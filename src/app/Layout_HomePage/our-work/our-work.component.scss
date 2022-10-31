@@ -1,0 +1,36 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.row {
+  padding: 0% 10% 5% 10%;
+}
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.centered {
+  position: absolute;
+  top: 80%;
+  padding-top: 3%;
+  // transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.85);
+  height: 30%;
+  color: #004057;
+  width: 100%;
+  .btn {
+    width: 80%;
+    margin-top: 5px;
+    color: white;
+    background-color: #18af9a;
+    border-radius: 0px;
+    height: 35px;
+  }
+}
+h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #18af9a;
+}

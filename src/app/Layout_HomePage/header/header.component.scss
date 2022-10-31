@@ -1,0 +1,42 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.desc {
+  background: linear-gradient(90deg, #2c5364 0%, #203a43 50%, #0f2027 100%);
+  padding: 3% 10% 0% 10%;
+}
+.regButton {
+  width: 285px;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+  background: linear-gradient(360deg, #00816e 0%, #00dcbd 100%);
+  font-family: "Tajawal";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+}
+.description {
+  padding-left: 5%;
+  font-family: "Tajawal";
+  margin-top: 80px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  /* or 117% */
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+  /* white */
+  color: #ffffff;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}

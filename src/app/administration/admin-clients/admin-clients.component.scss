@@ -1,0 +1,59 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color: #12e193;
+  --whait: white;
+}
+.bg-dark-greenish-blue {
+  background-color: #004958;
+  font-size: 14px;
+}
+.text-greenblue {
+  color: #004958;
+}
+body {
+  background-color: #eee;
+}
+
+main .btn-group button {
+  padding: 5px 25px;
+  border: 0;
+  font-size: 12px;
+}
+
+main .row .col-4 .div-1 i:nth-child(1) {
+  color: var(--color);
+  padding: 10px 15px;
+  font-size: 14px;
+}
+main .row .col-4 .div-1 select {
+  border: 0;
+  font-size: 12px;
+  padding: 7px 0;
+}
+main .row .col-4 .div-1 input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 7px 5px;
+  margin: 0;
+}
+main .row .col-4 .div-1 i:last-of-type {
+  color: var(--color);
+  padding: 10px 10px;
+  font-size: 14px;
+}
+
+main .row .col-8 .div-1 img {
+  width: 70px;
+  border-radius: 50%;
+}
+main .row .col-8 .div-3 .row .col-4 {
+  overflow: hidden;
+}
+main .row .col-8 .div-4 .row .col-4 {
+  overflow: hidden;
+}

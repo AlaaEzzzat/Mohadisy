@@ -1,0 +1,212 @@
+<header class=" form-control  signFormIn  border-end ">
+    <h5 class=" bd-title  " dir="rtl"> أستكمال البيانات الخاصه بكـ </h5>
+
+</header>
+<div class="container form-control border-0 signFormIn">
+  <form [formGroup]="registerForm" (ngSubmit)="registerFormSubmit(registerForm.value)">
+  <div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+       <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+          الاسم الاول
+        </label>
+        <input type="text" formControlName="name" id="name" class="form-control form-control-lg signup" placeholder="   الاسم الاول" required>
+
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+       <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+          اسم العائله
+        </label>
+        <input type="text" formControlName="name" id="name" class="form-control form-control-lg signup" placeholder="   اسم العائله " required>
+
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+        <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+          البريد الالكتروني</label>
+        <input type="text"  formControlName="emailId" id="email"class="form-control form-control-lg signup" placeholder="البريد الالكتروني" required>
+
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+         <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+           رقم التلفون</label>
+        <input type="tel"  formControlName="mobile" id="mobile" class="form-control form-control-lg signup" placeholder="+966XXXXXXXXX" required>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+       <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+          اسم المستخدم
+        </label>
+        <input type="text" formControlName="name" id="name" class="form-control form-control-lg signup" placeholder="   اسم المستخدم " required>
+
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="form-group">
+       <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+          رقم الهوية
+        </label>
+        <input type="text" formControlName="name" id="name" class="form-control form-control-lg signup" placeholder="   رقم الهوية  " required>
+
+      </div>
+
+
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+<div class="form-group">
+       <label class="form-label" for="userName">
+          <i class="fa fa-star text-danger" aria-hidden="true" ></i>
+           ارفاق
+        </label>
+        <input type="file" formControlName="name" id="name" class="form-control form-control-lg signup" placeholder="    ارفاق " required>
+
+      </div>
+
+    </div>
+  </div>
+
+<hr>
+<div class="row">
+  <div class="row mt-5">
+      <div class="col-4">
+        <h5 class="mb-5 bd-title" style='color: #18AF9A;' dir="rtl">العنوان</h5>
+      </div>
+      <div class="col-8">
+        <div class="row">
+          <div class="col-4">
+            <label for="region" class="control-label">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+              منطقه
+            </label>
+
+            <select name="region" id="region" class="form-control form-control-lg"
+               formControlName="region"
+                >
+                <option >
+                ...اختر
+              </option>
+              <ng-container *ngFor="let region of regionsList">
+              <option [value]="region.id">{{region.nameAr}}</option>
+              </ng-container>
+            </select>
+
+
+
+          </div>
+          <div class="col-4">
+            <label for="city" class="control-label">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+              المدينة
+            </label>
+
+            <select name="city" id="city" class="form-control form-control-lg"
+            formControlName="city"
+            >
+           <option >
+                ...اختر
+              </option>
+              <!-- <ng-container *ngFor="let city of citiesList">
+              <option [value]="city.id">{{city.nameAr}}</option>
+               </ng-container> -->
+            </select>
+
+
+
+
+          </div>
+          <div class="col-4">
+            <label for="district" class="control-label">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+              الحى
+            </label>
+            <select name="district" id="district" class="form-control form-control-lg"
+            formControlName="district"
+            >
+              <option >
+                ...اختر
+              </option>
+              <!-- <ng-container >
+                <option [value]="district.id">{{district.nameAr}}</option>
+              </ng-container> -->
+            </select>
+
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col-4">
+            <label class="form-label" for="buildNo">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+              رقم المبنى
+            </label>
+
+            <input type="text" id="buildNo" name="buildNo" formControlName="buildNo"
+              class="form-control form-control-lg form-group" placeholder="  رقم المبنى" />
+          </div>
+
+          <div class="col-4">
+            <label class="form-label" for="postal_code">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+              صندوق بريد
+            </label>
+
+            <input type="text" id="postal_code" name="postal_code" formControlName="postal_code"
+              class="form-control form-control-lg form-group" placeholder="    صندوق بريد" />
+          </div>
+          <div class="col-4">
+            <label class="form-label" for="StreetName">
+              <i class="fa fa-star text-danger" aria-hidden="true"></i>
+             رقم بريد
+            </label>
+
+            <input type="text" id="StreetName" name="StreetName" formControlName="StreetName"
+              class="form-control form-control-lg form-group" placeholder="  رقم بريد" />
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<hr>
+  <div class="row mb-5">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="form-group">
+        <button type="submit" [disabled]="registerForm.invalid" class="btn btn-success form-control text-white">
+          <!-- (click)="secandform = true" -->
+          <i class="fa fa-floppy-disk" aria-hidden="true"></i>
+
+          حفظ
+        </button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>

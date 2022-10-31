@@ -1,0 +1,99 @@
+<div class="d-flex" id="wrapper">
+  <!-- Sidebar -->
+
+  <!-- /#sidebar-wrapper -->
+
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg shadow-sm">
+      <div class="container-fluid">
+        <div>
+          <img src="assets/logo.png" alt="" height="40px">
+        </div>
+        <div (click)="clickEvent()" class="mx-3">
+          <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li>
+
+              <div class="form-group has-search">
+                <span class="fa fa-search form-control-feedback"></span>
+                <input type="text" class="form-control border-0 rounded-5 bg-light" placeholder="Search">
+              </div>
+            </li>
+            <li class="nav-item mx-3 bg-light rounded-5">
+              <a class="nav-link active " aria-current="page" href="#">ar</a>
+            </li>
+            <li class="nav-item mx-3 bg-light rounded-5">
+              <a class="nav-link active " aria-current="page" href="#">
+                <img src="assets/logo.png" alt="" class=" rounded-circle" width="30px" height="30px">
+
+                <span  class="fontStyle">
+                  مرحبا وMohandisy
+                </span>
+
+
+
+
+              </a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid" style="background-color: #eef0f8;">
+      <div class="row">
+        <div class="col-2 ">
+          <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" [hidden]="status">
+            <div class="list-group list-group-flush ">
+              <div class="text-white">
+
+                <div class="p-2 my-4"routerLink="/usermanagement/dashboard">
+
+                  <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
+                  <span class="px-2 fontStyle"> لوحة التحكم </span>
+                </div>
+
+                <div class="p-2 my-4" routerLink="/usermanagement/offers">
+                  <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
+                  <span class="px-2 fontStyle"> عروض الأسعار </span>
+                </div>
+                <div class="p-2 my-4" routerLink="/usermanagement/project">
+                  <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
+                  <span class="px-2 fontStyle"> المشاريع  </span>
+                </div>
+
+
+                <div class="p-2 my-4" routerLink="/usermanagement/profile">
+                  <img src="assets/images/profile.svg" alt="" srcset="" width="28px" height="28px" />
+                  <span class="px-2 fontStyle"> المعلومات </span>
+                </div>
+                <div class="p-2 my-4" routerLink="/usermanagement/messages">
+                  <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
+                  <span class="px-2 fontStyle"> الرسائل </span>
+                </div>
+                <div class="p-2 my-4 px-2" (click)="clickEvent()">
+                  <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="col-10 ">
+        <router-outlet></router-outlet>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+  </div>
+  <!-- /#wrapper -->

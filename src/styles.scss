@@ -1,0 +1,968 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~bootstrap/dist/css/bootstrap.rtl.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
+$mainColor: #004057;
+$green: #18af9a;
+// $mainColor: #f6c513;
+$secColor: #68d2dd;
+$blue: #293eb7;
+$Color: #1f283e;
+$red: #f2564b;
+// 19525b
+$title: #161d24;
+
+//mediaqueries
+$maxMobile: 767px;
+$minMedium: 992px;
+$minSmall: 768px;
+$mediumMedia: 1000px;
+body {
+  font-family: "Cairo";
+}
+html {
+  scrollbar-color: #18af9a #2c5364;
+  scrollbar-width: thin;
+
+  scrollbar-thumb {
+    border-radius: 50px;
+  }
+}
+.fontStyle {
+  letter-spacing: 0.5px;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+
+.ltr {
+  
+  direction: ltr;
+  text-align: left !important;
+  .usersList li {
+    margin-left: 65px;
+    &:before {
+      left: -65px !important;
+    }
+  }
+  .float-right {
+    float: left !important;
+  }
+  .float-left {
+    float: right !important;
+  }
+}
+.rtl {
+  direction: rtl;
+  text-align: right !important;
+  .usersList li {
+    margin-right: 65px;
+    &:before {
+      right: -65px !important;
+    }
+  }
+
+  .float-right {
+    float: right !important;
+  }
+  .float-left {
+    float: left !important;
+  }
+}
+.provProfile {
+  font-family: "Cairo", sans-serif !important;
+  // padding: 20px;
+  // background-color: #EEF0F8;
+  .profContent {
+    background-color: white;
+    border-radius: 6px;
+    padding: 20px;
+    .customInputFile {
+      line-height: 50px;
+    }
+    .customInputFile::-webkit-file-upload-button {
+      content: "ارفاق";
+      background-color: $mainColor;
+      border: 0;
+      height: 50px;
+      color: white;
+
+      float: left;
+      line-height: 50px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+      margin-right: 5px;
+      margin: 0;
+    }
+    h2 {
+      @extend .fontStyle;
+      font-size: 20px;
+      text-decoration: underline;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: $green;
+      @media only screen and (max-width: 1000px) {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
+    // ul{
+    //     list-style: none;
+    //     text-align: right;
+    //     @media only screen and (max-width : 1000px) {
+    //       text-align: center;
+
+    //   }
+
+    //     li{
+    //         display: inline-block;
+    //         margin: 0 10px;
+    //         @media only screen and (max-width : 1000px) {
+    //           margin: 0 3px;
+    //       }
+
+    //     }
+    .profBtn {
+      @media only screen and (max-width: 1000px) {
+        font-size: 12px;
+        // height: 40px;
+        //margin-bottom: 40px;
+      }
+      @extend .fontStyle;
+      height: 50px;
+      color: white;
+      border: 0;
+      font-size: 16px;
+      width: 100%;
+      margin: 50px 10px;
+      border-radius: 6px;
+      &:hover,
+      &:focus {
+        outline: 0;
+        border: 0;
+      }
+    }
+    .save {
+      // background-color: #68D2DD;
+      background-color: $mainColor;
+      min-width: 120px;
+      width: fit-content !important;
+      svg {
+        margin: 0 5px;
+      }
+    }
+    .next {
+      background-color: $mainColor;
+      min-width: 120px;
+      width: fit-content !important;
+      svg {
+        margin: 0 5px;
+      }
+    }
+    .prev {
+      background-color: $green;
+      min-width: 120px;
+      width: fit-content !important;
+      svg {
+        margin: 0 5px;
+      }
+    }
+    .send {
+      background-color: $mainColor;
+    }
+    // }
+  }
+  .prevWork {
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        display: inline-block;
+        margin: 0 5px !important;
+        button {
+          width: 30px;
+          height: 30px;
+          color: white;
+          text-align: center;
+          line-height: 1;
+          padding: 0;
+        }
+        .addBtn {
+          background-color: $secColor;
+          border: 0;
+        }
+        .removeBtn {
+          background-color: $red;
+          border: 0;
+        }
+      }
+    }
+  }
+}
+.greenBtnIcon {
+  background-color: $green !important;
+  height: 40px !important;
+  width: 40px;
+  border-radius: 6px !important;
+  color: white !important;
+  font-size: 14px !important;
+  text-align: center;
+  margin: 10px 5px;
+  border: 1px solid $green !important;
+}
+.greenBtn {
+  background-color: $green !important;
+  height: 50px !important;
+  width: 100%;
+  border-radius: 6px !important;
+  color: white !important;
+  font-size: 14px !important;
+  text-align: center;
+  border: 1px solid $green !important;
+}
+.mainBtn {
+  background-color: $mainColor !important;
+  height: 50px !important;
+  width: 100%;
+  border-radius: 6px !important;
+  color: white !important;
+  font-size: 14px !important;
+  text-align: center;
+  border: 1px solid $mainColor !important;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.toast {
+  width: 90%;
+  margin: 20px 20px 40px 20px;
+  background-color: turquoise;
+  border: 0;
+  border-radius: 6px;
+  .toast-header {
+    display: block;
+    border-bottom: 0;
+    border: 0;
+    border-radius: 6px;
+    font-weight: bold;
+    @extend .fontStyle;
+    // text-align: right;
+    button {
+      float: right;
+      clear: both;
+      text-align: center;
+      background-color: transparent;
+      color: $green;
+      border: 0;
+      &:hover,
+      &:focus {
+        border: 0;
+        background-color: transparent;
+      }
+      span:nth-child(2) {
+        display: none;
+      }
+    }
+  }
+}
+.workTable {
+  padding: 20px;
+  table {
+    border: 1px solid #c7c7c7;
+    text-align: center;
+    th {
+      background-color: $mainColor;
+      padding: 10px;
+      border-color: $mainColor;
+      color: white;
+    }
+    tr {
+      td {
+        color: #666;
+        padding: 20px;
+      }
+    }
+  }
+}
+.work_modal {
+  .customInputFile::-webkit-file-upload-button {
+    content: "ارفاق";
+    background-color: $mainColor;
+    border: 0;
+    height: 50px;
+    color: white;
+
+    float: left;
+    line-height: 50px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    margin-right: 5px;
+    margin: 0;
+  }
+  .modal-header {
+    h4 {
+      font-size: 20px;
+      color: $green;
+    }
+    button {
+      background-color: $green;
+      color: white;
+      height: 30px;
+      border: 0;
+      .sr-only {
+        display: none;
+      }
+    }
+  }
+  .profBtn {
+    @media only screen and (max-width: 1000px) {
+      font-size: 12px;
+      // height: 40px;
+      //margin-bottom: 40px;
+    }
+    @extend .fontStyle;
+    height: 50px;
+    color: white;
+    border: 0;
+    font-size: 16px;
+    width: 100%;
+    margin: 50px auto;
+    display: block;
+    border-radius: 50px;
+    &:hover,
+    &:focus {
+      outline: 0;
+      border: 0;
+    }
+  }
+  .save {
+    // background-color: #68D2DD;
+    background-color: $green;
+    min-width: 120px;
+    width: fit-content !important;
+    svg {
+      margin: 0 5px;
+    }
+  }
+}
+.left {
+  text-align: left;
+  direction: ltr;
+  left: 0 !important;
+  input {
+    text-align: left;
+  }
+}
+.right {
+  text-align: right;
+  direction: rtl;
+  right: 0 !important;
+  input {
+    text-align: right;
+  }
+}
+.signBg {
+  background-color: $green;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden !important;
+  .forgetPassLeft {
+    font-size: 14px;
+    color: #68d2dd;
+    font-weight: 500;
+    text-align: right;
+    display: inline-block;
+    float: right;
+  }
+  .forgetPassRight {
+    font-size: 14px;
+    color: #68d2dd;
+    font-weight: 500;
+    // text-align: right;
+    //   display: inline-block;
+    //  float: left;
+  }
+  .signImg {
+    @media only screen and (max-width: 1000px) {
+      width: 100%;
+      display: none;
+    }
+    background-color: $green;
+    text-align: center;
+    position: absolute;
+    // right: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 50%;
+    height: 100%;
+    min-height: 150vh;
+    overflow: hidden !important;
+    padding: 50px;
+    .logoImg {
+      text-align: center;
+      width: 20%;
+      margin: 0 auto 20px auto;
+      transition: all 0.5s ease-in-out;
+      img {
+        width: 100%;
+
+        height: auto;
+      }
+    }
+    .signFrontImg {
+      width: 80%;
+      margin: 50px auto;
+      transition: all 0.5s ease-in-out;
+      img {
+        width: 100%;
+        height: auto;
+        transition: all 0.5s ease-in-out;
+      }
+    }
+    h3 {
+      color: white;
+      font-weight: bold;
+      margin: 20px 0;
+      @extend .fontStyle;
+      font-size: 18px;
+    }
+    p {
+      color: white;
+      margin: 20px 0;
+      font-weight: 500;
+      @extend .fontStyle;
+      font-size: 14px;
+    }
+  }
+  .forgetPassForm {
+    margin-top: 50px;
+    .labelcontainer {
+      margin: 0 20px;
+      input {
+        margin-left: 5px;
+      }
+    }
+  }
+  .signForm {
+    @media only screen and (max-width: 1000px) {
+      width: 100%;
+      left: 0;
+      z-index: 999;
+      padding: 30px 80px;
+    }
+    position: absolute;
+    background-color: white;
+    //left: 0;
+    top: 0;
+    width: 50%;
+    min-height: 100vh;
+    padding: 80px 80px;
+    overflow: hidden !important;
+    .acceptCheckRight {
+      input {
+        float: right;
+        margin-right: -1.5em;
+      }
+    }
+    .signSteps {
+      position: absolute;
+      right: 50px;
+      top: 50px;
+      width: 200px;
+      height: 100px;
+      ul {
+        padding: 0;
+        list-style: none;
+        position: relative;
+        &:after {
+          content: "";
+          position: absolute;
+          top: 13px;
+          height: 1px;
+          background-color: #d3d6da;
+          width: 84px;
+          left: 10px;
+          text-align: center;
+          margin: auto;
+          z-index: 1;
+        }
+
+        li {
+          display: inline-block;
+          margin: 0 10px;
+          transition: all 0.5s ease-in-out;
+          text-align: center;
+          font-size: 10px;
+          width: 16px;
+          height: 16px;
+          position: relative;
+          z-index: 999;
+          span {
+            width: 16px;
+            height: 16px;
+            display: block;
+            border-radius: 50%;
+            transition: all 0.5s ease-in-out;
+          }
+          .active {
+            background-color: $green;
+            width: 16px;
+            height: 16px;
+            color: white;
+            font-weight: bold;
+          }
+          .disactive {
+            background-color: #d3d6da;
+            width: 12px;
+            height: 12px;
+            color: #d3d6da;
+          }
+          .complete {
+            background-color: $green;
+            width: 12px;
+            height: 12px;
+            color: $green;
+          }
+        }
+      }
+    }
+    .form-text {
+      display: block;
+      font-size: 11px;
+      @extend .fontStyle;
+      text-decoration: underline;
+      padding-top: 5px;
+    }
+    h2 {
+      // @extend .fontStyle;
+      color: $green;
+      font-size: 40px;
+      font-weight: 500;
+      text-align: center;
+    }
+    p {
+      color: $mainColor;
+      a {
+        color: $mainColor;
+        font-size: 14px;
+        font-weight: bold;
+        //margin-left: 5px;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+      }
+      // text-align: center;
+
+      span {
+        color: #999;
+      }
+      .spantitle {
+        padding: 0 5px;
+        font-size: 12px;
+        @extend .fontStyle;
+        color: $mainColor;
+        font-weight: bold;
+      }
+      .fixedTitle {
+        position: relative;
+        font-weight: 500 !important;
+        &:after {
+          content: "";
+          position: absolute;
+          top: 3px;
+          right: 0;
+          width: 1px;
+          height: 12px;
+          border-right: 1px solid $mainColor;
+        }
+      }
+    }
+    .loginIn {
+      margin: 30px 0 40px 0 !important;
+    }
+
+    .form-check {
+      padding: 20px 20px 0 20px;
+    }
+    .frmBtn {
+      margin-top: 30px;
+      height: 40px;
+      border: 1px solid;
+      width: 100%;
+      font-weight: bold;
+      &:disabled {
+        cursor: not-allowed;
+        pointer-events: unset;
+      }
+    }
+
+    .Next {
+      background-color: $green;
+      border: 1px solid $green;
+      color: white;
+      &:hover,
+      &:focus {
+        background-color: $green;
+        border-color: $green;
+      }
+    }
+    .Back {
+      background-color: transparent;
+      border: 0;
+      color: $green;
+      text-decoration: underline;
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        border-color: transparent;
+      }
+    }
+    .prev {
+      background-color: transparent;
+      border: 1px solid $mainColor;
+      color: #919aa3;
+      &:hover,
+      &:focus {
+        background-color: transparent;
+      }
+    }
+  }
+}
+.codeVer {
+  padding: 20px 0;
+  .vi__wrapper {
+    margin-bottom: 30px;
+  }
+}
+.signFormIn {
+  // height:60px;
+  width: 100%;
+  margin: 20px 0;
+  padding: 0;
+  border: 0;
+  .clearfix {
+    display: flex;
+  }
+
+  label {
+    color: $mainColor;
+    @extend .fontStyle;
+    font-size: 15px;
+    font-weight: bolder;
+    height: 20px;
+    width: 100%;
+    display: block;
+  }
+  input,
+  select {
+    height: 50px;
+    width: 100%;
+    border: 1px solid #c7c7c7;
+    color: $mainColor;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #919aa3;
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+    option {
+      font-size: 12px;
+      color: #444;
+      padding: 20px 10px;
+    }
+  }
+  // select{
+  //     text-align: center;
+  // }
+  .formbtn {
+    height: 40px;
+    width: 100%;
+    border: 1px solid $mainColor;
+    color: $mainColor;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .infoTitle {
+    height: 50px;
+    padding: 10px 0;
+    font-weight: 300 !important;
+    text-decoration: none !important;
+  }
+  .clearimg {
+    background-color: transparent;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    color: #f55d5d;
+    svg {
+      font-size: 18px;
+    }
+  }
+  img {
+    border: 1px solid $mainColor;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+  }
+  .float-left {
+    display: inline-block;
+  }
+  .float-right {
+    display: inline-block;
+  }
+}
+
+.selectFormIn {
+  // height:60px;
+  width: 80%;
+  margin: 20px 0;
+  padding: 0;
+  border: 0;
+  .clearfix {
+    display: flex;
+  }
+
+  label {
+    color: $mainColor;
+    @extend .fontStyle;
+    font-size: 15px;
+    font-weight: bolder;
+    height: 20px;
+    width: 100%;
+    display: block;
+  }
+  input,
+  select {
+    height: 26px;
+    width: 100%;
+    border: 1px solid #c7c7c7;
+    color: $mainColor;
+    border-radius: 5px;
+    background-color: white;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 12px;
+    color: #919aa3;
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+    option {
+      font-size: 12px;
+      color: #444;
+      padding: 20px 10px;
+    }
+  }
+  // select{
+  //     text-align: center;
+  // }
+  .formbtn {
+    height: 40px;
+    width: 100%;
+    border: 1px solid $mainColor;
+    color: $mainColor;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  .infoTitle {
+    height: 50px;
+    padding: 10px 0;
+    font-weight: 300 !important;
+    text-decoration: none !important;
+  }
+  .clearimg {
+    background-color: transparent;
+    border: 0;
+    width: 30px;
+    height: 30px;
+    color: #f55d5d;
+    svg {
+      font-size: 18px;
+    }
+  }
+  img {
+    border: 1px solid $mainColor;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+  }
+  .float-left {
+    display: inline-block;
+  }
+  .float-right {
+    display: inline-block;
+  }
+}
+
+.signFormAuto {
+  height: 60px;
+  width: 100%;
+  margin: 20px 0 20px 0;
+  padding: 0;
+  border: 0;
+  label {
+    color: $mainColor;
+    @extend .fontStyle;
+    font-size: 15px;
+    font-weight: bolder;
+    height: 20px;
+    width: 100%;
+    display: block;
+  }
+  input {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    height: 50px;
+    border: 1px solid #c7c7c7;
+    border-radius: 0;
+    color: $mainColor;
+    font-size: 12px;
+    background-color: white;
+    // background-color: white;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+  .mapInput {
+    border-radius: 5px 0 0 5px;
+    background-repeat: no-repeat;
+  }
+  .dropIn {
+    border-radius: 0;
+    //border-radius:  0 5px 5px 0;
+  }
+  .dropdown-toggle,
+  .input-group-text {
+    height: 50px;
+    border-radius: 0;
+    border: 0;
+    color: $title;
+    color: white;
+    font-size: 12px;
+    background-color: $mainColor;
+    &:hover,
+    &:focus {
+      color: white;
+      background-color: $mainColor;
+    }
+    &::after {
+      color: $title;
+      border: 0;
+      vertical-align: middle;
+    }
+  }
+  button {
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #919aa3;
+    color: $title;
+    text-align: center;
+    font-weight: 500;
+    &:hover,
+    &:focus {
+      background-color: #f2f6f9;
+      border-color: #f2f6f9;
+
+      color: $title;
+    }
+  }
+  .mapBtn {
+    border-radius: 0 5px 5px 0;
+  }
+}
+.progress {
+  margin: 10px 0;
+  height: 10px;
+  animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+.progressTxt {
+  font-size: 12px;
+  margin: 8px 0;
+  animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+  -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+.form-control::-webkit-input-placeholder {
+  color: #919aa3;
+  font-size: 11px;
+  opacity: 0.7;
+  font-family: "Cairo", sans-serif !important;
+} /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder {
+  color: #919aa3;
+  font-size: 11px;
+  opacity: 0.7;
+  font-family: "Cairo", sans-serif !important;
+} /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder {
+  color: #919aa3;
+  font-size: 11px;
+  opacity: 0.7;
+  font-family: "Cairo", sans-serif !important;
+} /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder {
+  color: #919aa3;
+  font-size: 11px;
+  opacity: 0.7;
+  font-family: "Cairo", sans-serif !important;
+} /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder {
+  color: #919aa3;
+  font-size: 11px;
+  opacity: 0.7;
+  font-family: "Cairo", sans-serif !important;
+} /* Microsoft Edge */
+
+.ltr {
+  .signImg {
+    left: 0;
+  }
+  .signForm {
+    right: 0;
+  }
+}
+.rtl {
+  .signImg {
+    right: 0;
+  }
+  .signForm {
+    left: 0;
+  }
+}
+
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+/* angular-cli file: src/styles.css */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";

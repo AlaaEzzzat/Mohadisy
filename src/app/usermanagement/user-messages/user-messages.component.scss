@@ -1,0 +1,46 @@
+.eee {
+  background-color: #eee;
+}
+.bg-green {
+  background-color: #004958;
+}
+.premary-color {
+  color: #004958;
+}
+.text-Bgreen {
+  color: #12e192;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #12e192;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #12e192;
+}
+
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #18af9a;
+}

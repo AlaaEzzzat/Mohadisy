@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.row {
+  padding: 0% 10% 0% 10%;
+  background: linear-gradient(90deg, #2c5364 0%, #203a43 50%, #0f2027 100%);
+  min-height: 352px;
+}
+.container-fluid {
+  position: relative;
+  // text-align: center;
+  color: white;
+}
+.top-left {
+  position: absolute;
+  top: -20%;
+  left: 10%;
+  background-color: #18af9a;
+  padding: 30px;
+}
+.desc-text {
+  margin-top: 50px;
+}
+.about,
+.services {
+  margin-top: 140px;
+}
