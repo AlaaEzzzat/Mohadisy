@@ -1,99 +1,239 @@
-<div class="d-flex" id="wrapper">
-  <!-- Sidebar -->
-
-  <!-- /#sidebar-wrapper -->
-
+<div id="wrapper">
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg shadow-sm">
+    <!--  <nav class="navbar navbar-expand-lg shadow-sm">
       <div class="container-fluid">
-        <div>
-          <img src="assets/logo.png" alt="" height="40px">
+        <div class="d-flex">
+          <div>
+            <img src="assets/logo.png" alt="" height="40px" />
+          </div>
+          <div (click)="clickEvent()" class="mx-3">
+            <img
+              src="assets/next.png"
+              alt=""
+              srcset=""
+              width="28px"
+              height="28px"
+              class="img-fluid"
+            />
+          </div>
         </div>
-        <div (click)="clickEvent()" class="mx-3">
-          <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
-        </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li>
-
               <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control border-0 rounded-5 bg-light" placeholder="Search">
+                <input
+                  type="text"
+                  class="form-control border-0 rounded-5 bg-light"
+                  placeholder="Search"
+                />
               </div>
             </li>
             <li class="nav-item mx-3 bg-light rounded-5">
-              <a class="nav-link active " aria-current="page" href="#">ar</a>
+              <a class="nav-link active" aria-current="page" href="#">ar</a>
             </li>
             <li class="nav-item mx-3 bg-light rounded-5">
-              <a class="nav-link active " aria-current="page" href="#">
-                <img src="assets/logo.png" alt="" class=" rounded-circle" width="30px" height="30px">
+              <a class="nav-link active" aria-current="page" href="#">
+                <img
+                  src="assets/logo.png"
+                  alt=""
+                  class="rounded-circle"
+                  width="30px"
+                  height="30px"
+                />
 
-                <span  class="fontStyle">
-                  مرحبا وMohandisy
-                </span>
-
-
-
-
+                <span class="fontStyle"> مرحبا {{ username }} </span>
               </a>
             </li>
-
+          </ul>
+        </div>
+      </div>
+    </nav> -->
+    <!-- ************************************************************************************************** -->
+    <!-- **************************اقتراح ************ -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+        <div class="d-flex navbar-brand">
+          <div>
+            <img src="assets/logo.png" alt="" height="40px" />
+          </div>
+          <div (click)="clickEvent()" class="mx-3">
+            <img
+              src="assets/next.png"
+              alt=""
+              srcset=""
+              width="28px"
+              height="28px"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+        <button
+          class="navbar-toggler mb-2"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul
+            class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row flex-wrap align-items-baseline"
+          >
+            <li class="nav-item mb-2" style="width: fit-content">
+              <a
+                class="nav-link active bg-light rounded-5 px-2"
+                aria-current="page"
+                href="#"
+              >
+                <img
+                  src="assets/logo.png"
+                  alt=""
+                  class="rounded-circle"
+                  width="30px"
+                  height="30px"
+                />
+                <span class="fontStyle"> مرحبا {{ username }} </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex search-con">
+                <div style="position: relative">
+                  <span class="fa fa-search form-control-feedback"></span>
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="بحث..."
+                    aria-label="Search"
+                  />
+                </div>
+                <button class="btn btn-outline-success me-3">AR</button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid" style="background-color: #eef0f8;">
+    <!-- *********************************************************** -->
+    <div
+      class="container-fluid"
+      style="background-color: #eef0f8; padding-top: 60px"
+    >
       <div class="row">
-        <div class="col-2 ">
-          <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" [hidden]="status">
-            <div class="list-group list-group-flush ">
-              <div class="text-white">
-
-                <div class="p-2 my-4"routerLink="/usermanagement/dashboard">
-
-                  <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle"> لوحة التحكم </span>
+        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
+          <div
+            class="m-0"
+            style="background-color: #004057; font-weight: 600"
+            id="sidebar-wrapper"
+            [hidden]="status"
+          >
+            <div class="list-group list-group-flush">
+              <div class="text-white items">
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item"
+                  routerLink="/usermanagement/dashboard"
+                >
+                  <img
+                    src="assets/images/Group.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 title fontStyle"> لوحة التحكم </span>
                 </div>
 
-                <div class="p-2 my-4" routerLink="/usermanagement/offers">
-                  <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle"> عروض الأسعار </span>
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item"
+                  routerLink="/usermanagement/offers"
+                >
+                  <img
+                    src="assets/images/blueprint.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 title fontStyle"> عروض الأسعار </span>
                 </div>
-                <div class="p-2 my-4" routerLink="/usermanagement/project">
-                  <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle"> المشاريع  </span>
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item"
+                  routerLink="/usermanagement/project"
+                >
+                  <img
+                    src="assets/images/blueprint.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 title fontStyle"> المشاريع </span>
                 </div>
 
-
-                <div class="p-2 my-4" routerLink="/usermanagement/profile">
-                  <img src="assets/images/profile.svg" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle"> المعلومات </span>
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item"
+                  routerLink="/usermanagement/profile"
+                >
+                  <img
+                    src="assets/images/profile.svg"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 title fontStyle"> المعلومات </span>
                 </div>
-                <div class="p-2 my-4" routerLink="/usermanagement/messages">
-                  <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle"> الرسائل </span>
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item"
+                  routerLink="/usermanagement/messages"
+                >
+                  <img
+                    src="assets/images/chat.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 title fontStyle"> الرسائل </span>
                 </div>
-                <div class="p-2 my-4 px-2" (click)="clickEvent()">
-                  <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
+                <div
+                  class="p-2 my-4 pe-3 sidebar-item px-2"
+                  (click)="clickEvent()"
+                >
+                  <img
+                    src="assets/images/next.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
                 </div>
               </div>
             </div>
           </div>
-          </div>
-          <div class="col-10 ">
-        <router-outlet></router-outlet>
-
-          </div>
         </div>
-
+        <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
+        <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
-    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#wrapper -->
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->

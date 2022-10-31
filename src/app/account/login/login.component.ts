@@ -29,9 +29,10 @@ export class LoginComponent implements OnInit {
         this.LoginForm.value
       )
       .subscribe((data) => {
-        console.log(data);
+        console.log(JSON.stringify(data.data));
         localStorage.setItem('token', JSON.stringify(data.data.token));
         localStorage.setItem('role', JSON.stringify(data.data.roles[0]));
+        localStorage.setItem('name', JSON.stringify(data.data.username));
         let roles = this.auth.getRole();
         if (roles == 'Admin') {
           this.router.navigate(['/Admin']);

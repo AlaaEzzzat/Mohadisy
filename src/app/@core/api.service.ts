@@ -21,7 +21,7 @@ export class ApiService {
     });
   }
 
-  post(url: string, body?: {}): Observable<any> {
+  post(url: string, body?: any): Observable<any> {
     const url_ = url.replace(/[?&]$/, '');
     const content_ = JSON.stringify(body);
 
