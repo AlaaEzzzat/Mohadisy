@@ -1,0 +1,113 @@
+<section class="container-fluid">
+  <div class="section-1 mt-4">
+    <div class="row">
+      <div class="col-6 content">
+        <a href="/project" class="btn  " style="background-color: white;">طلبات الانشاءات <span>20</span></a>
+      </div>
+
+      <div class="col-6  content">
+        <a href="#" class="btn text-white" style="background-color: #004958;">طلبات الاستشارات <span>0</span></a>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="section-2 mt-2">
+    <div class="row">
+      <div class="col-4">
+        <div class="row">
+
+          <ng-container *ngFor="let project of Listprojects">
+
+            <ng-container *ngIf="this.select==project.id">
+              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+                style="background:#004958; color:white;">
+                <p><i class="fa fa-user "></i>
+                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <a class="btn text-success">استشارات</a>
+                </p>
+                <p><i class="fa fa-location-dot "></i>
+                  {{project.district.nameAr}},{{project.district.city.nameAr}},
+                  {{project.district.city.region.nameAr}} </p>
+                <p><i class="fa fa-clock-four "></i>{{project.dateCreated}}</p>
+              </div>
+            </ng-container>
+
+
+
+              <div class="col-12 card card-1 mt-4"
+                style="background:white;  color:#004057;">
+                <p><i class="fa fa-user "></i>
+                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <a class="btn text-success">استشارات</a>
+                </p>
+                <p><i class="fa fa-location-dot "></i>
+                  {{project.district.nameAr}},{{project.district.city.nameAr}},
+                  {{project.district.city.region.nameAr}} </p>
+                <p><i class="fa fa-clock-four "></i>{{project.dateCreated}}</p>
+              </div>
+
+
+          </ng-container>
+
+
+
+
+        </div>
+
+      </div>
+
+
+      <div class="col-8 mt-3 section-3">
+        <a href="#" class="mt-3 mb-2 return">الرجوع</a>
+
+        <form action="">
+        <div class="card mt-3">
+
+            <div class="row">
+
+              <div class="col-12 form-group ">
+                <label for="count" class="label-control">مده المشروع</label>
+                <input type="text" class="form-control" name="count" placeholder="موضوع المشروع">
+              </div>
+
+
+              <div class="col-6 form-group mt-3">
+                <label for="price" class="label-control">السعر</label>
+                <input type="text" class="form-control" name="price" placeholder="السعر">
+              </div>
+
+              <div class="col-6 form-group mt-3">
+                <label for="pay" class="label-control">عدد مراحل الدفع</label>
+                <input type="text" class="form-control" name="pay" placeholder="عدد مراحل الدفع">
+              </div>
+
+
+              <div class="col-6 form-group mt-3">
+                <label for="stage" class="label-control">المرحله الاولى</label>
+                <input type="text" class="form-control" name="stage" placeholder="500$">
+              </div>
+
+              <div class="col-12 form-group mt-3">
+                <label for="contact">تواصل مع المسؤل</label>
+                <textarea name="" id="" cols="30" rows="10" name="contact" placeholder="الرساله"></textarea>
+              </div>
+
+
+
+            </div>
+
+        </div>
+        </form>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</section>
+

@@ -13,6 +13,7 @@ import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
+import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.compon
     SpHomeComponent,
     SpMainProfileComponent,
     SpProfileComponent,
+    SpProjectRequestComponent,
   ],
   imports: [
     CommonModule,

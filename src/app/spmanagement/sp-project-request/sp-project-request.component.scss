@@ -13,11 +13,10 @@
 }
 
 
-
  .card
 {
    border: none;
-   padding: 4% ;
+   padding: 3% ;
    color:#004057;
 }
 
@@ -71,19 +70,6 @@
   margin-right: 13%;
 }
 
-.section-2 .card-3 ul
-{
-  list-style-type: none;
-  padding: 2%;
-  font-size: 14px;
-  color: rgb(87, 86, 86);
-}
-
-ul li i
-{
-  padding: 3%;
-
-}
 
 
 .section-1 .content a
@@ -103,21 +89,39 @@ ul li i
 }
 
 
-.rep
+.section-3 .card label
 {
-  background-color: #004057;
-  padding:3% 4%  3% 9%;
-  font-size:35px !important;
-  margin-left: 2%;
-  color: white;
-
+  margin:2% 0%;
+}
+.section-3 .card input
+{
+  padding: 2%;
+  height: 50%;
 
 }
 
-li
+.section-3 .card textarea
 {
-  cursor:pointer;
+  width: 100%;
+  height: 30%;
+  padding: 2%;
 }
+
+.section-3 .card
+{
+  width: 95%;
+  margin-right: 4%;
+
+}
+
+.return
+{
+  margin-right: 94%;
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
+  color:#198754;
+}
+
 
 
 

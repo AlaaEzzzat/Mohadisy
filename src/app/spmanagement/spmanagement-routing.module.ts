@@ -9,6 +9,7 @@ import { SpMessagesComponent } from './sp-messages/sp-messages.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
+import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'dashboard', component: SpDashBoardComponent },
       { path: 'messages', component: SpMessagesComponent },
       { path: 'project', component: SpProjectsComponent },
+      { path: 'project/request',component:SpProjectRequestComponent},
       { path: 'offers', component: SpPriceOffersComponent },
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'profile', component: SpProfileComponent },
