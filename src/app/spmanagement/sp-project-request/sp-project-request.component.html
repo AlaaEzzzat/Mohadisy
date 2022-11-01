@@ -63,20 +63,28 @@
         <form action="">
         <div class="card card-3 mt-3">
             <div class="row">
+
+              <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
               <div class="col-12 form-group ">
-                <label for="count" class="label-control">مده المشروع</label>
-                <input type="text" class="form-control" name="count" placeholder="موضوع المشروع">
+                <label for="period" class="label-control">مده المشروع</label>
+                <input type="text" class="form-control" name="period"
+                formControlName="period"
+                 placeholder="موضوع المشروع">
               </div>
 
 
               <div class="col-md-6 form-group mt-3">
-                <label for="price" class="label-control">السعر</label>
-                <input type="text" class="form-control" name="price" placeholder="السعر">
+                <label for="cost" class="label-control">السعر</label>
+                <input type="text" class="form-control" name="cost"
+                formControlName="cost"
+                 placeholder="السعر">
               </div>
 
               <div class="col-md-6 form-group mt-3">
-                <label for="pay" class="label-control">عدد مراحل الدفع</label>
-                <input type="text" class="form-control" name="pay" placeholder="عدد مراحل الدفع">
+                <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
+                <input type="text" class="form-control" name="numberOfMilestones"
+                formArrayName="numberOfMilestones"
+                 placeholder="عدد مراحل الدفع">
               </div>
 
 
@@ -86,8 +94,10 @@
               </div>
 
               <div class="col-12 form-group mt-3">
-                <label for="contact">تواصل مع المسؤل</label>
-                <textarea name="" id=""  name="contact" placeholder="الرساله"></textarea>
+                <label for="message">تواصل مع المسؤل</label>
+                <textarea name="" id=""  name="message"
+                formControlName="message"
+                placeholder="الرساله"></textarea>
               </div>
 
             </div>
