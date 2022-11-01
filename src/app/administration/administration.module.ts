@@ -27,8 +27,9 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
     AdminSPComponent,
   ],
   imports: [
-    CommonModule,
+  CommonModule,
     AdministrationRoutingModule,
+
   ],
 })
 export class AdministrationModule {}

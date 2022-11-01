@@ -1,1 +1,405 @@
-<p>admin-sp works!</p>
+<div class="m-3">
+  <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)="getNewProfiles()"
+    >
+      طلبات الانضمام
+    </button>
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)="getRejectedProfiles()"
+    >
+      طلبات المرفوضه
+    </button>
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getActiveAcconting()"
+    >
+      الحسابات النشطه
+    </button>
+    <button
+      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getClosedProfiles()"
+    >
+      الحسابات المعطله
+    </button>
+    <button
+      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getNonActiveAccount()"
+    >
+      الحسابات غيرالنشطه
+    </button>
+    <button
+      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getBlockedProfiles()"
+    >
+      الحسابات المنتهيه
+    </button>
+    <button
+      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getBlockedProfiles()"
+    >
+      issues
+    </button>
+  </div>
+
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
+    <div class="col-md-4 col-12">
+      <form class="d-flex flex-column me-3">
+        <!-- search company -->
+
+        <div class="d-flex position-relative mb-3">
+          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa-regular fa-clock"></i>
+          </button>
+          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa fa-arrow-down-a-z" (click)="filter()"></i>
+          </button>
+          <!-- [(ngModel)]="companyName" -->
+
+          <input
+            class="form-control bg-white border-0 rounded-0 w-100"
+            type="search"
+            placeholder="Search for name ,number,location,etc"
+            aria-label="Search"
+            name="companyName"
+            (keyup)="filter()"
+          />
+          <button class="btn position-absolute top-0 start-0" type="submit">
+            <i class="fa fa-search" (click)="filter()"></i>
+          </button>
+        </div>
+
+        <!-- card company -->
+        <!-- <ng-container> -->
+
+        <div
+          *ngFor="let pro of iProfileData"
+          class="card mb-3 border-0 rounded-0 textFontSizeCard"
+        >
+          <div class="card-body" (click)="objectProduct(pro)">
+            <div class="d-flex">
+              <i class="fa-regular fa-building"></i>
+              <div class="card-title me-3 title">
+                <p class="typeCom"></p>
+                <p>{{ pro.applicationUser.accountType.typeName }}</p>
+                <p class="1h-sm">{{ pro.companyName }}</p>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <i class="fa fa-location-dot"></i>
+              <i class="bi bi-geo-alt"></i>
+              <p class="me-3">{{ pro.district.city.nameAr }}</p>
+            </div>
+            <div class="d-flex">
+              <i class="fa fa-phone"></i>
+              <div class="me-3 d-flex flex-row justify-content-between">
+                <small
+                  >({{ pro.representative.firstName }})+966
+                  {{ pro.representative.phoneNumber }}</small
+                >
+                <small class="me-5 opacity-50"
+                  >منذ
+                  {{
+                    pro.companyRegisterationNumberStartDate
+                  }}
+                  ايام</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- </ng-container> -->
+      </form>
+    </div>
+
+    <!--  -->
+    <div class="col-md-7 sizew col-12 flex-row">
+      <div class="col-12 card mb-3 border-0 rounded-0">
+        <div class="row g-0 justify-content-evenly align-items-center">
+          <div class="col-md-2">
+            <img  *ngIf=" productCurrent.companyLogoPath ; else templateName"
+              src="{{ productCurrent.companyLogoPath }}"
+              class="img-fluid rounded-5  ms-5 me-2 px-1"
+              alt="..."
+            />
+            <ng-template #templateName>
+              Null
+          </ng-template>
+          </div>
+          <div class="col-md-5">
+            <div class="card-body">
+              <div class="d-flex">
+                <i class="fa-regular fa-building"></i>
+                <p class="me-3">
+                  {{ productCurrent.applicationUser.accountType.typeName }}
+                </p>
+              </div>
+
+              <p class="card-text">
+                {{ productCurrent.companyName }}
+              </p>
+              <p class="card-text">جيليام وجونستون بي إل سي</p>
+              <p class="card-text">
+                <small class="text-muted"> نوع الخدمه </small>
+                <!-- <span class="typeCom">{{ productCurrent.companyClassification.name }}</span> -->
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="d-flex">
+              <a type="button" class="btn">
+                <i class="fa-solid fa-check text-secondary"></i>
+                <p>مكتمل</p></a
+              >
+              <a type="button" class="btn">
+                <i class="fa-solid fa-exclamation"></i>
+                <p>غير مكتمل</p></a
+              >
+              <a type="button" class="btn"
+                ><i class="fa-solid fa-xmark"></i>
+                <p>رفض</p></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--    معلومات عن الشركه-->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title">معلومات عن الشركه</h6>
+
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+          <div class="col-lg-5 col-12">
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitletext-muted">
+                رقم سجل الشركه <br />
+                <small>{{ productCurrent.companyRegisterationNumber }} </small>
+              </p>
+              <a
+                target="_blank"
+                class="informationDownload  bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.companyRegisterationNumberPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.companyRegisterationNumberFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="card-subtitle text-muted">شهاده التأمينات الاجتماعية</p>
+              <a
+                target="_blank"
+                class="informationDownload  bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.socialInsuranceCertificatePath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.socialInsuranceCertificateFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="card-subtitle text-muted">شهاده الزكاة والدخل</p>
+              <a
+                class="bg-light d-flex px-2 align-items-center informationDownload "
+                (click)="downloadImage(productCurrent.zakatCertificatePath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.zakatCertificateFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4 align-items-center">
+              <p class="card-subtitle text-muted">التقريرالمالي</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.financialStatementPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.financialStatementFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">عضوية الفرقة التجارية</p>
+              <a
+                target="_blank"
+                class="informationDownload  bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.coCMembershipPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.coCMembershipFile }}</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5 col-12">
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitletext-muted ms-2">
+                رقم الرخصة <br />
+                <small>{{productCurrent.licenseNumber}}</small>
+              </p>
+              <a
+                target="_blank"
+                class="informationDownload  bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.licensePath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.licenseFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">خطاب بنكي برقم البيان</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.companyRegisterationNumberPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.companyRegisterationNumberFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">شهاده السعوده</p>
+              <a
+                target="_blank"
+                class="informationDownload py-2 bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.saudizationCertificatePath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p>{{ productCurrent.saudizationCertificateFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">ضربيه القيمه المضافه</p>
+              <a
+                target="_blank"
+                class="informationDownload  bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(
+                    productCurrent.addedValueRegisterationCertificatePath
+                  )
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">
+                  {{ productCurrent.addedValueRegisterationCertificateFile }}
+                </p>
+              </a>
+            </div>
+            <div class=" d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">شهاده الايزو 9001</p>
+              <a
+                class="informationDownload  bg-light d-flex px-2 align-items-center  "
+                (click)="
+                  downloadImage(productCurrent.isoPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 ">{{ productCurrent.isoFile }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- معلومات التواصل -->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4">معلومات التواصل</h6>
+        <div class="d-flex col-12 mb-4 flex-wrap">
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">الدوله</p>
+            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.nameEn }}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">المدينه</p>
+            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.nameEn }}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">المنطقه</p>
+            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.region.nameEn }}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">العنوان</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.shortAddress}}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">رقم هاتف المكتب</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.officePhoneNumber}}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">عنوان البريد الالكتروني</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.representative.email}}</small>
+          </div>
+          <div class="d-flex col-4 flex-column">
+            <p class="card-subtitle text-muted">رابط الموقع</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.websiteLink}}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">صندوق البريد</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.postalCode}}</small>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">رمز البريد</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.postalCode}} </small>
+          </div>
+        </div>
+      </div>
+      <!-- معلومات عن ممثل الموقع -->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4">معلومات عن ممثل الموقع</h6>
+        <div class="d-flex justify-content-between flex-wrap">
+          <div>
+            <p class="card-subtitle text-muted">الاسم</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.representative.firstName}}</small>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">رقم التليفون</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.representative.phoneNumber}} 966+ </small>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">البريد الالكتروني</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.representative.email}}</small>
+          </div>
+        </div>
+      </div>
+      <!-- معلومات عن الموظفين-->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4">معلومات عن الموظفين</h6>
+        <!-- card loop -->
+        <div class="d-flex col-12 mb-4" *ngFor="let employes of productCurrent.district.employees">
+          <div class="d-flex col-6 flex-column">
+            <p class="card-subtitle text-muted">الاسم</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.employees.name}}</small>
+          </div>
+          <div class="d-flex col-6 flex-column">
+            <p class="card-subtitle text-muted">المستوى</p>
+            <small class="fs-6 fw-semibold">{{productCurrent.district.employees.employeeLevel}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

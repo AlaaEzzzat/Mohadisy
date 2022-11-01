@@ -1,0 +1,47 @@
+
+a:focus ,a:hover,button:focus ,button:hover {
+  background-color: #004057 !important;
+  color: white !important;
+}
+button>i ,.typeCom
+{
+  color: #18AF9A !important;
+
+}
+input[type="search"]{
+  &:hover,&:active ,&:focus{
+    border: 0px none transparent !important;
+  }
+
+}
+.title
+{
+  line-height:0.5;
+  font-size: 90%;
+}
+.textFontSizeCard{
+  font-size: 90%;
+}
+.we-25 {
+  width: 10em !important;
+  font-size: 1em!important;
+
+}
+@media only screen and (min-width: 768px) {
+  .sizew
+  {
+    flex: 0 0 auto;
+    width: 63.333333% ;
+  }
+
+}
+
+.informationDownload{
+  width: 45% !important;
+  text-decoration: none !important;
+  height: 35px  !important;
+  overflow: hidden;
+white-space:nowrap;
+
+
+}
