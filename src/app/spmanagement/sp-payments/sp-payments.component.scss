@@ -1,4 +1,15 @@
 
+.search input::placeholder
+{
+color:rgb(14, 136, 124);
+}
+
+.search input
+{
+  width: 90%;
+  outline: none;
+}
+
 .card
 {
   padding:5% 5% 3% 4%;
@@ -21,4 +32,17 @@
 img
 {
   height: 93%;
+}
+
+.btn
+{
+  padding: 6% 18%;
+  color: white;
+  border: none;
+}
+
+.card .fa-phone , .card .fa-user
+{
+  margin-left: 4%;
+
 }
