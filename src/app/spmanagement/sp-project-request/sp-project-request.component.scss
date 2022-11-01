@@ -1,34 +1,20 @@
-*{
-  margin: 0;
-  padding: 0;
-}
-
-.nav a
-{
-  padding: 3% 7%;
-  background-color: white;
-  width: 96%;
-  margin-left: 3%;
-
-}
-
 
  .card
 {
+   margin: 0;
    border: none;
    padding: 3% ;
    color:#004057;
 }
 
-.section-2  .card p
+.section-2  .card-1 p
 {
-  padding: 1% 2%;
   margin-right: 4%;
 }
 
-.section-2 .card p span
+.section-2 .card-1 p span
 {
-  margin-left: 47%;
+  margin-left: 40%;
 }
 
 .card p i
@@ -55,14 +41,6 @@
 
 }
 
-.section-2 .card-3
-{
-  margin: 0;
-  padding: 3% 4%;
-  width: 90%;
-  margin-right: 7%;
-
-}
 
 .section-2 .card-3 h6
 {
@@ -89,25 +67,25 @@
 }
 
 
-.section-3 .card label
+.section-3 .card-3 label
 {
   margin:2% 0%;
 }
-.section-3 .card input
+.section-3 .card-3 input
 {
   padding: 2%;
-  height: 50%;
+  height: 7vh;
 
 }
 
-.section-3 .card textarea
+.section-3 .card-3 textarea
 {
   width: 100%;
-  height: 30%;
+  height: 60%;
   padding: 2%;
 }
 
-.section-3 .card
+.section-3 .card-3
 {
   width: 95%;
   margin-right: 4%;
@@ -122,6 +100,13 @@
   color:#198754;
 }
 
+
+button
+{
+  background-color: #004057;
+  color: white;
+  margin-right: 75%;
+}
 
 
 
