@@ -10,7 +10,7 @@
     <button
       class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
       role="button"
-      (click)="getRejectedProfiles()"
+      (click)="pageid()"
     >
       طلبات المرفوضه
     </button>
@@ -72,6 +72,7 @@
             aria-label="Search"
             name="companyName"
             (keyup)="filter()"
+            [(ngModel)]="companyName"
           />
           <button class="btn position-absolute top-0 start-0" type="submit">
             <i class="fa fa-search" (click)="filter()"></i>
@@ -82,7 +83,7 @@
         <!-- <ng-container> -->
 
         <div
-          *ngFor="let pro of iProfileData"
+          *ngFor="let pro of iProfileData | paginate: { itemsPerPage: 6, currentPage: page, totalItems: total }"
           class="card mb-3 border-0 rounded-0 textFontSizeCard"
         >
           <div class="card-body" (click)="objectProduct(pro)">
@@ -90,7 +91,11 @@
               <i class="fa-regular fa-building"></i>
               <div class="card-title me-3 title">
                 <p class="typeCom"></p>
-                <p>{{ pro.applicationUser.accountType.typeName }}</p>
+                <p *ngIf="pro.applicationUser.accountType.typeName ;else templateName">
+                  {{ pro.applicationUser.accountType.typeName }}</p>
+                <ng-template #templateName>
+                  Null
+              </ng-template>
                 <p class="1h-sm">{{ pro.companyName }}</p>
               </div>
             </div>
@@ -103,14 +108,21 @@
             <div class="d-flex">
               <i class="fa fa-phone"></i>
               <div class="me-3 d-flex flex-row justify-content-between">
-                <small
+                <ng-container ></ng-container>
+                <small *ngIf="pro.applicationUser.accountType.typeName==='شركة/مؤسسة' ;else mostcal"
                   >({{ pro.representative.firstName }})+966
                   {{ pro.representative.phoneNumber }}</small
                 >
+                <ng-template  #mostcal>
+
+
+                     <small>({{ pro.applicationUser.normalizedUserName }})+966
+                  {{ pro.applicationUser.phoneNumber }}</small
+                ></ng-template>
                 <small class="me-5 opacity-50"
                   >منذ
                   {{
-                    pro.companyRegisterationNumberStartDate
+                    pro.companyRegisterationNumberStartDate |date
                   }}
                   ايام</small
                 >
@@ -118,9 +130,16 @@
             </div>
           </div>
         </div>
+        <!-- <tr> -->
+                    <!-- <th scope="row" *ngFor="
+                    let data of arrayOfDigits | paginate: { itemsPerPage: 1, currentPage: page }"></th>
+                    <td colspan="1"></td>
+                    <td colspan="6">
+                    </td> -->
 
-        <!-- </ng-container> -->
       </form>
+      <pagination-controls  (pageChange)="choiseFunCallApiPagin($event)"></pagination-controls>
+
     </div>
 
     <!--  -->
@@ -131,7 +150,7 @@
             <img  *ngIf=" productCurrent.companyLogoPath ; else templateName"
               src="{{ productCurrent.companyLogoPath }}"
               class="img-fluid rounded-5  ms-5 me-2 px-1"
-              alt="..."
+              alt="null"
             />
             <ng-template #templateName>
               Null
@@ -170,6 +189,10 @@
                 ><i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
+              <a type="button" class="btn"
+              ><i class="fa-solid fa-xmark"></i>
+              <p>إرسال</p></a
+            >
             </div>
           </div>
         </div>
@@ -177,7 +200,7 @@
 
       <!--    معلومات عن الشركه-->
       <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title">معلومات عن الشركه</h6>
+        <h6 class="card-title mb-4 h5">معلومات عن الشركه</h6>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
@@ -326,76 +349,118 @@
 
       <!-- معلومات التواصل -->
       <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4">معلومات التواصل</h6>
+        <h6 class="card-title mb-4 h5">معلومات التواصل</h6>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">الدوله</p>
-            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.nameEn }}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.district.city.nameEn;else cityName">{{ productCurrent.district.city.nameEn }}</small>
+            <ng-template #cityName>
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">المدينه</p>
-            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.nameEn }}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.district.city.nameEn; else city">{{ productCurrent.district.city.nameEn }}</small>
+            <ng-template #city>
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">المنطقه</p>
-            <small class="fs-6 fw-semibold">{{ productCurrent.district.city.region.nameEn }}</small>
+            <small class="fs-6 fw-semibold"  *ngIf="productCurrent.district.city.region.nameEn; else regionName">{{ productCurrent.district.city.region.nameEn }}</small>
+            <ng-template #regionName>
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">العنوان</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.district.shortAddress}}</small>
+            <small class="fs-6 fw-semibold"  *ngIf="productCurrent.district.shortAddress; else shortAddress">{{productCurrent.district.shortAddress}}</small>
+            <ng-template #shortAddress>
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">رقم هاتف المكتب</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.district.officePhoneNumber}}</small>
+            <small class="fs-6 fw-semibold"   *ngIf="productCurrent.district.officePhoneNumber; else officePhoneNumber">{{productCurrent.district.officePhoneNumber}}</small>
+            <ng-template #officePhoneNumber >
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">عنوان البريد الالكتروني</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.representative.email}}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.representative.email; else emailName">{{productCurrent.representative.email}}</small>
+            <ng-template #emailName>
+              _
+          </ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
             <p class="card-subtitle text-muted">رابط الموقع</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.district.websiteLink}}</small>
+            <small class="fs-6 fw-semibold"  *ngIf="productCurrent.district.websiteLink; else websiteLink">{{productCurrent.district.websiteLink}}</small>
+            <ng-template #websiteLink >
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">صندوق البريد</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.district.postalCode}}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.district.postalCode; else box">{{productCurrent.district.postalCode}}</small>
+            <ng-template #box>
+              _
+          </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">رمز البريد</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.district.postalCode}} </small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.district.postalCode; else postcode">{{productCurrent.district.postalCode}} </small>
+            <ng-template #postcode>
+              _
+          </ng-template>
           </div>
         </div>
       </div>
       <!-- معلومات عن ممثل الموقع -->
       <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4">معلومات عن ممثل الموقع</h6>
+        <h6 class="card-title mb-4 h5">معلومات عن ممثل الموقع</h6>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted">الاسم</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.representative.firstName}}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.representative.firstName;else firstName">{{productCurrent.representative.firstName}}</small>
+            <ng-template #firstName>
+              _
+          </ng-template>
           </div>
           <div>
             <p class="card-subtitle text-muted">رقم التليفون</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.representative.phoneNumber}} 966+ </small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.representative.firstName;else phoneNumber">{{productCurrent.representative.phoneNumber}} 966+ </small>
+            <ng-template #phoneNumber>
+              _
+          </ng-template>
           </div>
           <div>
             <p class="card-subtitle text-muted">البريد الالكتروني</p>
-            <small class="fs-6 fw-semibold">{{productCurrent.representative.email}}</small>
+            <small class="fs-6 fw-semibold" *ngIf="productCurrent.representative.firstName;else email">{{productCurrent.representative.email}}</small>
+            <ng-template #email>
+              _
+          </ng-template>
           </div>
         </div>
       </div>
       <!-- معلومات عن الموظفين-->
       <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4">معلومات عن الموظفين</h6>
+        <h6 class="card-title mb-4 h5">معلومات عن الموظفين</h6>
         <!-- card loop -->
         <div class="d-flex col-12 mb-4" *ngFor="let employes of productCurrent.district.employees">
           <div class="d-flex col-6 flex-column">
-            <p class="card-subtitle text-muted">الاسم</p>
+            <p class="card-subtitle text-muted" *ngIf="productCurrent.representative.firstName;else employeeName">الاسم</p>
             <small class="fs-6 fw-semibold">{{productCurrent.district.employees.name}}</small>
+            <ng-template #employeeName>
+              _
+          </ng-template>
           </div>
           <div class="d-flex col-6 flex-column">
-            <p class="card-subtitle text-muted">المستوى</p>
+            <p class="card-subtitle text-muted" *ngIf="productCurrent.representative.firstName;else employeeLevel">المستوى</p>
             <small class="fs-6 fw-semibold">{{productCurrent.district.employees.employeeLevel}}</small>
+            <ng-template #employeeLevel>
+              _
+          </ng-template>
           </div>
         </div>
       </div>

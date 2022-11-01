@@ -35,6 +35,8 @@ export interface IadminSp {
   coCMembershipPath: string;
   coCMembershipStartDate: any;
   applicationUser: {
+    normalizedUserName:string,
+    phoneNumber:string,
     id: string;
     roleId: string;
     accountId: number;
@@ -158,4 +160,6 @@ export interface IadminSp {
     zakatCertificatePath: string;
     zakatCertificateStartDate: any;
   };
+
+
 }

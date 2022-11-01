@@ -67,4 +67,8 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`)
   }
+
+  getAllPosts(): Observable<any> {
+    return this._HttpClient.get(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/`);
+  }
 }

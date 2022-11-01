@@ -12,6 +12,8 @@ import { AdminMessagesComponent } from './admin-messages/admin-messages.componen
 import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
   imports: [
   CommonModule,
     AdministrationRoutingModule,
+    NgxPaginationModule,
+    FormsModule
+
 
   ],
 })
