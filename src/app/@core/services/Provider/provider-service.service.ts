@@ -80,4 +80,10 @@ export class ProviderServiceService {
       data
     );
   }
+  postAdress(data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Address/storeNewAddress`,
+      data
+    );
+  }
 }

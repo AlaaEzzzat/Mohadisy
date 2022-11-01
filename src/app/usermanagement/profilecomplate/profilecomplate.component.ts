@@ -1,7 +1,12 @@
 import { ApiService } from 'src/app/@core/api.service';
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ValidatorFn,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-profilecomplate',
@@ -15,9 +20,10 @@ export class ProfilecomplateComponent implements OnInit {
   selectCity: any = 0;
   citiesList: any;
   regionsList: any;
-  districtsList: any;
+  districtsList: any = [];
   imageSuccess: boolean = false;
   userSuccess: boolean = false;
+  addingDistrict: boolean = false;
   constructor(
     private fb: FormBuilder,
     private provider: ProviderServiceService,
@@ -27,23 +33,51 @@ export class ProfilecomplateComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', Validators.required],
       applicationUser: this.fb.group({
-        userName: ['', Validators.required],
+        userName: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$'
+            ),
+          ],
+        ],
         phoneNumber: [
           '',
-          [Validators.required, Validators.pattern('^(966)[0-9]{9}$')],
+          [
+            Validators.required,
+            Validators.pattern('^(966)[0-9]{9}$'),
+            Validators.maxLength(12),
+            Validators.minLength(12),
+          ],
         ],
         email: ['', [Validators.required, Validators.email]],
       }),
-      idNumber: ['', [Validators.required, Validators.minLength(10)]],
+      idNumber: [
+        '',
+        [
+          Validators.required,
+          /*  Validators.pattern('^[0-9]{10}*$'), */
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       imageFile: ['', [Validators.required]],
       region: ['', [Validators.required]],
       city: ['', [Validators.required]],
       districtId: ['', [Validators.required]],
-      /* streetName: ['', [Validators.required]],
-      neighborhood: ['', [Validators.required]], */
-      buildingNumber: ['', [Validators.required]],
-      postalBox: ['', [Validators.required]],
-      postalCode: ['', [Validators.required]],
+      buildingNumber: [
+        '',
+        [Validators.required, Validators.minLength(4), Validators.maxLength(4)],
+      ],
+      postalBox: [
+        '',
+        [Validators.required, Validators.minLength(5), Validators.maxLength(5)],
+      ],
+      postalCode: [
+        '',
+        [Validators.required, Validators.minLength(5), Validators.maxLength(5)],
+      ],
     });
     this.registerForm?.get('region')?.valueChanges.subscribe(() => {
       console.log(this.registerForm?.get('region')?.value);
@@ -56,6 +90,28 @@ export class ProfilecomplateComponent implements OnInit {
       this.regionsList = data.data;
       console.log(this.regionsList);
     });
+  }
+
+  numberOnly(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
+  englishOnly(event: any): boolean {
+    if (event.altKey == false && event.ctrlKey == false)
+      if (
+        (event.keyCode >= 48 &&
+          event.keyCode <= 57 &&
+          event.shiftKey == false) ||
+        (event.keyCode >= 65 && event.keyCode <= 90) ||
+        (event.keyCode >= 97 && event.keyCode <= 122)
+      ) {
+        return true;
+      }
+    return false;
   }
 
   get f() {
@@ -174,11 +230,43 @@ export class ProfilecomplateComponent implements OnInit {
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
-          this.districtsList = data.data;
+          if (data.data == '') {
+            this.addingDistrict = true;
+          } else {
+            console.log(data.data);
+            this.districtsList = data.data;
+          }
         },
         (error) => {
-          console.log('error');
+          this.addingDistrict = true;
         }
       );
+  }
+  addAdress(district: any) {
+    let region = this.regionsList.find((region: any) => {
+      if (region.id == this.registerForm?.get('region')?.value) {
+        return region;
+      }
+    });
+    let city = this.citiesList.find((city: any) => {
+      if (city.id == this.registerForm?.get('city')?.value) {
+        return city;
+      }
+    });
+    let newAddress = {
+      region: region.nameAr,
+      city: city.nameAr,
+      district: district,
+    };
+    this.provider.postAdress(newAddress).subscribe({
+      next: (response: any) => {
+        console.log('address Posted');
+        this.addingDistrict = false;
+        this._getDistricts();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
   }
 }
