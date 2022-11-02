@@ -13,7 +13,7 @@ export class AdminSPComponent implements OnInit {
 
   iProfileData: IadminSp[] = [];
   datas: any;
-  companyName: string = ' ';
+  companyName: string = '';
   idProduct: any;
   idProductSessionStorage: any;
   // objectpeo: any;

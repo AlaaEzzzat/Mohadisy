@@ -80,7 +80,7 @@
 
         <!-- card company -->
         <!-- <ng-container> -->
-<ng-container  *ngFor="let pro of iProfileData | paginate: { itemsPerPage: 6, currentPage: page, totalItems: total }">
+<ng-container  *ngFor="let pro of iProfileData | paginate: { itemsPerPage: 6, currentPage: page, totalItems: total } |filter:companyName">
         <div
 
           class="card mb-3 border-0 rounded-0 textFontSizeCard"
