@@ -55,4 +55,5 @@ export class AdminClientsService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Client/getNotCompletedClientsProfiles/Page/${page}`);
   }
 
+  
 }

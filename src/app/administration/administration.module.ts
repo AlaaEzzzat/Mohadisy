@@ -13,6 +13,7 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ CommonModule,
     AdministrationRoutingModule,
     NgxPaginationModule,
     FormsModule,
-
+    Ng2SearchPipeModule
   ],
 })
 export class AdministrationModule {}

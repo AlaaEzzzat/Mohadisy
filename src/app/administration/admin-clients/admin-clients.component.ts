@@ -1,4 +1,4 @@
-import { Component, OnInit ,OnDestroy } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { AdminClientsService } from 'src/app/@core/services/admin/admin-clients.service';
 import { IadminClients } from 'src/app/@models/iadmin-clients';
 import { Observable, Observer, filter } from 'rxjs';
@@ -9,7 +9,7 @@ import { Observable, Observer, filter } from 'rxjs';
   templateUrl: './admin-clients.component.html',
   styleUrls: ['./admin-clients.component.scss']
 })
-export class AdminClientsComponent implements OnInit, OnDestroy {
+export class AdminClientsComponent implements OnInit {
   page: number = 1;
   newApi: number = 1;
   total: number = 0;
@@ -17,7 +17,7 @@ export class AdminClientsComponent implements OnInit, OnDestroy {
   datas: any;
   idProduct: any;
   idProductSessionStorage: any;
-  filterTerm!: string;
+  filterTerm: string=''
   productCurrent: any;
   // down
   base64Image: any;
@@ -29,7 +29,7 @@ export class AdminClientsComponent implements OnInit, OnDestroy {
     this.getNewClientProfiles();
 
     this.objectProductGet();
-
+    // this.fin("علي")
   }
 
   getNewClientProfiles(){
@@ -167,5 +167,20 @@ export class AdminClientsComponent implements OnInit, OnDestroy {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
 
+  fin(a:string):any{
 
+    for(let pro of this.iProfileData){
+    if(  pro.firstName === a){
+      console.log(pro)
+      return pro
+    }else{
+      console.log("errrrr")
+    }
+  
+
+    }
+
+
+
+  }
 }
