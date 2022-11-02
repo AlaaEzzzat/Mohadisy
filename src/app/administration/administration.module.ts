@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -29,11 +28,10 @@ import { FormsModule } from '@angular/forms';
     AdminSPComponent,
   ],
   imports: [
-  CommonModule,
+CommonModule,
     AdministrationRoutingModule,
     NgxPaginationModule,
-    FormsModule
-
+    FormsModule,
 
   ],
 })

@@ -1,24 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileData } from './../../@models/profile-data';
 import { Router } from '@angular/router';
 import { Observable, Observer, filter } from 'rxjs';
 import { IadminSp } from './../../@models/iadmin-sp';
 import { AdminServiceProvidorService } from './../../@core/services/admin/admin-service-providor.service';
+
 @Component({
   selector: 'app-admin-sp',
   templateUrl: './admin-sp.component.html',
   styleUrls: ['./admin-sp.component.scss'],
 })
 export class AdminSPComponent implements OnInit {
+
   iProfileData: IadminSp[] = [];
   datas: any;
   companyName: string = ' ';
   idProduct: any;
   idProductSessionStorage: any;
-  objectpeo: any;
+  // objectpeo: any;
   productCurrent: any;
   name = '';
+  // down
   base64Image: any;
+  // pagenation
   page: number = 1;
   newApi: number = 1;
   total: number = 0;
@@ -164,23 +167,23 @@ export class AdminSPComponent implements OnInit {
     }
   }
 
-  filter() {
-    this.iProfileData = [
-      ...this.datas.filter((name: any) => {
-        name.companyName.includes(this.companyName);
-      }),
-    ];
+  filter(filterValue:any) {
+
+    this.iProfileData.filter((val) => {
+      return val.companyName.toLowerCase().indexOf(filterValue) > -1;
+   });
+
+    // this.iProfileData = [
+    //   ...this.datas.filter((name:any) => {
+    //     name.companyName.includes(this.companyName);
+    //   }),
+      // console.log(this.iProfileData)
+    // ];
     console.log(this.iProfileData);
   }
-  openProductDetails(id: any) {
-    this.idProduct = id;
-    console.log(this.idProduct);
-    sessionStorage.setItem('idProduct', this.idProduct);
-    this.idProductSessionStorage = sessionStorage.getItem('idProduct');
-    console.log(this.idProductSessionStorage);
-  }
-  objectProduct(id: any) {
-    this.idProduct = id;
+
+  objectProduct(object: any,id:any) {
+    this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
     sessionStorage.setItem('Product', test);
     this.idProductSessionStorage = sessionStorage.getItem('Product');
@@ -241,4 +244,5 @@ export class AdminSPComponent implements OnInit {
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
+
 }

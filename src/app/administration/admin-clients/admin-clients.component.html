@@ -1,4 +1,4 @@
-
+<!--
     <main class="container">
         <section class="section-1">
            <div class="btn-group pt-5 pb-5">
@@ -132,4 +132,310 @@
         </section>
     </main>
 
+ -->
 
+<div class="m-3">
+
+  <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)=" getActiveClientAcconting()"
+
+    >
+      طلبات الانضمام
+    </button>
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)=" getActiveClientAcconting()"
+
+    >
+العملاء النشيطين    </button>
+    <button
+      class="btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getNonActiveClientAccount()"
+
+    >
+    العملاء  غير النشيطين     </button>
+    <button
+      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getBlockedClientsProfiles()"
+
+    >
+      العملاء المعطلين
+    </button>
+    <a>
+      <button
+        class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+        role="button"
+        (click)="getExpiredClientsProfiles()"
+      >
+العملاء المنتهين      </button>
+    </a>
+  </div>
+
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
+    <div class="col-md-4 col-12">
+      <form class="d-flex flex-column me-3">
+        <!-- search company -->
+
+        <div class="d-flex position-relative mb-3">
+          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa-regular fa-clock"></i>
+          </button>
+          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa fa-arrow-down-a-z"></i>
+          </button>
+          <!-- [(ngModel)]="companyName" -->
+
+          <input
+            class="form-control bg-white border-0 rounded-0 w-100"
+            type="search"
+            placeholder="Search for name ,number,location,etc"
+            aria-label="Search"
+            name="filterTerm"
+            [(ngModel)]="filterTerm"
+          />
+          <button class="btn position-absolute top-0 start-0" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+
+        <!-- card company -->
+        <!-- <ng-container> -->
+        <ng-container
+          *ngFor="
+            let pro of iProfileData
+              | paginate
+                : { itemsPerPage: 6, currentPage: page, totalItems: total }
+          "
+        >
+          <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
+            <div class="card-body" (click)="objectProduct(pro)">
+              <div class="d-flex">
+                <i class="fa-regular fa-building"></i>
+                <div class="card-title me-3 title">
+                  <p *ngIf="pro.firstName; else templateName">
+                    {{ pro.firstName }} {{ pro.lastName }}
+                  </p>
+                  <ng-template #templateName> Null firstName </ng-template>
+
+                </div>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-location-dot"></i>
+                <i class="bi bi-geo-alt"></i>
+                <p
+                  class="me-3"
+                  *ngIf="
+                    pro.district.city.region.code &&
+                      pro.district.city.region.nameAr;
+                    else region
+                  "
+                >
+                  <span *ngIf="pro.district.city.region.code; else regioncode"
+                    >{{ pro.district.city.region.code }} -
+                  </span>
+                  <ng-template #regioncode> null </ng-template>
+                  <span
+                    *ngIf="pro.district.city.region.nameAr; else regioncode"
+                  >
+                    {{ pro.district.city.region.nameAr }}
+                  </span>
+                  <ng-template #regionnameAr> null </ng-template>
+                </p>
+                <ng-template #region></ng-template>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-phone"></i>
+                <div class="me-3 d-flex flex-row justify-content-between">
+                  <small *ngIf="pro.phoneNumber; else phoneNumberdateCreated">
+                    +966 {{ pro.phoneNumber }}</small
+                  >
+                  <ng-template #phoneNumberdateCreated>
+                    undefind mobile</ng-template
+                  >
+
+                  <small
+                    class="me-5 opacity-50 fsvw"
+                    *ngIf="pro.dateCreated; else dateCreated"
+                    >منذ
+                    {{ pro.dateCreated | date }}
+                  </small>
+                  <ng-template #dateCreated>null</ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+      <pagination-controls
+        (pageChange)="choiseFunCallApiPagin($event)"
+      ></pagination-controls>
+    </div>
+    <div class="col-md-7 sizew col-12 flex-row">
+      <div class="col-12 card mb-3 border-0 rounded-0 p-4">
+        <div class="row g-0 justify-content-evenly align-items-center">
+          <div class="col-lg-2 col-sm-3">
+            <img
+              *ngIf="productCurrent.profilePicturePath; else profilePicturePath"
+              src="{{ productCurrent.profilePicturePath }}"
+              class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
+              alt="null"
+            />
+            <ng-template #profilePicturePath>
+              Null pPofile Picture
+            </ng-template>
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <div class="card-body">
+              <p class="me-2">
+                {{ productCurrent.firstName }} {{ productCurrent.lastName }}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-7 col-sm-5">
+            <div class="d-flex">
+              <a type="button" class="btn w-25">
+                <i class="fa-solid fa-check text-secondary"></i>
+                <p class="fsvw">مكتمل</p></a
+              >
+              <a type="button" class="btn w-25">
+                <i class="fa-solid fa-exclamation"></i>
+                <p  class="fsvw">غير مكتمل</p></a
+              >
+              <a type="button" class="btn w-25"
+                ><i class="fa-solid fa-xmark"></i>
+                <p  class="fsvw">رفض</p></a
+              >
+              <a type="button" class="btn w-25"
+                ><i class="fa-solid fa-xmark"></i>
+                <p  class="fsvw">إرسال</p></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
+        <p class="card-title mb-4">معلومات عن العميل</p>
+        <div class="d-flex col-12 mb-4 flex-wrap">
+          <div class="col-12 mb-4">
+            <div class="d-flex flex-row justify-content-between">
+              <p class="card-subtitle text-secondary ms-2">رقم الهوية</p>
+
+              <p>{{ productCurrent.idNumber }}</p>
+
+              <!-- <div   [hidden]="!productCurrent.idFile"> -->
+              <a
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                target="_blank"
+                (click)="
+                downloadImage(productCurrent.profilePicturePath)
+              "
+                *ngIf="productCurrent.idFile; else idFile"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.idFile }}</p>
+              </a>
+              <ng-template #idFile>___</ng-template>
+              <!-- </div> -->
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">الدوله</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.district.city.region.code; else cityName"
+              >{{ productCurrent.district.city.region.code }}</small
+            >
+            <ng-template #cityName> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">المدينه</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.district.city.nameAr; else city"
+              >{{ productCurrent.district.city.nameAr }}</small
+            >
+            <ng-template #city> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">المنطقه</p>
+            <small
+              class="fs-6"
+              *ngIf="
+                productCurrent.district.city.region.nameAr;
+                else regionName
+              "
+              >{{ productCurrent.district.city.region.nameAr }}</small
+            >
+            <ng-template #regionName> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">العنوان</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.streetName; else shortAddress"
+            >{{productCurrent.buildingNumber}},
+              {{ productCurrent.streetName }} -
+              {{ productCurrent.neighborhood }}</small
+            >
+            <ng-template #shortAddress> _ </ng-template>
+          </div>
+
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">
+              رقم هاتف المكتب
+            </p>
+            <small
+              class="fs-6"
+              *ngIf="
+                productCurrent.district.officePhoneNumber;
+                else officePhoneNumber
+              "
+              >{{ productCurrent.district.officePhoneNumber }}</small
+            >
+            <ng-template #officePhoneNumber> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">
+              عنوان البريد الالكتروني
+            </p>
+            <small class="fs-6" *ngIf="productCurrent.email; else emailName">{{
+              productCurrent.email
+            }}</small>
+            <ng-template #emailName> _ </ng-template>
+          </div>
+          <div class="d-flex col-4 flex-column">
+            <p class="card-subtitle text-secondary fs-6 mb-2">رابط الموقع</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.websiteLink; else websiteLink"
+              >{{ productCurrent.websiteLink }}</small
+            >
+            <ng-template #websiteLink> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">صندوق البريد</p>
+            <small class="fs-6" *ngIf="productCurrent.postalBox; else box">{{
+              productCurrent.postalBox
+            }}</small>
+            <ng-template #box> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">رمز البريد</p>
+            <small class="fs-6" *ngIf="productCurrent.postalCode; else postcode"
+              >{{ productCurrent.postalCode }}
+            </small>
+            <ng-template #postcode> _ </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

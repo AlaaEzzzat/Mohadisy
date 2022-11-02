@@ -14,13 +14,13 @@ import { ApiService } from 'src/app/@core/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+// import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [AppComponent],
   imports: [
+  SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule,
     AccountModule,
     CoreModule,
     HttpClientModule,
@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     FormsModule,
     NgbModule,
+    // Ng2SearchPipeModule,
   ],
   providers: [
     {

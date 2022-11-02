@@ -61,7 +61,7 @@
             <i class="fa-regular fa-clock"></i>
           </button>
           <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
-            <i class="fa fa-arrow-down-a-z" (click)="filter()"></i>
+            <i class="fa fa-arrow-down-a-z" ></i>
           </button>
           <!-- [(ngModel)]="companyName" -->
 
@@ -71,22 +71,21 @@
             placeholder="Search for name ,number,location,etc"
             aria-label="Search"
             name="companyName"
-            (keyup)="filter()"
             [(ngModel)]="companyName"
           />
           <button class="btn position-absolute top-0 start-0" type="submit">
-            <i class="fa fa-search" (click)="filter()"></i>
+            <i class="fa fa-search"></i>
           </button>
         </div>
 
         <!-- card company -->
         <!-- <ng-container> -->
-
+<ng-container  *ngFor="let pro of iProfileData | paginate: { itemsPerPage: 6, currentPage: page, totalItems: total }">
         <div
-          *ngFor="let pro of iProfileData | paginate: { itemsPerPage: 6, currentPage: page, totalItems: total }"
+
           class="card mb-3 border-0 rounded-0 textFontSizeCard"
         >
-          <div class="card-body" (click)="objectProduct(pro)">
+          <div class="card-body" (click)="objectProduct(pro,pro.id)">
             <div class="d-flex">
               <i class="fa-regular fa-building"></i>
               <div class="card-title me-3 title">
@@ -122,7 +121,7 @@
                 <small class="me-5 opacity-50"
                   >منذ
                   {{
-                    pro.companyRegisterationNumberStartDate |date
+                    pro.companyRegisterationNumberStartDate | date
                   }}
                   ايام</small
                 >
@@ -130,6 +129,7 @@
             </div>
           </div>
         </div>
+      </ng-container>
         <!-- <tr> -->
                     <!-- <th scope="row" *ngFor="
                     let data of arrayOfDigits | paginate: { itemsPerPage: 1, currentPage: page }"></th>
