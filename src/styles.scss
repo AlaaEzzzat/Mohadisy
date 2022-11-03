@@ -966,3 +966,6 @@ input[type="number"]::-webkit-outer-spin-button {
 @import "~bootstrap/scss/bootstrap";
 /* angular-cli file: src/styles.css */
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

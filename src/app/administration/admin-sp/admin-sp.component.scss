@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
 
+// *{
+//   font-family: 'Cairo', sans-serif;
+//   font-size: 1rem;
+
+// }
 a:focus ,a:hover,button:focus ,button:hover {
   background-color: #004057 !important;
   color: white !important;
@@ -23,8 +29,8 @@ input[type="search"]{
   font-size: 90%;
 }
 .we-25 {
-  width: 10em !important;
-  font-size: 1em!important;
+  width: 12em !important;
+  font-size: 1.1em!important;
 
 }
 @media only screen and (min-width: 768px) {

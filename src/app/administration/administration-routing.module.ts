@@ -28,6 +28,7 @@ const routes: Routes = [
       { path: 'contributions', component: AdminContributionsComponent },
       { path: 'sp', component: AdminSPComponent },
 
+
       { path: '', redirectTo: 'clients', pathMatch: 'full' },
     ],
   },

@@ -10,10 +10,10 @@ export interface IadminClients {
   lastName: 'string';
   phoneNumber: string;
   joinRequestStatusId: 2305;
-  email:string,
-  websiteLink:string,
+  email: string;
+  websiteLink: string;
   neighborhood: 'منطقة نجران';
-  buildingNumber:number,
+  buildingNumber: number;
   postalBox: '00000';
   postalCode: '11442';
   profilePictureFile: 'default.png';
@@ -45,5 +45,18 @@ export interface IadminClients {
     nameEn: 'Ar Rawdah Dist.';
     organizationalServiceProviderProfiles: [];
   };
+  id: string;
 
+  joinRequestStatus: {
+    accountStatusId: 4;
+    clientProfiles: [];
+    dateCreated: null;
+    description: '';
+    accountStatus: {
+      id: 4;
+      joinRequestStatuses: [];
+      nameAr: 'جديد';
+      nameEn: 'New';
+    };
+  };
 }

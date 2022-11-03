@@ -14,6 +14,8 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,16 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AdminPaymentsComponent,
     AdminSettingsComponent,
     AdminSPComponent,
+
   ],
   imports: [
 CommonModule,
     AdministrationRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    MatSortModule,
+    MatIconModule
   ],
 })
 export class AdministrationModule {}

@@ -19,43 +19,37 @@ export class AdminSPComponent implements OnInit {
   // objectpeo: any;
   productCurrent: any;
   name = '';
+  id:any;
   // down
   base64Image: any;
   // pagenation
   page: number = 1;
   newApi: number = 1;
   total: number = 0;
+  firstObject:any;
+
   constructor(
     private ServicesProvidor: AdminServiceProvidorService,
     private router: Router
   ) {
-    this.ServicesProvidor.getAllProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-    });
+    // this.ServicesProvidor.getAllProfiles(this.page).subscribe((value) => {
+    //   this.datas = value.data.profiles;
+    //   this.iProfileData = this.datas;
+    //   this.total = value.data.totalPages;
+    // });
   }
 
   ngOnInit(): void {
+    this.getNewProfiles()
     this.objectProductGet();
   }
-  //7
-  pageid() {
-    this.newApi = 7;
 
-    this.ServicesProvidor.getAllProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      console.log(value);
 
-    });
-  }
   //6
-  getClosedProfiles() {
+  getExpiredProfiles() {
     this.newApi = 6;
 
-    this.ServicesProvidor.getClosedProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
       this.datas = value.data.profiles;
       this.iProfileData = this.datas;
       console.log(this.iProfileData);
@@ -87,12 +81,8 @@ export class AdminSPComponent implements OnInit {
         console.log(this.datas);
         this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-        console.log(value);
-        console.log(this.total);
-
-        // for (var i = 1; i <= tota; i++) {
-        //   this.arrayOfDigits.push(i);
-        // }
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id)
       }
     });
   }
@@ -156,39 +146,24 @@ export class AdminSPComponent implements OnInit {
         this.getNonActiveAccount();
         break;
       case 5:
-        this.getNewProfiles();
+        this.getBlockedProfiles();
         break;
       case 6:
-        this.getNewProfiles();
+        this.getExpiredProfiles();
         break;
-      case 7:
-        this.pageid();
-        break;
+
     }
-  }
-
-  filter(filterValue:any) {
-
-    this.iProfileData.filter((val) => {
-      return val.companyName.toLowerCase().indexOf(filterValue) > -1;
-   });
-
-    // this.iProfileData = [
-    //   ...this.datas.filter((name:any) => {
-    //     name.companyName.includes(this.companyName);
-    //   }),
-      // console.log(this.iProfileData)
-    // ];
-    console.log(this.iProfileData);
   }
 
   objectProduct(object: any,id:any) {
     this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
-    sessionStorage.setItem('Product', test);
-    this.idProductSessionStorage = sessionStorage.getItem('Product');
+    sessionStorage.setItem('Productsp', test);
+    sessionStorage.setItem('ids', id);
+    this.idProductSessionStorage = sessionStorage.getItem('Productsp');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
+    this.id=sessionStorage.getItem('ids');
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('Product');

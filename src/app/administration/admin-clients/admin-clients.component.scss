@@ -1,70 +1,34 @@
-// * {
-//   padding: 0;
-//   margin: 0;
-//   box-sizing: border-box;
-// }
-// :root {
-//   --color: #12e193;
-//   --whait: white;
-// }
-// .bg-dark-greenish-blue {
-//   background-color: #004958;
-//   font-size: 14px;
-// }
-// .text-greenblue {
-//   color: #004958;
-// }
-// body {
-//   background-color: #eee;
-// }
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$fontTajawalFamily: 'Tajawal', sans-serif;
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$textColor:#18AF9A;
+$font25Size:1.25vw;
+$font18Size:0.8999999999999999vw;
+$font16Size:0.8vw;
 
-// main .btn-group button {
-//   padding: 5px 25px;
-//   border: 0;
-//   font-size: 12px;
-// }
-
-// main .row .col-4 .div-1 i:nth-child(1) {
-//   color: var(--color);
-//   padding: 10px 15px;
-//   font-size: 14px;
-// }
-// main .row .col-4 .div-1 select {
-//   border: 0;
-//   font-size: 12px;
-//   padding: 7px 0;
-// }
-// main .row .col-4 .div-1 input {
-//   border: 1px solid #ccc;
-//   border-radius: 5px;
-//   font-size: 12px;
-//   padding: 7px 5px;
-//   margin: 0;
-// }
-// main .row .col-4 .div-1 i:last-of-type {
-//   color: var(--color);
-//   padding: 10px 10px;
-//   font-size: 14px;
-// }
-
-// main .row .col-8 .div-1 img {
-//   width: 70px;
-//   border-radius: 50%;
-// }
-// main .row .col-8 .div-3 .row .col-4 {
-//   overflow: hidden;
-// }
-// main .row .col-8 .div-4 .row .col-4 {
-//   overflow: hidden;
-// }
-
+@mixin title{
+  font-size: $font25Size;
+  font-family:$fontTajawalFamily ;
+}
+@mixin text18{
+  font-size: $font18Size;
+  font-family:$fontCairoFamily ;
+}
+@mixin text16{
+  font-size: $font16Size;
+  font-family:$fontCairoFamily ;
+}
 a:focus ,a:hover,button:focus ,button:hover {
-  background-color: #004057 !important;
+  background-color: $Alltext!important;
   color: white !important;
+  border: 0px none transparent!important;
 }
 button>i ,.typeCom
 {
-  color: #18AF9A !important;
+  color: $textColor !important;
 
 }
 input[type="search"]{
@@ -82,8 +46,8 @@ input[type="search"]{
   font-size: 90%;
 }
 .we-25 {
-  width: 10em !important;
-  font-size: 1em!important;
+  width: 13em !important;
+  font-size: 1.1em!important;
 
 }
 @media only screen and (min-width: 768px) {
@@ -91,6 +55,10 @@ input[type="search"]{
   {
     flex: 0 0 auto;
     width: 63.333333% ;
+  }
+  .sizewSay{
+    flex: 0 0 auto;
+    width: 38.333333%;
   }
 
 }
@@ -105,5 +73,33 @@ white-space:nowrap;
 
 }
 .fsvw{
-  font-size:1vw !important;
+  @include text16();
+}
+.postionCard{
+  right: 50px !important;
+  bottom: 20px !important;
+}
+.circle{
+  background-color: #18af9b4e;
+  color: #18AF9A;
+}
+.projectLeter{
+  color: #18AF9A;
+ @include title;
+}
+.sayPro{
+  @include title();
+  background-color: $Alltext!important;
+  color: white !important;
+  border: 0px none transparent!important;
+}
+.titleResone,.bodyResine{
+  @include text16();
+
+}
+.bodyResine{
+color: $Alltext;
+}
+.titleResone{
+color: #707070;
 }

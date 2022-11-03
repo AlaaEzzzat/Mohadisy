@@ -40,7 +40,7 @@ export class AdminClientsService {
 
   getBlockedClientsProfiles​(page:number):Observable<any>
   {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api​/Client​/getBlockedClientsProfiles​/Page​/${page}`);
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getBlockedProfiles/Page/${page}`);
   }
 
   getExpiredClientsProfiles(page:number):Observable<any>
@@ -55,5 +55,5 @@ export class AdminClientsService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Client/getNotCompletedClientsProfiles/Page/${page}`);
   }
 
-  
+
 }

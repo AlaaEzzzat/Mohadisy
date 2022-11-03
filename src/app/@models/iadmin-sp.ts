@@ -22,7 +22,7 @@ export interface IadminSp {
   bankAccountNumber: any;
   bankId: number;
   bankName: any;
-  buildingNumber:string;
+  buildingNumber: string;
   cityName: any;
   classificationCertificateEndDate: string;
   classificationCertificateFile: string;
@@ -34,14 +34,45 @@ export interface IadminSp {
   coCMembershipNumber: number;
   coCMembershipPath: string;
   coCMembershipStartDate: any;
+  projectService: any;
+  firstName: string;
+  lastName: string;
   applicationUser: {
-    normalizedUserName:string,
-    phoneNumber:string,
-    id: string;
-    roleId: string;
+    accessFailedCount: 0;
+    accountActivationApplicationUserWhoTakeDecision: null;
+    accountActivationApplicationUsers: [];
     accountId: number;
     individualServiceProviderProfile: any;
-    clientProfile: any;
+    adminProfile: null;
+    applicationRole: null;
+    appointments: null;
+    clientProfile: null;
+    complaints: [];
+    concurrencyStamp: '64901872-8b7d-4348-a94e-f9be14369359';
+    connectionId: null;
+    email: 'ind@gmail.com';
+    emailConfirmed: true;
+    emailVerifyToken: '7f240ae8-c509-484c-8d50-65e1b4169005';
+    id: '6e0e0787-b636-48f1-b040-63ffe824bf5a';
+    isActive: true;
+    lockoutEnabled: true;
+    lockoutEnd: null;
+    messageReceivers: null;
+    messageSenders: null;
+    normalizedEmail: 'IND@GMAIL.COM';
+    normalizedUserName: 'WESSAMIND';
+    organizationalServiceProviderProfile: null;
+    passResetToken: null;
+    passwordHash: 'AQAAAAEAACcQAAAAEL5lDebxmpVcxBMX/LlHatSI2yOfVzQXtVjpAfV+c8fSXnAWU8ofM2mFTHZFI218sw==';
+    phoneNumber: '1111111111';
+    phoneNumberConfirmed: false;
+    roleId: 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb';
+    roles: null;
+    securityStamp: 'JTEQ6FAKIRDCSYGQZGP2YM4PGXGJQGWO';
+    serviceProviderPartnerships: null;
+    testimonials: [];
+    twoFactorEnabled: false;
+    userName: 'wessamInd';
     accountType: {
       id: number;
       typeName: string;
@@ -57,6 +88,7 @@ export interface IadminSp {
     organizationalServiceProviderProfiles: [];
   };
   representative: {
+    typeName: string;
     id: number;
     firstName: string;
     lastName: string;
@@ -65,6 +97,7 @@ export interface IadminSp {
     organizationalServiceProviderProfileId: number;
     dateCreated: number;
   };
+
   district: {
     id: number;
     cityId: number;
@@ -106,10 +139,10 @@ export interface IadminSp {
     isoStartDate: string;
     joinRequestStatus: {
       id: number;
-      description: string,
-      accountStatusId: number,
-      dateCreated: any
-      accountStatus: {},
+      description: string;
+      accountStatusId: number;
+      dateCreated: any;
+      accountStatus: {};
     };
     joinRequestStatusId: number;
     licenseEndDate: string;
@@ -152,7 +185,7 @@ export interface IadminSp {
     unitNumber: any;
     vatregistrationCertificateEndDate: string;
     vatregistrationCertificateStartDate: string;
-    websiteLink:string;
+    websiteLink: string;
     yearlyBudget: string;
     zakatCertificateEndDate: any;
     zakatCertificateFile: any;
@@ -160,6 +193,4 @@ export interface IadminSp {
     zakatCertificatePath: string;
     zakatCertificateStartDate: any;
   };
-
-
 }

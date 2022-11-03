@@ -1,7 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { AdminClientsService } from 'src/app/@core/services/admin/admin-clients.service';
 import { IadminClients } from 'src/app/@models/iadmin-clients';
-import { Observable, Observer, filter } from 'rxjs';
+import { Observable, Observer, filter, first } from 'rxjs';
+import {Sort} from '@angular/material/sort';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Observable, Observer, filter } from 'rxjs';
 })
 export class AdminClientsComponent implements OnInit {
   page: number = 1;
-  newApi: number = 1;
+  newApi: number = 3;
   total: number = 0;
   iProfileData: IadminClients [] = [];
   datas: any;
@@ -19,17 +20,22 @@ export class AdminClientsComponent implements OnInit {
   idProductSessionStorage: any;
   filterTerm: string=''
   productCurrent: any;
+  id:any;
   // down
   base64Image: any;
+  sortedData:IadminClients []=[];
+  firstObject:any;
+  constructor( private ServicesProvidor:AdminClientsService) {
 
-  constructor( private ServicesProvidor:AdminClientsService) { }
+     this.iProfileData.slice();
+     this.getNewClientProfiles();
+  }
 
 
   ngOnInit(): void {
-    this.getNewClientProfiles();
+
 
     this.objectProductGet();
-    // this.fin("علي")
   }
 
   getNewClientProfiles(){
@@ -38,8 +44,12 @@ export class AdminClientsComponent implements OnInit {
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      console.log(this.iProfileData)
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
+
+
     });
+
   }
 
   getActiveClientAcconting(){
@@ -49,6 +59,8 @@ export class AdminClientsComponent implements OnInit {
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
       console.log(this.iProfileData)
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
 
@@ -59,6 +71,8 @@ export class AdminClientsComponent implements OnInit {
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
       console.log(this.iProfileData)
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
   getBlockedClientsProfiles(){
@@ -68,6 +82,8 @@ export class AdminClientsComponent implements OnInit {
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
       console.log(this.iProfileData)
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
   getExpiredClientsProfiles(){
@@ -77,6 +93,8 @@ export class AdminClientsComponent implements OnInit {
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
       console.log(this.iProfileData)
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
   // bagenations
@@ -102,18 +120,26 @@ export class AdminClientsComponent implements OnInit {
     }
   }
 // details informatin
-  objectProduct(object: any) {
-    this.idProduct = object;
+  objectProduct(object ?: any,id?:any) {
+
+      this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
     sessionStorage.setItem('Product', test);
+    sessionStorage.setItem('id', id);
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
+    this.id = sessionStorage.getItem('id');
+
+
   }
   objectProductGet() {
+
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.productCurrent);
+    console.log(this.idProductSessionStorage);
+
+
   }
 
 
@@ -166,21 +192,56 @@ export class AdminClientsComponent implements OnInit {
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
-
-  fin(a:string):any{
-
-    for(let pro of this.iProfileData){
-    if(  pro.firstName === a){
-      console.log(pro)
-      return pro
-    }else{
-      console.log("errrrr")
-    }
-  
-
+  sortData(sort: Sort) {
+    const data = this.iProfileData.slice();
+    if (!sort.active || sort.direction === '') {
+      this.iProfileData = data;
+      return;
     }
 
+    this.iProfileData = data.sort((a:any, b:any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'fristName':
+          return this.compare(a.name, b.name, isAsc);
+          case 'dateCreated':
+            return this.compare(a.name, b.name, isAsc);
 
 
+        default:
+          return 0;
+      }
+    });
   }
+
+  // sortorder(){
+  //   // this.iProfileData.sort(
+  //   //   (n1,n2)=>{
+  //   //      if (n1.dateCreated>n2.dateCreated) return 1;
+  //   //      if (n1.dateCreated<n2.dateCreated) return -1;
+  //   //      else return 0;
+  //   //  })
+
+  //   this.iProfileData.sort(function(a, b) {
+  //     var nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
+  //     var nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
+  //     if (nameA < nameB) {
+  //       return -1;
+  //     }
+  //     if (nameA > nameB) {
+  //       return 1;
+  //     }
+
+  //     // names must be equal
+  //     return 0;
+  //   });
+  // }
+
+   compare(a: number | string, b: number | string, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+
+
 }
+

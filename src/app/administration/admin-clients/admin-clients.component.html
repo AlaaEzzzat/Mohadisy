@@ -1,194 +1,88 @@
-<!--
-    <main class="container">
-        <section class="section-1">
-           <div class="btn-group pt-5 pb-5">
-                <button class="ms-3 text-white bg-dark-greenish-blue p-2 rounded-1" onclick="">طلبات الانضمام</button>
-                <button class="ms-3 text-primary bg-white" onclick="">الطلبات المرفوضه</button>
-                <button class="ms-3 text-primary bg-white" onclick="">الحسابات النشطه</button>
-                <button class="ms-3 text-primary bg-white" onclick="">الحسابات المعطله</button>
-                <button class="ms-3 text-primary bg-white" onclick="">الحسابات غير نشطه</button>
-                <button class="ms-3 text-primary bg-white" onclick="">الحسابات منتهيه</button>
-            </div>
-        </section>
-        <section class="section-2">
-            <div class="row">
-                <div class="col-4">
-                    <div class="div-1 mb-2">
-                        <i class="fa-regular fa-clock bg-white ms-1" style="color: #12e193;"></i>
-                        <select name="list" class="ms-1 bg-white me-4 p-2" >
-                            <option value="كل الطلبات">كل الطلبات</option>
-                            <option value="بعض الطلبات">بعض الطلبات</option>
-                        </select>
-                        <input type="text" placeholder="search" class="pe-3 me-4">
-                        <i class="fa-solid fa-magnifying-glass bg-white  " style="color: #12e193;"></i>
-                    </div>
-                    <div class="div-2 bg-dark-greenish-blue p-3 ms-4">
-                        <div class=" mb-3">
-                            <i class="fa-regular fa-building ms-5 text-white"></i>
-                            <span class="text-white">افكار هندسيه</span>
-                        </div>
-                        <div class=" mb-3">
-                            <i class="fa-solid fa-location-dot ms-5 text-white"></i>
-                            <span class="text-white">جده-منطقةمكه المكرمه</span>
-                        </div>
-                        <div class=" mb-3">
-                            <i class="fa-solid fa-phone ms-5 text-white"></i>
-                            <span class="text-white">050570193</span>
-                        </div>
-                        <div class=" mb-3">
-                            <i class="fa-solid fa-briefcase ms-5 text-white"></i>
-                            <span class="text-white">13:40:00/01-09-2022:منذ</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="div-1 mb-3 p-4 bg-white">
-                        <img src="assets/logo.png" class="rounded-circle" alt="صوره شخصيه">
-                        <span class="me-4 text-secondary">افكار مهندسي</span>
-                    </div>
-                    <div class="div-2 mb-3 p-3 bg-white">
-                        <h6 class="mb-4 text-greenblue h4">معلومات عن الشركه</h6>
-                        <div class=" mb-2 row">
-                           <span class="text-secondary col-4">رقم السجل التجارى</span>
-                           <span class="text-secondary col-4">1111111111</span>
-                           <i class="fa-solid fa-download col-4 text-center"></i>
-                        </div>
-                        <div class=" mb-2 row">
-                            <span class="text-secondary col-4">رقم الرخصه</span>
-                            <span class="text-secondary col-4">2126</span>
-                            <i class="fa-solid fa-download col-4 text-center"></i>
-                        </div>
-                    </div>
-                    <div class="div-3 mb-3 p-4 bg-white">
-                        <h6 class="mb-4 text-greenblue h4">معلومات التواصل</h6>
-                        <div class="row">
-                            <div class="col-4">
-                                <span class="text-secondary">الدوله</span>
-                                <p class="mb-3">منطفة مكه المكرمه</p>
-                                <span class="text-secondary">رقم الفهرس</span>
-                                <p class="mb-3">095970193</p>
-                                <span class="text-secondary">الرقم الاضافي</span>
-                            </div>
-                            <div class="col-4">
-                                <span class="text-secondary">المدينه</span>
-                                <p class="mb-3">جده</p>
-                                <span class="text-secondary">البريد الالكترونى</span>
-                                <p class="mb-3"><a class="text-decoration-none text-secondary text-wrap" href="mailto:">ABDULRAHMAN.ABDULRAHEEM@GMAIL.COM</a></p>
-                                <span class="text-secondary text-start">
-                                    <p class="m-0">البحر بريد</p>
-                                    <p class="m-0">11111</p>
-                                </span>
-                            </div>
-                            <div class="col-4">
-                                <span class="text-secondary">المنطقه</span>
-                                <p class="mb-3">حي الفضيله</p>
-                                <span class="text-secondary">الموقع الالكترونى</span>
-                                <p>mohandicy.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div-4 mb-3 p-4 bg-white">
-                        <h6 class="mb-4 text-greenblue h4">معلومات المسئول عن المشروع</h6>
-                        <div class="row">
-                            <div class="col-4">
-                                <span class="text-secondary">الاسم الاول</span>
-                                <p>عبدالرحمن عبدالرحيم</p>
-                            </div>
-                            <div class="col-4">
-                                <div>
-                                <span class="text-secondary">البريد الالكترونى</span>
-                                <p class="mb-3"><a class="text-decoration-none text-secondary" href="mailto:">ABDULRAHMAN.ABDULRAHEEM@GMAIL.COM</a></p>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <span class="text-secondary">رقم التليفون</span>
-                                <p>908001578</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div-5 mb-3 p-4 bg-white">
-                        <h6 class="mb-4 text-greenblue h4">معلومات عن الموظفين</h6>
-                        <div class="row">
-                            <div class="col-6">
-                                الاسم الاول
-                            </div>
-                            <div class="col-6">
-                                المستوى
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div-5 mb-3 pe-4 ps-4 pt-2 bg-dark-greenish-blue">
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="text-white">المشاريع السابقه</span>
-                            </div>
-                            <div class="col-6">
-                                <p class="text-white text-start">0<span>مشروع</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
- -->
-
 <div class="m-3">
-
   <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
     <button
-      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      [ngStyle]="{
+        'background-color': newApi === 1 ? '#004958' : '#ffffff',
+        color: newApi === 1 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
       role="button"
-      (click)=" getActiveClientAcconting()"
-
+      (click)="getNewClientProfiles()"
     >
       طلبات الانضمام
     </button>
     <button
-      class="btn bg-white rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      [ngStyle]="{
+        'background-color': newApi === 2 ? '#004958' : '#ffffff',
+        color: newApi === 2 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
       role="button"
-      (click)=" getActiveClientAcconting()"
-
+      (click)="getActiveClientAcconting()"
     >
-العملاء النشيطين    </button>
+      العملاء النشيطين
+    </button>
     <button
-      class="btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      [ngStyle]="{
+        'background-color': newApi === 3 ? '#004958' : '#ffffff',
+        color: newApi === 3 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
       role="button"
       (click)="getNonActiveClientAccount()"
-
     >
-    العملاء  غير النشيطين     </button>
+      العملاء غير النشيطين
+    </button>
     <button
-      class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      [ngStyle]="{
+        'background-color': newApi === 4 ? '#004958' : '#ffffff',
+        color: newApi === 4 ? '#ffffff' : '#000000'
+      }"
+      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
       role="button"
       (click)="getBlockedClientsProfiles()"
-
     >
       العملاء المعطلين
     </button>
-    <a>
-      <button
-        class="btn btn bg-white rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
-        role="button"
-        (click)="getExpiredClientsProfiles()"
-      >
-العملاء المنتهين      </button>
-    </a>
+
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 5 ? '#004958' : '#ffffff',
+        color: newApi === 5 ? '#ffffff' : '#000000'
+      }"
+      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getExpiredClientsProfiles()"
+    >
+      العملاء المنتهين
+    </button>
   </div>
 
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
     <div class="col-md-4 col-12">
-      <form class="d-flex flex-column me-3">
+      <form
+        class="d-flex flex-column me-3"
+        matSort
+        (matSortChange)="sortData($event)"
+      >
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+          <!-- <button
+            class="btn bg-white border-0 rounded-0 ms-1"
+            type="submit"
+            mat-sort-header="dateCreated"
+          >
             <i class="fa-regular fa-clock"></i>
-          </button>
-          <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+          </button> -->
+          <!-- sort -->
+          <!-- <button
+            class="btn bg-white border-0 rounded-0 ms-1"
+            type="submit"
+            mat-sort-header="fristName"
+          >
             <i class="fa fa-arrow-down-a-z"></i>
-          </button>
+          </button> -->
           <!-- [(ngModel)]="companyName" -->
 
           <input
@@ -210,11 +104,20 @@
           *ngFor="
             let pro of iProfileData
               | paginate
-                : { itemsPerPage: 6, currentPage: page, totalItems: total } |filter:filterTerm
+                : { itemsPerPage: 6, currentPage: page, totalItems: total }
+              | filter: filterTerm
           "
         >
           <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
-            <div class="card-body" (click)="objectProduct(pro)">
+            <div
+              class="card-body"
+              (click)="objectProduct(pro, pro.id)"
+              [ngStyle]="{
+                'background-color':
+                  productCurrent.id === pro.id ? '#004958' : '#ffffff',
+                color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
+              }"
+            >
               <div class="d-flex">
                 <i class="fa-regular fa-building"></i>
                 <div class="card-title me-3 title">
@@ -222,7 +125,6 @@
                     {{ pro.firstName }} {{ pro.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
-
                 </div>
               </div>
               <div class="d-flex">
@@ -286,9 +188,7 @@
               class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
               alt="null"
             />
-            <ng-template #profilePicturePath>
-              Null pPofile Picture
-            </ng-template>
+            <ng-template #profilePicturePath> C </ng-template>
           </div>
           <div class="col-md-3 col-sm-4">
             <div class="card-body">
@@ -305,20 +205,21 @@
               >
               <a type="button" class="btn w-25">
                 <i class="fa-solid fa-exclamation"></i>
-                <p  class="fsvw">غير مكتمل</p></a
+                <p class="fsvw">غير مكتمل</p></a
               >
               <a type="button" class="btn w-25"
                 ><i class="fa-solid fa-xmark"></i>
-                <p  class="fsvw">رفض</p></a
+                <p class="fsvw">رفض</p></a
               >
               <a type="button" class="btn w-25"
                 ><i class="fa-solid fa-xmark"></i>
-                <p  class="fsvw">إرسال</p></a
+                <p class="fsvw">إرسال</p></a
               >
             </div>
           </div>
         </div>
       </div>
+
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
         <p class="card-title mb-4">معلومات عن العميل</p>
         <div class="d-flex col-12 mb-4 flex-wrap">
@@ -332,12 +233,10 @@
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
                 target="_blank"
-                (click)="
-                downloadImage(productCurrent.profilePicturePath)
-              "
+                (click)="downloadImage(productCurrent.profilePicturePath)"
                 *ngIf="productCurrent.idFile; else idFile"
               >
-              <!-- <a [href]="productCurrent.profilePicturePath" [download]="productCurrent.idFile">
+                <!-- <a [href]="productCurrent.profilePicturePath" [download]="productCurrent.idFile">
                 {{ productCurrent.idFile }}
               </a> -->
                 <i class="fa fa-download typeCom ms-3"></i>
@@ -383,7 +282,7 @@
             <small
               class="fs-6"
               *ngIf="productCurrent.streetName; else shortAddress"
-            >{{productCurrent.buildingNumber}},
+              >{{ productCurrent.buildingNumber }},
               {{ productCurrent.streetName }} -
               {{ productCurrent.neighborhood }}</small
             >
@@ -438,7 +337,227 @@
           </div>
         </div>
       </div>
+      <!-- projects -->
+
+      <div
+        class="col-12 d-flex flex-row flex-wrap justify-content-between"
+        *ngIf="productCurrent.joinRequestStatus.accountStatus.id !== 4"
+      >
+        <div class="sizewSay col-12">
+          <!-- سبب -->
+            <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1 ">
+              <p class="bodyResine fw-bold align-content-end">
+                سبب عدم نشاط الحساب
+              </p>
+              <small class="titleResone align-content-end">
+                {{ productCurrent.joinRequestStatus.description }}.</small
+              >
+            </div>
+
+
+            <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 3 ; ">
+              <p class="bodyResine fw-bold align-content-end">سبب تعطيل الحساب</p>
+              <small class="titleResone align-content-end">
+                {{ productCurrent.joinRequestStatus.description }}.</small
+              >
+            </div>
+
+          <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 2 ; ">
+            <p class="bodyResine fw-bold align-content-end">
+              سبب انتهاء الحساب
+            </p>
+            <small class="titleResone align-content-end">
+              {{ productCurrent.joinRequestStatus.description }}.</small
+            >
+          </div>
+          <!-- العدد المشتركين   -->
+          <div
+            class="d-flex flex-column justify-content-center px-4 py-4 align-items-center bg-white"
+          >
+            <div class="py-3 px-4 rounded-circle circle mb-3">
+              <p class="fs-1 fw-bolder">10</p>
+
+              <i class="fa fa-handshake-simple fs-1 fw-bolder"></i>
+            </div>
+            <p class="fw-bold projectLeter">شركات تم التعامل معهم</p>
+          </div>
+          <!-- footer -->
+          <div
+            class="sayPro d-flex justify-content-center px-4 py-1 align-items-center"
+          >
+            <a class="btn sayPro text-center" href="#" role="button"
+              >رؤية جميع المشاريع</a
+            >
+          </div>
+        </div>
+        <div class="col-md-7 col-12 mb-1">
+          <!-- header -->
+          <div
+            class="d-flex justify-content-between bg-white px-4 py-1 align-items-center"
+          >
+            <h2 class="fw-bold pt-3">تقيم العملاء</h2>
+            <div class="align-content-end">
+              <span class="ps-1">4/5</span>
+              <mat-icon class="align-text-bottom text-warning">star</mat-icon>
+            </div>
+          </div>
+
+          <div class="position-relative mt-2">
+            <div
+              id="carouselExampleCaptions"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <!-- cards -->
+                <div class="carousel-item active">
+                  <div
+                    class="card d-flex justify-content-center align-items-center p-3 border-0 rounded-0 bg-white pb-5"
+                  >
+                    <img
+                      src="https://picsum.photos/200"
+                      class="card-img-top rounded-circle w-25"
+                      alt="..."
+                    />
+                    <div class="card-body text-center">
+                      <p class="card-title fs-6">Admin Admin</p>
+                      <div class="d-flex flex-row justify-content-center">
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                      </div>
+                      <p class="card-text text-wrap">
+                        Some quick example text to build on the card title and
+                        make up the bulk of the card's content.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div
+                    class="card bg-white d-flex justify-content-center align-items-center p-3 border-0 rounded-0 pb-5"
+                  >
+                    <img
+                      src="https://picsum.photos/200"
+                      class="card-img-top rounded-circle w-25"
+                      alt="..."
+                    />
+                    <div class="card-body text-center">
+                      <p class="card-title fs-6">2Admin Admin</p>
+                      <div class="d-flex flex-row justify-content-center">
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                      </div>
+                      <p class="card-text text-wrap">
+                        Some quick example text to build on the card title and
+                        make up the bulk of the card's content.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div
+                    class="card bg-white d-flex justify-content-center align-items-center p-3 border-0 rounded-0 pb-5"
+                  >
+                    <img
+                      src="https://picsum.photos/200"
+                      class="card-img-top rounded-circle w-25"
+                      alt="..."
+                    />
+                    <div class="card-body text-center">
+                      <p class="card-title fs-6">3Admin Admin</p>
+                      <div class="d-flex flex-row justify-content-center">
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                        <mat-icon class="align-text-bottom text-warning"
+                          >star</mat-icon
+                        >
+                      </div>
+                      <p class="card-text text-wrap">
+                        Some quick example text to build on the card title and
+                        make up the bulk of the card's content.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="carousel-indicators pt-5justify-content-start align-content-start position-absolute postionCard m-0"
+                  style="width: 18rem"
+                >
+                  <div class="pt-4 mt-5">
+                    <button
+                      type="button"
+                      data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide-to="0"
+                      class="active rounded-pill bg-dark py-1 px-1 border-0"
+                      aria-current="true"
+                      aria-label="Slide 1"
+                    ></button>
+                    <button
+                      type="button"
+                      data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide-to="0"
+                      class="active rounded-pill bg-dark py-1 px-1 border-0"
+                      aria-current="true"
+                      aria-label="Slide 1"
+                    ></button>
+                    <button
+                      type="button"
+                      data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide-to="1"
+                      aria-label="Slide 2"
+                      class="rounded-pill bg-dark py-1 px-1 border-0"
+                    ></button>
+                    <button
+                      type="button"
+                      data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide-to="2"
+                      aria-label="Slide 3"
+                      class="rounded-pill bg-dark py-1 px-1 border-0"
+                    ></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
 </div>
