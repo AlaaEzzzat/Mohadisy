@@ -42,13 +42,11 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
                         ],
             "scripts": [
-<<<<<<< HEAD
+
 "node_modules/bootstrap/dist/js/bootstrap.js",
-              "./node_modules/hammerjs/hammer.min.js"
-=======
+              "./node_modules/hammerjs/hammer.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
 
->>>>>>> f8f86030f3e1d41e8e5210393ad43336450bcf66
             ]
           },
           "configurations": {

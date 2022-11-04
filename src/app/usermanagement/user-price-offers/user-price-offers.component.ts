@@ -41,22 +41,22 @@ export class UserPriceOffersComponent implements OnInit {
         .getProjectSubService(this.activeService)
         .subscribe((data: any) => {
           this.projectServicesFullData = data.data;
-          console.log('projectOfServices : ');
-          console.log(this.projectServicesFullData);
+          /* console.log('projectOfServices : ');
+          console.log(this.projectServicesFullData); */
           this.projectServiesArrays = this.projectServicesFullData.projects;
-          console.log(this.projectServiesArrays);
+          /*       console.log(this.projectServiesArrays); */
           this.activeProject = this.projectServiesArrays[0].id;
           this.selectedProject = this.projectServiesArrays[0];
-          console.log(this.selectedProject);
-          console.log(this.activeProject);
+          /* console.log(this.selectedProject);
+          console.log(this.activeProject); */
           this.projectServiesArrays.map((project: any) => {
             if (project.id == this.activeProject) {
               this.offersOfSelectedProject = project.offers;
             }
-            console.log(this.offersOfSelectedProject);
+            /* console.log(this.offersOfSelectedProject); */
           });
           this.selectedOffer = this.offersOfSelectedProject[0].id;
-          console.log(this.selectedOffer);
+          /* console.log(this.selectedOffer); */
         });
     });
   }
@@ -67,10 +67,11 @@ export class UserPriceOffersComponent implements OnInit {
     this.projectServicesFullData = [];
     this.clientService.getProjectSubService(id).subscribe((data: any) => {
       this.projectServicesFullData = data.data;
-      console.log('projectOfServices : ');
-      console.log(this.projectServicesFullData);
+      /* console.log('projectOfServices : ');
+      console.log(this.projectServicesFullData); */
       this.projectServiesArrays = this.projectServicesFullData.projects;
-      console.log(this.projectServiesArrays);
+      /* console.log(this.projectServiesArrays); */
+      this.showOffers(this.projectServiesArrays[0]);
     });
   }
 
@@ -85,12 +86,12 @@ export class UserPriceOffersComponent implements OnInit {
 
   showOffers(project: any) {
     this.selectedProject = project;
-    console.log(this.selectedProject);
+    /* console.log(this.selectedProject); */
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
-    console.log(this.offersOfSelectedProject);
+    // console.log(this.offersOfSelectedProject);
     this.selectedOffer = this.offersOfSelectedProject[0].id;
-    console.log(this.selectedOffer);
+    // console.log(this.selectedOffer);
   }
 
   acceptOffer(offerId: any) {
@@ -102,8 +103,5 @@ export class UserPriceOffersComponent implements OnInit {
         console.log(err);
       },
     });
-  }
-  selectF(i: any) {
-    return i == 0 ? true : false;
   }
 }

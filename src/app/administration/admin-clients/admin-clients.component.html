@@ -345,24 +345,32 @@
       >
         <div class="sizewSay col-12">
           <!-- سبب -->
-            <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1 ">
-              <p class="bodyResine fw-bold align-content-end">
-                سبب عدم نشاط الحساب
-              </p>
-              <small class="titleResone align-content-end">
-                {{ productCurrent.joinRequestStatus.description }}.</small
-              >
-            </div>
+          <div
+            class="d-flex flex-column px-4 py-2 bg-white mb-2"
+            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1"
+          >
+            <p class="bodyResine fw-bold align-content-end">
+              سبب عدم نشاط الحساب
+            </p>
+            <small class="titleResone align-content-end">
+              {{ productCurrent.joinRequestStatus.description }}.</small
+            >
+          </div>
 
+          <div
+            class="d-flex flex-column px-4 py-2 bg-white mb-2"
+            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 3"
+          >
+            <p class="bodyResine fw-bold align-content-end">سبب تعطيل الحساب</p>
+            <small class="titleResone align-content-end">
+              {{ productCurrent.joinRequestStatus.description }}.</small
+            >
+          </div>
 
-            <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 3 ; ">
-              <p class="bodyResine fw-bold align-content-end">سبب تعطيل الحساب</p>
-              <small class="titleResone align-content-end">
-                {{ productCurrent.joinRequestStatus.description }}.</small
-              >
-            </div>
-
-          <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 2 ; ">
+          <div
+            class="d-flex flex-column px-4 py-2 bg-white mb-2"
+            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 2"
+          >
             <p class="bodyResine fw-bold align-content-end">
               سبب انتهاء الحساب
             </p>

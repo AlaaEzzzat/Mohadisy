@@ -127,7 +127,7 @@
 
                 <div
                   *ngIf="offer.id == selectedOffer && !seeProjectInfo"
-                  class="cardOffer mb-3"
+                  class="cardOffer"
                 >
                   <div class="pb-3">
                     <div class="row pb-0 mb-0">
@@ -411,7 +411,7 @@
                 <!-- message -->
                 <div
                   *ngIf="offer.id == selectedOffer && !seeProjectInfo"
-                  class="message bg-white p-3 mt-3"
+                  class="message bg-white p-3"
                 >
                   <div
                     class="msText align-items-center pb-3 d-flex"
@@ -532,7 +532,7 @@
                     <div class="cairo p-3 bg-white" *ngIf="usedMaterials">
                       <div
                         *ngIf="!offer.materials.length"
-                        class="cairo p-3 bg-white"
+                        class="cairo bg-white"
                       >
                         المواد المستخدمة غير مذكورة
                       </div>

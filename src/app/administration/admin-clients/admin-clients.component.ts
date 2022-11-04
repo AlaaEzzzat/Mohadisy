@@ -1,101 +1,104 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminClientsService } from 'src/app/@core/services/admin/admin-clients.service';
 import { IadminClients } from 'src/app/@models/iadmin-clients';
 import { Observable, Observer, filter, first } from 'rxjs';
-import {Sort} from '@angular/material/sort';
-
+import { Sort } from '@angular/material/sort';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-admin-clients',
   templateUrl: './admin-clients.component.html',
-  styleUrls: ['./admin-clients.component.scss']
+  styleUrls: ['./admin-clients.component.scss'],
 })
 export class AdminClientsComponent implements OnInit {
   page: number = 1;
   newApi: number = 3;
   total: number = 0;
-  iProfileData: IadminClients [] = [];
+  iProfileData: IadminClients[] = [];
   datas: any;
   idProduct: any;
   idProductSessionStorage: any;
-  filterTerm: string=''
+  filterTerm: string = '';
   productCurrent: any;
-  id:any;
+  id: any;
   // down
   base64Image: any;
-  sortedData:IadminClients []=[];
-  firstObject:any;
-  constructor( private ServicesProvidor:AdminClientsService) {
-
-     this.iProfileData.slice();
-     this.getNewClientProfiles();
+  sortedData: IadminClients[] = [];
+  firstObject: any;
+  constructor(private ServicesProvidor: AdminClientsService) {
+    this.iProfileData.slice();
+    this.getNewClientProfiles();
   }
 
-
   ngOnInit(): void {
-
-
     this.objectProductGet();
   }
 
-  getNewClientProfiles(){
-    this.newApi=1;
-    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
-
-
-    });
-
+  getNewClientProfiles() {
+    this.newApi = 1;
+    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe(
+      (value) => {
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);
+      }
+    );
   }
 
-  getActiveClientAcconting(){
-    this.newApi=2
-    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
-    });
+  getActiveClientAcconting() {
+    this.newApi = 2;
+    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe(
+      (value) => {
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        console.log(this.iProfileData);
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);
+      }
+    );
   }
 
-  getNonActiveClientAccount(){
-    this.newApi=3
-    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
-    });
+  getNonActiveClientAccount() {
+    this.newApi = 3;
+    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe(
+      (value) => {
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        console.log(this.iProfileData);
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);
+      }
+    );
   }
-  getBlockedClientsProfiles(){
-    this.newApi=4
-    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
-    });
+  getBlockedClientsProfiles() {
+    this.newApi = 4;
+    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe(
+      (value) => {
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        console.log(this.iProfileData);
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);
+      }
+    );
   }
-  getExpiredClientsProfiles(){
-    this.newApi=5
-    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
-    });
+  getExpiredClientsProfiles() {
+    this.newApi = 5;
+    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe(
+      (value) => {
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        console.log(this.iProfileData);
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);
+      }
+    );
   }
   // bagenations
   choiseFunCallApiPagin(event: number) {
@@ -114,15 +117,12 @@ export class AdminClientsComponent implements OnInit {
         this.getBlockedClientsProfiles();
         break;
       case 5:
-        this.getExpiredClientsProfiles()
-
-
+        this.getExpiredClientsProfiles();
     }
   }
-// details informatin
-  objectProduct(object ?: any,id?:any) {
-
-      this.idProduct = object;
+  // details informatin
+  objectProduct(object?: any, id?: any) {
+    this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
     sessionStorage.setItem('Product', test);
     sessionStorage.setItem('id', id);
@@ -130,18 +130,12 @@ export class AdminClientsComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('id');
-
-
   }
   objectProductGet() {
-
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.idProductSessionStorage);
-
-
   }
-
 
   // downlod file
 
@@ -199,14 +193,13 @@ export class AdminClientsComponent implements OnInit {
       return;
     }
 
-    this.iProfileData = data.sort((a:any, b:any) => {
+    this.iProfileData = data.sort((a: any, b: any) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'fristName':
           return this.compare(a.name, b.name, isAsc);
-          case 'dateCreated':
-            return this.compare(a.name, b.name, isAsc);
-
+        case 'dateCreated':
+          return this.compare(a.name, b.name, isAsc);
 
         default:
           return 0;
@@ -237,11 +230,7 @@ export class AdminClientsComponent implements OnInit {
   //   });
   // }
 
-   compare(a: number | string, b: number | string, isAsc: boolean) {
+  compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
-
-
-
 }
-
