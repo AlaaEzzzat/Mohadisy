@@ -1,19 +1,127 @@
-img
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.nav a
 {
-  border-radius: 90%;
-  -webkit-border-radius: 90%;
-  -moz-border-radius: 90%;
-  -ms-border-radius: 90%;
-  -o-border-radius: 90%;
+  padding: 3% 7%;
+  background-color: white;
+  width: 96%;
+  margin-left: 3%;
+
 }
 
 
-.project
+
+ .card
 {
-  border-radius: 70%;
-  -webkit-border-radius: 70%;
-  -moz-border-radius: 70%;
-  -ms-border-radius: 70%;
-  -o-border-radius: 70%;
+   border: none;
+   padding: 4% ;
+   color:#004057;
+}
+
+.section-2  .card p
+{
+  padding: 1% 2%;
+  margin-right: 4%;
+}
+
+.section-2 .card p span
+{
+  margin-left: 47%;
+}
+
+.card p i
+{
+
+  margin-left: 3%;
 
 }
+
+.section-2  .card-1
+{
+  cursor: pointer;
+}
+
+
+
+
+.section-2 .card-2
+{
+  margin: 0;
+  padding: 2% 0% ;
+  width: 95%;
+  margin-right: 4%;
+
+}
+
+.section-2 .card-3
+{
+  margin: 0;
+  padding: 3% 4%;
+  width: 90%;
+  margin-right: 7%;
+
+}
+
+.section-2 .card-3 h6
+{
+
+  margin-right: 13%;
+}
+
+.section-2 .card-3 ul
+{
+  list-style-type: none;
+  padding: 2%;
+  font-size: 14px;
+  color: rgb(87, 86, 86);
+}
+
+ul li i
+{
+  padding: 3%;
+
+}
+
+
+.section-1 .content a
+{
+  width: 98%;
+  padding: 2% 6% 2% 0% ;
+}
+
+.section-1 .content span
+{
+
+  margin-right: 70%;
+  padding-left: 3%;
+  color: #198754;
+  font-size: 18px;
+
+}
+
+
+.rep
+{
+  background-color: #004057;
+  padding:3% 4%  3% 9%;
+  font-size:35px !important;
+  margin-left: 2%;
+  color: white;
+
+
+}
+
+li
+{
+  cursor:pointer;
+}
+
+
+
+
+
+
+
