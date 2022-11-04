@@ -1,3 +1,4 @@
+import { ClientService } from './../../@core/services/client/client.service';
 import { ApiService } from 'src/app/@core/api.service';
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
@@ -24,14 +25,20 @@ export class ProfilecomplateComponent implements OnInit {
   imageSuccess: boolean = false;
   userSuccess: boolean = false;
   addingDistrict: boolean = false;
+  isComplete: boolean = false;
+  isCreated: boolean = false;
   constructor(
     private fb: FormBuilder,
     private provider: ProviderServiceService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private clientService: ClientService
   ) {
     this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', Validators.required],
+      firstName: [
+        '',
+        [Validators.required, Validators.pattern('^[a-zA-Z_  a-zA-Z]*$')],
+      ],
+
       applicationUser: this.fb.group({
         userName: [
           '',
@@ -46,7 +53,7 @@ export class ProfilecomplateComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.pattern('^(966)[0-9]{9}$'),
+            Validators.pattern('^(966)(5)[0-9]{8}$'),
             Validators.maxLength(12),
             Validators.minLength(12),
           ],
@@ -70,10 +77,7 @@ export class ProfilecomplateComponent implements OnInit {
         '',
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)],
       ],
-      postalBox: [
-        '',
-        [Validators.required, Validators.minLength(5), Validators.maxLength(5)],
-      ],
+      streetName: ['', [Validators.required]],
       postalCode: [
         '',
         [Validators.required, Validators.minLength(5), Validators.maxLength(5)],
@@ -86,9 +90,17 @@ export class ProfilecomplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provider.getRegions().subscribe((data) => {
+    this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
       console.log(this.regionsList);
+    });
+    /* check complete profie or not */
+    this.clientService.checkStatus().subscribe((data: any) => {
+      console.log(data.data);
+      this.isComplete = data.data.profileCompleted;
+      console.log(data.data.profileCompleted);
+      this.isCreated = data.data.profileCreated;
+      console.log(data.data.profileCreated);
     });
   }
 
@@ -150,8 +162,8 @@ export class ProfilecomplateComponent implements OnInit {
   get buildingNumber() {
     return this.registerForm.get('buildingNumber');
   }
-  get postalBox() {
-    return this.registerForm.get('postalBox');
+  get streetName() {
+    return this.registerForm.get('streetName');
   }
   get postalCode() {
     return this.registerForm.get('postalCode');
@@ -166,13 +178,10 @@ export class ProfilecomplateComponent implements OnInit {
 
   registerFormSubmit() {
     this.user = this.registerForm.value;
-    let streetName = '';
-    this.districtsList.map((city: any) => {
-      if (city.id == this.user.districtId) {
-        streetName = city.nameAr;
-      }
-    });
-    this.user.streetName = streetName;
+
+    let fullNameArr = this.registerForm.get('firstName')?.value.split(' ');
+    this.user.firstName = fullNameArr.splice(0, 1)[0];
+    this.user.lastName = fullNameArr.join(' ');
 
     let neighborhood = '';
     this.regionsList.map((region: any) => {
@@ -198,6 +207,7 @@ export class ProfilecomplateComponent implements OnInit {
     });
 
     delete this.user.imageFile;
+    console.log(this.user);
     //send data to profile
     this.provider.storeClientProfile(this.user).subscribe({
       next: (response: any) => {
@@ -235,6 +245,7 @@ export class ProfilecomplateComponent implements OnInit {
           } else {
             console.log(data.data);
             this.districtsList = data.data;
+            this.addingDistrict = false;
           }
         },
         (error) => {

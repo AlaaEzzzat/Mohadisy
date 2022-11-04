@@ -1,42 +1,651 @@
- <div class="container mt-5 fontStyle">
-        <div class="row">
-            <div class=" col-md-6 col-sm-12 mt-2" >
-                <div class="card p-2 " style="background-color: #004057;">
-                    <span class="align-items-end text-white h5"  >
-                        طلبات الإنشاءات
-                    </span>
-                </div>
-            </div>
-            <div class=" col-md-6 col-sm-12 mt-2">
-                <div class="card p-2 ">
-                    <span class="align-items-end h5" style="color: #004057;">
-                        طلبات الإستشارات
-                    </span>
-                </div>
-            </div>
-
-            <div class=" col-md-3 col-sm-6 mt-2">
-                <div class="card p-2 " style="background-color: #18af9a ;">
-                    <span class=" d-flex justify-content-center text-white h5" >
-                        مقاولات الإنشاءات العامة
-                    </span>
-                </div>
-            </div>
-            <div class=" col-md-3 col-sm-6 mt-2">
-                <div class="card p-2 ">
-                    <span class=" d-flex justify-content-center h5" style="color: #18af9a ;">
-                        مقاولات عامة للمباني
-                    </span>
-                </div>
-            </div>
-            <div class=" col-md-3 col-sm-6 mt-2 ">
-                <div class="card p-2 ">
-                    <span class=" d-flex justify-content-center h5" style="color: #18af9a ;">
-                        مقاولات فرعية تخصصية
-                    </span>
-                </div>
-            </div>
-
-
+<section class="price-offer">
+  <div class="container mt-5 fontStyle">
+    <div class="row">
+      <ng-container *ngFor="let service of projectServices; let i = index">
+        <div class="col-md-3 col-sm-12 mt-2">
+          <div
+            [id]="service.id"
+            class="btn p-2 px-3 w-100 d-flex justify-content-between"
+            (click)="isActiveService(service.id)"
+            [ngClass]="activeService == service.id ? 'active' : 'bg-white'"
+          >
+            <span class="name tajawal">{{ service.name }}</span>
+            <!-- <span class="secondColor">{{
+              projectServicesCount(service.id)
+            }}</span> -->
+          </div>
         </div>
+      </ng-container>
+
+      <div class="col-12">
+        <div class="row py-4">
+          <div class="col-md-4">
+            <div *ngIf="projectServiesArrays.length > 0" class="cards">
+              <ng-container
+                *ngFor="let project of projectServiesArrays; let i = index"
+              >
+                <div
+                  class="card rounded-0 d-flex flex-row justify-content-between p-3 mb-2 border-0 d-flex"
+                  (click)="showOffers(project)"
+                  [ngClass]="
+                    activeProject == project.id ? 'active' : 'bg-white'
+                  "
+                >
+                  <div class="me-1">
+                    <div class="mb-1">
+                      <i class="icon fa-regular fa-user ms-2"></i>
+                      <span class="textcard"> {{ project.name }} </span>
+                    </div>
+                    <div class="mb-1">
+                      <i class="icon fa fa-location-dot ms-2"></i>
+                      <span class="textcard">
+                        {{ project.district.nameAr }} ,
+                        {{ project.district.city.nameAr }} ,
+                        {{ project.district.city.region.nameAr }}
+                      </span>
+                    </div>
+                    <div>
+                      <i class="icon fa-solid fa-calendar-days ms-2"></i>
+                      <span class="textcard"> {{ project.dateCreated }}</span>
+                    </div>
+                  </div>
+
+                  <div
+                    class="secondColor"
+                    style="min-width: 36px; font-weight: 600"
+                  >
+                    {{ project.offers.length }} رد
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div
+              *ngIf="projectServiesArrays.length == 0"
+              class="bg-white text-center projectInfo p-5 mb-3"
+            >
+              <h3>لا توجد مشاريع</h3>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div *ngIf="offersOfSelectedProject.length > 0">
+              <div
+                style="cursor: pointer"
+                class="person p-3 d-flex mb-3 active text-white w-100"
+              >
+                <div>مقدم الطلب :</div>
+                <select
+                  class="active w-75"
+                  style="color: #fff; border: 0"
+                  name="offers"
+                  id="offers"
+                  [(ngModel)]="selectedOffer"
+                >
+                  <ng-container
+                    *ngFor="let offer of offersOfSelectedProject; let i = index"
+                  >
+                    <option [value]="offer.id" class="active text-white">
+                      {{ offer.contractTerms }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+              <!-- offer style -->
+              <ng-container *ngFor="let offer of offersOfSelectedProject">
+                <div
+                  class="d-flex bg-white justify-content-between mb-3"
+                  *ngIf="offer.id == selectedOffer"
+                >
+                  <div class="pe-3 py-3 info1">
+                    <p class="cairo">كود الطلب : {{ selectedProject.code }}</p>
+                    <p class="cairo">
+                      اسم المشروع : {{ selectedProject.name }}
+                    </p>
+                    <p class="cairo">
+                      موضوع المشروع : {{ selectedProject.subject }}
+                    </p>
+                  </div>
+                  <div class="d-flex flex-column">
+                    <button
+                      class="btn h-50 text-white border-0 rounded-0"
+                      (click)="seeProjectInfo = !seeProjectInfo"
+                      [ngClass]="seeProjectInfo ? 'active' : 'show'"
+                    >
+                      {{
+                        seeProjectInfo
+                          ? "الرجوع لعرض السعر"
+                          : " رؤية تفاصيل المشروع"
+                      }}
+                    </button>
+                    <button
+                      class="btn h-50 rounded-0 border-0 text-white"
+                      style="background-color: #18af9a"
+                    >
+                      قبول عرض السعر
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="offer.id == selectedOffer && !seeProjectInfo"
+                  class="cardOffer mb-3"
+                >
+                  <div class="pb-3">
+                    <div class="row pb-0 mb-0">
+                      <div class="col-md-6 mb-3">
+                        <div
+                          style="
+                            justify-content: space-around;
+                            flex-direction: column;
+                            height: 100%;
+                          "
+                          class="d-flex p-3 bg-white align-items-center"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="40"
+                            height="40"
+                            viewBox="0 0 61 61"
+                          >
+                            <defs>
+                              <linearGradient
+                                id="linear-gradient"
+                                x1="0.159"
+                                y1="0.048"
+                                x2="0.929"
+                                y2="0.929"
+                                gradientUnits="objectBoundingBox"
+                              >
+                                <stop offset="0" stop-color="#076384" />
+                                <stop offset="0.259" stop-color="#12789e" />
+                                <stop offset="1" stop-color="#004057" />
+                              </linearGradient>
+                            </defs>
+                            <g id="calendar" transform="translate(-2 -2)">
+                              <path
+                                id="Path_3084"
+                                data-name="Path 3084"
+                                d="M56,40.105V12a5.006,5.006,0,0,0-5-5H49V5a3,3,0,0,0-6,0V7H38V5a3,3,0,0,0-6,0V7H26V5a3,3,0,0,0-6,0V7H15V5A3,3,0,0,0,9,5V7H7a5.006,5.006,0,0,0-5,5V52a5.006,5.006,0,0,0,5,5H40.624A11.991,11.991,0,1,0,56,40.105ZM45,5a1,1,0,0,1,2,0v6a1,1,0,0,1-2,0ZM34,5a1,1,0,0,1,2,0v6a1,1,0,0,1-2,0ZM22,5a1,1,0,0,1,2,0v6a1,1,0,0,1-2,0ZM11,5a1,1,0,0,1,2,0v6a1,1,0,0,1-2,0ZM7,9H9v2a3,3,0,0,0,6,0V9h5v2a3,3,0,0,0,6,0V9h6v2a3,3,0,0,0,6,0V9h5v2a3,3,0,0,0,6,0V9h2a3,3,0,0,1,3,3v5H4V12A3,3,0,0,1,7,9ZM7,55a3,3,0,0,1-3-3V19H54V39.395a11.42,11.42,0,0,0-5-.214V34a1,1,0,0,0-1-1H42a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h2.381A11.933,11.933,0,0,0,39.7,55ZM47,39H43V35h4Zm4,22A10,10,0,1,1,61,51,10.012,10.012,0,0,1,51,61Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3085"
+                                data-name="Path 3085"
+                                d="M52,49.277V43H50v6.277a1.91,1.91,0,0,0-.97,2.018l-3.655,2.923,1.25,1.563,3.652-2.921A1.993,1.993,0,0,0,52,49.277Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3086"
+                                data-name="Path 3086"
+                                d="M15,22H9a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V23A1,1,0,0,0,15,22Zm-1,6H10V24h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3087"
+                                data-name="Path 3087"
+                                d="M26,22H20a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V23A1,1,0,0,0,26,22Zm-1,6H21V24h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3088"
+                                data-name="Path 3088"
+                                d="M37,22H31a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V23A1,1,0,0,0,37,22Zm-1,6H32V24h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3089"
+                                data-name="Path 3089"
+                                d="M42,30h6a1,1,0,0,0,1-1V23a1,1,0,0,0-1-1H42a1,1,0,0,0-1,1v6A1,1,0,0,0,42,30Zm1-6h4v4H43Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3090"
+                                data-name="Path 3090"
+                                d="M15,33H9a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V34A1,1,0,0,0,15,33Zm-1,6H10V35h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3091"
+                                data-name="Path 3091"
+                                d="M26,33H20a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V34A1,1,0,0,0,26,33Zm-1,6H21V35h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3092"
+                                data-name="Path 3092"
+                                d="M37,33H31a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V34A1,1,0,0,0,37,33Zm-1,6H32V35h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3093"
+                                data-name="Path 3093"
+                                d="M15,44H9a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V45A1,1,0,0,0,15,44Zm-1,6H10V46h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3094"
+                                data-name="Path 3094"
+                                d="M26,44H20a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V45A1,1,0,0,0,26,44Zm-1,6H21V46h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3095"
+                                data-name="Path 3095"
+                                d="M37,44H31a1,1,0,0,0-1,1v6a1,1,0,0,0,1,1h6a1,1,0,0,0,1-1V45A1,1,0,0,0,37,44Zm-1,6H32V46h4Z"
+                                fill="url(#linear-gradient)"
+                              />
+                            </g>
+                          </svg>
+
+                          <p class="p-0 m-0 me-3 mainColor">
+                            مده المشروع :
+                            <span class="secondColor">
+                              {{ offer.period }}
+                            </span>
+                            يوم عمل
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <div>
+                          <div
+                            class="bg-white p-3 d-flex align-items-center mb-2"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              width="40"
+                              height="40"
+                              viewBox="0 0 59.066 60"
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="linear-gradient"
+                                  x1="0.5"
+                                  x2="0.577"
+                                  y2="4.675"
+                                  gradientUnits="objectBoundingBox"
+                                >
+                                  <stop offset="0" stop-color="#1aa5d6" />
+                                  <stop offset="0.259" stop-color="#005977" />
+                                  <stop offset="1" stop-color="#004057" />
+                                </linearGradient>
+                              </defs>
+                              <g
+                                id="_3338889_business_tools_rich_currency_money_money_bag_icon"
+                                data-name="3338889_business tools_rich_currency_money_money bag_icon"
+                                transform="translate(-0.466 0.001)"
+                              >
+                                <path
+                                  id="Path_3096"
+                                  data-name="Path 3096"
+                                  d="M16.586,10.028A2.9,2.9,0,0,0,19.316,12h7.431a2.9,2.9,0,0,0,2.73-1.97A13.675,13.675,0,0,1,32.03,5.583a2.99,2.99,0,0,0,1.014-2.842A2.846,2.846,0,0,0,31.116.559c-3-1-5.663-.66-7.7.967a.959.959,0,0,1-1.22,0C20.163-.1,17.5-.435,14.5.56a2.846,2.846,0,0,0-1.929,2.182,2.99,2.99,0,0,0,1.014,2.842A15.747,15.747,0,0,1,16.586,10.028Zm-2.051-6.9a.85.85,0,0,1,.594-.664A8.3,8.3,0,0,1,17.728,2a5.01,5.01,0,0,1,3.221,1.091,2.959,2.959,0,0,0,3.718,0c1.5-1.2,3.458-1.412,5.82-.63a.85.85,0,0,1,.593.664.974.974,0,0,1-.343.935c-1.528,1.294-2.894,4.576-3.15,5.319a.9.9,0,0,1-.839.622H19.317a.9.9,0,0,1-.839-.622,17.286,17.286,0,0,0-3.6-5.319A.972.972,0,0,1,14.535,3.123Z"
+                                  fill="url(#linear-gradient)"
+                                />
+                                <path
+                                  id="Path_3097"
+                                  data-name="Path 3097"
+                                  d="M31.532,14a1,1,0,0,0-1-1,.977.977,0,0,0-.5.153.968.968,0,0,0-.5-.153h-12a1,1,0,0,0,0,2h12v1h-11a1,1,0,0,0,0,2H30.457a4.949,4.949,0,0,0,6.715-.293,1,1,0,1,0-1.414-1.414,3.069,3.069,0,0,1-4.226.014Z"
+                                  fill="url(#linear-gradient)"
+                                />
+                                <path
+                                  id="Path_3098"
+                                  data-name="Path 3098"
+                                  d="M16.879,26c-4.28,0-9.347,6.861-9.347,12.657A.772.772,0,0,0,8.2,39.5a.772.772,0,0,0,.668-.844c0-4.818,4.492-10.969,8.012-10.969a.867.867,0,0,0,0-1.688Z"
+                                  transform="translate(4.986)"
+                                  fill="url(#linear-gradient)"
+                                />
+                                <path
+                                  id="Path_3099"
+                                  data-name="Path 3099"
+                                  d="M49.532,32a31.689,31.689,0,0,0-3.5.2,19.791,19.791,0,0,0-5.365-6.3L33.468,21a8.889,8.889,0,0,0-5.246-2H20.445a8.632,8.632,0,0,0-5.3,1.822L8.067,25.977A19.6,19.6,0,0,0,2.516,50.145c1.514,2.985,4.043,6.592,7.5,6.826.271.018.545.028.821.028H30.3A7.978,7.978,0,0,0,43.37,56.13,21.419,21.419,0,0,0,49.532,57c4.809,0,10-1.529,10-4V47.5h-.079a1.753,1.753,0,0,0,.079-.5V35.5C59.532,32.735,53.246,32,49.532,32Zm7.924,3.491a.7.7,0,0,1-.067.065c-.039.031-.086.064-.139.1s-.146.086-.233.13c-.071.036-.145.073-.23.11-.1.047-.229.094-.356.142-.1.038-.205.076-.321.115-.146.048-.314.1-.483.143-.132.037-.262.075-.408.111-.19.047-.4.09-.617.133-.161.033-.314.067-.488.1-.24.042-.508.078-.773.114-.181.025-.35.053-.543.075-.315.036-.662.061-1.008.086-.176.013-.336.031-.52.042-.546.03-1.124.048-1.741.048s-1.195-.018-1.741-.048c-.184-.01-.344-.028-.52-.042-.346-.026-.693-.051-1.008-.086-.193-.022-.362-.05-.543-.075-.265-.036-.533-.072-.773-.114-.174-.031-.327-.065-.488-.1-.213-.044-.427-.087-.617-.133-.146-.036-.275-.073-.408-.111-.169-.047-.336-.1-.483-.143-.116-.038-.219-.077-.321-.115-.127-.048-.251-.1-.356-.142-.085-.037-.159-.074-.23-.11-.087-.045-.167-.089-.233-.13a1.5,1.5,0,0,1-.139-.1.6.6,0,0,1-.062-.06c.012-.01.02-.02.034-.031a1.621,1.621,0,0,1,.142-.1,3.159,3.159,0,0,1,.3-.169c.065-.033.129-.065.205-.1s.17-.07.261-.106c.108-.042.226-.084.351-.126.09-.03.177-.061.277-.091.224-.068.469-.135.738-.2.124-.03.268-.057.4-.085.163-.035.33-.069.507-.1.195-.035.4-.068.616-.1A27.309,27.309,0,0,1,49.527,34C54.253,34,56.9,34.973,57.456,35.489ZM42.207,43.716c.09.038.183.074.277.111.174.068.352.132.536.195.1.033.192.065.291.1.211.066.428.127.65.186.078.021.153.044.232.063.3.076.613.146.931.208.066.013.135.023.2.036q.383.072.775.131c.112.017.225.031.338.046.225.03.451.057.68.081l.36.035c.236.021.473.037.711.051.106.006.212.014.318.019.342.015.683.025,1.023.025s.681-.01,1.023-.025c.108-.005.216-.013.324-.019.235-.014.47-.03.7-.05.123-.011.246-.023.368-.036q.337-.034.67-.08c.116-.015.232-.03.347-.047.258-.038.512-.082.763-.129.071-.013.143-.024.214-.038q.474-.094.926-.207c.084-.021.164-.045.247-.067.217-.058.43-.118.636-.183.1-.032.2-.065.3-.1q.274-.093.534-.194c.093-.036.186-.073.276-.111.18-.076.351-.156.516-.238.052-.026.111-.048.161-.074l.006,3.524c-.235.569-2.819,1.837-6.9,2.04-.366.013-.72.031-1.115.031a18.672,18.672,0,0,1-6.041-.932l-.019-.03c-.118-.206-.243-.407-.378-.6-.02-.029-.043-.056-.064-.085-.125-.175-.254-.346-.393-.51-.042-.049-.087-.094-.13-.143-.123-.139-.247-.276-.379-.406-.068-.067-.141-.127-.211-.192-.116-.106-.23-.212-.351-.311-.012-.01-.022-.021-.034-.03,0-.391,0-1.26,0-2.353.051.027.112.05.164.076C41.862,43.562,42.03,43.641,42.207,43.716ZM29,55H10.838c-.231,0-.461-.008-.688-.023-1.965-.133-4.043-2.17-5.851-5.735A17.59,17.59,0,0,1,9.273,27.571l7.078-5.157A6.655,6.655,0,0,1,20.444,21h7.777A7.013,7.013,0,0,1,32.3,22.621l7.2,4.894a17.694,17.694,0,0,1,4.445,5,9.39,9.39,0,0,0-3.331,1.243l-.069.048a3.26,3.26,0,0,0-.349.291c-.045.043-.085.087-.126.132a2.262,2.262,0,0,0-.217.269,1.947,1.947,0,0,0-.13.242,1.866,1.866,0,0,0-.1.223,1.713,1.713,0,0,0-.089.534v9.089a7.848,7.848,0,0,0-1.044-.337c-.047-.012-.094-.025-.141-.036a7.912,7.912,0,0,0-1.072-.178c-.041,0-.082,0-.123-.006-.205-.016-.411-.031-.62-.031-.11,0-.216.012-.325.016-.085,0-.17.007-.255.013a8.059,8.059,0,0,0-1.05.138l-.02,0c-.027.006-.052.017-.079.023a7.644,7.644,0,0,0-.916.266c-.108.038-.216.076-.322.118a7.929,7.929,0,0,0-.866.4c-.1.057-.2.123-.305.185-.195.119-.385.244-.568.379-.108.079-.217.156-.321.24a7.892,7.892,0,0,0-.671.609c-.093.094-.178.194-.266.293-.15.168-.293.343-.428.523-.073.1-.15.191-.219.292a7.917,7.917,0,0,0-.478.8c-.056.108-.107.218-.159.329a7.848,7.848,0,0,0-.305.753c-.026.075-.058.146-.081.222a7.923,7.923,0,0,0-.238,1.012c-.008.044-.024.086-.031.13s-.008.112-.015.166c-.032.235-.052.473-.063.714,0,.086-.012.171-.013.258,0,.037-.006.073-.006.11,0,.159.015.314.024.47A9.585,9.585,0,0,0,29,55Zm7.536,3a6,6,0,0,1-6-5.929c0-.078,0-.155,0-.233,0-.11.008-.219.017-.328.007-.092.018-.183.029-.274s.026-.185.042-.276a5.807,5.807,0,0,1,.182-.766c.008-.027.02-.052.029-.078a5.851,5.851,0,0,1,.3-.733l.033-.068A6.168,6.168,0,0,1,33.6,46.772l.011-.007a5.933,5.933,0,0,1,.73-.345c.065-.026.131-.049.2-.072a5.607,5.607,0,0,1,.681-.2c.032-.007.062-.018.094-.024a6.127,6.127,0,0,1,.868-.108c.055,0,.11-.007.166-.008a5.984,5.984,0,0,1,.879.033l.049.008a5.882,5.882,0,0,1,.907.185l.013,0a6.33,6.33,0,0,1,1.681.779l.04.028c.035.024.067.051.1.075a6.033,6.033,0,0,1,.478.38c.037.032.073.066.109.1a6.113,6.113,0,0,1,.436.446l.042.046a5.984,5.984,0,0,1,.812,1.218c.051.1.1.2.147.3.076.175.142.352.2.531,0,.013.01.026.014.039.058.181.1.365.145.55,0,.015.008.029.011.043.038.184.066.37.087.557,0,.017.006.032.008.049a6.007,6.007,0,0,1,.032.616,6.072,6.072,0,0,1-.034.633c0,.031-.01.06-.014.091-.022.181-.049.361-.088.538,0,.02-.011.039-.015.059-.043.19-.094.378-.156.564l-.009.024q-.1.291-.228.574A6.011,6.011,0,0,1,36.532,58Zm13-3a19.615,19.615,0,0,1-5.339-.706.013.013,0,0,0,0-.006,8.023,8.023,0,0,0,.224-1c.013-.081.026-.161.037-.243A8.037,8.037,0,0,0,44.532,52c0-.259-.014-.516-.039-.771-.009-.092-.025-.181-.037-.272-.017-.129-.029-.259-.052-.386A28.78,28.78,0,0,0,49.532,51a22.551,22.551,0,0,0,8-1.259l.006,3.188C57.286,53.546,54.251,55,49.532,55Zm0-12c-4.7,0-7.731-1.441-7.995-1.994,0-1.14,0-2.3,0-3.261.025.011.055.02.081.031.239.1.489.2.755.286l.043.014c.272.088.559.167.852.24.1.024.195.046.293.068.214.049.43.1.651.138.107.021.213.041.321.06.243.043.487.081.734.117l.233.035c.323.043.646.081.967.112l.241.021c.247.022.491.042.733.058l.31.019c.224.013.442.023.658.031l.271.01c.293.008.579.013.849.013s.555-.005.848-.013l.275-.01c.214-.008.431-.018.654-.031l.314-.019q.363-.024.734-.059l.238-.021c.322-.032.645-.069.968-.113L53.8,38.7q.369-.052.732-.117c.109-.019.215-.04.322-.06.221-.043.438-.089.653-.139.1-.023.2-.044.292-.068.3-.075.591-.155.868-.245l.04-.014c.261-.086.508-.181.743-.281.028-.012.061-.022.089-.034l.006,3.188C57.286,41.546,54.251,43,49.532,43Z"
+                                  fill="url(#linear-gradient)"
+                                />
+                              </g>
+                            </svg>
+
+                            <p class="p-0 m-0 me-3 mainColor">
+                              تكلفة المشروع :
+                              <span class="secondColor">
+                                {{ offer.totalCost }}
+                              </span>
+                              ريال
+                            </p>
+                          </div>
+                          <div class="p-3 bg-white d-flex align-items-center">
+                            <svg
+                              id="_3339051_business_tools_money_time_clock_schedule_icon"
+                              data-name="3339051_business tools_money_time_clock_schedule_icon"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              width="40"
+                              height="40"
+                              viewBox="0 0 60 60"
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="linear-gradient"
+                                  x1="0.5"
+                                  y1="-0.197"
+                                  x2="1"
+                                  y2="1.282"
+                                  gradientUnits="objectBoundingBox"
+                                >
+                                  <stop offset="0" stop-color="#40b7e2" />
+                                  <stop offset="0.418" stop-color="#086f94" />
+                                  <stop offset="1" stop-color="#004057" />
+                                </linearGradient>
+                              </defs>
+                              <path
+                                id="Path_3100"
+                                data-name="Path 3100"
+                                d="M34,29.879a4,4,0,0,0-3-3.858V15.879a1,1,0,1,0-2,0V26.021a4,4,0,0,0-2.858,2.858H19a1,1,0,0,0,0,2h7.142a3.992,3.992,0,0,0,7.858-1Zm-4,2a2,2,0,1,1,2-2A2,2,0,0,1,30,31.879Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3101"
+                                data-name="Path 3101"
+                                d="M30,9.879a1,1,0,0,0,1-1v-1a1,1,0,0,0-2,0v1A1,1,0,0,0,30,9.879Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3102"
+                                data-name="Path 3102"
+                                d="M29,50.879v1a1,1,0,0,0,2,0v-1a1,1,0,0,0-2,0Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3103"
+                                data-name="Path 3103"
+                                d="M52,30.879a1,1,0,0,0,0-2H51a1,1,0,0,0,0,2Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3104"
+                                data-name="Path 3104"
+                                d="M8,28.879a1,1,0,1,0,0,2H9a1,1,0,0,0,0-2Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3105"
+                                data-name="Path 3105"
+                                d="M44.849,16.029a1,1,0,0,0,.707-.293l.707-.707a1,1,0,1,0-1.414-1.414l-.707.707a1,1,0,0,0,.707,1.707Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3106"
+                                data-name="Path 3106"
+                                d="M14.444,44.021l-.707.707a1,1,0,1,0,1.414,1.414l.707-.707a1,1,0,0,0-1.414-1.414Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3107"
+                                data-name="Path 3107"
+                                d="M15.858,14.322l-.707-.707a1,1,0,1,0-1.414,1.414l.707.707a1,1,0,0,0,1.414-1.414Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3108"
+                                data-name="Path 3108"
+                                d="M30,0A30,30,0,1,0,40.414,58.141a1,1,0,1,0-.694-1.875A27.983,27.983,0,1,1,56.265,39.719a1,1,0,0,0,1.876.695A30.015,30.015,0,0,0,30,0Z"
+                                fill="url(#linear-gradient)"
+                              />
+                              <path
+                                id="Path_3109"
+                                data-name="Path 3109"
+                                d="M50,41.1V40a1,1,0,0,0-2,0v1.1a4.985,4.985,0,0,0-2.818,1.668,3.438,3.438,0,0,0-.794,2.6,3.649,3.649,0,0,0,1.383,2.491L48,49.6v5.438a3,3,0,0,1-2-2.816,1,1,0,0,0-2,0,5.009,5.009,0,0,0,4,4.9V58a1,1,0,0,0,2,0v-.882a4.991,4.991,0,0,0,2.819-1.668,3.444,3.444,0,0,0,.793-2.6,3.646,3.646,0,0,0-1.383-2.488L50,48.622V43.184A3,3,0,0,1,52,46a1,1,0,0,0,2,0A5.009,5.009,0,0,0,50,41.1Zm1,10.834a1.642,1.642,0,0,1,.622,1.118,1.457,1.457,0,0,1-.331,1.1A2.988,2.988,0,0,1,50,55.033V51.155Zm-4-5.647a1.642,1.642,0,0,1-.622-1.12,1.461,1.461,0,0,1,.331-1.1A2.988,2.988,0,0,1,48,43.189v3.877Z"
+                                fill="url(#linear-gradient)"
+                              />
+                            </svg>
+
+                            <p class="p-0 m-0 me-3 mainColor">
+                              {{ offer.contractTerms }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- message -->
+                <div
+                  *ngIf="offer.id == selectedOffer && !seeProjectInfo"
+                  class="message bg-white p-3 mt-3"
+                >
+                  <div
+                    class="msText align-items-center pb-3 d-flex"
+                    style="border-bottom: 1px dashed rgb(175, 175, 175)"
+                  >
+                    <img
+                      style="width: 40px; height: 40px; border-radius: 50%"
+                      src="assets/dashboard/visitor.png"
+                    />
+                    <div class="me-2 cairo">
+                      {{ offer.message }}
+                    </div>
+                  </div>
+                  <div class="replay mt-3">
+                    <div class="form-group">
+                      <label
+                        class="mb-2 cairo"
+                        style="font-weight: 500"
+                        for="msg"
+                        >الرد علي الرساله</label
+                      >
+                      <textarea
+                        class="p-2 cairo form-control"
+                        placeholder="المحتوي"
+                        name="msg"
+                        id="msg"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                    <div class="d-flex flex-row-reverse">
+                      <button class="p-2 px-4 mt-3 btn active text-white cairo">
+                        إرسال
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="offer.id == selectedOffer && !seeProjectInfo">
+                  <div class="conditions my-3 cairo">
+                    <div
+                      class="p-3 d-flex justify-content-between"
+                      (click)="conditions = !conditions"
+                      style="cursor: pointer"
+                      [ngClass]="conditions ? 'active' : 'bg-white'"
+                    >
+                      <h5
+                        [ngClass]="conditions ? 'text-white' : 'mainColor'"
+                        class="m-0 p-0 cairo"
+                      >
+                        الشروط
+                      </h5>
+                      <i
+                        class="fa fa-chevron-down"
+                        *ngIf="!conditions"
+                        (click)="conditions = !conditions"
+                      ></i>
+                      <i
+                        (click)="conditions = !conditions"
+                        *ngIf="conditions"
+                        class="fa fa-chevron-up"
+                      ></i>
+                    </div>
+                    <div class="bg-white cairo p-3" *ngIf="conditions">
+                      {{ offer.contractTerms }}
+                    </div>
+                  </div>
+                  <div class="rules mb-3">
+                    <div
+                      class="p-3 d-flex justify-content-between"
+                      (click)="rules = !rules"
+                      style="cursor: pointer"
+                      [ngClass]="rules ? 'active' : 'bg-white'"
+                    >
+                      <h5
+                        [ngClass]="rules ? 'text-white' : 'mainColor'"
+                        class="m-0 p-0 cairo"
+                      >
+                        طريقة التحجيم
+                      </h5>
+                      <i
+                        class="fa fa-chevron-down"
+                        *ngIf="!rules"
+                        (click)="rules = !rules"
+                      ></i>
+                      <i
+                        (click)="rules = !rules"
+                        *ngIf="rules"
+                        class="fa fa-chevron-up"
+                      ></i>
+                    </div>
+                    <div class="cairo p-3 bg-white" *ngIf="rules">
+                      {{ offer.disputeResolution }}
+                    </div>
+                  </div>
+                  <div class="usedMaterials mb-3 tajwal">
+                    <div
+                      class="p-3 d-flex justify-content-between"
+                      (click)="usedMaterials = !usedMaterials"
+                      style="cursor: pointer"
+                      [ngClass]="usedMaterials ? 'active' : 'bg-white'"
+                    >
+                      <h5
+                        [ngClass]="usedMaterials ? 'text-white' : 'mainColor'"
+                        class="m-0 p-0 cairo"
+                      >
+                        مواصفات المواد المستخدمة
+                      </h5>
+                      <i
+                        class="fa fa-chevron-down"
+                        *ngIf="!usedMaterials"
+                        (click)="usedMaterials = !usedMaterials"
+                      ></i>
+                      <i
+                        (click)="usedMaterials = !usedMaterials"
+                        *ngIf="usedMaterials"
+                        class="fa fa-chevron-up"
+                      ></i>
+                    </div>
+                    <div class="cairo p-3 bg-white" *ngIf="usedMaterials">
+                      <div
+                        *ngIf="!offer.materials.length"
+                        class="cairo p-3 bg-white"
+                      >
+                        المواد المستخدمة غير مذكورة
+                      </div>
+
+                      <ng-container *ngIf="offer.materials.length">
+                        <div>gfdj</div>
+                        <ul *ngFor="let mat of offer.materials">
+                          <li>{{ mat }}</li>
+                        </ul>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="offer.id == selectedOffer && seeProjectInfo">
+                  <div class="pe-3 py-3 info1 bg-white mb-3 projectInfo">
+                    <p>
+                      صلاحيه عرض السعر :
+                      {{
+                        getTime(
+                          selectedProject.pricequoteEndDate,
+                          selectedProject.dateCreated
+                        )
+                      }}
+                    </p>
+                    <p>
+                      التصنيف الرئيسي للمشروع :{{
+                        selectedProject.projectCategory.name
+                      }}
+                    </p>
+                    <p>
+                      التصنيف الفرعى للمشروع :
+                      {{ selectedProject.projectSubCategory.name }}
+                    </p>
+                  </div>
+                  <div class="pe-3 py-3 info1 bg-white mb-3 projectInfo">
+                    <p>عنوان المشروع : {{ selectedProject.name }}</p>
+                    <p>رقم القطعه : {{ selectedProject.area }}</p>
+                    <p>
+                      رقم المخطط التنظيمي :
+                      {{ selectedProject.organizationalChartNumber }}
+                    </p>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="bg-white p-3 projectInfo projectContributes">
+                        <h4 class="head">مكونات المشروع</h4>
+                        <ul
+                          class="m-0 p-0 list-unstyled"
+                          *ngFor="
+                            let component of selectedProject.projectComponents
+                          "
+                        >
+                          <li class="mb-2">
+                            <i class="fa fa-chevron-left ms-3"></i>
+                            <span>
+                              {{ component.component }}
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="bg-white p-3 mb-3 rquiredWoks projectInfo">
+                        <h4 class="head">الأعمال المطلوبة</h4>
+                        <ul
+                          class="m-0 p-0 list-unstyled"
+                          *ngFor="
+                            let requiredWork of selectedProject.projectRequiredWorks
+                          "
+                        >
+                          <li class="mb-2">
+                            <i class="fa fa-chevron-left ms-3"></i>
+                            <span>
+                              {{ requiredWork.requiredWork }}
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="bg-white p-3 mb-3 projectFiles projectInfo">
+                        <h4 class="head">الملفات الخاصة المشروع</h4>
+                        <ul
+                          class="m-0 p-0 list-unstyled"
+                          *ngFor="
+                            let document of selectedProject.clientProjectDocuments
+                          "
+                        >
+                          <li class="mb-2">
+                            <i class="fa fa-chevron-left ms-3"></i>
+                            <span>
+                              {{ document.document }}
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+            <div
+              *ngIf="
+                offersOfSelectedProject.length == 0 ||
+                projectServiesArrays.length == 0
+              "
+              class="bg-white text-center projectInfo p-5 mb-3"
+            >
+              <h3>لا توجد عروض</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>

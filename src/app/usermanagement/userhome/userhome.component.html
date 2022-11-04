@@ -235,5 +235,46 @@
     </div>
   </div>
   <!-- /#page-content-wrapper -->
+
+  <div class="overlay p-5" *ngIf="showpopup">
+    <div class="popup p-5">
+      <h5 class="text-center mb-4">نوع طلب السعر</h5>
+      <a class="close" style="cursor: pointer" (click)="showpopup = false"
+        >&times;</a
+      >
+      <div class="content">
+        <form>
+          <div class="d-flex justify-content-around">
+            <div>
+              <input
+                type="radio"
+                id="ck1"
+                name="type"
+                value="إستشارات هندسية"
+              />
+              <label class="me-2" for="ck1">إستشارات هندسية</label>
+            </div>
+            <div>
+              <input type="radio" id="ck2" name="type" value="إنشاءات" />
+              <label class="me-2" for="ck2">إنشاءات</label><br />
+            </div>
+          </div>
+          <input
+            type="submit"
+            class="btn w-100 text-center"
+            value="الاستمرار"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- /#wrapper -->
+
+<span
+  (click)="showpopup = true"
+  class="btn cairo btn-success p-3 px-4 text-white title"
+  style="position: fixed; bottom: 30px; left: 20px; font-size: 15px"
+>
+  طلب عرض السعر
+</span>

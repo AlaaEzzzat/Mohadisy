@@ -1,3 +1,109 @@
-* {
-  border: 0px;
+.cairo{
+  font-family: 'Cairo';
 }
+.tajawal{
+  font-family: 'Tajawal';
+  font-weight: 500;
+}
+.show{
+  background-color: #5e5e5e;
+}
+.show:hover{
+  background-color: #5e5e5e!important;
+
+}
+.price-offer{
+  min-height: 100vh;
+  .mainColor{
+    color: #004057;
+  }
+    .secondColor{
+      color:#18AF9A;
+    }
+    .mainBk{
+     background-color: #004057;
+     color: #FFF;
+    }
+      .secondBk{
+        background-color:#18AF9A;
+     color: #FFF;
+      }
+    .card {
+      cursor: pointer;
+
+      .textcard{
+        font-weight: 400;
+
+      }
+      .icon{
+        color: #004057;
+      }
+    }
+  .active{
+    background-color: #004057;
+    color:#FFF;
+   .name{
+    color: #FFF;
+   }
+   .icon{
+    color: #FFF;
+   }
+  }
+  .cards{
+    .card{
+      position: relative;
+    }
+     .active::after{
+      position: absolute;
+      content: "";
+    width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+    border-right: 15px solid #004057;
+    border-bottom: 15px solid transparent;
+    bottom: 34%;
+    left: -15px;
+    }
+  }
+
+  .info1 p{
+font-size: 14px;
+    color: #004057;
+    font-weight: 500;
+  }
+  .projectInfo{
+    color: #004057;
+    font-family: 'cairo';
+    .head{
+font-size: 19px;
+    }
+    span{
+      font-size: 14px;
+
+    }
+  }
+  .cardOffer{
+
+    .borderDashed{
+
+      border-top: 2px dashed #ccc;
+    }
+
+
+.icon{
+  font-size: 30px;
+
+}
+p{
+  font-family: "Cairo";
+  font-size: 16px;
+    font-weight: 700;
+}
+  }
+  .person{
+    select:focus {
+      outline: none !important;
+  }
+  }
+}
+/* ********************** */

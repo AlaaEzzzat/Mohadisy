@@ -73,3 +73,33 @@ input {
 .popup .my-popup  .btn{
   color: #fff;
 }
+.overlay {
+  *{
+font-family: 'cairo';
+  }
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+display: flex;
+  z-index: 1000;
+  .popup {
+    margin: auto;
+    width:450px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    height:auto ;
+
+.btn{
+  margin-top: 20px;
+  background-color: #18AF9A;
+  color: #FFF;
+}
+
+  }
+}

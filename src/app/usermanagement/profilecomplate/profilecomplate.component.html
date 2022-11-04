@@ -1,20 +1,25 @@
-<section *ngIf="(userSuccess && imageSuccess) == false">
+<section
+  *ngIf="(userSuccess && imageSuccess) == false"
+  style="min-height: 100vh"
+>
   <header class="form-control p-3 signFormIn border-end">
     <h5 class="bd-title m-0 p-0" dir="rtl">إستكمال البيانات الخاصه بكـ</h5>
   </header>
   <div class="container form-control py-5 px-4 border-0 signFormIn">
     <form [formGroup]="registerForm" (ngSubmit)="registerFormSubmit()">
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group">
-            <label class="form-label mb-2" for="firstName"> الإسم الأول </label>
+            <label class="form-label mb-2" for="firstName">
+              الإسم بالكامل
+            </label>
             <input
               type="text"
               formControlName="firstName"
               name="firstName"
               id="firstName"
               class="form-control form-control-lg signup"
-              placeholder="   الإسم الأول"
+              placeholder="   الإسم بالكامل"
               required
               [class.is-valid]="firstName?.valid"
               [class.is-invalid]="firstName?.invalid && firstName?.touched"
@@ -24,12 +29,15 @@
               [hidden]="firstName?.valid || firstName?.untouched"
             >
               <span *ngIf="firstName?.errors?.['required']"
-                >الإسم الأول مطلوب
+                >الإسم بالكامل مطلوب
+              </span>
+              <span *ngIf="firstName?.errors?.['pattern']"
+                >الإسم يجب أن يكون علي الاقل ثنائي
               </span>
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <!--  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
           <div class="form-group">
             <label class="form-label mb-2" for="lastName">إسم العائلة</label>
             <input
@@ -53,7 +61,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group" formGroupName="applicationUser">
             <label class="form-label mb-2" for="email">
               البريد الإلكتروني</label
@@ -80,15 +89,15 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group" formGroupName="applicationUser">
-            <label class="form-label mb-2" for="phoneNumber"> رقم الهاتف</label>
+            <label class="form-label mb-2" for="phoneNumber"> رقم الجوال</label>
             <input
               type="text"
               id="phoneNumber"
               formControlName="phoneNumber"
               class="form-control form-control-lg signup"
-              placeholder="+966XXXXXXXXX"
+              placeholder="9665XXXXXXXX"
               (keypress)="numberOnly($event)"
               [class.is-valid]="phoneNumber?.valid"
               [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched"
@@ -98,10 +107,10 @@
               [hidden]="phoneNumber?.valid || phoneNumber?.untouched"
             >
               <span *ngIf="phoneNumber?.errors?.['required']">
-                رقم الهاتف مطللوب</span
+                رقم الجوال مطللوب</span
               >
               <span *ngIf="phoneNumber?.errors?.['pattern']">
-                تأكد من بنية رقم الهاتف</span
+                تأكد من بنية رقم الجوال</span
               >
             </div>
           </div>
@@ -164,11 +173,16 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
           <div class="form-group">
-            <label class="form-label mb-2" for="imageFile"> صورة الهويه </label>
+            <label class="form-label mb-2" for="imageFile"> صورة الهوية </label>
             <div class="button-wrapper">
               <div class="h-100">
                 <span class="label">{{
-                  image.value ? image.value.split("\\").slice(-1)[0] : "إرفاق"
+                  image.value
+                    ? image.value.split("\\").slice(-1)[0].length > 15
+                      ? image.value.split("\\").slice(-1)[0].substr(0, 15) +
+                        "..."
+                      : image.value.split("\\").slice(-1)[0]
+                    : "إرفاق"
                 }}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +229,8 @@
         <div class="row mt-5">
           <div class="col-12 col-md-3">
             <h5 class="mb-5 bd-title" style="color: #18af9a" dir="rtl">
-              العنوان
+              العنوان الوطني
+              <i class="fa-solid fa-location-dot"></i>
             </h5>
           </div>
           <div class="col-12 col-md-9">
@@ -324,6 +339,38 @@
             </div>
             <div class="row my-4">
               <div class="col-12 col-md-4">
+                <label class="form-label mb-2" for="postal_code">
+                  إسم الشارع
+                </label>
+
+                <input
+                  type="text"
+                  id="streetName"
+                  name="streetName"
+                  formControlName="streetName"
+                  class="form-control form-control-lg form-group"
+                  placeholder="إسم الشارع  "
+                  [class.is-valid]="streetName?.valid"
+                  [class.is-invalid]="
+                    streetName?.invalid && streetName?.touched
+                  "
+                />
+                <div
+                  class="alert alert-warning"
+                  [hidden]="streetName?.valid || streetName?.untouched"
+                >
+                  <span *ngIf="streetName?.errors?.['required']">
+                    إسم الشارع</span
+                  >
+                  <span
+                    *ngIf="streetName?.errors?.['minlength'] || streetName?.errors?.['maxlength'] "
+                  >
+                    إسم الشارع مطلوب
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
                 <label class="form-label mb-2" for="buildingNumber">
                   رقم المبني
                 </label>
@@ -356,36 +403,6 @@
                 </div>
               </div>
 
-              <div class="col-12 col-md-4">
-                <label class="form-label mb-2" for="postal_code">
-                  صندوق البريد
-                </label>
-
-                <input
-                  type="text"
-                  id="postalBox"
-                  name="postalBox"
-                  (keypress)="numberOnly($event)"
-                  formControlName="postalBox"
-                  class="form-control form-control-lg form-group"
-                  placeholder="    صندوق بريد"
-                  [class.is-valid]="postalBox?.valid"
-                  [class.is-invalid]="postalBox?.invalid && postalBox?.touched"
-                />
-                <div
-                  class="alert alert-warning"
-                  [hidden]="postalBox?.valid || postalBox?.untouched"
-                >
-                  <span *ngIf="postalBox?.errors?.['required']">
-                    صندوق البريد مطلوب</span
-                  >
-                  <span
-                    *ngIf="postalBox?.errors?.['minlength'] || postalBox?.errors?.['maxlength'] "
-                  >
-                    صندوق البريد يجب أن يكون 5 أرقام</span
-                  >
-                </div>
-              </div>
               <div class="col-12 col-md-4">
                 <label class="form-label mb-2" for="postalCode">
                   رقم البريد
@@ -432,9 +449,9 @@
             <button
               [disabled]="!registerForm.valid"
               type="submit"
-              class="btn btn-success form-control text-white"
+              class="btn btn-success py-2 form-control text-white"
             >
-              <i class="fa fa-floppy-disk" aria-hidden="true"></i>
+              <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
               حفظ
             </button>
           </div>
@@ -445,15 +462,31 @@
 </section>
 <!-- popup -->
 
-<div
-  *ngIf="userSuccess && imageSuccess"
-  class="popup d-flex justify-content-center align-items-center"
->
-  <div class="my-popup text-center" style="width: 21rem">
-    <div class="card-body">
-      <h5 class="card-title text-light">تم إدخال البيانات بنجاح !</h5>
-      <a routerLink="/usermanagement/profile" class="mt-4 btn btn-success"
-        >حسناََ</a
+<div *ngIf="isCreated" class="overlay p-5">
+  <div class="popup p-5">
+    <div class="content p-1 text-center">
+      <div class="d-flex justify-content-around">
+        {{
+          isComplete
+            ? "تم إستكمال بياناتك"
+            : "تم إستكمال بياناتك و ستتم المراجعة في خلال 24 ساعة"
+        }}
+      </div>
+      <a class="btn w-50 text-center" routerLink="/usermanagement/profile"
+        >حسناً</a
+      >
+    </div>
+  </div>
+</div>
+
+<div *ngIf="userSuccess && imageSuccess" class="overlay p-5">
+  <div class="popup p-5">
+    <div class="content p-1 text-center">
+      <div class="d-flex justify-content-around">
+        تم إستكمال بياناتك و ستتم المراجعة في خلال 24 ساعة
+      </div>
+      <a class="btn w-50 text-center" routerLink="/usermanagement/profile"
+        >حسناً</a
       >
     </div>
   </div>
