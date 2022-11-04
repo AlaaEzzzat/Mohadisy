@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -12,6 +11,11 @@ import { AdminMessagesComponent } from './admin-messages/admin-messages.componen
 import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -25,10 +29,16 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
     AdminPaymentsComponent,
     AdminSettingsComponent,
     AdminSPComponent,
+
   ],
   imports: [
-    CommonModule,
+CommonModule,
     AdministrationRoutingModule,
+    NgxPaginationModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    MatSortModule,
+    MatIconModule
   ],
 })
 export class AdministrationModule {}

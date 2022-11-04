@@ -1,1 +1,556 @@
-<p>admin-sp works!</p>
+<div class="m-3">
+  <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
+    <button
+      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)="getNewProfiles()"
+      [ngStyle]="{
+        'background-color': newApi === 1 ? '#004958' : '#ffffff',
+        color: newApi === 1 ? '#ffffff' : '#000000'
+      }"
+    >
+      طلبات الانضمام
+    </button>
+    <button
+      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      role="button"
+      (click)="getRejectedProfiles()"
+      [ngStyle]="{
+        'background-color': newApi === 2 ? '#004958' : '#ffffff',
+        color: newApi === 2 ? '#ffffff' : '#000000'
+      }"
+    >
+      طلبات المرفوضه
+    </button>
+    <button
+      class="btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getActiveAcconting()"
+      [ngStyle]="{
+        'background-color': newApi === 3 ? '#004958' : '#ffffff',
+        color: newApi === 3 ? '#ffffff' : '#000000'
+      }"
+    >
+      الحسابات النشطه
+    </button>
+    <button
+      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getBlockedProfiles()"
+      [ngStyle]="{
+        'background-color': newApi === 5 ? '#004958' : '#ffffff',
+        color: newApi === 5 ? '#ffffff' : '#000000'
+      }"
+    >
+      الحسابات المعطله
+    </button>
+    <button
+      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getNonActiveAccount()"
+      [ngStyle]="{
+        'background-color': newApi === 4 ? '#004958' : '#ffffff',
+        color: newApi === 4 ? '#ffffff' : '#000000'
+      }"
+    >
+      الحسابات غيرالنشطه
+    </button>
+    <button
+      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      role="button"
+      (click)="getExpiredProfiles()"
+      [ngStyle]="{
+        'background-color': newApi === 6 ? '#004958' : '#ffffff',
+        color: newApi === 6 ? '#ffffff' : '#000000'
+      }"
+    >
+      الحسابات المنتهيه
+    </button>
+  </div>
+
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
+    <div class="col-md-4 col-12">
+      <form class="d-flex flex-column me-3">
+        <!-- search company -->
+
+        <div class="d-flex position-relative mb-3">
+          <!-- <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa-regular fa-clock"></i>
+          </button> -->
+          <!-- <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
+            <i class="fa fa-arrow-down-a-z"></i>
+          </button> -->
+          <!-- [(ngModel)]="companyName" -->
+
+          <input
+            class="form-control bg-white border-0 rounded-0 w-100"
+            type="search"
+            placeholder="Search for name ,number,location,etc"
+            aria-label="Search"
+            name="companyName"
+            [(ngModel)]="companyName"
+          />
+          <button class="btn position-absolute top-0 start-0" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+
+        <!-- card company -->
+        <!-- <ng-container> -->
+        <ng-container
+          *ngFor="
+            let pro of iProfileData
+              | paginate
+                : { itemsPerPage: 6, currentPage: page, totalItems: total }
+              | filter: companyName
+          "
+        >
+          <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
+            <div
+              class="card-body"
+              (click)="objectProduct(pro, pro.id)"
+              [ngStyle]="{
+                'background-color':
+                  productCurrent.id === pro.id ? '#004958' : '#ffffff',
+                color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
+              }"
+            >
+              <div class="d-flex">
+                <i class="fa-regular fa-building"></i>
+                <div class="card-title me-3 title">
+                  <p class="typeCom"></p>
+                  <p
+                    *ngIf="
+                      pro.applicationUser.accountType.typeName;
+                      else templateName
+                    "
+                  >
+                    {{ pro.applicationUser.accountType.typeName }}
+                  </p>
+                  <ng-template #templateName> Null </ng-template>
+                  <p class="1h-sm">{{ pro.companyName }}</p>
+                </div>
+              </div>
+
+              <div class="d-flex">
+                <i class="fa fa-location-dot"></i>
+                <i class="bi bi-geo-alt"></i>
+                <p class="me-3">{{ pro.district.city.nameAr }}</p>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-phone"></i>
+                <div class="me-3 d-flex flex-row justify-content-between">
+                  <ng-container></ng-container>
+                  <small
+                    *ngIf="
+                      pro.applicationUser.accountType.typeName === 'شركة/مؤسسة';
+                      else mostcal
+                    "
+                    >({{ pro.representative.firstName }} {{ pro.representative.lastName}})+966
+                    {{ pro.representative.phoneNumber }}</small
+                  >
+                  <ng-template #mostcal>
+                    <small                      >
+                      ( {{ productCurrent.firstName }}  {{ productCurrent.lastName }})+966
+                      {{ pro.applicationUser.phoneNumber }}
+                    </small>
+                    </ng-template>
+                  <small class="me-5 opacity-50"
+                    >منذ
+                    {{ pro.companyRegisterationNumberStartDate | date }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </form>
+      <pagination-controls
+        (pageChange)="choiseFunCallApiPagin($event)"
+      ></pagination-controls>
+    </div>
+
+    <!--  -->
+    <div class="col-md-7 sizew col-12 flex-row">
+      <div class="col-12 card mb-3 border-0 rounded-0">
+        <div class="row g-0 justify-content-evenly align-items-center">
+          <div class="col-md-2">
+            <img
+              *ngIf="productCurrent.companyLogoPath; else templateName"
+              src="{{ productCurrent.companyLogoPath }}"
+              class="img-fluid rounded-5 ms-5 me-2 px-1"
+              alt="null"
+            />
+            <ng-template #templateName>
+              <img
+                src="https://picsum.photos/200"
+                class="img-fluid rounded-5 ms-5 me-2 px-1"
+                alt="null"
+              />
+            </ng-template>
+          </div>
+          <div class="col-md-5">
+            <div class="card-body">
+              <div class="d-flex">
+                <i class="fa-regular fa-building"></i>
+                <p class="me-3"></p>
+                <p
+                  *ngIf="
+                    productCurrent.applicationUser.accountType.typeName;
+                    else templateName
+                  "
+                >
+                  {{ productCurrent.applicationUser.accountType.typeName }}
+                </p>
+                <ng-template #templateName> Null </ng-template>
+                <!-- <p class="1h-sm">{{ productCurrent.companyName }}</p> -->
+                <!-- {{ productCurrent.applicationUser.accountType.typeName-->
+
+                <!-- {{ productCurrent.representative.name }} -->
+              </div>
+
+              <p class="card-text">
+                {{ productCurrent.firstName }}  {{ productCurrent.lastName }}
+              </p>
+              <p class="card-text">
+                <small class="text-muted"> نوع الخدمه </small>
+                <span class="typeCom">{{ productCurrent.projectService }}</span>
+              </p>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="d-flex">
+              <a type="button" class="btn">
+                <i class="fa-solid fa-check text-secondary"></i>
+                <p>مكتمل</p></a
+              >
+              <a type="button" class="btn">
+                <i class="fa-solid fa-exclamation"></i>
+                <p>غير مكتمل</p></a
+              >
+              <a type="button" class="btn"
+                ><i class="fa-solid fa-xmark"></i>
+                <p>رفض</p></a
+              >
+              <a type="button" class="btn"
+                ><i class="fa-solid fa-xmark"></i>
+                <p>مراسله</p></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--    معلومات عن الشركه-->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4 h5">معلومات عن الشركه</h6>
+
+        <div class="d-flex flex-row flex-wrap justify-content-between">
+          <div class="col-lg-5 col-12">
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitletext-muted">
+                رقم سجل الشركه <br />
+                <small>{{ productCurrent.companyRegisterationNumber }} </small>
+              </p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.companyRegisterationNumberPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">
+                  {{ productCurrent.companyRegisterationNumberFile }}
+                </p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="card-subtitle text-muted">شهاده التأمينات الاجتماعية</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.socialInsuranceCertificatePath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">
+                  {{ productCurrent.socialInsuranceCertificateFile }}
+                </p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="card-subtitle text-muted">شهاده الزكاة والدخل</p>
+              <a
+                class="bg-light d-flex px-2 align-items-center informationDownload"
+                (click)="downloadImage(productCurrent.zakatCertificatePath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.zakatCertificateFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4 align-items-center">
+              <p class="card-subtitle text-muted">التقريرالمالي</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="downloadImage(productCurrent.financialStatementPath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.financialStatementFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">عضوية الفرقة التجارية</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="downloadImage(productCurrent.coCMembershipPath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.coCMembershipFile }}</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-5 col-12">
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitletext-muted ms-2">
+                رقم الرخصة <br />
+                <small>{{ productCurrent.licenseNumber }}</small>
+              </p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="downloadImage(productCurrent.licensePath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.licenseFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">خطاب بنكي برقم البيان</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.companyRegisterationNumberPath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">
+                  {{ productCurrent.companyRegisterationNumberFile }}
+                </p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">شهاده السعوده</p>
+              <a
+                target="_blank"
+                class="informationDownload py-2 bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(productCurrent.saudizationCertificatePath)
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p>{{ productCurrent.saudizationCertificateFile }}</p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">ضربيه القيمه المضافه</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  downloadImage(
+                    productCurrent.addedValueRegisterationCertificatePath
+                  )
+                "
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">
+                  {{ productCurrent.addedValueRegisterationCertificateFile }}
+                </p>
+              </a>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+              <p class="card-subtitle text-muted">شهاده الايزو 9001</p>
+              <a
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="downloadImage(productCurrent.isoPath)"
+              >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.isoFile }}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- معلومات التواصل -->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4 h5">معلومات التواصل</h6>
+        <div class="d-flex col-12 mb-4 flex-wrap">
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">الدوله</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.district.city.nameEn; else cityName"
+              >{{ productCurrent.district.city.nameEn }}</small
+            >
+            <ng-template #cityName> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">المدينه</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.district.city.nameEn; else city"
+              >{{ productCurrent.district.city.nameEn }}</small
+            >
+            <ng-template #city> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">المنطقه</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="
+                productCurrent.district.city.region.nameEn;
+                else regionName
+              "
+              >{{ productCurrent.district.city.region.nameEn }}</small
+            >
+            <ng-template #regionName> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">العنوان</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.district.shortAddress; else shortAddress"
+              >{{ productCurrent.district.shortAddress }}</small
+            >
+            <ng-template #shortAddress> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">رقم هاتف المكتب</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="
+                productCurrent.district.officePhoneNumber;
+                else officePhoneNumber
+              "
+              >{{ productCurrent.district.officePhoneNumber }}</small
+            >
+            <ng-template #officePhoneNumber> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">عنوان البريد الالكتروني</p>
+            <!-- <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.email; else emailName"
+              >{{ productCurrent.representative.email }}</small
+            > -->
+            <ng-template #emailName> _ </ng-template>
+          </div>
+          <div class="d-flex col-4 flex-column">
+            <p class="card-subtitle text-muted">رابط الموقع</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.websiteLink; else websiteLink"
+              >{{ productCurrent.websiteLink }}</small
+            >
+            <ng-template #websiteLink> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">صندوق البريد</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.district.postalCode; else box"
+              >{{ productCurrent.district.postalCode }}</small
+            >
+            <ng-template #box> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-muted">رمز البريد</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.district.postalCode; else postcode"
+              >{{ productCurrent.district.postalCode }}
+            </small>
+            <ng-template #postcode> _ </ng-template>
+          </div>
+        </div>
+      </div>
+      <!-- معلومات عن ممثل الموقع -->
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4 h5">معلومات عن ممثل الموقع</h6>
+        <div class="d-flex justify-content-between flex-wrap">
+          <div>
+            <p class="card-subtitle text-muted">الاسم</p>
+            <!-- <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.firstName; else firstName"
+              >{{ productCurrent.representative.firstName }}</small
+            >
+            <ng-template #firstName> _ </ng-template> -->
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">رقم التليفون</p>
+            <!-- <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
+              >{{ productCurrent.representative.phoneNumber }} 966+
+            </small> -->
+            <ng-template #phoneNumber> _ </ng-template>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">البريد الالكتروني</p>
+            <!-- <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.email; else email"
+              >{{ productCurrent.representative.email }}</small
+            >
+            <ng-template #email> _ </ng-template> -->
+          </div>
+        </div>
+      </div>
+      <!-- معلومات عن الموظفين-->
+      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h6 class="card-title mb-4 h5">معلومات عن الموظفين</h6>
+        card loop
+        <div
+          class="d-flex col-12 mb-4"
+          *ngFor="let employes of productCurrent.district.employees"
+        >
+          <div class="d-flex col-6 flex-column">
+            <p
+              class="card-subtitle text-muted"
+              *ngIf="productCurrent.representative.name; else employeeName"
+            >
+              الاسم
+            </p>
+            <small class="fs-6 fw-semibold">{{
+              productCurrent.district.employees.name
+            }}</small>
+            <ng-template #employeeName> _ </ng-template>
+          </div>
+          <div class="d-flex col-6 flex-column">
+            <p
+              class="card-subtitle text-muted"
+              *ngIf="
+                productCurrent.representative.employeeLevel;
+                else employeeLevel
+              "
+            >
+              المستوى
+            </p>
+            <small class="fs-6 fw-semibold">{{
+              productCurrent.district.employees.employeeLevel
+            }}</small>
+            <ng-template #employeeLevel> _ </ng-template>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

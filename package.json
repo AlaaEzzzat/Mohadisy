@@ -32,6 +32,8 @@
     "minireset.css": "~0.0.4",
     "moment": "^2.29.4",
     "ng-circle-progress": "^1.6.0",
+    "ng2-search-filter": "^0.5.1",
+    "ngx-pagination": "^6.0.2",
     "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.3.0",
     "open-iconic": "^1.1.1",
