@@ -18,6 +18,7 @@ export class SpCprojectRequestComponent implements OnInit {
    descWork:Array<any>=[];
    documents:Array<any>=[];
    descDocument:Array<any>=[];
+   page:number=0;
 
   constructor(private api:ApiService) { }
 
@@ -130,6 +131,18 @@ export class SpCprojectRequestComponent implements OnInit {
       this.descDocument[documentId]=1;
      }
 
+     changepage(e:any)
+     {
+
+      this.page=e;
+      console.log(this.page);
+      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+
+       this.Listprojects=data.data.priceQuotes;
+
+
+    });
+     }
 
 
   }

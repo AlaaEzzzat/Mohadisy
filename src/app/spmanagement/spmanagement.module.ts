@@ -17,6 +17,7 @@ import { SpPinnedProjectComponent } from './sp-pinned-project/sp-pinned-project.
 import { LayoutProjectComponent } from './layout-project/layout-project.component';
 import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
 import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-re
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule ,
   ],
 })
 export class SPmanagementModule {}

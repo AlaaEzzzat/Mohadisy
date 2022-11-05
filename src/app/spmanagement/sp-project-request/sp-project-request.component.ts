@@ -10,6 +10,7 @@ export class SpProjectRequestComponent implements OnInit {
 
   Listprojects:Array<any>=[];
   select:any=0;
+  page:number=1;
 
   constructor(private api:ApiService) { }
 
@@ -26,6 +27,19 @@ export class SpProjectRequestComponent implements OnInit {
   {
     this.select=idProject;
 
+  }
+
+  changepage(e:any)
+  {
+
+   this.page=e;
+   console.log(this.page);
+   this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+
+    this.Listprojects=data.data.priceQuotes;
+
+
+ });
   }
 
 }

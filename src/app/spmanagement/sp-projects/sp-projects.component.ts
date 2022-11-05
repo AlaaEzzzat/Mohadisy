@@ -19,6 +19,7 @@ export class SpProjectsComponent implements OnInit {
    descWork:Array<any>=[];
    documents:Array<any>=[];
    descDocument:Array<any>=[];
+   page:number=1;
 
   constructor(private api:ApiService) { }
 
@@ -48,7 +49,7 @@ export class SpProjectsComponent implements OnInit {
       }
      }
      console.log(this.selectProject);
-  
+
 
     this.projectComponent=[],this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -134,6 +135,19 @@ export class SpProjectsComponent implements OnInit {
       this.descDocument[documentId]=1;
      }
 
+
+     changepage(e:any)
+     {
+
+      this.page=e;
+      console.log(this.page);
+      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+
+       this.Listprojects=data.data.priceQuotes;
+
+
+    });
+     }
 
 
   }

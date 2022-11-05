@@ -4,7 +4,8 @@
       <div class="col-4">
         <div class="row">
 
-          <ng-container *ngFor="let project of Listprojects">
+          <ng-container *ngFor="let project of Listprojects |
+          paginate: {itemsPerPage:5, currentPage: page }">
 
             <ng-container *ngIf="this.select==project.id">
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
@@ -54,6 +55,15 @@
           <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
         </div>
       -->
+
+
+      <div class="paginate mt-4">
+        <pagination-controls (pageChange)="changepage($event)"
+        previousLabel="السابق"
+        nextLabel="التالى"
+        >
+        </pagination-controls>
+      </div>
 
         </div>
 
