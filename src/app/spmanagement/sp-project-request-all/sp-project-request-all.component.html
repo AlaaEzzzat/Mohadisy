@@ -197,11 +197,11 @@
                   </div>
                 </div>
 
-                <div class="col-6 mt-3">
+                <div class="col-12 mt-3">
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
 
-
+                  <ul>
                     <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
                       <div>
                         <li (click)="toggoleDocument(document.id)">
@@ -226,6 +226,8 @@
                       </div>
 
                     </ng-container>
+                  </ul>
+
 
 
 

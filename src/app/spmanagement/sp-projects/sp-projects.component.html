@@ -6,7 +6,6 @@
 
           <ng-container *ngFor="let project of Listprojects |
           paginate: {itemsPerPage:5, currentPage: page }">
-          >
 
             <ng-container *ngIf="this.select==project.id">
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
@@ -203,31 +202,33 @@
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
 
+                    <ul>
+                      <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+                        <div>
+                          <li (click)="toggoleDocument(document.id)">
+                            <ng-container *ngIf="descDocument[document.id]==1">
+                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                            </ng-container>
 
-                    <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                      <div>
-                        <li (click)="toggoleDocument(document.id)">
-                          <ng-container *ngIf="descDocument[document.id]==1">
-                            <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                            <ng-container *ngIf="descDocument[document.id]!=1">
+                              <i class="fa fa-greater-than text-success"></i>
+                            </ng-container>
+                            {{document.file}}
+                          </li>
+
+
+                          <ng-container *ngIf="descDocument[document.id]">
+                            <ul>
+                              <li> {{document.filePath}}</li>
+                            </ul>
                           </ng-container>
 
-                          <ng-container *ngIf="descDocument[document.id]!=1">
-                            <i class="fa fa-greater-than text-success"></i>
-                          </ng-container>
-                          {{document.file}}
-                        </li>
 
+                        </div>
 
-                        <ng-container *ngIf="descDocument[document.id]">
-                          <ul>
-                            <li> {{document.filePath}}</li>
-                          </ul>
-                        </ng-container>
+                      </ng-container>
+                    </ul>
 
-
-                      </div>
-
-                    </ng-container>
 
 
 

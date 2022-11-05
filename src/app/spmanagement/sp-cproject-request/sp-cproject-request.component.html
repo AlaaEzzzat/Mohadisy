@@ -74,8 +74,8 @@
         class=" mb-2 return" routerLinkActive="active">الرجوع</a>
 
         <ng-container *ngIf="select!=0">
-          <div class="row mt-4">
-            <div class="col-12 ">
+          <div class="row ">
+            <div class="col-12 mt-3">
 
               <div class="card">
              <div id="accordion">
@@ -131,6 +131,93 @@
                       </div>
 
                       <button type="submit" class="btn col-3 mt-4 mb-2">ارسال</button>
+
+                  </div>
+                  </form>
+
+
+              </div>
+              </div>
+
+            </div>
+             </div>
+
+
+             <div class="col-12 mt-3">
+
+              <div class="card">
+             <div id="accordion">
+              <h2>
+                <button class="btn btn-accordion w-100" type="button"
+                data-target="#item2" data-toggle="collapse" >التزامات المقاول</button>
+              </h2>
+
+              <div class="collapse hide" id="item2" data-parent="#accordian">
+
+                <h6 class="dotted-line mt-2 text-center" style="color:gray;"></h6>
+
+                <form action="">
+                  <div class="card-3">
+                      <div class="row">
+
+                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn col-3 mt-4 mb-3">ارسال</button>
+
+                  </div>
+                  </form>
+
+
+              </div>
+              </div>
+
+            </div>
+             </div>
+
+
+
+             <div class="col-12 mt-3">
+
+              <div class="card">
+             <div id="accordion">
+              <h2>
+                <button class="btn btn-accordion w-100" type="button"
+                data-target="#item3" data-toggle="collapse" >الشروط</button>
+              </h2>
+
+              <div class="collapse hide" id="item3" data-parent="#accordian">
+
+                <h6 class="dotted-line mt-2 text-center" style="color:gray;"></h6>
+
+                <form action="">
+                  <div class="card-3">
+                      <div class="row">
+
+                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn col-3 mt-4 mb-3">تأكيد</button>
 
                   </div>
                   </form>
