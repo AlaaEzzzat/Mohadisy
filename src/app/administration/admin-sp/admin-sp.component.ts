@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { Observable, Observer, filter } from 'rxjs';
 import { IadminSp } from './../../@models/iadmin-sp';
 import { AdminServiceProvidorService } from './../../@core/services/admin/admin-service-providor.service';
+import { IChangeStatus } from 'src/app/@models/ichange-status';
+import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-sp',
@@ -10,12 +13,16 @@ import { AdminServiceProvidorService } from './../../@core/services/admin/admin-
   styleUrls: ['./admin-sp.component.scss'],
 })
 export class AdminSPComponent implements OnInit {
-
+  show:boolean=false;
+  showDanger:boolean=false;
+  messages:any;
   iProfileData: IadminSp[] = [];
   datas: any;
   companyName: string = '';
   idProduct: any;
   idProductSessionStorage: any;
+  iChangeStatus:IChangeStatus|undefined=undefined
+  myTimeout:any;
   // objectpeo: any;
   productCurrent: any;
   name = '';
@@ -28,52 +35,58 @@ export class AdminSPComponent implements OnInit {
   total: number = 0;
   firstObject:any;
 
-  constructor(
+  constructor(private _HttpClient:HttpClient,
     private ServicesProvidor: AdminServiceProvidorService,
     private router: Router
   ) {
-    // this.ServicesProvidor.getAllProfiles(this.page).subscribe((value) => {
-    //   this.datas = value.data.profiles;
-    //   this.iProfileData = this.datas;
-    //   this.total = value.data.totalPages;
-    // });
+    this.getNewProfiles()
+
+
   }
 
   ngOnInit(): void {
-    this.getNewProfiles()
+    // this.getNewProfiles()
     this.objectProductGet();
+
+
   }
 
 
   //6
   getExpiredProfiles() {
     this.newApi = 6;
-
+    sessionStorage.removeItem('ids')
+    sessionStorage.removeItem('Productsp')
     this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
       this.datas = value.data.profiles;
       this.iProfileData = this.datas;
       console.log(this.iProfileData);
       this.total = value.data.totalPages;
-
+      this.firstObject=this.iProfileData[0];
+      this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
   //5
   getBlockedProfiles() {
     this.newApi = 5;
-
+    sessionStorage.removeItem('ids')
+    sessionStorage.removeItem('Productsp')
     this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
-      if (value.data.profiles) {
         this.datas = value.data.profiles;
         this.iProfileData = this.datas;
         console.log(this.iProfileData);
         this.total = value.data.totalPages;
         console.log(this.total);
-      }
+        this.firstObject=this.iProfileData[0];
+        this.objectProduct(this.firstObject,this.firstObject.id)
+
     });
   }
   // 1
   getNewProfiles() {
     this.newApi = 1;
+sessionStorage.removeItem('ids')
+sessionStorage.removeItem('Productsp')
 
     this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
       if (value.data.profiles) {
@@ -81,7 +94,7 @@ export class AdminSPComponent implements OnInit {
         console.log(this.datas);
         this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-        this.firstObject=this.iProfileData[0]
+        this.firstObject=this.iProfileData[0];
         this.objectProduct(this.firstObject,this.firstObject.id)
       }
     });
@@ -89,45 +102,51 @@ export class AdminSPComponent implements OnInit {
   //2
   getRejectedProfiles() {
     this.newApi = 2;
-
+    sessionStorage.removeItem('ids')
+    sessionStorage.removeItem('Productsp')
     this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
       this.datas = value.data.profiles;
       console.log(this.datas);
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      console.log(this.total);
-
+      this.firstObject=this.iProfileData[0]
+      this.objectProduct(this.firstObject,this.firstObject.id)
 
     });
   }
   //3
-  getActiveAcconting() {
+  activeAllAcconting() {
     this.newApi = 3;
+    sessionStorage.removeItem('ids')
+    sessionStorage.removeItem('Productsp')
+    this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
 
-    this.ServicesProvidor.getActiveProfiles(this.page).subscribe((value) => {
-      if (value.data.profiles) {
-        this.datas = value.data.profiles;
+        this.datas = value.data.activeProfiles;
         console.log(this.datas);
         this.iProfileData = this.datas;
         console.log(this.iProfileData);
         this.total = value.data.totalPages;
+        this.firstObject=this.iProfileData[0];
+        this.objectProduct(this.firstObject,this.firstObject.id)
 
-      }
+
     });
   }
   //4
   getNonActiveAccount() {
     this.newApi = 4;
-
-    this.ServicesProvidor.getNonActiveProfiles(this.page).subscribe((value) => {
-      if (value.data.profiles) {
-        this.datas = value.data.profiles;
+    sessionStorage.removeItem('ids');
+    sessionStorage.removeItem('Productsp');
+    this.ServicesProvidor.getNonActiveProfiles(1).subscribe((value) => {
+        this.datas = value.data.nonActiveProfiles;
         this.iProfileData = this.datas;
         console.log(this.iProfileData);
         this.total = value.data.totalPages;
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id)
 
-      }
-    });
+
+      });
   }
 
   choiseFunCallApiPagin(event: number) {
@@ -140,7 +159,7 @@ export class AdminSPComponent implements OnInit {
         this.getRejectedProfiles();
         break;
       case 3:
-        this.getActiveAcconting();
+        this.activeAllAcconting();
         break;
       case 4:
         this.getNonActiveAccount();
@@ -171,53 +190,148 @@ export class AdminSPComponent implements OnInit {
     console.log(this.productCurrent);
   }
 
-  downloadImage(item: string) {
-    // let imageUrl=this.productCurrent.companyRegisterationNumberPath
-    let imageUrl = item;
-    console.log(imageUrl);
-    this.getBase64ImageFromURL(imageUrl).subscribe((base64data: any) => {
-      console.log(base64data);
-      this.base64Image = 'data:image/jpg;base64,' + base64data;
-      // save image to disk
-      var link = document.createElement('a');
+// change stutas client
+changeToAccepted(){
+  this.iChangeStatus={
+    profileId:this.idProduct.id,
+    description: "",
+    accountStatusId:5
+  }
+  if(this.iChangeStatus.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
+    alert("العميل موجود بالفعل")
+  }else if(this.idProduct.applicationUser.accountType.key==="CO"){
+  this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data)=>{
+    alert(`${data.message}`);
+    console.log(this.iChangeStatus!.profileId)
+  });
+}else{
+  this.ServicesProvidor.changeIndividualStatus(this.iChangeStatus).subscribe((data)=>{
+    alert(`${data.message}`);
+    console.log(this.iChangeStatus!.profileId)
+  });
+}
+}
+// changeToNotComplette
+changeToNotComplette(){
+  this.iChangeStatus={
+    profileId:this.idProduct.id,
+    description: "",
+    accountStatusId:8
+  }
+  if(this.iChangeStatus.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
+    this.showDanger=true;
+    setTimeout(()=>{
+      this.showDanger=false
+    }, 3000);
+  }else if(this.idProduct.applicationUser.accountType.key==="CO"){
+  this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data)=>{
+    // alert(`${data.message}`);
+    this.show=true;
 
-      document.body.appendChild(link); // for Firefox
+    this.messages=data.message
+    console.log(this.iChangeStatus!.profileId)
+    setTimeout(()=>{
+      this.show=false
+    }, 3000);
+  });
+}else{
+  this.ServicesProvidor.changeIndividualStatus(this.iChangeStatus).subscribe((data)=>{
+    // alert(`${data.message}`);
+    console.log(this.iChangeStatus!.profileId)
+    this.show=true;
+    this.messages=data.message
+    setTimeout(()=>{
+      this.show=false
+    }, 3000);
+  });
+}
+}
+// changeToReject
+changeToReject(){
+  this.iChangeStatus={
+    profileId:this.idProduct.id,
+    description: "",
+    accountStatusId:6
+  }
+  if(this.iChangeStatus.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
+    alert("العميل موجود بالفعل")
+  }else if(this.idProduct.applicationUser.accountType.key==="CO"){
+  this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data)=>{
+    alert(`${data.message}`);
+    console.log(this.iChangeStatus!.profileId)
+  });
+}else{
+  this.ServicesProvidor.changeIndividualStatus(this.iChangeStatus).subscribe((data)=>{
+    alert(`${data.message}`);
+    console.log(this.iChangeStatus!.profileId)
+  });
+}
+}
 
-      link.setAttribute('href', this.base64Image);
-      link.setAttribute('download', 'mrHankey.jpg');
-      link.click();
-    });
+
+
+
+  // downloadImage(item: string) {
+  //   // let imageUrl=this.productCurrent.companyRegisterationNumberPath
+  //   let imageUrl = item;
+  //   console.log(imageUrl);
+  //   this.getBase64ImageFromURL(imageUrl).subscribe((base64data: any) => {
+  //     console.log(base64data);
+  //     this.base64Image = 'data:image/jpg;base64,' + base64data;
+  //     // save image to disk
+  //     var link = document.createElement('a');
+
+  //     document.body.appendChild(link); // for Firefox
+
+  //     link.setAttribute('href', this.base64Image);
+  //     link.setAttribute('download', 'mrHankey.jpg');
+  //     link.click();
+  //   });
+  // }
+
+  // getBase64ImageFromURL(url: string) {
+  //   return Observable.create((observer: Observer<string>) => {
+  //     const img: HTMLImageElement = new Image();
+  //     img.crossOrigin = 'Anonymous';
+  //     img.src = url;
+  //     if (!img.complete) {
+  //       img.onload = () => {
+  //         observer.next(this.getBase64Image(img));
+  //         observer.complete();
+  //       };
+  //       img.onerror = (err) => {
+  //         observer.error(err);
+  //       };
+  //     } else {
+  //       observer.next(this.getBase64Image(img));
+  //       observer.complete();
+  //     }
+  //   });
+  // }
+
+  // getBase64Image(img: HTMLImageElement) {
+  //   const canvas: HTMLCanvasElement = document.createElement('canvas');
+  //   canvas.width = img.width;
+  //   canvas.height = img.height;
+  //   const ctx: CanvasRenderingContext2D | any = canvas.getContext('2d');
+  //   ctx.drawImage(img, 0, 0);
+  //   const dataURL: string = canvas.toDataURL('image/png');
+
+  //   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  // }
+  download(url: string,name:any) {
+    return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe((png)=>{
+      const blob=new Blob([png],{type:'application/pdf'});
+      const fileName=name;
+      saveAs(blob,fileName)
+    },err=>{
+      console.log(err)
+    }
+    )
+
   }
 
-  getBase64ImageFromURL(url: string) {
-    return Observable.create((observer: Observer<string>) => {
-      const img: HTMLImageElement = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.src = url;
-      if (!img.complete) {
-        img.onload = () => {
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-        };
-        img.onerror = (err) => {
-          observer.error(err);
-        };
-      } else {
-        observer.next(this.getBase64Image(img));
-        observer.complete();
-      }
-    });
-  }
 
-  getBase64Image(img: HTMLImageElement) {
-    const canvas: HTMLCanvasElement = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx: CanvasRenderingContext2D | any = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const dataURL: string = canvas.toDataURL('image/png');
 
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
-  }
 
 }

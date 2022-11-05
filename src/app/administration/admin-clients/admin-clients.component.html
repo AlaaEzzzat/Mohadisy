@@ -1,11 +1,11 @@
 <div class="m-3">
-  <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
+  <div class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around">
     <button
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
         color: newApi === 1 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      class="btn rounded-0  fs-6 h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
       (click)="getNewClientProfiles()"
     >
@@ -16,7 +16,7 @@
         'background-color': newApi === 2 ? '#004958' : '#ffffff',
         color: newApi === 2 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      class="btn rounded-0  fs-6  h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
       (click)="getActiveClientAcconting()"
     >
@@ -27,7 +27,7 @@
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
       (click)="getNonActiveClientAccount()"
     >
@@ -38,7 +38,7 @@
         'background-color': newApi === 4 ? '#004958' : '#ffffff',
         color: newApi === 4 ? '#ffffff' : '#000000'
       }"
-      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
       (click)="getBlockedClientsProfiles()"
     >
@@ -50,7 +50,7 @@
         'background-color': newApi === 5 ? '#004958' : '#ffffff',
         color: newApi === 5 ? '#ffffff' : '#000000'
       }"
-      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn btn rounded-0  fs-6 h-75 col-lg-2 col-sm-4 col-12  text-nowrap p-2 "
       role="button"
       (click)="getExpiredClientsProfiles()"
     >
@@ -62,12 +62,12 @@
     <div class="col-md-4 col-12">
       <form
         class="d-flex flex-column me-3"
-        matSort
-        (matSortChange)="sortData($event)"
+
       >
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
+
           <!-- <button
             class="btn bg-white border-0 rounded-0 ms-1"
             type="submit"
@@ -100,14 +100,21 @@
 
         <!-- card company -->
         <!-- <ng-container> -->
-        <ng-container
+        <!-- <ng-container
           *ngFor="
             let pro of iProfileData
               | paginate
                 : { itemsPerPage: 6, currentPage: page, totalItems: total }
               | filter: filterTerm
           "
-        >
+        > -->
+        <ng-container
+        *ngFor="
+          let pro of iProfileData
+
+            | filter: filterTerm
+        "
+      >
           <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
             <div
               class="card-body"
@@ -120,8 +127,8 @@
             >
               <div class="d-flex">
                 <i class="fa-regular fa-building"></i>
-                <div class="card-title me-3 title">
-                  <p *ngIf="pro.firstName; else templateName">
+                <div class="card-title me-3 ">
+                  <p *ngIf="pro.firstName; else templateName" >
                     {{ pro.firstName }} {{ pro.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
@@ -174,9 +181,13 @@
           </div>
         </ng-container>
       </form>
-      <pagination-controls
+      <!-- <mat-paginator [length]="5"
+              [pageSize]="total"
+              aria-label="Select page">
+</mat-paginator> -->
+      <!-- <pagination-controls
         (pageChange)="choiseFunCallApiPagin($event)"
-      ></pagination-controls>
+      ></pagination-controls> -->
     </div>
     <div class="col-md-7 sizew col-12 flex-row">
       <div class="col-12 card mb-3 border-0 rounded-0 p-4">
@@ -199,21 +210,21 @@
           </div>
           <div class="col-md-7 col-sm-5">
             <div class="d-flex">
-              <a type="button" class="btn w-25">
+              <a type="button" class="btn w-25" (click)="changeToAccepted()">
                 <i class="fa-solid fa-check text-secondary"></i>
                 <p class="fsvw">مكتمل</p></a
               >
-              <a type="button" class="btn w-25">
+              <a type="button" class="btn w-25" (click)="changeToNotComplette()">
                 <i class="fa-solid fa-exclamation"></i>
                 <p class="fsvw">غير مكتمل</p></a
               >
-              <a type="button" class="btn w-25"
+              <a type="button" class="btn w-25" (click)="changeToReject()"
                 ><i class="fa-solid fa-xmark"></i>
-                <p class="fsvw">رفض</p></a
+                <p class="fsvw" >رفض</p></a
               >
               <a type="button" class="btn w-25"
                 ><i class="fa-solid fa-xmark"></i>
-                <p class="fsvw">إرسال</p></a
+                <p class="fsvw">مراسله</p></a
               >
             </div>
           </div>
@@ -224,7 +235,7 @@
         <p class="card-title mb-4">معلومات عن العميل</p>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
-            <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row justify-content-between ">
               <p class="card-subtitle text-secondary ms-2">رقم الهوية</p>
 
               <p>{{ productCurrent.idNumber }}</p>
@@ -245,6 +256,25 @@
               <ng-template #idFile>___</ng-template>
               <!-- </div> -->
             </div>
+
+            <!-- <div class="d-flex flex-row justify-content-between mb-4">
+              <p class="card-subtitle text-secondary ms-2">صوره الهوية</p>
+
+              <p>{{ productCurrent.idNumber }}</p>
+
+              <a
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                target="_blank"
+                (click)="downloadImage(productCurrent.profilePicturePath)"
+                *ngIf="productCurrent.idFile; else idFile"
+              >
+
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3">{{ productCurrent.idFile }}</p>
+              </a>
+              <ng-template #idFile>___</ng-template>
+            </div> -->
+
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
@@ -339,15 +369,13 @@
       </div>
       <!-- projects -->
 
-      <div
+      <!-- <div
         class="col-12 d-flex flex-row flex-wrap justify-content-between"
         *ngIf="productCurrent.joinRequestStatus.accountStatus.id !== 4"
       >
         <div class="sizewSay col-12">
-          <!-- سبب -->
             <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1 ">
               <p class="bodyResine fw-bold align-content-end">
-                سبب عدم نشاط الحساب
               </p>
               <small class="titleResone align-content-end">
                 {{ productCurrent.joinRequestStatus.description }}.</small
@@ -370,7 +398,6 @@
               {{ productCurrent.joinRequestStatus.description }}.</small
             >
           </div>
-          <!-- العدد المشتركين   -->
           <div
             class="d-flex flex-column justify-content-center px-4 py-4 align-items-center bg-white"
           >
@@ -381,7 +408,6 @@
             </div>
             <p class="fw-bold projectLeter">شركات تم التعامل معهم</p>
           </div>
-          <!-- footer -->
           <div
             class="sayPro d-flex justify-content-center px-4 py-1 align-items-center"
           >
@@ -391,7 +417,6 @@
           </div>
         </div>
         <div class="col-md-7 col-12 mb-1">
-          <!-- header -->
           <div
             class="d-flex justify-content-between bg-white px-4 py-1 align-items-center"
           >
@@ -409,7 +434,6 @@
               data-bs-ride="carousel"
             >
               <div class="carousel-inner">
-                <!-- cards -->
                 <div class="carousel-item active">
                   <div
                     class="card d-flex justify-content-center align-items-center p-3 border-0 rounded-0 bg-white pb-5"
@@ -557,7 +581,9 @@
             </div>
           </div>
         </div>
+
       </div>
+       -->
     </div>
   </div>
 </div>

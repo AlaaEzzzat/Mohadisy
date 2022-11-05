@@ -1,62 +1,64 @@
 export interface IadminClients {
-  applicationUserId: string;
-  accountOverview: null;
-  additionalNumber: 0;
-  applicationUser: null;
 
-  dateCreated: '2022-11-01T13:18:00';
+  "id": 2049,
+  "applicationUserId": "7a859cf9-754d-411a-8d42-7336a493a69f",
+  "applicationUser": null,
+  "firstName": "علاء",
+  "lastName": "عزت",
+  "idFile": "1.PNG",
+  "neighborhood": "منطقة مكة المكرمة",
+  "streetName": "حي العدل",
+  "buildingNumber": 55,
+  "additionalNumber": 0,
+  "postalCode": "121222",
+  "joinRequestStatusId": 2303,
+  "districtId": 10200006001,
+  "dateCreated": "2022-10-27T16:02:00",
+  "idNumber": "1122334455",
+  "accountOverview": null,
+  "profilePictureFile": "default.png",
+  "district": {
+      "id": 10200006001,
+      "cityId": 6,
+      "nameAr": "حي العدل",
+      "nameEn": "Al Adl Dist.",
+      "city": {
+          "id": 6,
+          "regionId": 2,
+          "nameAr": "مكة المكرمة",
+          "nameEn": "Makkah Al Mukarramah",
+          "region": {
+              "id": 2,
+              "code": "MQ",
+              "nameAr": "منطقة مكة المكرمة",
+              "nameEn": "Makkah",
+              "population": 6915006,
+              "cities": []
+          },
+          "districts": []
+      },
+      "clientProfiles": [],
+      "individualServiceProviderProfiles": [],
+      "organizationalServiceProviderProfiles": [],
+      "projects": []
+  },
+  "joinRequestStatus": {
+      "id": 2303,
+      "description": "",
+      "accountStatusId": 4,
+      "dateCreated": "2022-10-27T16:02:00",
+      "accountStatus": {
+          "id": 4,
+          "nameAr": "جديد",
+          "nameEn": "New",
+          "joinRequestStatuses": []
+      },
+      "clientProfiles": [],
+      "individualServiceProviderProfiles": [],
+      "organizationalServiceProviderProfiles": []
+  },
+  "projects": [],
+  "profilePicturePath": "https://app.mohandisy.com/files/ProfilePictures/default.png",
+  "idPath": "https://app.mohandisy.com/files/Clients/1.PNG"
 
-  firstName: 'string';
-  lastName: 'string';
-  phoneNumber: string;
-  joinRequestStatusId: 2305;
-  email: string;
-  websiteLink: string;
-  neighborhood: 'منطقة نجران';
-  buildingNumber: number;
-  postalBox: '00000';
-  postalCode: '11442';
-  profilePictureFile: 'default.png';
-  profilePicturePath: 'https://app.mohandisy.com/files/ProfilePictures/default.png';
-
-  idFile: 'Amazing.400.Mixed Wallpapers.Pack.143.HD.akoam (3).jpg';
-  idNumber: '1122334455';
-  idPath: 'https://app.mohandisy.com/files/Clients/Amazing.400.Mixed Wallpapers.Pack.143.HD.akoam (3).jpg';
-  district: {
-    cityId: 6;
-    city: {
-      districts: [];
-      id: 6;
-      nameAr: 'مكة المكرمة';
-      nameEn: 'Makkah Al Mukarramah';
-      region: {
-        id: 2;
-        code: 'MQ';
-        nameAr: 'منطقة مكة المكرمة';
-        nameEn: 'Makkah';
-        population: 6915006;
-      };
-      regionId: 2;
-    };
-    clientProfiles: [];
-    id: 10200006002;
-    individualServiceProviderProfiles: [];
-    nameAr: 'حي الروضة';
-    nameEn: 'Ar Rawdah Dist.';
-    organizationalServiceProviderProfiles: [];
-  };
-  id: string;
-
-  joinRequestStatus: {
-    accountStatusId: 4;
-    clientProfiles: [];
-    dateCreated: null;
-    description: '';
-    accountStatus: {
-      id: 4;
-      joinRequestStatuses: [];
-      nameAr: 'جديد';
-      nameEn: 'New';
-    };
-  };
 }

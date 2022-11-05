@@ -1,10 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
 
-// *{
-//   font-family: 'Cairo', sans-serif;
-//   font-size: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$fontTajawalFamily: 'Tajawal', sans-serif;
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+// $textColor:#18AF9A;
+$bgButton:#F3FBFA;
+$font25Size:1.543vw;
+$font18Size:1.111vw;
+$font16Size:0.988vw;
+$font40Size:2.469vw;
+$font20Size:1.235vw;
+$font15Size:0.926vw;
 
-// }
+
+@mixin titleTotal($fontS,$fontfa){
+  font-size: $fontS;
+  font-family:$fontfa;
+}
+
+
 a:focus ,a:hover,button:focus ,button:hover {
   background-color: #004057 !important;
   color: white !important;
@@ -50,4 +66,7 @@ input[type="search"]{
 white-space:nowrap;
 
 
+}
+.m-3>.justify-content-around>.btn.rounded-0.m-1{
+  @include titleTotal($font25Size,$fontTajawalFamily)
 }
