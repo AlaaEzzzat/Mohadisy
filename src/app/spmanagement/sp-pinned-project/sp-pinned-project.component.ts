@@ -23,9 +23,10 @@ export class SpPinnedProjectComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
+    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
-    this.Listprojects=data.data.projects;
+    this.Listprojects=data.data.priceQuotes;
+
 
     });
 
