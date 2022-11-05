@@ -2,6 +2,7 @@ import { ProviderServiceService } from './../../@core/services/Provider/provider
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
   selector: 'app-sp-profile',
@@ -9,13 +10,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sp-profile.component.scss'],
 })
 export class SpProfileComponent implements OnInit {
-  cars = [
-    { id: 1, name: 'BMW Hyundai' },
-    { id: 2, name: 'Kia Tata' },
-    { id: 3, name: 'Volkswagen Ford' },
-    { id: 4, name: 'Renault Audi' },
-    { id: 5, name: 'Mercedes Benz Skoda' },
-  ];
 
   imageSrc?: string;
   secandform: boolean = false;
@@ -31,7 +25,7 @@ export class SpProfileComponent implements OnInit {
   FilterSearch: Array<any> = [];
   checkedSubServices: Array<any> = [];
 
-  constructor(private provider: ProviderServiceService) {
+  constructor(private provider: ProviderServiceService ,private api:ApiService) {
     this.providerData = new FormGroup({
       TypeService: new FormControl('', [
         Validators.required,
@@ -113,9 +107,14 @@ export class SpProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provider.getRegions().subscribe((data) => {
-      this.regionsList = data.data;
-    });
+
+    this.api.get("https://app.mohandisy.com/api/Address/getRegions").subscribe(
+      (data)=>
+      {
+        this.regionsList = data.data;
+      }
+
+    );
 
     this.provider.projectServices().subscribe((data) => {
       this.servicesType = data.data;
@@ -126,32 +125,35 @@ export class SpProfileComponent implements OnInit {
     return this.providerData.controls;
   }
 
-  _getCities() {
-    //console.log(this.providerData.get("region").value);
+  _getCities()
+  {
 
-    this.selectRegion = this.providerData.get('region').value;
 
-    this.provider.getCities(this.selectRegion).subscribe((data) => {
-      this.citiesList = data.data;
-    });
+    this.selectRegion=this.providerData.get("region").value;
 
-    this._getDistricts();
+     this.provider.getCities(this.selectRegion).subscribe(data=>{
+      this.citiesList=data.data;});
+
+      this._getDistricts();
   }
 
-  _getDistricts() {
-    this.selectCity = this.providerData.get('city').value;
+  _getDistricts()
+  {
+    this.selectCity=this.providerData.get("city").value;
     console.log(this.selectCity);
-    if (this.selectCity != 0 && this.selectCity != null)
-      this.provider.getDistricts(this.selectCity).subscribe(
-        (data) => {
-          this.districtsList = data.data;
+    if(this.selectCity!=0&&this.selectCity!=null)
+     this.provider.getDistricts(this.selectCity).subscribe(
+        (data)=>{
+         this.districtsList=data.data;
         },
-        (error) => {
-          console.log('error');
+        (error)=>
+        {
+          console.log("error");
         }
-      );
-  }
+    );
 
+
+  }
   /******************start services and subservices***************/
 
   _subServices() {
@@ -167,7 +169,6 @@ export class SpProfileComponent implements OnInit {
   _search() {
     var x = this.providerData.get('search').value;
     this.FilterSearch = this.subService.filter((e) => e.name.includes(x));
-    //console.log( this.FilterSearch);
   }
   addSubService(subServiceId: number) {
     this.checkedSubServices[subServiceId] = 1;
@@ -179,97 +180,57 @@ export class SpProfileComponent implements OnInit {
 
   /***********************end services and subservices****************************/
 
-  SelectFile_1(event: any) {
-    this.Files[0] = <File>event.target.files[0];
+  SelectFile_1(event: any)
+  {
+    this.Files[0]=<File>event.target.files[0];
+
   }
 
-  SelectFile_2(event: any) {
-    /*this.Files[1]={
-      "idFile":<File>event.target.files[0].name,
-      "membershipFile":<File>event.target.files[0].name
-     };*/
+  SelectFile_2(event: any)
+  {
 
-    this.Files[1] = <File>event.target.files[0];
+     this.Files[1]=<File>event.target.files[0];
   }
 
-  SelectFile_3(event: any) {
-    this.Files[2] = <File>event.target.files[0];
+  SelectFile_3(event: any)
+  {
+    this.Files[2]=<File>event.target.files[0];
+
   }
 
-  // onFileChange(event: any) {
-  //   const reader = new FileReader();
 
-  //   if (event.target.files && event.target.files.length) {
-  //     const [file] = event.target.files;
 
-  //     reader.readAsDataURL(file);
 
-  //     reader.onload = () => {
-  //       this.imageSrc = reader.result as string;
-
-  //       this.providerData.patchValue({
-  //         fileSource: reader.result,
-  //       });
-  //     };
-  //   }
-  // }
 
   onSubmit() {
-    this.providerData.value['servicetype'] = [];
+    this.providerData.value['ospprofileSubServices']=[];
 
-    this.subService.forEach((e) => {
-      if (this.checkedSubServices[e.id])
-        this.providerData.value['servicetype'].push(e.id);
+    this.subService.forEach(e=>{
+      if(this.checkedSubServices[e.id])
+      this.providerData.value['ospprofileSubServices'].push(
+        { "projectServiceId":this.providerData.get('projectServiceId').value,
+          "projectSubServiceId":e.id}
+        );
     });
-    console.log(this.providerData.value);
 
-    //console.log(this.providerData.value['servicetype']);
 
     var formFiles: any = new FormData();
+     formFiles.append("CompanyLogo",this.Files[0]);
+     formFiles.append("CompanyRegisteration",this.Files[1]);
+     formFiles.append("License",this.Files[2]);
 
-    formFiles.append('CompanyLogo', this.Files[0]);
-    formFiles.append('CompanyRegisteration', this.Files[1]);
-    formFiles.append('License', this.Files[2]);
 
-    //console.log(formFiles);
-
-    /*var formFiles=
-     {
-      'CompanyLogo':this.Files[0],
-      'CompanyRegisteration':this.Files[1],
-      'License':this.Files[3]
-     }*/
 
     this.provider.Files(formFiles).subscribe((data) => {
       console.log(data);
     });
 
-    /*var formRdata:any=new FormData();
-      formRdata.append('firstName',this.providerData.value['representative_name']);
-      formRdata.append('lastName',this.providerData.value['representative_lastName']);
-      formRdata.append('email',this.providerData.value['representative_email']);
-      formRdata.append('phoneNumber',this.providerData.value['representative_phone']);*/
 
-    var formRdata = {
-      firstName: this.providerData.value['representative_name'],
-      lastName: this.providerData.value['representative_lastName'],
-      email: this.providerData.value['representative_email'],
-      phoneNumber: this.providerData.value['representative_phone'],
-    };
-
-    this.provider.representative(formRdata).subscribe((data) => {
+    this.provider.Profile(this.providerData.value).subscribe((data) => {
       console.log(data);
+
     });
 
-    this.provider.getR().subscribe((data) => {
-      console.log(data);
-    });
 
-    /*this.provider.storeProfile(this.providerData.value).subscribe((data) => {
-      console.log(data);
-
-    });*/
-
-    //    })
   }
 }

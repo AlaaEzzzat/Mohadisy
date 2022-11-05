@@ -28,12 +28,13 @@ h5 {
   font-weight: bolder;
   // font-family: 'Times New Roman', Times, serif;
   font-size: 18px;
-  text-decoration: underline;
-  color: #18af9a;
+ // color: #18af9a;
+ color: #004057;
 }
 .btn-success-style {
-  background-color: #004057;
+  background-color: #18af9a;
   color: #fff;
+  padding: 3% 0%;
 }
 form-group {
   padding: 2px;
@@ -72,10 +73,13 @@ form-group {
   // background-color: #18AF9A;
 }
 
-input {
+input{
   font-size: 12px;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
+
+label
+{
+  margin:  0%;
 }
+

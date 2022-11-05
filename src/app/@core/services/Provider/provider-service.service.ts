@@ -49,26 +49,9 @@ export class ProviderServiceService {
   }
 
 
-
-
-  representative(data:any):Observable<any>
+  Profile(data:any):Observable<any>
   {
-    console.log(data);
-    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Representative/updateRepresentative`
-    ,data);
-  }
-
-
-  getR():Observable<any>
-  {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/getProfile`);
-  }
-
-
-
-  updateProfile(data:any):Observable<any>
-  {
-    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/updateProfile`,data);
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfile`,data);
   }
 
 

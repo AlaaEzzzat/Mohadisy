@@ -12,8 +12,11 @@ import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { SpHomeComponent } from './sp-home/sp-home.component';
-import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
 import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
+import { SpPinnedProjectComponent } from './sp-pinned-project/sp-pinned-project.component';
+import { LayoutProjectComponent } from './layout-project/layout-project.component';
+import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
+import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,12 @@ import { SpProjectRequestComponent } from './sp-project-request/sp-project-reque
     SpProjectsComponent,
     SpPriceOffersComponent,
     SpHomeComponent,
-    SpMainProfileComponent,
     SpProfileComponent,
     SpProjectRequestComponent,
+    SpPinnedProjectComponent,
+    LayoutProjectComponent,
+    SpProjectRequestAllComponent,
+    SpCprojectRequestComponent,
   ],
   imports: [
     CommonModule,
