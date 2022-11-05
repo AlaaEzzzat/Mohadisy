@@ -36,7 +36,7 @@ h5 {
   color: #fff;
   padding: 3% 0%;
 }
-form-group {
+form-group{
   padding: 2px;
   width: auto;
 }
@@ -81,5 +81,12 @@ input{
 label
 {
   margin:  0%;
+}
+
+input[type="file"] + .btn
+{
+  margin: 0;
+
+
 }
 

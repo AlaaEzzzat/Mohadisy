@@ -253,13 +253,13 @@
         </div>
       </div>
       <div class="col-2">
-        <label for="servicetype " class="control-label mb-3">
+        <label for="projectServiceId " class="control-label mb-3">
           خدمات
         </label>
 
         <select
-          name="servicetype"
-          id="servicetype"
+          name="projectServiceId"
+          id="projectServiceId"
           class="form-control form-control-lg"
           formControlName="projectServiceId" (change)="_subServices()">
           <ng-container *ngFor="let service of servicesType">
@@ -269,19 +269,19 @@
 
         <div
           *ngIf="
-            providerData.get('servicetype')?.invalid &&
-            (providerData.get('servicetype').dirty ||
-              providerData.get('servicetype').touched)
+            providerData.get('projectServiceId')?.invalid &&
+            (providerData.get('projectServiceId').dirty ||
+              providerData.get('projectServiceId').touched)
           "
           class="alert alert-danger"
         >
-          <div *ngIf=" providerData.get('servicetype').errors?.['required']">
+          <div *ngIf=" providerData.get('projectServiceId').errors?.['required']">
             servicetype is required.
           </div>
         </div>
       </div>
 
-      <div class="col-3">
+      <!--<div class="col-3">
         <label for="search_name_input" class="control-label mb-3">
          خدمات فرعيه
         </label>
@@ -295,8 +295,44 @@
           <option value="">value tow</option>
         </select>
 
-        <!-- [formControl]="formControl" -->
-      </div>
+      </div>-->
+
+      <ng-container *ngIf="providerData.get('projectServiceId').value">
+        <div class="col-3">
+          <label for="search_name_input " class="control-label mb-3">
+            خدمات فرعيه
+          </label>
+
+
+          <input type="text" class="form-control" (keyup)="_search()" formControlName="search"
+            placeholder="مكونات المشروع" />
+
+          <ng-container *ngFor="let i of  subService">
+              <ng-container *ngIf="checkedSubServices[i.id]==1">
+                <button class="btn btn-primary mx-2 my-2" (click)="deleteSubService(i.id)">{{i.name}}
+                  <i class="fa fa-trash"></i>
+                </button>
+
+              </ng-container>
+
+
+          </ng-container>
+
+          <ul>
+            <ng-container *ngFor="let i of FilterSearch">
+              <ng-container *ngIf="checkedSubServices[i.id]!=1">
+                <li (click)="addSubService(i.id)"><span class="dropdown-item">{{i.name}}</span></li>
+              </ng-container>
+            </ng-container>
+          </ul>
+
+        </div>
+      </ng-container>
+
+
+
+
+
 
 
     </div>

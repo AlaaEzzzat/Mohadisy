@@ -1,5 +1,4 @@
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
@@ -51,7 +50,7 @@ export class SpProfileComponent implements OnInit {
         Validators.pattern('[789][0-9]{9}'),
       ]),
       site_url: new FormControl('', [Validators.required]),
-      servicetype: new FormControl('', [Validators.required]),
+      projectServiceId: new FormControl('', [Validators.required]),
       search_name_input: new FormControl('', [Validators.required]),
       yearly_budget: new FormControl('', [
         Validators.required,
@@ -159,17 +158,19 @@ export class SpProfileComponent implements OnInit {
   _subServices() {
     this.checkedSubServices = [];
     this.subService = [];
-    var serviceId = this.providerData.get('servicetype').value;
+    var serviceId = this.providerData.get('projectServiceId').value;
     this.provider.subServicesByServiceId(serviceId).subscribe((data) => {
       this.FilterSearch = data.data;
       this.subService = data.data;
     });
   }
 
+
   _search() {
     var x = this.providerData.get('search').value;
     this.FilterSearch = this.subService.filter((e) => e.name.includes(x));
   }
+
   addSubService(subServiceId: number) {
     this.checkedSubServices[subServiceId] = 1;
   }
