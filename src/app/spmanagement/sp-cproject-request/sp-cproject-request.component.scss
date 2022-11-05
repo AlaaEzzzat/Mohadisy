@@ -26,7 +26,7 @@
 
 .section-2 .card-1 p span
 {
-  margin-left: 42%;
+  margin-left: 40%;
 }
 
 .card p i
@@ -161,4 +161,11 @@
   text-decoration-line: none;
   -moz-text-decoration-line: none;
   color:#004057;
+}
+
+
+.dotted-line::after
+{
+
+  content:"--------------------------------------------------------------------------------------";
 }

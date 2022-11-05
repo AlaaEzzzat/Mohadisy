@@ -84,7 +84,7 @@
 
                   <p>موضوع المشروع:<span>{{selectProject.subject}}</span></p>
 
-                  <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0].period}}</span></p>
+                  <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
                   <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory.name}}</span></p>
                   <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory.name}}</span></p>
                   <p>عنوان المشروع :
