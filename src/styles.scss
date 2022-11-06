@@ -16,8 +16,12 @@ $maxMobile: 767px;
 $minMedium: 992px;
 $minSmall: 768px;
 $mediumMedia: 1000px;
+.cairo{
+  font-family: "cairo";
+
+}
 body {
-  font-family: "Cairo";
+  font-family: "cairo";
 }
 html {
   scrollbar-color: #18af9a #2c5364;

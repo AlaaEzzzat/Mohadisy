@@ -58,6 +58,42 @@
                   </div>
                 </div>
               </ng-container>
+
+              <nav aria-label="..." class="w-100 d-flex justify-content-center">
+                <ul class="pagination w-100">
+                  <li class="page-item">
+                    <button
+                      (click)="prev()"
+                      class="page-link"
+                      [disabled]="page <= 1"
+                    >
+                      السابق
+                    </button>
+                  </li>
+
+                  <ng-container
+                    class="page-item"
+                    *ngFor="let mypage of pagenation; let i = index"
+                  >
+                    <li class="page-item">
+                      <a
+                        class="page-link"
+                        [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
+                        >{{ mypage + 1 }}</a
+                      >
+                    </li>
+                  </ng-container>
+                  <li class="page-item">
+                    <button
+                      (click)="next()"
+                      class="page-link"
+                      [disabled]="page == pagenation.length"
+                    >
+                      التالي
+                    </button>
+                  </li>
+                </ul>
+              </nav>
             </div>
             <div
               *ngIf="projectServiesArrays.length == 0"
@@ -78,13 +114,19 @@
                   style="color: #fff; border: 0"
                   name="offers"
                   id="offers"
-                  [(ngModel)]="selectedOffer"
+                  [(ngModel)]="selectedOfferId"
                 >
                   <ng-container
                     *ngFor="let offer of offersOfSelectedProject; let i = index"
                   >
                     <option [value]="offer.id" class="active text-white">
-                      {{ offer.contractTerms }}
+                      {{
+                        offer.offerSender?.companyName
+                          ? offer.offerSender?.companyName
+                          : offer.offerSender?.firstName +
+                            " " +
+                            offer.offerSender?.lastName
+                      }}
                     </option>
                   </ng-container>
                 </select>
@@ -93,7 +135,7 @@
               <ng-container *ngFor="let offer of offersOfSelectedProject">
                 <div
                   class="d-flex bg-white justify-content-between mb-3"
-                  *ngIf="offer.id == selectedOffer"
+                  *ngIf="offer.id == selectedOfferId"
                 >
                   <div class="pe-3 py-3 info1">
                     <p class="cairo">كود الطلب : {{ selectedProject.code }}</p>
@@ -126,7 +168,7 @@
                 </div>
 
                 <div
-                  *ngIf="offer.id == selectedOffer && !seeProjectInfo"
+                  *ngIf="offer.id == selectedOfferId && !seeProjectInfo"
                   class="cardOffer"
                 >
                   <div class="pb-3">
@@ -410,7 +452,7 @@
 
                 <!-- message -->
                 <div
-                  *ngIf="offer.id == selectedOffer && !seeProjectInfo"
+                  *ngIf="offer.id == selectedOfferId && !seeProjectInfo"
                   class="message bg-white p-3"
                 >
                   <div
@@ -419,7 +461,11 @@
                   >
                     <img
                       style="width: 40px; height: 40px; border-radius: 50%"
-                      src="assets/dashboard/visitor.png"
+                      [src]="
+                        offer.offerSender?.companyLogoPath
+                          ? offer.offerSender?.companyLogoPath
+                          : offer.offerSender?.profilePicturePath
+                      "
                     />
                     <div class="me-2 cairo">
                       {{ offer.message }}
@@ -448,7 +494,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="offer.id == selectedOffer && !seeProjectInfo">
+                <div *ngIf="offer.id == selectedOfferId && !seeProjectInfo">
                   <div class="conditions my-3 cairo">
                     <div
                       class="p-3 d-flex justify-content-between"
@@ -546,7 +592,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="offer.id == selectedOffer && seeProjectInfo">
+                <div *ngIf="offer.id == selectedOfferId && seeProjectInfo">
                   <div class="pe-3 py-3 info1 bg-white mb-3 projectInfo">
                     <p>
                       صلاحيه عرض السعر :

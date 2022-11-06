@@ -1,8 +1,6 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "ae856f49-299b-4910-9657-a6dfa3091ff9"
-  },
+  "$schema": "node_modules/@angular/cli/lib/config/schema.json",
+
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -43,9 +41,11 @@
                         ],
             "scripts": [
 
+
 "node_modules/bootstrap/dist/js/bootstrap.js",
               "./node_modules/hammerjs/hammer.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
 
             ]
           },

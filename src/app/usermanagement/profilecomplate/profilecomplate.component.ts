@@ -34,10 +34,7 @@ export class ProfilecomplateComponent implements OnInit {
     private clientService: ClientService
   ) {
     this.registerForm = this.fb.group({
-      firstName: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z_  a-zA-Z]*$')],
-      ],
+      firstName: ['', [Validators.required, Validators.pattern(/\s/g)]],
 
       applicationUser: this.fb.group({
         userName: [

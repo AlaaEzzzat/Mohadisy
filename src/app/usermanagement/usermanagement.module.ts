@@ -10,8 +10,6 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { AskPriceOfferComponent } from './ask-price-offer/ask-price-offer.component';
-
 @NgModule({
   declarations: [
     UserDashBoardComponent,
@@ -21,7 +19,6 @@ import { AskPriceOfferComponent } from './ask-price-offer/ask-price-offer.compon
     UserMessagesComponent,
     UserhomeComponent,
     ProfilecomplateComponent,
-    AskPriceOfferComponent,
   ],
   imports: [
     CommonModule,
