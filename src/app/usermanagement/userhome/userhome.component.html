@@ -243,27 +243,23 @@
         >&times;</a
       >
       <div class="content">
-        <form>
+        <form #typeForm="ngForm" (ngSubmit)="goToForm(typeForm)">
           <div class="d-flex justify-content-around">
-            <div>
-              <input
-                type="radio"
-                id="ck1"
-                name="type"
-                value="إستشارات هندسية"
-              />
-              <label class="me-2" for="ck1">إستشارات هندسية</label>
-            </div>
-            <div>
-              <input type="radio" id="ck2" name="type" value="إنشاءات" />
-              <label class="me-2" for="ck2">إنشاءات</label><br />
-            </div>
+            <ng-container *ngFor="let service of allServices">
+              <div>
+                <input
+                  ngModel
+                  type="radio"
+                  id="ck1"
+                  name="type"
+                  #radio
+                  [value]="service.id"
+                />
+                <label class="me-2" for="ck1"> {{ service.name }}</label>
+              </div>
+            </ng-container>
           </div>
-          <input
-            type="submit"
-            class="btn w-100 text-center"
-            value="الاستمرار"
-          />
+          <button type="submit" class="btn w-100 text-center">إستمرار</button>
         </form>
       </div>
     </div>
@@ -272,7 +268,7 @@
 <!-- /#wrapper -->
 
 <span
-  (click)="showpopup = true"
+  (click)="openPriceRequest()"
   class="btn cairo btn-success p-3 px-4 text-white title"
   style="position: fixed; bottom: 30px; left: 20px; font-size: 15px"
 >

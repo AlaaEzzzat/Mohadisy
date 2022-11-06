@@ -6,19 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ClientService {
+  requestedServiceId: any = 0;
+  reuestedProject: any = {};
+  projectRequiredFiles: any = [];
   constructor(private _HttpClient: HttpClient) {}
   getProjectServicesAndSubService(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/PriceQuotes/getProjectServicesAndSubService`
     );
   }
-  getProjectSubService(serviceId: any, page?: any): Observable<any> {
+  getProjectService(serviceId: any, page?: any): Observable<any> {
     return this._HttpClient.get<any>(
-      `${
-        environment.baseUrl
-      }/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${
-        page | 1
-      }`
+      `${environment.baseUrl}/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${page}`
     );
   }
   acceptOffer(offerId: any): Observable<any> {
@@ -30,6 +29,67 @@ export class ClientService {
   checkStatus(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/Account/checkAccountStatus`
+    );
+  }
+  getOfferSender(profileId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Offer/getOfferSenderProfile/${profileId}`
+    );
+  }
+  /* ******************************* */
+  /* getAllServics(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
+    );
+  } */
+  getAllProjectCategories(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
+    );
+  }
+
+  getSubCategories(id: any) {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/ProjectCategory/GetProjectSubCategoriesByCategoryId/${id}`
+    );
+  }
+
+  storeProject(data: any) {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Project/storeProject`,
+      data
+    );
+  }
+  //return project
+
+  storeProjectFiles(idProject: any, files: any) {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Project/storeProjectFiles/${idProject}`,
+      files
+    );
+  }
+
+  getAllComponent(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/project/getAllProjectComponents`
+    );
+  }
+  getAllReqworks(serviceId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/RequiredWorks/GetRequiredWorksByServiceId/${serviceId}`
+    );
+  }
+
+  getRequiredFilesByWorkId(workId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/RequiredWorks/GetRequiredDocumentsByWorkId/${workId}`
+    );
+  }
+
+  getAllRequiredFiles(arrOfWorksId: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/RequiredWorks/GetRequiredDocumentsByRequiredWorkIds`,
+      arrOfWorksId
     );
   }
 }

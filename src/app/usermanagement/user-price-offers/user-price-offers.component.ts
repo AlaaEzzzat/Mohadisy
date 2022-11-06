@@ -18,8 +18,12 @@ export class UserPriceOffersComponent implements OnInit {
   activeSubServiceData: any = [];
   offersOfSelectedProject: any = [];
   projectServiesArrays: any = [];
+  selectedOffer: any = {};
   order: any = 0;
-  selectedOffer: any = 0;
+  selectedOfferId: any = 0;
+  page: number = 1;
+  totalpages: any = 0;
+  pagenation: any = [];
 
   projectDtails: boolean = false;
   projectCostDtails: boolean = false;
@@ -29,35 +33,26 @@ export class UserPriceOffersComponent implements OnInit {
   seeProjectInfo: boolean = false;
   usedMaterials: boolean = false;
   constructor(private clientService: ClientService) {}
-
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+  }
+  next() {
+    if (this.page < this.totalpages) {
+      this.page = this.page + 1;
+      this.getAllProjectServices();
+    }
+  }
+  prev() {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.getAllProjectServices();
+    }
+  }
   ngOnInit(): void {
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
-      console.log('All : ');
-      console.log(data.data);
       this.projectServices = data.data.projectServices;
       this.activeService = this.projectServices[0].id;
-
-      this.clientService
-        .getProjectSubService(this.activeService)
-        .subscribe((data: any) => {
-          this.projectServicesFullData = data.data;
-          console.log('projectOfServices : ');
-          console.log(this.projectServicesFullData);
-          this.projectServiesArrays = this.projectServicesFullData.projects;
-          console.log(this.projectServiesArrays);
-          this.activeProject = this.projectServiesArrays[0].id;
-          this.selectedProject = this.projectServiesArrays[0];
-          console.log(this.selectedProject);
-          console.log(this.activeProject);
-          this.projectServiesArrays.map((project: any) => {
-            if (project.id == this.activeProject) {
-              this.offersOfSelectedProject = project.offers;
-            }
-            console.log(this.offersOfSelectedProject);
-          });
-          this.selectedOffer = this.offersOfSelectedProject[0].id;
-          console.log(this.selectedOffer);
-        });
+      this.getAllProjectServices();
     });
   }
 
@@ -65,19 +60,58 @@ export class UserPriceOffersComponent implements OnInit {
     this.activeService = id;
     this.offersOfSelectedProject = 0;
     this.projectServicesFullData = [];
-    this.clientService.getProjectSubService(id).subscribe((data: any) => {
+    this.clientService.getProjectService(id).subscribe((data: any) => {
       this.projectServicesFullData = data.data;
-      console.log('projectOfServices : ');
-      console.log(this.projectServicesFullData);
       this.projectServiesArrays = this.projectServicesFullData.projects;
-      console.log(this.projectServiesArrays);
+      this.showOffers(this.projectServiesArrays[0]);
     });
   }
+  getAllProjectServices() {
+    this.clientService
+      .getProjectService(this.activeService, this.page)
+      .subscribe((data: any) => {
+        this.projectServicesFullData = data.data;
+        console.log('projectOfServices : ');
+        console.log(this.projectServicesFullData);
+        this.projectServiesArrays = this.projectServicesFullData.projects;
+        this.totalpages = this.projectServicesFullData.totalPages;
+        this.counter(this.totalpages);
 
+        this.activeProject = this.projectServiesArrays[0].id;
+        this.selectedProject = this.projectServiesArrays[0];
+
+        this.projectServiesArrays.map((project: any) => {
+          if (project.id == this.activeProject) {
+            this.offersOfSelectedProject = project.offers;
+          }
+        });
+        if (this.offersOfSelectedProject.length > 0) {
+          this.selectedOffer = this.offersOfSelectedProject[0];
+          this.selectedOfferId = this.offersOfSelectedProject[0]?.id;
+          if (this.selectedOffer.organizationalServiceProviderProfileId) {
+            this.clientService
+              .getOfferSender(
+                this.selectedOffer.organizationalServiceProviderProfileId
+              )
+              .subscribe((offerSender: any) => {
+                this.selectedOffer.offerSender = offerSender.data;
+              });
+          } else if (this.selectedOffer.individualServiceProviderProfileId) {
+            this.clientService
+              .getOfferSender(
+                this.selectedOffer.individualServiceProviderProfileId
+              )
+              .subscribe((offerSender: any) => {
+                this.selectedOffer.offerSender = offerSender.data;
+              });
+          }
+        }
+        console.log(this.selectedOffer);
+      });
+  }
   getTime(end: any, start: any) {
-    var startDate = new Date('06/30/2019');
-    var endDate = new Date('07/30/2019');
-
+    var startDate = new Date(start);
+    var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     return Days;
@@ -89,8 +123,27 @@ export class UserPriceOffersComponent implements OnInit {
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
     console.log(this.offersOfSelectedProject);
-    this.selectedOffer = this.offersOfSelectedProject[0].id;
+    if (this.offersOfSelectedProject.length > 0) {
+      this.selectedOffer = this.offersOfSelectedProject[0];
+      this.selectedOfferId = this.offersOfSelectedProject[0].id;
+      if (this.selectedOffer.organizationalServiceProviderProfileId) {
+        this.clientService
+          .getOfferSender(
+            this.selectedOffer.organizationalServiceProviderProfileId
+          )
+          .subscribe((offerSender: any) => {
+            this.selectedOffer.offerSender = offerSender.data;
+          });
+      } else if (this.selectedOffer.individualServiceProviderProfileId) {
+        this.clientService
+          .getOfferSender(this.selectedOffer.individualServiceProviderProfileId)
+          .subscribe((offerSender: any) => {
+            this.selectedOffer.offerSender = offerSender.data;
+          });
+      }
+    }
     console.log(this.selectedOffer);
+    console.log(this.selectedOfferId);
   }
 
   acceptOffer(offerId: any) {
@@ -102,8 +155,5 @@ export class UserPriceOffersComponent implements OnInit {
         console.log(err);
       },
     });
-  }
-  selectF(i: any) {
-    return i == 0 ? true : false;
   }
 }
