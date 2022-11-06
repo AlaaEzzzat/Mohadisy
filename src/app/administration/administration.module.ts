@@ -12,10 +12,15 @@ import { AdminPaymentsComponent } from './admin-payments/admin-payments.componen
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,7 @@ import {MatIconModule} from '@angular/material/icon';
     AdminSettingsComponent,
     AdminSPComponent,
 
+
   ],
   imports: [
 CommonModule,
@@ -38,7 +44,13 @@ CommonModule,
     FormsModule,
     Ng2SearchPipeModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    ReactiveFormsModule
   ],
 })
 export class AdministrationModule {}

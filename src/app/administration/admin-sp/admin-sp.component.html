@@ -1,7 +1,7 @@
-<div class="m-3">
-  <div class="d-flex flex-row mb-3 col-12 flex-wrap justify-content-around">
+<div class="my-3 container-fluid ">
+  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-lg-nowrap flex-wrap">
     <button
-      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
       (click)="getNewProfiles()"
       [ngStyle]="{
@@ -12,7 +12,7 @@
       طلبات الانضمام
     </button>
     <button
-      class="btn rounded-0 m-1 fs-6 we-25 h-75 text-nowrap p-2"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2"
       role="button"
       (click)="getRejectedProfiles()"
       [ngStyle]="{
@@ -23,9 +23,9 @@
       طلبات المرفوضه
     </button>
     <button
-      class="btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getActiveAcconting()"
+      (click)="activeAllAcconting()"
       [ngStyle]="{
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
@@ -34,7 +34,7 @@
       الحسابات النشطه
     </button>
     <button
-      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
       (click)="getBlockedProfiles()"
       [ngStyle]="{
@@ -45,7 +45,7 @@
       الحسابات المعطله
     </button>
     <button
-      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
       (click)="getNonActiveAccount()"
       [ngStyle]="{
@@ -56,7 +56,7 @@
       الحسابات غيرالنشطه
     </button>
     <button
-      class="btn btn rounded-0 m-1 fs-6 h-75 we-25 text-nowrap p-2"
+      class="btn btn rounded-0   h-75 mx-2 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
       (click)="getExpiredProfiles()"
       [ngStyle]="{
@@ -67,8 +67,18 @@
       الحسابات المنتهيه
     </button>
   </div>
+  <div class="alert alert-success" role="alert" *ngIf="show">
+    {{messages}}
+  </div>
+  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="showDanger">
+    <!-- <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+    <use xlink:href="#exclamation-triangle-fill"/></svg> -->
+    <div>
+    العميل موجود بالفعل
+    </div>
+  </div>
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="firstObject;else undefind">
 
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
     <div class="col-md-4 col-12">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
@@ -81,6 +91,15 @@
             <i class="fa fa-arrow-down-a-z"></i>
           </button> -->
           <!-- [(ngModel)]="companyName" -->
+
+          <!-- <mat-form-field appearance="fill">
+            <mat-label>كل الطلبات</mat-label>
+            <mat-select>
+              <mat-option value="one">المستقل</mat-option>
+              <mat-option value="two">شركات ممؤسٍه</mat-option>
+            </mat-select>
+          </mat-form-field>ٍ -->
+
 
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
@@ -97,14 +116,21 @@
 
         <!-- card company -->
         <!-- <ng-container> -->
-        <ng-container
+        <!-- <ng-container
           *ngFor="
             let pro of iProfileData
               | paginate
                 : { itemsPerPage: 6, currentPage: page, totalItems: total }
               | filter: companyName
           "
-        >
+        > -->
+        <ng-container
+        *ngFor="
+          let pro of iProfileData
+
+            | filter: companyName
+        "
+      >
           <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
             <div
               class="card-body"
@@ -165,9 +191,9 @@
           </div>
         </ng-container>
       </form>
-      <pagination-controls
+      <!-- <pagination-controls
         (pageChange)="choiseFunCallApiPagin($event)"
-      ></pagination-controls>
+      ></pagination-controls> -->
     </div>
 
     <!--  -->
@@ -194,7 +220,8 @@
               <div class="d-flex">
                 <i class="fa-regular fa-building"></i>
                 <p class="me-3"></p>
-                <p
+                <!-- ????????????????????????? -->
+                 <!-- <p
                   *ngIf="
                     productCurrent.applicationUser.accountType.typeName;
                     else templateName
@@ -202,33 +229,30 @@
                 >
                   {{ productCurrent.applicationUser.accountType.typeName }}
                 </p>
-                <ng-template #templateName> Null </ng-template>
-                <!-- <p class="1h-sm">{{ productCurrent.companyName }}</p> -->
-                <!-- {{ productCurrent.applicationUser.accountType.typeName-->
-
-                <!-- {{ productCurrent.representative.name }} -->
-              </div>
+                <ng-template #templateName> Null </ng-template> -->
+                </div>
 
               <p class="card-text">
                 {{ productCurrent.firstName }}  {{ productCurrent.lastName }}
               </p>
               <p class="card-text">
                 <small class="text-muted"> نوع الخدمه </small>
-                <span class="typeCom">{{ productCurrent.projectService }}</span>
+                <!-- ?? -->
+                <!-- <span class="typeCom">{{ productCurrent.projectService.name}}</span> -->
               </p>
             </div>
           </div>
           <div class="col-md-5">
             <div class="d-flex">
-              <a type="button" class="btn">
+              <a type="button" class="btn" (click)="changeToAccepted()">
                 <i class="fa-solid fa-check text-secondary"></i>
                 <p>مكتمل</p></a
               >
-              <a type="button" class="btn">
+              <a type="button" class="btn" (click)="changeToNotComplette()">
                 <i class="fa-solid fa-exclamation"></i>
                 <p>غير مكتمل</p></a
               >
-              <a type="button" class="btn"
+              <a type="button" class="btn" (click)="changeToReject()"
                 ><i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
@@ -255,9 +279,7 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="
-                  downloadImage(productCurrent.companyRegisterationNumberPath)
-                "
+                (click)="download(productCurrent.companyRegisterationNumberPath, productCurrent.companyRegisterationNumberFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -270,9 +292,8 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="
-                  downloadImage(productCurrent.socialInsuranceCertificatePath)
-                "
+                (click)="download(productCurrent.socialInsuranceCertificatePath, productCurrent.socialInsuranceCertificateFile)"
+
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -284,7 +305,7 @@
               <p class="card-subtitle text-muted">شهاده الزكاة والدخل</p>
               <a
                 class="bg-light d-flex px-2 align-items-center informationDownload"
-                (click)="downloadImage(productCurrent.zakatCertificatePath)"
+                (click)="download(productCurrent.zakatCertificatePath, productCurrent.zakatCertificateFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.zakatCertificateFile }}</p>
@@ -295,7 +316,7 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="downloadImage(productCurrent.financialStatementPath)"
+                (click)="download(productCurrent.financialStatementPath, productCurrent.financialStatementFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.financialStatementFile }}</p>
@@ -306,7 +327,7 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="downloadImage(productCurrent.coCMembershipPath)"
+                (click)="download(productCurrent.coCMembershipPath, productCurrent.coCMembershipFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.coCMembershipFile }}</p>
@@ -323,7 +344,7 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="downloadImage(productCurrent.licensePath)"
+                (click)="download(productCurrent.licensePath, productCurrent.licenseFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.licenseFile }}</p>
@@ -334,9 +355,8 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="
-                  downloadImage(productCurrent.companyRegisterationNumberPath)
-                "
+                (click)="download(productCurrent.companyRegisterationNumberPath, productCurrent.companyRegisterationNumberFile)"
+
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -349,9 +369,8 @@
               <a
                 target="_blank"
                 class="informationDownload py-2 bg-light d-flex px-2 align-items-center"
-                (click)="
-                  downloadImage(productCurrent.saudizationCertificatePath)
-                "
+                (click)="download(productCurrent.saudizationCertificatePath, productCurrent.saudizationCertificateFile)"
+
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p>{{ productCurrent.saudizationCertificateFile }}</p>
@@ -362,11 +381,8 @@
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="
-                  downloadImage(
-                    productCurrent.addedValueRegisterationCertificatePath
-                  )
-                "
+                (click)="download(productCurrent.addedValueRegisterationCertificatePath, productCurrent.addedValueRegisterationCertificateFile)"
+
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -378,7 +394,7 @@
               <p class="card-subtitle text-muted">شهاده الايزو 9001</p>
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="downloadImage(productCurrent.isoPath)"
+                (click)="download(productCurrent.isoPath, productCurrent.isoFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.isoFile }}</p>
@@ -553,4 +569,13 @@
       </div> -->
     </div>
   </div>
+<ng-template #undefind>
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
+    <h1 class="fw-bold fs-1 text-center mt-5">
+      لايوجد بيانات في هذا التصنيف
+  </h1>
+
+  </div>
+
+</ng-template>
 </div>

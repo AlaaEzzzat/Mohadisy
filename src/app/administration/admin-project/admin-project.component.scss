@@ -1,6 +1,29 @@
-i {
-  color: #18af9a;
+// i {
+//   color: #18af9a;
+// }
+// * {
+//   border: 0px;
+// }
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$fontTajawalFamily: 'Tajawal', sans-serif;
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$textColor:#18AF9A;
+$font25Size:1.25vw;
+$font18Size:0.8999999999999999vw;
+$font16Size:0.8vw;
+
+@mixin title{
+  font-size: $font25Size;
+  font-family:$fontTajawalFamily ;
 }
-* {
-  border: 0px;
+@mixin text18{
+  font-size: $font18Size;
+  font-family:$fontCairoFamily ;
+}
+@mixin text16{
+  font-size: $font16Size;
+  font-family:$fontCairoFamily ;
 }

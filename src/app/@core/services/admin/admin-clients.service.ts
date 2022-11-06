@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, retry, catchError, throwError } from 'rxjs';
+import { IChangeStatus } from 'src/app/@models/ichange-status';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminClientsService {
 
+  private httpoptions ={}
 
   constructor(private _HttpClient:HttpClient) {
+    this.httpoptions={
+      headers:new HttpHeaders({
+        'content-Type':'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
 
+
+      })
+    }
   }
 
 
@@ -40,7 +49,7 @@ export class AdminClientsService {
 
   getBlockedClientsProfiles​(page:number):Observable<any>
   {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getBlockedProfiles/Page/${page}`);
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Client/getBlockedClientsProfiles/Page/${page}`);
   }
 
   getExpiredClientsProfiles(page:number):Observable<any>
@@ -55,5 +64,16 @@ export class AdminClientsService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Client/getNotCompletedClientsProfiles/Page/${page}`);
   }
 
+  //
+
+  changeProfileStatus(objectStatus:IChangeStatus):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Client/changeProfileStatus`,JSON.stringify(objectStatus), this.httpoptions).pipe(retry(3),catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
 
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminClientsService } from 'src/app/@core/services/admin/admin-clients.service';
 import { IadminClients } from 'src/app/@models/iadmin-clients';
-import { Observable, Observer, filter, first } from 'rxjs';
-import { Sort } from '@angular/material/sort';
-import { CommonModule } from '@angular/common';
+
+import { Observable, Observer } from 'rxjs';
+import { IChangeStatus } from 'src/app/@models/ichange-status';
 
 @Component({
   selector: 'app-admin-clients',
@@ -14,7 +14,10 @@ export class AdminClientsComponent implements OnInit {
   page: number = 1;
   newApi: number = 3;
   total: number = 0;
+
+  iChangeStatusCliend: IChangeStatus | undefined = undefined;
   iProfileData: IadminClients[] = [];
+
   datas: any;
   idProduct: any;
   idProductSessionStorage: any;
@@ -23,10 +26,11 @@ export class AdminClientsComponent implements OnInit {
   id: any;
   // down
   base64Image: any;
+
   sortedData: IadminClients[] = [];
   firstObject: any;
   constructor(private ServicesProvidor: AdminClientsService) {
-    this.iProfileData.slice();
+    //  this.iProfileData.slice();
     this.getNewClientProfiles();
   }
 
@@ -74,6 +78,7 @@ export class AdminClientsComponent implements OnInit {
       }
     );
   }
+
   getBlockedClientsProfiles() {
     this.newApi = 4;
     this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe(
@@ -81,7 +86,7 @@ export class AdminClientsComponent implements OnInit {
         this.datas = value.data.profiles;
         this.iProfileData = this.datas;
         this.total = value.data.totalPages;
-        console.log(this.iProfileData);
+        console.log(this.datas);
         this.firstObject = this.iProfileData[0];
         this.objectProduct(this.firstObject, this.firstObject.id);
       }
@@ -136,6 +141,72 @@ export class AdminClientsComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.idProductSessionStorage);
   }
+  // change stutas client
+  changeToAccepted() {
+    this.iChangeStatusCliend = {
+      profileId: this.idProduct.id,
+      description: '',
+      accountStatusId: 5,
+    };
+    if (
+      this.iChangeStatusCliend.accountStatusId ===
+      this.idProduct.joinRequestStatus.accountStatus.id
+    ) {
+      alert('العميل موجود بالفعل');
+    } else {
+      this.ServicesProvidor.changeProfileStatus(
+        this.iChangeStatusCliend
+      ).subscribe((data) => {
+        alert(`${data.message}`);
+        console.log(this.iChangeStatusCliend!.profileId);
+        this.getNewClientProfiles();
+      });
+    }
+  }
+
+  changeToReject() {
+    this.iChangeStatusCliend = {
+      profileId: this.idProduct.id,
+      description: '',
+      accountStatusId: 6,
+    };
+    if (
+      this.iChangeStatusCliend.accountStatusId ===
+      this.idProduct.joinRequestStatus.accountStatus.id
+    ) {
+      alert('العميل موجود بالفعل');
+    } else {
+      this.ServicesProvidor.changeProfileStatus(
+        this.iChangeStatusCliend
+      ).subscribe((data) => {
+        alert(`${data.message}`);
+        console.log(this.iChangeStatusCliend!.profileId);
+        this.getNewClientProfiles();
+      });
+    }
+  }
+
+  changeToNotComplette() {
+    this.iChangeStatusCliend = {
+      profileId: this.idProduct.id,
+      description: '',
+      accountStatusId: 8,
+    };
+    if (
+      this.iChangeStatusCliend.accountStatusId ===
+      this.idProduct.joinRequestStatus.accountStatus.id
+    ) {
+      alert('العميل موجود بالفعل');
+    } else {
+      this.ServicesProvidor.changeProfileStatus(
+        this.iChangeStatusCliend
+      ).subscribe((data) => {
+        alert(`${data.message}`);
+        console.log(this.iChangeStatusCliend!.profileId);
+        this.getNewClientProfiles();
+      });
+    }
+  }
 
   // downlod file
 
@@ -186,26 +257,27 @@ export class AdminClientsComponent implements OnInit {
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   }
-  sortData(sort: Sort) {
-    const data = this.iProfileData.slice();
-    if (!sort.active || sort.direction === '') {
-      this.iProfileData = data;
-      return;
-    }
 
-    this.iProfileData = data.sort((a: any, b: any) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'fristName':
-          return this.compare(a.name, b.name, isAsc);
-        case 'dateCreated':
-          return this.compare(a.name, b.name, isAsc);
+  // sortData(sort: Sort) {
+  //   const data = this.iProfileData.slice();
+  //   if (!sort.active || sort.direction === '') {
+  //     this.iProfileData = data;
+  //     return;
+  //   }
 
-        default:
-          return 0;
-      }
-    });
-  }
+  //   this.iProfileData = data.sort((a:any, b:any) => {
+  //     const isAsc = sort.direction === 'asc';
+  //     switch (sort.active) {
+  //       case 'fristName':
+  //         return this.compare(a.name, b.name, isAsc);
+  //         case 'dateCreated':
+  //           return this.compare(a.name, b.name, isAsc);
+
+  //       default:
+  //         return 0;
+  //     }
+  //   });
+  // }
 
   // sortorder(){
   //   // this.iProfileData.sort(
@@ -230,7 +302,7 @@ export class AdminClientsComponent implements OnInit {
   //   });
   // }
 
-  compare(a: number | string, b: number | string, isAsc: boolean) {
-    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  }
+  //  compare(a: number | string, b: number | string, isAsc: boolean) {
+  //   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  // }
 }

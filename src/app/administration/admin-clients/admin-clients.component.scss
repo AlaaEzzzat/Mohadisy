@@ -4,10 +4,17 @@ $fontTajawalFamily: 'Tajawal', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
-$textColor:#18AF9A;
-$font25Size:1.25vw;
-$font18Size:0.8999999999999999vw;
-$font16Size:0.8vw;
+$bgButton:#F3FBFA;
+$font25Size:1.543vw;
+$font18Size:1.111vw;
+$font16Size:0.988vw;
+$font40Size:2.469vw;
+$font20Size:1.235vw;
+$font15Size:0.926vw;
+@mixin titleTotal($fontS,$fontfa){
+  font-size: $fontS;
+  font-family:$fontfa;
+}
 
 @mixin title{
   font-size: $font25Size;
@@ -39,15 +46,14 @@ input[type="search"]{
 }
 .title
 {
-  line-height:0.5;
-  font-size: 90%;
+  @include titleTotal($font18Size,$fontCairoFamily) ;
 }
 .textFontSizeCard{
   font-size: 90%;
 }
 .we-25 {
   width: 13em !important;
-  font-size: 1.1em!important;
+  @include titleTotal($font25Size,$fontTajawalFamily)
 
 }
 @media only screen and (min-width: 768px) {

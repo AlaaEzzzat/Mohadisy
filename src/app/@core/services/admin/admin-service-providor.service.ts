@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../../environments/environment';
-import { Observable } from 'rxjs';
+import { catchError, Observable, retry, throwError } from 'rxjs';
+import { IChangeStatus } from 'src/app/@models/ichange-status';
+import { saveAs } from 'file-saver';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminServiceProvidorService {
+  private httpoptions ={}
 
   constructor(private _HttpClient:HttpClient) {
+    this.httpoptions={
+      headers:new HttpHeaders({
+        'content-Type':'application/json',
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
 
+
+      })
+    }
   }
-  getAllProfiles(page:number):Observable<any>
-  {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`);
-  }
+
 
   getNewProfiles(page:number):Observable<any>
   {
@@ -45,17 +52,11 @@ export class AdminServiceProvidorService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getClosedProfiles/Page/${page}`);
   }
 
-  getCompletedProfiles(page:number):Observable<any>
-  {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getCompletedProfiles/Page/${page}`);
-  }
 
-  getNotCompletedProfiles(page:number):Observable<any>
-  {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNotCompletedProfiles/Page/${page}`);
-  }
 
-  getActiveProfiles​(page:number):Observable<any>
+
+
+  activeProfile​(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getActiveProfiles/Page/${page}`);
   }
@@ -68,7 +69,34 @@ export class AdminServiceProvidorService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`)
   }
 
-  getAllPosts(): Observable<any> {
-    return this._HttpClient.get(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/`);
+  changeOrganizationalStatus(objectStatus:IChangeStatus):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/changeProfileStatus`,JSON.stringify(objectStatus), this.httpoptions).pipe(retry(3),catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
   }
+  changeIndividualStatus(objectStatus:IChangeStatus):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/changeProfileStatus`,JSON.stringify(objectStatus), this.httpoptions).pipe(retry(3),catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+
+  // download(url: string) {
+  //   return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe(png=>{
+  //     const blob=new Blob([png],{type:'image/png'});
+  //     const fileName="hh.png";
+  //     saveAs(blob,fileName)
+  //   },err=>{
+  //     console.log(err)
+  //   }
+  //   )
+
+  // }
 }

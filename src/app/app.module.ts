@@ -18,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-  SharedModule,
+SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AccountModule,
@@ -28,6 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     FormsModule,
     NgbModule,
+
+
 
   ],
   providers: [

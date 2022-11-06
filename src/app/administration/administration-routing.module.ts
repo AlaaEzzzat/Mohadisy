@@ -21,7 +21,9 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'clients', component: AdminClientsComponent },
       { path: 'messages', component: AdminMessagesComponent },
-      { path: 'settings', component: AdminSettingsComponent },
+      { path: 'settings', component: AdminSettingsComponent
+
+      },
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },
       { path: 'payments', component: AdminPaymentsComponent },
