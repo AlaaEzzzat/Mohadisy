@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminSettingsService } from './../../@core/services/admin/admin-settings.service';
 import { IprofileAdmin } from './../../@models/iprofile-admin';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 interface admin{
   adminProfile:{
     id : number,
@@ -17,9 +18,10 @@ interface admin{
   styleUrls: ['./admin-settings-profile.component.scss']
 })
 export class AdminSettingsProfileComponent implements OnInit {
-  userformlogin :FormGroup;
+  userformlogin :FormGroup
   iProfileAdmin :any|undefined=undefined;
   state :any=0
+  edit:boolean=true;
   profileChange:admin={} as admin;
   constructor(private adminSettingsService:AdminSettingsService,private formbuilder:FormBuilder) {
      this.userformlogin=this.formbuilder.group({
@@ -40,7 +42,7 @@ export class AdminSettingsProfileComponent implements OnInit {
   }
 
   getProfileAdmin(){
-    this.state=1
+    // this.edit=false
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
       this.iProfileAdmin= value.data
       console.log(this.iProfileAdmin)
@@ -67,8 +69,12 @@ export class AdminSettingsProfileComponent implements OnInit {
     this.adminSettingsService.updateAdminProfile( this.profileChange.adminProfile).subscribe((data)=>{
       alert(`${data.message}`);
     })
-    this.getProfileAdmin()
+
+    // this.edit=false ;
+      this.getProfileAdmin()
 
   }
-
+getChange(){
+  this.edit=true
+}
 }

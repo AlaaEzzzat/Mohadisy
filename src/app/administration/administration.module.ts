@@ -12,7 +12,7 @@ import { AdminPaymentsComponent } from './admin-payments/admin-payments.componen
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MatSortModule} from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
@@ -60,7 +60,6 @@ CommonModule,
     MatSlideToggleModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-
   ],
 })
 export class AdministrationModule {}

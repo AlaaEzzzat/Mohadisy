@@ -47,54 +47,39 @@ export class AdminClientsComponent implements OnInit {
       this. pagenationNonActiveClientAccount=false
       this. pagenationBlockedClientsProfiles=false
       this. pagenationExpiredClientsProfiles=false
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
+
       this.total = value.data.totalPages;
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+
       this.fortest(this.total,this.arrayNewProfiles)
 
 
     });
     this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+
       this.fortest(this.total,this.arrayOfDigitsActiveClientAcconting)
 
     });
     this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id);
+
       this.fortest(this.total,this.arrayOfDigitsNonActiveClientAccount)
 
     });
     this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      console.log(this.datas)
-      this.firstObject=this.iProfileData[0]
+
       this.objectProduct(this.firstObject,this.firstObject.id)
       this.fortest(this.total,this.arrayBlockedClientsProfiles)
 
     });
     this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+
       this.fortest(this.total,this.arrayOfDigitsExpiredClientsProfiles)
 
     });
