@@ -5,12 +5,12 @@ $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#F3FBFA;
-$font25Size:1.543vw;
-$font18Size:1.111vw;
-$font16Size:0.988vw;
-$font40Size:2.469vw;
-$font20Size:1.235vw;
-$font15Size:0.926vw;
+$font25Size:25px;
+$font18Size:18px;
+$font16Size:16px;
+$font40Size:40px;
+$font20Size:20px;
+$font15Size:15px;
 @mixin titleTotal($fontS,$fontfa){
   font-size: $fontS;
   font-family:$fontfa;

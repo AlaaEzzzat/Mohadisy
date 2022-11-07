@@ -1,19 +1,20 @@
-// i {
-//   color: #18af9a;
-// }
-// * {
-//   border: 0px;
-// }
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
 $fontTajawalFamily: 'Tajawal', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
-$textColor:#18AF9A;
-$font25Size:1.25vw;
-$font18Size:0.8999999999999999vw;
-$font16Size:0.8vw;
+$bgButton:#F3FBFA;
+$font25Size:25px;
+$font18Size:18px;
+$font16Size:16px;
+$font40Size:40px;
+$font20Size:20px;
+$font15Size:15px;
+@mixin titleTotal($fontS,$fontfa){
+  font-size: $fontS;
+  font-family:$fontfa;
+}
 
 @mixin title{
   font-size: $font25Size;
@@ -26,4 +27,85 @@ $font16Size:0.8vw;
 @mixin text16{
   font-size: $font16Size;
   font-family:$fontCairoFamily ;
+}
+a:focus ,a:hover,button:focus ,button:hover {
+  background-color: $Alltext!important;
+  color: white !important;
+  border: 0px none transparent!important;
+}
+button>i ,.typeCom
+{
+  color: $textColor !important;
+
+}
+input[type="search"]{
+  &:hover,&:active ,&:focus{
+    border: 0px none transparent !important;
+  }
+
+}
+.title
+{
+  @include titleTotal($font18Size,$fontCairoFamily) ;
+}
+.textFontSizeCard{
+  font-size: 90%;
+}
+.we-25 {
+  width: 13em !important;
+  @include titleTotal($font25Size,$fontTajawalFamily)
+
+}
+@media only screen and (min-width: 768px) {
+  .sizew
+  {
+    flex: 0 0 auto;
+    width: 63.333333% ;
+  }
+  .sizewSay{
+    flex: 0 0 auto;
+    width: 38.333333%;
+  }
+
+}
+
+.informationDownload{
+  width: 45% !important;
+  text-decoration: none !important;
+  height: 35px  !important;
+  overflow: hidden;
+white-space:nowrap;
+
+
+}
+.fsvw{
+  @include text16();
+}
+.postionCard{
+  right: 50px !important;
+  bottom: 20px !important;
+}
+.circle{
+  background-color: #18af9b4e;
+  color: #18AF9A;
+}
+.projectLeter{
+  color: #18AF9A;
+ @include title;
+}
+.sayPro{
+  @include title();
+  background-color: $Alltext!important;
+  color: white !important;
+  border: 0px none transparent!important;
+}
+.titleResone,.bodyResine{
+  @include text16();
+
+}
+.bodyResine{
+color: $Alltext;
+}
+.titleResone{
+color: #707070;
 }

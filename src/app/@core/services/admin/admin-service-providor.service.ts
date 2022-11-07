@@ -51,7 +51,10 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getClosedProfiles/Page/${page}`);
   }
-
+  getAllProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`);
+  }
 
 
 

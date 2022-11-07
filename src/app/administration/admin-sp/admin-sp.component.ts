@@ -28,36 +28,123 @@ export class AdminSPComponent implements OnInit {
   name = '';
   id:any;
   // down
-  base64Image: any;
+  // base64Image: any;
   // pagenation
+  arrayOfDigits1:any []=[]
+  arrayOfDigits2:any []=[]
+  arrayOfDigits3:any []=[]
+  arrayOfDigits4:any []=[]
+  arrayOfDigits5:any []=[]
+  arrayOfDigits6:any []=[]
+  pagenationNewProfiles:boolean=false
+  pagenationRejectedProfiles:boolean=false
+  pagenationactiveAllAcconting:boolean=false
+  pagenationBlockedProfiles:boolean=false
+  pagenationNonActiveAccount:boolean=false
+  pagenationExpiredProfiles:boolean=false
+
   page: number = 1;
   newApi: number = 1;
   total: number = 0;
   firstObject:any;
 
-  constructor(private _HttpClient:HttpClient,
-    private ServicesProvidor: AdminServiceProvidorService,
-    private router: Router
-  ) {
-    this.getNewProfiles()
+  constructor(private _HttpClient:HttpClient,private ServicesProvidor: AdminServiceProvidorService ) {
 
 
+    this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
+      this.pagenationNewProfiles=true
+      this.pagenationRejectedProfiles=false
+      this.pagenationactiveAllAcconting=false
+      this.pagenationBlockedProfiles=false
+      this.pagenationNonActiveAccount=false
+      this.pagenationExpiredProfiles=false
+
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          this.firstObject=this.iProfileData[0];
+          this.objectProduct(this.firstObject,this.firstObject.id)
+          this.fortest(this.total,this.arrayOfDigits1)
+
+      });
+      this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
+        this.datas = value.data.profiles;
+        console.log(this.datas);
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id)
+        this.fortest(this.total,this.arrayOfDigits2)
+
+      });
+      this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
+
+        this.datas = value.data.activeProfiles;
+        console.log(this.datas);
+        this.iProfileData = this.datas;
+        console.log(this.iProfileData);
+        this.total = value.data.totalPages;
+        this.firstObject=this.iProfileData[0];
+        this.objectProduct(this.firstObject,this.firstObject.id)
+        this.fortest(this.total,this.arrayOfDigits3)
+
+
+    });
+
+    this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
+      this.datas = value.data.profiles;
+      this.iProfileData = this.datas;
+      console.log(this.iProfileData);
+      this.total = value.data.totalPages;
+      console.log(this.total);
+      this.firstObject=this.iProfileData[0];
+      this.objectProduct(this.firstObject,this.firstObject.id)
+      this.fortest(this.total,this.arrayOfDigits4)
+
+  });
+  this.ServicesProvidor.getNonActiveProfiles(this.page).subscribe((value) => {
+    this.datas = value.data.nonActiveProfiles;
+    this.iProfileData = this.datas;
+    console.log(this.iProfileData);
+    this.total = value.data.totalPages;
+    this.firstObject=this.iProfileData[0]
+    this.objectProduct(this.firstObject,this.firstObject.id)
+    this.fortest(this.total,this.arrayOfDigits5)
+
+
+  });
+
+  this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
+    this.datas = value.data.profiles;
+    this.iProfileData = this.datas;
+    console.log(this.iProfileData);
+    this.total = value.data.totalPages;
+    this.firstObject=this.iProfileData[0];
+    this.objectProduct(this.firstObject,this.firstObject.id);
+    this.fortest(this.total,this.arrayOfDigits6)
+
+  });
   }
 
   ngOnInit(): void {
-    // this.getNewProfiles()
+
+this.getNewProfiles(this.page)
     this.objectProductGet();
-
-
   }
 
 
   //6
-  getExpiredProfiles() {
+  getExpiredProfiles(page:any) {
+    this.pagenationNewProfiles=false
+    this.pagenationRejectedProfiles=false
+    this.pagenationactiveAllAcconting=false
+    this.pagenationBlockedProfiles=false
+    this.pagenationNonActiveAccount=false
+    this.pagenationExpiredProfiles=true
     this.newApi = 6;
     sessionStorage.removeItem('ids')
     sessionStorage.removeItem('Productsp')
-    this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getExpiredProfiles(page).subscribe((value) => {
       this.datas = value.data.profiles;
       this.iProfileData = this.datas;
       console.log(this.iProfileData);
@@ -67,11 +154,17 @@ export class AdminSPComponent implements OnInit {
     });
   }
   //5
-  getBlockedProfiles() {
+  getBlockedProfiles(page:any) {
+    this.pagenationNewProfiles=false
+    this.pagenationRejectedProfiles=false
+    this.pagenationactiveAllAcconting=false
+    this.pagenationBlockedProfiles=true
+    this.pagenationNonActiveAccount=false
+    this.pagenationExpiredProfiles=false
     this.newApi = 5;
     sessionStorage.removeItem('ids')
     sessionStorage.removeItem('Productsp')
-    this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getBlockedProfiles(page).subscribe((value) => {
         this.datas = value.data.profiles;
         this.iProfileData = this.datas;
         console.log(this.iProfileData);
@@ -83,12 +176,18 @@ export class AdminSPComponent implements OnInit {
     });
   }
   // 1
-  getNewProfiles() {
+  getNewProfiles(page:any) {
+    this.pagenationNewProfiles=true
+    this.pagenationRejectedProfiles=false
+    this.pagenationactiveAllAcconting=false
+    this.pagenationBlockedProfiles=false
+    this.pagenationNonActiveAccount=false
+    this.pagenationExpiredProfiles=false
     this.newApi = 1;
 sessionStorage.removeItem('ids')
 sessionStorage.removeItem('Productsp')
 
-    this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getNewProfiles(page).subscribe((value) => {
       if (value.data.profiles) {
         this.datas = value.data.profiles;
         console.log(this.datas);
@@ -100,11 +199,17 @@ sessionStorage.removeItem('Productsp')
     });
   }
   //2
-  getRejectedProfiles() {
+  getRejectedProfiles(page:any) {
+    this.pagenationNewProfiles=false
+    this.pagenationRejectedProfiles=true
+    this.pagenationactiveAllAcconting=false
+    this.pagenationBlockedProfiles=false
+    this.pagenationNonActiveAccount=false
+    this.pagenationExpiredProfiles=false
     this.newApi = 2;
     sessionStorage.removeItem('ids')
     sessionStorage.removeItem('Productsp')
-    this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getRejectedProfiles(page).subscribe((value) => {
       this.datas = value.data.profiles;
       console.log(this.datas);
       this.iProfileData = this.datas;
@@ -115,11 +220,17 @@ sessionStorage.removeItem('Productsp')
     });
   }
   //3
-  activeAllAcconting() {
+  activeAllAcconting(page:any) {
+    this.pagenationNewProfiles=false
+    this.pagenationRejectedProfiles=false
+    this.pagenationactiveAllAcconting=true
+    this.pagenationBlockedProfiles=false
+    this.pagenationNonActiveAccount=false
+    this.pagenationExpiredProfiles=false
     this.newApi = 3;
     sessionStorage.removeItem('ids')
     sessionStorage.removeItem('Productsp')
-    this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
+    this.ServicesProvidor.activeProfile(page).subscribe((value) => {
 
         this.datas = value.data.activeProfiles;
         console.log(this.datas);
@@ -133,11 +244,17 @@ sessionStorage.removeItem('Productsp')
     });
   }
   //4
-  getNonActiveAccount() {
+  getNonActiveAccount(page:any) {
+    this.pagenationNewProfiles=false
+    this.pagenationRejectedProfiles=false
+    this.pagenationactiveAllAcconting=false
+    this.pagenationBlockedProfiles=false
+    this.pagenationNonActiveAccount=true
+    this.pagenationExpiredProfiles=false
     this.newApi = 4;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getNonActiveProfiles(1).subscribe((value) => {
+    this.ServicesProvidor.getNonActiveProfiles(page).subscribe((value) => {
         this.datas = value.data.nonActiveProfiles;
         this.iProfileData = this.datas;
         console.log(this.iProfileData);
@@ -149,30 +266,30 @@ sessionStorage.removeItem('Productsp')
       });
   }
 
-  choiseFunCallApiPagin(event: number) {
-    this.page = event;
-    switch (this.newApi) {
-      case 1:
-        this.getNewProfiles();
-        break;
-      case 2:
-        this.getRejectedProfiles();
-        break;
-      case 3:
-        this.activeAllAcconting();
-        break;
-      case 4:
-        this.getNonActiveAccount();
-        break;
-      case 5:
-        this.getBlockedProfiles();
-        break;
-      case 6:
-        this.getExpiredProfiles();
-        break;
+  // choiseFunCallApiPagin(event: number) {
+  //   this.page = event;
+  //   switch (this.newApi) {
+  //     case 1:
+  //       this.getNewProfiles();
+  //       break;
+  //     case 2:
+  //       this.getRejectedProfiles();
+  //       break;
+  //     case 3:
+  //       this.activeAllAcconting();
+  //       break;
+  //     case 4:
+  //       this.getNonActiveAccount();
+  //       break;
+  //     case 5:
+  //       this.getBlockedProfiles();
+  //       break;
+  //     case 6:
+  //       this.getExpiredProfiles();
+  //       break;
 
-    }
-  }
+  //   }
+  // }
 
   objectProduct(object: any,id:any) {
     this.idProduct = object;
@@ -185,7 +302,7 @@ sessionStorage.removeItem('Productsp')
     this.id=sessionStorage.getItem('ids');
   }
   objectProductGet() {
-    this.idProductSessionStorage = sessionStorage.getItem('Product');
+    this.idProductSessionStorage = sessionStorage.getItem('Productsp');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
   }
@@ -268,8 +385,24 @@ changeToReject(){
 }
 }
 
+download(url: string,name:any) {
+  return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe((png)=>{
+    const blob=new Blob([png],{type:'application/pdf'});
+    const fileName=name;
+    saveAs(blob,fileName)
+  },err=>{
+    console.log(err)
+  }
+  )
 
+}
 
+fortest(totals:any,arrays:any[]){
+  for (var i  = 1; i <=totals; i++) {
+    arrays.push(i)
+    console.log(arrays.length)
+  }
+}
 
   // downloadImage(item: string) {
   //   // let imageUrl=this.productCurrent.companyRegisterationNumberPath
@@ -319,17 +452,8 @@ changeToReject(){
 
   //   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   // }
-  download(url: string,name:any) {
-    return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe((png)=>{
-      const blob=new Blob([png],{type:'application/pdf'});
-      const fileName=name;
-      saveAs(blob,fileName)
-    },err=>{
-      console.log(err)
-    }
-    )
 
-  }
+
 
 
 

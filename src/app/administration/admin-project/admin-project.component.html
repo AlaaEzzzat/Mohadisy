@@ -1,498 +1,491 @@
-<div class="container pt-5 fontStyle">
-        <div class="row text-center">
-            <div class="col-md-12 col-sm-12">
-                <div class="row">
-                    <div class="col-md-2 col-sm-6 mt-2 ">
-                        <div class="card p-2 text-white" style="background-color: #18af9a;">
-                            المشاريع الحالية
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 mt-2">
-                        <div class="card p-2">
-                           مشاريع معلقة
+<div class="m-3">
+  <div
+    class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around"
+  >
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 1 ? '#004958' : '#ffffff',
+        'color': newApi === 1 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      role="button"
+      (click)="getNewProjectsForAdmin()"
+    >
+      طلبات المشاريع
+    </button>
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 3 ? '#004958' : '#ffffff',
+        'color': newApi === 3 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      (click)="getCurrentProjects()"
+    >
+      المشاريع الحاليه
+    </button>
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 4 ? '#004958' : '#ffffff',
+        'color': newApi === 4 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      (click)="getPendingProject()"
+    >
+      المشاريع المعلقه
+    </button>
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 5 ? '#004958' : '#ffffff',
+        'color': newApi === 5 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      (click)="getFinishedProjects()"
+    >
+      المشاريع منتهيه
+    </button>
 
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 mt-2 ">
-                        <div class="card p-2">
-                          المشاريع المنتهية
-
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 mt-2">
-                        <div class="card p-2">
-                           مشاريع متأخرة
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-6 mt-2">
-                        <div class="card p-2">
-                            مشاريع متوقفة
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-12  mt-4">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12 mt-3 text-white " >
-                                <div class="card p-2" style="background-color: #004057;">
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4"></i>
-                                        <span class="">
-                                            wessam
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4  " style="opacity:0;"></i>
-                                        <span class="">
-                                            cli@gmail.com
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location-dot ms-4"></i>
-                                        <span class="">
-                                            المنطقة الشرقية
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-calendar ms-4"></i>
-                                        <span class="">
-                                            <span> 2022-09-17</span>
-                                            <span> /</span>
-                                            <span> 2022-09-17</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="card p-2">
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4"></i>
-                                        <span class="">
-                                            wessam
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4  " style="opacity:0;"></i>
-                                        <span class="">
-                                            cli@gmail.com
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            المنطقة الشرقية
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            <span> 2022-09-17</span>
-                                            <span> /</span>
-                                            <span> 2022-09-17</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="card p-2">
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4"></i>
-                                        <span class="">
-                                            wessam
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4  " style="opacity:0;"></i>
-                                        <span class="">
-                                            cli@gmail.com
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            المنطقة الشرقية
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            <span> 2022-09-17</span>
-                                            <span> /</span>
-                                            <span> 2022-09-17</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 mt-3">
-                                <div class="card p-2">
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4"></i>
-                                        <span class="">
-                                            wessam
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-user ms-4  " style="opacity:0;"></i>
-                                        <span class="">
-                                            cli@gmail.com
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            المنطقة الشرقية
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location ms-4"></i>
-                                        <span class="">
-                                            <span> 2022-09-17</span>
-                                            <span> /</span>
-                                            <span> 2022-09-17</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-12 mt-4">
-                <div class="row ">
-                    <div class="col-md-12 ">
-                        <div class="row ">
-                            <div class="col-md-8 col-sm-12    mt-3">
-                                <div class=" card p-2 ">
-                                    <div class=" d-flex justify-content-between align-items-center " >
-                                        <div class=" d-flex align-items-center ">
-                                            <img class="rounded-circle ms-2"  src="https://via.placeholder.com/50" alt="" />
-                                            <p>wessamCli</p>
-                                        </div>
-                                        <div class="">
-                                            <i class="fa fa-comment"></i>
-                                            <p>مراسلة</p>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12 mt-3 ">
-                                <div class=" card p-2 h-100">
-                                    <div class="d-flex justify-content-around align-items-center py-3" >
-                                            <i class="fa fa-calendar-alt fa-3x"></i>
-                                            <p class="text-secondary fs-5 h5"> ميعاد التسليم</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row ">
-                            <div class="col-md-8 col-sm-12    mt-3">
-                                <div class=" card p-2 h-100  ">
-                                    <p class="text-end text-secondary fs-6 h5">معلومات عن العميل</p>
-                                    <div class="d-flex justify-content-between align-items-center   py-3" >
-                                         <div>
-                                            <span class="text-secondary">رقم الهوية</span>
-                                            <br>
-                                            <span>1123123123</span>
-                                        </div>
-                                        <div>
-                                            <i class="fa fa-download mx-2"></i>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center  py-3" >
-                                        <div>
-                                            <span class="text-secondary">الدولة
-</span>
-                                            <br>
-                                            <span>المنطقة الشرقية
-
-</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-secondary">المدينة</span>
-                                            <br>
-                                            <span>الدمام</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-secondary"> المنطقة</span>
-                                            <br>
-                                            <span>حي النخيل
-
-</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center  py-3" >
-                                        <div>
-                                            <span class="text-secondary"> رقم التليفون
-</span>
-                                            <br>
-                                            <span>1111111111</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-secondary">البريد الالكترونى
- </span>
-                                            <br>
-                                            <span>cli@gmail.com
-
-</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12 mt-3">
-                                <div class=" card p-2">
-                                    <p class="text-end text-secondary fs-6 h5">معلومات المسئول عن المشروع</p>
-
-                                        <div class="d-flex align-items-center my-2">
-                                            <i class=" fa fa-1x fa-building ms-4"></i>
-                                            <span class="">
-
-                                            </span>
-                                        </div>
-
-                                    <div class="d-flex align-items-center my-2">
-                                        <i class=" fa fa-1x fa-user ms-4"></i>
-                                        <span class="">
-                                            wessam
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-location-dot ms-4"></i>
-                                        <span class="">
-
-                                        </span>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <i class=" fa fa-1x fa-comment-alt ms-4"></i>
-                                        <span class="">
-                                            مراسله
-                                        </span>
-                                    </div>
-                            </div>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="row ">
-                        <div class="col-md-4 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <img class="rounded-circle ms-2"  src="https://via.placeholder.com/90" alt="" />
-                                            <p>التفاصيل</p>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 col-sm-12    mt-3">
-                            <div class=" card p-2 h-100  ">
-
-                                <div class="d-flex justify-content-between align-items-center  py-3" >
-                                    <div>
-                                        <span class="text-secondary"> اسم المشروع</span>
-                                        <br>
-                                        <span>Jemima Oneill
-
-</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-secondary"> التقسيم الاساسى
-</span>
-                                        <br>
-                                        <span>صحي</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-secondary">التقسيم الفرعى
- </span>
-                                        <br>
-                                        <span>العيادات</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center  py-3" >
-                                    <div>
-                                        <span class="text-secondary"> الدولة</span>
-                                        <br>
-                                        <span>المنطقة الشرقية
-
-</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-secondary"> المدينة</span>
-                                        <br>
-                                        <span>الدمام</span>
-                                    </div>
-                                    <div>
-                                        <span>المنطقة </span>
-                                        <br>
-                                        <span>حي النخيل
-
-</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center  py-3" >
-                                    <div>
-                                        <span class="text-secondary"> رقم القطعة
-</span>
-                                        <br>
-                                        <span>1123123123</span>
-                                    </div>
-                                    <div>
-                                        <span class="text-secondary">رقم المخطط</span>
-                                        <br>
-                                        <span>1123123123</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="row ">
-                        <div class="col-md-4 col-sm-12 mt-3">
-                            <div class=" card p-4">
-                                    <div class="align-items-center">
-                                        <p class="text-end">  80000 متر مربع</p>
-                                        <p class="text-end text-secondary fs-5 h5"> المساحة المقام عليها المشروع </p>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mt-3">
-                            <div class=" card p-4">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5">المدة التي تم تنفيذ المشروع خلالها</p>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12 mt-3">
-                            <div class=" card p-4">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5">
-                                            الميزانية الخاصة بالمشروع</p>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="row ">
-                        <div class="col-md-6 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5">مكونات المشروع</p>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end">المكون الأول</p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end">المكون الثاني</p>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5">الأعمال المطلوبة
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end"> مراجعة واعتماد بختم المكتب</p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end"> مراجعة واعتماد ( معماري - امن وسلامة )</p>
-                                            <p class="text-start"></p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end">صميم ( معماري - امن وسلامة )</p>
-                                            <p class="text-start"></p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <p class="text-end">تصميم واعتماد ( معماري - امن وسلامة )</p>
-                                            <p class="text-start"></p>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-                <div class="col-md-12">
-                    <div class="row ">
-                        <div class="col-md-12 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5"> نبذة مختصره عن المشروع</p>
-
-                                        <div class="d-flex justify-content-between mt-4">
-                                            <p class="text-end"> Fuga Ratione esse o
-</p>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-12 mb-5">
-                    <div class="row ">
-                        <div class="col-md-6 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <p class="text-end text-secondary fs-5 h5">المستندات الخاصة بالعميل </p>
-
-                                        <div class="d-flex justify-content-between mt-4">
-                                            <p class="text-end"> </p>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 mt-3">
-                            <div class=" card p-2">
-                                    <div class="align-items-center">
-                                        <h5 class="text-end text-secondary fs-5 h5">المستندات الخاصة بمزود الخدمة
- </h5>
-
-                                        <div class="d-flex justify-content-between mt-4">
-                                            <p class="text-end"></p>
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-            </div>
-        </div>
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 6 ? '#004958' : '#ffffff',
+        'color': newApi === 6 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      (click)="getLateProjects(page)"
+    >
+      المشاريع متأخره
+    </button>
+    <button
+      [ngStyle]="{
+        'background-color': newApi === 7 ? '#004958' : '#ffffff',
+        'color': newApi === 7 ? '#ffffff' : '#000000'
+      }"
+      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+            role="button"
+      (click)="getStoppedProjects()"
+    >
+      المشاريع المتوقفه
+    </button>
+  </div>
+  <!-- alert fun  -->
+  <div class="alert alert-success" role="alert" *ngIf="show">
+    {{messages}}
+  </div>
+  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="showDanger">
+    <div>
+      المشروع موجود بالفعل
     </div>
+  </div>
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" >
+
+  <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
+    <div class="col-md-4 col-12">
+      <form class="d-flex flex-column me-3">
+        <!-- search company -->
+
+        <div class="d-flex position-relative mb-3">
+       <!-- Example single danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    الطلبات
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" (click)="getAllPriceQuotesForAdmin()" >كل الطلبات</a></li>
+    <li><a class="dropdown-item" (click)="getNewProjectsForAdmin()">الطلبات المكتمله</a></li>
+    <li><a class="dropdown-item" (click)="getNotCompletedProjectsForAdmin()">الطلبات غير مكتمله</a></li>
+
+  </ul>
+</div>
+
+          <input
+            class="form-control bg-white border-0 rounded-0 w-100"
+            type="search"
+            placeholder="Search for name ,number,location,etc"
+            aria-label="Search"
+            name="filterTerm"
+            [(ngModel)]="filterTerm"
+          />
+          <button class="btn position-absolute top-0 start-0" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+
+        <!-- card company -->
+        <!-- <ng-container> -->
+
+        <ng-container *ngFor="let pro of iadminPriceQuotes | filter: filterTerm ">
+          <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
+            <div
+              class="card-body"
+              (click)="objectProduct(pro, pro.id)"
+              [ngStyle]="{
+                'background-color':
+                  productCurrent.id === pro.id ? '#004958' : '#ffffff',
+                color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
+              }"
+            >
+              <div class="d-flex">
+                <i class="fa-regular fa-building"></i>
+                <div class="card-title me-3">
+                  <p *ngIf="pro.clientProfile.firstName; else templateName">
+                    {{ pro.clientProfile.firstName }} {{ pro.clientProfile.lastName }}
+                  </p>
+                  <ng-template #templateName> Null firstName </ng-template>
+                </div>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-location-dot"></i>
+                <i class="bi bi-geo-alt"></i>
+                <p
+                  class="me-3"
+                  *ngIf="
+                    pro.district.city.region.code &&
+                      pro.district.city.region.nameAr;
+                    else region
+                  "
+                >
+                  <span *ngIf="pro.district.city.region.code; else regioncode"
+                    >{{ pro.district.city.region.code  }} -
+                  </span>
+                  <ng-template #regioncode> null </ng-template>
+                  <span
+                    *ngIf="pro.district.city.nameAr; else regioncode"
+                  >
+                    {{pro.district.city.nameAr}}
+                  </span>
+                  <ng-template #regionnameAr> null </ng-template>
+                </p>
+                <ng-template #region></ng-template>
+              </div>
+              <div class="d-flex">
+                <i class="fa fa-phone"></i>
+                <div class="me-3 d-flex flex-row justify-content-between">
+                  <small *ngIf="pro.clientProfile.applicationUser.phoneNumber; else phoneNumberdateCreated">
+                    +966 {{pro.clientProfile.applicationUser.phoneNumbe }}</small
+                  >
+                  <ng-template #phoneNumberdateCreated>
+                    undefind mobile</ng-template
+                  >
+
+                  <small
+                    class="me-5 opacity-50 fsvw align-content-end"
+                    *ngIf="pro.dateCreated; else dateCreated"
+                    >منذ
+                    {{calculateDiff(pro.dateCreated)}} يوم
+                  </small>
+                  <ng-template #dateCreated>null</ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </ng-container>
+
+      </form>
+    </div>
+    <div class="col-md-7 sizew col-12 flex-row">
+      <div class="col-12 card mb-3 border-0 rounded-0 p-4">
+        <div class="row g-0 justify-content-evenly align-items-center">
+          <div class="col-lg-2 col-sm-3">
+            <img
+
+              src="{{ productCurrent.clientProfile.profilePicturePath }}"
+              class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
+              alt="null"
+            />
+          </div>
+          <div class="col-md-3 col-sm-4">
+            <div class="card-body">
+              <p class="me-2">
+                {{ productCurrent.clientProfile.firstName  }} {{ productCurrent.clientProfile.lastName }}
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-7 col-sm-5" >
+            <div class="d-flex">
+              <a type="button" class="btn w-25" (click)="changeToAccepted()">
+                <i class="fa-solid fa-check text-secondary"></i>
+                <p class="fsvw">قبول</p></a
+              >
+              <a
+                type="button"
+                class="btn w-25"
+(click)="changeToNotComplette()"
+              >
+                <i class="fa-solid fa-exclamation"></i>
+                <p class="fsvw">غير مكتمل</p></a
+              >
+              <a type="button" class="btn w-25"
+              (click)="changeToReject()"
+                ><i class="fa-solid fa-xmark"></i>
+                <p class="fsvw">رفض</p></a
+              >
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+<!-- معلومات عن العميل -->
+      <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
+        <p class="card-title mb-4">معلومات عن العميل</p>
+        <div class="d-flex col-12 mb-4 flex-wrap">
+          <div class="col-12 mb-4">
+            <div class="d-flex flex-row justify-content-between">
+              <p class="card-subtitle text-secondary ms-2">رقم الهوية</p>
+
+              <p>{{ productCurrent.clientProfile.idNumber }}</p>
+
+
+
+              <a
+              *ngIf="productCurrent.clientProfile.idPath; else idFile"
+
+              target="_blank"
+              class="informationDownload bg-light d-flex px-2 align-items-center"
+              (click)="download(productCurrent.clientProfile.idPath,  productCurrent.clientProfile.idPath )"
+            >
+              <i class="fa fa-download typeCom ms-3"></i>
+              <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
+
+            </a>
+              <ng-template #idFile>___</ng-template>
+              <!-- </div> -->
+            </div>
+
+
+          </div>
+
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">الدوله</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.district.city.region.code; else cityName"
+              >{{ productCurrent.district.city.region.code }}</small
+            >
+            <ng-template #cityName> _ </ng-template>
+          </div>
+
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">المدينه</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.district.city.nameAr; else city"
+              >{{ productCurrent.district.city.nameAr }}</small
+            >
+            <ng-template #city> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">المنطقه</p>
+            <small
+              class="fs-6"
+              *ngIf="
+                productCurrent.district.city.region.nameAr;
+                else regionName
+              "
+              >{{ productCurrent.district.city.region.nameAr }}</small
+            >
+            <ng-template #regionName> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">العنوان</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.clientProfile.streetName; else shortAddress"
+              >
+              {{ productCurrent.clientProfile.streetName }} -
+              {{ productCurrent.district.city.region.nameAr }}</small
+            >
+            <ng-template #shortAddress> _ </ng-template>
+          </div>
+
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">
+              رقم الهاتف
+            </p>
+            <small
+              class="fs-6"
+              *ngIf="
+              productCurrent.clientProfile.applicationUser.phoneNumber;
+                else officePhoneNumber
+              "
+              >{{ productCurrent.clientProfile.applicationUser.phoneNumber }}</small
+            >
+            <ng-template #officePhoneNumber> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">
+              عنوان البريد الالكتروني
+            </p>
+            <small class="fs-6" *ngIf="productCurrent.clientProfile.applicationUser.email; else emailName">{{
+              productCurrent.clientProfile.applicationUser.email
+            }}</small>
+            <ng-template #emailName> _ </ng-template>
+          </div>
+          <!-- <div class="d-flex col-4 flex-column">
+            <p class="card-subtitle text-secondary fs-6 mb-2">رابط الموقع</p>
+            <small
+              class="fs-6"
+              *ngIf="productCurrent.websiteLink; else websiteLink"
+              >{{ productCurrent.websiteLink }}</small
+            >
+            <ng-template #websiteLink> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">صندوق البريد</p>
+            <small class="fs-6" *ngIf="productCurrent.postalBox; else box">{{
+              productCurrent.postalBox
+            }}</small>
+            <ng-template #box> _ </ng-template>
+          </div>
+          <div class="col-lg-4 col-6 mb-4">
+            <p class="card-subtitle text-secondary fs-6 mb-2">رمز البريد</p>
+            <small class="fs-6" *ngIf="productCurrent.postalCode; else postcode"
+              >{{ productCurrent.postalCode }}
+            </small>
+            <ng-template #postcode> _ </ng-template>
+          </div> -->
+        </div>
+      </div>
+<!--  -->
+      <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 py-2 ">
+        <div class="col-lg-10 col-12 bg-white ms-1 py-4 px-5">
+          <div class=" d-flex flex-row col-12 mb-4">
+            <div class="col-4">
+              <p class="card-subtitle text-secondary fs-6 mb-2">اسم المشروع</p>
+              <small class="fs-6" *ngIf="productCurrent.name; else namecode"
+              >{{ productCurrent.name }}
+            </small>
+            <ng-template #namecode> _ </ng-template>
+            </div>
+            <div class="col-4">
+              <p class="card-subtitle text-secondary fs-6 mb-2 ">التصنيف الرئيسي </p>
+              <small class="fs-6" *ngIf="productCurrent.projectCategory.name; else projectCategoryname"
+              >{{ productCurrent.projectCategory.name }}
+            </small>
+            <ng-template #projectCategoryname> _ </ng-template>
+            </div>
+            <div class="col-4">
+              <p class="card-subtitle text-secondary fs-6 mb-2">التصنيف الفرعي</p>
+              <small class="fs-6" *ngIf="productCurrent.projectSubCategory.name; else projectSubCategoryname"
+              >{{ productCurrent.projectSubCategory.name }}
+            </small>
+            <ng-template #projectSubCategoryname> _ </ng-template>
+            </div>
+
+          </div>
+          <div class=" d-flex flex-row col-12 mt-4">
+            <div class="col-3">
+              <p class="card-subtitle text-secondary fs-6 mb-2"> اسم المدينه</p>
+              <small
+              class="fs-6"
+              *ngIf="productCurrent.district.city.nameAr; else city"
+              >{{ productCurrent.district.city.nameAr }}</small
+            >
+            <ng-template #city> _ </ng-template>
+            </div>
+            <div class="col-3">
+              <p class="card-subtitle text-secondary fs-6 mb-2 "> المنطقه</p>
+              <small
+              class="fs-6"
+              *ngIf="
+                productCurrent.district.city.region.nameAr;
+                else regionName
+              "
+              >{{ productCurrent.district.city.region.nameAr }}</small
+            >
+            <ng-template #regionName> _ </ng-template>
+            </div>
+            <div class="col-4">
+              <p class="card-subtitle text-secondary fs-6 mb-2"> العنوان</p>
+              <small
+              class="fs-6"
+              *ngIf="productCurrent.clientProfile.streetName; else shortAddress"
+              >
+              {{ productCurrent.clientProfile.streetName }} -
+              {{ productCurrent.district.city.region.nameAr }}</small
+            >
+            <ng-template #shortAddress> _ </ng-template>
+            </div>
+            <div class="col-1">
+              <p class="card-subtitle text-secondary fs-6 mb-2"> رقم القطعه</p>
+              <small
+              class="fs-6"
+              *ngIf="productCurrent.plotNumber; else plotNumber"
+              >
+              {{ productCurrent.plotNumber }}</small
+            >
+            <ng-template #plotNumber> _ </ng-template>
+            </div>
+            <div class="col-1">
+              <p class="card-subtitle text-secondary fs-6 mb-2"> رقم المخطط</p>
+              <small
+              class="fs-6"
+              *ngIf="productCurrent.rganizationalChartNumber; else organizationalChartNumber"
+              >
+              {{ productCurrent.organizationalChartNumber }}</small
+            >
+            <ng-template #organizationalChartNumber> _ </ng-template>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center justify-content-center  px-3 pt-4 pb-3">
+
+<img src="assets/icons/calendar.svg" alt="" srcset="" class="imges">
+<h1 class="fs-2 fw-bold" style="color: #004057;">{{productCurrent.pricequoteEndDate|date}} <sub class="fs-5 fw-normal" >في يوم</sub></h1>
+<span style="color: #004057;">لانتهاء عرض السعر </span>
+
+        </div>
+
+      </div>
+<!--  -->
+      <div class="col-12  d-flex flex-lg-row flex-column  border-0 rounded-0 ps-2 mb-3 ">
+        <div class="col-lg-6 col-12 d-flex p-2 bg-white ms-1 align-content-end flex-column">
+<p>مكونات المشروع</p>
+<ng-container *ngFor="let comp of productCurrent.projectComponents">
+  <ul>
+    <li>
+      {{comp.component}}
+    </li>
+  </ul>
+</ng-container>
+
+        </div>
+        <div class="col-lg-6 col-12 p-2 bg-white me-1 align-content-start flex-column">
+<p>الاعمال المطلوبه</p>
+
+<div>
+  <ul *ngFor="let com of productCurrent.projectRequiredWorks">
+    <li class="text-danger" >
+     {{com.requiredWork}}
+
+    </li>
+  </ul>
+
+</div>
+        </div>
+
+      </div>
+<!--  -->
+      <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
+
+        <p>نبذه عن المشروع</p>
+        <p> {{productCurrent.subject }}</p>
+      </div>
+
+
+      </div>
+  </div>
+
+  <!-- <ng-template #undefind>
+    <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
+      <h1 class="fw-bold fs-1 text-center mt-5">
+        لايوجد بيانات في هذا التصنيف
+    </h1>
+
+    </div>
+
+  </ng-template> -->
+</div>

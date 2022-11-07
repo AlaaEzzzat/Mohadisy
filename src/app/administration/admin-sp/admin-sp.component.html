@@ -3,7 +3,7 @@
     <button
       class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getNewProfiles()"
+      (click)="getNewProfiles(page)"
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
         color: newApi === 1 ? '#ffffff' : '#000000'
@@ -14,7 +14,7 @@
     <button
       class="btn rounded-0 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getRejectedProfiles()"
+      (click)="getRejectedProfiles(page)"
       [ngStyle]="{
         'background-color': newApi === 2 ? '#004958' : '#ffffff',
         color: newApi === 2 ? '#ffffff' : '#000000'
@@ -25,7 +25,7 @@
     <button
       class="btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="activeAllAcconting()"
+      (click)="activeAllAcconting(page)"
       [ngStyle]="{
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
@@ -36,7 +36,7 @@
     <button
       class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getBlockedProfiles()"
+      (click)="getBlockedProfiles(page)"
       [ngStyle]="{
         'background-color': newApi === 5 ? '#004958' : '#ffffff',
         color: newApi === 5 ? '#ffffff' : '#000000'
@@ -47,7 +47,7 @@
     <button
       class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getNonActiveAccount()"
+      (click)="getNonActiveAccount(page)"
       [ngStyle]="{
         'background-color': newApi === 4 ? '#004958' : '#ffffff',
         color: newApi === 4 ? '#ffffff' : '#000000'
@@ -58,7 +58,7 @@
     <button
       class="btn btn rounded-0   h-75 mx-2 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
       role="button"
-      (click)="getExpiredProfiles()"
+      (click)="getExpiredProfiles(page)"
       [ngStyle]="{
         'background-color': newApi === 6 ? '#004958' : '#ffffff',
         color: newApi === 6 ? '#ffffff' : '#000000'
@@ -67,16 +67,16 @@
       الحسابات المنتهيه
     </button>
   </div>
+
   <div class="alert alert-success" role="alert" *ngIf="show">
     {{messages}}
   </div>
   <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="showDanger">
-    <!-- <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
-    <use xlink:href="#exclamation-triangle-fill"/></svg> -->
     <div>
     العميل موجود بالفعل
     </div>
   </div>
+
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="firstObject;else undefind">
 
     <div class="col-md-4 col-12">
@@ -84,21 +84,7 @@
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-          <!-- <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
-            <i class="fa-regular fa-clock"></i>
-          </button> -->
-          <!-- <button class="btn bg-white border-0 rounded-0 ms-1" type="submit">
-            <i class="fa fa-arrow-down-a-z"></i>
-          </button> -->
-          <!-- [(ngModel)]="companyName" -->
 
-          <!-- <mat-form-field appearance="fill">
-            <mat-label>كل الطلبات</mat-label>
-            <mat-select>
-              <mat-option value="one">المستقل</mat-option>
-              <mat-option value="two">شركات ممؤسٍه</mat-option>
-            </mat-select>
-          </mat-form-field>ٍ -->
 
 
           <input
@@ -116,21 +102,14 @@
 
         <!-- card company -->
         <!-- <ng-container> -->
-        <!-- <ng-container
+        <ng-container
           *ngFor="
             let pro of iProfileData
-              | paginate
-                : { itemsPerPage: 6, currentPage: page, totalItems: total }
+
               | filter: companyName
           "
-        > -->
-        <ng-container
-        *ngFor="
-          let pro of iProfileData
+        >
 
-            | filter: companyName
-        "
-      >
           <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
             <div
               class="card-body"
@@ -190,10 +169,112 @@
             </div>
           </div>
         </ng-container>
-      </form>
-      <!-- <pagination-controls
-        (pageChange)="choiseFunCallApiPagin($event)"
-      ></pagination-controls> -->
+<!-- pagenation -->
+
+
+<tr *ngIf="pagenationNewProfiles">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits1
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getNewProfiles(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationRejectedProfiles">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits2
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getRejectedProfiles(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationactiveAllAcconting">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits3
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="activeAllAcconting(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationBlockedProfiles">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits4
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getBlockedProfiles(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationNonActiveAccount">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits5
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getNonActiveAccount(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationExpiredProfiles">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits6
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getExpiredProfiles(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+<!-- end pagination -->
+    </form>
     </div>
 
     <!--  -->

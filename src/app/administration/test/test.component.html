@@ -1,0 +1,39 @@
+<button (click)="pageid(page)">all</button>
+<button (click)="pageid2(page)">allNot</button>
+
+<div *ngFor="let pro of iProfileData">
+  <h1>{{ pro.firstName }} {{ pro.lastName }}</h1>
+</div>
+<tr *ngIf="paginOne">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="pageid(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="paginTwo">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigits2
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="pageid2(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>

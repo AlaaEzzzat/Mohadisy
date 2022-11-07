@@ -21,6 +21,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
+import { TestComponent } from './test/test.component';
+import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
+import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AdminPaymentsComponent,
     AdminSettingsComponent,
     AdminSPComponent,
+    TestComponent,
+    AdminSettingUsersComponent,
+    AdminSettingChangeProfileComponent,
+    // CountryTransformPipe
+    // CountryTransformPipe
 
 
   ],
@@ -50,7 +59,8 @@ CommonModule,
     MatBadgeModule,
     MatSlideToggleModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
 })
 export class AdministrationModule {}

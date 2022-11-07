@@ -10,6 +10,11 @@ import { AdminpricePriceOffersComponent } from './adminprice-price-offers/adminp
 import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
 import { AdminContributionsComponent } from './admin-contributions/admin-contributions.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
+import { TestComponentRenderer } from '@angular/core/testing';
+import { TestComponent } from './test/test.component';
+import { AdminSettingsProfileComponent } from './admin-settings-profile/admin-settings-profile.component';
+import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
+import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 
 const routes: Routes = [
   // { path: '', component: AdminHomeComponent },
@@ -21,14 +26,17 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'clients', component: AdminClientsComponent },
       { path: 'messages', component: AdminMessagesComponent },
-      { path: 'settings', component: AdminSettingsComponent
+      { path: 'settings', component: AdminSettingsComponent ,children:[
+        { path: 'change', component: AdminSettingsProfileComponent},
+        { path: 'user', component: AdminSettingUsersComponent },
 
-      },
+      ]},
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },
       { path: 'payments', component: AdminPaymentsComponent },
       { path: 'contributions', component: AdminContributionsComponent },
       { path: 'sp', component: AdminSPComponent },
+      { path: 'test', component: TestComponent },
 
 
       { path: '', redirectTo: 'clients', pathMatch: 'full' },
@@ -38,6 +46,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+exports: [RouterModule],
 })
 export class AdministrationRoutingModule {}

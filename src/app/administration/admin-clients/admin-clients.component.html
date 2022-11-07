@@ -7,7 +7,7 @@
       }"
       class="btn rounded-0  fs-6 h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
-      (click)="getNewClientProfiles()"
+      (click)="getNewClientProfiles(page)"
     >
       طلبات الانضمام
     </button>
@@ -18,7 +18,7 @@
       }"
       class="btn rounded-0  fs-6  h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
-      (click)="getActiveClientAcconting()"
+      (click)="getActiveClientAcconting(page)"
     >
       العملاء النشيطين
     </button>
@@ -29,7 +29,8 @@
       }"
       class="btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
-      (click)="getNonActiveClientAccount()"
+      (click)="getNonActiveClientAccount(page)"
+
     >
       العملاء غير النشيطين
     </button>
@@ -40,7 +41,7 @@
       }"
       class="btn btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
-      (click)="getBlockedClientsProfiles()"
+      (click)="getBlockedClientsProfiles(page)"
     >
       العملاء المعطلين
     </button>
@@ -52,13 +53,13 @@
       }"
       class="btn btn rounded-0  fs-6 h-75 col-lg-2 col-sm-4 col-12  text-nowrap p-2 "
       role="button"
-      (click)="getExpiredClientsProfiles()"
+      (click)="getExpiredClientsProfiles(page)"
     >
       العملاء المنتهين
     </button>
   </div>
 
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="firstObject;else undefind">
     <div class="col-md-4 col-12">
       <form
         class="d-flex flex-column me-3"
@@ -68,22 +69,7 @@
 
         <div class="d-flex position-relative mb-3">
 
-          <!-- <button
-            class="btn bg-white border-0 rounded-0 ms-1"
-            type="submit"
-            mat-sort-header="dateCreated"
-          >
-            <i class="fa-regular fa-clock"></i>
-          </button> -->
-          <!-- sort -->
-          <!-- <button
-            class="btn bg-white border-0 rounded-0 ms-1"
-            type="submit"
-            mat-sort-header="fristName"
-          >
-            <i class="fa fa-arrow-down-a-z"></i>
-          </button> -->
-          <!-- [(ngModel)]="companyName" -->
+
 
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
@@ -99,23 +85,9 @@
         </div>
 
         <!-- card company -->
-        <!-- <ng-container> -->
-        <!-- <ng-container
-          *ngFor="
-            let pro of iProfileData
-              | paginate
-                : { itemsPerPage: 6, currentPage: page, totalItems: total }
-              | filter: filterTerm
-          "
-        > -->
-        <ng-container
-        *ngFor="
-          let pro of iProfileData
-
-            | filter: filterTerm
-        "
-      >
-          <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
+       <div class="card mb-3 border-0 rounded-0 textFontSizeCard"  *ngFor="
+          let pro of iProfileData| filter: filterTerm
+        ">
             <div
               class="card-body"
               (click)="objectProduct(pro, pro.id)"
@@ -179,15 +151,96 @@
               </div>
             </div>
           </div>
-        </ng-container>
+
+
+
       </form>
-      <!-- <mat-paginator [length]="5"
-              [pageSize]="total"
-              aria-label="Select page">
-</mat-paginator> -->
-      <!-- <pagination-controls
-        (pageChange)="choiseFunCallApiPagin($event)"
-      ></pagination-controls> -->
+
+      <tr *ngIf="pagenationNewProfiles">
+        <th
+          scope="row"
+          *ngFor="
+            let data of arrayNewProfiles
+              | paginate: { itemsPerPage: 1, currentPage: page }
+          "
+        ></th>
+        <td colspan="1"></td>
+        <td colspan="6">
+          <pagination-controls
+            (click)="getNewClientProfiles(page)"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </td>
+      </tr>
+
+      <tr *ngIf="pagenationActiveClientAcconting">
+        <th
+          scope="row"
+          *ngFor="
+            let data of arrayOfDigitsActiveClientAcconting
+              | paginate: { itemsPerPage: 1, currentPage: page }
+          "
+        ></th>
+        <td colspan="1"></td>
+        <td colspan="6">
+          <pagination-controls
+            (click)="getActiveClientAcconting(page)"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </td>
+      </tr>
+      <tr *ngIf="pagenationNonActiveClientAccount">
+        <th
+          scope="row"
+          *ngFor="
+            let data of arrayOfDigitsNonActiveClientAccount
+              | paginate: { itemsPerPage: 1, currentPage: page }
+          "
+        ></th>
+        <td colspan="1"></td>
+        <td colspan="6">
+          <pagination-controls
+            (click)="getNonActiveClientAccount(page)"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </td>
+      </tr>
+
+      <tr *ngIf="pagenationBlockedClientsProfiles">
+        <th
+          scope="row"
+          *ngFor="
+            let data of arrayBlockedClientsProfiles
+              | paginate: { itemsPerPage: 1, currentPage: page }
+          "
+        ></th>
+        <td colspan="1"></td>
+        <td colspan="6">
+          <pagination-controls
+            (click)="getBlockedClientsProfiles(page)"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </td>
+      </tr>
+      <tr *ngIf="pagenationExpiredClientsProfiles">
+        <th
+          scope="row"
+          *ngFor="
+            let data of arrayOfDigitsExpiredClientsProfiles
+              | paginate: { itemsPerPage: 1, currentPage: page }
+          "
+        ></th>
+        <td colspan="1"></td>
+        <td colspan="6">
+          <pagination-controls
+            (click)="getExpiredClientsProfiles(page)"
+            (pageChange)="page = $event"
+          ></pagination-controls>
+        </td>
+      </tr>
+
+
+
     </div>
     <div class="col-md-7 sizew col-12 flex-row">
       <div class="col-12 card mb-3 border-0 rounded-0 p-4">
@@ -244,12 +297,10 @@
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
                 target="_blank"
-                (click)="downloadImage(productCurrent.profilePicturePath)"
+                (click)="download(productCurrent.profilePicturePath,productCurrent.idFile)"
                 *ngIf="productCurrent.idFile; else idFile"
               >
-                <!-- <a [href]="productCurrent.profilePicturePath" [download]="productCurrent.idFile">
-                {{ productCurrent.idFile }}
-              </a> -->
+
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.idFile }}</p>
               </a>
@@ -257,23 +308,7 @@
               <!-- </div> -->
             </div>
 
-            <!-- <div class="d-flex flex-row justify-content-between mb-4">
-              <p class="card-subtitle text-secondary ms-2">صوره الهوية</p>
 
-              <p>{{ productCurrent.idNumber }}</p>
-
-              <a
-                class="informationDownload bg-light d-flex px-2 align-items-center"
-                target="_blank"
-                (click)="downloadImage(productCurrent.profilePicturePath)"
-                *ngIf="productCurrent.idFile; else idFile"
-              >
-
-                <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.idFile }}</p>
-              </a>
-              <ng-template #idFile>___</ng-template>
-            </div> -->
 
           </div>
 
@@ -282,7 +317,8 @@
             <small
               class="fs-6"
               *ngIf="productCurrent.district.city.region.code; else cityName"
-              >{{ productCurrent.district.city.region.code }}</small
+              >{{ productCurrent.district.city.region.code
+               }}</small
             >
             <ng-template #cityName> _ </ng-template>
           </div>
@@ -584,6 +620,16 @@
 
       </div>
        -->
-    </div>
+
+      </div>
   </div>
+  <ng-template #undefind>
+    <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
+      <h1 class="fw-bold fs-1 text-center mt-5">
+        لايوجد بيانات في هذا التصنيف
+    </h1>
+
+    </div>
+
+  </ng-template>
 </div>

@@ -19,6 +19,7 @@ const routes: Routes = [
     ArabicNumberPipe,
     SplitNameByCommaPipe,
     NotFoundComponent,
+
   ],
   imports: [
     ReactiveFormsModule,
