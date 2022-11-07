@@ -4,106 +4,167 @@
   <!-- /#sidebar-wrapper -->
 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
+  <div id="page-content-wrapper" class="w-100">
     <nav class="navbar navbar-expand-lg shadow-sm">
       <div class="container-fluid">
         <div>
-          <img src="assets/logo.png" alt="" height="40px">
+          <img src="assets/logo.png" alt="" height="40px" />
         </div>
-        <div  class="mx-lg-3 mx-sm-1 mx-md-1 texticon">
-          <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
+        <div class="mx-lg-3 mx-sm-1 mx-md-1 texticon" (click)="clickEvent()">
+          <img
+            src="assets/next.png"
+            alt=""
+            srcset=""
+            width="28px"
+            height="28px"
+            class="img-fluid"
+          />
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li>
-
               <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control border-0 rounded-5 bg-light" placeholder="Search">
+                <input
+                  type="text"
+                  class="form-control border-0 rounded-5 bg-light"
+                  placeholder="Search"
+                />
               </div>
             </li>
             <li class="nav-item mx-3 bg-light rounded-5">
-              <a class="nav-link active " aria-current="page" href="#">ar</a>
+              <a class="nav-link active" aria-current="page" href="#">ar</a>
             </li>
             <li class="nav-item mx-3 bg-light rounded-5">
-              <a class="nav-link active " aria-current="page" href="#">
-                <img src="assets/logo.png" alt="" class=" rounded-circle" width="30px" height="30px">
+              <a class="nav-link active" aria-current="page" href="#">
+                <img
+                  src="assets/logo.png"
+                  alt=""
+                  class="rounded-circle"
+                  width="30px"
+                  height="30px"
+                />
 
-                <span  class="fontStyle">
-                  مرحبا وMohandisy
-                </span>
-
-
-
-
+                <span class="fontStyle"> مرحبا وMohandisy </span>
               </a>
             </li>
-
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container-fluid" style="background-color: #eef0f8;">
+    <div
+      class="container-fluid"
+      style="background-color: #eef0f8; padding-top: 80px"
+    >
       <div class="row">
-        <div class="col-2 ">
-          <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" >
-            <div class="list-group list-group-flush ">
+        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
+          <div
+            [hidden]="status"
+            class="m-0"
+            style="background-color: #004057; font-weight: 600"
+            id="sidebar-wrapper"
+          >
+            <div class="list-group list-group-flush">
               <div class="text-white">
-
-                <div class="p-2 my-4"routerLink="/Spmanagement/mainProfile" >
-                  <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px" />
+                <div class="p-2 my-4" routerLink="/Spmanagement/mainProfile">
+                  <img
+                    src="assets/images/icon1.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
                   <span class="px-2 fontStyle texticon"> الصفحه الرئيسيه</span>
                 </div>
 
-                <div class="p-2 my-4"routerLink="/Spmanagement/dashboard">
-
-                  <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
+                <div class="p-2 my-4" routerLink="/Spmanagement/dashboard">
+                  <img
+                    src="assets/images/Group.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
                   <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
                 </div>
                 <div class="p-2 my-4" routerLink="/Spmanagement/project">
-                  <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle texticon"> المشاريع  </span>
+                  <img
+                    src="assets/images/blueprint.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> مشاريعي </span>
                 </div>
 
-                <div class="p-2 my-4" routerLink="/Spmanagement/settings">
-                  <img src="assets/images/settings.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle texticon"> الإعدادات </span>
-                </div>
-
-                <div class="p-2 my-4"routerLink="/Spmanagement/contributions" >
-                  <img src="assets/images/id-card.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle texticon"> الاشتراكات  </span>
+                <div class="p-2 my-4" routerLink="/Spmanagement/contributions">
+                  <img
+                    src="assets/images/id-card.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> إشتراكاتي </span>
                 </div>
                 <div class="p-2 my-4" routerLink="/Spmanagement/messages">
-                  <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
-                  <span class="px-2 fontStyle texticon"> الرسائل </span>
+                  <img
+                    src="assets/images/chat.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> رسائلي </span>
                 </div>
-                <div class="p-2 my-4 flex justify-content-between" routerLink="/Spmanagement/payments">
-                  <img src="assets/images/hand.png" alt="" srcset="" width="28px" height="28px" />
+                <div
+                  class="p-2 my-4 flex justify-content-between"
+                  routerLink="/Spmanagement/payments"
+                >
+                  <img
+                    src="assets/images/hand.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
                   <span class="px-2 fontStyle texticon"> المدفوعات </span>
                 </div>
-
-                <div class="p-2 my-4 px-2" >
-                  <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
+                <div class="p-2 my-4" routerLink="/Spmanagement/settings">
+                  <img
+                    src="assets/images/settings.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> الإعدادات </span>
                 </div>
               </div>
             </div>
           </div>
-          </div>
-          <div class="col-10 ">
-        <router-outlet></router-outlet>
-
-          </div>
         </div>
+        <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
 
+        <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
-    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#wrapper -->
-
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->

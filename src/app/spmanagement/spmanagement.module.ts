@@ -13,7 +13,8 @@ import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
-
+import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
+import { PrevWorksComponent } from './prev-works/prev-works.component';
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -25,6 +26,8 @@ import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.compon
     SpHomeComponent,
     SpMainProfileComponent,
     SpProfileComponent,
+    SpCompleteProfileComponent,
+    PrevWorksComponent,
   ],
   imports: [
     CommonModule,

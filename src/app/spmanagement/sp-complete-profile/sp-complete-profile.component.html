@@ -1,0 +1,586 @@
+<!-- *ngIf="(userSuccess && imageSuccess) == false" -->
+<section style="min-height: 100vh">
+  <header class="form-control p-3 signFormIn border-end">
+    <h5 class="bd-title m-0 p-0" dir="rtl">إستكمال البيانات الخاصه بكـ</h5>
+  </header>
+  <div class="container form-control py-5 px-4 border-0 signFormIn">
+    <form
+      [formGroup]="completeProfileForm"
+      (ngSubmit)="completeProfileFormSubmit()"
+    >
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="firstName">
+              الإسم بالكامل
+            </label>
+            <input
+              type="text"
+              formControlName="firstName"
+              name="firstName"
+              id="firstName"
+              class="form-control form-control-lg signup"
+              placeholder="   الإسم بالكامل"
+              required
+              [class.is-valid]="firstName?.valid"
+              [class.is-invalid]="firstName?.invalid && firstName?.touched"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="firstName?.valid || firstName?.untouched"
+            >
+              <span *ngIf="firstName?.errors?.['required']"
+                >الإسم بالكامل مطلوب
+              </span>
+              <span *ngIf="firstName?.errors?.['pattern']"
+                >الإسم يجب أن يكون علي الاقل ثنائي
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label" for="idNumber"> رقم الهوية </label>
+            <input
+              type="text"
+              id="idNumber"
+              formControlName="idNumber"
+              class="form-control form-control-lg signup"
+              placeholder="   رقم الهوية  "
+              [class.is-valid]="idNumber?.valid"
+              [class.is-invalid]="idNumber?.invalid && idNumber?.touched"
+              (keypress)="numberOnly($event)"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="idNumber?.valid || idNumber?.untouched"
+            >
+              <span *ngIf="idNumber?.errors?.['required']">
+                رقم الهوية مطللوب</span
+              >
+              <span *ngIf="idNumber?.errors?.['pattern']  "
+                >تأكد أن رقم الهوية 10 أرقام
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="Id"> صورة الهوية </label>
+            <div class="button-wrapper">
+              <div class="h-100">
+                <span class="label">{{
+                  imageId.value
+                    ? imageId.value.split("\\").slice(-1)[0].length > 15
+                      ? imageId.value.split("\\").slice(-1)[0].substr(0, 15) +
+                        "..."
+                      : imageId.value.split("\\").slice(-1)[0]
+                    : "إرفاق"
+                }}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-upload"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="file"
+                #imageId
+                id="Id"
+                required
+                (change)="onImageUpload($event, imageId.id)"
+                [class.is-valid]="Id?.valid"
+                [class.is-invalid]="Id?.invalid && Id?.touched"
+                class="file upload-box"
+              />
+            </div>
+
+            <div
+              class="alert alert-warning"
+              [hidden]="Id?.valid || Id?.untouched"
+            >
+              <span *ngIf="Id?.errors?.['required']"> صورة الهوية مطلوبة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label" for="membershipNumber">
+              رقم العضويه
+            </label>
+            <input
+              type="text"
+              id="membershipNumber"
+              formControlName="membershipNumber"
+              class="form-control form-control-lg signup"
+              placeholder="   رقم العضويه  "
+              [class.is-valid]="membershipNumber?.valid"
+              [class.is-invalid]="
+                membershipNumber?.invalid && membershipNumber?.touched
+              "
+              (keypress)="numberOnly($event)"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="membershipNumber?.valid || membershipNumber?.untouched"
+            >
+              <span *ngIf="membershipNumber?.errors?.['required']">
+                رقم العضويه مطلوب</span
+              >
+              <span *ngIf="membershipNumber?.errors?.['pattern']">
+                تأكد أن رقم العضويه 10 أرقام</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="Membership">
+              صورة العضوبة
+            </label>
+            <div class="button-wrapper">
+              <div class="h-100">
+                <span class="label">{{
+                  image.value
+                    ? image.value.split("\\").slice(-1)[0].length > 15
+                      ? image.value.split("\\").slice(-1)[0].substr(0, 15) +
+                        "..."
+                      : image.value.split("\\").slice(-1)[0]
+                    : "إرفاق"
+                }}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-upload"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="file"
+                #image
+                id="Membership"
+                required
+                (change)="onImageUpload($event, image.id)"
+                [class.is-valid]="Membership?.valid"
+                [class.is-invalid]="Membership?.invalid && Membership?.touched"
+                class="file upload-box"
+              />
+            </div>
+
+            <div
+              class="alert alert-warning"
+              [hidden]="Membership?.valid || Membership?.untouched"
+            >
+              <span *ngIf="Membership?.errors?.['required']">
+                صورة العضوية مطلوبة</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="bankAccountNumber">
+              (IPAN) رقم الحساب البنكي</label
+            >
+            <input
+              type="text"
+              formControlName="bankAccountNumber"
+              id="bankAccountNumber"
+              class="form-control form-control-lg signup"
+              placeholder="(IPAN) رقم الحساب البنكي"
+              required
+              [class.is-valid]="bankAccountNumber?.valid"
+              [class.is-invalid]="
+                bankAccountNumber?.invalid && bankAccountNumber?.touched
+              "
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="
+                bankAccountNumber?.valid || bankAccountNumber?.untouched
+              "
+            >
+              <span *ngIf="bankAccountNumber?.errors?.['required']"
+                >(IPAN) رقم الحساب البنكي</span
+              >
+              <span *ngIf="bankAccountNumber?.errors?.['pattern']"
+                >تأكد من بنيه الرقم
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <label for="bankId" class="control-label mb-2"> البنك</label>
+
+          <select
+            name="bankId"
+            id="bankId"
+            class="mt-2 form-control form-control-lg"
+            formControlName="bankId"
+            [class.is-valid]="bankId?.valid"
+            [class.is-invalid]="bankId?.invalid && bankId?.touched"
+          >
+            <option>...اختر</option>
+            <ng-container *ngFor="let bankId of allBanks">
+              <option [value]="bankId.id">{{ bankId.name }}</option>
+            </ng-container>
+          </select>
+          <div
+            class="alert alert-warning"
+            [hidden]="bankId?.valid || bankId?.untouched"
+          >
+            <span *ngIf="bankId?.errors?.['required']"> البنك مطلوب</span>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+      <div class="row">
+        <div class="row mt-5">
+          <div class="col-12 col-md-3">
+            <h5 class="mb-5 bd-title" style="color: #18af9a" dir="rtl">
+              العنوان الوطني
+              <i class="fa-solid fa-location-dot"></i>
+            </h5>
+          </div>
+          <div class="col-12 col-md-9">
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <label for="neighborhood" class="control-label mb-2">
+                  منطقة</label
+                >
+
+                <select
+                  name="neighborhood"
+                  id="neighborhood"
+                  class="mt-2 form-control form-control-lg"
+                  formControlName="neighborhood"
+                  [class.is-valid]="neighborhood?.valid"
+                  [class.is-invalid]="
+                    neighborhood?.invalid && neighborhood?.touched
+                  "
+                  (change)="_getCities()"
+                >
+                  <option>...اختر</option>
+                  <ng-container *ngFor="let neighborhood of regionsList">
+                    <option [value]="neighborhood.nameAr">
+                      {{ neighborhood.nameAr }}
+                    </option>
+                  </ng-container>
+                </select>
+                <div
+                  class="alert alert-warning"
+                  [hidden]="neighborhood?.valid || neighborhood?.untouched"
+                >
+                  <span *ngIf="neighborhood?.errors?.['required']">
+                    المنطقة مطلوبة</span
+                  >
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <label for="city" class="control-label mb-2"> المدينة </label>
+                <select
+                  name="city"
+                  id="city"
+                  class="mt-2 form-control form-control-lg"
+                  formControlName="city"
+                  [class.is-valid]="city?.valid"
+                  [class.is-invalid]="city?.invalid && city?.touched"
+                  (change)="_getDistricts()"
+                >
+                  <option>...اختر</option>
+                  <ng-container *ngFor="let city of citiesList">
+                    <option [value]="city.id">{{ city.nameAr }}</option>
+                  </ng-container>
+                </select>
+
+                <div
+                  class="alert alert-warning"
+                  [hidden]="city?.valid || city?.untouched"
+                >
+                  <span *ngIf="city?.errors?.['required']">
+                    المدينة مطلوبة</span
+                  >
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label for="district" class="control-label mb-2"> الحي</label>
+                <select
+                  *ngIf="!addingDistrict"
+                  name="districtId"
+                  id="districtId"
+                  class="mt-2 form-control form-control-lg"
+                  formControlName="districtId"
+                  [class.is-valid]="districtId?.valid"
+                  [class.is-invalid]="
+                    districtId?.invalid && districtId?.touched
+                  "
+                >
+                  <option disabled>...اختر</option>
+                  <ng-container *ngFor="let district of districtsList">
+                    <option [value]="district.id">{{ district.nameAr }}</option>
+                  </ng-container>
+                </select>
+
+                <div
+                  *ngIf="addingDistrict"
+                  class="add d-flex justify-content-between align-items-center"
+                >
+                  <input
+                    placeholder="رجاءاََ أدخل إسم الحي"
+                    type="text"
+                    name="district"
+                    id="district"
+                    #district
+                    class="form-control m-0 form-control-lg"
+                  />
+                  <!--  [class.is-valid]="districtId?.valid"
+                    [class.is-invalid]="
+                      districtId?.invalid && districtId?.touched
+                    " -->
+                  <i
+                    class="p-2 rounded-2 me-2 fa fa-plus btn-primary"
+                    (click)="addAdress(district.value)"
+                  ></i>
+                </div>
+                <div
+                  class="alert alert-warning"
+                  [hidden]="districtId?.valid || districtId?.untouched"
+                >
+                  <span *ngIf="districtId?.errors?.['required']">
+                    إسم الحي مطلوب</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row my-4">
+              <div class="col-12 col-md-4">
+                <label class="form-label mb-2" for="postal_code">
+                  إسم الشارع
+                </label>
+
+                <input
+                  type="text"
+                  id="streetName"
+                  name="streetName"
+                  formControlName="streetName"
+                  class="form-control form-control-lg form-group"
+                  placeholder="إسم الشارع  "
+                  [class.is-valid]="streetName?.valid"
+                  [class.is-invalid]="
+                    streetName?.invalid && streetName?.touched
+                  "
+                />
+                <div
+                  class="alert alert-warning"
+                  [hidden]="streetName?.valid || streetName?.untouched"
+                >
+                  <span *ngIf="streetName?.errors?.['required']">
+                    إسم الشارع</span
+                  >
+                  <span
+                    *ngIf="streetName?.errors?.['minlength'] || streetName?.errors?.['maxlength'] "
+                  >
+                    إسم الشارع مطلوب
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label class="form-label mb-2" for="buildingNumber">
+                  رقم المبني
+                </label>
+
+                <input
+                  type="text"
+                  id="buildingNumber"
+                  name="buildingNumber"
+                  formControlName="buildingNumber"
+                  class="form-control form-control-lg form-group"
+                  placeholder=" رقم المبني"
+                  (keypress)="numberOnly($event)"
+                  [class.is-valid]="buildingNumber?.valid"
+                  [class.is-invalid]="
+                    buildingNumber?.invalid && buildingNumber?.touched
+                  "
+                />
+                <div
+                  class="alert alert-warning"
+                  [hidden]="buildingNumber?.valid || buildingNumber?.untouched"
+                >
+                  <span *ngIf="buildingNumber?.errors?.['required']">
+                    رقم المبني مطلوب</span
+                  >
+                  <span
+                    *ngIf="buildingNumber?.errors?.['minlength'] || buildingNumber?.errors?.['maxlength'] "
+                  >
+                    رقم المبني يجب أن يكون 4 أرقام</span
+                  >
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="form-label mb-2" for="unitNumber">
+                    رقم الوحدة
+                  </label>
+                  <input
+                    type="text"
+                    formControlName="unitNumber"
+                    id="unitNumber"
+                    class="form-control form-control-lg signup"
+                    placeholder="   رقم الوحدة  "
+                    (keypress)="numberOnly($event)"
+                    [class.is-valid]="unitNumber?.valid"
+                    [class.is-invalid]="
+                      unitNumber?.invalid && unitNumber?.touched
+                    "
+                  />
+                  <div
+                    class="alert alert-warning"
+                    [hidden]="unitNumber?.valid || unitNumber?.untouched"
+                  >
+                    <span *ngIf="unitNumber?.errors?.['required']">
+                      رقم الوحدة مطللوب</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <label class="form-label mb-2" for="additionalNumber">
+                    الرقم الإضافي</label
+                  >
+                  <input
+                    type="text"
+                    id="additionalNumber"
+                    formControlName="additionalNumber"
+                    class="form-control form-control-lg signup"
+                    placeholder="الرقم الإضافي"
+                    (keypress)="numberOnly($event)"
+                    [class.is-valid]="additionalNumber?.valid"
+                    [class.is-invalid]="
+                      additionalNumber?.invalid && additionalNumber?.touched
+                    "
+                  />
+                  <div
+                    class="alert alert-warning"
+                    [hidden]="
+                      additionalNumber?.valid || additionalNumber?.untouched
+                    "
+                  >
+                    <span *ngIf="additionalNumber?.errors?.['required']">
+                      الرقم الإضافي مطللوب</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label mb-2" for="postalCode">
+                  رقم البريد
+                </label>
+
+                <input
+                  type="text"
+                  id="postalCode"
+                  name="postalCode"
+                  formControlName="postalCode"
+                  (keypress)="numberOnly($event)"
+                  class="form-control form-control-lg form-group"
+                  placeholder="  رقم بريد"
+                  [class.is-valid]="postalCode?.valid"
+                  [class.is-invalid]="
+                    postalCode?.invalid && postalCode?.touched
+                  "
+                />
+                <div
+                  class="alert alert-warning"
+                  [hidden]="postalCode?.valid || postalCode?.untouched"
+                >
+                  <span *ngIf="postalCode?.errors?.['required']">
+                    رقم البريد مطلوب</span
+                  >
+                  <span
+                    *ngIf="postalCode?.errors?.['minlength'] || postalCode?.errors?.['maxlength'] "
+                  >
+                    رقم البريد يجب أن يكون 5 أرقام</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+      <div class="row mb-5">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12"></div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-success py-2 form-control text-white"
+            >
+              <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
+              حفظ
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- popup -->
+<!-- <div *ngIf="isCreated" class="overlay p-5">
+  <div class="popup p-5">
+    <div class="content p-1 text-center">
+      <div class="d-flex justify-content-around">
+        {{
+          isComplete
+            ? "تم إستكمال بياناتك"
+            : "تم إستكمال بياناتك و ستتم المراجعة في خلال 24 ساعة"
+        }}
+      </div>
+      <a class="btn w-50 text-center" routerLink="/Spmanagement/prevWorks"
+        >حسناً</a
+      >
+    </div>
+  </div>
+</div>
+
+<div *ngIf="userSuccess && imageSuccess" class="overlay p-5">
+  <div class="popup p-5">
+    <div class="content p-1 text-center">
+      <div class="d-flex justify-content-around">
+        تم إستكمال بياناتك و ستتم المراجعة في خلال 24 ساعة
+      </div>
+      <a class="btn w-50 text-center" routerLink="/Spmanagement/prevWorks"
+        >حسناً</a
+      >
+    </div>
+  </div>
+</div>
+ -->

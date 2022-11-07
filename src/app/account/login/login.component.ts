@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(data.data.token));
         localStorage.setItem('role', JSON.stringify(data.data.roles[0]));
         localStorage.setItem('name', JSON.stringify(data.data.username));
+        localStorage.setItem('id', JSON.stringify(data.data.id));
         let roles = this.auth.getRole();
         if (roles == 'Admin') {
           this.router.navigate(['/Admin']);

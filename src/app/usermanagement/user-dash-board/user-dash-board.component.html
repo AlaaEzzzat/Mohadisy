@@ -9,7 +9,7 @@
 
           <div class="card-body p-0">
             <h5 class="card-title">المشاريع</h5>
-            <p class="card-text">{{ data!.overview.projectsNumber }}</p>
+            <p class="card-text">{{ data!.overview?.projectsNumber }}</p>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
           <div class="card-body p-0">
             <h5 class="card-title">المشاريع المنتهيه</h5>
             <p class="card-text">
-              {{ data!.overview.completedProjectsNumber }}
+              {{ data!.overview?.completedProjectsNumber }}
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@
           <div class="card-body p-0">
             <h5 class="card-title">الطلبات</h5>
             <p class="card-text">
-              {{ data!.overview.pricequotesNumber }}
+              {{ data!.overview?.pricequotesNumber }}
             </p>
           </div>
         </div>

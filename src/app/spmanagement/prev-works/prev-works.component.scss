@@ -1,0 +1,108 @@
+input {
+  border: 0px solid;
+  background-color: #f2f6f9;
+}
+.is-invalid{
+  border-left: 4px solid #f2564b;
+}
+.is-valid{
+  border-left: 4px solid #18af9a;}
+
+  .button-wrapper {
+    position: relative;
+    height:50px;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .button-wrapper span.label {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #18af9a;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px 0;
+
+  }
+  .button-wrapper svg{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    color: #fff;
+  }
+
+  .file {
+      display: inline-block;
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 50px;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+  }
+
+.popup{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 110000;
+  background-color: #0b7e74;
+  overflow: hidden;
+  font-size: 18px;
+
+}
+.popup .my-popup{
+  padding: 40px 20px;
+    width: 500px;
+    background-image: linear-gradient(135deg,rgpa(255,255,255,0.1),rgpa(255,255,255,0));
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 25px;
+}
+.popup .my-popup .card-title{
+  font-size: 18px;
+}
+.popup .my-popup  .btn{
+  color: #fff;
+}
+.overlay {
+  *{
+font-family: 'cairo';
+  }
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+display: flex;
+  z-index: 1000;
+  .popup {
+    margin: auto;
+    width:450px;
+    background: #fff;
+    border-radius: 5px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    height:auto ;
+
+.btn{
+  margin-top: 20px;
+  background-color: #18AF9A;
+  color: #FFF;
+}
+
+  }
+}
+.mainBk{
+  background-color:#004057;
+}

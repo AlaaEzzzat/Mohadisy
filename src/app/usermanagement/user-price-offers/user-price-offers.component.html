@@ -2,17 +2,14 @@
   <div class="container mt-5 fontStyle">
     <div class="row">
       <ng-container *ngFor="let service of projectServices; let i = index">
-        <div class="col-md-3 col-sm-12 mt-2">
+        <div class="col">
           <div
             [id]="service.id"
             class="btn p-2 px-3 w-100 d-flex justify-content-between"
             (click)="isActiveService(service.id)"
             [ngClass]="activeService == service.id ? 'active' : 'bg-white'"
           >
-            <span class="name tajawal">{{ service.name }}</span>
-            <!-- <span class="secondColor">{{
-              projectServicesCount(service.id)
-            }}</span> -->
+            <span class="name cairo">{{ service.name }}</span>
           </div>
         </div>
       </ng-container>
@@ -25,7 +22,7 @@
                 *ngFor="let project of projectServiesArrays; let i = index"
               >
                 <div
-                  class="card rounded-0 d-flex flex-row justify-content-between p-3 mb-2 border-0 d-flex"
+                  class="card rounded-1 d-flex flex-row justify-content-between p-3 mb-2 border-0 d-flex"
                   (click)="showOffers(project)"
                   [ngClass]="
                     activeProject == project.id ? 'active' : 'bg-white'
@@ -48,6 +45,36 @@
                       <i class="icon fa-solid fa-calendar-days ms-2"></i>
                       <span class="textcard"> {{ project.dateCreated }}</span>
                     </div>
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-secondary dropdown-toggle"
+                        type="button"
+                        id="dropdownMenu2"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        Dropdown
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li>
+                          <button class="dropdown-item" type="button">
+                            Action
+                          </button>
+                        </li>
+                        <li>
+                          <button class="dropdown-item" type="button">
+                            Another action
+                          </button>
+                        </li>
+                        <li>
+                          <button class="dropdown-item" type="button">
+                            Something else here
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <i class="fa-regular fa-circle-ellipsis-vertical"></i>
                   </div>
 
                   <div
