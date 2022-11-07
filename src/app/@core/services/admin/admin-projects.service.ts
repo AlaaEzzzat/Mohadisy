@@ -39,12 +39,8 @@ export class AdminProjectsService {
 
   getLateProjectsForAdmin(page:any):Observable<any>
   {
-    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getLateProjectsForAdmin/Page/${page}`).pipe(retry(3),catchError((err)=>{
-      return throwError(()=>{
-        return new Error('Error occured please try again.')
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getLateProjectsForAdmin/Page/${page}`)
 
-      })
-    }))
   }
   getStoppedProjectsForAdmin(page:number):Observable<any>
   {
@@ -81,7 +77,7 @@ export class AdminProjectsService {
 
   changeProfileStatus(objectStatus:any):Observable<any>
   {
-    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Project/changeProjectStatus`,JSON.stringify(objectStatus), this.httpoptions).pipe(retry(3),catchError((err)=>{
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Project/changeProjectStatus`,JSON.stringify(objectStatus),this.httpoptions).pipe(retry(3),catchError((err)=>{
       return throwError(()=>{
         return new Error('Error occured please try again.')
 

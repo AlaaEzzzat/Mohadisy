@@ -2,7 +2,7 @@
   <div
     class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around"
   >
-    <button
+    <!-- <button
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
         'color': newApi === 1 ? '#ffffff' : '#000000'
@@ -12,7 +12,7 @@
       (click)="getNewProjectsForAdmin()"
     >
       طلبات المشاريع
-    </button>
+    </button> -->
     <button
       [ngStyle]="{
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
@@ -75,7 +75,12 @@
       المشروع موجود بالفعل
     </div>
   </div>
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" >
+  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="!isProcessing">
+    <div>
+      حاليا لايوجد عروض
+    </div>
+  </div>
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind" >
 
   <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
     <div class="col-md-4 col-12">
@@ -84,17 +89,7 @@
 
         <div class="d-flex position-relative mb-3">
        <!-- Example single danger button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    الطلبات
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" (click)="getAllPriceQuotesForAdmin()" >كل الطلبات</a></li>
-    <li><a class="dropdown-item" (click)="getNewProjectsForAdmin()">الطلبات المكتمله</a></li>
-    <li><a class="dropdown-item" (click)="getNotCompletedProjectsForAdmin()">الطلبات غير مكتمله</a></li>
 
-  </ul>
-</div>
 
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
@@ -159,15 +154,14 @@
               <div class="d-flex">
                 <i class="fa fa-phone"></i>
                 <div class="me-3 d-flex flex-row justify-content-between">
-                  <small *ngIf="pro.clientProfile.applicationUser.phoneNumber; else phoneNumberdateCreated">
-                    +966 {{pro.clientProfile.applicationUser.phoneNumbe }}</small
-                  >
-                  <ng-template #phoneNumberdateCreated>
-                    undefind mobile</ng-template
+                  <small >
+                  {{pro.clientProfile.applicationUser.phoneNumbe }}</small
                   >
 
+
+
                   <small
-                    class="me-5 opacity-50 fsvw align-content-end"
+                    class="me-5 opacity-50 fsvw align-content-start"
                     *ngIf="pro.dateCreated; else dateCreated"
                     >منذ
                     {{calculateDiff(pro.dateCreated)}} يوم
@@ -201,7 +195,7 @@
             </div>
           </div>
 
-          <div class="col-md-7 col-sm-5" >
+          <!-- <div class="col-md-7 col-sm-5" >
             <div class="d-flex">
               <a type="button" class="btn w-25" (click)="changeToAccepted()">
                 <i class="fa-solid fa-check text-secondary"></i>
@@ -222,7 +216,7 @@
               >
 
             </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -311,7 +305,7 @@
               "
               >{{ productCurrent.clientProfile.applicationUser.phoneNumber }}</small
             >
-            <ng-template #officePhoneNumber> _ </ng-template>
+            <ng-template #officePhoneNumber> <small class="text-center fs-6">_</small></ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-secondary fs-6 mb-2">
@@ -441,7 +435,7 @@
 
       </div>
 <!--  -->
-      <div class="col-12  d-flex flex-lg-row flex-column  border-0 rounded-0 ps-2 mb-3 ">
+      <!-- <div class="col-12  d-flex flex-lg-row flex-column  border-0 rounded-0 ps-2 mb-3 ">
         <div class="col-lg-6 col-12 d-flex p-2 bg-white ms-1 align-content-end flex-column">
 <p>مكونات المشروع</p>
 <ng-container *ngFor="let comp of productCurrent.projectComponents">
@@ -467,7 +461,7 @@
 </div>
         </div>
 
-      </div>
+      </div> -->
 <!--  -->
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
 
@@ -478,8 +472,7 @@
 
       </div>
   </div>
-
-  <!-- <ng-template #undefind>
+  <ng-template #undefind>
     <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
       <h1 class="fw-bold fs-1 text-center mt-5">
         لايوجد بيانات في هذا التصنيف
@@ -487,5 +480,6 @@
 
     </div>
 
-  </ng-template> -->
+  </ng-template>
+
 </div>
