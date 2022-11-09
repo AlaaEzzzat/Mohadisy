@@ -2,7 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { switchAll } from 'rxjs';
 import { AdminClientsService } from 'src/app/@core/services/admin/admin-clients.service';
 import { IadminClients } from 'src/app/@models/iadmin-clients';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
+interface admin{
+
+
+    firstName : string,
+
+
+}
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -23,7 +31,14 @@ paginTwo:boolean=false
 
 page:any=1
 flag:any=0
-  constructor(  private ServicesProvidor: AdminClientsService) { }
+massage:any
+userformlogin :FormGroup;
+
+  constructor(  private ServicesProvidor: AdminClientsService,private formbuilder:FormBuilder) {
+     this.userformlogin=this.formbuilder.group({
+    firstName:['',[Validators.required]],
+  });
+ }
 
   ngOnInit(): void {
 
@@ -98,7 +113,9 @@ flag:any=0
     })
   }
 
-
+  get firstName(){
+    return this.userformlogin?.get('firstName');
+  }
 // switchAll(page:any){
 //   switch(this.flag){
 //   case 1:{
@@ -126,6 +143,8 @@ fortest(totals:any,arrays:any[]){
     console.log(arrays.length)
   }
 }
-
+test(){
+  console.log(this.firstName?.value)
+}
 }
 

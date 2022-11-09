@@ -39,14 +39,14 @@ input[type="search"]{
 .title
 {
   line-height:0.5;
-  font-size: 90%;
+  // font-size: 90%;
 }
 .textFontSizeCard{
-  font-size: 90%;
+  // font-size: 90%;
 }
 .we-25 {
-  width: 12em !important;
-  font-size: 1.1em!important;
+  // width: 12em !important;
+  // font-size: 1.1em!important;
 
 }
 @media only screen and (min-width: 768px) {
@@ -69,4 +69,19 @@ white-space:nowrap;
 }
 .m-3>.justify-content-around>.btn.rounded-0.m-1{
   @include titleTotal($font25Size,$fontTajawalFamily)
+}
+:is(.reject ,.notcomplete, .complete):hover{
+color: #000 !important;
+}
+.reject:hover{
+
+  background-color: #dc354680 !important;
+}
+.complete:hover{
+
+  background-color: #19875480 !important;
+}
+.notcomplete:hover{
+
+  background-color: #FFC10780 !important;
 }

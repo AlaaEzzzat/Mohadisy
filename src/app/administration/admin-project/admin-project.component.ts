@@ -119,20 +119,23 @@ export class AdminProjectComponent implements OnInit {
     this.newApi = 6;
     this.isProcessing = true;
 
-    this.ServicesProvidor.getLateProjectsForAdmin(page).subscribe(
-      (value) => {
+    this.ServicesProvidor.getLateProjectsForAdmin(page).subscribe({
+      next:(value)=>{
         if(value !=null || value != undefined) {
 
-        this.datas = value.data.projects;
-        this.iadminPriceQuotes = this.datas;
-        this.total = value.data.totalPages;
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
+          this.datas = value.data.projects;
+          this.iadminPriceQuotes = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.iadminPriceQuotes);
+          this.firstObject = this.iadminPriceQuotes[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        }
+      },
+      error:(err)=>{
+        alert(err)
       }
+    }
 
-    },(error) => {
-      this.isProcessing = false;
-      }
     )}
 
 
@@ -142,6 +145,7 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
     this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
+
       (value) => {
         if(value !=null || value != undefined) {
 

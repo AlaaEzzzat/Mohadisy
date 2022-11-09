@@ -1,5 +1,7 @@
 export interface IadminPriceQuotes {
   id: any;
+  plotNumber:any;
+  rganizationalChartNumber:any;
   clientProfileId: any;
   projectServiceId: any;
   projectSubServiceId: any;

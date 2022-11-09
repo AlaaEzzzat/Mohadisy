@@ -26,7 +26,10 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNewProfiles/Page/${page}`);
   }
-
+  getNotCompletedProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNotCompletedProfiles/Page/${page}`);
+  }
   getAcceptedProfiles(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAcceptedProfiles/Page/${page}`);
@@ -91,15 +94,24 @@ export class AdminServiceProvidorService {
     }))
   }
 
-  // download(url: string) {
-  //   return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe(png=>{
-  //     const blob=new Blob([png],{type:'image/png'});
-  //     const fileName="hh.png";
-  //     saveAs(blob,fileName)
-  //   },err=>{
-  //     console.log(err)
-  //   }
-  //   )
 
-  // }
+  updateOrganizationalUpdateProfile(objectStatus:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/updateProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+  updateIndividualUpdateProfile(objectStatus:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/updateIndividualServiceProviderProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+
 }

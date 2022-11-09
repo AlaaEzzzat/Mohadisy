@@ -52,7 +52,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         if (returnedError.error instanceof ErrorEvent) {
           errorMessage = `هناك خطأ: ${returnedError.error.Message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message}`;
+          errorMessage = ` لايوجد بيانات في هذا التصنيف`;
           handled = this.handleServerSideError(returnedError);
         }
 

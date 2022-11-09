@@ -23,8 +23,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
   idProduct: any;
   idProductSessionStorage: any;
   filterTerm: string = '';
-  productCurrent2:IadminPriceQuotes | undefined = undefined;
-  productCurrent: any;
+  productCurrent:IadminPriceQuotes ={} as IadminPriceQuotes
+  // productCurrent: any;
   id: any;
 down:any;
   messages:any;
@@ -41,27 +41,27 @@ down:any;
     this.newApi = 1;
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getNewProjectsForAdmin(this.page).subscribe(
-(value) => {
-  if(value !=null || value != undefined) {
+    this.ServicesProvidor.getNewProjectsForAdmin(this.page).subscribe({
+      next:(value) => {
+        if(value !=null || value != undefined) {
 
-    this.dataPriceQuotes = value.data.projects;
-    this.iadminPriceQuotes = this.dataPriceQuotes;
-    this.total = value.data.totalPages;
-    this.firstObject = this.iadminPriceQuotes[0];
-      this.objectProduct(this.firstObject, this.firstObject.id);
-      console.log(this.firstObject.projectRequiredWorks);
-      // this.isProcessing = false;
+          this.dataPriceQuotes = value.data.projects;
+          this.iadminPriceQuotes = this.dataPriceQuotes;
+          this.total = value.data.totalPages;
+          this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+            console.log(this.firstObject.projectRequiredWorks);
+            // this.isProcessing = false;
 
-  }
+        }
 
-  },(error) => {
-    this.isProcessing = false;
-  }
-    );
+        },error: (error) => {
+              this.isProcessing = false;
 
-
+            }
     }
+    );
+}
 
 
 
@@ -70,23 +70,20 @@ down:any;
     this.newApi =6;
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getAcceptedProjectsForAdmin(this.page).subscribe(
-      (value) => {
-        if(value !=null || value != undefined) {
-        this.dataPriceQuotes = value.data.projects;
-        this.iadminPriceQuotes = this.dataPriceQuotes;
-        this.total = value.data.totalPages;
-        console.log(this.iadminPriceQuotes);
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-        // this.isProcessing = false;
-
-      }
-
-
-    },(error) => {
-      this.isProcessing = false;
-    }
+    this.ServicesProvidor.getAcceptedProjectsForAdmin(this.page).subscribe({
+        next:(value) => {
+          if(value !=null || value != undefined) {
+            this.dataPriceQuotes = value.data.projects;
+            this.iadminPriceQuotes = this.dataPriceQuotes;
+            this.total = value.data.totalPages;
+            this.firstObject = this.iadminPriceQuotes[0];
+              this.objectProduct(this.firstObject, this.firstObject.id);
+              console.log(this.firstObject.projectRequiredWorks);
+          }
+          },error: (error) => {
+                this.isProcessing = false;
+              }
+            }
     );
   }
 
@@ -95,23 +92,28 @@ down:any;
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
 
-    this.ServicesProvidor.getAllPriceQuotesForAdmin(this.page).subscribe(
-      (value) => {
+    this.ServicesProvidor.getAllPriceQuotesForAdmin(this.page).subscribe({
+      next:(value) => {
         if(value !=null || value != undefined) {
-        this.dataPriceQuotes = value.data.priceQuotes;
 
-        this.iadminPriceQuotes = this.dataPriceQuotes;
-        this.total = value.data.totalPages;
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-        // this.isProcessing = false;
+          this.dataPriceQuotes = value.data.projects;
+          this.iadminPriceQuotes = this.dataPriceQuotes;
+          this.total = value.data.totalPages;
+          this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+            console.log(this.firstObject.projectRequiredWorks);
+            // this.isProcessing = false;
 
-      }
+        }
 
+        },error: (error) => {
+              this.isProcessing = false;
 
-    },(error) => {
-      this.isProcessing = false;
+            }
     }
+
+
+
     );
   }
 
@@ -120,19 +122,28 @@ down:any;
     this.newApi = 3;
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getNotCompletedProjectsForAdmin(this.page).subscribe(
-      (value) => {
+    this.ServicesProvidor.getNotCompletedProjectsForAdmin(this.page).subscribe({
+      next:(value) => {
         if(value !=null || value != undefined) {
-        this.dataPriceQuotes = value.data.projects;
-        this.iadminPriceQuotes = this.dataPriceQuotes;
-        this.total = value.data.totalPages;
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-        // this.isProcessing = false;
+
+          this.dataPriceQuotes = value.data.projects;
+          this.iadminPriceQuotes = this.dataPriceQuotes;
+          this.total = value.data.totalPages;
+          this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+            console.log(this.firstObject.projectRequiredWorks);
+            // this.isProcessing = false;
+
         }
-      },(error) => {
-        this.isProcessing = false;
-        }
+
+        },error: (error) => {
+              this.isProcessing = false;
+
+            }
+    }
+
+
+
     );
   }
 
@@ -141,17 +152,25 @@ down:any;
     this.newApi = 4
     sessionStorage.removeItem('idProjects')
     sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getRejectedProjectsForAdmin(this.page).subscribe(
-      (value) => {
+    this.ServicesProvidor.getRejectedProjectsForAdmin(this.page).subscribe({
+      next:(value) => {
         if(value !=null || value != undefined) {
-        this.dataPriceQuotes = value.data.projects;
-        this.iadminPriceQuotes = this.dataPriceQuotes;
-        this.total = value.data.totalPages;
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }},(error) => {
-        this.isProcessing = false;
+
+          this.dataPriceQuotes = value.data.projects;
+          this.iadminPriceQuotes = this.dataPriceQuotes;
+          this.total = value.data.totalPages;
+          this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+            console.log(this.firstObject.projectRequiredWorks);
+            // this.isProcessing = false;
+
         }
+
+        },error: (error) => {
+              this.isProcessing = false;
+
+            }
+    }
     );
   }
 
@@ -163,8 +182,8 @@ down:any;
     sessionStorage.setItem('projects', test);
     sessionStorage.setItem('idProjects', id);
     this.idProductSessionStorage = sessionStorage.getItem('projects');
-    this.productCurrent2 = JSON.parse(this.idProductSessionStorage);
-    this.productCurrent=this.productCurrent2
+    this.productCurrent = JSON.parse(this.idProductSessionStorage);
+    this.productCurrent=this.productCurrent
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
     }
@@ -179,7 +198,7 @@ down:any;
     this.iChangeStatusCliend = {
 
       projectId: this.idProduct.id,
-      projectStatusId:2,
+      projectStatusId:1010,
       notes: "string",
       rejectionReasonId: null
     };
@@ -212,7 +231,7 @@ down:any;
     this.iChangeStatusCliend = {
 
       projectId: this.idProduct.id,
-      projectStatusId:2,
+      projectStatusId:9,
       notes: "string",
       rejectionReasonId: null
     };

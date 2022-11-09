@@ -25,6 +25,7 @@ import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
 import { TestComponent } from './test/test.component';
 import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
 import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ CommonModule,
     MatSlideToggleModule,
     MatPaginatorModule,
     ReactiveFormsModule,
+
   ],
 })
 export class AdministrationModule {}

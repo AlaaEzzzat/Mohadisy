@@ -1,7 +1,7 @@
 <div class="my-3 container-fluid ">
-  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-lg-nowrap flex-wrap">
+  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap g-2">
     <button
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      class="btn rounded-1  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getNewProfiles(page)"
       [ngStyle]="{
@@ -12,7 +12,7 @@
       طلبات الانضمام
     </button>
     <button
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2"
+      class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getRejectedProfiles(page)"
       [ngStyle]="{
@@ -23,7 +23,30 @@
       طلبات المرفوضه
     </button>
     <button
-      class="btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+    class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
+    role="button"
+    (click)="getNotCompletedProfiles(page)"
+    [ngStyle]="{
+      'background-color': newApi === 8 ? '#004958' : '#ffffff',
+      color: newApi === 8 ? '#ffffff' : '#000000'
+    }"
+  >
+    طلبات غير مكتمله
+  </button>
+
+  <!-- <button
+  class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
+  role="button"
+  (click)="getNotCompletedProfiles(page)"
+  [ngStyle]="{
+    'background-color': newApi === 8 ? '#004958' : '#ffffff',
+    color: newApi === 8 ? '#ffffff' : '#000000'
+  }"
+>
+  طلبات  مكتمله
+</button> -->
+    <button
+      class="btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="activeAllAcconting(page)"
       [ngStyle]="{
@@ -34,7 +57,7 @@
       الحسابات النشطه
     </button>
     <button
-      class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      class="btn btn rounded-1  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getBlockedProfiles(page)"
       [ngStyle]="{
@@ -45,7 +68,7 @@
       الحسابات المعطله
     </button>
     <button
-      class="btn btn rounded-0  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      class="btn btn rounded-1  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 "
       role="button"
       (click)="getNonActiveAccount(page)"
       [ngStyle]="{
@@ -56,7 +79,7 @@
       الحسابات غيرالنشطه
     </button>
     <button
-      class="btn btn rounded-0   h-75 mx-2 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      class="btn btn rounded-1   h-75 mx-2 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 "
       role="button"
       (click)="getExpiredProfiles(page)"
       [ngStyle]="{
@@ -66,6 +89,7 @@
     >
       الحسابات المنتهيه
     </button>
+
   </div>
 
   <div class="alert alert-success" role="alert" *ngIf="show">
@@ -84,11 +108,19 @@
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
+          <div class="btn-group">
+            <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              طلبات           </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" > المستقل</a></li>
+              <li><a class="dropdown-item" (click)="getNewProfilesCompany(page)"> شركات </a></li>
 
+            </ul>
+          </div>
 
 
           <input
-            class="form-control bg-white border-0 rounded-0 w-100"
+            class="form-control bg-white border-0 rounded-1 w-100"
             type="search"
             placeholder="Search for name ,number,location,etc"
             aria-label="Search"
@@ -110,21 +142,23 @@
           "
         >
 
-          <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
+          <div class="card mb-3 border-0 rounded-1 textFontSizeCard">
             <div
-              class="card-body"
+              class="card-body rounded-1"
               (click)="objectProduct(pro, pro.id)"
               [ngStyle]="{
                 'background-color':
                   productCurrent.id === pro.id ? '#004958' : '#ffffff',
-                color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
+                color: productCurrent.id === pro.id ? '#ffffff' : '#004958'
+
               }"
             >
               <div class="d-flex">
-                <i class="fa-regular fa-building"></i>
-                <div class="card-title me-3 title">
+                <img src="assets/icons/XMLID_1_.svg" *ngIf=" productCurrent.id != pro.id ;else whiteIconw"/>
+                <ng-template #whiteIconw><img src="assets/icons/XMLID_1_WH.svg" class=""  /></ng-template>
+                <div class="card-title me-3 ">
                   <p class="typeCom"></p>
-                  <p
+                  <p class="fs-6"
                     *ngIf="
                       pro.applicationUser.accountType.typeName;
                       else templateName
@@ -133,37 +167,36 @@
                     {{ pro.applicationUser.accountType.typeName }}
                   </p>
                   <ng-template #templateName> Null </ng-template>
-                  <p class="1h-sm">{{ pro.companyName }}</p>
+
+                  <p class="fs-6 " *ngIf="pro.companyName;else ind">{{ pro.companyName }}</p>
+                  <ng-template #ind>
+                    <p class=" fs-6 " >{{ pro.firstName }} {{ pro.lastName }}</p>
+                  </ng-template>
                 </div>
               </div>
 
-              <div class="d-flex">
-                <i class="fa fa-location-dot"></i>
-                <i class="bi bi-geo-alt"></i>
-                <p class="me-3">{{ pro.district.city.nameAr }}</p>
+              <div class="d-flex mb-2">
+                <img src="assets/icons/Group 801.svg" class="" [hidden]=" productCurrent.id === pro.id"/>
+                <img src="assets/icons/Group 801White.svg" class="" [hidden]=" productCurrent.id != pro.id" />
+                <p class="fs-6 me-3">{{ pro.district.city.nameAr }}</p>
               </div>
               <div class="d-flex">
-                <i class="fa fa-phone"></i>
-                <div class="me-3 d-flex flex-row justify-content-between">
-                  <ng-container></ng-container>
-                  <small
-                    *ngIf="
-                      pro.applicationUser.accountType.typeName === 'شركة/مؤسسة';
-                      else mostcal
-                    "
-                    >({{ pro.representative.firstName }} {{ pro.representative.lastName}})+966
-                    {{ pro.representative.phoneNumber }}</small
-                  >
-                  <ng-template #mostcal>
-                    <small                      >
-                      ( {{ productCurrent.firstName }}  {{ productCurrent.lastName }})+966
-                      {{ pro.applicationUser.phoneNumber }}
-                    </small>
+                  <img src="assets/icons/Phone.svg" class="" [hidden]=" productCurrent.id === pro.id"/>
+                  <img src="assets/icons/PhoneWhite.svg" class=""  [hidden]=" productCurrent.id != pro.id"/>
+                  <div class="me-3 d-flex flex-row justify-content-between w-100">
+                    <small class="fs-6"  *ngIf="pro.officePhoneNumber;  else mostcal    "
+                      >  {{ pro.officePhoneNumber }} (966+)</small>
+
+                    <ng-template #mostcal>
+                      <small class="fs-6">
+                        {{ pro.applicationUser.phoneNumber }} (966+)
+                      </small>
                     </ng-template>
-                  <small class="me-5 opacity-50"
-                    >منذ
-                    {{ pro.companyRegisterationNumberStartDate | date }}
-                  </small>
+
+                      <small class=" opacity-75 align-content-end"
+                      >منذ
+                      {{ pro.dateCreated | date }}
+                    </small>
                 </div>
               </div>
             </div>
@@ -184,6 +217,24 @@
   <td colspan="6">
     <pagination-controls
       (click)="getNewProfiles(page)"
+      (pageChange)="page = $event"
+    ></pagination-controls>
+  </td>
+</tr>
+
+<tr *ngIf="pagenationNotCompletedProfiles">
+  <th
+    scope="row"
+    *ngFor="
+      let data of arrayOfDigitsNotCompletedProfiles
+        | paginate: { itemsPerPage: 1, currentPage: page }
+    "
+  ></th>
+
+  <td colspan="1"></td>
+  <td colspan="6">
+    <pagination-controls
+      (click)="getNotCompletedProfiles(page)"
       (pageChange)="page = $event"
     ></pagination-controls>
   </td>
@@ -244,7 +295,7 @@
   <th
     scope="row"
     *ngFor="
-      let data of arrayOfDigits5
+      let data of arrayOfDigitsNotCompletedProfiles
         | paginate: { itemsPerPage: 1, currentPage: page }
     "
   ></th>
@@ -279,82 +330,94 @@
 
     <!--  -->
     <div class="col-md-7 sizew col-12 flex-row">
-      <div class="col-12 card mb-3 border-0 rounded-0">
+      <div class="col-12 card mb-3 border-0 rounded-1">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
-            <img
-              *ngIf="productCurrent.companyLogoPath; else templateName"
-              src="{{ productCurrent.companyLogoPath }}"
-              class="img-fluid rounded-5 ms-5 me-2 px-1"
+
+            <img *ngIf=" productCurrent.idPath ;else company"
+              src="{{ productCurrent.profilePicturePath}}"
+              class="img-fluid rounded-circle w-75 p-2"
               alt="null"
             />
-            <ng-template #templateName>
-              <img
-                src="https://picsum.photos/200"
-                class="img-fluid rounded-5 ms-5 me-2 px-1"
-                alt="null"
-              />
-            </ng-template>
+
+            <ng-template #company>
+            <img
+            src="{{ productCurrent.companyLogoPath}}"
+            class="img-fluid rounded-circle  w-75  p-2"
+            alt="null"
+          /></ng-template>
+
           </div>
-          <div class="col-md-5">
+          <div class="col-md-6">
             <div class="card-body">
               <div class="d-flex">
-                <i class="fa-regular fa-building"></i>
-                <p class="me-3"></p>
-                <!-- ????????????????????????? -->
-                 <!-- <p
-                  *ngIf="
-                    productCurrent.applicationUser.accountType.typeName;
-                    else templateName
-                  "
-                >
+                <img src="assets/icons/XMLID_1_.svg" />
+
+                  <p class="fs-6 me-3 pt-2">
                   {{ productCurrent.applicationUser.accountType.typeName }}
                 </p>
-                <ng-template #templateName> Null </ng-template> -->
                 </div>
+                <p class="card-text fs-6 " *ngIf="productCurrent.companyName;else ind">{{ productCurrent.companyName }}</p>
+                <ng-template #ind>
+                  <p class="card-text fs-6" >{{ productCurrent.firstName }} {{ productCurrent.lastName }}</p>
+                </ng-template>
 
-              <p class="card-text">
-                {{ productCurrent.firstName }}  {{ productCurrent.lastName }}
-              </p>
-              <p class="card-text">
-                <small class="text-muted"> نوع الخدمه </small>
+
+
+              <p class="card-text  ">
+                <small class="text-muted fs-6"> نوع الخدمه </small>
                 <!-- ?? -->
-                <!-- <span class="typeCom">{{ productCurrent.projectService.name}}</span> -->
+                <span class="typeCom fs-6" *ngIf="productCurrent.projectService;else mstql">{{ productCurrent.projectService.name}}</span>
+                <ng-template #mstql> <span class="typeCom">استشارات</span></ng-template>
               </p>
             </div>
           </div>
-          <div class="col-md-5">
-            <div class="d-flex">
-              <a type="button" class="btn" (click)="changeToAccepted()">
-                <i class="fa-solid fa-check text-secondary"></i>
+          <div class="col-md-4">
+            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===4">
+              <a type="button" class="btn complete" >
+                <i class="fa-solid fa-check text-secondary "></i>
                 <p>مكتمل</p></a
               >
-              <a type="button" class="btn" (click)="changeToNotComplette()">
+              <a type="button" class="btn notcomplete"   data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa-solid fa-exclamation"></i>
                 <p>غير مكتمل</p></a
               >
-              <a type="button" class="btn" (click)="changeToReject()"
-                ><i class="fa-solid fa-xmark"></i>
+              <a type="button" class="btn reject"  data-bs-toggle="modal" data-bs-target="#exampleModalReject">
+                <i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
-              <a type="button" class="btn"
-                ><i class="fa-solid fa-xmark"></i>
+              <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalUpdata">
+                <p>تعديل</p></a>
+            </div>
+            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===1">
+
+              <a type="button" class="btn notcomplete"   data-bs-toggle="modal" data-bs-target="#exampleModalAccepte">
+                <i class="fa-solid fa-exclamation"></i>
+                <p>تفعيل</p></a>
+              <a type="button" class="btn">
+                <i class="bi bi-chat-dots"></i>
                 <p>مراسله</p></a
               >
             </div>
+            <!-- <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId !=1 && productCurrent.joinRequestStatus.accountStatusId !=4">
+
+              <a type="button" class="btn align-content-start">
+                <i class="fa-solid fa-xmark"></i>
+                <p>مراسله</p></a>
+            </div> -->
           </div>
         </div>
       </div>
 
       <!--    معلومات عن الشركه-->
-      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4 h5">معلومات عن الشركه</h6>
+      <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+        <h1 class="card-title mb-4 "> الاوراق الثبوتيه</h1>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
             <div class="d-flex justify-content-between mb-4">
               <p class="card-subtitletext-muted">
-                رقم سجل الشركه <br />
+                سجل التجاري <br />
                 <small>{{ productCurrent.companyRegisterationNumber }} </small>
               </p>
               <a
@@ -486,8 +549,8 @@
       </div>
 
       <!-- معلومات التواصل -->
-      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4 h5">معلومات التواصل</h6>
+      <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+        <h1 class="card-title mb-4 h5">معلومات التواصل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted">الدوله</p>
@@ -579,8 +642,8 @@
         </div>
       </div>
       <!-- معلومات عن ممثل الموقع -->
-      <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4 h5">معلومات عن ممثل الموقع</h6>
+      <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+        <h1 class="card-title mb-4 ">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted">الاسم</p>
@@ -612,8 +675,8 @@
         </div>
       </div>
       <!-- معلومات عن الموظفين-->
-      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h6 class="card-title mb-4 h5">معلومات عن الموظفين</h6>
+      <!-- <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+        <h1 class="card-title mb-4 h5">معلومات عن الموظفين</h1>
         card loop
         <div
           class="d-flex col-12 mb-4"
@@ -650,6 +713,7 @@
       </div> -->
     </div>
   </div>
+
 <ng-template #undefind>
   <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
     <h1 class="fw-bold fs-1 text-center mt-5">
@@ -659,4 +723,90 @@
   </div>
 
 </ng-template>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">سبب  اخيارك  غير مكتمل.</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body my-3">
+        <form  [formGroup]="userformMassage">
+          <input type="text" class="form-control" name="massage" id="massage" placeholder="massage" value="text" formControlName="massage" >
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToNotComplette()">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalReject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">سبب  الرفض.</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body my-3">
+        <form  [formGroup]="userformMassage">
+          <input type="text" class="form-control" name="massage" id="massage" placeholder="massage" value="text" formControlName="massage" >
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToReject()">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalAccepte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h5 class="modal-title" id="exampleModalLabel">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="accepted()">حفظ </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal ub date-->
+<div class="modal fade" id="modalUpdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="productCurrent.applicationUser.accountType.key=== 'CO';else ind">
+          <input type="text"  class="form-control" name="officePhoneNumber" id="officePhoneNumber" [(ngModel)]="productCurrent.officePhoneNumber" >
+        </div>
+
+        <ng-template #ind>
+          <input type="text"  class="form-control" name="firstName" id="firstName" [(ngModel)]="productCurrent.firstName"  >
+          <input type="text"  class="form-control" name="phoneNumber" id="phoneNumber" [(ngModel)]="productCurrent.applicationUser.phoneNumber"  >
+        </ng-template>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updatapro()">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
