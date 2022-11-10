@@ -52,6 +52,10 @@ export class AdminProjectsService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/PriceQuotes/getNewProjectsForAdmin/Page/${page}`);
   }
+  getUnderNegotiationProjectsForAdmin(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/PriceQuotes/getUnderNegotiationProjectsForAdmin/Page/${page}`);
+  }
   getAcceptedProjectsForAdmin(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/PriceQuotes/getAcceptedProjectsForAdmin/Page/${page}`);

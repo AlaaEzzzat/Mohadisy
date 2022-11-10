@@ -343,7 +343,7 @@
             <ng-template #company>
             <img
             src="{{ productCurrent.companyLogoPath}}"
-            class="img-fluid rounded-circle  w-75  p-2"
+            class="img-fluid rounded-circle  w-75  mx-2"
             alt="null"
           /></ng-template>
 
@@ -386,7 +386,7 @@
                 <i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
-              <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalUpdata">
+              <a type="button" class="btn" (click)="updatapro(productCurrent)">
                 <p>تعديل</p></a>
             </div>
             <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===1">
@@ -399,12 +399,14 @@
                 <p>مراسله</p></a
               >
             </div>
-            <!-- <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId !=1 && productCurrent.joinRequestStatus.accountStatusId !=4">
+           <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId !=1 && productCurrent.joinRequestStatus.accountStatusId !=4">
 
               <a type="button" class="btn align-content-start">
                 <i class="fa-solid fa-xmark"></i>
                 <p>مراسله</p></a>
-            </div> -->
+                <a type="button" class="btn" (click)="updatapro(productCurrent)">
+                  <p>تعديل</p></a>
+            </div>
           </div>
         </div>
       </div>
@@ -642,35 +644,69 @@
         </div>
       </div>
       <!-- معلومات عن ممثل الموقع -->
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+      <div class="col-12 card mb-3 border-0 rounded-1 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
+      ">
         <h1 class="card-title mb-4 ">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted">الاسم</p>
-            <!-- <small
+            <small
               class="fs-6 fw-semibold"
               *ngIf="productCurrent.representative.firstName; else firstName"
-              >{{ productCurrent.representative.firstName }}</small
+              >{{ productCurrent.representative.firstName }}{{ productCurrent.representative.lastName }}</small
             >
-            <ng-template #firstName> _ </ng-template> -->
+            <ng-template #firstName> _ </ng-template>
           </div>
           <div>
             <p class="card-subtitle text-muted">رقم التليفون</p>
-            <!-- <small
+            <small
               class="fs-6 fw-semibold"
               *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
               >{{ productCurrent.representative.phoneNumber }} 966+
-            </small> -->
+            </small>
             <ng-template #phoneNumber> _ </ng-template>
           </div>
           <div>
             <p class="card-subtitle text-muted">البريد الالكتروني</p>
-            <!-- <small
+            <small
               class="fs-6 fw-semibold"
               *ngIf="productCurrent.representative.email; else email"
               >{{ productCurrent.representative.email }}</small
             >
-            <ng-template #email> _ </ng-template> -->
+            <ng-template #email> _ </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 card mb-3 border-0 rounded-1 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
+      ">
+        <h1 class="card-title mb-4 ">معلومات عن ممثل الموقع</h1>
+        <div class="d-flex justify-content-between flex-wrap">
+          <div>
+            <p class="card-subtitle text-muted">الاسم</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.firstName; else firstName"
+              >{{ productCurrent.representative.firstName }}{{ productCurrent.representative.lastName }}</small
+            >
+            <ng-template #firstName> _ </ng-template>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">رقم التليفون</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
+              >{{ productCurrent.representative.phoneNumber }} 966+
+            </small>
+            <ng-template #phoneNumber> _ </ng-template>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted">البريد الالكتروني</p>
+            <small
+              class="fs-6 fw-semibold"
+              *ngIf="productCurrent.representative.email; else email"
+              >{{ productCurrent.representative.email }}</small
+            >
+            <ng-template #email> _ </ng-template>
           </div>
         </div>
       </div>
@@ -805,7 +841,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updatapro()">Save changes</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
       </div>
     </div>
   </div>

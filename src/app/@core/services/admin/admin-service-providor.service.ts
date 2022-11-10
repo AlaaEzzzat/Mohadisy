@@ -4,6 +4,7 @@ import { environment } from './../../../../environments/environment';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { saveAs } from 'file-saver';
+import { IND } from './../../../administration/admin-sp-updata/admin-sp-updata.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -104,7 +105,7 @@ export class AdminServiceProvidorService {
       })
     }))
   }
-  updateIndividualUpdateProfile(objectStatus:any):Observable<any>
+  updateIndividualUpdateProfile(objectStatus:IND):Observable<any>
   {
     return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/updateIndividualServiceProviderProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
       return throwError(()=>{

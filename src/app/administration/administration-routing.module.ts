@@ -15,6 +15,7 @@ import { TestComponent } from './test/test.component';
 import { AdminSettingsProfileComponent } from './admin-settings-profile/admin-settings-profile.component';
 import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
 import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
+import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 
 const routes: Routes = [
   // { path: '', component: AdminHomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'payments', component: AdminPaymentsComponent },
       { path: 'contributions', component: AdminContributionsComponent },
       { path: 'sp', component: AdminSPComponent },
+      { path: 'updata', component: AdminSpUpdataComponent },
       { path: 'test', component: TestComponent },
 
 

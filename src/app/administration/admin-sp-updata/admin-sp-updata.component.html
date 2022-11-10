@@ -1,0 +1,301 @@
+
+        <div *ngIf="productCurrent.applicationUser.accountType.key=== 'CO';else ind">
+          <form  [formGroup]="formOrganiztionl" class="d-flex flex-wrap">
+
+            <div class="m-3">
+              <label for="companyName" class="form-label h5">اسم الشركه</label>
+              <input type="text" class="form-control py-2" id="companyName" name="companyName" id="companyName" formControlName="companyName" >
+            </div>
+            <div class="m-3">
+              <label for="companyLogoFile" class="form-label h5"> شعار الشركة</label>
+              <input type="text" class="form-control py-2" id="companyLogoFile" name="companyLogoFile"  >
+            </div>
+            <div class="m-3">
+              <label for="companyRegisterationNumber" class="form-label h5"> رقم السجل التجاري</label>
+              <input type="number" class="form-control py-2" id="companyRegisterationNumber" name="companyRegisterationNumber" formControlName="companyRegisterationNumber">
+            </div>
+           <div class="m-3">
+              <label for="companyRegisterationNumberFile" class="form-label h5"> ملف السجل التجاري</label>
+              <input type="text" class="form-control py-2"  name="companyRegisterationNumberFile" id="companyRegisterationNumberFile" value="iBanFile"
+              (change)="onFileChange1($event)" formControlName="companyRegisterationNumberFile">
+            </div>
+
+            <div class="m-3">
+              <label for="shortAddressOrg" class="form-label h5">العنوان</label>
+              <input type="text" class="form-control py-2" name="shortAddressOrg" id="shortAddressOrg" formControlName="shortAddressOrg">
+            </div>
+            <div class="m-3">
+              <label for="streetNameOrg" class="form-label h5">اسم الشارع</label>
+              <input type="text" class="form-control py-2"  name="streetNameOrg" id="streetNameOrg" formControlName="streetNameOrg">
+            </div>
+            <div class="m-3">
+              <label for="buildingNumberOrg" class="form-label h5">رقم المبنى</label>
+              <input type="number" class="form-control py-2" name="buildingNumberOrg" id="buildingNumberOrg" formControlName="buildingNumberOrg">
+            </div>
+
+            <div class="m-3">
+              <label for="bankAccountNumberOrg" class="form-label h5">اسم الاول</label>
+              <input type="text" class="form-control py-2" name="bankAccountNumberOrg" id="bankAccountNumberOrg" formControlName="bankAccountNumberOrg">
+            </div>
+
+            <div class="m-3">
+              <label for="licenseFile" class="form-label h5">اسم العائله</label>
+              <input type="text" class="form-control py-2" id="licenseFile" name="licenseFile"  formControlName="licenseFile">
+            </div>
+
+            <div class="m-3">
+              <label for="officePhoneNumber" class="form-label h5">رقم الهاتف</label>
+              <input type="text" class="form-control py-2"  name="officePhoneNumber" id="officePhoneNumber" formControlName="officePhoneNumber">
+            </div>
+            <div class="m-3">
+              <label for="officeMobileNumber" class="form-label h5">رقم الجوال</label>
+              <input type="text" class="form-control py-2" name="officeMobileNumber" id="officeMobileNumber" formControlName="officeMobileNumber">
+            </div>
+            <div class="m-3">
+              <label for="websiteLink" class="form-label h5">الموقع الالكتروني</label>
+              <input type="text" class="form-control py-2" name="websiteLink" id="websiteLink" formControlName="websiteLink">
+            </div>
+
+      <div class="m-3">
+              <label for="zakatCertificateFile" class="form-label h5">شهاده الزكاه</label>
+              <input type="text" class="form-control py-2" value="iBanFile" id="zakatCertificateFile" name="zakatCertificateFile" formControlName="zakatCertificateFile" >
+            </div>
+            <div class="m-3">
+              <label for="saudizationCertificateFile" class="form-label h5">شهاده سعوده</label>
+              <input type="text" class="form-control py-2" value="iBanFile" name="saudizationCertificateFile" id="saudizationCertificateFile"formControlName="saudizationCertificateFile">
+            </div>
+            <div class="m-3">
+              <label for="financialStatementFile" class="form-label h5">ملف القوائم المالية</label>
+              <input type="text" class="form-control py-2"  value="iBanFile" name="financialStatementFile" id="financialStatementFile" formControlName="financialStatementFile" (change)="onFileChange1($event)">
+            </div>
+
+
+
+            <div class="m-3">
+              <label for="coCMembershipFile" class="form-label h5">ملف عضوية الفرقة التجارية</label>
+              <input type="text" class="form-control py-2" value="iBanFile"  name="coCMembershipFile" id="coCMembershipFile" formControlName="coCMembershipFile">
+            </div>
+
+            <div class="m-3">
+              <label for="isoFile" class="form-label h5">ملف الأيزو</label>
+              <input type="text" class="form-control py-2 " value="iBanFile" id="isoFile" name="isoFile"  formControlName="isoFile">
+            </div>
+
+            <div class="m-3">
+              <label for="companyClassificationId" class="form-label h5">رقم تصنيف الشركه </label>
+              <input type="text" class="form-control py-2" name="companyClassificationId" id="companyClassificationId" formControlName="companyClassificationId">
+            </div>
+
+
+
+            <div class="m-3">
+              <label for="postalCodeOrg" class="form-label h5">رمز بريدي</label>
+              <input type="text" class="form-control py-2" name="postalCodeOrg" id="postalCodeOrg" formControlName="postalCodeOrg">
+            </div>
+
+            <div class="m-3">
+              <label for="addedValueRegisterationCertificateFile" class="form-label h5">ملف شهادة تسجيل القيمة المضافة</label>
+              <input type="text" class="form-control py-2" value="iBanFile" name="addedValueRegisterationCertificateFile" id="addedValueRegisterationCertificateFile" formControlName="addedValueRegisterationCertificateFile">
+            </div>
+            <div class="m-3">
+              <label for="classificationCertificateFile" class="form-label h5">ملف شهادة التصنيف</label>
+              <input type="text" class="form-control py-2" value="iBanFile" name="classificationCertificateFile" id="classificationCertificateFile" formControlName="classificationCertificateFile">
+            </div>
+
+            <div class="m-3">
+              <label for="socialInsuranceCertificateFile" class="form-label h5">ملف شهادة التأمين الاجتماعي</label>
+              <input type="text" class="form-control py-2" value="iBanFile"  name="socialInsuranceCertificateFile" id="socialInsuranceCertificateFile" formControlName="socialInsuranceCertificateFile">
+            </div>
+
+            <div class="m-3">
+              <label for="professionLicenseFile" class="form-label h5">ملف ترخيص المهني</label>
+              <input type="text" class="form-control py-2" value="iBanFile" name="professionLicenseFile" id="professionLicenseFile" formControlName="professionLicenseFile">
+            </div>
+            <div class="m-3">
+              <label for="iBanFile" class="form-label h5">iBan ملف</label>
+              <input type="text" class="form-control py-2" value="iBanFile" name="iBanFile" id="iBanFile" formControlName="iBanFile">
+            </div> -->
+            <div class="m-3" disabled>
+              <label for="iBanNumber" class="form-label h5">iBanرقم </label>
+              <input type="text" class="form-control py-2" name="iBanNumber" id="iBanNumber" formControlName="iBanNumber" >
+            </div>
+
+            <div class="m-3">
+              <label for="bankName" class="form-label h5">اسم البنك</label>
+              <input type="text" class="form-control py-2" name="bankName" id="bankName" formControlName="bankName">
+            </div>
+
+
+    </form>
+
+
+        </div>
+
+
+        <ng-template #ind>
+          <form  [formGroup]="userformMassage" class="d-flex flex-wrap">
+         <div class=" d-flex col-12">
+          <!-- <p>معلومات شخصيه</p> -->
+          <div class="m-3 col-3">
+            <label for="protextPictureFile" class="form-label h5">   صورة الملف الشخصي </label>
+            <input type="text" class="form-control py-2" name="protextPictureFile" id="protextPictureFile" formControlName="protextPictureFile">
+          </div>
+          <div class="m-3 col-3">
+            <label for="firstName" class="form-label h5">اسم الاول</label>
+            <input type="text" class="form-control py-2" name="firstName" id="firstName" formControlName="firstName">
+          </div>
+          <div class="m-3 col-3">
+            <label for="lastName" class="form-label h5">اسم العائله</label>
+            <input type="text" class="form-control py-2" id="lastName" name="lastName"  formControlName="lastName">
+          </div>
+        </div>
+        <div class=" d-flex col-12">
+
+          <div class="m-3 col-3">
+            <label for="buildingNumber" class="form-label h5">رقم المبنى </label>
+            <input type="text" class="form-control py-2" name="buildingNumber" id="buildingNumber" formControlName="buildingNumber">
+          </div>
+          <div class="m-3 col-3">
+            <label for="shortAddress" class="form-label h5">العنوان</label>
+            <input type="text" class="form-control py-2"  name="shortAddress" id="shortAddress" formControlName="shortAddress">
+          </div>
+          <div class="m-3 col-3">
+            <label for="streetName" class="form-label h5">اسم الشارع</label>
+            <input type="text" class="form-control py-2"  name="streetName" id="streetName" formControlName="streetName">
+          </div>
+        </div>
+              <!-- <div class="m-3">
+                <label for="city" class="form-label h5">المدينه</label>
+                <input type="text" class="form-control py-2" id="city" name="city" id="city"formControlName="city">
+              </div> -->
+
+              <!-- <div class="m-3">
+                <label for="neighborhood" class="form-label h5">الحي</label>
+                <input type="text" class="form-control py-2" name="neighborhood" id="neighborhood" formControlName="neighborhood">
+              </div>
+
+              <div class="m-3">
+                <label for="cityName" class="form-label h5">اسم المدينه</label>
+                <input type="text" class="form-control py-2" name="cityName" id="cityName" formControlName="cityName">
+              </div> -->
+              <div class=" d-flex col-12">
+
+              <div class="m-3 col-3">
+                <label for="membershipNumber" class="form-label h5"> رقم العضوية</label>
+                <input type="text" class="form-control py-2" name="membershipNumber" id="membershipNumber" formControlName="membershipNumber">
+              </div>
+              <div class="m-3">
+                <label for="exampleFormControlInput1" class="form-label h5">ملف العضوية</label>
+                <input type="text" class="form-control py-2" id="exampleFormControlInput1" name="phoneNumber" id="phoneNumber" formControlName="membershipFile" >
+              </div>
+              </div>
+              <div class=" d-flex col-12">
+
+              <div class="m-3 col-3">
+                <label for="idNumber" class="form-label h5">رقم البطاقه</label>
+                <input type="text" class="form-control py-2" id="idNumber" name="idNumber" id="idNumber" formControlName="idNumber" >
+              </div>
+
+              <div class="m-3">
+                <label for="idFile" class="form-label h5"> صوره البطاقه</label>
+                <input type="text" class="form-control py-2" name="idFile" id="idFile" formControlName="idFile">
+              </div>
+</div>
+<div class=" d-flex col-12">
+
+              <div class="m-3 col-3">
+                <label for="postalCode" class="form-label h5">رمز بريدي</label>
+                <input type="number" class="form-control py-2 " name="postalCode" id="postalCode" formControlName="postalCode">
+              </div>
+              <div class="m-3 col-3 ">
+                <label for="postalBox" class="form-label h5">صندوق البريدي</label>
+                <input type="number" class="form-control py-2 " id="postalBox" name="postalBox" id="postalBox" formControlName="postalBox">
+              </div>
+              </div>
+              <!-- <div class="m-3">
+                <label for="bankAccountNumber" class="form-label h5">رقم الحساب المصرفي</label>
+                <input type="text" class="form-control py-2"  name="bankAccountNumber" id="bankAccountNumber" formControlName="bankAccountNumber">
+              </div> -->
+
+
+
+
+      </form>
+        </ng-template>
+
+        <button type="button" class="btn btn-secondary m-3">Cancle</button>
+        <button type="button" class="btn btn-success m-3" (click)="updatapro()">Save changes</button>
+
+
+
+
+          <!-- <div class="m-3">
+              <label for="isoNumber" class="form-label h5">isoNumber</label>
+              <input type="text" class="form-control py-2" name="isoNumber" id="isoNumber" formControlName="isoNumber">
+            </div> -->
+            <!-- <div class="m-3">
+              <label for="financialStatementNumber" class="form-label h5">financialStatementNumber</label>
+              <input type="text" class="form-control py-2" name="financialStatementNumber" id="financialStatementNumber" formControlName="financialStatementNumber">
+            </div> -->
+            <!-- <div class="m-3">
+              <label for="saudizationCertificateNumber" class="form-label h5">saudizationCertificateNumber</label>
+              <input type="text" class="form-control py-2" name="saudizationCertificateNumber" id="saudizationCertificateNumber" formControlName="saudizationCertificateNumber">
+            </div> -->
+            <!-- <div class="m-3">
+              <label for="protextPictureFile" class="form-label h5">protextPictureFile</label>
+              <input type="text" class="form-control py-2"  name="protextPictureFile" id="protextPictureFile" formControlName="protextPictureFile">
+            </div> -->
+            <!-- <div class="m-3">
+              <label for="classificationCertificateNumber" class="form-label h5">classificationCertificateNumber</label>
+              <input type="text" class="form-control py-2" name="classificationCertificateNumber" id="classificationCertificateNumber" formControlName="classificationCertificateNumber">
+            </div> -->
+   <!-- <div class="m-3">
+              <label for="unitNumber" class="form-label h5">رقم الوحدة</label>
+              <input type="text" class="form-control py-2" name="unitNumber" id="unitNumber" formControlName="unitNumber">
+            </div> -->
+            <!-- <div class="m-3" >
+              <label for="cityNameOrg" class="form-label h5">cityNameOrg</label>
+              <input type="text" class="form-control py-2" name="cityNameOrg" id="cityNameOrg" formControlName="cityNameOrg">
+            </div>
+            <div class="m-3">
+              <label for="districtNameOrg" class="form-label h5">districtNameOrg</label>
+              <input type="text" class="form-control py-2" name="districtNameOrg" id="districtNameOrg" formControlName="districtNameOrg">
+            </div> -->
+              <!-- <div class="m-3">
+              <label for="coCMembershipNumber" class="form-label h5">رقم عضوية الفرقة التجارية</label>
+              <input type="text" class="form-control py-2" name="coCMembershipNumber" id="coCMembershipNumber" formControlName="coCMembershipNumber">
+            </div> -->
+            <!-- <div class="col-6"> <label for="img" > product image</label>
+              <input type="text" class="form-control"  formControlName="img" name="protextPictureFile" (change)="onFileChange1($event)">
+
+          </div> -->
+            <!-- <div class="m-3">
+              <label for="zakatCertificateNumber" class="form-label h5">رقم شهاده الزكاه</label>
+              <input type="text" class="form-control py-2" name="zakatCertificateNumber" id="zakatCertificateNumber" formControlName="zakatCertificateNumber">
+            </div> -->
+              <!-- <div class="m-3">
+              <label for="protextPictureFile" class="form-label h5">صورة الملف الشخصي</label>
+              <input type="text" class="form-control py-2" name="protextPictureFile" id="protextPictureFile" formControlName="protextPictureFile">
+            </div> -->
+               <!-- <div class="m-3">
+              <label for="licenseNumber" class="form-label h5">رقم الرخصة</label>
+              <input type="text" class="form-control py-2" name="licenseNumber" id="licenseNumber" formControlName="licenseNumber">
+            </div> -->
+             <!-- <div class="m-3">
+              <label for="additionalNumber" class="form-label h5">رقم إضافي</label>
+              <input type="text" class="form-control py-2" name="additionalNumber" id="additionalNumber" formControlName="additionalNumber">
+            </div> -->
+               <!--  -->
+            <!-- <div class="m-3">
+              <label for="addedValueRegisterationCertificateNumber" class="form-label h5">addedValueRegisterationCertificateNumber</label>
+              <input type="text" class="form-control py-2" name="addedValueRegisterationCertificateNumber" id="addedValueRegisterationCertificateNumber" formControlName="addedValueRegisterationCertificateNumber">
+            </div> -->
+              <!-- <div class="m-3">
+              <label for="professionLicenseNumber" class="form-label h5">professionLicenseNumber</label>
+              <input type="text" class="form-control py-2" name="professionLicenseNumber" id="professionLicenseNumber" formControlName="professionLicenseNumber">
+            </div> -->
+            <!-- <div class="m-3">
+              <label for="socialInsuranceCertificateNumber" class="form-label h5">socialInsuranceCertificateNumber</label>
+              <input type="text" class="form-control py-2" name="socialInsuranceCertificateNumber" id="socialInsuranceCertificateNumber" formControlName="socialInsuranceCertificateNumber">
+            </div> -->
+

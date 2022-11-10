@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Indivdual } from './../../@models/indivdual';
 import { Organiztionl } from './../../@models/organiztionl';
+import { IND, OSP } from './../admin-sp-updata/admin-sp-updata.component';
 
 @Component({
   selector: 'app-admin-sp',
@@ -16,6 +17,8 @@ import { Organiztionl } from './../../@models/organiztionl';
   styleUrls: ['./admin-sp.component.scss'],
 })
 export class AdminSPComponent implements OnInit {
+  currentIndivdual: IND= {} as IND;
+  currentOrganiztionl: OSP= {} as OSP;
   companys: IadminSp[] = [];
   mostaql: IadminSp[] = [];
   description:any;
@@ -52,11 +55,9 @@ export class AdminSPComponent implements OnInit {
   total: number = 0;
   firstObject: any;
   userformMassage :FormGroup;
-  currentIndivdual: Indivdual= {} as Indivdual;
-  currentOrganiztionl: Organiztionl= {} as Organiztionl;
 
 productCurrent: any;
-  constructor(private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
+  constructor(private router:Router,private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
   {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
@@ -458,20 +459,9 @@ accepted(){
     }
 
   }
-  updatapro(){
-    this.idProductSessionStorage = sessionStorage.getItem('Productsp');
-    this.productCurrent = JSON.parse(this.idProductSessionStorage);
-
-    if (this.idProduct.applicationUser.accountType.key === 'CO'){
-    this.ServicesProvidor.updateOrganizationalUpdateProfile(this.productCurrent).subscribe(da=>{
-
-    });
-  }
-    else{
-      this.ServicesProvidor.updateIndividualUpdateProfile(this.productCurrent).subscribe(da=>{
-
-      });
-    }
+  updatapro(obj:any){
+    this.router.navigate(['./Admin/updata',obj])
+    console.log(this.currentIndivdual)
   }
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(

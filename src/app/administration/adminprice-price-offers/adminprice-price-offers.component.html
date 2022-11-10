@@ -36,10 +36,11 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 5 ? '#004958' : '#ffffff',
-        'color': newApi === 5 ? '#ffffff' : '#000000'
+        'background-color': newApi === 10 ? '#004958' : '#ffffff',
+        'color': newApi === 10 ? '#ffffff' : '#000000'
       }"
       class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      (click)="getUnderNegotiationProjects()"
     >
     عروض تحت التفاوض
     </button>
