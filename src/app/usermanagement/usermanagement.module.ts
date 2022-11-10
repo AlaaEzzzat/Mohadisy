@@ -10,6 +10,8 @@ import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     UserDashBoardComponent,
@@ -21,6 +23,8 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     ProfilecomplateComponent,
   ],
   imports: [
+    MatMenuModule,
+    MatIconModule,
     CommonModule,
     UsermanagementRoutingModule,
     FormsModule,

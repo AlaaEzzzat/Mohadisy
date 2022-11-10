@@ -32,6 +32,7 @@ export class UserPriceOffersComponent implements OnInit {
   rules: boolean = false;
   seeProjectInfo: boolean = false;
   usedMaterials: boolean = false;
+  showProjectProfile: boolean = false;
   constructor(private clientService: ClientService) {}
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -116,13 +117,16 @@ export class UserPriceOffersComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     return Days;
   }
+  showProject() {
+    this.showProjectProfile = true;
+  }
 
   showOffers(project: any) {
+    this.showProjectProfile = false;
     this.selectedProject = project;
-    console.log(this.selectedProject);
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
-    console.log(this.offersOfSelectedProject);
+
     if (this.offersOfSelectedProject.length > 0) {
       this.selectedOffer = this.offersOfSelectedProject[0];
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
@@ -142,8 +146,6 @@ export class UserPriceOffersComponent implements OnInit {
           });
       }
     }
-    console.log(this.selectedOffer);
-    console.log(this.selectedOfferId);
   }
 
   acceptOffer(offerId: any) {

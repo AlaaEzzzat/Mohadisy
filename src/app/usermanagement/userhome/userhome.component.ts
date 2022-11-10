@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserhomeComponent implements OnInit {
   status: boolean = false;
-  username: string = localStorage.getItem('name') || '';
+  username: string = localStorage.getItem('name')?.replace(/"/g, '') || '';
   showpopup: boolean = false;
   allServices: any = [];
   clickEvent() {
@@ -18,6 +18,9 @@ export class UserhomeComponent implements OnInit {
   constructor(private router: Router, private clientService: ClientService) {}
 
   ngOnInit(): void {}
+  search() {}
+  showNotification() {}
+  showSubMenu() {}
   goToForm(formType: any) {
     console.log(formType.value.type);
     if (formType.value.type) {

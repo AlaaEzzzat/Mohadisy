@@ -92,4 +92,10 @@ export class ClientService {
       arrOfWorksId
     );
   }
+
+  getAccountStatus(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Account/checkAccountStatus`
+    );
+  }
 }

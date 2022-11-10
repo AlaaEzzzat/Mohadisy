@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ServiceProviderService {
+  personalData: any = {};
   constructor(private _HttpClient: HttpClient) {}
 
   getAllCompanyClassifications(): Observable<any> {
@@ -37,6 +38,8 @@ export class ServiceProviderService {
       `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
     );
   }
+  /* *************************************individual**************************************** */
+
   storeIndividualServiceProviderWork(work: any): Observable<any> {
     return this._HttpClient.post<any>(
       `${environment.baseUrl}/api/ServiceProviderWork/storeIndividualServiceProviderWork`,
@@ -53,9 +56,79 @@ export class ServiceProviderService {
     );
   }
 
+  /* ***************************************************************************************** */
+  /* *************************************Organization**************************************** */
+  storeOrganizationalProfile(data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfile`,
+      data
+    );
+  }
+
+  storeOrganizationalProfileFiles(data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfileFiles`,
+      data
+    );
+  }
+
+  getOrganizationalServiceProviderProfile(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/getProfile`
+    );
+  }
+  storeReprasintative(data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Representative/storeRepresentative`,
+      data
+    );
+  }
+  storeOrganizationalServiceProviderWork(work: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/ServiceProviderWork/storeOrganizationalServiceProviderWork`,
+      work
+    );
+  }
+  storeOrganizationalServiceProviderWorkFilesByWorkId(
+    images: any,
+    workId: any
+  ): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/ServiceProviderWork/storeOrganizationalServiceProviderWorkFilesByWorkId/${workId}`,
+      images
+    );
+  }
+
+  storeProfileFiles(files: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/ServiceProviderWork/storeProfileFiles`,
+      files
+    );
+  }
+  storeCompanyProfileFiles(files: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfileFiles`,
+      files
+    );
+  }
+  /* **************************************************************************************** */
   getServiceProviderWorks(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/ServiceProviderWork/getServiceProviderWorks`
+    );
+  }
+
+  deleteServiceProviderWork(workId: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/ServiceProviderWork/deleteServiceProviderWork/${workId}`,
+      workId
+    );
+  }
+  /* *************************************** */
+
+  getProjectSubServicesByServiceId(serviceId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/ProjectService/GetProjectSubServicesByServiceId/${serviceId}`
     );
   }
 }

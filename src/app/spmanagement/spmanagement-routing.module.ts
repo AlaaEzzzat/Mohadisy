@@ -1,3 +1,4 @@
+import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { SpContributionsComponent } from './sp-contributions/sp-contributions.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
@@ -27,6 +28,10 @@ const routes: Routes = [
       { path: 'contributions', component: SpContributionsComponent },
       { path: 'completeProfile', component: SpCompleteProfileComponent },
       { path: 'prevWorks', component: PrevWorksComponent },
+      {
+        path: 'competeProfileForCompany',
+        component: CompanyCompleteProfileComponent,
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

@@ -15,6 +15,7 @@ import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
+import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -28,6 +29,7 @@ import { PrevWorksComponent } from './prev-works/prev-works.component';
     SpProfileComponent,
     SpCompleteProfileComponent,
     PrevWorksComponent,
+    CompanyCompleteProfileComponent,
   ],
   imports: [
     CommonModule,

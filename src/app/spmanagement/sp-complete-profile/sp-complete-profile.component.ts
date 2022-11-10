@@ -99,8 +99,8 @@ export class SpCompleteProfileComponent implements OnInit {
     /* check complete profie or not */
     this.clientService.checkStatus().subscribe((data: any) => {
       console.log(data.data);
-      this.isComplete = data.data.profileCompleted;
-      console.log(data.data.profileCompleted);
+      this.isComplete = data.data.profileAccepted;
+      console.log(data.data.profileAccepted);
       this.isCreated = data.data.profileCreated;
       console.log(data.data.profileCreated);
     });

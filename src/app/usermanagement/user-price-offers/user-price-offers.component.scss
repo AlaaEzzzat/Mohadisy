@@ -105,5 +105,23 @@ p{
       outline: none !important;
   }
   }
+  .dotCon{
+    background-color: transparent;
+    border: 0;
+    left: -3px;
+    top: 13px;
+    color: #18AF9A;
+    height: 50px;
+    .dots{
+    background-color: transparent;
+    border: 0;
+    color: #18AF9A;
+    height: 50px;
+    }
+  }
+  .matBtnCon{
+
+background-color: #18AF9A;
+  }
 }
 /* ********************** */

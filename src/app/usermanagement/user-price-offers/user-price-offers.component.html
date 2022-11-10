@@ -22,7 +22,7 @@
                 *ngFor="let project of projectServiesArrays; let i = index"
               >
                 <div
-                  class="card rounded-1 d-flex flex-row justify-content-between p-3 mb-2 border-0 d-flex"
+                  class="card rounded-1 position-relative d-flex flex-row justify-content-between p-3 ps-4 mb-2 border-0 d-flex"
                   (click)="showOffers(project)"
                   [ngClass]="
                     activeProject == project.id ? 'active' : 'bg-white'
@@ -45,43 +45,37 @@
                       <i class="icon fa-solid fa-calendar-days ms-2"></i>
                       <span class="textcard"> {{ project.dateCreated }}</span>
                     </div>
-                    <div class="dropdown">
-                      <button
-                        class="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenu2"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        Dropdown
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li>
-                          <button class="dropdown-item" type="button">
-                            Action
-                          </button>
-                        </li>
-                        <li>
-                          <button class="dropdown-item" type="button">
-                            Another action
-                          </button>
-                        </li>
-                        <li>
-                          <button class="dropdown-item" type="button">
-                            Something else here
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
 
                     <i class="fa-regular fa-circle-ellipsis-vertical"></i>
                   </div>
 
                   <div
-                    class="secondColor"
-                    style="min-width: 36px; font-weight: 600"
+                    class="secondColor bg-white rounded-5 text-center p-2"
+                    style="min-width: 36px; height: 36px; font-weight: 600"
                   >
                     {{ project.offers.length }} رد
+                  </div>
+                  <div class="position-absolute dotCon">
+                    <button
+                      class="dots"
+                      mat-icon-button
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Example icon-button with a menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu
+                      #menu="matMenu"
+                      style="background-color: #18af9a"
+                      class="matBtnCon"
+                    >
+                      <button mat-menu-item>
+                        <span (click)="showProject()">عرض المشروع</span>
+                      </button>
+                      <button mat-menu-item>
+                        <span>حذف المشروع</span>
+                      </button>
+                    </mat-menu>
                   </div>
                 </div>
               </ng-container>
@@ -122,15 +116,17 @@
                 </ul>
               </nav>
             </div>
-            <div
+            <!--   <div
               *ngIf="projectServiesArrays.length == 0"
               class="bg-white text-center projectInfo p-5 mb-3"
             >
               <h3>لا توجد مشاريع</h3>
-            </div>
+            </div> -->
           </div>
           <div class="col-md-8">
-            <div *ngIf="offersOfSelectedProject.length > 0">
+            <div
+              *ngIf="offersOfSelectedProject.length > 0 && !showProjectProfile"
+            >
               <div
                 style="cursor: pointer"
                 class="person p-3 d-flex mb-3 active text-white w-100"
@@ -611,7 +607,6 @@
                       </div>
 
                       <ng-container *ngIf="offer.materials.length">
-                        <div>gfdj</div>
                         <ul *ngFor="let mat of offer.materials">
                           <li>{{ mat }}</li>
                         </ul>
@@ -710,11 +705,129 @@
             <div
               *ngIf="
                 offersOfSelectedProject.length == 0 ||
-                projectServiesArrays.length == 0
+                (offersOfSelectedProject.length > 0 && showProjectProfile)
               "
-              class="bg-white text-center projectInfo p-5 mb-3"
+              class="projectInfo mb-3"
             >
-              <h3>لا توجد عروض</h3>
+              <ul class="list-unstyled p-3 bg-white">
+                <li class="mb-2">
+                  <p class="cairo">
+                    اسم المشروع :
+                    <span class="secondColor me-2 bold">{{
+                      selectedProject.name
+                    }}</span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p class="cairo">
+                    موضوع المشروع :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject?.subject }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    التصنيف الرئيسي للمشروع :
+                    <span class="secondColor me-2 bold">
+                      {{ selectedProject.projectCategory?.name }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    التصنيف الفرعى للمشروع :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject.projectSubCategory?.name }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    رقم القطعه :
+                    <span class="secondColor me-2 bold">{{
+                      selectedProject?.area
+                    }}</span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    رقم المخطط التنظيمي :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject?.organizationalChartNumber }}
+                    </span>
+                  </p>
+                </li>
+              </ul>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 projectInfo projectContributes">
+                    <h4 class="head">مكونات المشروع</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="
+                        let component of selectedProject.projectComponents
+                      "
+                    >
+                      <li class="mb-2">
+                        <i class="fa fa-chevron-left ms-3"></i>
+                        <span>
+                          {{ component.component }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 rquiredWoks projectInfo">
+                    <h4 class="head">الأعمال المطلوبة</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="
+                        let requiredWork of selectedProject.projectRequiredWorks
+                      "
+                    >
+                      <li class="mb-2">
+                        <i class="fa fa-chevron-left ms-3"></i>
+                        <span>
+                          {{ requiredWork.requiredWork }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 projectFiles projectInfo">
+                    <h4 class="head">الملفات الخاصة المشروع</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="
+                        let document of selectedProject.clientProjectDocuments
+                      "
+                    >
+                      <li class="mb-2">
+                        <i class="fa fa-chevron-left ms-3"></i>
+                        <span>
+                          {{ document.document }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                  <button
+                    class="btn mainBk"
+                    [disabled]="offersOfSelectedProject.length == 0"
+                    (click)="showProjectProfile = false"
+                  >
+                    العوده للعروض
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,5 +1,7 @@
-<!-- *ngIf="(userSuccess && imageSuccess) == false" -->
-<section style="min-height: 100vh">
+<section
+  style="min-height: 100vh"
+  *ngIf="(userSuccess && imageSuccess) == false"
+>
   <header class="form-control p-3 signFormIn border-end">
     <h5 class="bd-title m-0 p-0" dir="rtl">إستكمال البيانات الخاصه بكـ</h5>
   </header>
@@ -201,14 +203,14 @@
         <div class="col-sm-6 col-xs-12">
           <div class="form-group">
             <label class="form-label mb-2" for="bankAccountNumber">
-              (IPAN) رقم الحساب البنكي</label
+              (IBAN) رقم الحساب البنكي</label
             >
             <input
               type="text"
               formControlName="bankAccountNumber"
               id="bankAccountNumber"
               class="form-control form-control-lg signup"
-              placeholder="(IPAN) رقم الحساب البنكي"
+              placeholder="(IBAN) رقم الحساب البنكي"
               required
               [class.is-valid]="bankAccountNumber?.valid"
               [class.is-invalid]="
@@ -222,7 +224,7 @@
               "
             >
               <span *ngIf="bankAccountNumber?.errors?.['required']"
-                >(IPAN) رقم الحساب البنكي</span
+                >(IBAN) رقم الحساب البنكي</span
               >
               <span *ngIf="bankAccountNumber?.errors?.['pattern']"
                 >تأكد من بنيه الرقم
@@ -554,7 +556,7 @@
 </section>
 
 <!-- popup -->
-<!-- <div *ngIf="isCreated" class="overlay p-5">
+<div *ngIf="isCreated" class="overlay p-5">
   <div class="popup p-5">
     <div class="content p-1 text-center">
       <div class="d-flex justify-content-around">
@@ -583,4 +585,3 @@
     </div>
   </div>
 </div>
- -->
