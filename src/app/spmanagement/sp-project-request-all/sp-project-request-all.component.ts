@@ -142,5 +142,14 @@ export class SpProjectRequestAllComponent implements OnInit {
     });
      }
 
+     addIdProject(idProject:any)
+     {
+      console.log(idProject);
+
+      localStorage.setItem('idproject',idProject);
+
+
+     }
+
 
   }

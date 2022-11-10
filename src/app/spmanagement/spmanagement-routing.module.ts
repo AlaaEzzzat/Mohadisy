@@ -13,6 +13,10 @@ import { LayoutProjectComponent } from './layout-project/layout-project.componen
 import { SpPinnedProjectComponent } from './sp-pinned-project/sp-pinned-project.component';
 import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
 import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
+import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.component';
+import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
+import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
+import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
 
 const routes: Routes = [
   {
@@ -34,6 +38,10 @@ const routes: Routes = [
          { path: 'request',component:SpProjectRequestComponent},
          { path: 'request/all',component:SpProjectRequestAllComponent},
          {path:'all/request',component:SpCprojectRequestComponent},
+         {path:'accept',component:SpRequestAcceptComponent},
+         {path:'reject',component:SpRequestRejectComponent},
+         {path:'offer',component:SpProjectOfferComponent},
+         {path:'negotiation',component:SpProjectNegotiationComponent},
        ]
       },
 

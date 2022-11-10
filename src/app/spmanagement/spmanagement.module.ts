@@ -18,6 +18,10 @@ import { LayoutProjectComponent } from './layout-project/layout-project.componen
 import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
 import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.component';
+import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
+import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
+import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LayoutProjectComponent,
     SpProjectRequestAllComponent,
     SpCprojectRequestComponent,
+    SpRequestAcceptComponent,
+    SpRequestRejectComponent,
+    SpProjectOfferComponent,
+    SpProjectNegotiationComponent,
   ],
   imports: [
     CommonModule,

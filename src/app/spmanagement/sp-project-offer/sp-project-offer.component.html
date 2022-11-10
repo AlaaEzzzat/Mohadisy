@@ -1,4 +1,12 @@
 
+
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
+
   <div class="section-2 mt-2">
     <div class="row">
       <div class="col-4">
@@ -11,13 +19,13 @@
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
-                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <span>{{project?.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
                   <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
-                <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+                  {{project?.district.nameAr}},{{project?.district.city.nameAr}},
+                  {{project?.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt "></i>{{project?.dateCreated}}</p>
               </div>
             </ng-container>
 
@@ -26,13 +34,13 @@
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
-                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <span>{{project?.clientProfile.firstName}} {{project?.clientProfile.lastName}}</span>
                   <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
-                <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
+                  {{project?.district.nameAr}},{{project?.district.city.nameAr}},
+                  {{project?.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt  "></i>{{project?.dateCreated}}</p>
               </div>
             </ng-container>
 
@@ -57,7 +65,7 @@
       -->
 
 
-      <div class="paginate mt-4">
+      <div class="paginate mt-4" *ngIf="result==1">
         <pagination-controls (pageChange)="changepage($event)"
         previousLabel="السابق"
         nextLabel="التالى"
@@ -93,9 +101,7 @@
                   </div>
 
                    <div class="col-1 rep">
-                     <i class="fa-solid fa-handshake">
-                    </i>
-                    <a href="/Spmanagement/projects/request" class="btn text-white" (click)="addIdProject(selectProject.id)" routerLinkActive="active">الرد</a>
+                    <a href="/Spmanagement/projects/request" class="btn text-white" (click)="addIdProject(selectProject.id)" routerLinkActive="active">تعديل</a>
                   </div>
 
 
@@ -252,6 +258,7 @@
     </div>
 
   </div>
+
 
 
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
   selector: 'app-layout-project',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutProjectComponent implements OnInit {
 
-  constructor() { }
+  projectstatues:any;
+  constructor(private api:ApiService) { }
 
   ngOnInit(): void {
+    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
+      this.projectstatues=data.data.projectStatues;
+
+    })
   }
 
 }

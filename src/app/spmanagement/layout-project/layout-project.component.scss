@@ -1,26 +1,41 @@
+.nav a
+{
+  padding: 3% 7%;
+  background-color: white;
+  width: 96%;
+  margin-left: 3%;
+  color: #18af9a;
+
+}
+
+
 .section-1 .content a
 {
-  width: 98%;
-  padding: 2% 6% 2% 0% ;
+  width: 100%;
+  padding: 1% ;
 }
 
 .section-1 .content span
 {
 
-  margin-right: 70%;
-  padding-left: 3%;
-  color: #198754;
-  font-size: 18px;
+  margin-right: 83%;
+
+  color: #18af9a;
+  font-size: 20px;
 
 }
 
 .section-1 .content .request
 {
-  background-color: white;
-}
-
-.section-1 .content .active
-{
   background-color: #004958;
   color:white;
 }
+
+
+.active
+{
+  background-color: #18af9a !important;
+  color: white !important;
+}
+
+
