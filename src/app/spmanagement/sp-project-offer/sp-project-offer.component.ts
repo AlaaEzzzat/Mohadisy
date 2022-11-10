@@ -25,8 +25,10 @@ export class SpProjectOfferComponent implements OnInit {
 
  ngOnInit(): void {
 
-   this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/subServiceId/1003/Page/1").subscribe(data=>{
-   this.Listprojects=data.data.priceQuotes;
+   this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
+   this.Listprojects=data.data.projects;
+   if(this.Listprojects.length>0)
+   this.result=1;
 
    });
 

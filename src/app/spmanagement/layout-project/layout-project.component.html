@@ -20,11 +20,11 @@
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/request/all"]'
         [routerLinkActive]='["active"]'
-        class="btn">جديد</a>
+        class="btn">{{projectstatues[0].nameAr}}</a>
       </div>
 
       <div class="col   text-center contnet">
-        <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >{{projectstatues[0].nameAr}}</a>
+        <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
       </div>
 
       <div class="col   text-center contnet">
