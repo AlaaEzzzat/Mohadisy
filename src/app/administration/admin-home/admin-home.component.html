@@ -5,14 +5,14 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg shadow-sm">
+    <nav class="navbar navbar-expand-lg shadow-sm py-3">
       <div class="container-fluid">
         <div>
           <img src="assets/logo.png" alt="" height="40px">
         </div>
-        <div (click)="clickEvent()" class="mx-lg-3 mx-sm-1 mx-md-1 texticon">
+        <!-- <div (click)="clickEvent()" class="mx-lg-3 mx-sm-1 mx-md-1 texticon">
           <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
-        </div>
+        </div> -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -28,6 +28,19 @@
             </li>
             <li class="nav-item mx-3 bg-light rounded-5 px-2 py-1 text-center">
               <a class="nav-link active " aria-current="page" href="#">ar</a>
+            </li>
+            <li class="nav-item mx-3 bg-light rounded-circle px-1  text-center">
+              <!-- <a class="nav-link active " aria-current="page" href="#">ar</a> -->
+<div class="position-relative nav-link active">
+
+  <img src="/assets/icons/bell.svg" alt="" srcset="" class="w-75" >
+
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill mt-2 "style="background-color:#18AF9A">
+    {{counter}}
+    <span class="visually-hidden">unread messages</span>
+  </span>
+</div>
+
             </li>
             <li class="nav-item mx-3 bg-light rounded-5">
               <a class="nav-link active " aria-current="page" href="#">
@@ -93,9 +106,9 @@
                     <img src="assets/images/settings.png" alt="" srcset="" width="28px" height="28px" />
                     <span class="px-2 fontStyle texticon"> الإعدادات </span>
                   </div>
-                  <div class="p-2 my-4 px-2" (click)="clickEvent()">
+                  <!-- <div class="p-2 my-4 px-2" (click)="clickEvent()">
                     <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -103,8 +116,12 @@
             <div class="col-10 ">
               <router-outlet></router-outlet>
             </div>
+
           </div>
 
+        </div>
+        <div class="col-12 ">
+          <app-footer></app-footer>
         </div>
     </div>
     <!-- /#page-content-wrapper -->

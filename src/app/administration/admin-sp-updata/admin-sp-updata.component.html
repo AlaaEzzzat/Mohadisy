@@ -17,7 +17,7 @@
            <div class="m-3">
               <label for="companyRegisterationNumberFile" class="form-label h5"> ملف السجل التجاري</label>
               <input type="text" class="form-control py-2"  name="companyRegisterationNumberFile" id="companyRegisterationNumberFile" value="iBanFile"
-              (change)="onFileChange1($event)" formControlName="companyRegisterationNumberFile">
+              formControlName="companyRegisterationNumberFile">
             </div>
 
             <div class="m-3">
@@ -66,7 +66,7 @@
             </div>
             <div class="m-3">
               <label for="financialStatementFile" class="form-label h5">ملف القوائم المالية</label>
-              <input type="text" class="form-control py-2"  value="iBanFile" name="financialStatementFile" id="financialStatementFile" formControlName="financialStatementFile" (change)="onFileChange1($event)">
+              <input type="text" class="form-control py-2"  value="iBanFile" name="financialStatementFile" id="financialStatementFile" formControlName="financialStatementFile" >
             </div>
 
 
@@ -135,14 +135,15 @@
         <ng-template #ind>
           <form  [formGroup]="userformMassage" class="d-flex flex-wrap">
          <div class=" d-flex col-12">
+
           <!-- <p>معلومات شخصيه</p> -->
           <div class="m-3 col-3">
-            <label for="protextPictureFile" class="form-label h5">   صورة الملف الشخصي </label>
-            <input type="text" class="form-control py-2" name="protextPictureFile" id="protextPictureFile" formControlName="protextPictureFile">
+            <label for="profilePictureFile"   class="form-label h5">   صورة الملف الشخصي </label>
+            <input type="file" placeholder="profilePictureFile" class="form-control py-2" name="profilePictureFile" id="profilePictureFile" #profilePictureFile (change)="onFileChange($event,profilePictureFile)">
           </div>
           <div class="m-3 col-3">
             <label for="firstName" class="form-label h5">اسم الاول</label>
-            <input type="text" class="form-control py-2" name="firstName" id="firstName" formControlName="firstName">
+            <input type="text"  class="form-control py-2" name="firstName" id="firstName" formControlName="firstName">
           </div>
           <div class="m-3 col-3">
             <label for="lastName" class="form-label h5">اسم العائله</label>

@@ -428,12 +428,13 @@ this.currentOrganiztionl2={
        );
     }
   }
-  onFileChange1(event: any){
 
-      const file = event.target.files[0]
-      // this.companyRegisterationNumberFile!.event.target.files[0]
-      console.log(  this.companyRegisterationNumberFile?.setValue(file))
-
+onFileChange(event: any, name: any) {
+  if (event.target.files.length > 0) {
+    console.log(event.target.files);
+    const myImage = event.target.files[0];
+    this.userformMassage.get(name)?.setValue(myImage);
+  }
 }
 
 }

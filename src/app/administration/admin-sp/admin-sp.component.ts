@@ -55,7 +55,7 @@ export class AdminSPComponent implements OnInit {
   total: number = 0;
   firstObject: any;
   userformMassage :FormGroup;
-
+  company:any="مستقل"
 productCurrent: any;
   constructor(private router:Router,private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
   {
@@ -203,7 +203,7 @@ productCurrent: any;
     this.ServicesProvidor.getNewProfiles(page).subscribe((value) => {
       if (value.data.profiles) {
         this.datas = value.data.profiles;
-        // console.log(this.datas);
+        console.log(this.datas.length);
         this.iProfileData = this.datas;
         this.total = value.data.totalPages;
         if(this.datas.length!=0){
@@ -284,20 +284,28 @@ productCurrent: any;
   }
   getNewProfilesCompany(page: any) {
     this.ServicesProvidor.activeProfile​(page).subscribe((value) => {
-      let companys:any[]=[];
+      let companys:any[]=[]||value.data.profiles
       let mostaql:any[]=[]
-        this.datas = value.data.profiles;
-        for(let x of this.datas){
-            if(x.applicationUser.accountType.key  === "CO"){
-             companys.push(x)
-              console.log(companys)
-            }else if(x.applicationUser.accountType.key  === "IND"){
-              mostaql.push(x)
-              console.log(mostaql)
-            }
+      this.iProfileData =  value.data.profiles || []
+let tests = this.iProfileData.find((key)=>{
+return key.applicationUser.accountType.key == "CO"
+
+});
+console.log(tests);console.log(this.iProfileData)
 
 
-        }
+        //
+        // for(let x of this.datas){
+        //     if(x.applicationUser.accountType.key  === "CO"){
+        //      companys.push(x)
+        //       console.log(companys)
+        //     }else if(x.applicationUser.accountType.key  === "IND"){
+        //       mostaql.push(x)
+        //       console.log(mostaql)
+        //     }
+
+
+        // }
         //  let coms =this.datas.filter((Company: any) => {Company.id  === 3101  } );
         // console.log(coms)
 

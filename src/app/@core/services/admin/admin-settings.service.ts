@@ -35,4 +35,18 @@ export class AdminSettingsService {
       })
     }))
   }
+
+  getUserNotifications(check:boolean):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Notification/getUserNotifications/${check}`);
+  }
+  readNotification(id:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Notification/readNotification/${id}`,JSON.stringify(id), this.httpoptions).pipe(retry(3),catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }));
+  }
 }

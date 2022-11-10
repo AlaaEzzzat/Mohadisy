@@ -27,6 +27,7 @@ import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-
 import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.compon
     AdminSettingUsersComponent,
     AdminSettingChangeProfileComponent,
     AdminSpUpdataComponent,
+    FooterComponent,
     // CountryTransformPipe
     // CountryTransformPipe
 
