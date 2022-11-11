@@ -226,7 +226,7 @@
               <a
                 type="button"
                 class="btn w-25"
-(click)="changeToNotComplette()"
+              (click)="changeToNotComplette()"
               >
                 <i class="fa-solid fa-exclamation"></i>
                 <p class="fsvw">غير مكتمل</p></a
@@ -495,4 +495,21 @@
   </div>
 
   </ng-template>
+</div>
+
+<div class="modal fade" id="changeToAccepted" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h1 class="modal-title " id="exampleModalLabel" >هل انت متاكد من الموافقه علي هذا الطلب ؟</h1>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToAccepted()">حفظ </button>
+      </div>
+    </div>
+  </div>
 </div>

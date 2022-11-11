@@ -4,6 +4,7 @@ import { IadminPriceQuotes } from 'src/app/@models/iadmin-price-quotes';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-adminprice-price-offers',
@@ -27,11 +28,17 @@ export class AdminpricePriceOffersComponent implements OnInit {
   // productCurrent: any;
   id: any;
 down:any;
+userformMassage :FormGroup;
+
   messages:any;
   show:boolean=false;
   showDanger:boolean=false;
   isProcessing:boolean=true
-  constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient) { }
+  constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
+    this.userformMassage=this.formbuilder.group({
+      massage:['',[Validators.required]],
+    });
+  }
 
   ngOnInit(): void {
     this.getNewProjectsForAdmin();
@@ -194,8 +201,6 @@ getUnderNegotiationProjects(){
     );
   }
 
-
-
   objectProduct(object?: any, id?: any) {
     this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
@@ -211,6 +216,9 @@ getUnderNegotiationProjects(){
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
 
+  }
+  get massage(){
+    return this.userformMassage?.get('massage');
   }
   // change stutas client
   //2
