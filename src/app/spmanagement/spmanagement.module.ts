@@ -22,6 +22,7 @@ import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.
 import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
 import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
 import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
+import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-proje
     SpRequestRejectComponent,
     SpProjectOfferComponent,
     SpProjectNegotiationComponent,
+    SpProjectStatusComponent,
   ],
   imports: [
     CommonModule,

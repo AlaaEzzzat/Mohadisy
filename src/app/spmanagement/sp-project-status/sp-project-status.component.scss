@@ -1,0 +1,94 @@
+.current-project
+{
+  background-color:#7fd393;
+  padding: 4%;
+  color:#004057;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: .8;
+}
+
+.finish-project
+{
+  background-color: #efaab1;
+  padding: 4%;
+  color:#004057;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: .8;
+
+}
+
+.card
+{
+  border: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+  padding-top: 2%;
+  padding-left: 5%;
+}
+.card p
+{
+  padding:2% 5% 1% 2%;
+  margin: 0;
+  color: #004057;
+}
+
+.card p span
+{
+
+  color: grey;
+}
+
+
+.card .require
+{
+  width: 55%;
+  height: 12vh;
+  border-radius: 90%;
+  -webkit-border-radius: 90%;
+  -moz-border-radius: 90%;
+  -ms-border-radius: 90%;
+  -o-border-radius: 90%;
+  margin:2% 20%;
+
+}
+
+.card-projects p
+{
+  margin-top: 40%;
+
+}
+
+.projects
+{
+  width: 40%;
+  height: 20vh;
+  border-radius: 80%;
+  -webkit-border-radius: 80%;
+  -moz-border-radius: 80%;
+  -ms-border-radius: 80%;
+  -o-border-radius: 80%;
+  margin:2% 27%;
+  border: 5px solid rgb(176, 13, 176);
+  border-right: 5px green solid;
+  border-left: 5px solid rgb(92, 92, 223);
+}
+
+
+.card-projects ul li
+{
+  display: inline;
+  padding-left: 8%;
+  font-size: 13px;
+}
+
+i
+{
+  color:purple;
+  font-size: 10px;
+
+}

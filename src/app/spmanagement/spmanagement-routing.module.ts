@@ -17,6 +17,7 @@ import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.
 import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
 import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
 import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
+import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },
+      { path: 'projects/status', component:SpProjectStatusComponent},
       { path: 'projects', component:LayoutProjectComponent ,
         children:
        [
