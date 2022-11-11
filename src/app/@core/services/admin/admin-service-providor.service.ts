@@ -31,6 +31,10 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNotCompletedProfiles/Page/${page}`);
   }
+  getCompletedProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getCompletedProfiles/Page/${page}`);
+  }
   getAcceptedProfiles(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAcceptedProfiles/Page/${page}`);

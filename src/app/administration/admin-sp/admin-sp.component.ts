@@ -50,6 +50,7 @@ export class AdminSPComponent implements OnInit {
   pagenationNonActiveAccount: boolean = false;
   pagenationExpiredProfiles: boolean = false;
   pagenationNotCompletedProfiles: boolean = false;
+  pagenationCompletedProfiles:boolean=false
   page: number = 1;
   newApi: number = 1;
   total: number = 0;
@@ -70,6 +71,7 @@ productCurrent: any;
       this.pagenationNonActiveAccount = false;
       this.pagenationExpiredProfiles = false;
       this.pagenationNotCompletedProfiles= false;
+      this.pagenationCompletedProfiles=false;
 
       this.total = value.data.totalPages;
       this.fortest(this.total, this.arrayOfDigits1);
@@ -155,6 +157,28 @@ productCurrent: any;
       this.datas = value.data.profiles;
       this.iProfileData = this.datas;
       // console.log(this.iProfileData);
+      this.total = value.data.totalPages;
+      if(this.datas.length!=0){
+        this.firstObject = this.iProfileData[0];
+        this.objectProduct(this.firstObject, this.firstObject.id);}
+
+    });
+  }
+  getCompletedProfiles(page: any) {
+    this.pagenationNewProfiles = false;
+    this.pagenationRejectedProfiles = false;
+    this.pagenationactiveAllAcconting = false;
+    this.pagenationBlockedProfiles = false;
+    this.pagenationNonActiveAccount = false;
+    this.pagenationExpiredProfiles = false;
+    this.pagenationNotCompletedProfiles = false;
+    this.pagenationCompletedProfiles = true;
+    this.newApi = 18;
+    sessionStorage.removeItem('ids');
+    sessionStorage.removeItem('Productsp');
+    this.ServicesProvidor.getCompletedProfiles(page).subscribe((value) => {
+      this.datas = value.data.profiles;
+      this.iProfileData = this.datas;
       this.total = value.data.totalPages;
       if(this.datas.length!=0){
         this.firstObject = this.iProfileData[0];
@@ -343,24 +367,29 @@ console.log(tests);console.log(this.iProfileData)
     };
 
 
-    if (
-      this.iChangeStatus.accountStatusId ===
-      this.idProduct.joinRequestStatus.accountStatus.id
-    ) {
-      alert('العميل موجود بالفعل');
-    } else if (this.idProduct.applicationUser.accountType.key === 'CO') {
+    if (this.idProduct.applicationUser.accountType.key === 'CO') {
       this.ServicesProvidor.changeOrganizationalStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-        alert(`${data.message}`);
-        // console.log(this.iChangeStatus!.profileId);
+        this.show = true;
+        this.messages = data.message;
+        // console.log(this.iChangeStatus);
+        setTimeout(() => {
+          this.show = false;
+        }, 1000);
+
       });
     } else {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-        alert(`${data.message}`);
-        // console.log(this.iChangeStatus!.profileId);
+        this.show = true;
+        this.messages = data.message;
+        // console.log(this.iChangeStatus);
+        setTimeout(() => {
+          this.show = false;
+        }, 1000);
+
       });
     }
   }
@@ -422,8 +451,7 @@ console.log(tests);console.log(this.iProfileData)
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-        // alert(`${data.message}`);
-        // console.log(this.iChangeStatus!.profileId);
+
         this.show = true;
         this.messages = data.message;
         setTimeout(() => {
@@ -446,7 +474,6 @@ accepted(){
       this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
-        // console.log(this.iChangeStatus);
         setTimeout(() => {
           this.show = false;
         }, 1000);

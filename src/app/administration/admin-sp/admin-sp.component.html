@@ -22,7 +22,7 @@
     >
       طلبات المرفوضه
     </button>
-    <button
+    <!-- <button
     class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
     role="button"
     (click)="getNotCompletedProfiles(page)"
@@ -32,7 +32,7 @@
     }"
   >
     طلبات غير مكتمله
-  </button>
+  </button> -->
 
   <!-- <button
   class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
@@ -114,6 +114,8 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" > المستقل</a></li>
               <li><a class="dropdown-item" (click)="getNewProfilesCompany(page)"> شركات </a></li>
+              <li><a class="dropdown-item" (click)="getCompletedProfiles(page)"> طلبات مكتمله</a></li>
+              <li><a class="dropdown-item"  (click)="getNotCompletedProfiles(page)">  طلبات غير مكتمله</a></li>
 
             </ul>
           </div>
@@ -329,8 +331,11 @@
     </div>
 
     <!--  -->
-    <div class="col-md-7 sizew col-12 flex-row">
+    <div class="col-md-7 sizew col-12 flex-row position-relative">
+
       <div class="col-12 card mb-3 border-0 rounded-1">
+        <a type="button" class="btn position-absolute top-0 start-0 me-5" (click)="updatapro(productCurrent)" *ngIf="productCurrent.joinRequestStatus.accountStatusId===4">
+          <p>تعديل</p></a>
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
 
@@ -374,7 +379,7 @@
           </div>
           <div class="col-md-4">
             <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===4">
-              <a type="button" class="btn complete" >
+              <a type="button" class="btn complete" data-bs-toggle="modal" data-bs-target="#changeToAccepted">
                 <i class="fa-solid fa-check text-secondary "></i>
                 <p>مكتمل</p></a
               >
@@ -386,9 +391,9 @@
                 <i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
-              <a type="button" class="btn" (click)="updatapro(productCurrent)">
-                <p>تعديل</p></a>
+
             </div>
+
             <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===1">
 
               <a type="button" class="btn notcomplete"   data-bs-toggle="modal" data-bs-target="#exampleModalAccepte">
@@ -408,6 +413,7 @@
                   <p>تعديل</p></a>
             </div> -->
           </div>
+
         </div>
       </div>
 
@@ -418,9 +424,9 @@
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
             <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitletext-muted">
+              <p class="card-subtitle text-muted h5">
                 سجل التجاري <br />
-                <small>{{ productCurrent.companyRegisterationNumber }} </small>
+                <small class="h6 ">{{ productCurrent.companyRegisterationNumber }} </small>
               </p>
               <a
                 target="_blank"
@@ -483,9 +489,9 @@
 
           <div class="col-lg-5 col-12">
             <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitletext-muted ms-2">
+              <p class="card-subtitle text-muted h5">
                 رقم الرخصة <br />
-                <small>{{ productCurrent.licenseNumber }}</small>
+                <small class="h6">{{ productCurrent.licenseNumber }}</small>
               </p>
               <a
                 target="_blank"
@@ -555,9 +561,9 @@
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
             <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitletext-muted">
+              <p class="card-subtitle text-muted h5">
                 صوره البطاقه  <br />
-                <small>{{ productCurrent.idNumber }} </small>
+                <small class="h6">{{ productCurrent.idNumber }} </small>
               </p>
               <a
                 target="_blank"
@@ -577,9 +583,9 @@
 
           <div class="col-lg-5 col-12">
             <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitletext-muted ms-2">
+              <p class="card-subtitle text-muted h5">
                 رقم العضويه <br />
-                <small>{{ productCurrent.membershipNumber }}</small>
+                <small class="h6">{{ productCurrent.membershipNumber }}</small>
               </p>
               <a
                 target="_blank"
@@ -935,12 +941,12 @@
 
       <div class="modal-body">
 
-        <h5 class="modal-title" id="exampleModalLabel">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
+        <h1 class="modal-title" id="exampleModalLabel">هل انت متاكد من تفعيل هذاالحساب ؟</h1>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="accepted()">حفظ </button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="accepted()">حفظ </button>
       </div>
     </div>
   </div>
@@ -969,6 +975,23 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
         <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="changeToAccepted" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+
+        <h1 class="modal-title " id="exampleModalLabel" >هل انت متاكد من الموافقه علي هذا الطلب ؟</h1>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToAccepted()">حفظ </button>
       </div>
     </div>
   </div>

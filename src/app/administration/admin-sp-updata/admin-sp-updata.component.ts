@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminServiceProvidorService } from 'src/app/@core/services/admin/admin-service-providor.service';
+import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { Indivdual } from 'src/app/@models/indivdual';
 import { Organiztionl } from 'src/app/@models/organiztionl';
 
@@ -13,6 +14,7 @@ import { Organiztionl } from 'src/app/@models/organiztionl';
 export class AdminSpUpdataComponent implements OnInit {
   currentIndivdual: IND= {} as IND;
   currentIndivdual2: IND= {} as IND;
+  iChangeStatus: IChangeStatus | undefined = undefined;
 
   currentOrganiztionl: OSP= {} as OSP;
   currentOrganiztionl2: OSP= {} as OSP;
@@ -395,7 +397,13 @@ this.currentOrganiztionl2={
   "profilePictureFile": this.productCurrent.profilePictureFile,
 
 }
+this.iChangeStatus = {
+  profileId: this.productCurrent.id,
+  description:"تم التعديل البيانات و تحويل طلبات المكتمله",
+  accountStatusId: 7,
+  joinRequestStatuses:[""]
 
+};
 
     if (this.productCurrent.applicationUser.accountType.key === 'CO'){
       // console.log(this.currentOrganiztionl2)
@@ -414,6 +422,9 @@ this.currentOrganiztionl2={
 
       }
     });
+    this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+              });
+
   }
     else{
       console.log(this.currentIndivdual2)
@@ -426,8 +437,31 @@ this.currentOrganiztionl2={
         }
       }
        );
+       this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+                });
     }
   }
+
+  // changeToComplette(){
+  //   this.iChangeStatus = {
+  //     profileId: this.productCurrent.id,
+  //     description:"تم التعديل البيانات و تحويل طلبات المكتمله",
+  //     accountStatusId: 7,
+  //     joinRequestStatuses:[""]
+
+  //   };
+  //   if (this.idProduct.applicationUser.accountType.key === 'CO') {
+  //     this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+  //         });
+  //   }
+  //   else{
+  //     this.ServicesProvidor.changeIndividualStatus(
+  //       this.iChangeStatus
+  //     ).subscribe((data) => {
+  //     });
+  //   }
+
+  // }
 
 onFileChange(event: any, name: any) {
   if (event.target.files.length > 0) {
