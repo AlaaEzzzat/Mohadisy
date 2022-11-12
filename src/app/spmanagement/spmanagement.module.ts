@@ -1,3 +1,4 @@
+import { SharedModule } from './../@shared/shared.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,7 @@ import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.compon
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
+
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -32,6 +34,7 @@ import { CompanyCompleteProfileComponent } from './company-complete-profile/comp
     CompanyCompleteProfileComponent,
   ],
   imports: [
+    SharedModule,
     CommonModule,
     SPmanagementRoutingModule,
     FormsModule,

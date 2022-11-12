@@ -1,9 +1,11 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { ICompany } from './../../@models/ICompany';
 import { ICompanyPresenter } from './../../@models/ICompanyPresenter';
+import { IWork } from './../../@models/IWork';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -41,10 +43,17 @@ export class CompanyCompleteProfileComponent implements OnInit {
   isComplete: boolean = false;
   isCreated: boolean = false;
 
+  work: any = {} as IWork;
+  workId: any = 0;
+  workImages: any = [];
+  AllProjectCategory: any = [];
+  allServiceProviderWorks: any = [];
+
   constructor(
     private fb: FormBuilder,
     private serviceProviderService: ServiceProviderService,
     private provider: ProviderServiceService,
+    private _toastr: ToastrService,
     private client: ClientService,
     private router: Router
   ) {
@@ -74,6 +83,16 @@ export class CompanyCompleteProfileComponent implements OnInit {
       companyRegisteration: ['', [Validators.required]],
       license: ['', [Validators.required]],
       companyLogo: ['', [Validators.required]],
+
+      projectCategoryId: ['', [Validators.required]],
+      projectName: ['', [Validators.required]],
+      ownerName: ['', [Validators.required]],
+      projectPrice: ['', [Validators.required]],
+      completionYear: [
+        '',
+        [Validators.required, Validators.pattern('^0*([1-9]|[0-9]{2}|100)$')],
+      ],
+      images: ['', [Validators.required]],
     });
   }
 
@@ -97,6 +116,34 @@ export class CompanyCompleteProfileComponent implements OnInit {
       console.log(data.data.profileAccepted);
       this.isCreated = data.data.profileCreated;
       console.log(data.data.profileCreated);
+    });
+    this.serviceProviderService
+      .getAllProjectCategory()
+      .subscribe((data: any) => {
+        this.AllProjectCategory = data.data;
+        console.log(this.AllProjectCategory);
+      });
+    this.getServiceProviderWorks();
+  }
+  getServiceProviderWorks() {
+    this.serviceProviderService
+      .getServiceProviderWorks()
+      .subscribe((data: any) => {
+        this.allServiceProviderWorks = data.data;
+        console.log(this.allServiceProviderWorks);
+      });
+  }
+  deleteThisWork(workId: any) {
+    this.serviceProviderService.deleteServiceProviderWork(workId).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        this._toastr.info(response.message);
+        console.log('work deleted');
+        this.getServiceProviderWorks();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
     });
   }
   _getSubServices() {
@@ -226,7 +273,35 @@ export class CompanyCompleteProfileComponent implements OnInit {
   get ospprofileSubServices() {
     return this.completeCampanyProfileForm.get('ospprofileSubServices');
   }
+  get projectCategoryId() {
+    return this.completeCampanyProfileForm.get('projectCategoryId');
+  }
+  get projectName() {
+    return this.completeCampanyProfileForm.get('projectName');
+  }
+  get ownerName() {
+    return this.completeCampanyProfileForm.get('ownerName');
+  }
+  get projectPrice() {
+    return this.completeCampanyProfileForm.get('projectPrice');
+  }
 
+  get completionYear() {
+    return this.completeCampanyProfileForm.get('completionYear');
+  }
+  get images() {
+    return this.completeCampanyProfileForm.get('images');
+  }
+  onMultiImageUpload(event: any) {
+    if (event.target.files.length > 0) {
+      console.log(event.target.files);
+      console.log(event.target.files.length);
+      Array.from(event.target.files).forEach((file) => {
+        this.workImages.push(file);
+      });
+      console.log(this.workImages);
+    }
+  }
   numberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -296,7 +371,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
                     .subscribe({
                       next: (response: any) => {
                         console.log('files Sent');
-                        this.router.navigate(['Spmanagement/prevWorks']);
+                        this.prevWorksFormSubmit();
                       },
                       error: (err: any) => {
                         console.log(err);
@@ -392,5 +467,80 @@ export class CompanyCompleteProfileComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  prevWorksFormSubmit() {
+    let filesFormDta = new FormData();
+    this.workImages.map((file: any) => {
+      filesFormDta.append('file', file);
+    });
+
+    this.work.projectCategoryId = this.projectCategoryId?.value;
+    this.work.projectName = this.projectName?.value;
+    this.work.ownerName = this.ownerName?.value;
+    this.work.projectPrice = this.projectPrice?.value;
+    this.work.completionYear = this.completionYear?.value;
+    this.work.identifier = '1';
+    console.log(this.work);
+    delete this.work.images;
+    if (localStorage.getItem('type') == '"CO"') {
+      /* send work */
+      this.serviceProviderService
+        .storeOrganizationalServiceProviderWork(this.work)
+        .subscribe({
+          next: (response: any) => {
+            console.log('work Posted');
+            this._toastr.info(response.message);
+            this.workId = response.data.id;
+            console.log(response);
+            console.log(response.data);
+            /* send files */
+            this.serviceProviderService
+              .storeOrganizationalServiceProviderWorkFilesByWorkId(
+                filesFormDta,
+                this.workId
+              )
+              .subscribe({
+                next: (response: any) => {
+                  console.log(response);
+                  console.log('Image Posted');
+                },
+                error: (err: any) => {
+                  console.log(err);
+                },
+              });
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+        });
+    } else {
+      /* send work */
+      this.serviceProviderService
+        .storeIndividualServiceProviderWork(this.work)
+        .subscribe({
+          next: (response: any) => {
+            console.log('work Posted');
+            this.workId = response.data.id;
+            console.log(response.data);
+            /* send files */
+            this.serviceProviderService
+              .storeIndividualServiceProviderWorkFilesByWorkId(
+                filesFormDta,
+                this.workId
+              )
+              .subscribe({
+                next: (response: any) => {
+                  console.log('Image Posted');
+                },
+                error: (err: any) => {
+                  console.log(err);
+                },
+              });
+          },
+          error: (err: any) => {
+            console.log(err);
+          },
+        });
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { SharedModule } from './../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.comp
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     UserDashBoardComponent,
@@ -23,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ProfilecomplateComponent,
   ],
   imports: [
+    SharedModule,
     MatMenuModule,
     MatIconModule,
     CommonModule,

@@ -110,8 +110,12 @@ body {
   .dots{
     background: transparent;
     border: none;
+
   }
+  .dots:focus{ border: none; }
 }
+.dotCon:focus{ border: none; }
+
 /* Alaa */
 .overlay {
   *{

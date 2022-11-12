@@ -1,7 +1,7 @@
 import { ClientService } from './../../@core/services/client/client.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
+/* import { SignalrService } from './../../@core/services/signalR/signalr.service'; */
 @Component({
   selector: 'app-userhome',
   templateUrl: './userhome.component.html',
@@ -15,10 +15,26 @@ export class UserhomeComponent implements OnInit {
   clickEvent() {
     this.status = !this.status;
   }
-  constructor(private router: Router, private clientService: ClientService) {}
+  constructor(
+    private router: Router,
+    private clientService: ClientService /*  public signalrService: SignalrService */
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    /*  this.signalrService.startConnection();
+    setTimeout(() => {
+      this.signalrService.askServerListener();
+      this.signalrService.askServer();
+    }, 2000); */
+  }
+  /*   ngOnDestroy(): void {
+    this.signalrService.hubConnection.off('askServerResponse');
+  } */
   search() {}
+  signOut() {
+    localStorage.clear();
+    this.router.navigate(['/account/login']);
+  }
   showNotification() {}
   showSubMenu() {}
   goToForm(formType: any) {

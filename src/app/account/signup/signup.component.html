@@ -1,5 +1,5 @@
 <section class="h-100">
-  <div class="container h-100">
+  <div class="container-fluid h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <div class="card card-registration border-0 shadow-sm">
@@ -87,11 +87,19 @@
                         class="form-control"
                         name="username"
                         formControlName="username"
-                        [ngClass]="{ 'is-invalid':f['username'].errors &&f['username'].touched }"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['username'].errors && f['username'].touched
+                        }"
                       />
-                      <div *ngIf="f['username'].errors &&f['username'].touched " class="invalid-feedback">
-        <div *ngIf="f['username'].errors['required']"> من فضلك ادخل اسم المستخدم</div>
-      </div>
+                      <div
+                        *ngIf="f['username'].errors && f['username'].touched"
+                        class="alert alert-warning mt-2"
+                      >
+                        <div *ngIf="f['username'].errors['required']">
+                          من فضلك ادخل اسم المستخدم
+                        </div>
+                      </div>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label" for="email"
@@ -103,26 +111,51 @@
                         name="email"
                         formControlName="email"
                         class="form-control"
-                         [ngClass]="{ 'is-invalid':f['email'].errors &&f['email'].touched }"
+                        [ngClass]="{
+                          'is-invalid': f['email'].errors && f['email'].touched
+                        }"
                       />
+                      <div
+                        *ngIf="f['email'].errors && f['email'].touched"
+                        class="alert alert-warning mt-2"
+                      >
+                        <div *ngIf="f['email'].errors['required']">
+                          من فضلك ادخل البريد الالكتروني
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <p class="form-label" for="phoneNumber">رقم التلفون</p>
-                  <div class="form-group d-inline-block form-control">
-                    <span class="px-2">+966</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      formControlName="phoneNumber"
-                      placeholder="xxxxxxxxxxxxx"
-                      [ngClass]="{ 'is-invalid':f['phoneNumber'].errors }"
 
-                    />
-                  </div>
-
-                  <div class="row">
+                  <div class="row mt-3">
+                    <div class="col-md-12 mb-4">
+                      <label class="form-label" for="phoneNumber"
+                        >رقم الهاتف
+                      </label>
+                      <input
+                        type="phoneNumber"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        formControlName="phoneNumber"
+                        class="form-control"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['phoneNumber'].errors && f['phoneNumber'].touched
+                        }"
+                      />
+                      <div
+                        *ngIf="
+                          f['phoneNumber'].errors && f['phoneNumber'].touched
+                        "
+                        class="alert alert-warning mt-2"
+                      >
+                        <div *ngIf="f['phoneNumber'].errors['required']">
+                          من فضلك ادخل رقم الهاتف
+                        </div>
+                        <div *ngIf="f['phoneNumber'].errors['pattern']">
+                          من فضلك ادخل رقم هاتف صحيح
+                        </div>
+                      </div>
+                    </div>
                     <div class="col-md-12 mb-4">
                       <label class="form-label" for="password"
                         >كلمة المرور</label
@@ -133,9 +166,19 @@
                         name="password"
                         formControlName="password"
                         class="form-control"
-                         [ngClass]="{ 'is-invalid':f['password'].errors &&f['password'].touched }"
-
+                        [ngClass]="{
+                          'is-invalid':
+                            f['password'].errors && f['password'].touched
+                        }"
                       />
+                      <div
+                        *ngIf="f['password'].errors && f['password'].touched"
+                        class="alert alert-warning mt-2"
+                      >
+                        <div *ngIf="f['password'].errors['required']">
+                          من فضلك ادخل كلمة المرور
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -177,4 +220,4 @@
 
 <!-- <h3>Form Value</h3>
 -->
-{{ f['phoneNumber'].errors| json }}
+{{ f["phoneNumber"].errors | json }}

@@ -8,7 +8,9 @@ import { ArabicDatePipe } from './Pipes/arabic-date.pipe';
 import { ArabicNumberPipe } from './Pipes/arabic-number.pipe';
 import { SplitNameByCommaPipe } from './Pipes/split-name-by-comma.pipe';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 const routes: Routes = [
   // {path: 'login', component: LoginComponent},
 ];
@@ -19,8 +21,11 @@ const routes: Routes = [
     ArabicNumberPipe,
     SplitNameByCommaPipe,
     NotFoundComponent,
+    NavbarComponent,
   ],
   imports: [
+    MatMenuModule,
+    MatIconModule,
     ReactiveFormsModule,
     CommonModule,
     NgxSpinnerModule,
@@ -33,7 +38,12 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   providers: [],
-  exports: [ArabicDatePipe, ArabicNumberPipe, SplitNameByCommaPipe],
+  exports: [
+    ArabicDatePipe,
+    ArabicNumberPipe,
+    SplitNameByCommaPipe,
+    NavbarComponent,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {}
