@@ -1,0 +1,99 @@
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
+
+<div class="section-2 mt-2">
+  <div class="row">
+    <div class="col-4">
+      <div class="row">
+
+        <ng-container *ngFor="let project of Listprojects |
+          paginate: {itemsPerPage:5, currentPage: page }"
+        >
+
+          <ng-container *ngIf="this.select==project.id">
+            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:#004958; color:white;">
+              <p><i class="far fa-user "></i>
+                <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                <a class="btn text-success">استشارات</a>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                {{project.district.nameAr}},{{project.district.city.nameAr}},
+                {{project.district.city.region.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+            </div>
+          </ng-container>
+
+
+          <ng-container *ngIf="this.select!=project.id">
+            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:white;  color:#004057;">
+              <p><i class="far fa-user "></i>
+                <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                <a class="btn text-success">استشارات</a>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                {{project.district.nameAr}},{{project.district.city.nameAr}},
+                {{project.district.city.region.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+            </div>
+          </ng-container>
+
+        </ng-container>
+
+
+        <div class="paginate mt-4" *ngIf="result==1">
+          <pagination-controls (pageChange)="changepage($event)"
+          previousLabel="السابق"
+          nextLabel="التالى"
+          >
+          </pagination-controls>
+        </div>
+
+        <!--- <div class="col-12 card card-1 mt-4" >
+        <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
+          <a class="btn text-success">تشطيب</a>
+        </p>
+        <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
+        <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
+      </div>
+
+      <div class="col-12 card card-1 mt-4">
+        <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
+          <a class="btn text-success">تشطيب</a>
+        </p>
+        <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
+        <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
+      </div>
+    -->
+
+      </div>
+
+    </div>
+
+
+    <!---------------------------------->
+    
+    <div class="col-5 mt-4 mb-3">
+
+    </div>
+
+
+
+    <!---------------------------------------->
+    <div class="col-3 mt-4 mb-3">
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+

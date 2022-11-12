@@ -122,3 +122,7 @@ input::placeholder
   padding-right: 8%;
  }
 
+ .was-validated .form-control:valid, .form-control.is-valid 
+ {
+  background-position: left calc(0.375em + 0.1875rem) center;
+ }

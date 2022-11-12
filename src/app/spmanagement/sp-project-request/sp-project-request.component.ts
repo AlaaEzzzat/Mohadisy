@@ -22,7 +22,7 @@ export class SpProjectRequestComponent implements OnInit {
   araby:any;
   selectProject:any;
   RequiredWorks:Array<any>=[];
-  Presentage:Array<number>=[];
+  Precentage:Array<number>=[];
   WorkId:Array<number>=[];
   check:any=true;
 
@@ -127,6 +127,7 @@ export class SpProjectRequestComponent implements OnInit {
     {
       this.numberofMilestones.push(i);
       this.totalcostMilestone[i]=0;
+      this.Precentage[i]=0;
     }
   }
 }
@@ -134,18 +135,41 @@ export class SpProjectRequestComponent implements OnInit {
   TotalCost()
   {
     this.totalcost=0;
+
+    if(this.OfferData.get('cost').value){
     this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData.get('cost').value}`).subscribe(data=>{
 
 
       this.totalcost=data.data;
-
-      this.milestones();
+      this.checkDataStage();
 
 
     });
+     }else{
+      var milestones=(Number)(this.OfferData.get('numberOfMilestones').value);
+      console.log(milestones);
+      if(milestones<=6){
+      for(let i=1;i<=milestones;i++)
+      {
+      this.Precentage[i]=0,
+      this.totalcostMilestone[i]=0;
 
+      }
+       }
 
+     }
 
+  }
+
+  checkDataStage()
+  {
+    var milestones=this.OfferData.get('numberOfMilestones').value;
+    if(milestones<=6){
+    for(let i=1;i<=milestones;i++)
+    {
+      this.MilestoneCost(i,this.Precentage[i]);
+    }
+     }
 
   }
 
@@ -154,7 +178,7 @@ export class SpProjectRequestComponent implements OnInit {
   {
 
     this.totalcostMilestone[stage]=0;
-    this.Presentage[stage]=precentage;
+    this.Precentage[stage]=precentage;
     if(stage=="1"&&precentage)
     {
       this.api.get(`https://app.mohandisy.com/api/Offer/getFirstMilestoneCost?cost=
@@ -194,27 +218,27 @@ export class SpProjectRequestComponent implements OnInit {
 
     for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
     {
-      Allprecentage.push((Number)(this.Presentage[i]));
+      Allprecentage.push((Number)(this.Precentage[i]));
       console.log(this.WorkId[i]);
-      if(this.WorkId[i]==8)
+      if(Number(this.WorkId[i])==8)
       {
 
         Allmilestones.push(
           {
             "cost":this.totalcostMilestone[i],
-            "percentage":(Number)(this.Presentage[i]),
+            "percentage":(Number)(this.Precentage[i]),
             "isFirstMilestone":true,
             "isLastMilestone": false,
             "requiredWorkId": 0,
           }
         );
 
-      }else if(this.WorkId[i]==9)
+      }else if(Number(this.WorkId[i])==9)
       {
         Allmilestones.push(
           {
             "cost":this.totalcostMilestone[i],
-            "percentage":(Number)(this.Presentage[i]),
+            "percentage":(Number)(this.Precentage[i]),
             "isFirstMilestone":false,
             "isLastMilestone": true,
             "requiredWorkId": 0,
@@ -226,7 +250,7 @@ export class SpProjectRequestComponent implements OnInit {
       Allmilestones.push(
         {
           "cost":this.totalcostMilestone[i],
-          "percentage":(Number)(this.Presentage[i]),
+          "percentage":(Number)(this.Precentage[i]),
           "requiredWorkedId":Number(this.WorkId[i]),
           "isFirstMilestone":false,
           "isLastMilestone": false,
@@ -273,6 +297,8 @@ export class SpProjectRequestComponent implements OnInit {
         "ContractorCommitments":null
 
       }
+
+      console.log(AllData);
 
 
       this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(data=>

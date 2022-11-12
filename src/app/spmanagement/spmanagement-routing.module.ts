@@ -18,6 +18,8 @@ import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.
 import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
 import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
+import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
+import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
 
 const routes: Routes = [
   {
@@ -31,23 +33,40 @@ const routes: Routes = [
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },
-      { path: 'projects/status', component:SpProjectStatusComponent},
       { path: 'projects', component:LayoutProjectComponent ,
         children:
-       [
-         { path: 'all', component: SpProjectsComponent },
-         {path:'request/pinned',component:SpPinnedProjectComponent},
-         { path: 'request',component:SpProjectRequestComponent},
-         { path: 'request/all',component:SpProjectRequestAllComponent},
-         {path:'all/request',component:SpCprojectRequestComponent},
-         {path:'accept',component:SpRequestAcceptComponent},
-         {path:'reject',component:SpRequestRejectComponent},
-         {path:'offer',component:SpProjectOfferComponent},
-         {path:'negotiation',component:SpProjectNegotiationComponent},
-       ]
-      },
+          [
+            {path:'', component:SpMenuOffersComponent,
+            children:
+            [
+              { path: 'new', component:SpProjectRequestAllComponent},
+              { path:'new/request',component:SpProjectRequestComponent},
+              {path:'accept',component:SpRequestAcceptComponent},
+              {path:'reject',component:SpRequestRejectComponent},
+              {path:'offer',component:SpProjectOfferComponent},
+              {path:'negotiation',component:SpProjectNegotiationComponent},
+            ]
+           },
+           {path:'status',component:SpProjectStatusComponent,
+           children:
+           [
+            {path:'current',component:SpProjectCurrentComponent},
+           ]
+          },
+  
+ 
+            
+          ],
 
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+
+        }
+        ,
+         { path: 'all', component: SpProjectsComponent},
+         {path:'all/request',component:SpCprojectRequestComponent},
+        
+
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
 
   },

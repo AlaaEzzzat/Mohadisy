@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
-  selector: 'app-sp-request-accept',
-  templateUrl: './sp-request-accept.component.html',
-  styleUrls: ['./sp-request-accept.component.scss']
+  selector: 'app-sp-project-current',
+  templateUrl: './sp-project-current.component.html',
+  styleUrls: ['./sp-project-current.component.scss']
 })
-export class SpRequestAcceptComponent implements OnInit {
+export class SpProjectCurrentComponent implements OnInit {
 
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
@@ -25,10 +25,10 @@ export class SpRequestAcceptComponent implements OnInit {
 
  ngOnInit(): void {
 
-   this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPAcceptedOffers/Page/1").subscribe(data=>{
+   this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
 
    console.log(data);
-   this.Listprojects=data.data.priceQuotes;
+   this.Listprojects=data.data.projects;
    if(this.Listprojects.length>0)
    this.result=1;
 
@@ -141,13 +141,14 @@ export class SpRequestAcceptComponent implements OnInit {
 
      this.page=e;
      console.log(this.page);
-     this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+     this.api.get(`https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/${this.page}`).subscribe(data=>{
 
-      this.Listprojects=data.data.priceQuotes;
+      this.Listprojects=data.data.projects;
 
 
    });
     }
 
  }
+
 

@@ -23,6 +23,8 @@ import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.
 import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
 import { SpProjectNegotiationComponent } from './sp-project-negotiation/sp-project-negotiation.component';
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
+import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
+import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.
     SpProjectOfferComponent,
     SpProjectNegotiationComponent,
     SpProjectStatusComponent,
+    SpMenuOffersComponent,
+    SpProjectCurrentComponent,
   ],
   imports: [
     CommonModule,
