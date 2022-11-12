@@ -226,7 +226,7 @@ getUnderNegotiationProjects(){
     this.iChangeStatusCliend = {
 
       projectId: this.idProduct.id,
-      projectStatusId:1010,
+      projectStatusId:5,
       notes: "string",
       rejectionReasonId: null
     };
