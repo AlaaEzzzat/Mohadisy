@@ -58,7 +58,8 @@ export class AdminSPComponent implements OnInit {
   userformMassage :FormGroup;
   company:any="مستقل"
 productCurrent: any;
-  constructor(private router:Router,private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
+isProcessing:boolean=true
+constructor(private router:Router,private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
   {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
@@ -131,18 +132,29 @@ productCurrent: any;
     this.newApi = 6;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getExpiredProfiles(page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      // console.log(this.iProfileData);
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getExpiredProfiles(page).subscribe({
+      next:(value) => {        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.isProcessing = true;
+          console.log(this.isProcessing)
+        this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
 
+      } else{
+        this.isProcessing = false;
+      }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   getNotCompletedProfiles(page: any) {
+    this.isProcessing = true;
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = false;
@@ -153,18 +165,28 @@ productCurrent: any;
     this.newApi = 8;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getNotCompletedProfiles(page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      // console.log(this.iProfileData);
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getNotCompletedProfiles(page).subscribe({
+      next:(value) => {
+        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
 
+      } else{
+        this.isProcessing=false;
+      }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   getCompletedProfiles(page: any) {
+    this.isProcessing = true;
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = false;
@@ -176,18 +198,28 @@ productCurrent: any;
     this.newApi = 18;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getCompletedProfiles(page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getCompletedProfiles(page).subscribe({
+      next:(value) => {        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
 
+      } else{
+        this.isProcessing=false;
+      }
+    },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   //5
   getBlockedProfiles(page: any) {
+    this.isProcessing = true;
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = false;
@@ -199,19 +231,26 @@ productCurrent: any;
     this.newApi = 5;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getBlockedProfiles(page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      // console.log(this.iProfileData);
-      this.total = value.data.totalPages;
-      // console.log(this.datas.length!=0);
-        if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getBlockedProfiles(page).subscribe({
+      next:(value) => {        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+          if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
+      } else{
+        this.isProcessing=false;
+      }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   // 1
-  getNewProfiles(page: any) {
+  getNewProfiles(page: any) {    this.isProcessing = true;
     this.pagenationNewProfiles = true;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = false;
@@ -224,21 +263,29 @@ productCurrent: any;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
 
-    this.ServicesProvidor.getNewProfiles(page).subscribe((value) => {
-      if (value.data.profiles) {
-        this.datas = value.data.profiles;
-        console.log(this.datas.length);
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getNewProfiles(page).subscribe({
+      next:(value) => {
+        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          if(this.datas.length!=0){
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);}
+
+        } else{
+          this.isProcessing=false;
+        }
+      },error: (error) => {
+        this.isProcessing = false;
 
       }
     });
   }
   //2
-  getRejectedProfiles(page: any) {
+  getRejectedProfiles(page: any) {    this.isProcessing = true;
+
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = true;
     this.pagenationactiveAllAcconting = false;
@@ -246,21 +293,31 @@ productCurrent: any;
     this.pagenationNonActiveAccount = false;
     this.pagenationExpiredProfiles = false;
     this.pagenationNotCompletedProfiles= false;
-
     this.newApi = 2;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getRejectedProfiles(page).subscribe((value) => {
-      this.datas = value.data.profiles;
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getRejectedProfiles(page).subscribe({
+      next:(value) => {
+        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
+      } else{
+        this.isProcessing=false;
+      }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   //3
-  activeAllAcconting(page: any) {
+  activeAllAcconting(page: any) {    this.isProcessing = true;
+
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = true;
@@ -268,23 +325,29 @@ productCurrent: any;
     this.pagenationNonActiveAccount = false;
     this.pagenationExpiredProfiles = false;
     this.pagenationNotCompletedProfiles= false;
-
     this.newApi = 3;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.activeProfile(page).subscribe((value) => {
-      this.datas = value.data.activeProfiles;
-      // console.log(this.datas);
-      this.iProfileData = this.datas;
-      // console.log(this.iProfileData);
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.activeProfile(page).subscribe({
+      next:(value) => {
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.activeProfiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
+      } else{
+        this.isProcessing=false;
+      }
+    },error: (error) => {
+        this.isProcessing = false;
+      }
     });
   }
   //4
-  getNonActiveAccount(page: any) {
+  getNonActiveAccount(page: any) {    this.isProcessing = true;
+
     this.pagenationNewProfiles = false;
     this.pagenationRejectedProfiles = false;
     this.pagenationactiveAllAcconting = false;
@@ -296,16 +359,26 @@ productCurrent: any;
     this.newApi = 4;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
-    this.ServicesProvidor.getNonActiveProfiles(page).subscribe((value) => {
-      this.datas = value.data.nonActiveProfiles;
-      this.iProfileData = this.datas;
-      // console.log(this.iProfileData);
-      this.total = value.data.totalPages;
-      if(this.datas.length!=0){
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);}
+    this.ServicesProvidor.getNonActiveProfiles(page).subscribe({
+      next:(value) => {
+        console.log(value);
+        if(value !=null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.nonActiveProfiles;
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;
+        if(this.datas.length!=0){
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);}
+        } else{
+          this.isProcessing=false;
+        }
+      },error: (error) => {
+        this.isProcessing = false;
+      }
     });
   }
+
+  // test
   getNewProfilesCompany(page: any) {
     this.ServicesProvidor.activeProfile​(page).subscribe((value) => {
       let companys:any[]=[]||value.data.profiles

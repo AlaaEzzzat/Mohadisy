@@ -5,10 +5,10 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg shadow-sm py-3">
+    <nav class="navbar navbar-expand-lg shadow-sm ">
       <div class="container-fluid">
         <div>
-          <img src="assets/logo.png" alt="" height="40px">
+          <img src="assets/logo.png" alt="" height="65px" class="w-100 me-2">
         </div>
         <!-- <div (click)="clickEvent()" class="mx-lg-3 mx-sm-1 mx-md-1 texticon">
           <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
@@ -64,56 +64,64 @@
 
       <div class="container-fluid " style="background-color: #eef0f8;">
         <div class="row ">
-          <div class="col-2 ">
-            <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" [hidden]="status">
-              <div class=" list-group-flush ">
-                <div class="text-white">
+          <div class="col-2 mt-0 pe-0 pt-0">
+            <div class="position-sticky  top-0 ">
+              <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" [hidden]="status">
+                <div class=" list-group-flush ">
+                  <div class="text-white">
 
-                  <div class="p-2 my-4"routerLink="/Admin/dashboard" routerLinkActive="active">
+                    <div class="p-2 my-4"routerLink="/Admin/dashboard" routerLinkActive="active">
 
-                    <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
+                      <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
+                    </div>
+                    <div class="p-2 my-4" routerLink="/Admin/offers" routerLinkActive="active">
+                      <!-- <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" /> -->
+                      <!-- <i class="fa fa-users fs-4" width="30px" height="30px" ></i> -->
+                      <i class="fa fa-hand-holding-dollar fs-4"></i>
+                      <!-- <mat-icon>users</mat-icon> -->
+                      <span class="px-2 fontStyle texticon" > عروض الأسعار </span>
+                    </div>
+                    <div class="p-2 my-4" routerLink="/Admin/project" routerLinkActive="active">
+                      <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> المشاريع  </span>
+                    </div>
+                    <div class="p-2 my-4"routerLink="/Admin/sp" routerLinkActive="active">
+                      <!-- <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px" /> -->
+                      <i class="fa fa-users fs-4" width="30px" height="30px" ></i>
+
+                      <span class="px-2 fontStyle texticon"> مزودي الخدمة </span>
+                    </div>
+                    <div class="p-2 my-4 " routerLink="/Admin/clients" routerLinkActive="active">
+                      <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px"  />
+                      <span class="px-2 fontStyle texticon"> العملاء </span>
+                    </div>
+                    <div class="p-2 my-4"routerLink="/Admin/contributions" routerLinkActive="active">
+                      <img src="assets/images/id-card.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> الاشتراكات  </span>
+                    </div>
+                    <div class="p-2 my-4" routerLink="/Admin/messages" routerLinkActive="active">
+                      <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> الرسائل </span>
+                    </div>
+                    <div class="p-2 my-4 flex justify-content-between" routerLink="/Admin/payments" routerLinkActive="active">
+                      <img src="assets/images/hand.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> المدفوعات </span>
+                    </div>
+                    <div class="p-2 my-4" routerLink="/Admin/settings" routerLinkActive="active">
+                      <img src="assets/images/settings.png" alt="" srcset="" width="28px" height="28px" />
+                      <span class="px-2 fontStyle texticon"> الإعدادات </span>
+                    </div>
+                    <!-- <div class="p-2 my-4 px-2" (click)="clickEvent()">
+                      <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
+                    </div> -->
                   </div>
-                  <div class="p-2 my-4" routerLink="/Admin/offers" routerLinkActive="active">
-                    <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon" > عروض الأسعار </span>
-                  </div>
-                  <div class="p-2 my-4" routerLink="/Admin/project" routerLinkActive="active">
-                    <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> المشاريع  </span>
-                  </div>
-                  <div class="p-2 my-4"routerLink="/Admin/sp" routerLinkActive="active">
-                    <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> مزودي الخدمة </span>
-                  </div>
-                  <div class="p-2 my-4 " routerLink="/Admin/clients" routerLinkActive="active">
-                    <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px"  />
-                    <span class="px-2 fontStyle texticon"> العملاء </span>
-                  </div>
-                  <div class="p-2 my-4"routerLink="/Admin/contributions" routerLinkActive="active">
-                    <img src="assets/images/id-card.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> الاشتراكات  </span>
-                  </div>
-                  <div class="p-2 my-4" routerLink="/Admin/messages" routerLinkActive="active">
-                    <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> الرسائل </span>
-                  </div>
-                  <div class="p-2 my-4 flex justify-content-between" routerLink="/Admin/payments" routerLinkActive="active">
-                    <img src="assets/images/hand.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> المدفوعات </span>
-                  </div>
-                  <div class="p-2 my-4" routerLink="/Admin/settings" routerLinkActive="active">
-                    <img src="assets/images/settings.png" alt="" srcset="" width="28px" height="28px" />
-                    <span class="px-2 fontStyle texticon"> الإعدادات </span>
-                  </div>
-                  <!-- <div class="p-2 my-4 px-2" (click)="clickEvent()">
-                    <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
-                  </div> -->
                 </div>
               </div>
             </div>
-            </div>
-            <div class="col-10 ">
+
+          </div>
+            <div class="col-10 mb-3">
               <router-outlet></router-outlet>
             </div>
 

@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
 SharedModule,
     AppRoutingModule,
@@ -28,7 +28,7 @@ SharedModule,
     FormsModule,
     NgbModule,
 
-    
+
 
 
   ],

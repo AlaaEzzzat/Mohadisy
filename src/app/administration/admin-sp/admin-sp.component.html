@@ -1,7 +1,9 @@
-<div class="my-3 container-fluid ">
-  <div class="d-flex flex-row mb-3 col-12 justify-content-around g-2">
+<div class="my-3 container-fluid">
+  <div
+    class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
+  >
     <button
-      class="btn rounded-1  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn rounded-1 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getNewProfiles(page)"
       [ngStyle]="{
@@ -34,7 +36,7 @@
     طلبات غير مكتمله
   </button> -->
 
-  <!-- <button
+    <!-- <button
   class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
   role="button"
   (click)="getNotCompletedProfiles(page)"
@@ -57,7 +59,7 @@
       الحسابات النشطه
     </button>
     <button
-      class="btn btn rounded-1  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getBlockedProfiles(page)"
       [ngStyle]="{
@@ -68,7 +70,7 @@
       الحسابات المعطله
     </button>
     <button
-      class="btn btn rounded-1  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 "
+      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getNonActiveAccount(page)"
       [ngStyle]="{
@@ -79,7 +81,7 @@
       الحسابات غيرالنشطه
     </button>
     <button
-      class="btn btn rounded-1  h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
+      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
       role="button"
       (click)="getExpiredProfiles(page)"
       [ngStyle]="{
@@ -89,37 +91,60 @@
     >
       الحسابات المنتهيه
     </button>
-
   </div>
 
   <div class="alert alert-success" role="alert" *ngIf="show">
-    {{messages}}
+    {{ messages }}
   </div>
-  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="showDanger">
-    <div>
-    العميل موجود بالفعل
-    </div>
+  <div
+    class="alert alert-danger d-flex align-items-center"
+    role="alert"
+    *ngIf="showDanger"
+  >
+    <div>العميل موجود بالفعل</div>
   </div>
 
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="firstObject;else undefind">
-
-    <div class="col-md-4 col-12">
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind">
+    <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-          <div class="btn-group">
-            <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              طلبات           </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" > المستقل</a></li>
-              <li><a class="dropdown-item" (click)="getNewProfilesCompany(page)"> شركات </a></li>
-              <li><a class="dropdown-item" (click)="getCompletedProfiles(page)"> طلبات مكتمله</a></li>
-              <li><a class="dropdown-item"  (click)="getNotCompletedProfiles(page)">  طلبات غير مكتمله</a></li>
 
-            </ul>
-          </div>
-
+            <div class="btn-group bg-white ms-1"  [hidden]="productCurrent.joinRequestStatus.accountStatusId != 4" >
+              <button
+                type="button"
+                class="btn btn-white dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                طلبات
+              </button>
+              <ul class="dropdown-menu text-end">
+                <li><a class="dropdown-item"> المستقل</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="getNewProfilesCompany(page)"
+                  >
+                    شركات
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getCompletedProfiles(page)">
+                    طلبات مكتمله</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="getNotCompletedProfiles(page)"
+                  >
+                    طلبات غير مكتمله</a
+                  >
+                </li>
+              </ul>
+            </div>
 
           <input
             class="form-control bg-white border-0 rounded-1 w-100"
@@ -135,15 +160,7 @@
         </div>
 
         <!-- card company -->
-        <!-- <ng-container> -->
-        <ng-container
-          *ngFor="
-            let pro of iProfileData
-
-              | filter: companyName
-          "
-        >
-
+        <ng-container *ngFor="let pro of iProfileData | filter: companyName">
           <div class="card mb-3 border-0 rounded-1 textFontSizeCard">
             <div
               class="card-body rounded-1"
@@ -152,300 +169,419 @@
                 'background-color':
                   productCurrent.id === pro.id ? '#004958' : '#ffffff',
                 color: productCurrent.id === pro.id ? '#ffffff' : '#004958'
-
               }"
             >
-              <div class="d-flex">
-                <img src="assets/icons/XMLID_1_.svg" *ngIf=" productCurrent.id != pro.id ;else whiteIconw"/>
-                <ng-template #whiteIconw><img src="assets/icons/XMLID_1_WH.svg" class=""  /></ng-template>
-                <div class="card-title me-3 ">
-                  <p class="typeCom"></p>
-                  <p class="fs-6"
-                    *ngIf="
-                      pro.applicationUser.accountType.typeName;
-                      else templateName
-                    "
+              <div class="d-flex justify-content-between">
+                <div class="d-flex">
+                  <img
+                    src="assets/icons/XMLID_1_.svg"
+                    *ngIf="productCurrent.id != pro.id; else whiteIconw"
+                  />
+                  <ng-template #whiteIconw
+                    ><img src="assets/icons/XMLID_1_WH.svg" class=""
+                  /></ng-template>
+                  <div class="card-title me-3">
+                    <p class="typeCom"></p>
+                    <p
+                      class="fs-6 typeCom"
+                      *ngIf="
+                        pro.applicationUser.accountType.typeName;
+                        else templateName
+                      "
+                    >
+                      {{ pro.applicationUser.accountType.typeName }}
+                    </p>
+                    <ng-template #templateName> Null </ng-template>
+                    <p class="fs-6" *ngIf="pro.companyName; else ind">
+                      {{ pro.companyName }}
+                    </p>
+                    <ng-template #ind>
+                      <p class="fs-6">{{ pro.firstName }} {{ pro.lastName }}</p>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <button
+                    mat-icon-button
+                    [matMenuTriggerFor]="menu"
+                    aria-label="Example icon-button with a menu"
                   >
-                    {{ pro.applicationUser.accountType.typeName }}
-                  </p>
-                  <ng-template #templateName> Null </ng-template>
-
-                  <p class="fs-6 " *ngIf="pro.companyName;else ind">{{ pro.companyName }}</p>
-                  <ng-template #ind>
-                    <p class=" fs-6 " >{{ pro.firstName }} {{ pro.lastName }}</p>
-                  </ng-template>
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu" class="py-2">
+                    <button mat-menu-item (click)="updatapro(productCurrent)">
+                      <mat-icon class="text-white">edit</mat-icon>
+                      <span>تعديل</span>
+                    </button>
+                  </mat-menu>
                 </div>
               </div>
 
               <div class="d-flex mb-2">
-                <img src="assets/icons/Group 801.svg" class="" [hidden]=" productCurrent.id === pro.id"/>
-                <img src="assets/icons/Group 801White.svg" class="" [hidden]=" productCurrent.id != pro.id" />
+                <img
+                  src="assets/icons/Group 801.svg"
+                  class=""
+                  [hidden]="productCurrent.id === pro.id"
+                />
+                <img
+                  src="assets/icons/Group 801White.svg"
+                  class=""
+                  [hidden]="productCurrent.id != pro.id"
+                />
                 <p class="fs-6 me-3">{{ pro.district.city.nameAr }}</p>
               </div>
               <div class="d-flex">
-                  <img src="assets/icons/Phone.svg" class="" [hidden]=" productCurrent.id === pro.id"/>
-                  <img src="assets/icons/PhoneWhite.svg" class=""  [hidden]=" productCurrent.id != pro.id"/>
-                  <div class="me-3 d-flex flex-row justify-content-between w-100">
-                    <small class="fs-6"  *ngIf="pro.officePhoneNumber;  else mostcal    "
-                      >  {{ pro.officePhoneNumber }} (966+)</small>
+                <img
+                  src="assets/icons/Phone.svg"
+                  class=""
+                  [hidden]="productCurrent.id === pro.id"
+                />
+                <img
+                  src="assets/icons/PhoneWhite.svg"
+                  class=""
+                  [hidden]="productCurrent.id != pro.id"
+                />
+                <div class="me-3 d-flex flex-row justify-content-between w-100">
+                  <small
+                    class="fs-6"
+                    *ngIf="pro.officePhoneNumber; else mostcal"
+                  >
+                    {{ pro.officePhoneNumber }} (966+)</small
+                  >
 
-                    <ng-template #mostcal>
-                      <small class="fs-6">
-                        {{ pro.applicationUser.phoneNumber }} (966+)
-                      </small>
-                    </ng-template>
-
-                      <small class=" opacity-75 align-content-end"
-                      >منذ
-                      {{ pro.dateCreated | date }}
+                  <ng-template #mostcal>
+                    <small class="fs-6">
+                      {{ pro.applicationUser.phoneNumber }} (966+)
                     </small>
+                  </ng-template>
+
+                  <small class="opacity-75 align-content-end"
+                    >منذ
+                    {{ pro.dateCreated | date }}
+                  </small>
                 </div>
               </div>
             </div>
           </div>
         </ng-container>
-<!-- pagenation -->
+        <!-- pagenation -->
+        <div class="col-12">
+          <div class="position-absolute top100">
+            <ng-container *ngIf="pagenationNewProfiles">
+              <tr *ngIf="pagenationNewProfiles">
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigits1
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getNewProfiles(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
 
+            <ng-container *ngIf="pagenationNotCompletedProfiles">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigitsNotCompletedProfiles
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
 
-<tr *ngIf="pagenationNewProfiles">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigits1
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getNewProfiles(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getNotCompletedProfiles(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
 
-<tr *ngIf="pagenationNotCompletedProfiles">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigitsNotCompletedProfiles
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
+            <ng-container *ngIf="pagenationRejectedProfiles">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigits2
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getRejectedProfiles(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
 
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getNotCompletedProfiles(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
+            <ng-container *ngIf="pagenationactiveAllAcconting">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigits3
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="activeAllAcconting(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
 
-<tr *ngIf="pagenationRejectedProfiles">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigits2
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getRejectedProfiles(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
+            <ng-container *ngIf="pagenationBlockedProfiles">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigits4
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getBlockedProfiles(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="pagenationNonActiveAccount">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigitsNotCompletedProfiles
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getNonActiveAccount(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="pagenationExpiredProfiles">
+              <tr>
+                <th
+                  scope="row"
+                  *ngFor="
+                    let data of arrayOfDigits6
+                      | paginate: { itemsPerPage: 1, currentPage: page }
+                  "
+                ></th>
+                <td colspan="1"></td>
+                <td colspan="4">
+                  <pagination-controls
+                    (click)="getExpiredProfiles(page)"
+                    (pageChange)="page = $event"
+                  ></pagination-controls>
+                </td>
+              </tr>
+            </ng-container>
+          </div>
+        </div>
 
-<tr *ngIf="pagenationactiveAllAcconting">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigits3
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="activeAllAcconting(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
-
-<tr *ngIf="pagenationBlockedProfiles">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigits4
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getBlockedProfiles(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
-
-<tr *ngIf="pagenationNonActiveAccount">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigitsNotCompletedProfiles
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getNonActiveAccount(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
-
-<tr *ngIf="pagenationExpiredProfiles">
-  <th
-    scope="row"
-    *ngFor="
-      let data of arrayOfDigits6
-        | paginate: { itemsPerPage: 1, currentPage: page }
-    "
-  ></th>
-  <td colspan="1"></td>
-  <td colspan="6">
-    <pagination-controls
-      (click)="getExpiredProfiles(page)"
-      (pageChange)="page = $event"
-    ></pagination-controls>
-  </td>
-</tr>
-<!-- end pagination -->
-    </form>
+        <!-- end pagination -->
+      </form>
     </div>
 
     <!--  -->
     <div class="col-md-7 sizew col-12 flex-row position-relative">
-
       <div class="col-12 card mb-3 border-0 rounded-1">
-        <a type="button" class="btn position-absolute top-0 start-0 me-5" (click)="updatapro(productCurrent)" *ngIf="productCurrent.joinRequestStatus.accountStatusId===4">
-          <p>تعديل</p></a>
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
-
-            <img *ngIf=" productCurrent.idPath ;else company"
-              src="{{ productCurrent.profilePicturePath}}"
+            <img
+              *ngIf="productCurrent.idPath; else company"
+              src="{{ productCurrent.profilePicturePath }}"
               class="img-fluid rounded-circle w-75 p-2"
               alt="null"
             />
 
             <ng-template #company>
-            <img
-            src="{{ productCurrent.companyLogoPath}}"
-            class="img-fluid rounded-circle  w-75  mx-2"
-            alt="null"
-          /></ng-template>
-
+              <img
+                src="{{ productCurrent.companyLogoPath }}"
+                class="img-fluid rounded-circle w-75 mx-2"
+                alt="null"
+            /></ng-template>
           </div>
           <div class="col-md-6">
             <div class="card-body">
               <div class="d-flex">
                 <img src="assets/icons/XMLID_1_.svg" />
 
-                  <p class="fs-6 me-3 pt-2">
+                <p class="fs-6 me-3 pt-2">
                   {{ productCurrent.applicationUser.accountType.typeName }}
                 </p>
-                </div>
-                <p class="card-text fs-6 " *ngIf="productCurrent.companyName;else ind">{{ productCurrent.companyName }}</p>
-                <ng-template #ind>
-                  <p class="card-text fs-6" >{{ productCurrent.firstName }} {{ productCurrent.lastName }}</p>
-                </ng-template>
+              </div>
+              <p
+                class="card-text fs-6"
+                *ngIf="productCurrent.companyName; else ind"
+              >
+                {{ productCurrent.companyName }}
+              </p>
+              <ng-template #ind>
+                <p class="card-text fs-6">
+                  {{ productCurrent.firstName }} {{ productCurrent.lastName }}
+                </p>
+              </ng-template>
 
-
-
-              <p class="card-text  ">
+              <p class="card-text">
                 <small class="text-muted fs-6"> نوع الخدمه </small>
                 <!-- ?? -->
-                <span class="typeCom fs-6" *ngIf="productCurrent.projectService;else mstql">{{ productCurrent.projectService.name}}</span>
-                <ng-template #mstql> <span class="typeCom">استشارات</span></ng-template>
+                <span
+                  class="typeCom fs-6"
+                  *ngIf="productCurrent.projectService; else mstql"
+                  >{{ productCurrent.projectService.name }}</span
+                >
+                <ng-template #mstql>
+                  <span class="typeCom">استشارات</span></ng-template
+                >
               </p>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===4">
-              <a type="button" class="btn complete" data-bs-toggle="modal" data-bs-target="#changeToAccepted">
-                <i class="fa-solid fa-check text-secondary "></i>
+          <div class="col-md-4 align-content-start">
+            <div
+              class="d-flex"
+              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"
+            >
+              <a
+                type="button"
+                class="btn complete"
+                data-bs-toggle="modal"
+                data-bs-target="#changeToAccepted"
+              >
+                <i class="fa-solid fa-check text-secondary"></i>
                 <p>مكتمل</p></a
               >
-              <a type="button" class="btn notcomplete"   data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <a
+                type="button"
+                class="btn notcomplete"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
                 <i class="fa-solid fa-exclamation"></i>
                 <p>غير مكتمل</p></a
               >
-              <a type="button" class="btn reject"  data-bs-toggle="modal" data-bs-target="#exampleModalReject">
+              <a
+                type="button"
+                class="btn reject"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalReject"
+              >
                 <i class="fa-solid fa-xmark"></i>
                 <p>رفض</p></a
               >
-
             </div>
 
-            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId===1">
-
-              <a type="button" class="btn notcomplete"   data-bs-toggle="modal" data-bs-target="#exampleModalAccepte">
+            <div
+              class="d-flex justify-content-end ms-3 "
+              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 1"
+            >
+              <a
+                type="button"
+                class="btn notcomplete"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalAccepte"
+              >
                 <i class="fa-solid fa-exclamation"></i>
-                <p>تفعيل</p></a>
+                <p>تفعيل</p></a
+              >
               <!-- <a type="button" class="btn">
                 <i class="bi bi-chat-dots"></i>
                 <p>مراسله</p></a
               > -->
             </div>
-           <!-- <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId !=1 && productCurrent.joinRequestStatus.accountStatusId !=4">
-
-              <a type="button" class="btn align-content-start">
+            <div
+              class="d-flex justify-content-end ms-3 "
+              *ngIf=" productCurrent.joinRequestStatus.accountStatusId != 1 &&
+                productCurrent.joinRequestStatus.accountStatusId != 4 " >
+              <a
+                type="button"
+                class="btn reject"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModalReject"
+              >
                 <i class="fa-solid fa-xmark"></i>
-                <p>مراسله</p></a>
-                <a type="button" class="btn" (click)="updatapro(productCurrent)">
-                  <p>تعديل</p></a>
-            </div> -->
+                <p>تعطيل</p></a
+              >
+            </div>
           </div>
-
         </div>
       </div>
-
+      <!-- سبب عدم الاكتمال -->
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        *ngIf="productCurrent.joinRequestStatus.accountStatusId != 4"
+      >
+        <p class="titleInformation fs-6">سبب عدم تاكيد الحساب </p>
+        <p class="fs-6">{{ productCurrent.joinRequestStatus.description }}</p>
+      </div>
       <!--    معلومات عن الشركه-->
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3" [hidden]="productCurrent.applicationUser.accountType.key != 'CO'">
-        <h1 class="card-title mb-4 "> الاوراق الثبوتيه</h1>
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
+      >
+        <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath&&productCurrent.companyRegisterationNumberFile">
+              <p class="card-subtitle text-muted fs-6">
                 سجل التجاري <br />
-                <small class="h6 ">{{ productCurrent.companyRegisterationNumber }} </small>
+                <small class="fs-6 textInformation"
+                  >{{ productCurrent.companyRegisterationNumber }}
+                </small>
               </p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.companyRegisterationNumberPath, productCurrent.companyRegisterationNumberFile)"
+                (click)="
+                  download(
+                    productCurrent.companyRegisterationNumberPath,
+                    productCurrent.companyRegisterationNumberFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
                   {{ productCurrent.companyRegisterationNumberFile }}
                 </p>
               </a>
+
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="card-subtitle text-muted h5">شهاده التأمينات الاجتماعية</p>
+            <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="productCurrent.socialInsuranceCertificatePath&&productCurrent.socialInsuranceCertificateFile">
+              <p class="card-subtitle text-muted fs-6">
+                شهاده التأمينات الاجتماعية
+              </p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.socialInsuranceCertificatePath, productCurrent.socialInsuranceCertificateFile)"
-
+                (click)="
+                  download(
+                    productCurrent.socialInsuranceCertificatePath,
+                    productCurrent.socialInsuranceCertificateFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -453,33 +589,48 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <p class="card-subtitle text-muted h5">شهاده الزكاة والدخل</p>
+            <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="productCurrent.zakatCertificatePath&&productCurrent.zakatCertificateFile">
+              <p class="card-subtitle text-muted fs-6">شهاده الزكاة والدخل</p>
               <a
                 class="bg-light d-flex px-2 align-items-center informationDownload"
-                (click)="download(productCurrent.zakatCertificatePath, productCurrent.zakatCertificateFile)"
+                (click)="
+                  download(
+                    productCurrent.zakatCertificatePath,
+                    productCurrent.zakatCertificateFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.zakatCertificateFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4 align-items-center">
-              <p class="card-subtitle text-muted h5">التقريرالمالي</p>
+            <div class="d-flex justify-content-between mb-4 align-items-center" *ngIf="productCurrent.financialStatementFile&&productCurrent.financialStatementPath">
+              <p class="card-subtitle text-muted fs-6">التقريرالمالي</p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.financialStatementPath, productCurrent.financialStatementFile)"
+                (click)="
+                  download(
+                    productCurrent.financialStatementPath,
+                    productCurrent.financialStatementFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.financialStatementFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">عضوية الفرقة التجارية</p>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.coCMembershipPath&&productCurrent.coCMembershipFile">
+              <p class="card-subtitle text-muted fs-6">عضوية الفرقة التجارية</p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.coCMembershipPath, productCurrent.coCMembershipFile)"
+                (click)="
+                  download(
+                    productCurrent.coCMembershipPath,
+                    productCurrent.coCMembershipFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.coCMembershipFile }}</p>
@@ -488,27 +639,36 @@
           </div>
 
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.licensePath&& productCurrent.licenseFile">
+              <p class="card-subtitle text-muted fs-6">
                 رقم الرخصة <br />
-                <small class="h6">{{ productCurrent.licenseNumber }}</small>
+                <small class="fs-6 textInformation">{{ productCurrent.licenseNumber }}</small>
               </p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.licensePath, productCurrent.licenseFile)"
+                (click)="
+                  download(
+                    productCurrent.licensePath,
+                    productCurrent.licenseFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.licenseFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">خطاب بنكي برقم البيان</p>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath&& productCurrent.companyRegisterationNumberFile">
+              <p class="card-subtitle text-muted fs-6">خطاب بنكي برقم البيان</p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.companyRegisterationNumberPath, productCurrent.companyRegisterationNumberFile)"
-
+                (click)="
+                  download(
+                    productCurrent.companyRegisterationNumberPath,
+                    productCurrent.companyRegisterationNumberFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -516,25 +676,33 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">شهاده السعوده</p>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.saudizationCertificatePath&& productCurrent.saudizationCertificateFile">
+              <p class="card-subtitle text-muted fs-6">شهاده السعوده</p>
               <a
                 target="_blank"
                 class="informationDownload py-2 bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.saudizationCertificatePath, productCurrent.saudizationCertificateFile)"
-
+                (click)="
+                  download(
+                    productCurrent.saudizationCertificatePath,
+                    productCurrent.saudizationCertificateFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p>{{ productCurrent.saudizationCertificateFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">ضربيه القيمه المضافه</p>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.addedValueRegisterationCertificatePath&& productCurrent.addedValueRegisterationCertificateFile">
+              <p class="card-subtitle text-muted fs-6">ضربيه القيمه المضافه</p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.addedValueRegisterationCertificatePath, productCurrent.addedValueRegisterationCertificateFile)"
-
+                (click)="
+                  download(
+                    productCurrent.addedValueRegisterationCertificatePath,
+                    productCurrent.addedValueRegisterationCertificateFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">
@@ -542,11 +710,13 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">شهاده الايزو 9001</p>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.isoPath&& productCurrent.isoFile">
+              <p class="card-subtitle text-muted fs-6">شهاده الايزو 9001</p>
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.isoPath, productCurrent.isoFile)"
+                (click)="
+                  download(productCurrent.isoPath, productCurrent.isoFile)
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
                 <p class="pt-3">{{ productCurrent.isoFile }}</p>
@@ -555,15 +725,18 @@
           </div>
         </div>
       </div>
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3" [hidden]="productCurrent.applicationUser.accountType.key === 'CO'">
-        <h1 class="card-title mb-4 "> الاوراق الثبوتيه</h1>
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
+      >
+        <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">
-                صوره البطاقه  <br />
-                <small class="h6">{{ productCurrent.idNumber }} </small>
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.idPath&&productCurrent.idFile">
+              <p class="card-subtitle text-muted fs-6">
+                صوره البطاقه <br />
+                <small class="fs-6 textInformation">{{ productCurrent.idNumber }} </small>
               </p>
               <a
                 target="_blank"
@@ -576,57 +749,60 @@
                 </p>
               </a>
             </div>
-
-
-
           </div>
 
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4">
-              <p class="card-subtitle text-muted h5">
+            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.membershipFile&&productCurrent.membershipPath">
+              <p class="card-subtitle text-muted fs-6">
                 رقم العضويه <br />
-                <small class="h6">{{ productCurrent.membershipNumber }}</small>
+                <small class="fs-6">{{ productCurrent.membershipNumber }}</small>
               </p>
               <a
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
-                (click)="download(productCurrent.membershipPath, productCurrent.membershipFile)"
+                (click)="
+                  download(
+                    productCurrent.membershipPath,
+                    productCurrent.membershipFile
+                  )
+                "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.membershipFile }}</p>
+                <p class="pt-3 textInformation">{{ productCurrent.membershipFile }}</p>
               </a>
             </div>
-
-
           </div>
         </div>
       </div>
       <!-- معلومات التواصل -->
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3" [hidden]="productCurrent.applicationUser.accountType.key === 'CO'">
-        <h1 class="card-title mb-4 h5">معلومات التواصل</h1>
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
+      >
+        <h1 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">الدوله</p>
+            <p class="card-subtitle text-muted  fs-6">الدوله</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else cityName"
               >{{ productCurrent.district.city.nameEn }}</small
             >
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">المدينه</p>
+            <p class="card-subtitle text-muted  fs-6">المدينه</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else city"
               >{{ productCurrent.district.city.nameEn }}</small
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">المنطقه</p>
+            <p class="card-subtitle text-muted  fs-6">المنطقه</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="
                 productCurrent.district.city.region.nameEn;
                 else regionName
@@ -636,9 +812,9 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">العنوان</p>
+            <p class="card-subtitle text-muted  fs-6">العنوان</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.shortAddress; else shortAddress"
               >{{ productCurrent.shortAddress }}</small
             >
@@ -646,68 +822,70 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">عنوان البريد الالكتروني</p>
+            <p class="card-subtitle text-muted  fs-6">عنوان البريد الالكتروني</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.applicationUser.email; else emailName"
-              >{{ productCurrent.applicationUser.email }}</small
+              >{{ productCurrent.applicationUser.email}}</small
             >
-            <ng-template #emailName> _ </ng-template>
+            <ng-template #emailName><small  class="fs-6 text-center textInformation" > _ </small></ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-muted h5"> الجوال</p>
+            <p class="card-subtitle text-muted  fs-6">الجوال</p>
             <small
-              class="fs-6 "
-              *ngIf="productCurrent.applicationUser.phoneNumber; else websiteLink"
+              class="fs-6 textInformation"
+              *ngIf="
+                productCurrent.applicationUser.phoneNumber;
+                else websiteLink
+              "
               >{{ productCurrent.applicationUser.phoneNumber }} +</small
             >
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">صندوق البريد</p>
-            <small
-              class="fs-6 "
-              *ngIf="productCurrent.postalBox; else box"
-              >{{ productCurrent.postalBox }}</small
-            >
+            <p class="card-subtitle text-muted fs-6">صندوق البريد</p>
+            <small class="fs-6 textInformation" *ngIf="productCurrent.postalBox; else box">{{
+              productCurrent.postalBox
+            }}</small>
             <ng-template #box> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">رمز البريد</p>
-            <small
-              class="fs-6 "
-              *ngIf="productCurrent.postalCode; else postcode"
+            <p class="card-subtitle text-muted fs-6">رمز البريد</p>
+            <small class="fs-6 textInformation" *ngIf="productCurrent.postalCode; else postcode"
               >{{ productCurrent.postalCode }}
             </small>
             <ng-template #postcode> _ </ng-template>
           </div>
         </div>
       </div>
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3" [hidden]="productCurrent.applicationUser.accountType.key != 'CO'">
-        <h1 class="card-title mb-4 h5">معلومات التواصل</h1>
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
+      >
+        <h1 class="card-title mb-4  titleInformation">معلومات التواصل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">الدوله</p>
+            <p class="card-subtitle text-muted  fs-6">الدوله</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else cityName"
               >{{ productCurrent.district.city.nameEn }}</small
             >
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">المدينه</p>
+            <p class="card-subtitle text-muted  fs-6">المدينه</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else city"
               >{{ productCurrent.district.city.nameEn }}</small
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">المنطقه</p>
+            <p class="card-subtitle text-muted  fs-6">المنطقه</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="
                 productCurrent.district.city.region.nameEn;
                 else regionName
@@ -717,59 +895,58 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">العنوان</p>
+            <p class="card-subtitle text-muted fs-6">العنوان</p>
             <small
-              class="fs-6 "
-              *ngIf="productCurrent.district.shortAddress; else shortAddress"
-              >{{ productCurrent.district.shortAddress }}</small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.streetName; else shortAddress"
+              >{{ productCurrent.streetName }}-{{productCurrent.district.nameAr}}</small
             >
             <ng-template #shortAddress> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">رقم هاتف المكتب</p>
+            <p class="card-subtitle text-muted fs-6">رقم هاتف المكتب</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="
-                productCurrent.district.officePhoneNumber;
+                productCurrent.officePhoneNumber;
                 else officePhoneNumber
               "
-              >{{ productCurrent.district.officePhoneNumber }}</small
+              >{{ productCurrent.officePhoneNumber }}</small
             >
             <ng-template #officePhoneNumber> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">عنوان البريد الالكتروني</p>
-            <!-- <small
-              class="fs-6 "
-              *ngIf="productCurrent.representative.email; else emailName"
-              >{{ productCurrent.representative.email }}</small
-            > -->
+            <p class="card-subtitle text-muted fs-6">عنوان البريد الالكتروني</p>
+            <small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.applicationUser.email; else emailName"
+              >{{ productCurrent.applicationUser.email }}</small
+            >
             <ng-template #emailName> _ </ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-muted h5">رابط الموقع</p>
+            <p class="card-subtitle text-muted  fs-6">رابط الموقع</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.websiteLink; else websiteLink"
-              >{{ productCurrent.websiteLink }}</small
-            >
+              >{{ productCurrent.websiteLink }}</small>
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">صندوق البريد</p>
+            <p class="card-subtitle text-muted  fs-6">صندوق البريد</p>
             <small
-              class="fs-6 "
-              *ngIf="productCurrent.district.postalCode; else box"
-              >{{ productCurrent.district.postalCode }}</small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.postalBox; else box"
+              >{{ productCurrent.postalBox }}</small
             >
-            <ng-template #box> _ </ng-template>
+            <ng-template #box> <small class="fs-6 text-center textInformation" >_</small> </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted h5">رمز البريد</p>
+            <p class="card-subtitle text-muted  fs-6">رمز البريد</p>
             <small
-              class="fs-6 "
-              *ngIf="productCurrent.district.postalCode; else postcode"
-              >{{ productCurrent.district.postalCode }}
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.postalCode; else postcode"
+              >{{ productCurrent.postalCode }}
             </small>
             <ng-template #postcode> _ </ng-template>
           </div>
@@ -777,32 +954,38 @@
       </div>
 
       <!-- معلومات عن ممثل الموقع -->
-      <div class="col-12 card mb-3 border-0 rounded-1 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
-      ">
-        <h1 class="card-title mb-4 ">معلومات عن ممثل الموقع</h1>
+      <div
+        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        *ngIf="productCurrent.applicationUser.accountType.key == 'CO'"
+      >
+        <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
-            <p class="card-subtitle text-muted h5">الاسم</p>
+            <p class="card-subtitle text-muted  fs-6">الاسم</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.representative.firstName; else firstName"
-              >{{ productCurrent.representative.firstName }}{{ productCurrent.representative.lastName }}</small
+              >{{ productCurrent.representative.firstName
+              }}{{ productCurrent.representative.lastName }}</small
             >
             <ng-template #firstName> _ </ng-template>
           </div>
           <div>
-            <p class="card-subtitle text-muted h5">رقم التليفون</p>
+            <p class="card-subtitle text-muted  fs-6">رقم التليفون</p>
             <small
-              class="fs-6"
-              *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
-              >{{ productCurrent.representative.phoneNumber }} 966+
+              class="fs-6 textInformation"
+              *ngIf="
+                productCurrent.representative.phoneNumber;
+                else phoneNumber
+              "
+              >{{ productCurrent.representative.phoneNumber }}
             </small>
             <ng-template #phoneNumber> _ </ng-template>
           </div>
           <div>
-            <p class="card-subtitle text-muted h5">البريد الالكتروني</p>
+            <p class="card-subtitle text-muted  fs-6">البريد الالكتروني</p>
             <small
-              class="fs-6 "
+              class="fs-6 textInformation"
               *ngIf="productCurrent.representative.email; else email"
               >{{ productCurrent.representative.email }}</small
             >
@@ -810,9 +993,15 @@
           </div>
         </div>
       </div>
+      <!-- serviceProviderWorks -->
+      <div class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-1 p-3 serviceProviderWorksBg">
+        <p>المشاريع السابقه</p>
+        <p>{{productCurrent.serviceProviderWorks.length}} مشروع</p>
+      </div>
+
       <!-- <div class="col-12 card mb-3 border-0 rounded-1 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
       ">
-        <h1 class="card-title mb-4 ">معلومات عن ممثل الموقع</h1>
+        <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted h5">الاسم</p>
@@ -845,7 +1034,7 @@
       </div> -->
       <!-- معلومات عن الموظفين-->
       <!-- <div class="col-12 card mb-3 border-0 rounded-1 p-3">
-        <h1 class="card-title mb-4 h5">معلومات عن الموظفين</h1>
+        <h1 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h1>
         card loop
         <div
           class="d-flex col-12 mb-4"
@@ -880,118 +1069,249 @@
           </div>
         </div>
       </div> -->
+
     </div>
   </div>
 
-<ng-template #undefind>
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
-    <h1 class="fw-bold fs-1 text-center mt-5">
-      لايوجد بيانات في هذا التصنيف
-  </h1>
-
-  </div>
-
-</ng-template>
+  <ng-template #undefind>
+    <div class="alert alert-danger d-flex align-items-center h2" role="alert" *ngIf="!isProcessing">
+      <div>
+        حاليا لايوجد طلبات
+      </div>
+      </div>
+  </ng-template>
 </div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- غير مكتمل -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header ">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">سبب  اخيارك  غير مكتمل.</h1>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h2 class="modal-title col-11" id="exampleModalLabel">
+          سبب عدم اكتمال الحساب
+        </h2>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <div class="modal-body my-3">
-        <form  [formGroup]="userformMassage">
-          <input type="text" class="form-control" name="massage" id="massage" placeholder="massage" value="text" formControlName="massage" >
+      <div class="modal-body my-3 modalbody">
+        <form [formGroup]="userformMassage">
+          <textarea
+            type="text"
+            class="form-control fs-5"
+            placeholder=" سبب عدم اكتمال "
+            name="massage"
+            id="massage"
+            cols="50"
+            rows="3"
+            value="text"
+            formControlName="massage"
+          ></textarea>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToNotComplette()">حفظ </button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToNotComplette()"
+        >
+          حفظ
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          الغاء
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="exampleModalReject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- تعطيل /الرفض -->
+<div
+  class="modal fade"
+  id="exampleModalReject"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header ">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">سبب  الرفض.</h1>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h2 class="modal-title col-11" id="exampleModalLabel">
+          سبب تعطيل الحساب
+        </h2>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <div class="modal-body my-3">
-        <form  [formGroup]="userformMassage">
-          <input type="text" class="form-control" name="massage" id="massage" placeholder="massage" value="text" formControlName="massage" >
+      <div class="modal-body my-3 modalbody">
+        <form [formGroup]="userformMassage">
+          <textarea
+            type="text"
+            class="form-control fs-5"
+            placeholder=" سبب الرفض "
+            name="massage"
+            id="massage"
+            cols="50"
+            rows="2"
+            value="text"
+            formControlName="massage"
+          ></textarea>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToReject()">حفظ </button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToReject()"
+        >
+          حفظ
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          الغاء
+        </button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- تاكيد -->
+<div
+  class="modal fade"
+  id="changeToAccepted"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h2 class="modal-title col-11" id="exampleModalLabel">
+          هل انت متاكد من الموافقه علي هذا الطلب ؟
+        </h2>
 
-<div class="modal fade" id="exampleModalAccepte" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToAccepted()"
+        >
+          نعم
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          لا
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- تفعيل -->
+<!-- <div
+  class="modal fade"
+  id="exampleModalAccepte"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-body">
-
-        <h1 class="modal-title" id="exampleModalLabel">هل انت متاكد من تفعيل هذاالحساب ؟</h1>
-
+        <h1 class="modal-title" id="exampleModalLabel">
+          هل انت متاكد من تفعيل هذاالحساب ؟
+        </h1>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="accepted()">حفظ </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          لا
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="accepted()"
+        >
+        نعم
+        </button>
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
 
 <!-- Modal ub date-->
-<div class="modal fade" id="modalUpdata" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
+
+<div
+  class="modal fade"
+  id="exampleModalAccepte"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div
+        class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h2 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h2>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <div class="modal-body">
-        <div *ngIf="productCurrent.applicationUser.accountType.key=== 'CO';else ind">
-          <input type="text"  class="form-control" name="officePhoneNumber" id="officePhoneNumber" [(ngModel)]="productCurrent.officePhoneNumber" >
-        </div>
-
-        <ng-template #ind>
-          <input type="text"  class="form-control" name="firstName" id="firstName" [(ngModel)]="productCurrent.firstName"  >
-          <input type="text"  class="form-control" name="phoneNumber" id="phoneNumber" [(ngModel)]="productCurrent.applicationUser.phoneNumber"  >
-        </ng-template>
-
-
+      <div class="modal-body my-3 modalbody">
+        <h2 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h2>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="changeToAccepted" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-body">
-
-        <h1 class="modal-title " id="exampleModalLabel" >هل انت متاكد من الموافقه علي هذا الطلب ؟</h1>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="changeToAccepted()">حفظ </button>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="accepted()"
+        >
+          نعم
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          لا
+        </button>
       </div>
     </div>
   </div>

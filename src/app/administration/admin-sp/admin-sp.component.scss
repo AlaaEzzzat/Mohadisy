@@ -5,7 +5,7 @@ $fontTajawalFamily: 'Tajawal', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
-// $textColor:#18AF9A;
+
 $bgButton:#F3FBFA;
 $font25Size:25px;
 $font18Size:18px;
@@ -22,17 +22,28 @@ $font15Size:15px;
 
 
 a:focus ,a:hover,button:focus ,button:hover {
-  background-color: #004057 !important;
+  background-color :$Alltext!important;
   color: white !important;
 }
 button>i ,.typeCom
 {
   color: #18AF9A !important;
+  // font-family:$fontCairoFamily;
 
 }
+.textInformation,a{
+  color: $Alltext !important;
+  font-family:$fontCairoFamily;
+ }
+ .titleInformation{
+  color: $Alltext !important;
+  font-family:$fontTajawalFamily;
+
+ }
 input[type="search"]{
   &:hover,&:active ,&:focus{
     border: 0px none transparent !important;
+    box-shadow: none !important;
   }
 
 }
@@ -84,4 +95,65 @@ color: #000 !important;
 .notcomplete:hover{
 
   background-color: #FFC10780 !important;
+}
+.top100 {
+  top: 99% !important;
+  right: -10% !important;
+}
+.modaltitle{
+  background-color: $textColor !important;
+  >h2,>button{
+    color: white !important;
+    font-family: $fontTajawalFamily;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.modalbody{
+  form>h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  >h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  textarea:active,textarea:focus{
+    box-shadow: none !important;
+    border: #004057 solid 1px;
+    font-family: $fontCairoFamily;
+  }
+  // textarea{
+  //   height: auto;
+  // }
+}
+.modalfooter{
+  >button:first-child{
+    background-color: #18AF9A;
+    color: white;
+    &:hover,&:focus{
+      background-color: white;
+      border: #18AF9A 1px solid;
+      color: #18AF9A;
+    }
+
+  }
+
+}
+.serviceProviderWorksBg{
+  background-color: $Alltext;
+  font-family: $fontCairoFamily;
+  p:first-child{
+    color: white;
+  }
+  color: #18AF9A;
 }

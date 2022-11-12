@@ -28,7 +28,7 @@ import { AdminSettingChangeProfileComponent } from './admin-setting-change-profi
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
-
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -65,7 +65,7 @@ CommonModule,
     MatSlideToggleModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-
+    MatMenuModule,
   ],
 })
 export class AdministrationModule {}
