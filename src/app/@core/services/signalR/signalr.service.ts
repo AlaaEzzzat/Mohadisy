@@ -1,21 +1,21 @@
-/* import { Injectable } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
+import {
+  HubConnection,
+  HubConnectionBuilder,
+  LogLevel,
+} from '@microsoft/signalr';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalrService {
-  public hubConnection: signalR.HubConnection;
+  public hubConnection!: HubConnection;
   constructor() {}
   startConnection = () => {
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(
-        'http:/:localhost:1874/notify' ,  {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
-      }
-      )
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('http:/:localhost:1874/notify')
       .build();
+
     this.hubConnection
       .start()
       .then(() => {
@@ -35,4 +35,3 @@ export class SignalrService {
     });
   }
 }
- */

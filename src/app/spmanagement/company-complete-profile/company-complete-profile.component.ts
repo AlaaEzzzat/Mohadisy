@@ -1,3 +1,4 @@
+import { SignalrService } from './../../@core/services/signalR/signalr.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ClientService } from './../../@core/services/client/client.service';
@@ -13,12 +14,17 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-company-complete-profile',
   templateUrl: './company-complete-profile.component.html',
   styleUrls: ['./company-complete-profile.component.scss'],
 })
 export class CompanyCompleteProfileComponent implements OnInit {
+  subServices = new FormControl();
+  selectedsubServices: any = [];
+  ospprofileSubServices: any = [];
+
   companyUser: ICompany = {} as ICompany;
   companyPresenter: ICompanyPresenter = {} as ICompanyPresenter;
   completeCampanyProfileForm!: FormGroup;
@@ -30,7 +36,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
   citiesList: any = [];
   districtsList: any = [];
   allProjectSubService = [];
-  selectedSubServices: any = [];
+  /*   selectedSubServices: any = []; */
   uplaodedImages: any = [];
   addingDistrict: boolean = false;
   selectedServices: any = 0;
@@ -55,7 +61,8 @@ export class CompanyCompleteProfileComponent implements OnInit {
     private provider: ProviderServiceService,
     private _toastr: ToastrService,
     private client: ClientService,
-    private router: Router
+    private router: Router,
+    private SignalrService: SignalrService
   ) {
     this.completeCampanyProfileForm = this.fb.group({
       companyName: ['', [Validators.required]],
@@ -81,6 +88,8 @@ export class CompanyCompleteProfileComponent implements OnInit {
       licenseEndDate: ['', [Validators.required]],
       licenseStartDate: ['', [Validators.required]],
       companyRegisteration: ['', [Validators.required]],
+      companyRegisterationEndDate: ['', [Validators.required]],
+      companyRegisterationStartDate: ['', [Validators.required]],
       license: ['', [Validators.required]],
       companyLogo: ['', [Validators.required]],
 
@@ -157,7 +166,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
       });
   }
 
-  actionOnSubServie(SubId: any) {
+  /*  actionOnSubServie(SubId: any) {
     console.log(SubId);
     var flag = 0;
     if (this.selectedSubServices.length > 0) {
@@ -181,7 +190,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
       });
     }
     console.log(this.selectedSubServices);
-  }
+  } */
   onImageUpload(event: any, name: any) {
     if (event.target.files.length > 0) {
       console.log(event.target.files);
@@ -259,7 +268,12 @@ export class CompanyCompleteProfileComponent implements OnInit {
   get postalCode() {
     return this.completeCampanyProfileForm.get('postalCode');
   }
-
+  get companyRegisterationStartDate() {
+    return this.completeCampanyProfileForm.get('companyRegisterationStartDate');
+  }
+  get companyRegisterationEndDate() {
+    return this.completeCampanyProfileForm.get('companyRegisterationEndDate');
+  }
   get projectServiceId() {
     return this.completeCampanyProfileForm.get('projectServiceId');
   }
@@ -270,9 +284,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
   get websiteLink() {
     return this.completeCampanyProfileForm.get('websiteLink');
   }
-  get ospprofileSubServices() {
-    return this.completeCampanyProfileForm.get('ospprofileSubServices');
-  }
+
   get projectCategoryId() {
     return this.completeCampanyProfileForm.get('projectCategoryId');
   }
@@ -324,8 +336,12 @@ export class CompanyCompleteProfileComponent implements OnInit {
     return false;
   }
   completeCampanyProfileFormSubmit() {
-    console.log(this.uplaodedImages);
-    console.log(this.filesFormData);
+    this.selectedsubServices.map((sub: any) => {
+      this.ospprofileSubServices.push({
+        projectServiceId: this.projectServiceId?.value,
+        projectSubServiceId: sub,
+      });
+    });
 
     this.companyUser.companyName = this.companyName?.value;
     this.companyUser.officePhoneNumber = this.officePhoneNumber?.value;
@@ -336,10 +352,9 @@ export class CompanyCompleteProfileComponent implements OnInit {
     this.companyUser.districtId = this.districtId?.value;
     this.companyUser.postalCode = this.postalCode?.value;
     this.companyUser.streetName = this.streetName?.value;
-    this.companyUser.ospprofileSubServices = this.ospprofileSubServices?.value;
+
     this.companyUser.companyClassificationId = 0;
-    this.companyUser.ospprofileSubServices = this.selectedSubServices;
-    this.companyUser.ospprofileSubServices = this.selectedSubServices;
+    this.companyUser.ospprofileSubServices = this.ospprofileSubServices;
     this.companyUser.companyRegisterationNumber =
       this.companyRegisterationNumber?.value;
     this.companyUser.licenseNumber = this.licenseNumber?.value;
@@ -351,9 +366,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
     this.companyPresenter.lastName = this.lastName?.value;
     this.companyPresenter.phoneNumber = this.phoneNumber?.value;
 
-    console.log(this.companyUser);
-    console.log(this.companyPresenter);
-    if (this.selectedSubServices.length > 0) {
+    if (this.selectedsubServices.length > 0) {
       this.serviceProviderService
         .storeOrganizationalProfile(this.companyUser)
         .subscribe({
@@ -410,18 +423,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
         }
       );
   }
-  checkStatus(id: any) {
-    var flag = 0;
-    this.selectedSubServices.map((subService: any) => {
-      if (subService.projectSubServiceId == id) {
-        var index = this.selectedSubServices.indexOf(subService);
-        this.selectedSubServices.splice(index, 1);
-        flag = 1;
-      }
-    });
-    return flag;
-  }
-
   _getDistricts() {
     this.selectCity = this.completeCampanyProfileForm?.get('city')?.value;
     console.log(this.selectCity);
@@ -503,6 +504,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
                 next: (response: any) => {
                   console.log(response);
                   console.log('Image Posted');
+                  this.router.navigate(['/Spmanagement/prevWorks']);
                 },
                 error: (err: any) => {
                   console.log(err);
@@ -543,4 +545,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
         });
     }
   }
+
+  /* ********************** */
 }

@@ -13,9 +13,12 @@ export class SpHomeComponent implements OnInit {
   }
 
   constructor() {}
-  search() {}
-  showNotification() {}
-  showSubMenu() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    /*   this.signalr.startConnection();
+    setTimeout(() => {
+      this.signalr.askServerListener();
+      this.signalr.askServer();
+    }, 2000);*/
+  }
 }

@@ -1,6 +1,8 @@
 <section style="min-height: 100vh" class="prevWork">
-  <header class="form-control p-3 signFormIn border-end">
-    <h5 class="bd-title m-0 p-0 cairo" dir="rtl">إضافه عمل سابق خاص بكـ</h5>
+  <header class="form-control p-3 signFormIn border-0">
+    <label class="bd-title m-0 p-0 cairo" dir="rtl"
+      >إضافه عمل سابق خاص بكـ</label
+    >
   </header>
   <div class="container form-control py-5 px-4 border-0 signFormIn">
     <form [formGroup]="prevWorksForm" (ngSubmit)="prevWorksFormSubmit()">
@@ -212,7 +214,9 @@
     </form>
   </div>
   <section class="bg-white p-4" *ngIf="allServiceProviderWorks.length > 0">
-    <h4 class="bd-title m-0 p-0 mb-3 cairo">جميع أعمالك السابقة</h4>
+    <header class="form-control p-3 signFormIn border-0">
+      <label class="bd-title m-0 p-0 mb-3 cairo">جميع أعمالك السابقة</label>
+    </header>
     <div id="table-container">
       <table
         style="border: 1px solid #004057"

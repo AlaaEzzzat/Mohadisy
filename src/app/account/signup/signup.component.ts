@@ -45,11 +45,9 @@ export class SignupComponent implements OnInit {
       phoneNumber: [
         '',
         [Validators.required],
-        Validators.pattern('^(966)(5)[0-9]{8}$'),
+        /*    Validators.pattern('^(966)(5)[0-9]{8}$'), */
       ],
       roleId: ['', [Validators.required]],
-      // accountId: new FormArray([]),
-      // accountId: [0, [Validators.required]],
     });
   }
 

@@ -17,7 +17,8 @@ import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.compon
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -34,6 +35,8 @@ import { CompanyCompleteProfileComponent } from './company-complete-profile/comp
     CompanyCompleteProfileComponent,
   ],
   imports: [
+    MatSelectModule,
+    MatFormFieldModule,
     SharedModule,
     CommonModule,
     SPmanagementRoutingModule,
