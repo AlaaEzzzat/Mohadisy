@@ -83,7 +83,6 @@
   </div>
 
   <div  class="col-12 d-flex flex-row flex-wrap justify-content-between"  *ngIf="isProcessing; else undefind">
-    <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
     <div class="col-md-4 col-12  position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
@@ -373,7 +372,7 @@
                   )
                 "
               >
-                <i class="fa fa-download typeCom ms-3"></i>
+                <i class="fa fa-download  ms-3"></i>
                 <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
               </a>
               <ng-template #idFile>___</ng-template>
@@ -435,12 +434,12 @@
                 productCurrent.clientProfile.applicationUser ;
                 else emailName
               "
-              >_</small
+              >{{
+                productCurrent.clientProfile.applicationUser.email
+              }}</small
             >
             <ng-template #emailName>
-              <small class="fs-6 textInformation"  *ngIf="productCurrent.clientProfile.applicationUser">{{
-                productCurrent.clientProfile.applicationUser.email
-              }}</small>
+              <small class="fs-6 textInformation"  >_</small>
             </ng-template>
           </div>
 
@@ -471,14 +470,15 @@
               </small>
               <ng-template #projectCategoryname> _ </ng-template>
             </div>
-            <div class="col-4">
+            <div class="col-4"  *ngIf="
+            productCurrent.projectSubCategory">
               <p class="card-subtitle text-muted fs-6 mb-2">
                 التصنيف الفرعي
               </p>
               <small
                 class="fs-6 textInformation"
                 *ngIf="
-                  productCurrent.projectSubCategory.name;
+                  productCurrent.projectSubCategory;
                   else projectSubCategoryname
                 "
                 >{{ productCurrent.projectSubCategory.name }}

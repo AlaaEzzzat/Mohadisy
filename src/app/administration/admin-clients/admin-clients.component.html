@@ -1,5 +1,5 @@
 <div class="m-3">
-  <div class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around">
+  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap">
     <button
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
@@ -59,7 +59,7 @@
     </button>
   </div>
 
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" >
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind" >
     <div class="col-md-4 col-12 position-relative">
       <form
         class="d-flex flex-column me-3"
@@ -662,12 +662,10 @@
       </div>
   </div>
   <ng-template #undefind>
-    <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
-      <h1 class="fw-bold fs-1 text-center mt-5">
-        لايوجد بيانات في هذا التصنيف
-    </h1>
-
-    </div>
-
+    <div class="alert alert-danger d-flex align-items-center h2" role="alert" *ngIf="!isProcessing">
+      <div>
+        حاليا لايوجد عملاء
+      </div>
+      </div>
   </ng-template>
 </div>

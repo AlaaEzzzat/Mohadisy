@@ -35,7 +35,7 @@ userformMassage :FormGroup;
   messages:any;
   show:boolean=false;
   showDanger:boolean=false;
-  isProcessing:boolean=true
+  isProcessing:boolean=true;
   constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],

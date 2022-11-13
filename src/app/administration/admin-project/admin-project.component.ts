@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-project',
@@ -29,24 +30,25 @@ export class AdminProjectComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  messages: any;
-  show: boolean = false;
-  showDanger: boolean = false;
-  isProcessing: boolean = true;
-
+  userformMassage :FormGroup;
+  messages:any;
+  show:boolean=false;
+  showDanger:boolean=false;
+  isProcessing:boolean=true;
   constructor(
     private ServicesProvidor: AdminProjectsService,
-    private _HttpClient: HttpClient
+    private _HttpClient: HttpClient ,private formbuilder:FormBuilder
   ) {
-    // this.getCurrentProjects()
+    this.userformMassage=this.formbuilder.group({
+      massage:['',[Validators.required]],
+    });
   }
 
   ngOnInit(): void {
-    // this.objectProductGet();
+    this.getCurrentProjects();
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
-    // console.log( this.pagenation)
   }
   next() {
     if (this.page < this.total) {
@@ -81,13 +83,13 @@ export class AdminProjectComponent implements OnInit {
   }
   //3
   getCurrentProjects() {
-    sessionStorage.clear();
     this.isProcessing = true;
     this.newApi = 3;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe(
-      (value) => {
+    this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe({
+
+      next:(value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
@@ -95,14 +97,14 @@ export class AdminProjectComponent implements OnInit {
           console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
-
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },
-      (error) => {
+      },error: (error) => {
         this.isProcessing = false;
+
       }
-    );
+    });
+
   }
   // 4
   getPendingProject() {
@@ -112,7 +114,8 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
-      (value) => {
+    {
+      next:  (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
@@ -122,10 +125,11 @@ export class AdminProjectComponent implements OnInit {
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },
-      (error) => {
+      },error: (error) => {
         this.isProcessing = false;
+
       }
+    }
     );
   }
   //5
@@ -136,7 +140,9 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
-      (value) => {
+
+     {
+      next:(value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
@@ -146,10 +152,11 @@ export class AdminProjectComponent implements OnInit {
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },
-      (error) => {
+      },error: (error) => {
         this.isProcessing = false;
+
       }
+     }
     );
   }
   //6
@@ -171,7 +178,7 @@ export class AdminProjectComponent implements OnInit {
         }
       },
       error: (err) => {
-        alert(err);
+        this.isProcessing = false;
       },
     });
   }
@@ -184,7 +191,7 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
-      (value) => {
+     {next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
@@ -195,10 +202,10 @@ export class AdminProjectComponent implements OnInit {
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
       },
-      (error) => {
+      error: (error) => {
         this.isProcessing = false;
       }
-    );
+  });
   }
 
   objectProduct(object?: any, id?: any) {
@@ -317,19 +324,32 @@ export class AdminProjectComponent implements OnInit {
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
     let differenceInTime = todayDate.getTime() - sentOnDate.getTime();
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
+  }
+
+  calculateDiffEend(sentOn:any){
+
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
     // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
   }
+
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
-      (png) => {
-        const blob = new Blob([png], { type: 'application/pdf' });
-        const fileName = name;
-        saveAs(blob, fileName);
-      },
-      (err) => {
-        console.log(err);
+      {
+        next:(pptx) => {
+          const blob = new Blob([pptx], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
+          const fileName = name;
+          saveAs(blob, fileName);
+        },
+    error:(err) => {
+          console.log(err);
+        }
       }
     );
   }

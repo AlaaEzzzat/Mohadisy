@@ -1,14 +1,14 @@
 <div class="m-3">
   <div
-    class="d-flex flex-row mb-3 col-12   justify-content-around flex-wrap flex-lg-nowrap "
+    class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around"
   >
-
     <button
       [ngStyle]="{
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
-        'color': newApi === 3 ? '#ffffff' : '#000000'
+        color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      role="button"
       (click)="getCurrentProjects()"
     >
       المشاريع الحاليه
@@ -16,9 +16,10 @@
     <button
       [ngStyle]="{
         'background-color': newApi === 4 ? '#004958' : '#ffffff',
-        'color': newApi === 4 ? '#ffffff' : '#000000'
+        color: newApi === 4 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      role="button"
       (click)="getPendingProject()"
     >
       المشاريع المعلقه
@@ -26,9 +27,10 @@
     <button
       [ngStyle]="{
         'background-color': newApi === 5 ? '#004958' : '#ffffff',
-        'color': newApi === 5 ? '#ffffff' : '#000000'
+        color: newApi === 5 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      role="button"
       (click)="getFinishedProjects()"
     >
       المشاريع منتهيه
@@ -37,9 +39,10 @@
     <button
       [ngStyle]="{
         'background-color': newApi === 6 ? '#004958' : '#ffffff',
-        'color': newApi === 6 ? '#ffffff' : '#000000'
+        color: newApi === 6 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      role="button"
       (click)="getLateProjects()"
     >
       المشاريع متأخره
@@ -47,40 +50,39 @@
     <button
       [ngStyle]="{
         'background-color': newApi === 7 ? '#004958' : '#ffffff',
-        'color': newApi === 7 ? '#ffffff' : '#000000'
+        color: newApi === 7 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"
-            role="button"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      role="button"
       (click)="getStoppedProjects()"
     >
       المشاريع المتوقفه
     </button>
   </div>
+
   <!-- alert fun  -->
   <div class="alert alert-success" role="alert" *ngIf="show">
-    {{messages}}
+    {{ messages }}
   </div>
-  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="showDanger">
-    <div>
-      المشروع موجود بالفعل
-    </div>
+  <div
+    class="alert alert-danger d-flex align-items-center"
+    role="alert"
+    *ngIf="showDanger"
+  >
+    <div>المشروع موجود بالفعل</div>
   </div>
-  <div class="alert alert-danger d-flex align-items-center" role="alert" *ngIf="!isProcessing">
-    <div>
-      حاليا لايوجد عروض
-    </div>
-  </div>
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind" >
 
-  <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
+  <div
+    class="col-12 d-flex flex-row flex-wrap justify-content-between"
+    *ngIf="isProcessing; else undefind"
+  >
+    <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
     <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-       <!-- Example single danger button -->
-
-
+          <!-- Example single danger button -->
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
             type="search"
@@ -97,7 +99,9 @@
         <!-- card company -->
         <!-- <ng-container> -->
 
-        <ng-container *ngFor="let pro of iadminPriceQuotes | filter: filterTerm ">
+        <ng-container
+          *ngFor="let pro of iadminPriceQuotes | filter: filterTerm"
+        >
           <div class="card mb-3 border-0 rounded-0 textFontSizeCard">
             <div
               class="card-body"
@@ -108,70 +112,106 @@
                 color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
               }"
             >
-              <div class="d-flex">
-                <i class="fa-regular fa-building"></i>
+              <div class="d-flex align-items-start mb-2">
+                <img
+                  class=""
+                  src="assets/icons/user.svg"
+                  *ngIf="productCurrent.id != pro.id; else whiteIconw"
+                />
+                <ng-template #whiteIconw
+                  ><img src="assets/icons/userWh.svg" class=""
+                /></ng-template>
                 <div class="card-title me-3">
-                  <p *ngIf="pro.clientProfile.firstName; else templateName">
-                    {{ pro.clientProfile.firstName }} {{ pro.clientProfile.lastName }}
+                  <p
+                    class="fs-6"
+                    *ngIf="pro.clientProfile.firstName; else templateName"
+                  >
+                    {{ pro.clientProfile.firstName }}
+                    {{ pro.clientProfile.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
                 </div>
               </div>
-              <div class="d-flex">
-                <i class="fa fa-location-dot"></i>
-                <i class="bi bi-geo-alt"></i>
+              <div class="d-flex align-items-start mb-2">
+                <img
+                  src="assets/icons/Group 801.svg"
+                  class=""
+                  [hidden]="productCurrent.id === pro.id"
+                />
+                <img
+                  src="assets/icons/Group 801White.svg"
+                  class=""
+                  [hidden]="productCurrent.id != pro.id"
+                />
                 <p
-                  class="me-3"
+                  class="me-3 fs-6"
                   *ngIf="
                     pro.district.city.region.code &&
                       pro.district.city.region.nameAr;
                     else region
                   "
                 >
-                  <span *ngIf="pro.district.city.region.code; else regioncode"
-                    >{{ pro.district.city.region.code  }} -
-                  </span>
-                  <ng-template #regioncode> null </ng-template>
                   <span
+                    class="fs-6"
+                    *ngIf="pro.district.nameAr; else regioncode"
+                    >{{ pro.district.nameAr }} ,
+                  </span>
+                  <ng-template #regioncode> </ng-template>
+                  <span
+                    class="fs-6"
                     *ngIf="pro.district.city.nameAr; else regioncode"
                   >
-                    {{pro.district.city.nameAr}}
+                    {{ pro.district.city.nameAr }} ,
                   </span>
-                  <ng-template #regionnameAr> null </ng-template>
+                  <ng-template #regionnameAr> </ng-template>
+                  <span
+                    class="fs-6"
+                    *ngIf="pro.district.city.region.nameAr; else regioncode"
+                  >
+                    {{ pro.district.city.region.nameAr }}
+                  </span>
+                  <ng-template #regionnameAr> </ng-template>
                 </p>
                 <ng-template #region></ng-template>
               </div>
-              <div class="d-flex">
-                <i class="fa fa-phone"></i>
-                <div class="me-3 d-flex flex-row justify-content-between">
-                  <small >
-                  {{pro.clientProfile.applicationUser.phoneNumbe }}</small
+              <div class="d-flex align-items-start">
+                <img
+                  src="assets/icons/Phone.svg"
+                  class=""
+                  [hidden]="productCurrent.id === pro.id"
+                />
+                <img
+                  src="assets/icons/PhoneWhite.svg"
+                  class=""
+                  [hidden]="productCurrent.id != pro.id"
+                />
+                <div class="me-3 d-flex flex-row justify-content-between w-100">
+                  <small
+                    class="fs-6"
+                    *ngIf="productCurrent.clientProfile.applicationUser"
+                  >
+                    {{ pro.clientProfile.applicationUser.phoneNumber }}</small
                   >
 
-
-
                   <small
-                    class="me-5 opacity-50 fsvw align-content-start"
+                    class="opacity-75 align-content-end"
                     *ngIf="pro.dateCreated; else dateCreated"
-                    >منذ
-                    {{calculateDiff(pro.dateCreated)}} يوم
+                    >منذ {{ calculateDiff(pro.dateCreated) }} يوم
                   </small>
                   <ng-template #dateCreated>null</ng-template>
                 </div>
               </div>
             </div>
           </div>
-
         </ng-container>
         <div class="col-12">
-          <div class="position-absolute top100" [hidden]="total<=1">
-
+          <div class="position-absolute top100" [hidden]="total <= 1">
             <nav aria-label="..." class="w-100 d-flex justify-content-center">
               <ul class="pagination w-100">
                 <li class="page-item">
                   <button
                     (click)="prev()"
-                    class="page-link rounded-0  btn-dark"
+                    class="page-link rounded-0 btn-dark"
                     [disabled]="page <= 1"
                   >
                     السابق
@@ -193,7 +233,7 @@
                 <li class="page-item">
                   <button
                     (click)="next()"
-                    class="page-link rounded-0   btn-dark"
+                    class="page-link rounded-0 btn-dark"
                     [disabled]="page == pagenation.length"
                   >
                     التالي
@@ -201,107 +241,120 @@
                 </li>
               </ul>
             </nav>
-            </div>
+          </div>
         </div>
       </form>
     </div>
     <div class="col-md-7 sizew col-12 flex-row">
-      <div class="col-12 card mb-3 border-0 rounded-0 p-4">
-        <div class="row g-0 justify-content-evenly align-items-center">
-          <div class="col-lg-2 col-sm-3">
+      <div
+        class="col-12 d-flex mb-3 border-0 rounded-0 justify-content-between"
+      >
+        <div
+          class="col-8 ms-1 card border-0 rounded-0 d-flex flex-row g-0 justify-content-evenly align-items-center"
+        >
+          <div class="col-lg-4 col-sm-3">
             <img
-
               src="{{ productCurrent.clientProfile.profilePicturePath }}"
-              class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
+              class="img-fluid rounded-0 w-50 ms-5 me-2 p-2"
               alt="null"
             />
           </div>
-          <div class="col-md-3 col-sm-4">
+          <div class="col-md-7 col-sm-4">
             <div class="card-body">
-              <p class="me-2">
-                {{ productCurrent.clientProfile.firstName  }} {{ productCurrent.clientProfile.lastName }}
+              <p class="me-2 fs-6 textInformation">
+                {{ productCurrent.clientProfile.firstName }}
+                {{ productCurrent.clientProfile.lastName }}
               </p>
             </div>
           </div>
-
-          <!-- <div class="col-md-7 col-sm-5" >
-            <div class="d-flex">
-              <a type="button" class="btn w-25" (click)="changeToAccepted()">
-                <i class="fa-solid fa-check text-secondary"></i>
-                <p class="fsvw">قبول</p></a
-              >
-              <a
-                type="button"
-                class="btn w-25"
-(click)="changeToNotComplette()"
-              >
-                <i class="fa-solid fa-exclamation"></i>
-                <p class="fsvw">غير مكتمل</p></a
-              >
-              <a type="button" class="btn w-25"
-              (click)="changeToReject()"
-                ><i class="fa-solid fa-xmark"></i>
-                <p class="fsvw">رفض</p></a
-              >
-
-            </div>
-          </div> -->
-
+        </div>
+        <!-- <div class="col-4 d-flex flex-column">
+          <div class="bg-white col-12 py-2 px-2 mb-2">
+            <img src="assets/icons/calendar.svg " alt="" srcset=""  class=" "  style="width:30px">
+          <span class="fs-6 typeCom2 pe-1" style="color: #EE9C0F;">تحويل المشروع لمزود خدمه اخر </span>
+          </div>
+          <div class="bg-white col-12 py-2 px-2 ">
+            <img src="assets/icons/calendar.svg" alt="" srcset="" class=" " style="width:35px">
+          <span class="fs-6 typeCom2 pe-1 ">معاد التسليم {{productCurrent.pricequoteEndDate|date:'shortDate'}}</span>
+          </div>
+        </div> -->
+        <div
+          class="col-4 d-flex bg-white justify-content-between align-items-center p-2"
+        >
+          <img
+            src="assets/icons/calendar.svg"
+            alt=""
+            srcset=""
+            class=" "
+            style="width: 35px"
+          />
+          <span class="fs-6 typeCom2 pe-1"
+            >معاد التسليم
+            {{ productCurrent.pricequoteEndDate | date: "shortDate" }}</span
+          >
         </div>
       </div>
-<!-- معلومات عن العميل -->
+      <!-- سبب عدم الاكتمال -->
+      <!-- <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
+       *ngIf="productCurrent.projectRequestStatus.projectStatus.id === 9"
+     >
+       <p class="typeCom   fs-6">سبب التاخر  </p>
+       <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
+     </div>
+     <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
+     *ngIf="productCurrent.projectRequestStatus.projectStatus.id === 6"
+   >
+     <p class="typeCom   fs-6">سبب   التوقف  </p>
+     <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
+   </div> -->
+      <!-- معلومات عن العميل -->
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-        <p class="card-title mb-4">معلومات عن العميل</p>
+        <h1 class="card-title mb-4 titleInformation">معلومات عن العميل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
             <div class="d-flex flex-row justify-content-between">
-              <p class="card-subtitle text-secondary ms-2">رقم الهوية</p>
+              <p class="card-subtitle text-muted fs-6">رقم الهوية</p>
 
-              <p>{{ productCurrent.clientProfile.idNumber }}</p>
-
-
-
+              <p class="fs-6 textInformation">
+                {{ productCurrent.clientProfile.idNumber }}
+              </p>
               <a
-              *ngIf="productCurrent.clientProfile.idPath; else idFile"
-
-              target="_blank"
-              class="informationDownload bg-light d-flex px-2 align-items-center"
-              (click)="download(productCurrent.clientProfile.idPath,  productCurrent.clientProfile.idPath )"
-            >
-              <i class="fa fa-download typeCom ms-3"></i>
-              <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
-
-            </a>
+                *ngIf="productCurrent.clientProfile.idPath; else idFile"
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)="
+                  download(
+                    productCurrent.clientProfile.idPath,
+                    productCurrent.clientProfile.idPath
+                  )
+                "
+              >
+                <i class="fa fa-download ms-3"></i>
+                <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
+              </a>
               <ng-template #idFile>___</ng-template>
               <!-- </div> -->
             </div>
-
-
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">الدوله</p>
-            <small
-              class="fs-6"
-              *ngIf="productCurrent.district.city.region.code; else cityName"
-              >{{ productCurrent.district.city.region.code }}</small
-            >
-            <ng-template #cityName> _ </ng-template>
+            <p class="card-subtitle text-muted fs-6 mb-2">الدوله</p>
+            <small class="fs-6 textInformation">المملكه العربيه السعوديه</small>
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">المدينه</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">المدينه</p>
             <small
-              class="fs-6"
+              class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameAr; else city"
               >{{ productCurrent.district.city.nameAr }}</small
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">المنطقه</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
             <small
-              class="fs-6"
+              class="fs-6 textInformation"
               *ngIf="
                 productCurrent.district.city.region.nameAr;
                 else regionName
@@ -311,11 +364,11 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">العنوان</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
             <small
-              class="fs-6"
+              class="fs-6 textInformation"
               *ngIf="productCurrent.clientProfile.streetName; else shortAddress"
-              >
+            >
               {{ productCurrent.clientProfile.streetName }} -
               {{ productCurrent.district.city.region.nameAr }}</small
             >
@@ -323,147 +376,132 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">
-              رقم الهاتف
-            </p>
+            <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
             <small
-              class="fs-6"
-              *ngIf="
-              productCurrent.clientProfile.applicationUser.phoneNumber;
-                else officePhoneNumber
-              "
-              >{{ productCurrent.clientProfile.applicationUser.phoneNumber }}</small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.clientProfile.applicationUser"
+              >{{
+                productCurrent.clientProfile.applicationUser.phoneNumber
+              }}</small
             >
-            <ng-template #officePhoneNumber> <small class="text-center fs-6">_</small></ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">
+            <p class="card-subtitle text-muted fs-6 mb-2">
               عنوان البريد الالكتروني
             </p>
-            <small class="fs-6" *ngIf="productCurrent.clientProfile.applicationUser.email; else emailName">{{
-              productCurrent.clientProfile.applicationUser.email
-            }}</small>
-            <ng-template #emailName> _ </ng-template>
-          </div>
-          <!-- <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-secondary fs-6 mb-2">رابط الموقع</p>
             <small
-              class="fs-6"
-              *ngIf="productCurrent.websiteLink; else websiteLink"
-              >{{ productCurrent.websiteLink }}</small
+              class="fs-6 textInformation"
+              *ngIf="
+                productCurrent.clientProfile.applicationUser;
+                else emailName
+              "
+              >{{ productCurrent.clientProfile.applicationUser.email }}</small
             >
-            <ng-template #websiteLink> _ </ng-template>
+            <ng-template #emailName>
+              <small class="fs-6 textInformation">_</small>
+            </ng-template>
           </div>
-          <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">صندوق البريد</p>
-            <small class="fs-6" *ngIf="productCurrent.postalBox; else box">{{
-              productCurrent.postalBox
-            }}</small>
-            <ng-template #box> _ </ng-template>
-          </div>
-          <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">رمز البريد</p>
-            <small class="fs-6" *ngIf="productCurrent.postalCode; else postcode"
-              >{{ productCurrent.postalCode }}
-            </small>
-            <ng-template #postcode> _ </ng-template>
-          </div> -->
         </div>
       </div>
-<!--  -->
-      <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 py-2 ">
-        <div class="col-lg-10 col-12 bg-white ms-1 py-4 px-5">
-          <div class=" d-flex flex-row col-12 mb-4">
+      <!--  -->
+      <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 py-2">
+        <div class="col-lg-12 col-12 bg-white ms-1 py-4 px-5">
+          <div class="d-flex flex-row col-12 mb-5">
             <div class="col-4">
-              <p class="card-subtitle text-secondary fs-6 mb-2">اسم المشروع</p>
-              <small class="fs-6" *ngIf="productCurrent.name; else namecode"
-              >{{ productCurrent.name }}
-            </small>
-            <ng-template #namecode> _ </ng-template>
+              <p class="card-subtitle text-muted fs-6 mb-2">اسم المشروع</p>
+              <small
+                class="fs-6 textInformation"
+                *ngIf="productCurrent.name; else namecode"
+                >{{ productCurrent.name }}
+              </small>
+              <ng-template #namecode> _ </ng-template>
             </div>
             <div class="col-4">
-              <p class="card-subtitle text-secondary fs-6 mb-2 ">التصنيف الرئيسي </p>
-              <small class="fs-6" *ngIf="productCurrent.projectCategory.name; else projectCategoryname"
-              >{{ productCurrent.projectCategory.name }}
-            </small>
-            <ng-template #projectCategoryname> _ </ng-template>
+              <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الرئيسي</p>
+              <small
+                class="fs-6 textInformation"
+                *ngIf="
+                  productCurrent.projectCategory.name;
+                  else projectCategoryname
+                "
+                >{{ productCurrent.projectCategory.name }}
+              </small>
+              <ng-template #projectCategoryname> _ </ng-template>
             </div>
             <div class="col-4">
-              <p class="card-subtitle text-secondary fs-6 mb-2">التصنيف الفرعي</p>
-              <small class="fs-6" *ngIf="productCurrent.projectSubCategory.name; else projectSubCategoryname"
-              >{{ productCurrent.projectSubCategory.name }}
-            </small>
-            <ng-template #projectSubCategoryname> _ </ng-template>
+              <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الفرعي</p>
+              <small
+                class="fs-6 textInformation"
+                *ngIf="
+                  productCurrent.projectSubCategory.name;
+                  else projectSubCategoryname
+                "
+                >{{ productCurrent.projectSubCategory.name }}
+              </small>
+              <ng-template #projectSubCategoryname> _ </ng-template>
             </div>
-
           </div>
-          <div class=" d-flex flex-row col-12 mt-4">
+          <div class="d-flex flex-row col-12 mt-5">
             <div class="col-3">
-              <p class="card-subtitle text-secondary fs-6 mb-2"> اسم المدينه</p>
+              <p class="card-subtitle text-muted fs-6 mb-2">اسم المدينه</p>
               <small
-              class="fs-6"
-              *ngIf="productCurrent.district.city.nameAr; else city"
-              >{{ productCurrent.district.city.nameAr }}</small
-            >
-            <ng-template #city> _ </ng-template>
-            </div>
-            <div class="col-3">
-              <p class="card-subtitle text-secondary fs-6 mb-2 "> المنطقه</p>
-              <small
-              class="fs-6"
-              *ngIf="
-                productCurrent.district.city.region.nameAr;
-                else regionName
-              "
-              >{{ productCurrent.district.city.region.nameAr }}</small
-            >
-            <ng-template #regionName> _ </ng-template>
+                class="fs-6 textInformation"
+                *ngIf="productCurrent.district.city.nameAr; else city"
+                >{{ productCurrent.district.city.nameAr }}</small
+              >
+              <ng-template #city> _ </ng-template>
             </div>
             <div class="col-4">
-              <p class="card-subtitle text-secondary fs-6 mb-2"> العنوان</p>
+              <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
               <small
-              class="fs-6"
-              *ngIf="productCurrent.clientProfile.streetName; else shortAddress"
+                class="fs-6 textInformation"
+                *ngIf="
+                  productCurrent.district.city.region.nameAr;
+                  else regionName
+                "
+                >{{ productCurrent.district.city.region.nameAr }}</small
               >
-              {{ productCurrent.clientProfile.streetName }} -
-              {{ productCurrent.district.city.region.nameAr }}</small
-            >
-            <ng-template #shortAddress> _ </ng-template>
+              <ng-template #regionName> _ </ng-template>
             </div>
-            <div class="col-1">
-              <p class="card-subtitle text-secondary fs-6 mb-2"> رقم القطعه</p>
+            <div class="col-5">
+              <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
               <small
-              class="fs-6"
-              *ngIf="productCurrent.plotNumber; else plotNumber"
+                class="fs-6 textInformation"
+                *ngIf="
+                  productCurrent.clientProfile.streetName;
+                  else shortAddress
+                "
               >
-              {{ productCurrent.plotNumber }}</small
-            >
-            <ng-template #plotNumber> _ </ng-template>
-            </div>
-            <div class="col-1">
-              <p class="card-subtitle text-secondary fs-6 mb-2"> رقم المخطط</p>
-              <small
-              class="fs-6"
-              *ngIf="productCurrent.rganizationalChartNumber; else organizationalChartNumber"
+                {{ productCurrent.clientProfile.streetName }} -
+                {{ productCurrent.district.city.region.nameAr }}</small
               >
-              {{ productCurrent.organizationalChartNumber }}</small
-            >
-            <ng-template #organizationalChartNumber> _ </ng-template>
+              <ng-template #shortAddress> _ </ng-template>
             </div>
-
           </div>
-
+          <div class="d-flex flex-row col-12 mt-5">
+            <div class="col-2" *ngIf="productCurrent.plotNumber">
+              <p class="card-subtitle text-muted fs-6 mb-2">رقم القطعه</p>
+              <small class="fs-6 textInformation">
+                {{ productCurrent.plotNumber }}</small
+              >
+            </div>
+            <div class="col-2" *ngIf="productCurrent.rganizationalChartNumber">
+              <p class="card-subtitle text-muted fs-6 mb-2">رقم المخطط</p>
+              <small class="fs-6 textInformation">
+                {{ productCurrent.organizationalChartNumber }}</small
+              >
+            </div>
+          </div>
         </div>
-        <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center justify-content-center  px-3 pt-4 pb-3">
+        <!-- <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center justify-content-center  px-3 pt-4 pb-3">
 
 <img src="assets/icons/calendar.svg" alt="" srcset="" class="imges">
 <h1 class="fs-2 fw-bold" style="color: #004057;">{{productCurrent.pricequoteEndDate|date}} <sub class="fs-5 fw-normal" >في يوم</sub></h1>
 <span style="color: #004057;">لانتهاء عرض السعر </span>
 
-        </div>
-
+        </div> -->
       </div>
-<!--  -->
+      <!--  -->
       <!-- <div class="col-12  d-flex flex-lg-row flex-column  border-0 rounded-0 ps-2 mb-3 ">
         <div class="col-lg-6 col-12 d-flex p-2 bg-white ms-1 align-content-end flex-column">
 <p>مكونات المشروع</p>
@@ -491,24 +529,84 @@
         </div>
 
       </div> -->
-<!--  -->
+      <!--  -->
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-
-        <p>نبذه عن المشروع</p>
-        <p> {{productCurrent.subject }}</p>
-      </div>
-
-
-      </div>
-  </div>
-  <ng-template #undefind>
-    <div class="col-12 d-flex flex-row flex-wrap justify-content-center align-items-center mt-5">
-      <h1 class="fw-bold fs-1 text-center mt-5">
-        لايوجد بيانات في هذا التصنيف
-    </h1>
-
+        <h1 class=" titleInformation">نبذه عن المشروع</h1>
+        <p class="fs-6">{{ productCurrent.subject }}</p>
     </div>
+      <!--  -->
+      <div
+        class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-2 mb-3"
+      >
+        <div
+          class="col-lg-6 col-12 d-flex  bg-white ms-1 align-content-end flex-column p-4"
+        >
+          <h1 class=" titleInformation">المستندات الخاصه بالعميل</h1>
+          <ng-container
+            *ngIf="
+              productCurrent.clientProjectDocuments.length != 0 &&
+                productCurrent.clientProjectDocuments.length != null;
+              else undefindFile
+            "
+          >
+            <ng-container
+              *ngFor="let comp of productCurrent.clientProjectDocuments"
+            >
+              <a
+                target="_blank"
+                class="informationDownloadClient d-flex px-2 align-items-center"
+                (click)="download(comp.filePath, comp.file)"
+              >
+                <i class="fa fa-download ms-3"></i>
+                <p class="pt-3">{{ comp.file }}</p>
+              </a>
+            </ng-container>
+          </ng-container>
+          <ng-template #undefindFile>
+            <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
+          </ng-template>
+        </div>
+        <div
+          class="col-lg-6 col-12 p-2 bg-white me-1 align-content-start flex-column p-4"
+        >
 
+          <h1 class=" titleInformation">المستندات الخاصه بمزود الخدمه</h1>
+          <!-- <ng-container
+            *ngIf="
+              productCurrent.clientProjectDocuments.length != 0 &&
+                productCurrent.clientProjectDocuments.length != null;
+              else undefindFile
+            "
+          >
+            <ng-container
+              *ngFor="let comp of productCurrent.clientProjectDocuments"
+            >
+              <a
+                target="_blank"
+                class="informationDownloadClient d-flex px-2 align-items-center"
+                (click)="download(comp.filePath, comp.file)"
+              >
+                <i class="fa fa-download ms-3"></i>
+                <p class="pt-3">{{ comp.file }}</p>
+              </a>
+            </ng-container>
+          </ng-container>
+          <ng-template #undefindFile>
+            <p class="fs-5">لايوجد مستندات خاصه  بمزود الخدمه/p>
+          </ng-template> -->
+          </div>
+      </div>
+      <!--  -->
+    </div>
+  </div>
+
+  <ng-template #undefind>
+    <div
+      class="alert alert-danger d-flex align-items-center"
+      role="alert"
+      *ngIf="!isProcessing"
+    >
+      <div>حاليا لايوجد مشاريع</div>
+    </div>
   </ng-template>
-
 </div>

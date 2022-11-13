@@ -144,7 +144,8 @@ export class AdminClientsComponent implements OnInit {
 
     this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe({
       next:(value) => {
-        if(value !=null || value != undefined) {
+        if(value !=null && value != undefined &&value.data.totalPages != 0) {
+          console.log(value)
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
@@ -153,6 +154,9 @@ export class AdminClientsComponent implements OnInit {
       this.counter(this.total);
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)
+        }else{
+          this.isProcessing = false;
+
         }
       },error: (error) => {
         this.isProcessing = false;
@@ -165,60 +169,104 @@ export class AdminClientsComponent implements OnInit {
 
   getActiveClientAcconting(){
     this.newApi=2
+    this.isProcessing = true;
 
-    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe({
+      next:(value) => {
+        if(value !=null && value != undefined &&value.data.totalPages != 0) {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;  console.log(this.total)
-      this.counter(this.total);
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+        this.datas = value.data.profiles
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;  console.log(this.total)
+        this.counter(this.total);
+        console.log(value)
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id)}
+        else{
+          this.isProcessing = false;
+
+        }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
+
     });
   }
 
   getNonActiveClientAccount(){
     this.newApi=3
+    this.isProcessing = true;
 
-    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe({
+      next:(value) => {
+        if(value !=null && value != undefined &&value.data.totalPages != 0) {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;  console.log(this.total)
-      this.counter(this.total);
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id);
+        this.datas = value.data.profiles
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;  console.log(this.total)
+        this.counter(this.total);
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id);
+        }else{
+          this.isProcessing = false;
 
+        }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
 
   }
   getBlockedClientsProfiles(){
     this.newApi=4
+    this.isProcessing = true;
 
-    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe({
+      next:(value) => {
+        if(value !=null && value != undefined &&value.data.totalPages != 0) {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;  console.log(this.total)
-      this.counter(this.total);
-      console.log(this.datas)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+        this.datas = value.data.profiles
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;  console.log(this.total)
+        this.counter(this.total);
+        console.log(this.datas)
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id)
+      }else{
+          this.isProcessing = false;
+
+        }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   getExpiredClientsProfiles(){
     this.newApi=5
+    this.isProcessing = true;
 
-    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
+    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe({
+      next:(value) => {
+        if(value !=null && value != undefined &&value.data.totalPages != 0) {
 
-      this.datas = value.data.profiles
-      this.iProfileData = this.datas;
-      this.total = value.data.totalPages;  console.log(this.total)
-      this.counter(this.total);
-      console.log(this.iProfileData)
-      this.firstObject=this.iProfileData[0]
-      this.objectProduct(this.firstObject,this.firstObject.id)
+        this.datas = value.data.profiles
+        this.iProfileData = this.datas;
+        this.total = value.data.totalPages;  console.log(this.total)
+        this.counter(this.total);
+        console.log(this.iProfileData)
+        this.firstObject=this.iProfileData[0]
+        this.objectProduct(this.firstObject,this.firstObject.id);
+      } else{
+        this.isProcessing = false;
+
+      }
+      },error: (error) => {
+        this.isProcessing = false;
+
+      }
     });
   }
   // bagenations
