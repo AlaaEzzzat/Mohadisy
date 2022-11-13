@@ -1,3 +1,4 @@
+import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProjectsComponent } from './user-projects/user-projects.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'offers', component: UserPriceOffersComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'profilecomplate', component: ProfilecomplateComponent },
+      { path: 'payment', component: PaymentComponent },
       {
         path: 'askprice',
         loadChildren: () =>

@@ -148,22 +148,23 @@ export class ProjectInfoComponent implements OnInit {
         next: (response: any) => {
           console.log(response.data);
           this.clientService.reuestedProject = response.data;
-
-          this.clientService
-            .getAllRequiredFiles(this.project.requiredWorkIds)
-            .subscribe({
-              next: (response: any) => {
-                console.log(response);
-                this.clientService.projectRequiredFiles = response.data;
-                this.router.navigate([
-                  'usermanagement/askprice/uploadRequiredFiles',
-                ]);
-              },
-              error: (err: any) => {
-                console.log('no files requested');
-                this.router.navigate(['usermanagement/offers']);
-              },
-            });
+          if (this.serviceId == 1) {
+            this.clientService
+              .getAllRequiredFiles(this.project.requiredWorkIds)
+              .subscribe({
+                next: (response: any) => {
+                  console.log(response);
+                  this.clientService.projectRequiredFiles = response.data;
+                  this.router.navigate([
+                    'usermanagement/askprice/uploadRequiredFiles',
+                  ]);
+                },
+                error: (err: any) => {
+                  console.log('no files requested');
+                  this.router.navigate(['usermanagement/offers']);
+                },
+              });
+          }
         },
         error: (err: any) => {
           console.log(err);

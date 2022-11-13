@@ -13,6 +13,7 @@ import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.comp
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
     UserMessagesComponent,
     UserhomeComponent,
     ProfilecomplateComponent,
+    PaymentComponent,
   ],
   imports: [
     SharedModule,

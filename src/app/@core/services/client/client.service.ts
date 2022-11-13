@@ -17,7 +17,11 @@ export class ClientService {
   }
   getProjectService(serviceId: any, page?: any): Observable<any> {
     return this._HttpClient.get<any>(
-      `${environment.baseUrl}/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${page}`
+      `${
+        environment.baseUrl
+      }/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${
+        page || 1
+      }`
     );
   }
   acceptOffer(offerId: any): Observable<any> {
@@ -96,6 +100,22 @@ export class ClientService {
   getAccountStatus(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/Account/checkAccountStatus`
+    );
+  }
+  getClientProfile(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Client/getClientProfile`
+    );
+  }
+
+  getProjectComponentById(componentId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getProjectComponentById/${componentId}`
+    );
+  }
+  getRequiredWorkByWorkId(requiredWorkId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`
     );
   }
 }

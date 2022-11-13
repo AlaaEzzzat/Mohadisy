@@ -1,3 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
+import { IClientPayment } from './../../@models/IClientPayment';
+import { PaymentService } from './../../@core/services/payment/payment.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -24,7 +27,7 @@ export class UserPriceOffersComponent implements OnInit {
   page: number = 1;
   totalpages: any = 0;
   pagenation: any = [];
-
+  acceptPrice: boolean = false;
   projectDtails: boolean = false;
   projectCostDtails: boolean = false;
   commmitments: boolean = false;
@@ -33,7 +36,18 @@ export class UserPriceOffersComponent implements OnInit {
   seeProjectInfo: boolean = false;
   usedMaterials: boolean = false;
   showProjectProfile: boolean = false;
-  constructor(private clientService: ClientService) {}
+  paymethods: boolean = false;
+  invoiceValue: any = 0;
+  clientPaymentData: IClientPayment = {} as IClientPayment;
+  PaymentMethodsList: any = [];
+  activeProjectReqWorks: any = [];
+  activeProjectsComponents: any = [];
+  client: any = {};
+  constructor(
+    private clientService: ClientService,
+    private paymentService: PaymentService,
+    private _toastr: ToastrService
+  ) {}
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
   }
@@ -54,6 +68,11 @@ export class UserPriceOffersComponent implements OnInit {
       this.projectServices = data.data.projectServices;
       this.activeService = this.projectServices[0].id;
       this.getAllProjectServices();
+      this.isActiveService(this.activeService);
+    });
+    this.clientService.getClientProfile().subscribe((data) => {
+      console.log(data.data);
+      this.client = data.data;
     });
   }
 
@@ -75,6 +94,9 @@ export class UserPriceOffersComponent implements OnInit {
         console.log('projectOfServices : ');
         console.log(this.projectServicesFullData);
         this.projectServiesArrays = this.projectServicesFullData.projects;
+        /*  *******************/
+
+        /*  *******************/
         this.totalpages = this.projectServicesFullData.totalPages;
         this.counter(this.totalpages);
 
@@ -120,8 +142,32 @@ export class UserPriceOffersComponent implements OnInit {
   showProject() {
     this.showProjectProfile = true;
   }
-
+  mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
+    this.activeProjectReqWorks = [];
+    ProjectsReuiredWorks.map((ProjectsReuiredWork: any) => {
+      this.clientService
+        .getRequiredWorkByWorkId(ProjectsReuiredWork.requiredWorkId)
+        .subscribe((data) => {
+          this.activeProjectReqWorks.push(...data.data);
+        });
+    });
+  }
+  mapOnProjectsComponets(projectComponents: any) {
+    this.activeProjectsComponents = [];
+    projectComponents.map((projectComponent: any) => {
+      this.clientService
+        .getProjectComponentById(projectComponent.componentId)
+        .subscribe((data) => {
+          this.activeProjectsComponents.push(data.data);
+        });
+    });
+  }
   showOffers(project: any) {
+    this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
+    this.mapOnProjectsComponets(project.projectComponents);
+    console.log(this.activeProjectReqWorks);
+    console.log(this.activeProjectsComponents);
+
     this.showProjectProfile = false;
     this.selectedProject = project;
     this.activeProject = project.id;
@@ -148,10 +194,55 @@ export class UserPriceOffersComponent implements OnInit {
     }
   }
 
-  acceptOffer(offerId: any) {
-    this.clientService.acceptOffer(offerId).subscribe({
+  /*   getProjectComponentById(ComponentId: any) {
+    this.clientService
+      .getProjectComponentById(ComponentId)
+      .subscribe((data) => {
+        componentNames.push(data.data.name)
+        return data.data.name + 'hhhhh';
+      });
+  } */
+
+  acceptOffer(offer: any) {
+    this.invoiceValue =
+      offer.totalCost - offer.cost + offer.cost / offer.numberOfMilestones;
+    console.log(this.invoiceValue);
+    var payData = {
+      _invoiceAmount: this.invoiceValue,
+      _currencyIso: 'SAR',
+    };
+    this.paymentService.initiatePayment(payData).subscribe({
       next: (response: any) => {
-        console.log('offer accepted');
+        console.log(response);
+        this._toastr.info(response.Message);
+        this.PaymentMethodsList = response.Data.PaymentMethods;
+        console.log(this.PaymentMethodsList);
+        this.paymethods = true;
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
+  goToPay(payMethodId: any) {
+    this.clientPaymentData.invoiceValue = this.invoiceValue;
+    this.clientPaymentData.paymentMethodId = payMethodId;
+    this.clientPaymentData.displayCurrencyIso = 'SAR';
+    this.clientPaymentData.mobileCountryCode = '+996';
+    this.clientPaymentData.callBackUrl = 'https://www.google.com';
+    this.clientPaymentData.errorUrl = 'https://www.facebook.com';
+    this.clientPaymentData.language = 'ar';
+
+    this.clientPaymentData.customerName =
+      this.client?.firstName + ' ' + this.client?.lastName;
+    this.clientPaymentData.customerMobile =
+      this.client?.applicationUser.phoneNumber;
+    this.clientPaymentData.customerEmail = this.client?.applicationUser.email;
+    this.clientPaymentData.customerCivilId = this.client?.idNumber;
+    this.paymentService.executePayment(this.clientPaymentData).subscribe({
+      next: (response: any) => {
+        console.log(response.Data);
+        window.location.href = response.Data.PaymentURL;
       },
       error: (err: any) => {
         console.log(err);

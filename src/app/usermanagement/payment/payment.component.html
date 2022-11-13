@@ -1,0 +1,60 @@
+<div class="row pt-3" style="min-height: 100vh">
+  <div class="col-md-6">
+    <div class="card-body bg-white p-5" *ngIf="second">
+      <div class="text-center">
+        <label
+          class="mb-4 text-center cairo"
+          style="color: #18af9a; font-weight: bold"
+        >
+          الخطوة التالية
+        </label>
+      </div>
+      <form
+        novalidate
+        [formGroup]="payMethodForm"
+        (ngSubmit)="onMethodSubmit()"
+      >
+        <div class="row">
+          <div class="col-md-12 mb-4">
+            <label class="form-label cairo" for="PaymentMethod"
+              >الدفع من خلال</label
+            >
+            <select
+              name="PaymentMethod"
+              id="PaymentMethod"
+              name="PaymentMethod"
+              class="form-control"
+              formControlName="PaymentMethod"
+              [class.is-valid]="PaymentMethod?.valid"
+              [class.is-invalid]="
+                PaymentMethod?.invalid && PaymentMethod?.touched
+              "
+            >
+              <option>...اختر</option>
+              <ng-container *ngFor="let PaymentMethod of PaymentMethodsList">
+                <option [value]="PaymentMethod.PaymentMethodId">
+                  {{ PaymentMethod.PaymentMethodAr }}
+                </option>
+              </ng-container>
+            </select>
+            <div
+              class="alert alert-warning mt-2"
+              [hidden]="PaymentMethod?.valid || PaymentMethod?.untouched"
+            >
+              <span *ngIf="PaymentMethod?.errors?.['required']">
+                طريقة الدفع مطلوبة</span
+              >
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="btn cairo ms-2 text-white form-control"
+          style="background: #18af9a"
+        >
+          إرسال
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

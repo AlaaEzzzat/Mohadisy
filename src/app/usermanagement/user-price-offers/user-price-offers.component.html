@@ -184,6 +184,7 @@
                     <button
                       class="btn h-50 rounded-0 border-0 text-white"
                       style="background-color: #18af9a"
+                      (click)="acceptOffer(offer)"
                     >
                       قبول عرض السعر
                     </button>
@@ -464,7 +465,8 @@
                             </svg>
 
                             <p class="p-0 m-0 me-3 mainColor">
-                              {{ offer.contractTerms }}
+                              يتم تسديد المبلغ علي
+                              {{ offer.numberOfMilestones }} دفعات
                             </p>
                           </div>
                         </div>
@@ -517,7 +519,13 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="offer.id == selectedOfferId && !seeProjectInfo">
+                <div
+                  *ngIf="
+                    offer.id == selectedOfferId &&
+                    !seeProjectInfo &&
+                    activeService == 2
+                  "
+                >
                   <div class="conditions my-3 cairo">
                     <div
                       class="p-3 d-flex justify-content-between"
@@ -649,14 +657,12 @@
                         <h4 class="head">مكونات المشروع</h4>
                         <ul
                           class="m-0 p-0 list-unstyled"
-                          *ngFor="
-                            let component of selectedProject.projectComponents
-                          "
+                          *ngFor="let component of activeProjectsComponents"
                         >
                           <li class="mb-2">
                             <i class="fa fa-chevron-left ms-3"></i>
                             <span>
-                              {{ component.component }}
+                              {{ component.name }}
                             </span>
                           </li>
                         </ul>
@@ -667,14 +673,12 @@
                         <h4 class="head">الأعمال المطلوبة</h4>
                         <ul
                           class="m-0 p-0 list-unstyled"
-                          *ngFor="
-                            let requiredWork of selectedProject.projectRequiredWorks
-                          "
+                          *ngFor="let requiredWork of activeProjectReqWorks"
                         >
                           <li class="mb-2">
                             <i class="fa fa-chevron-left ms-3"></i>
                             <span>
-                              {{ requiredWork.requiredWork }}
+                              {{ requiredWork.name }}
                             </span>
                           </li>
                         </ul>
@@ -689,11 +693,30 @@
                             let document of selectedProject.clientProjectDocuments
                           "
                         >
-                          <li class="mb-2">
-                            <i class="fa fa-chevron-left ms-3"></i>
+                          <li class="mb-3 d-flex justify-content-between">
                             <span>
-                              {{ document.document }}
+                              <i class="fa fa-chevron-left ms-3"></i>
+                              {{
+                                document.file.length > 15
+                                  ? document.file.substr(0, 15) + "..."
+                                  : document.file
+                              }}
                             </span>
+                            <div>
+                              <a
+                                class="mx-3"
+                                target="_blank"
+                                [href]="document.filePath"
+                                ><i class="fa fa-eye"></i
+                              ></a>
+                              <a
+                                target="_blank"
+                                [href]="document.filePath"
+                                [download]="document.file"
+                                download
+                                ><i class="fa fa-download"></i
+                              ></a>
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -766,14 +789,12 @@
                     <h4 class="head">مكونات المشروع</h4>
                     <ul
                       class="m-0 p-0 list-unstyled"
-                      *ngFor="
-                        let component of selectedProject.projectComponents
-                      "
+                      *ngFor="let component of activeProjectsComponents"
                     >
                       <li class="mb-2">
                         <i class="fa fa-chevron-left ms-3"></i>
                         <span>
-                          {{ component.component }}
+                          {{ component.name }}
                         </span>
                       </li>
                     </ul>
@@ -784,14 +805,12 @@
                     <h4 class="head">الأعمال المطلوبة</h4>
                     <ul
                       class="m-0 p-0 list-unstyled"
-                      *ngFor="
-                        let requiredWork of selectedProject.projectRequiredWorks
-                      "
+                      *ngFor="let requiredWork of activeProjectReqWorks"
                     >
                       <li class="mb-2">
                         <i class="fa fa-chevron-left ms-3"></i>
                         <span>
-                          {{ requiredWork.requiredWork }}
+                          {{ requiredWork.name }}
                         </span>
                       </li>
                     </ul>
@@ -806,15 +825,29 @@
                         let document of selectedProject.clientProjectDocuments
                       "
                     >
-                      <li class="mb-2">
-                        <i class="fa fa-chevron-left ms-3"></i>
-                        <a [href]="document.filePath" target="_blank">
+                      <li class="mb-3 d-flex justify-content-between">
+                        <span>
+                          <i class="fa fa-chevron-left ms-3"></i>
                           {{
                             document.file.length > 15
                               ? document.file.substr(0, 15) + "..."
                               : document.file
                           }}
-                        </a>
+                        </span>
+                        <div>
+                          <a
+                            class="mx-3"
+                            target="_blank"
+                            [href]="document.filePath"
+                            ><i class="fa fa-eye"></i
+                          ></a>
+                          <a
+                            target="_blank"
+                            [href]="document.filePath"
+                            [download]="document.file"
+                            ><i class="fa fa-download"></i
+                          ></a>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -839,3 +872,23 @@
     </div>
   </div>
 </section>
+<div *ngIf="paymethods" class="overlay p-5">
+  <div class="popup p-4 px-3">
+    <a class="close" style="cursor: pointer" (click)="paymethods = false"
+      >&times;</a
+    >
+    <label style="font-weight: bolld">الدفع من خلال </label>
+    <div class="content p-1 text-center">
+      <ng-container *ngFor="let method of PaymentMethodsList">
+        <button
+          [disabled]="method.PaymentMethodId != 2"
+          [hidden]="![2, 6, 4, 11].includes(method.PaymentMethodId)"
+          class="btn cairo mainBk p-3 ms-2 text-white title"
+          (click)="goToPay(method.PaymentMethodId)"
+        >
+          {{ method.PaymentMethodAr }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</div>
