@@ -86,42 +86,42 @@
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-<ng-container *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4">
-            <div class="btn-group bg-white ms-1 rounded-0"   >
-              <button
-                type="button"
-                class="btn btn-white dropdown-toggle rounded-0"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                طلبات
-              </button>
-              <ul class="dropdown-menu text-end">
-                <li><a class="dropdown-item"> المستقل</a></li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    (click)="getNewProfilesCompany(page)"
-                  >
-                    شركات
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" (click)="getCompletedProfiles(page)">
-                    طلبات مكتمله</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    (click)="getNotCompletedProfiles(page)"
-                  >
-                    طلبات غير مكتمله</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </ng-container>
+            <ng-container *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4">
+              <div class="btn-group bg-white ms-1 rounded-0"   >
+                <button
+                  type="button"
+                  class="btn btn-white dropdown-toggle rounded-0"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  طلبات
+                </button>
+                <ul class="dropdown-menu text-end">
+                  <li><a class="dropdown-item"> المستقل</a></li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      (click)="getNewProfilesCompany(page)"
+                    >
+                      شركات
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" (click)="getCompletedProfiles(page)">
+                      طلبات مكتمله</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      (click)="getNotCompletedProfiles(page)"
+                    >
+                      طلبات غير مكتمله</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </ng-container>
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
             type="search"
@@ -137,7 +137,7 @@
 
         <!-- card company -->
         <ng-container *ngFor="let pro of iProfileData | filter: companyName">
-          <div class="card mb-3 border-0 rounded-0 textFontSizeCard" >
+          <div class="card mb-3 border-0 rounded-0 " >
             <div
               class="card-body rounded-0"
               (click)="objectProduct(pro, pro.id)"
@@ -157,7 +157,7 @@
                     ><img src="assets/icons/XMLID_1_WH.svg" class=""
                   /></ng-template>
                   <div class="card-title me-3">
-                    <p class="typeCom"></p>
+                    <!-- <p class="typeCom"></p> -->
                     <p
                       class="fs-6 typeCom"
                       *ngIf="
@@ -233,7 +233,7 @@
 
                   <small class="opacity-75 align-content-end"
                     >منذ
-                    {{ pro.dateCreated | date }}
+                    {{ calculateDiff(pro.dateCreated) }}يوم
                   </small>
                 </div>
               </div>
@@ -241,9 +241,45 @@
           </div>
         </ng-container>
         <!-- pagenation -->
-        <div class="col-12">
+      <div class="col-12">
           <div class="position-absolute top100" [hidden]="total<=1">
-            <ng-container *ngIf="pagenationNewProfiles">
+
+            <nav aria-label="..." class="w-100 d-flex justify-content-center">
+              <ul class="pagination w-100">
+                <li class="page-item">
+                  <button
+                    (click)="prev()"
+                    class="page-link rounded-0  btn-dark"
+                    [disabled]="page <= 1"
+                  >
+                    السابق
+                  </button>
+                </li>
+
+                <ng-container
+                  class="page-item"
+                  *ngFor="let mypage of pagenation; let i = index"
+                >
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
+                      >{{ mypage + 1 }}</a
+                    >
+                  </li>
+                </ng-container>
+                <li class="page-item">
+                  <button
+                    (click)="next()"
+                    class="page-link rounded-0   btn-dark"
+                    [disabled]="page == pagenation.length"
+                  >
+                    التالي
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <!-- <ng-container *ngIf="pagenationNewProfiles">
               <tr *ngIf="pagenationNewProfiles">
                 <th
                   scope="row"
@@ -373,7 +409,7 @@
                   ></pagination-controls>
                 </td>
               </tr>
-            </ng-container>
+            </ng-container> -->
           </div>
         </div>
 
@@ -382,21 +418,21 @@
     </div>
 
     <!--  -->
-    <div class="col-md-7 sizew col-12 flex-row position-relative" [hidden]="!showInformation">
+    <div class="col-md-7 sizew col-12 flex-row " [hidden]="!showInformation">
       <div class="col-12 card mb-3 border-0 rounded-0">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
             <img
               *ngIf="productCurrent.profilePicturePath; else company"
               src="{{ productCurrent.profilePicturePath }}"
-              class="img-fluid rounded-circle w-100 p-2"
+              class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
               alt="null"
             />
 
             <ng-template #company>
               <img
                 src="{{ productCurrent.companyLogoPath }}"
-                class="img-fluid rounded-circle w-75 mx-2"
+                class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
                 alt="null"
             /></ng-template>
           </div>
@@ -436,7 +472,7 @@
             </div>
           </div>
           <div class="col-md-4 ">
-            <div   class="d-flex "    *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"    >
+            <div   class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"    >
               <a
                 type="button"
                 class="btn complete col-4 rounded-0  "
@@ -499,6 +535,7 @@
               >
             </div>
           </div>
+
         </div>
       </div>
       <!-- سبب عدم الاكتمال -->
@@ -728,7 +765,7 @@
             <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.membershipFile&&productCurrent.membershipPath">
               <p class="card-subtitle text-muted fs-6">
                 رقم العضويه <br />
-                <small class="fs-6">{{ productCurrent.membershipNumber }}</small>
+                <small class="fs-6 textInformation">{{ productCurrent.membershipNumber }}</small>
               </p>
               <a
                 target="_blank"

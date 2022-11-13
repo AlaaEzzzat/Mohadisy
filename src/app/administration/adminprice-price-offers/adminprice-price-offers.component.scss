@@ -11,11 +11,13 @@ $bgButton:#F3FBFA;
 a:focus ,a:hover,button:focus ,button:hover {
   background-color :$Alltext!important;
   color: white !important;
+  box-shadow: none !important;
 }
 button>i ,.typeCom
 {
   color: #18AF9A !important;
   // font-family:$fontCairoFamily;
+  font-family:$fontTajawalFamily;
 
 }
 .textInformation,a{
@@ -83,8 +85,7 @@ color: #000 !important;
 }
 .top100 {
   top: 99% !important;
-  right: -10% !important;
-}
+  right:-7% !important;}
 .modaltitle{
   background-color: $textColor !important;
   >h2,>button{
@@ -141,4 +142,8 @@ border: none!important;
     color: white;
   }
   color: #18AF9A;
+}
+.top100 {
+  top: 99% !important;
+  right:-5% !important;
 }

@@ -13,10 +13,11 @@ import { IadminProjects } from 'src/app/@models/iadmin-projects';
   styleUrls: ['./admin-project.component.scss'],
 })
 export class AdminProjectComponent implements OnInit {
-  errorCom:any;
+  errorCom: any;
   page: number = 1;
-  newApi: number = 3;
-  total!: number;
+  newApi: number = 1;
+  total: any = 0;
+  pagenation: any = [];
   iadminPriceQuotes: IadminProjects[] = [];
   dataPriceQuotes: any;
   firstObject: any;
@@ -28,136 +29,175 @@ export class AdminProjectComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  messages:any;
-  show:boolean=false;
-  showDanger:boolean=false;
-  isProcessing:boolean=true
+  messages: any;
+  show: boolean = false;
+  showDanger: boolean = false;
+  isProcessing: boolean = true;
 
-  constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient) {
-    this.getCurrentProjects()
+  constructor(
+    private ServicesProvidor: AdminProjectsService,
+    private _HttpClient: HttpClient
+  ) {
+    // this.getCurrentProjects()
   }
-
 
   ngOnInit(): void {
     // this.objectProductGet();
   }
-
-
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+    // console.log( this.pagenation)
+  }
+  next() {
+    if (this.page < this.total) {
+      this.page = this.page + 1;
+      this.choise();
+    }
+  }
+  prev() {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.choise();
+    }
+  }
+  choise() {
+    switch (this.newApi) {
+      case 7:
+        this.getStoppedProjects();
+        break;
+      case 6:
+        this.getLateProjects();
+        break;
+      case 3:
+        this.getCurrentProjects();
+        break;
+      case 4:
+        this.getPendingProject();
+        break;
+      case 5:
+        this.getFinishedProjects();
+        break;
+    }
+  }
+  //3
   getCurrentProjects() {
-    sessionStorage.clear()
+    sessionStorage.clear();
     this.isProcessing = true;
     this.newApi = 3;
-    sessionStorage.removeItem('idProjects')
-    sessionStorage.removeItem('projects')
+    sessionStorage.removeItem('idProjects');
+    sessionStorage.removeItem('projects');
     this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe(
       (value) => {
-        if(value !=null || value != undefined) {
-
-          this.datas = value.data.projects;
-        this.iadminPriceQuotes = this.datas;
-        this.total = value.data.totalPages;
-        console.log(value);
-        this.firstObject = this.iadminPriceQuotes[0];
-
-          this.objectProduct(this.firstObject, this.firstObject.id);
-
-        }
-
-      },(error) => {
-        this.isProcessing = false;
-        }
-    );
-  }
-  getPendingProject() {
-    sessionStorage.clear()
-    this.isProcessing = true;
-    this.newApi = 4;
-    sessionStorage.removeItem('idProjects')
-    sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
-      (value) => {
-        if(value !=null || value != undefined) {
-
-        this.datas = value.data.projects;
-        this.iadminPriceQuotes = this.datas;
-        this.total = value.data.totalPages;
-        console.log(value);
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-
-    },(error) => {
-      this.isProcessing = false;
-      }
-    );
-  }
-
-  getFinishedProjects() {
-    sessionStorage.clear()
-    this.isProcessing = true;
-    this.newApi = 5;
-    sessionStorage.removeItem('idProjects')
-    sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
-      (value) => {
-        if(value !=null || value != undefined) {
-
-        this.datas = value.data.projects;
-        this.iadminPriceQuotes = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.iadminPriceQuotes);
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }},(error) => {
-        this.isProcessing = false;
-        }
-    );
-  }
-
-  getLateProjects(page:any) {
-    sessionStorage.clear()
-    this.newApi = 6;
-    this.isProcessing = true;
-
-    this.ServicesProvidor.getLateProjectsForAdmin(page).subscribe({
-      next:(value)=>{
-        if(value !=null || value != undefined) {
-
+        if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.iadminPriceQuotes);
+          console.log(this.total);
+          this.counter(this.total);
+          this.firstObject = this.iadminPriceQuotes[0];
+
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        }
+      },
+      (error) => {
+        this.isProcessing = false;
+      }
+    );
+  }
+  // 4
+  getPendingProject() {
+    sessionStorage.clear();
+    this.isProcessing = true;
+    this.newApi = 4;
+    sessionStorage.removeItem('idProjects');
+    sessionStorage.removeItem('projects');
+    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
+      (value) => {
+        if (value != null || value != undefined) {
+          this.datas = value.data.projects;
+          this.iadminPriceQuotes = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
       },
-      error:(err)=>{
-        alert(err)
-      }
-    }
-
-    )}
-
-
-  getStoppedProjects() {
-    sessionStorage.clear()
-    this.newApi = 7;    this.isProcessing = true;
-    sessionStorage.removeItem('idProjects')
-    sessionStorage.removeItem('projects')
-    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
-
-      (value) => {
-        if(value !=null || value != undefined) {
-
-        this.datas = value.data.projects;
-        this.iadminPriceQuotes = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.iadminPriceQuotes);
-        this.firstObject = this.iadminPriceQuotes[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }},(error) => {
+      (error) => {
         this.isProcessing = false;
+      }
+    );
+  }
+  //5
+  getFinishedProjects() {
+    sessionStorage.clear();
+    this.isProcessing = true;
+    this.newApi = 5;
+    sessionStorage.removeItem('idProjects');
+    sessionStorage.removeItem('projects');
+    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
+      (value) => {
+        if (value != null || value != undefined) {
+          this.datas = value.data.projects;
+          this.iadminPriceQuotes = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          this.firstObject = this.iadminPriceQuotes[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
         }
+      },
+      (error) => {
+        this.isProcessing = false;
+      }
+    );
+  }
+  //6
+  getLateProjects() {
+    sessionStorage.clear();
+    this.newApi = 6;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getLateProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
+        if (value != null || value != undefined) {
+          this.datas = value.data.projects;
+          this.iadminPriceQuotes = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          this.firstObject = this.iadminPriceQuotes[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        }
+      },
+      error: (err) => {
+        alert(err);
+      },
+    });
+  }
+
+  //7
+  getStoppedProjects() {
+    sessionStorage.clear();
+    this.newApi = 7;
+    this.isProcessing = true;
+    sessionStorage.removeItem('idProjects');
+    sessionStorage.removeItem('projects');
+    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
+      (value) => {
+        if (value != null || value != undefined) {
+          this.datas = value.data.projects;
+          this.iadminPriceQuotes = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          this.firstObject = this.iadminPriceQuotes[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        }
+      },
+      (error) => {
+        this.isProcessing = false;
+      }
     );
   }
 
@@ -177,104 +217,102 @@ export class AdminProjectComponent implements OnInit {
     console.log(this.idProductSessionStorage);
   }
 
-//   // change stutas client
-//   //2
-//   changeToAccepted() {
-//     this.iChangeStatusCliend = {
+  //   // change stutas client
+  //   //2
+  //   changeToAccepted() {
+  //     this.iChangeStatusCliend = {
 
-//       projectId: this.idProduct.id,
-//       projectStatusId:2,
-//       notes: "string",
-//       rejectionReasonId: null
-//     };
-//     if (
-//       this.iChangeStatusCliend.projectStatusId ===
-//       this.idProduct.projectRequestStatus.projectStatusId
-//     ) {
-//       this.showDanger=true;
-//       setTimeout(()=>{
-//         this.showDanger=false
-//       }, 3000);
-//     } else {
-//       this.ServicesProvidor.changeProfileStatus(
-//         this.iChangeStatusCliend
-//       ).subscribe((data) => {
-//         this.show=true;
-//      this.getNewProjectsForAdmin()
-//     this.messages=data.message
-//     setTimeout(()=>{
-//       this.show=false
-//     }, 3000);
-//       });
-//       // this.getNewProjectsForAdmin()
+  //       projectId: this.idProduct.id,
+  //       projectStatusId:2,
+  //       notes: "string",
+  //       rejectionReasonId: null
+  //     };
+  //     if (
+  //       this.iChangeStatusCliend.projectStatusId ===
+  //       this.idProduct.projectRequestStatus.projectStatusId
+  //     ) {
+  //       this.showDanger=true;
+  //       setTimeout(()=>{
+  //         this.showDanger=false
+  //       }, 3000);
+  //     } else {
+  //       this.ServicesProvidor.changeProfileStatus(
+  //         this.iChangeStatusCliend
+  //       ).subscribe((data) => {
+  //         this.show=true;
+  //      this.getNewProjectsForAdmin()
+  //     this.messages=data.message
+  //     setTimeout(()=>{
+  //       this.show=false
+  //     }, 3000);
+  //       });
+  //       // this.getNewProjectsForAdmin()
 
+  //     }
+  //   }
+  // //9
+  //   changeToReject() {
+  //     this.iChangeStatusCliend = {
 
-//     }
-//   }
-// //9
-//   changeToReject() {
-//     this.iChangeStatusCliend = {
+  //       projectId: this.idProduct.id,
+  //       projectStatusId:2,
+  //       notes: "string",
+  //       rejectionReasonId: null
+  //     };
+  //     if (
+  //       this.iChangeStatusCliend.projectStatusId ===
+  //       this.idProduct.projectRequestStatus.projectStatusId
+  //     ) {
+  //       this.showDanger=true;
+  //       setTimeout(()=>{
+  //         this.showDanger=false
+  //       }, 3000);
+  //     } else {
+  //       this.ServicesProvidor.changeProfileStatus(
+  //         this.iChangeStatusCliend
+  //       ).subscribe((data) => {
+  //         this.show=true;
+  //      this.getNewProjectsForAdmin()
+  //     this.messages=data.message
+  //     setTimeout(()=>{
+  //       this.show=false
+  //     }, 3000);
+  //       });
 
-//       projectId: this.idProduct.id,
-//       projectStatusId:2,
-//       notes: "string",
-//       rejectionReasonId: null
-//     };
-//     if (
-//       this.iChangeStatusCliend.projectStatusId ===
-//       this.idProduct.projectRequestStatus.projectStatusId
-//     ) {
-//       this.showDanger=true;
-//       setTimeout(()=>{
-//         this.showDanger=false
-//       }, 3000);
-//     } else {
-//       this.ServicesProvidor.changeProfileStatus(
-//         this.iChangeStatusCliend
-//       ).subscribe((data) => {
-//         this.show=true;
-//      this.getNewProjectsForAdmin()
-//     this.messages=data.message
-//     setTimeout(()=>{
-//       this.show=false
-//     }, 3000);
-//       });
+  //   }
+  // }
+  // //6
+  //   changeToNotComplette() {
+  //       this.iChangeStatusCliend = {
 
-//   }
-// }
-// //6
-//   changeToNotComplette() {
-//       this.iChangeStatusCliend = {
+  //       projectId: this.idProduct.id,
+  //       projectStatusId:6,
+  //       notes: "string",
+  //       rejectionReasonId: null
+  //     };
+  //     if (
+  //       this.iChangeStatusCliend.projectStatusId ===
+  //       this.idProduct.projectRequestStatus.projectStatusId
+  //     ) {
+  //       this.showDanger=true;
+  //       setTimeout(()=>{
+  //         this.showDanger=false
+  //       }, 3000);
+  //     } else {
+  //       this.ServicesProvidor.changeProfileStatus(
+  //         this.iChangeStatusCliend
+  //       ).subscribe((data) => {
+  //         this.show=true;
+  //      this.getNewProjectsForAdmin()
+  //     this.messages=data.message
+  //     setTimeout(()=>{
+  //       this.show=false
+  //     }, 3000);
+  //       });
+  //     }
+  //   }
 
-//       projectId: this.idProduct.id,
-//       projectStatusId:6,
-//       notes: "string",
-//       rejectionReasonId: null
-//     };
-//     if (
-//       this.iChangeStatusCliend.projectStatusId ===
-//       this.idProduct.projectRequestStatus.projectStatusId
-//     ) {
-//       this.showDanger=true;
-//       setTimeout(()=>{
-//         this.showDanger=false
-//       }, 3000);
-//     } else {
-//       this.ServicesProvidor.changeProfileStatus(
-//         this.iChangeStatusCliend
-//       ).subscribe((data) => {
-//         this.show=true;
-//      this.getNewProjectsForAdmin()
-//     this.messages=data.message
-//     setTimeout(()=>{
-//       this.show=false
-//     }, 3000);
-//       });
-//     }
-//   }
-
-  calculateDiff(sentOn:any){
-
+  calculateDiff(sentOn: any) {
     let todayDate = new Date();
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
@@ -282,16 +320,17 @@ export class AdminProjectComponent implements OnInit {
     // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
-}
-download(url: string,name:any) {
-  return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe((png)=>{
-    const blob=new Blob([png],{type:'application/pdf'});
-    const fileName=name;
-    saveAs(blob,fileName)
-  },err=>{
-    console.log(err)
   }
-  )
-
-}
+  download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

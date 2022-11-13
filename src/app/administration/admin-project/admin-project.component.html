@@ -40,7 +40,7 @@
         'color': newApi === 6 ? '#ffffff' : '#000000'
       }"
       class="btn rounded-0  col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2"      role="button"
-      (click)="getLateProjects(page)"
+      (click)="getLateProjects()"
     >
       المشاريع متأخره
     </button>
@@ -73,7 +73,7 @@
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind" >
 
   <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
-    <div class="col-md-4 col-12">
+    <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
@@ -163,7 +163,46 @@
           </div>
 
         </ng-container>
+        <div class="col-12">
+          <div class="position-absolute top100" [hidden]="total<=1">
 
+            <nav aria-label="..." class="w-100 d-flex justify-content-center">
+              <ul class="pagination w-100">
+                <li class="page-item">
+                  <button
+                    (click)="prev()"
+                    class="page-link rounded-0  btn-dark"
+                    [disabled]="page <= 1"
+                  >
+                    السابق
+                  </button>
+                </li>
+
+                <ng-container
+                  class="page-item"
+                  *ngFor="let mypage of pagenation; let i = index"
+                >
+                  <li class="page-item">
+                    <a
+                      class="page-link"
+                      [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
+                      >{{ mypage + 1 }}</a
+                    >
+                  </li>
+                </ng-container>
+                <li class="page-item">
+                  <button
+                    (click)="next()"
+                    class="page-link rounded-0   btn-dark"
+                    [disabled]="page == pagenation.length"
+                  >
+                    التالي
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            </div>
+        </div>
       </form>
     </div>
     <div class="col-md-7 sizew col-12 flex-row">

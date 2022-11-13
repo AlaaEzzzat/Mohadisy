@@ -14,8 +14,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 export class AdminpricePriceOffersComponent implements OnInit {
   // errorCom:any;
   page: number = 1;
-  newApi: number = 3;
-  total!: number;
+  newApi: number = 1;
+  total: any = 0;
+  pagenation: any = [];
+  // total!: number;
   iadminPriceQuotes: IadminPriceQuotes[] = [];
   dataPriceQuotes: any;
   firstObject: any;
@@ -39,9 +41,47 @@ userformMassage :FormGroup;
       massage:['',[Validators.required]],
     });
   }
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+    // console.log( this.pagenation)
 
+
+  }
+  next() {
+    if (this.page < this.total) {
+      this.page = this.page + 1;
+      this.choise()
+
+    }
+  }
+  prev() {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.choise()
+    }
+  }
   ngOnInit(): void {
     this.getNewProjectsForAdmin();
+  }
+
+  choise(){
+    switch(this.newApi){
+      case 1:
+        this.getNewProjectsForAdmin();
+        break;
+        case 6:
+        this.getAcceptedProjectsForAdmin();
+        break;
+        case 3:
+          this.getNotCompletedProjectsForAdmin();
+          break;
+          case 4:
+        this.getRejectedProjectsForAdmin();
+        break;
+        case 10:
+          this.getUnderNegotiationProjects();
+          break;
+    }
   }
   getNewProjectsForAdmin() {
     this.isProcessing = true;
@@ -55,6 +95,8 @@ userformMassage :FormGroup;
           this.dataPriceQuotes = value.data.projects;
           this.iadminPriceQuotes = this.dataPriceQuotes;
           this.total = value.data.totalPages;
+          console.log(this.total)
+          this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
             console.log(this.firstObject.projectRequiredWorks);
@@ -82,6 +124,8 @@ getUnderNegotiationProjects(){
           this.dataPriceQuotes = value.data.projects;
           this.iadminPriceQuotes = this.dataPriceQuotes;
           this.total = value.data.totalPages;
+          console.log(this.total)
+          this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
             console.log(this.firstObject.projectRequiredWorks);
@@ -103,6 +147,8 @@ getUnderNegotiationProjects(){
             this.dataPriceQuotes = value.data.projects;
             this.iadminPriceQuotes = this.dataPriceQuotes;
             this.total = value.data.totalPages;
+            console.log(this.total)
+            this.counter(this.total);
             this.firstObject = this.iadminPriceQuotes[0];
               this.objectProduct(this.firstObject, this.firstObject.id);
               console.log(this.firstObject.projectRequiredWorks);
@@ -125,7 +171,7 @@ getUnderNegotiationProjects(){
 
           this.dataPriceQuotes = value.data.projects;
           this.iadminPriceQuotes = this.dataPriceQuotes;
-          this.total = value.data.totalPages;
+          this.total = value.data.totalPages;            this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
             console.log(this.firstObject.projectRequiredWorks);
@@ -155,7 +201,7 @@ getUnderNegotiationProjects(){
 
           this.dataPriceQuotes = value.data.projects;
           this.iadminPriceQuotes = this.dataPriceQuotes;
-          this.total = value.data.totalPages;
+          this.total = value.data.totalPages;            this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
             console.log(this.firstObject.projectRequiredWorks);
@@ -185,7 +231,7 @@ getUnderNegotiationProjects(){
 
           this.dataPriceQuotes = value.data.projects;
           this.iadminPriceQuotes = this.dataPriceQuotes;
-          this.total = value.data.totalPages;
+          this.total = value.data.totalPages;            this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
             console.log(this.firstObject.projectRequiredWorks);
@@ -310,6 +356,16 @@ getUnderNegotiationProjects(){
     // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
+}
+calculateDiffEend(sentOn:any){
+
+  let todayDate = new Date();
+  let sentOnDate = new Date(sentOn);
+  sentOnDate.setDate(sentOnDate.getDate());
+  let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
+  // To calculate the no. of days between two dates
+  let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+  return differenceInDays;
 }
 download(url: string,name:any) {
   return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe((png)=>{

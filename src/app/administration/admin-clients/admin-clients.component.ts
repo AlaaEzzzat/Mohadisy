@@ -12,9 +12,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./admin-clients.component.scss']
 })
 export class AdminClientsComponent implements OnInit {
+  // page: number = 1;
+  // newApi: number = 3;
+  // total: number = 0;
   page: number = 1;
-  newApi: number = 3;
-  total: number = 0;
+  newApi: number = 1;
+  total: any = 0;
+  pagenation: any = [];
   iChangeStatusCliend:IChangeStatus|undefined=undefined
   iProfileData: IadminClients [] = [];
   datas: any;
@@ -26,159 +30,192 @@ export class AdminClientsComponent implements OnInit {
   // down
   sortedData:IadminClients []=[];
   firstObject:any;
+  isProcessing: boolean=false
 
-  arrayNewProfiles:any []=[]
-  arrayBlockedClientsProfiles:any []=[]
-  arrayOfDigitsActiveClientAcconting:any []=[]
-  arrayOfDigitsNonActiveClientAccount:any []=[]
-  arrayOfDigitsExpiredClientsProfiles:any []=[]
+  // arrayNewProfiles:any []=[]
+  // arrayBlockedClientsProfiles:any []=[]
+  // arrayOfDigitsActiveClientAcconting:any []=[]
+  // arrayOfDigitsNonActiveClientAccount:any []=[]
+  // arrayOfDigitsExpiredClientsProfiles:any []=[]
 
-  pagenationNewProfiles:boolean=false
-  pagenationActiveClientAcconting:boolean=false
-  pagenationNonActiveClientAccount:boolean=false
-  pagenationBlockedClientsProfiles:boolean=false
-  pagenationExpiredClientsProfiles:boolean=false
-  arrayOfDigits:any []=[]
+  // pagenationNewProfiles:boolean=false
+  // pagenationActiveClientAcconting:boolean=false
+  // pagenationNonActiveClientAccount:boolean=false
+  // pagenationBlockedClientsProfiles:boolean=false
+  // pagenationExpiredClientsProfiles:boolean=false
+  // arrayOfDigits:any []=[]
   constructor( private ServicesProvidor:AdminClientsService ,private _HttpClient:HttpClient) {
 
-    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe((value) => {
-      this.pagenationNewProfiles=true
-      this. pagenationActiveClientAcconting=false
-      this. pagenationNonActiveClientAccount=false
-      this. pagenationBlockedClientsProfiles=false
-      this. pagenationExpiredClientsProfiles=false
+    // this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe((value) => {
+    //   this.pagenationNewProfiles=true
+    //   this. pagenationActiveClientAcconting=false
+    //   this. pagenationNonActiveClientAccount=false
+    //   this. pagenationBlockedClientsProfiles=false
+    //   this. pagenationExpiredClientsProfiles=false
 
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total,this.arrayNewProfiles)
+    //   this.fortest(this.total,this.arrayNewProfiles)
 
 
-    });
-    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
+    // });
+    // this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
 
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total,this.arrayOfDigitsActiveClientAcconting)
+    //   this.fortest(this.total,this.arrayOfDigitsActiveClientAcconting)
 
-    });
-    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
+    // });
+    // this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
 
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total,this.arrayOfDigitsNonActiveClientAccount)
+    //   this.fortest(this.total,this.arrayOfDigitsNonActiveClientAccount)
 
-    });
-    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
+    // });
+    // this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
 
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
 
-      this.objectProduct(this.firstObject,this.firstObject.id)
-      this.fortest(this.total,this.arrayBlockedClientsProfiles)
+    //   this.objectProduct(this.firstObject,this.firstObject.id)
+    //   this.fortest(this.total,this.arrayBlockedClientsProfiles)
 
-    });
-    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
+    // });
+    // this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
 
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total,this.arrayOfDigitsExpiredClientsProfiles)
+    //   this.fortest(this.total,this.arrayOfDigitsExpiredClientsProfiles)
 
-    });
+    // });
   }
 
 
   ngOnInit(): void {
-    this.getNewClientProfiles(this.page)
+    this.getNewClientProfiles()
 
     this.objectProductGet();
   }
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+    // console.log( this.pagenation)
 
 
+  }
+  next() {
+    if (this.page < this.total) {
+      this.page = this.page + 1;
+      this.choise()
 
-  getNewClientProfiles(page:any){
+    }
+  }
+  prev() {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.choise()
+    }
+  }
+
+
+  choise(){
+    switch(this.newApi){
+      case 1:
+        this.getNewClientProfiles();
+        break;
+        case 2:
+        this.getActiveClientAcconting();
+        break;
+        case 3:
+          this.getNonActiveClientAccount();
+          break;
+          case 4:
+        this.getBlockedClientsProfiles();
+        break;
+        case 5:
+          this.getExpiredClientsProfiles();
+          break;
+    }
+  }
+
+
+  getNewClientProfiles(){
     this.newApi=1;
-    this.pagenationNewProfiles=true
-    this. pagenationActiveClientAcconting=false
-    this. pagenationNonActiveClientAccount=false
-    this. pagenationBlockedClientsProfiles=false
-    this. pagenationExpiredClientsProfiles=false
-    this.ServicesProvidor.getNewClientsProfiles(page).subscribe((value) => {
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe({
+      next:(value) => {
+        if(value !=null || value != undefined) {
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
+      console.log(this.total)
+      this.counter(this.total);
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)
+        }
+      },error: (error) => {
+        this.isProcessing = false;
 
+      }
 
     });
 
   }
 
-  getActiveClientAcconting(page:any){
+  getActiveClientAcconting(){
     this.newApi=2
-    this.pagenationNewProfiles=false
-    this. pagenationActiveClientAcconting=true
-    this. pagenationNonActiveClientAccount=false
-    this. pagenationBlockedClientsProfiles=false
-    this. pagenationExpiredClientsProfiles=false
-    this.ServicesProvidor.getActiveClientsProfiles(page).subscribe((value) => {
+
+    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
+      this.total = value.data.totalPages;  console.log(this.total)
+      this.counter(this.total);
       console.log(this.iProfileData)
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
 
-  getNonActiveClientAccount(page:any){
+  getNonActiveClientAccount(){
     this.newApi=3
-    this.pagenationNewProfiles=false
-      this. pagenationActiveClientAcconting=false
-      this. pagenationNonActiveClientAccount=true
-      this. pagenationBlockedClientsProfiles=false
-      this. pagenationExpiredClientsProfiles=false
-    this.ServicesProvidor.getNonActiveClientProfiles(page).subscribe((value) => {
+
+    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
+      this.total = value.data.totalPages;  console.log(this.total)
+      this.counter(this.total);
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id);
 
     });
 
   }
-  getBlockedClientsProfiles(page:any){
+  getBlockedClientsProfiles(){
     this.newApi=4
-    this.pagenationNewProfiles=false
-    this. pagenationActiveClientAcconting=false
-    this. pagenationNonActiveClientAccount=false
-    this. pagenationBlockedClientsProfiles=true
-    this. pagenationExpiredClientsProfiles=false
-    this.ServicesProvidor.getBlockedClientsProfiles(page).subscribe((value) => {
+
+    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
+      this.total = value.data.totalPages;  console.log(this.total)
+      this.counter(this.total);
       console.log(this.datas)
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)
     });
   }
-  getExpiredClientsProfiles(page:any){
+  getExpiredClientsProfiles(){
     this.newApi=5
-    this.pagenationNewProfiles=false
-    this. pagenationActiveClientAcconting=false
-    this. pagenationNonActiveClientAccount=false
-    this. pagenationBlockedClientsProfiles=false
-    this. pagenationExpiredClientsProfiles=true
-    this.ServicesProvidor.getExpiredClientsProfiles(page).subscribe((value) => {
+
+    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
-      this.total = value.data.totalPages;
+      this.total = value.data.totalPages;  console.log(this.total)
+      this.counter(this.total);
       console.log(this.iProfileData)
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)

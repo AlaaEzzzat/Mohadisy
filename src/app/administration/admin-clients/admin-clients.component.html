@@ -7,7 +7,7 @@
       }"
       class="btn rounded-0  fs-6 h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
-      (click)="getNewClientProfiles(page)"
+      (click)="getNewClientProfiles()"
     >
       طلبات الانضمام
     </button>
@@ -18,7 +18,7 @@
       }"
       class="btn rounded-0  fs-6  h-75 text-nowrap p-2 col-lg-2 col-sm-4 col-12 "
       role="button"
-      (click)="getActiveClientAcconting(page)"
+      (click)="getActiveClientAcconting()"
     >
       العملاء النشيطين
     </button>
@@ -29,7 +29,7 @@
       }"
       class="btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
-      (click)="getNonActiveClientAccount(page)"
+      (click)="getNonActiveClientAccount()"
 
     >
       العملاء غير النشيطين
@@ -41,7 +41,7 @@
       }"
       class="btn btn rounded-0  fs-6 h-75  text-nowrap p-2 col-lg-2 col-sm-4 col-12  "
       role="button"
-      (click)="getBlockedClientsProfiles(page)"
+      (click)="getBlockedClientsProfiles()"
     >
       العملاء المعطلين
     </button>
@@ -53,17 +53,16 @@
       }"
       class="btn btn rounded-0  fs-6 h-75 col-lg-2 col-sm-4 col-12  text-nowrap p-2 "
       role="button"
-      (click)="getExpiredClientsProfiles(page)"
+      (click)="getExpiredClientsProfiles()"
     >
       العملاء المنتهين
     </button>
   </div>
 
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between" >
-    <div class="col-md-4 col-12">
+    <div class="col-md-4 col-12 position-relative">
       <form
         class="d-flex flex-column me-3"
-
       >
         <!-- search company -->
 
@@ -152,11 +151,50 @@
             </div>
           </div>
 
+          <div class="col-12">
+            <div class="position-absolute top100" [hidden]="total<=1">
 
+              <nav aria-label="..." class="w-100 d-flex justify-content-center">
+                <ul class="pagination w-100">
+                  <li class="page-item">
+                    <button
+                      (click)="prev()"
+                      class="page-link rounded-0  btn-dark"
+                      [disabled]="page <= 1"
+                    >
+                      السابق
+                    </button>
+                  </li>
+
+                  <ng-container
+                    class="page-item"
+                    *ngFor="let mypage of pagenation; let i = index"
+                  >
+                    <li class="page-item">
+                      <a
+                        class="page-link"
+                        [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
+                        >{{ mypage + 1 }}</a
+                      >
+                    </li>
+                  </ng-container>
+                  <li class="page-item">
+                    <button
+                      (click)="next()"
+                      class="page-link rounded-0   btn-dark"
+                      [disabled]="page == pagenation.length"
+                    >
+                      التالي
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+              </div>
+          </div>
 
       </form>
 
-      <tr *ngIf="pagenationNewProfiles">
+      <!-- <tr *ngIf="pagenationNewProfiles">
         <th
           scope="row"
           *ngFor="
@@ -237,7 +275,7 @@
             (pageChange)="page = $event"
           ></pagination-controls>
         </td>
-      </tr>
+      </tr> -->
 
 
 

@@ -6,7 +6,13 @@ import { AdminServiceProvidorService } from './../../@core/services/admin/admin-
 import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Indivdual } from './../../@models/indivdual';
 import { Organiztionl } from './../../@models/organiztionl';
 import { IND, OSP } from './../admin-sp-updata/admin-sp-updata.component';
@@ -17,11 +23,11 @@ import { IND, OSP } from './../admin-sp-updata/admin-sp-updata.component';
   styleUrls: ['./admin-sp.component.scss'],
 })
 export class AdminSPComponent implements OnInit {
-  currentIndivdual: IND= {} as IND;
-  currentOrganiztionl: OSP= {} as OSP;
+  currentIndivdual: IND = {} as IND;
+  currentOrganiztionl: OSP = {} as OSP;
   companys: IadminSp[] = [];
   mostaql: IadminSp[] = [];
-  description:any;
+  description: any;
   show: boolean = false;
   showDanger: boolean = false;
   messages: any;
@@ -34,386 +40,462 @@ export class AdminSPComponent implements OnInit {
   myTimeout: any;
   // objectpeo: any;
   // productCurrent: any;
-  showInformation:boolean=false
+  showInformation: boolean = false;
   name = '';
   id: any;
-  arrayOfDigits1: any[] = [];
-  arrayOfDigits2: any[] = [];
-  arrayOfDigits3: any[] = [];
-  arrayOfDigits4: any[] = [];
-  arrayOfDigits5: any[] = [];
-  arrayOfDigits6: any[] = [];
-  arrayOfDigitsNotCompletedProfiles: any[] = [];
-  pagenationNewProfiles: boolean = false;
-  pagenationRejectedProfiles: boolean = false;
-  pagenationactiveAllAcconting: boolean = false;
-  pagenationBlockedProfiles: boolean = false;
-  pagenationNonActiveAccount: boolean = false;
-  pagenationExpiredProfiles: boolean = false;
-  pagenationNotCompletedProfiles: boolean = false;
-  pagenationCompletedProfiles:boolean=false
   page: number = 1;
   newApi: number = 1;
-  total: number = 0;
+  total: any = 0;
+  pagenation: any = [];
+
+  // arrayOfDigits1: any[] = [];
+  // arrayOfDigits2: any[] = [];
+  // arrayOfDigits3: any[] = [];
+  // arrayOfDigits4: any[] = [];
+  // arrayOfDigits5: any[] = [];
+  // arrayOfDigits6: any[] = [];
+  // arrayOfDigitsNotCompletedProfiles: any[] = [];
+  // pagenationNewProfiles: boolean = false;
+  // pagenationRejectedProfiles: boolean = false;
+  // pagenationactiveAllAcconting: boolean = false;
+  // pagenationBlockedProfiles: boolean = false;
+  // pagenationNonActiveAccount: boolean = false;
+  // pagenationExpiredProfiles: boolean = false;
+  // pagenationNotCompletedProfiles: boolean = false;
+  // pagenationCompletedProfiles: boolean = false;
+  // page: number = 1;
+  // newApi: number = 1;
+  // total: number = 0;
   firstObject: any;
-  userformMassage :FormGroup;
-  company:any="مستقل"
-productCurrent: any;
-isProcessing:boolean=true
-constructor(private router:Router,private _HttpClient: HttpClient, private ServicesProvidor: AdminServiceProvidorService,private formbuilder:FormBuilder)
-  {
-    this.userformMassage=this.formbuilder.group({
-      massage:['',[Validators.required]],
+  userformMassage: FormGroup;
+  company: any = 'مستقل';
+  productCurrent: any;
+  isProcessing: boolean = true;
+  constructor(
+    private router: Router,
+    private _HttpClient: HttpClient,
+    private ServicesProvidor: AdminServiceProvidorService,
+    private formbuilder: FormBuilder
+  ) {
+    this.userformMassage = this.formbuilder.group({
+      massage: ['', [Validators.required]],
     });
-    this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
-      this.pagenationNewProfiles = true;
-      this.pagenationRejectedProfiles = false;
-      this.pagenationactiveAllAcconting = false;
-      this.pagenationBlockedProfiles = false;
-      this.pagenationNonActiveAccount = false;
-      this.pagenationExpiredProfiles = false;
-      this.pagenationNotCompletedProfiles= false;
-      this.pagenationCompletedProfiles=false;
+    // this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
+    //   this.pagenationNewProfiles = true;
+    //   this.pagenationRejectedProfiles = false;
+    //   this.pagenationactiveAllAcconting = false;
+    //   this.pagenationBlockedProfiles = false;
+    //   this.pagenationNonActiveAccount = false;
+    //   this.pagenationExpiredProfiles = false;
+    //   this.pagenationNotCompletedProfiles= false;
+    //   this.pagenationCompletedProfiles=false;
 
-      this.total = value.data.totalPages;
-      this.fortest(this.total, this.arrayOfDigits1);
-    });
-    this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
+    //   this.total = value.data.totalPages;
+    //   this.fortest(this.total, this.arrayOfDigits1);
+    // });
+    // this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total, this.arrayOfDigits2);
-    });
-    this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
+    //   this.fortest(this.total, this.arrayOfDigits2);
+    // });
+    // this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total, this.arrayOfDigits3);
-    });
+    //   this.fortest(this.total, this.arrayOfDigits3);
+    // });
 
-    this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
-      // console.log(this.total);
+    // this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
+    //   // console.log(this.total);
 
-      this.fortest(this.total, this.arrayOfDigits4);
-    });
-    this.ServicesProvidor.getNonActiveProfiles(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
+    //   this.fortest(this.total, this.arrayOfDigits4);
+    // });
+    // this.ServicesProvidor.getNonActiveProfiles(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total, this.arrayOfDigits5);
-    });
+    //   this.fortest(this.total, this.arrayOfDigits5);
+    // });
 
-    this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
+    // this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total, this.arrayOfDigits6);
-    });
-    this.ServicesProvidor.getNotCompletedProfiles(this.page).subscribe((value) => {
-      this.total = value.data.totalPages;
+    //   this.fortest(this.total, this.arrayOfDigits6);
+    // });
+    // this.ServicesProvidor.getNotCompletedProfiles(this.page).subscribe((value) => {
+    //   this.total = value.data.totalPages;
 
-      this.fortest(this.total, this.arrayOfDigitsNotCompletedProfiles);
-    });
+    //   this.fortest(this.total, this.arrayOfDigitsNotCompletedProfiles);
+    // });
   }
 
   ngOnInit(): void {
     this.getNewProfiles(this.page);
     this.objectProductGet();
   }
-  get massage(){
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+    // console.log( this.pagenation)
+  }
+  next() {
+    if (this.page < this.total) {
+      this.page = this.page + 1;
+      this.choise();
+    }
+  }
+  prev() {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.choise();
+    }
+  }
+  choise() {
+    switch (this.newApi) {
+      case 4:
+        this.getNonActiveAccount(this.page);
+        break;
+      case 2:
+        this.getRejectedProfiles(this.page);
+        break;
+      case 1:
+        this.getNewProfiles(this.page);
+        break;
+      case 5:
+        this.getBlockedProfiles(this.page);
+        break;
+      case 3:
+        this.activeAllAcconting(this.page);
+        break;
+      case 6:
+        this.getExpiredProfiles(this.page);
+        break;
+      case 8:
+        this.getNotCompletedProfiles(this.page);
+        break;
+      case 18:
+        this.getCompletedProfiles(this.page);
+        break;
+    }
+  }
+  get massage() {
     return this.userformMassage?.get('massage');
   }
   //6
   getExpiredProfiles(page: any) {
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = true;
-    this.pagenationNotCompletedProfiles= false;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = true;
+    // this.pagenationNotCompletedProfiles = false;
 
     this.newApi = 6;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getExpiredProfiles(page).subscribe({
-      next:(value) => {        console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+      next: (value) => {
+        console.log(value);
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.isProcessing = true;
-          console.log(this.isProcessing)
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-
-      } else{
+          console.log(this.isProcessing);
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-      }
-      },error: (error) => {
-        this.isProcessing = false;
-
-      }
+      },
     });
   }
   getNotCompletedProfiles(page: any) {
     this.isProcessing = true;
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles = true;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = true;
     this.newApi = 8;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getNotCompletedProfiles(page).subscribe({
-      next:(value) => {
+      next: (value) => {
         console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-
-      } else{
-        this.isProcessing=false;
-      }
-      },error: (error) => {
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
   }
   getCompletedProfiles(page: any) {
     this.isProcessing = true;
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles = false;
-    this.pagenationCompletedProfiles = true;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
+    // this.pagenationCompletedProfiles = true;
     this.newApi = 18;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getCompletedProfiles(page).subscribe({
-      next:(value) => {        console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+      next: (value) => {
+        console.log(value);
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-
-      } else{
-        this.isProcessing=false;
-      }
-    },error: (error) => {
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
   }
   //5
   getBlockedProfiles(page: any) {
     this.isProcessing = true;
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = true;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles= false;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = true;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
 
     this.newApi = 5;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getBlockedProfiles(page).subscribe({
-      next:(value) => {        console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+      next: (value) => {
+        console.log(value);
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-          if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-      } else{
-        this.isProcessing=false;
-      }
-      },error: (error) => {
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
   }
   // 1
-  getNewProfiles(page: any) {    this.isProcessing = true;
-    this.pagenationNewProfiles = true;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles= false;
+  getNewProfiles(page: any) {
+    this.isProcessing = true;
+    // this.pagenationNewProfiles = true;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
 
     this.newApi = 1;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
 
     this.ServicesProvidor.getNewProfiles(page).subscribe({
-      next:(value) => {
+      next: (value) => {
         console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          if(this.datas.length!=0){
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
-            this.objectProduct(this.firstObject, this.firstObject.id);}
-
-        } else{
-          this.isProcessing=false;
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
   }
   //2
-  getRejectedProfiles(page: any) {    this.isProcessing = true;
+  getRejectedProfiles(page: any) {
+    this.isProcessing = true;
 
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = true;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles= false;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = true;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
     this.newApi = 2;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getRejectedProfiles(page).subscribe({
-      next:(value) => {
+      next: (value) => {
         console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-      } else{
-        this.isProcessing=false;
-      }
-      },error: (error) => {
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
   }
   //3
-  activeAllAcconting(page: any) {    this.isProcessing = true;
+  activeAllAcconting(page: any) {
+    this.isProcessing = true;
 
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = true;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = false;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles= false;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = true;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = false;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
     this.newApi = 3;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.activeProfile(page).subscribe({
-      next:(value) => {
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.activeProfiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-      } else{
-        this.isProcessing=false;
-      }
-    },error: (error) => {
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
         this.isProcessing = false;
-      }
+      },
     });
   }
   //4
-  getNonActiveAccount(page: any) {    this.isProcessing = true;
+  getNonActiveAccount(page: any) {
+    this.isProcessing = true;
 
-    this.pagenationNewProfiles = false;
-    this.pagenationRejectedProfiles = false;
-    this.pagenationactiveAllAcconting = false;
-    this.pagenationBlockedProfiles = false;
-    this.pagenationNonActiveAccount = true;
-    this.pagenationExpiredProfiles = false;
-    this.pagenationNotCompletedProfiles= false;
+    // this.pagenationNewProfiles = false;
+    // this.pagenationRejectedProfiles = false;
+    // this.pagenationactiveAllAcconting = false;
+    // this.pagenationBlockedProfiles = false;
+    // this.pagenationNonActiveAccount = true;
+    // this.pagenationExpiredProfiles = false;
+    // this.pagenationNotCompletedProfiles = false;
 
     this.newApi = 4;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getNonActiveProfiles(page).subscribe({
-      next:(value) => {
+      next: (value) => {
         console.log(value);
-        if(value !=null && value != undefined && value.data.totalPages != 0) {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.nonActiveProfiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        if(this.datas.length!=0){
-          this.firstObject = this.iProfileData[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);}
-        } else{
-          this.isProcessing=false;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          if (this.datas.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        } else {
+          this.isProcessing = false;
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-      }
+      },
     });
   }
 
   // test
   getNewProfilesCompany(page: any) {
-    this.ServicesProvidor.activeProfile​(page).subscribe((value) => {
-      let companys:any[]=[]||value.data.profiles
-      let mostaql:any[]=[]
-      this.iProfileData =  value.data.profiles || []
-let tests = this.iProfileData.find((key)=>{
-return key.applicationUser.accountType.key == "CO"
+    this.ServicesProvidor.activeProfile(page).subscribe((value) => {
+      let companys: any[] = [] || value.data.profiles;
+      let mostaql: any[] = [];
+      this.iProfileData = value.data.profiles || [];
+      let tests = this.iProfileData.find((key) => {
+        return key.applicationUser.accountType.key == 'CO';
+      });
+      console.log(tests);
+      console.log(this.iProfileData);
 
-});
-console.log(tests);console.log(this.iProfileData)
+      //
+      // for(let x of this.datas){
+      //     if(x.applicationUser.accountType.key  === "CO"){
+      //      companys.push(x)
+      //       console.log(companys)
+      //     }else if(x.applicationUser.accountType.key  === "IND"){
+      //       mostaql.push(x)
+      //       console.log(mostaql)
+      //     }
 
+      // }
+      //  let coms =this.datas.filter((Company: any) => {Company.id  === 3101  } );
+      // console.log(coms)
 
-        //
-        // for(let x of this.datas){
-        //     if(x.applicationUser.accountType.key  === "CO"){
-        //      companys.push(x)
-        //       console.log(companys)
-        //     }else if(x.applicationUser.accountType.key  === "IND"){
-        //       mostaql.push(x)
-        //       console.log(mostaql)
-        //     }
-
-
-        // }
-        //  let coms =this.datas.filter((Company: any) => {Company.id  === 3101  } );
-        // console.log(coms)
-
-        // console.log( this.datas.filter((Company: any) => {Company.applicationUser.accountType.key  === "CO"  } ))
-
-
-      }
-    );
+      // console.log( this.datas.filter((Company: any) => {Company.applicationUser.accountType.key  === "CO"  } ))
+    });
   }
-
 
   objectProduct(object: any, id: any) {
     this.idProduct = object;
@@ -423,9 +505,7 @@ console.log(tests);console.log(this.iProfileData)
     this.idProductSessionStorage = sessionStorage.getItem('Productsp');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     this.id = sessionStorage.getItem('ids');
-    this.showInformation=true
-
-
+    this.showInformation = true;
   }
 
   objectProductGet() {
@@ -436,13 +516,11 @@ console.log(tests);console.log(this.iProfileData)
 
   // change stutas client
   changeToAccepted() {
-
     this.iChangeStatus = {
       profileId: this.idProduct.id,
       description: '',
       accountStatusId: 5,
     };
-
 
     if (this.idProduct.applicationUser.accountType.key === 'CO') {
       this.ServicesProvidor.changeOrganizationalStatus(
@@ -454,7 +532,6 @@ console.log(tests);console.log(this.iProfileData)
         setTimeout(() => {
           this.show = false;
         }, 1000);
-
       });
     } else {
       this.ServicesProvidor.changeIndividualStatus(
@@ -466,22 +543,22 @@ console.log(tests);console.log(this.iProfileData)
         setTimeout(() => {
           this.show = false;
         }, 1000);
-
       });
     }
   }
   // changeToNotComplette
 
-  changeToNotComplette(){
+  changeToNotComplette() {
     this.iChangeStatus = {
       profileId: this.idProduct.id,
       description: this.massage?.value,
       accountStatusId: 8,
-      joinRequestStatuses:[this.massage?.value]
-
+      joinRequestStatuses: [this.massage?.value],
     };
     if (this.idProduct.applicationUser.accountType.key === 'CO') {
-      this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+      this.ServicesProvidor.changeOrganizationalStatus(
+        this.iChangeStatus
+      ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
         // console.log(this.iChangeStatus);
@@ -489,8 +566,7 @@ console.log(tests);console.log(this.iProfileData)
           this.show = false;
         }, 1000);
       });
-    }
-    else{
+    } else {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
@@ -503,19 +579,19 @@ console.log(tests);console.log(this.iProfileData)
         }, 3000);
       });
     }
-
   }
 
-  changeToReject(){
+  changeToReject() {
     this.iChangeStatus = {
       profileId: this.idProduct.id,
       description: this.massage?.value,
-      accountStatusId:1,
-      joinRequestStatuses:[this.massage?.value]
-
+      accountStatusId: 1,
+      joinRequestStatuses: [this.massage?.value],
     };
     if (this.idProduct.applicationUser.accountType.key === 'CO') {
-      this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+      this.ServicesProvidor.changeOrganizationalStatus(
+        this.iChangeStatus
+      ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
         // console.log(this.iChangeStatus);
@@ -523,12 +599,10 @@ console.log(tests);console.log(this.iProfileData)
           this.show = false;
         }, 1000);
       });
-    }
-    else{
+    } else {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-
         this.show = true;
         this.messages = data.message;
         setTimeout(() => {
@@ -536,27 +610,26 @@ console.log(tests);console.log(this.iProfileData)
         }, 3000);
       });
     }
-
   }
 
-accepted(){
+  accepted() {
     this.iChangeStatus = {
       profileId: this.idProduct.id,
-      description: "تم تفعيل الحساب",
-      accountStatusId:4,
-      joinRequestStatuses:[" تم تفعيل الحساب"]
-
+      description: 'تم تفعيل الحساب',
+      accountStatusId: 4,
+      joinRequestStatuses: [' تم تفعيل الحساب'],
     };
     if (this.idProduct.applicationUser.accountType.key === 'CO') {
-      this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
+      this.ServicesProvidor.changeOrganizationalStatus(
+        this.iChangeStatus
+      ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
         setTimeout(() => {
           this.show = false;
         }, 1000);
       });
-    }
-    else{
+    } else {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
@@ -569,11 +642,10 @@ accepted(){
         }, 3000);
       });
     }
-
   }
-  updatapro(obj:any){
-    this.router.navigate(['./Admin/updata',obj])
-    console.log(this.currentIndivdual)
+  updatapro(obj: any) {
+    this.router.navigate(['./Admin/updata', obj]);
+    console.log(this.currentIndivdual);
   }
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
@@ -592,6 +664,16 @@ accepted(){
     for (var i = 1; i <= totals; i++) {
       arrays.push(i);
     }
+  }
+
+  calculateDiff(sentOn: any) {
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime = todayDate.getTime() - sentOnDate.getTime();
+    // To calculate the no. of days between two dates
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
   }
 
   // downloadImage(item: string) {
@@ -642,7 +724,4 @@ accepted(){
 
   //   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   // }
-  showInf(){
-    this.showInformation=true
-  }
 }
