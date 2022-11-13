@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AdminSettingsService } from './../../@core/services/admin/admin-settings.service';
 import { IprofileAdmin } from './../../@models/iprofile-admin';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
  interface admin{
   adminProfile:{
     id : number,
@@ -24,9 +23,6 @@ export class AdminSettingsComponent implements OnInit {
   iProfileAdmin :any|undefined=undefined;
   state :any=0
   profileChange:admin={} as admin;
-  newApi!: number;
-  edit:boolean=true;
-
   constructor(private adminSettingsService:AdminSettingsService,private formbuilder:FormBuilder) {
     this.userformlogin=this.formbuilder.group({
       lastName:['',[Validators.required]],
@@ -36,8 +32,7 @@ export class AdminSettingsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.newApi=1;
-    this.getProfileAdmin()
+    // this.newApi=1;
 
 }
 getProfileAdmin(){
@@ -57,7 +52,7 @@ updateAdminProfile(){
 
   this.profileChange={
     adminProfile:{
-    id: this.iProfileAdmin.adminProfile.id,
+        id: this.iProfileAdmin.adminProfile.id,
     applicationUserId:this.iProfileAdmin.adminProfile.applicationUserId,
     firstName :this.firstName?.value,
     lastName:  this.lastName?.value,

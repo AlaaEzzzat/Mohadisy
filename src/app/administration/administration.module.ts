@@ -23,8 +23,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
 import { TestComponent } from './test/test.component';
-import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
-import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
@@ -42,8 +40,6 @@ import {MatMenuModule} from '@angular/material/menu';
     AdminSettingsComponent,
     AdminSPComponent,
     TestComponent,
-    AdminSettingUsersComponent,
-    AdminSettingChangeProfileComponent,
     AdminSpUpdataComponent,
     FooterComponent,
     // CountryTransformPipe

@@ -1,9 +1,7 @@
 <div class="my-3 container-fluid">
-  <div
-    class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
-  >
+  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap">
     <button
-      class="btn rounded-1 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNewProfiles(page)"
       [ngStyle]="{
@@ -14,7 +12,7 @@
       طلبات الانضمام
     </button>
     <button
-      class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getRejectedProfiles(page)"
       [ngStyle]="{
@@ -24,31 +22,8 @@
     >
       طلبات المرفوضه
     </button>
-    <!-- <button
-    class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
-    role="button"
-    (click)="getNotCompletedProfiles(page)"
-    [ngStyle]="{
-      'background-color': newApi === 8 ? '#004958' : '#ffffff',
-      color: newApi === 8 ? '#ffffff' : '#000000'
-    }"
-  >
-    طلبات غير مكتمله
-  </button> -->
-
-    <!-- <button
-  class="btn rounded-1 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3"
-  role="button"
-  (click)="getNotCompletedProfiles(page)"
-  [ngStyle]="{
-    'background-color': newApi === 8 ? '#004958' : '#ffffff',
-    color: newApi === 8 ? '#ffffff' : '#000000'
-  }"
->
-  طلبات  مكتمله
-</button> -->
-    <button
-      class="btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+<button
+      class="btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="activeAllAcconting(page)"
       [ngStyle]="{
@@ -59,7 +34,7 @@
       الحسابات النشطه
     </button>
     <button
-      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getBlockedProfiles(page)"
       [ngStyle]="{
@@ -70,7 +45,7 @@
       الحسابات المعطله
     </button>
     <button
-      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNonActiveAccount(page)"
       [ngStyle]="{
@@ -81,7 +56,7 @@
       الحسابات غيرالنشطه
     </button>
     <button
-      class="btn btn rounded-1 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3"
+      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getExpiredProfiles(page)"
       [ngStyle]="{
@@ -105,16 +80,17 @@
   </div>
 
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind">
+
     <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-
-            <div class="btn-group bg-white ms-1"  [hidden]="productCurrent.joinRequestStatus.accountStatusId != 4" >
+<ng-container *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4">
+            <div class="btn-group bg-white ms-1 rounded-0"   >
               <button
                 type="button"
-                class="btn btn-white dropdown-toggle"
+                class="btn btn-white dropdown-toggle rounded-0"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
@@ -145,9 +121,9 @@
                 </li>
               </ul>
             </div>
-
+          </ng-container>
           <input
-            class="form-control bg-white border-0 rounded-1 w-100"
+            class="form-control bg-white border-0 rounded-0 w-100"
             type="search"
             placeholder="Search for name ,number,location,etc"
             aria-label="Search"
@@ -161,9 +137,9 @@
 
         <!-- card company -->
         <ng-container *ngFor="let pro of iProfileData | filter: companyName">
-          <div class="card mb-3 border-0 rounded-1 textFontSizeCard">
+          <div class="card mb-3 border-0 rounded-0 textFontSizeCard" >
             <div
-              class="card-body rounded-1"
+              class="card-body rounded-0"
               (click)="objectProduct(pro, pro.id)"
               [ngStyle]="{
                 'background-color':
@@ -266,7 +242,7 @@
         </ng-container>
         <!-- pagenation -->
         <div class="col-12">
-          <div class="position-absolute top100">
+          <div class="position-absolute top100" [hidden]="total<=1">
             <ng-container *ngIf="pagenationNewProfiles">
               <tr *ngIf="pagenationNewProfiles">
                 <th
@@ -406,14 +382,14 @@
     </div>
 
     <!--  -->
-    <div class="col-md-7 sizew col-12 flex-row position-relative">
-      <div class="col-12 card mb-3 border-0 rounded-1">
+    <div class="col-md-7 sizew col-12 flex-row position-relative" [hidden]="!showInformation">
+      <div class="col-12 card mb-3 border-0 rounded-0">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
             <img
-              *ngIf="productCurrent.idPath; else company"
+              *ngIf="productCurrent.profilePicturePath; else company"
               src="{{ productCurrent.profilePicturePath }}"
-              class="img-fluid rounded-circle w-75 p-2"
+              class="img-fluid rounded-circle w-100 p-2"
               alt="null"
             />
 
@@ -459,14 +435,11 @@
               </p>
             </div>
           </div>
-          <div class="col-md-4 align-content-start">
-            <div
-              class="d-flex"
-              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"
-            >
+          <div class="col-md-4 ">
+            <div   class="d-flex "    *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"    >
               <a
                 type="button"
-                class="btn complete"
+                class="btn complete col-4 rounded-0  "
                 data-bs-toggle="modal"
                 data-bs-target="#changeToAccepted"
               >
@@ -475,7 +448,7 @@
               >
               <a
                 type="button"
-                class="btn notcomplete"
+                class="btn notcomplete  col-4 rounded-0"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -484,7 +457,7 @@
               >
               <a
                 type="button"
-                class="btn reject"
+                class="btn reject  col-4 rounded-0"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModalReject"
               >
@@ -494,7 +467,7 @@
             </div>
 
             <div
-              class="d-flex justify-content-end ms-3 "
+              class="d-flex justify-content-end ms-3 rounded-0"
               *ngIf="productCurrent.joinRequestStatus.accountStatusId === 1"
             >
               <a
@@ -512,7 +485,7 @@
               > -->
             </div>
             <div
-              class="d-flex justify-content-end ms-3 "
+              class="d-flex justify-content-end ms-3  rounded-0 "
               *ngIf=" productCurrent.joinRequestStatus.accountStatusId != 1 &&
                 productCurrent.joinRequestStatus.accountStatusId != 4 " >
               <a
@@ -530,7 +503,7 @@
       </div>
       <!-- سبب عدم الاكتمال -->
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         *ngIf="productCurrent.joinRequestStatus.accountStatusId != 4"
       >
         <p class="titleInformation fs-6">سبب عدم تاكيد الحساب </p>
@@ -538,7 +511,7 @@
       </div>
       <!--    معلومات عن الشركه-->
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
       >
         <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
@@ -726,7 +699,7 @@
         </div>
       </div>
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
       >
         <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
@@ -776,7 +749,7 @@
       </div>
       <!-- معلومات التواصل -->
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
       >
         <h1 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h1>
@@ -859,7 +832,7 @@
         </div>
       </div>
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
       >
         <h1 class="card-title mb-4  titleInformation">معلومات التواصل</h1>
@@ -955,7 +928,7 @@
 
       <!-- معلومات عن ممثل الموقع -->
       <div
-        class="col-12 card mb-3 border-0 rounded-1 p-3"
+        class="col-12 card mb-3 border-0 rounded-0 p-3"
         *ngIf="productCurrent.applicationUser.accountType.key == 'CO'"
       >
         <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
@@ -994,12 +967,12 @@
         </div>
       </div>
       <!-- serviceProviderWorks -->
-      <div class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-1 p-3 serviceProviderWorksBg">
+      <div class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-0 p-3 serviceProviderWorksBg">
         <p>المشاريع السابقه</p>
         <p>{{productCurrent.serviceProviderWorks.length}} مشروع</p>
       </div>
 
-      <!-- <div class="col-12 card mb-3 border-0 rounded-1 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
+      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
       ">
         <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
@@ -1033,7 +1006,7 @@
         </div>
       </div> -->
       <!-- معلومات عن الموظفين-->
-      <!-- <div class="col-12 card mb-3 border-0 rounded-1 p-3">
+      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
         <h1 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h1>
         card loop
         <div
@@ -1071,6 +1044,7 @@
       </div> -->
 
     </div>
+
   </div>
 
   <ng-template #undefind>

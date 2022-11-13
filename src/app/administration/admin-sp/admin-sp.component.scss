@@ -5,21 +5,7 @@ $fontTajawalFamily: 'Tajawal', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
-
 $bgButton:#F3FBFA;
-$font25Size:25px;
-$font18Size:18px;
-$font16Size:16px;
-$font40Size:40px;
-$font20Size:20px;
-$font15Size:15px;
-
-
-@mixin titleTotal($fontS,$fontfa){
-  font-size: $fontS;
-  font-family:$fontfa;
-}
-
 
 a:focus ,a:hover,button:focus ,button:hover {
   background-color :$Alltext!important;
@@ -78,9 +64,7 @@ white-space:nowrap;
 
 
 }
-.m-3>.justify-content-around>.btn.rounded-0.m-1{
-  @include titleTotal($font25Size,$fontTajawalFamily)
-}
+
 :is(.reject ,.notcomplete, .complete):hover{
 color: #000 !important;
 }

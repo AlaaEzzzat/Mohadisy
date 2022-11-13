@@ -221,13 +221,13 @@ getUnderNegotiationProjects(){
     return this.userformMassage?.get('massage');
   }
   // change stutas client
-  //2
+  //5
   changeToAccepted() {
     this.iChangeStatusCliend = {
 
       projectId: this.idProduct.id,
       projectStatusId:5,
-      notes: "string",
+      notes: "البيانات مكتمله",
       rejectionReasonId: null
     };
     if (
@@ -260,49 +260,34 @@ getUnderNegotiationProjects(){
 
       projectId: this.idProduct.id,
       projectStatusId:9,
-      notes: "string",
-      rejectionReasonId: null
+      notes: this.massage?.value,
+      rejectionReasonId:null
     };
-    if (
-      this.iChangeStatusCliend.projectStatusId ===
-      this.idProduct.projectRequestStatus.projectStatusId
-    ) {
-      this.showDanger=true;
-      setTimeout(()=>{
-        this.showDanger=false
-      }, 3000);
-    } else {
+
       this.ServicesProvidor.changeProfileStatus(
         this.iChangeStatusCliend
       ).subscribe((data) => {
         this.show=true;
-     this.getNewProjectsForAdmin()
-    this.messages=data.message
-    setTimeout(()=>{
-      this.show=false
-    }, 3000);
-      });
+      this.getNewProjectsForAdmin()
+      this.messages = data.message;
+      setTimeout(()=>{
+        this.show=false
+      }, 3000);
+        }
+        );
 
-  }
-}
+
+      }
 //6
   changeToNotComplette() {
       this.iChangeStatusCliend = {
 
       projectId: this.idProduct.id,
       projectStatusId:6,
-      notes: "string",
+      notes:this.massage?.value,
       rejectionReasonId: null
     };
-    if (
-      this.iChangeStatusCliend.projectStatusId ===
-      this.idProduct.projectRequestStatus.projectStatusId
-    ) {
-      this.showDanger=true;
-      setTimeout(()=>{
-        this.showDanger=false
-      }, 3000);
-    } else {
+
       this.ServicesProvidor.changeProfileStatus(
         this.iChangeStatusCliend
       ).subscribe((data) => {
@@ -311,9 +296,9 @@ getUnderNegotiationProjects(){
     this.messages=data.message
     setTimeout(()=>{
       this.show=false
-    }, 3000);
+    }, 1000);
       });
-    }
+
   }
 
   calculateDiff(sentOn:any){

@@ -1,1 +1,144 @@
 
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$fontTajawalFamily: 'Tajawal', sans-serif;
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$bgButton:#F3FBFA;
+
+a:focus ,a:hover,button:focus ,button:hover {
+  background-color :$Alltext!important;
+  color: white !important;
+}
+button>i ,.typeCom
+{
+  color: #18AF9A !important;
+  // font-family:$fontCairoFamily;
+
+}
+.textInformation,a{
+  color: $Alltext !important;
+  font-family:$fontCairoFamily;
+ }
+ .titleInformation{
+  color: $Alltext !important;
+  font-family:$fontTajawalFamily;
+
+ }
+input[type="search"]{
+  &:hover,&:active ,&:focus{
+    border: 0px none transparent !important;
+    box-shadow: none !important;
+  }
+
+}
+.title
+{
+  line-height:0.5;
+  // font-size: 90%;
+}
+.textFontSizeCard{
+  // font-size: 90%;
+}
+.we-25 {
+  // width: 12em !important;
+  // font-size: 1.1em!important;
+
+}
+@media only screen and (min-width: 768px) {
+  .sizew
+  {
+    flex: 0 0 auto;
+    width: 63.333333% ;
+  }
+
+}
+
+.informationDownload{
+  width: 45% !important;
+  text-decoration: none !important;
+  height: 35px  !important;
+  overflow: hidden;
+white-space:nowrap;
+
+
+}
+
+:is(.reject ,.notcomplete, .complete):hover{
+color: #000 !important;
+}
+.reject:hover{
+
+  background-color: #dc354680 !important;
+}
+.complete:hover{
+
+  background-color: #19875480 !important;
+}
+.notcomplete:hover{
+
+  background-color: #FFC10780 !important;
+}
+.top100 {
+  top: 99% !important;
+  right: -10% !important;
+}
+.modaltitle{
+  background-color: $textColor !important;
+  >h2,>button{
+    color: white !important;
+    font-family: $fontTajawalFamily;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.modalbody{
+  form>h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  >h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  textarea:active,textarea:focus{
+    box-shadow: none !important;
+    border: #004057 solid 1px;
+    font-family: $fontCairoFamily;
+  }
+  // textarea{
+  //   height: auto;
+  // }
+}
+.modalfooter{
+  >button:first-child{
+    background-color: #18AF9A;
+    color: white;
+    &:hover,&:focus{
+      background-color: white;
+      border: #18AF9A 1px solid;
+      color: #18AF9A;
+    }
+
+  }
+
+}
+.serviceProviderWorksBg{
+  background-color: $Alltext;
+  font-family: $fontCairoFamily;
+  p:first-child{
+    color: white;
+  }
+  color: #18AF9A;
+}

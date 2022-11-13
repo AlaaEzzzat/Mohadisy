@@ -1,79 +1,381 @@
 <div class="container-fluid my-4">
   <div class="col-12 d-flex flex-row justify-content-between">
+
     <div class="col-3">
       <div class="example-button-row mb-2">
-        <button
-          routerLinkActive="active"
-          mat-button
-          class="bg-white col-12 buttonChose border-0 py-2"
-          (click)="getProfileAdmin()"
-        >
+        <button mat-button class="bg-white col-12 buttonChose border-0 py-2"(click)="getProfileAdmin()">
           الملف الشخصي
         </button>
       </div>
-      <a class="btn edit" (click)="changeFirstOrLastName()">تعديل </a>
 
       <div class="example-button-row">
         <button
           mat-button
-          class=" bg-white mb-2 col-12 buttonChose border-0 py-2"
-          routerLink="/Admin/settings/user"
-          routerLinkActive="active"
+          class="bg-white mb-2 col-12 buttonChose border-0 py-2"
+          (click)="changeAndGetClint()"
         >
           المستخدمين
         </button>
       </div>
-    </div>
-    <div class="col-9 me-2">
-      <!-- <router-outlet></router-outlet> -->
-      <div class="card mb-3 border-0 rounded-1" >
-        <div class="row g-0">
-          <div class="col-md-2">
-            <img
-              src="{{iProfileAdmin.adminProfile.profilePicturePath}}"
-              class="img-fluid rounded-1 h-100"
-              alt="..."
-            />
-          </div>
-          <div class="col-md-10">
-            <div class="card-body" *ngIf="!edit">
-              <div class="d-flex justify-content-between">
-                <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5>
-              <a class="btn edit">تعديل </a>
 
+
+    </div>
+
+    <!-- الملف الشخصي -->
+    <ng-container *ngIf="state===1">
+   <div class="d-flex flex-column col-9 me-3">
+
+
+<div class="card mb-3 border-0 rounded-1" >
+  <div class="row g-0">
+    <div class="col-md-2">
+      <img
+        src="{{iProfileAdmin.adminProfile.profilePicturePath}}"
+        class="img-fluid rounded-1 h-100"
+        alt="..."
+      />
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5>
+          <span class="edit" (click)="changeFirstOrLastName()">تعديل </span>
+        </div>
+        <!-- <h5 class="card-title nameProfile">Admin ADMIN ADMIN admin</h5> -->
+
+        <p class="card-text emANumProfile">{{iProfileAdmin.phoneNumber}}</p>
+        <p class="card-text emANumProfile">{{iProfileAdmin.email}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- تغير رقم السر ي-->
+
+<!-- <div
+  class="bg-white p-3 mb-3 d-flex justify-content-between align-items-center"
+>
+  <a mat-button href="https://www.google.com/" target=""
+    class="nameProfile">تغير الرقم السري</a
+  >
+  <p class="nameProfile">#########</p>
+</div> -->
+<!-- الحاله -->
+
+
+ <div
+  class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
+>
+  <!-- <p class="stutsProfile" >منذ  {{iProfileAdmin.adminProfile.dateCreated | date}}</p> -->
+</div>
+
+   </div>
+  </ng-container>
+
+  <!-- تغير اسم الادمن -->
+
+  <ng-container *ngIf="state===2">
+    <div class="d-flex flex-column col-9 me-3">
+
+
+
+ <!-- hgfv,tdg -->
+
+ <div class="card mb-3 border-0 rounded-1" >
+   <div class="row g-0">
+     <div class="col-md-2">
+       <img
+         src="{{iProfileAdmin.adminProfile.profilePicturePath}}"
+         class="img-fluid rounded-1 h-100"
+         alt="..."
+       />
+     </div>
+     <div class="col-md-10">
+       <div class="card-body">
+         <div class="d-flex flex-column justify-content-between">
+
+          <form class="example-form"  [formGroup]="userformlogin">
+            <div class="row g-2">
+              <div class="col-md">
+                <div class="form-floating">
+                  <input type="text" class="form-control" name="firstName" id="firstName" placeholder="admin" value="text" formControlName="firstName" >
+                  <label for="firstName">First Name</label>
+                </div>
+
+              </div>
+              <div class="col-md">
+                <div class="form-floating">
+                  <input type="text" class="form-control" name="lastName" id="lastName" placeholder="admin" value="text" formControlName="lastName" >
+                  <label for="lastName">Last Name</label>
+                </div>
+              </div>
             </div>
-            <div *ngIf="state==2"  class="d-flex justify-content-between">
-              <!-- <form class="example-form"> -->
-          <form class="example-form" [formGroup]="userformlogin">
-              <div class="row g-2">
-                <div class="col-md">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" name="firstName" id="firstName" placeholder="admin" value="text" formControlName="firstName" >
-                    <label for="firstName">First Name</label>
-                  </div>
+
+
+            <button (click)="updateAdminProfile()" class="btn btn-dark my-2">حفظ</button>
+
+          </form>
+            <!-- <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5> -->
+
+
+
+          <p class="card-text emANumProfile">{{iProfileAdmin.phoneNumber}}</p>
+          <p class="card-text emANumProfile">{{iProfileAdmin.email}}</p>
+</div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+ <!-- الحاله -->
+
+
+  <div
+   class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
+ >
+   <p class="stutsProfile">تم اضافته <span></span></p>
+   <p class="stutsProfile" >منذ  {{iProfileAdmin.adminProfile.dateCreated | date}}</p>
+ </div>
+
+    </div>
+   </ng-container>
+
+  <!-- المستخدمين -->
+  <ng-container *ngIf="state===3">
+  <div class="col-9 me-2">
+    <!-- بروفيل تعطيل-->
+    <div class="col-12 me-2 mb-5">
+      <div class="bg-white p-3 mb-3 d-flex justify-content-between align-items-center">
+        <p class="titles fw-bold" style="color:  #004057">المستخدمين</p>
+        <!-- <div class="example-button-container col-3">
+          <button
+            class="buttonAdd btn rounded-5 d-flex justify-content-center align-items-center py-1 px-3"
+          >
+            <span class=" "> اضافه مستخدم جديد </span>
+            <mat-icon>add</mat-icon>
+          </button>
+        </div> -->
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <div
+            class="bg-white col-12 py-2 d-flex justify-content-between align-items-center flex-lg-row flex-column"
+          >
+
+
+            <div class="card mb-3 border-0 col-lg-5 col-12 justify-content-center align-items-center">
+
+              <div class="row g-0 justify-content-center align-items-center">
+                <div class="bg-white col-1 text-center pt-2 flex-wrap">
+                  <p class="">#01</p>
 
                 </div>
-                <div class="col-md">
-                  <div class="form-floating">
-                    <input type="text" class="form-control" name="lastName" id="lastName" placeholder="admin" value="text" formControlName="lastName" >
-                    <label for="lastName">Last Name</label>
+                <div class="col-md-2 text-lg-end text-center">
+                  <img
+                    src="https://picsum.photos/200"
+                    class="img-fluid rounded-circle me-1"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-9 text-lg-end text-center">
+                  <div class="card-body">
+                    <p class="card-text titles" style="color: #18af9a">
+                      اسماء احمدمحمد
+                    </p>
+                    <p class="card-text titles" style="color: #1d1c1c">
+                      Thisiscard@gmail.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="d-flex justify-content-evenly align-items-center border-0 col-lg-2 col-12 flex-md-row flex-column"
+            >
+              <button
+                type="button"
+                class="btn btn-primary position-relative badge bg-primary px-4 py-2 mb-lg-0 mb-2 rounded-pill fs-6 mx-1"
+              >
+              عميل
+               <span
+                  class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
+                >
+                  <img
+                    src="/assets/icons/Group 542.png"
+                    alt=""
+                    sizes=""
+                    srcset=""
+                  />
+                  <span class="visually-hidden">New</span>
+                </span>
+              </button>
+
+
+            </div>
+
+            <div
+              class="d-flex justify-content-evenly align-items-center col-lg-3 col-12 mx-3 flex-md-row flex-column"
+            >
+              <div class="example-button-container col-3 mb-lg-0 mb-2">
+                <button
+                  mat-mini-fab
+                  disabled
+                  aria-label="Example icon button with a home icon"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+
+              <div
+                class="example-button-container col-3 border-end py-2 px-2 mb-lg-0 mb-2 text-center align-content-center"
+              >
+                <mat-slide-toggle></mat-slide-toggle>
+              </div>
+
+              <div class="example-button-container border-end mb-lg-0 mb-2">
+                <button
+                  class="col-3"
+                  mat-icon-button
+                  disabled
+                  aria-label="Example icon button with a open in new tab icon"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div class="col-12 me-2 mb-5"> -->
+        <div class=" p-3  my-3  d-flex justify-content-between align-items-center" style="background-color: #DFDFDF;">
+          <p class="titles fw-bold" style="color: #004057">المستخدمين المعطلين</p>
+
+        </div>
+
+          <div class="col-12 d-flex flex-column justify-content-between align-items-center">
+            <div  class="bg-white col-12 py-2 d-flex justify-content-between align-items-center flex-lg-row flex-column" >
+
+
+              <div class="card mb-3 border-0 col-lg-5 col-12 justify-content-center align-items-center">
+
+                <div class="row g-0 justify-content-center align-items-center">
+                  <div class="bg-white col-1 text-center pt-2 flex-wrap">
+                    <p class="">#01</p>
+
+                  </div>
+                  <div class="col-md-2 text-lg-end text-center">
+                    <img
+                      src="https://picsum.photos/200"
+                      class="img-fluid rounded-circle me-1"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-md-9 text-lg-end text-center">
+                    <div class="card-body">
+                      <p class="card-text titles" style="color: #18af9a">
+                        اسماء احمدمحمد
+                      </p>
+                      <p class="card-text titles" style="color: #1d1c1c">
+                        Thisiscard@gmail.com
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
+              <div
+                class="d-flex justify-content-evenly align-items-center border-0 col-lg-3 col-12 flex-md-row flex-column"
+              >
 
-               <button (click)="updateAdminProfile()"  class="btn btn-dark my-2">حفظ</button>
+                <button
+                  type="button"
+                  class="btn btn-primary position-relative badge bg-primary px-4 py-2 mb-lg-0 mb-2 rounded-pill fs-6 mx-1"
+                >
+                عميل
+                <span
+                    class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
+                  >
+                    <img
+                      src="/assets/icons/Group 542.png"
+                      alt=""
+                      sizes=""
+                      srcset=""
+                    />
+                    <span class="visually-hidden">New</span>
+                  </span>
+                </button>
 
-            </form>
-          </div>
-              <p class="card-text emANumProfile">{{iProfileAdmin.phoneNumber}}</p>
-              <p class="card-text emANumProfile">{{iProfileAdmin.email}}</p>
+
+              </div>
+
+              <div
+                class="d-flex justify-content-evenly align-items-center col-lg-3 col-12 mx-3 flex-md-row flex-column"
+              >
+                <div class="example-button-container col-3 mb-lg-0 mb-2">
+                  <button
+                    mat-mini-fab
+                    disabled
+                    aria-label="Example icon button with a home icon"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+
+                <div
+                  class="example-button-container col-3 border-end py-2 px-2 mb-lg-0 mb-2 text-center align-content-center"
+                >
+                  <mat-slide-toggle></mat-slide-toggle>
+                </div>
+
+                <div class="example-button-container border-end mb-lg-0 mb-2">
+                  <button
+                    class="col-3"
+                    mat-icon-button
+                    disabled
+                    aria-label="Example icon button with a open in new tab icon"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+
             </div>
-          </div>
-        </div>
+            <div  class="bg-white col-12 py-2 d-flex align-items-center flex-column" >
+              <div class="reson col-12  d-flex align-items-center justify-content-start flex-row ">
+                <div class="col-1"></div>
 
-      </div>
+                <p class="col-3 me-4 pe-1 "  >سبب التعطيل</p>
+                <p >بسبب عد أداء المهام الوظيفيه بشكل صحيح</p>
+              </div>
+
+              <div class="reson col-12 d-flex align-items-center flex-row justify-content-start ">              <div class="col-1"></div>
+
+                <p class="col-3 me-4 pe-1">المسؤل عن ايقافه</p>
+                <p >م-محمد علاء</p>
+              </div>
+          </div>
+
+
+        <!-- </div> -->
+
+
+    </div>
+
 
     </div>
   </div>
+</ng-container>
+
 </div>
+</div>
+
+
+
+
+

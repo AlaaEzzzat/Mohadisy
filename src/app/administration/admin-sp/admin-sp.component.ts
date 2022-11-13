@@ -34,6 +34,7 @@ export class AdminSPComponent implements OnInit {
   myTimeout: any;
   // objectpeo: any;
   // productCurrent: any;
+  showInformation:boolean=false
   name = '';
   id: any;
   arrayOfDigits1: any[] = [];
@@ -422,6 +423,9 @@ console.log(tests);console.log(this.iProfileData)
     this.idProductSessionStorage = sessionStorage.getItem('Productsp');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     this.id = sessionStorage.getItem('ids');
+    this.showInformation=true
+
+
   }
 
   objectProductGet() {
@@ -638,4 +642,7 @@ accepted(){
 
   //   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
   // }
+  showInf(){
+    this.showInformation=true
+  }
 }

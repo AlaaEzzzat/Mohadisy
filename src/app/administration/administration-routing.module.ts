@@ -12,9 +12,9 @@ import { AdminContributionsComponent } from './admin-contributions/admin-contrib
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { TestComponentRenderer } from '@angular/core/testing';
 import { TestComponent } from './test/test.component';
-import { AdminSettingsProfileComponent } from './admin-settings-profile/admin-settings-profile.component';
-import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
-import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
+// import { AdminSettingsProfileComponent } from './admin-settings-profile/admin-settings-profile.component';
+// import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
+// import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 
 const routes: Routes = [
@@ -27,11 +27,7 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'clients', component: AdminClientsComponent },
       { path: 'messages', component: AdminMessagesComponent },
-      { path: 'settings', component: AdminSettingsComponent ,children:[
-        { path: 'change', component: AdminSettingsProfileComponent},
-        { path: 'user', component: AdminSettingUsersComponent },
-
-      ]},
+      { path: 'settings', component: AdminSettingsComponent },
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },
       { path: 'payments', component: AdminPaymentsComponent },

@@ -1,6 +1,6 @@
 export interface ChangeStatusProject {
   "projectId":number,
   "projectStatusId":number,
-  "notes": "string",
-  "rejectionReasonId": null
+  "notes"?: string,
+  "rejectionReasonId"?:null
 }
