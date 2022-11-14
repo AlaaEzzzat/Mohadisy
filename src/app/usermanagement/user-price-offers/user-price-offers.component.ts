@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { IClientPayment } from './../../@models/IClientPayment';
 import { PaymentService } from './../../@core/services/payment/payment.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { Component, OnInit } from '@angular/core';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-user-price-offers',
@@ -46,7 +48,8 @@ export class UserPriceOffersComponent implements OnInit {
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private _HttpClient: HttpClient
   ) {}
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -248,5 +251,17 @@ export class UserPriceOffersComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

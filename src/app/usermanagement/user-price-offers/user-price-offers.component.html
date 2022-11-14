@@ -133,8 +133,8 @@
               >
                 <div>مقدم الطلب :</div>
                 <select
-                  class="active w-75"
-                  style="color: #fff; border: 0"
+                  class="active"
+                  style="width: 90%; color: #fff; border: 0"
                   name="offers"
                   id="offers"
                   [(ngModel)]="selectedOfferId"
@@ -709,13 +709,12 @@
                                 [href]="document.filePath"
                                 ><i class="fa fa-eye"></i
                               ></a>
-                              <a
-                                target="_blank"
-                                [href]="document.filePath"
-                                [download]="document.file"
-                                download
+                              <span
+                                (click)="
+                                  download(document.filePath, document.file)
+                                "
                                 ><i class="fa fa-download"></i
-                              ></a>
+                              ></span>
                             </div>
                           </li>
                         </ul>
@@ -841,12 +840,10 @@
                             [href]="document.filePath"
                             ><i class="fa fa-eye"></i
                           ></a>
-                          <a
-                            target="_blank"
-                            [href]="document.filePath"
-                            [download]="document.file"
+                          <span
+                            (click)="download(document.filePath, document.file)"
                             ><i class="fa fa-download"></i
-                          ></a>
+                          ></span>
                         </div>
                       </li>
                     </ul>

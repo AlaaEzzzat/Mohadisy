@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((data) => {
         console.log(data);
-        if (/* data.data.emailConfirmed */ true) {
+        if (data.data.emailConfirmed) {
           this._toastr.info(data.message);
           this.clientService.getAccountStatus().subscribe((data: any) => {
             this.accountStatus = data.data.joinRequestStatus;
