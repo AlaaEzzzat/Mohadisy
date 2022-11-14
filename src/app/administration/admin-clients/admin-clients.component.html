@@ -96,56 +96,73 @@
                 color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
               }"
             >
-              <div class="d-flex">
-                <i class="fa-regular fa-building"></i>
-                <div class="card-title me-3 ">
-                  <p *ngIf="pro.firstName; else templateName" >
+              <div class="d-flex align-items-start mb-2">
+                <img
+                class=""
+                src="assets/icons/user.svg"
+                *ngIf="productCurrent.id != pro.id; else whiteIconw"
+              />
+              <ng-template #whiteIconw
+                ><img src="assets/icons/userWh.svg" class=""
+              /></ng-template>
+                  <div class="card-title me-3 ">
+                  <p *ngIf="pro.firstName; else templateName" class="fs-6" >
                     {{ pro.firstName }} {{ pro.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
                 </div>
               </div>
-              <div class="d-flex">
-                <i class="fa fa-location-dot"></i>
-                <i class="bi bi-geo-alt"></i>
-                <p
-                  class="me-3"
-                  *ngIf="
-                    pro.district.city.region.code &&
-                      pro.district.city.region.nameAr;
-                    else region
-                  "
+              <div class="d-flex align-items-start mb-2">
+                <img
+                src="assets/icons/Group 801.svg"
+                class=""
+                [hidden]="productCurrent.id === pro.id"
+              />
+              <img
+                src="assets/icons/Group 801White.svg"
+                class=""
+                [hidden]="productCurrent.id != pro.id"
+              />
+              <p class="me-3 fs-6" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region" >
+                <span
+                  class="fs-6"
+                  *ngIf="pro.district.nameAr; else regioncode"
+                  >{{ pro.district.nameAr }} ,
+                </span>
+                <ng-template #regioncode> </ng-template>
+                <span
+                  class="fs-6"
+                  *ngIf="pro.district.city.nameAr; else regioncode"
                 >
-                  <span *ngIf="pro.district.city.region.code; else regioncode"
-                    >{{ pro.district.city.region.code }} -
-                  </span>
-                  <ng-template #regioncode> null </ng-template>
-                  <span
-                    *ngIf="pro.district.city.region.nameAr; else regioncode"
-                  >
-                    {{ pro.district.city.region.nameAr }}
-                  </span>
-                  <ng-template #regionnameAr> null </ng-template>
-                </p>
+                  {{ pro.district.city.nameAr }} ,
+                </span>
+                <ng-template #regionnameAr> </ng-template>
+                <span
+                  class="fs-6"
+                  *ngIf="pro.district.city.region.nameAr; else regioncode"
+                >
+                  {{ pro.district.city.region.nameAr }}
+                </span>
+                <ng-template #regionnameAr> </ng-template>
+              </p>
                 <ng-template #region></ng-template>
               </div>
-              <div class="d-flex">
-                <i class="fa fa-phone"></i>
-                <div class="me-3 d-flex flex-row justify-content-between">
-                  <small *ngIf="pro.phoneNumber; else phoneNumberdateCreated">
-                    +966 {{ pro.phoneNumber }}</small
-                  >
-                  <ng-template #phoneNumberdateCreated>
-                    undefind mobile</ng-template
-                  >
-
-                  <small
-                    class="me-5 opacity-50 fsvw"
-                    *ngIf="pro.dateCreated; else dateCreated"
-                    >منذ
-                    {{ pro.dateCreated | date }}
-                  </small>
-                  <ng-template #dateCreated>null</ng-template>
+              <div class="d-flex align-items-start">
+                <img
+                  src="assets/icons/calendar.svg"
+                  class=""
+                  [hidden]="productCurrent.id === pro.id"
+                />
+                <img
+                  src="assets/icons/calendarWh.svg"
+                  class=""
+                  [hidden]="productCurrent.id != pro.id"
+                />
+                <div class="card-title me-3 ">
+                  <p *ngIf="pro.firstName; else templateName" class="fs-6" >
+                    {{ pro.dateCreated|date:'M/d/yyyy' }}
+                  </p>
+                  <ng-template #templateName> Null firstName </ng-template>
                 </div>
               </div>
             </div>
@@ -302,7 +319,7 @@
           <div class="col-md-7 col-sm-5">
             <div class="d-flex">
               <a type="button" class="btn w-25" (click)="changeToAccepted()">
-                <i class="fa-solid fa-check text-secondary"></i>
+                <i class="fa-solid fa-check text-muted"></i>
                 <p class="fsvw">مكتمل</p></a
               >
               <a type="button" class="btn w-25" (click)="changeToNotComplette()">
@@ -323,13 +340,13 @@
       </div>
 
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-        <p class="card-title mb-4">معلومات عن العميل</p>
+        <h1 class="card-title mb-4 titleInformation">معلومات عن العميل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
             <div class="d-flex flex-row justify-content-between ">
-              <p class="card-subtitle text-secondary ms-2">رقم الهوية</p>
+              <p class="card-subtitle text-muted ms-2 fs-6">رقم الهوية</p>
 
-              <p>{{ productCurrent.idNumber }}</p>
+              <p class="fs-6 textInformation">{{ productCurrent.idNumber }}</p>
 
               <!-- <div   [hidden]="!productCurrent.idFile"> -->
               <a
@@ -351,7 +368,7 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">الدوله</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">الدوله</p>
             <small
               class="fs-6"
               *ngIf="productCurrent.district.city.region.code; else cityName"
@@ -361,20 +378,18 @@
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">المدينه</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">المدينه</p>
             <small
-              class="fs-6"
+            class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameAr; else city"
               >{{ productCurrent.district.city.nameAr }}</small
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">المنطقه</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
             <small
-              class="fs-6"
-              *ngIf="
-                productCurrent.district.city.region.nameAr;
+            class="fs-6 textInformation" *ngIf=" productCurrent.district.city.region.nameAr;
                 else regionName
               "
               >{{ productCurrent.district.city.region.nameAr }}</small
@@ -382,9 +397,9 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">العنوان</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
             <small
-              class="fs-6"
+            class="fs-6 textInformation"
               *ngIf="productCurrent.streetName; else shortAddress"
               >{{ productCurrent.buildingNumber }},
               {{ productCurrent.streetName }} -
@@ -394,11 +409,11 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">
+            <p class="card-subtitle text-muted fs-6 mb-2">
               رقم هاتف المكتب
             </p>
             <small
-              class="fs-6"
+            class="fs-6 textInformation"
               *ngIf="
                 productCurrent.district.officePhoneNumber;
                 else officePhoneNumber
@@ -408,33 +423,33 @@
             <ng-template #officePhoneNumber> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">
+            <p class="card-subtitle text-muted fs-6 mb-2">
               عنوان البريد الالكتروني
             </p>
-            <small class="fs-6" *ngIf="productCurrent.email; else emailName">{{
+            <small class="fs-6 textInformation" *ngIf="productCurrent.email; else emailName">{{
               productCurrent.email
             }}</small>
             <ng-template #emailName> _ </ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-secondary fs-6 mb-2">رابط الموقع</p>
+            <p class="card-subtitle text-muted fs-6 mb-2">رابط الموقع</p>
             <small
-              class="fs-6"
+            class="fs-6 textInformation"
               *ngIf="productCurrent.websiteLink; else websiteLink"
               >{{ productCurrent.websiteLink }}</small
             >
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">صندوق البريد</p>
-            <small class="fs-6" *ngIf="productCurrent.postalBox; else box">{{
+            <p class="card-subtitle text-muted fs-6 mb-2">صندوق البريد</p>
+            <small class="fs-6 textInformation" *ngIf="productCurrent.postalBox; else box">{{
               productCurrent.postalBox
             }}</small>
             <ng-template #box> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-secondary fs-6 mb-2">رمز البريد</p>
-            <small class="fs-6" *ngIf="productCurrent.postalCode; else postcode"
+            <p class="card-subtitle text-muted fs-6 mb-2">رمز البريد</p>
+            <small class="fs-6 textInformation" *ngIf="productCurrent.postalCode; else postcode"
               >{{ productCurrent.postalCode }}
             </small>
             <ng-template #postcode> _ </ng-template>

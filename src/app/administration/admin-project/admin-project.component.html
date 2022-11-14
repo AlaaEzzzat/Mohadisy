@@ -143,14 +143,7 @@
                   class=""
                   [hidden]="productCurrent.id != pro.id"
                 />
-                <p
-                  class="me-3 fs-6"
-                  *ngIf="
-                    pro.district.city.region.code &&
-                      pro.district.city.region.nameAr;
-                    else region
-                  "
-                >
+                <p class="me-3 fs-6" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region"          >
                   <span
                     class="fs-6"
                     *ngIf="pro.district.nameAr; else regioncode"
@@ -538,8 +531,7 @@
       <div
         class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-2 mb-3"
       >
-        <div
-          class="col-lg-6 col-12 d-flex  bg-white ms-1 align-content-end flex-column p-4"
+        <div class="col-lg-12 col-12 d-flex  bg-white ms-1 align-content-end flex-column p-4"
         >
           <h1 class=" titleInformation">المستندات الخاصه بالعميل</h1>
           <ng-container
@@ -566,37 +558,10 @@
             <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
           </ng-template>
         </div>
-        <div
-          class="col-lg-6 col-12 p-2 bg-white me-1 align-content-start flex-column p-4"
-        >
 
-          <h1 class=" titleInformation">المستندات الخاصه بمزود الخدمه</h1>
-          <!-- <ng-container
-            *ngIf="
-              productCurrent.clientProjectDocuments.length != 0 &&
-                productCurrent.clientProjectDocuments.length != null;
-              else undefindFile
-            "
-          >
-            <ng-container
-              *ngFor="let comp of productCurrent.clientProjectDocuments"
-            >
-              <a
-                target="_blank"
-                class="informationDownloadClient d-flex px-2 align-items-center"
-                (click)="download(comp.filePath, comp.file)"
-              >
-                <i class="fa fa-download ms-3"></i>
-                <p class="pt-3">{{ comp.file }}</p>
-              </a>
-            </ng-container>
-          </ng-container>
-          <ng-template #undefindFile>
-            <p class="fs-5">لايوجد مستندات خاصه  بمزود الخدمه/p>
-          </ng-template> -->
-          </div>
+
       </div>
-      <!--  -->
+
     </div>
   </div>
 
@@ -610,3 +575,35 @@
     </div>
   </ng-template>
 </div>
+
+
+
+<!--
+<div class="col-lg-6 col-12 p-2 bg-white me-1 align-content-start flex-column p-4">
+
+  <h1 class=" titleInformation">المستندات الخاصه بمزود الخدمه</h1>
+  <ng-container
+    *ngIf="
+      productCurrent.clientProjectDocuments.length != 0 &&
+        productCurrent.clientProjectDocuments.length != null;
+      else undefindFile
+    "
+  >
+    <ng-container
+      *ngFor="let comp of productCurrent.clientProjectDocuments"
+    >
+      <a
+        target="_blank"
+        class="informationDownloadClient d-flex px-2 align-items-center"
+        (click)="download(comp.filePath, comp.file)"
+      >
+        <i class="fa fa-download ms-3"></i>
+        <p class="pt-3">{{ comp.file }}</p>
+      </a>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #undefindFile>
+    <p class="fs-5">لايوجد مستندات خاصه  بمزود الخدمه/p>
+  </ng-template>
+</div> -->

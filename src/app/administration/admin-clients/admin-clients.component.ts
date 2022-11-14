@@ -377,12 +377,33 @@ changeToNotComplette(){
 
   }
 
-  fortest(totals:any,arrays:any[]){
-    for (var i  = 1; i <=totals; i++) {
-      arrays.push(i)
-      console.log(arrays.length)
-    }
+  calculateDiff(sentOn: any) {
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime = todayDate.getTime() - sentOnDate.getTime();
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
   }
+
+  calculateDiffEend(sentOn:any){
+
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
+    // To calculate the no. of days between two dates
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
+  }
+
+
+  // fortest(totals:any,arrays:any[]){
+  //   for (var i  = 1; i <=totals; i++) {
+  //     arrays.push(i)
+  //     console.log(arrays.length)
+  //   }
+  // }
 
 }
 
