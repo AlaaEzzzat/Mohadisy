@@ -1,5 +1,4 @@
-<!-- [formGroup]="myForm" -->
-<!-- [formGroup]="providerData"] -->
+
 <form
   [formGroup]="providerData"
   (ngSubmit)="onSubmit()"
@@ -10,8 +9,7 @@
     <h5 class="mb-5 mt-5 bd-title" dir="rtl">المعلومات الشخصية</h5>
     <div class="row">
       <div class="col-3">
-        <label class="form-label" for="username">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="username">
           اسم المستخدم
         </label>
         <input
@@ -50,8 +48,7 @@
         </div>
       </div>
       <div class="col-3">
-        <label class="form-label" for="companyName">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="companyName">
           اسم الشركة
         </label>
         <input
@@ -90,8 +87,7 @@
         </div>
       </div>
       <div class="col-3">
-        <label class="form-label" for="email">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="email">
           البريد الالكتروني</label
         >
 
@@ -131,14 +127,12 @@
         </div>
       </div>
       <div class="col-3">
-        <label class="form-label" for="phone_number">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="phone_number">
           رقم التلفون</label
         >
         <div class="form-group d-inline-block form-control">
-          <span class="px-1 bg-primary text-light rounded-1">+966</span>
           <input
-            type="number"
+            type="text"
             id="phone_number"
             name="phone_number"
             class="mx-1"
@@ -175,13 +169,11 @@
     </div>
     <div class="row mt-5">
       <div class="col-3">
-        <label class="form-label" for="companyPhoneNum">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="companyPhoneNum">
           رقم تليفون الشركة</label
         >
 
         <div class="form-group d-inline-block form-control">
-          <span class="px-1 bg-primary text-light rounded-1">+966</span>
           <input
             type="number"
             id="companyPhoneNum"
@@ -222,8 +214,7 @@
       </div>
 
       <div class="col-4">
-        <label class="form-label" for="site_url">
-          <i class="fa fa-star" aria-hidden="true"></i>
+        <label class="form-label mb-3" for="site_url">
           الموقع الالكتروني(http://www.sample.com)</label
         >
 
@@ -262,40 +253,37 @@
         </div>
       </div>
       <div class="col-2">
-        <label for="servicetype" class="control-label">
-          <i class="fa fa-star" aria-hidden="true"></i>
-
+        <label for="projectServiceId " class="control-label mb-3">
           خدمات
         </label>
+
         <select
-          name="servicetype"
-          id="servicetype"
+          name="projectServiceId"
+          id="projectServiceId"
           class="form-control form-control-lg"
-          formControlName="servicetype"
-        >
-          <option value="values1">value one</option>
-          <option value="valu2">value tow</option>
+          formControlName="projectServiceId" (change)="_subServices()">
+          <ng-container *ngFor="let service of servicesType">
+            <option [value]="service.id">{{service.name}}</option>
+          </ng-container>
         </select>
 
         <div
           *ngIf="
-            providerData.get('servicetype')?.invalid &&
-            (providerData.get('servicetype').dirty ||
-              providerData.get('servicetype').touched)
+            providerData.get('projectServiceId')?.invalid &&
+            (providerData.get('projectServiceId').dirty ||
+              providerData.get('projectServiceId').touched)
           "
           class="alert alert-danger"
         >
-          <div *ngIf=" providerData.get('servicetype').errors?.['required']">
+          <div *ngIf=" providerData.get('projectServiceId').errors?.['required']">
             servicetype is required.
           </div>
         </div>
       </div>
 
-      <div class="col-3">
-        <label for="search_name_input" class="control-label">
-          <i class="fa fa-star" aria-hidden="true"></i>
-
-          خدمات
+      <!--<div class="col-3">
+        <label for="search_name_input" class="control-label mb-3">
+         خدمات فرعيه
         </label>
         <select
           filterEnabled="true"
@@ -307,63 +295,81 @@
           <option value="">value tow</option>
         </select>
 
-        <!-- [formControl]="formControl" -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label" for="yearly_budget">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          الدخل السنوي</label
-        >
+      </div>-->
 
-        <input
-          type="number"
-          id="yearly_budget"
-          name="yearly_budget"
-          formControlName="yearly_budget"
-          class="form-control form-control-lg form-group"
-          placeholder="$500"
-        />
-      </div>
+      <ng-container *ngIf="providerData.get('projectServiceId').value">
+        <div class="col-3">
+          <label for="search_name_input " class="control-label mb-3">
+            خدمات فرعيه
+          </label>
+
+
+          <input type="text" class="form-control" (keyup)="_search()" formControlName="search"
+            placeholder="مكونات المشروع" />
+
+          <ng-container *ngFor="let i of  subService">
+              <ng-container *ngIf="checkedSubServices[i.id]==1">
+                <button class="btn btn-primary mx-2 my-2" (click)="deleteSubService(i.id)">{{i.name}}
+                  <i class="fa fa-trash"></i>
+                </button>
+
+              </ng-container>
+
+
+          </ng-container>
+
+          <ul>
+            <ng-container *ngFor="let i of FilterSearch">
+              <ng-container *ngIf="checkedSubServices[i.id]!=1">
+                <li (click)="addSubService(i.id)"><span class="dropdown-item">{{i.name}}</span></li>
+              </ng-container>
+            </ng-container>
+          </ul>
+
+        </div>
+      </ng-container>
+
+
+
+
+
+
+
     </div>
-    <hr class="mt-3" />
+    <hr class="mt-5" />
     <div class="row mt-5">
-      <div class="col-4">
+      <div class="col-1">
         <h5 class="mb-5 bd-title" dir="rtl">العنوان</h5>
       </div>
-      <div class="col-8">
-        <div class="row">
+      <div class="col-11">
+        <div class="row mt-5">
           <div class="col-4">
-            <label for="region" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
+            <label for="region" class="control-label mb-3">
               منطقه
             </label>
-            <select
-              name="region"
-              id="region"
-              class="form-control form-control-lg"
-            >
-              <option value="">value one</option>
-              <option value="">value tow</option>
-            </select>
+            <select name="region" id="region" class="form-control form-control-lg" formControlName="region"
+            (change)="_getCities()">
+            <option [value]="0" disabled>----اختر----</option>
+            <ng-container *ngFor="let region of regionsList">
+              <option [value]="region.id">{{region.nameAr}}</option>
+            </ng-container>
+          </select>
           </div>
           <div class="col-4">
-            <label for="city" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
+            <label for="city" class="control-label mb-3">
               المدينة
             </label>
-            <select name="city" id="city" class="form-control form-control-lg">
-              <option value="">value one</option>
-              <option value="">value tow</option>
+            <select name="city" id="city" class="form-control form-control-lg" formControlName="city"
+            (change)="_getDistricts()">
+            <option [value]="0" disabled>----اختر----</option>
+              <ng-container *ngFor="let city of citiesList">
+                <option [value]="city.id">{{city.nameAr}}</option>
+              </ng-container>
             </select>
           </div>
-          <div class="col-4">
-            <label for="district" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
 
+          <div class="col-4">
+            <label for="district" class="control-label mb-3">
               الحى
             </label>
             <select
@@ -371,15 +377,16 @@
               id="district"
               class="form-control form-control-lg"
             >
-              <option value="">value one</option>
-              <option value="">value tow</option>
+               <option [value]="0" disabled>----اختر----</option>
+               <ng-container *ngFor="let district of districtsList">
+                <option [value]="district.id">{{district.nameAr}}</option>
+              </ng-container>
             </select>
           </div>
         </div>
         <div class="row my-4">
-          <div class="col-3">
-            <label class="form-label" for="buildNo">
-              <i class="fa fa-star" aria-hidden="true"></i>
+          <div class="col-2">
+            <label class="form-label mb-3" for="buildNo">
               رقم المبنى
             </label>
 
@@ -392,9 +399,8 @@
               placeholder="$500"
             />
           </div>
-          <div class="col-3">
-            <label class="form-label" for="postal_box">
-              <i class="fa fa-star" aria-hidden="true"></i>
+          <div class="col-2">
+            <label class="form-label mb-3" for="postal_box">
               الرقم الاضافي
             </label>
 
@@ -408,8 +414,7 @@
             />
           </div>
           <div class="col-3">
-            <label class="form-label" for="postal_code">
-              <i class="fa fa-star" aria-hidden="true"></i>
+            <label class="form-label mb-3" for="postal_code">
               الرمز بريد
             </label>
 
@@ -422,214 +427,23 @@
               placeholder="$500"
             />
           </div>
-          <div class="col-3">
-            <label class="form-label" for="StreetName">
-              <i class="fa fa-star" aria-hidden="true"></i>
+          <div class="col-5">
+            <label class="form-label mb-3" for="StreetName">
               اسم الشارع
             </label>
-
             <input
-              type="number"
+              type="text"
               id="StreetName"
               name="StreetName"
               formControlName="StreetName"
               class="form-control form-control-lg form-group"
-              placeholder="$500"
             />
           </div>
         </div>
       </div>
     </div>
-    <hr class="my-3" />
-    <div class="row">
-      <div class="col-4">
-        <h5 class="mb-5 bd-title" dir="rtl">ممثل الشركة</h5>
-      </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col-6">
-            <label class="form-label" for="representative_name">
-              <i class="fa fa-star" aria-hidden="true"></i>
 
-              الاسم الاول</label
-            >
-            <input
-              type="text"
-              id="representative_name"
-              class="form-control form-control-lg"
-              name="representative_name"
-              formControlName="representative_name"
-              placeholder="الاسم الاول"
-              [class.is-valid]="
-                providerData.get('representative_name')?.valid &&
-                (providerData.get('representative_name')?.dirty ||
-                  providerData.get('representative_name')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_name')?.invalid &&
-                (providerData.get('representative_name')?.dirty ||
-                  providerData.get('representative_name')?.touched)
-              "
-            />
 
-            <div
-              *ngIf="
-                providerData.get('representative_name')?.invalid &&
-                (providerData.get('representative_name').dirty ||
-                  providerData.get('representative_name').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_name').errors?.['required']"
-              >
-                first name is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_name').errors?.['minlength']"
-              >
-                first name must be at least 4 characters long.
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="representative_lastName">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              اسم العائلة</label
-            >
-            <input
-              type="text"
-              id="representative_lastName"
-              class="form-control form-control-lg"
-              name="representative_lastName"
-              formControlName="representative_lastName"
-              placeholder="اسم العائلة"
-              [class.is-valid]="
-                providerData.get('representative_lastName')?.valid &&
-                (providerData.get('representative_lastName')?.dirty ||
-                  providerData.get('representative_lastName')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_lastName')?.invalid &&
-                (providerData.get('representative_lastName')?.dirty ||
-                  providerData.get('representative_lastName')?.touched)
-              "
-            />
-
-            <div
-              *ngIf="
-                providerData.get('representative_lastName')?.invalid &&
-                (providerData.get('representative_lastName').dirty ||
-                  providerData.get('representative_lastName').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_lastName').errors?.['required']"
-              >
-                lastName is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_lastName').errors?.['minlength']"
-              >
-                lastName must be at least 4 characters long.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-6">
-            <label class="form-label" for="representative_email">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              البريد الالكتروني</label
-            >
-
-            <input
-              type="text"
-              id="representative_email"
-              name="representative_email"
-              formControlName="representative_email"
-              class="form-control form-control-lg form-group"
-              placeholder="البريد الالكتروني"
-              [class.is-valid]="
-                providerData.get('representative_email')?.valid &&
-                (providerData.get('representative_email')?.dirty ||
-                  providerData.get('representative_email')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_email')?.invalid &&
-                (providerData.get('representative_email')?.dirty ||
-                  providerData.get('representative_email')?.touched)
-              "
-            />
-            <div
-              *ngIf="
-                providerData.get('representative_email')?.invalid &&
-                (providerData.get('representative_email').dirty ||
-                  providerData.get('representative_email').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_email').errors?.['required']"
-              >
-                email is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_email').errors?.['minlength']"
-              >
-                email must be example@email.com
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="representative_phone">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              رقم التلفون</label
-            >
-            <div class="form-group d-inline-block form-control">
-              <span class="px-3">+966</span>
-              <input
-                type="text"
-                id="representative_phone"
-                name="representative_phone"
-                formControlName="representative_phone"
-                placeholder="رقم التلفون"
-                [class.is-valid]="
-                  providerData.get('representative_phone')?.valid &&
-                  (providerData.get('representative_phone')?.dirty ||
-                    providerData.get('representative_phone')?.touched)
-                "
-                [class.is-invalid]="
-                  providerData.get('representative_phone')?.invalid &&
-                  (providerData.get('representative_phone')?.dirty ||
-                    providerData.get('representative_phone')?.touched)
-                "
-              />
-            </div>
-            <div
-              *ngIf="
-                providerData.get('representative_phone')?.invalid &&
-                (providerData.get('representative_phone').dirty ||
-                  providerData.get('representative_phone').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_phone').errors?.['required']"
-              >
-                phone is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_phone').errors?.['pattern']"
-              >
-                phone must be 11 characters
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="row my-5">
       <div class="col-8"></div>
       <div class="col-4">
@@ -638,22 +452,20 @@
           type="submit"
           (click)="secandform = true"
 
-        >
-          <!-- (click)="secandform = true" -->
+          (click)="secandform = true" >
           <i class="fa fa-floppy-disk" aria-hidden="true"></i>
-
           حفظ استكمال البيانات
         </button>
       </div>
     </div>
   </div>
 
+
   <div *ngIf="secandform == true">
     <h5 class="mb-5 mt-5 bd-title" dir="rtl">المستندات المرفقة</h5>
     <div class="row">
       <div class="col-md-4 mb-4">
         <label for="file" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
           شعار الشركة
         </label>
         <div class="input-group custom-file-button form-control">
@@ -664,7 +476,7 @@
             placeholder="mohamed"
             formControlName="logo"
           />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
+          <label class="btn btn-primary " for="inputGroupFile"
             >ارفاق</label
           >
         </div>
@@ -674,9 +486,8 @@
       <div class="col-md-4 mb-4">
         <div class="form-outline">
           <label class="form-label mb-2" for="registration_number">
-            <i class="fa fa-star" aria-hidden="true"></i>
 
-            رقم تسجيل الشركة</label
+            السجل التجارى</label
           >
           <input
             type="number"
@@ -690,7 +501,6 @@
       </div>
       <div class="col-md-4 mb-4">
         <label for="attach_register" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
           ارفاق
         </label>
         <div class="input-group custom-file-button form-control">
@@ -728,8 +538,6 @@
       <div class="col-md-3 mb-4">
         <div class="form-outline">
           <label class="form-label mb-2" for="CompNum">
-            <i class="fa fa-star" aria-hidden="true"></i>
-
             تاريخ الرخصة
           </label>
           <input
@@ -745,8 +553,6 @@
       <div class="col-md-3 mb-4">
         <div class="form-outline">
           <label class="form-label mb-2" for="CompNum">
-            <i class="fa fa-star" aria-hidden="true"></i>
-
             تاريخ الانتهاء
           </label>
           <input
@@ -761,7 +567,6 @@
       </div>
       <div class="col-md-3 mb-4">
         <label for="attach_licences" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
           ارفاق
         </label>
         <div class="input-group custom-file-button form-control">
@@ -789,7 +594,7 @@
       </div>
       <div class="col-2">
         <button
-          class="btn btn-success-style form-control"
+          class="btn btn-success-style form-control "
           (click)="secandform = false"
         >
           <i class="fa fa-backward" aria-hidden="true"></i>
@@ -800,9 +605,3 @@
   </div>
 </form>
 
-{{ providerData.value | json }}
-<br />
-<br />
-<br />
-<br />
-{{ providerData.get("email").errors | json }}

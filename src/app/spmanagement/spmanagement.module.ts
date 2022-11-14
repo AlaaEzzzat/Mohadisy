@@ -19,6 +19,20 @@ import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
+import { SpPinnedProjectComponent } from './sp-pinned-project/sp-pinned-project.component';
+import { LayoutProjectComponent } from './layout-project/layout-project.component';
+import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
+import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.component';
+import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
+import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
+
+import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
+import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
+import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
+
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -33,6 +47,25 @@ import { MatSelectModule } from '@angular/material/select';
     SpCompleteProfileComponent,
     PrevWorksComponent,
     CompanyCompleteProfileComponent,
+    SpDashBoardComponent,
+    SpContributionsComponent,
+    SpMessagesComponent,
+    SpPaymentsComponent,
+    SpProjectsComponent,
+    SpPriceOffersComponent,
+    SpHomeComponent,
+    SpProfileComponent,
+    SpProjectRequestComponent,
+    SpPinnedProjectComponent,
+    LayoutProjectComponent,
+    SpProjectRequestAllComponent,
+    SpCprojectRequestComponent,
+    SpRequestAcceptComponent,
+    SpRequestRejectComponent,
+    SpProjectOfferComponent,
+    SpProjectStatusComponent,
+    SpMenuOffersComponent,
+    SpProjectCurrentComponent,
   ],
   imports: [
     MatSelectModule,
@@ -43,6 +76,7 @@ import { MatSelectModule } from '@angular/material/select';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
 })
 export class SPmanagementModule {}

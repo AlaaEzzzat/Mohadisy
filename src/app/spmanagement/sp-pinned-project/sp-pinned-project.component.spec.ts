@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpProjectsComponent } from './sp-projects.component';
+import { SpPinnedProjectComponent } from './sp-pinned-project.component';
 
-
-describe('SpProjectsComponent', () => {
-  let component: SpProjectsComponent;
-  let fixture: ComponentFixture<SpProjectsComponent>;
+describe('SpPinnedProjectComponent', () => {
+  let component: SpPinnedProjectComponent;
+  let fixture: ComponentFixture<SpPinnedProjectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpProjectsComponent ]
+      declarations: [ SpPinnedProjectComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpProjectsComponent);
+    fixture = TestBed.createComponent(SpPinnedProjectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

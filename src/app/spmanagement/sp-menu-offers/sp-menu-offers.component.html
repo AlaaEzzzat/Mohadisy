@@ -1,0 +1,37 @@
+
+
+  <div class="section-1 mt-4">
+
+    <div class="row nav mt-4">
+
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/new"]'
+        [routerLinkActive]='["active"]'
+        class="btn">{{projectstatues[0].nameAr}}</a>
+      </div>
+
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
+      </div>
+
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/accept"]'
+        [routerLinkActive]='["active"]'
+        class="btn" >{{projectstatues[2].nameAr}}</a>
+      </div>
+
+      <div class="col  text-center contnet">
+        <a [routerLink]="['/Spmanagement/projects/reject']" class="btn"
+        [routerLinkActive]='["active"]' >{{projectstatues[1].nameAr}}</a>
+      </div>
+
+  </div>
+  </div>
+
+  <router-outlet></router-outlet>
+
+
+
+
+
+

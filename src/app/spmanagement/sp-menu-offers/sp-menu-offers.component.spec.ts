@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpProjectsComponent } from './sp-projects.component';
+import { SpMenuOffersComponent } from './sp-menu-offers.component';
 
-
-describe('SpProjectsComponent', () => {
-  let component: SpProjectsComponent;
-  let fixture: ComponentFixture<SpProjectsComponent>;
+describe('SpMenuOffersComponent', () => {
+  let component: SpMenuOffersComponent;
+  let fixture: ComponentFixture<SpMenuOffersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpProjectsComponent ]
+      declarations: [ SpMenuOffersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpProjectsComponent);
+    fixture = TestBed.createComponent(SpMenuOffersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

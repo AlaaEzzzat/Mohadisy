@@ -12,7 +12,7 @@
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -27,7 +27,7 @@
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -39,32 +39,14 @@
           </ng-container>
 
 
-          <div class="paginate mt-4">
-            <pagination-controls (pageChange)="changepage($event)"
-            previousLabel="السابق"
-            nextLabel="التالى"
-            >
-            </pagination-controls>
-          </div>
 
-
-
-          <!--- <div class="col-12 card card-1 mt-4" >
-          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-            <a class="btn text-success">تشطيب</a>
-          </p>
-          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
-        </div>
-
-        <div class="col-12 card card-1 mt-4">
-          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-            <a class="btn text-success">تشطيب</a>
-          </p>
-          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
-        </div>
-      -->
+      <div class="paginate mt-4">
+        <pagination-controls (pageChange)="changepage($event)"
+        previousLabel="السابق"
+        nextLabel="التالى"
+        >
+        </pagination-controls>
+      </div>
 
         </div>
 
@@ -93,10 +75,10 @@
                     <p class="pt-4">موضوع المشروع:<span>{{selectProject.subject}}</span></p>
                   </div>
 
-                  <div class="col-1 rep">
+                   <div class="col-1 rep">
                      <i class="fa-solid fa-handshake">
                     </i>
-                    <a href="/Spmanagement/projects/all/request" class="btn text-white" >الرد</a>
+                    <a href="/Spmanagement/projects/new/request" class="btn text-white" (click)="addIdProject(selectProject.id)" routerLinkActive="active">الرد</a>
                   </div>
 
 
@@ -202,38 +184,22 @@
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
 
-                    <ul>
-                      <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                        <div>
-                          <li (click)="toggoleDocument(document.id)">
-                            <ng-container *ngIf="descDocument[document.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                            </ng-container>
+                  <ul>
+                    <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+                      <div>
 
-                            <ng-container *ngIf="descDocument[document.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
-                            </ng-container>
-                            {{document.file}}
-                          </li>
+                      <button style="border:none; background-color:transparent;"
+                      onclick="downloadFile(document.filePath,document.file)"
+                      >
+                        <i class="fa fa-download text-success mt-3" aria-hidden="true"></i>
+                        {{document.file}}
+                      </button>
 
 
-                          <ng-container *ngIf="descDocument[document.id]">
-                            <ul>
-                              <li> {{document.filePath}}</li>
-                            </ul>
-                          </ng-container>
+                      </div>
 
-
-                        </div>
-
-                      </ng-container>
-                    </ul>
-
-
-
-
-
-
+                    </ng-container>
+                  </ul>
                   </div>
 
                 </div>
@@ -253,6 +219,7 @@
     </div>
 
   </div>
+
 
 
 

@@ -1,4 +1,12 @@
 
+
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
+
   <div class="section-2 mt-2">
     <div class="row">
       <div class="col-4">
@@ -11,13 +19,13 @@
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
-                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <span>{{project?.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
-                <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+                  {{project?.district.nameAr}},{{project?.district.city.nameAr}},
+                  {{project?.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt "></i>{{project?.dateCreated}}</p>
               </div>
             </ng-container>
 
@@ -26,27 +34,17 @@
               <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
-                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <span>{{project?.clientProfile.firstName}} {{project?.clientProfile.lastName}}</span>
+                  <a class="btn text-success">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
-                <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
+                  {{project?.district.nameAr}},{{project?.district.city.nameAr}},
+                  {{project?.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt  "></i>{{project?.dateCreated}}</p>
               </div>
             </ng-container>
 
           </ng-container>
-
-
-          <div class="paginate mt-4">
-            <pagination-controls (pageChange)="changepage($event)"
-            previousLabel="السابق"
-            nextLabel="التالى"
-            >
-            </pagination-controls>
-          </div>
-
 
 
           <!--- <div class="col-12 card card-1 mt-4" >
@@ -65,6 +63,15 @@
           <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
         </div>
       -->
+
+
+      <div class="paginate mt-4" *ngIf="result==1">
+        <pagination-controls (pageChange)="changepage($event)"
+        previousLabel="السابق"
+        nextLabel="التالى"
+        >
+        </pagination-controls>
+      </div>
 
         </div>
 
@@ -93,10 +100,8 @@
                     <p class="pt-4">موضوع المشروع:<span>{{selectProject.subject}}</span></p>
                   </div>
 
-                  <div class="col-1 rep">
-                     <i class="fa-solid fa-handshake">
-                    </i>
-                    <a href="/Spmanagement/projects/all/request" class="btn text-white" >الرد</a>
+                   <div class="col-1 rep">
+                    <a href="/Spmanagement/projects/request" class="btn text-white" (click)="addIdProject(selectProject.id)" routerLinkActive="active">تعديل</a>
                   </div>
 
 
@@ -202,38 +207,22 @@
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
 
-                    <ul>
-                      <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                        <div>
-                          <li (click)="toggoleDocument(document.id)">
-                            <ng-container *ngIf="descDocument[document.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                            </ng-container>
+                  <ul>
+                    <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+                      <div>
 
-                            <ng-container *ngIf="descDocument[document.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
-                            </ng-container>
-                            {{document.file}}
-                          </li>
+                      <button style="border:none; background-color:transparent;"
+                      onclick="downloadFile(document.filePath,document.file)"
+                      >
+                        <i class="fa fa-download text-success mt-3" aria-hidden="true"></i>
+                        {{document.file}}
+                      </button>
 
 
-                          <ng-container *ngIf="descDocument[document.id]">
-                            <ul>
-                              <li> {{document.filePath}}</li>
-                            </ul>
-                          </ng-container>
+                      </div>
 
-
-                        </div>
-
-                      </ng-container>
-                    </ul>
-
-
-
-
-
-
+                    </ng-container>
+                  </ul>
                   </div>
 
                 </div>
@@ -253,6 +242,8 @@
     </div>
 
   </div>
+
+
 
 
 

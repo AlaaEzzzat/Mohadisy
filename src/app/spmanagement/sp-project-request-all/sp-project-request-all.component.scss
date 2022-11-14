@@ -11,15 +11,20 @@
    color:#004057;
 }
 
-.section-2  .card p
+.section-2  .card-2 p
 {
   padding: 1% 2%;
   margin-right: 4%;
 }
 
+.section-2 .card-1 p
+{
+  margin: 1%;
+}
+
 .section-2 .card-1 p span
 {
-  margin-left: 47%;
+  margin-left: 45%;
 }
 
 .card p i
@@ -85,6 +90,17 @@ ul li i
 
 }
 
+.rep a
+{
+  border: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+  outline: none;
+}
+
 
 li
 {
@@ -92,12 +108,13 @@ li
 }
 
 
-.card-2 
+.card-2
 {
 
   font-weight: 500;
   font-size: 14px;
 }
+
 
 
 

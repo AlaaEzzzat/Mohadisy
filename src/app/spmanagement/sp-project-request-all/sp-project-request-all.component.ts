@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+
 import { ApiService } from 'src/app/@core/api.service';
+import { Component, OnInit } from '@angular/core';
+//import { saveAs } from 'file-saver';
 
 @Component({
-  selector: 'app-sp-projects',
-  templateUrl: './sp-projects.component.html',
-  styleUrls: ['./sp-projects.component.scss']
+  selector: 'app-sp-project-request-all',
+  templateUrl: './sp-project-request-all.component.html',
+  styleUrls: ['./sp-project-request-all.component.scss']
 })
-export class SpProjectsComponent implements OnInit {
+export class SpProjectRequestAllComponent implements OnInit {
 
-
-   Listprojects:Array<any>=[];
+  Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
    AllProjectComponent:Array<any>=[];
    RequiredWorks:Array<any>=[];
@@ -26,9 +27,7 @@ export class SpProjectsComponent implements OnInit {
   ngOnInit(): void {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
-
     this.Listprojects=data.data.priceQuotes;
-
 
     });
 
@@ -48,13 +47,10 @@ export class SpProjectsComponent implements OnInit {
         break;
       }
      }
-     console.log(this.selectProject);
-
 
     this.projectComponent=[],this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
      subscribe(data=>{
-      console.log(data);
       this.AllProjectComponent=data.data;
 
        for(let component of this.AllProjectComponent)  {
@@ -104,6 +100,11 @@ export class SpProjectsComponent implements OnInit {
    }
 
 
+   /*download(file:any,fileName:any)
+   {
+    this.api.downloadFile(file).subscribe(blob => saveAs(blob,fileName));
+   }*/
+
 
 
      /*************************************/
@@ -127,13 +128,8 @@ export class SpProjectsComponent implements OnInit {
 
      }
 
-     toggoleDocument(documentId:any)
-     {
-      if(this.descDocument[documentId])
-      this.descDocument[documentId]=0;
-      else
-      this.descDocument[documentId]=1;
-     }
+
+
 
 
      changepage(e:any)
@@ -147,6 +143,15 @@ export class SpProjectsComponent implements OnInit {
 
 
     });
+     }
+
+     addIdProject(idProject:any)
+     {
+      console.log(idProject);
+
+      localStorage.setItem('idproject',idProject);
+
+
      }
 
 

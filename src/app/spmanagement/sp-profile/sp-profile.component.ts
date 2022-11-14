@@ -1,7 +1,7 @@
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
   selector: 'app-sp-profile',
@@ -9,14 +9,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sp-profile.component.scss'],
 })
 export class SpProfileComponent implements OnInit {
-  cars = [
-    { id: 1, name: 'BMW Hyundai' },
-    { id: 2, name: 'Kia Tata' },
-    { id: 3, name: 'Volkswagen Ford' },
-    { id: 4, name: 'Renault Audi' },
-    { id: 5, name: 'Mercedes Benz Skoda' },
-  ];
-
   imageSrc?: string;
   secandform: boolean = false;
   providerData: any;
@@ -31,7 +23,10 @@ export class SpProfileComponent implements OnInit {
   FilterSearch: Array<any> = [];
   checkedSubServices: Array<any> = [];
 
-  constructor(private provider: ProviderServiceService) {
+  constructor(
+    private provider: ProviderServiceService,
+    private api: ApiService
+  ) {
     this.providerData = new FormGroup({
       TypeService: new FormControl('', [
         Validators.required,
@@ -57,7 +52,7 @@ export class SpProfileComponent implements OnInit {
         Validators.pattern('[789][0-9]{9}'),
       ]),
       site_url: new FormControl('', [Validators.required]),
-      servicetype: new FormControl('', [Validators.required]),
+      projectServiceId: new FormControl('', [Validators.required]),
       search_name_input: new FormControl('', [Validators.required]),
       yearly_budget: new FormControl('', [
         Validators.required,
@@ -113,9 +108,11 @@ export class SpProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provider.getRegions().subscribe((data) => {
-      this.regionsList = data.data;
-    });
+    this.api
+      .get('https://app.mohandisy.com/api/Address/getRegions')
+      .subscribe((data) => {
+        this.regionsList = data.data;
+      });
 
     this.provider.projectServices().subscribe((data) => {
       this.servicesType = data.data;
@@ -138,6 +135,7 @@ export class SpProfileComponent implements OnInit {
 
   _getDistricts() {
     this.selectCity = this.providerData.get('city').value;
+    console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
@@ -148,13 +146,12 @@ export class SpProfileComponent implements OnInit {
         }
       );
   }
-
   /******************start services and subservices***************/
 
   _subServices() {
     this.checkedSubServices = [];
     this.subService = [];
-    var serviceId = this.providerData.get('servicetype').value;
+    var serviceId = this.providerData.get('projectServiceId').value;
     this.provider.subServicesByServiceId(serviceId).subscribe((data) => {
       this.FilterSearch = data.data;
       this.subService = data.data;
@@ -165,6 +162,7 @@ export class SpProfileComponent implements OnInit {
     var x = this.providerData.get('search').value;
     this.FilterSearch = this.subService.filter((e) => e.name.includes(x));
   }
+
   addSubService(subServiceId: number) {
     this.checkedSubServices[subServiceId] = 1;
   }
@@ -186,31 +184,29 @@ export class SpProfileComponent implements OnInit {
   SelectFile_3(event: any) {
     this.Files[2] = <File>event.target.files[0];
   }
+
   onSubmit() {
-    this.providerData.value['servicetype'] = [];
+    this.providerData.value['ospprofileSubServices'] = [];
 
     this.subService.forEach((e) => {
       if (this.checkedSubServices[e.id])
-        this.providerData.value['servicetype'].push(e.id);
+        this.providerData.value['ospprofileSubServices'].push({
+          projectServiceId: this.providerData.get('projectServiceId').value,
+          projectSubServiceId: e.id,
+        });
     });
 
     var formFiles: any = new FormData();
-
     formFiles.append('CompanyLogo', this.Files[0]);
     formFiles.append('CompanyRegisteration', this.Files[1]);
     formFiles.append('License', this.Files[2]);
 
-    this.provider.Files(formFiles).subscribe((data) => {});
+    this.provider.Files(formFiles).subscribe((data) => {
+      console.log(data);
+    });
 
-    var formRdata = {
-      firstName: this.providerData.value['representative_name'],
-      lastName: this.providerData.value['representative_lastName'],
-      email: this.providerData.value['representative_email'],
-      phoneNumber: this.providerData.value['representative_phone'],
-    };
-
-    this.provider.representative(formRdata).subscribe((data) => {});
-
-    this.provider.getR().subscribe((data) => {});
+    this.provider.Profile(this.providerData.value).subscribe((data: any) => {
+      console.log(data);
+    });
   }
 }

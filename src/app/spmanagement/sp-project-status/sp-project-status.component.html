@@ -1,0 +1,37 @@
+
+
+  <div class="section-1 mt-4">
+
+    <div class="row nav mt-4">
+  
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/status/current"]'
+        [routerLinkActive]='["active"]'
+        class="btn">المشاريع الحاليه</a>
+      </div>
+  
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >المشاريع المعلقه</a>
+      </div>
+  
+      <div class="col   text-center contnet">
+        <a [routerLink]='["/Spmanagement/projects/accept"]'
+        [routerLinkActive]='["active"]'
+        class="btn" >مشاريع منتهيه</a>
+      </div>
+  
+      <div class="col  text-center contnet">
+        <a [routerLink]="['/Spmanagement/projects/reject']" class="btn"
+        [routerLinkActive]='["active"]' >مشاريع متأخره</a>
+      </div>
+
+  </div>
+  </div>
+
+  <router-outlet></router-outlet>
+
+
+
+
+
+

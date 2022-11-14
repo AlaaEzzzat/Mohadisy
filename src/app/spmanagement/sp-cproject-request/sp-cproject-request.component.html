@@ -1,0 +1,244 @@
+<div class="section-2 mt-2">
+    <div class="row">
+      <div class="col-4">
+        <div class="row">
+
+          <ng-container *ngFor="let project of Listprojects|
+          paginate: {itemsPerPage:5, currentPage: page }">
+
+            <ng-container *ngIf="this.select==project.id">
+              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+                style="background:#004958; color:white;">
+                <p><i class="far fa-user "></i>
+                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <a class="btn text-success">تشطيب</a>
+                </p>
+                <p><i class="fa fa-location-dot "></i>
+                  {{project.district.nameAr}},{{project.district.city.nameAr}},
+                  {{project.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+              </div>
+            </ng-container>
+
+
+            <ng-container *ngIf="this.select!=project.id">
+              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+                style="background:white;  color:#004057;">
+                <p><i class="far fa-user "></i>
+                  <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                  <a class="btn text-success">تشطيب</a>
+                </p>
+                <p><i class="fa fa-location-dot "></i>
+                  {{project.district.nameAr}},{{project.district.city.nameAr}},
+                  {{project.district.city.region.nameAr}} </p>
+                <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
+              </div>
+            </ng-container>
+
+          </ng-container>
+
+          <div class="paginate mt-4">
+            <pagination-controls (pageChange)="changepage($event)"
+            previousLabel="السابق"
+            nextLabel="التالى"
+            >
+            </pagination-controls>
+          </div>
+
+
+          <!--- <div class="col-12 card card-1 mt-4" >
+          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
+            <a class="btn text-success">تشطيب</a>
+          </p>
+          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
+          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
+        </div>
+
+        <div class="col-12 card card-1 mt-4">
+          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
+            <a class="btn text-success">تشطيب</a>
+          </p>
+          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
+          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
+        </div>
+      -->
+
+        </div>
+
+      </div>
+
+
+      <div class="col-8  mt-4 mb-3">
+
+        <a href="/Spmanagement/projects/all"
+        class=" mb-2 return" routerLinkActive="active">الرجوع</a>
+
+        <ng-container *ngIf="select!=0">
+          <div class="row ">
+            <div class="col-12 mt-3">
+
+              <div class="card">
+             <div id="accordion">
+              <h2>
+                <button class="btn btn-accordion w-100" type="button"
+                data-target="#item1" data-toggle="collapse" >المده والتكلفه</button>
+              </h2>
+
+              <div class="collapse show" id="item1" data-parent="#accordian">
+
+                <h6 class="dotted-line mt-2 text-center" style="color:gray;"></h6>
+
+                <form action="">
+                  <div class="card-3">
+                      <div class="row">
+
+                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+                        <div class="col-12 form-group ">
+                          <label for="period" class="label-control">مده المشروع</label>
+                          <input type="text" class="form-control" name="period"
+                          formControlName="period"
+                           placeholder="موضوع المشروع">
+                        </div>
+
+
+                        <div class="col-md-6 form-group mt-3">
+                          <label for="cost" class="label-control">السعر</label>
+                          <input type="text" class="form-control" name="cost"
+                          formControlName="cost"
+                           placeholder="السعر">
+                        </div>
+
+                        <div class="col-md-6 form-group mt-3">
+                          <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
+                          <input type="text" class="form-control" name="numberOfMilestones"
+                          formArrayName="numberOfMilestones"
+                           placeholder="عدد مراحل الدفع">
+                        </div>
+
+
+                        <div class="col-6 form-group mt-3">
+                          <label for="stage" class="label-control">المرحله الاولى</label>
+                          <input type="text" class="form-control" name="stage" placeholder="500$">
+                        </div>
+
+                        <div class="col-12 form-group mt-3">
+                          <label for="message">تواصل مع المسؤل</label>
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn col-3 mt-4 mb-2">ارسال</button>
+
+                  </div>
+                  </form>
+
+
+              </div>
+              </div>
+
+            </div>
+             </div>
+
+
+             <div class="col-12 mt-3">
+
+              <div class="card">
+              <div id="accordion">
+              <h2>
+                <button class="btn btn-accordion w-100" type="button"
+                data-target="#item2" data-toggle="collapse" >التزامات المقاول</button>
+              </h2>
+
+              <div class="collapse hide" id="item2" data-parent="#accordian">
+
+                <h6 class="dotted-line mt-2 text-center" style="color:gray;"></h6>
+
+                <form action="">
+                  <div class="card-3">
+                      <div class="row">
+
+                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn col-3 mt-4 mb-3">ارسال</button>
+
+                  </div>
+                  </form>
+
+
+              </div>
+              </div>
+
+            </div>
+             </div>
+
+
+
+             <div class="col-12 mt-3">
+
+              <div class="card">
+             <div id="accordion">
+              <h2>
+                <button class="btn btn-accordion w-100" type="button"
+                data-target="#item3" data-toggle="collapse" >الشروط</button>
+              </h2>
+
+              <div class="collapse hide" id="item3" data-parent="#accordian">
+
+                <h6 class="dotted-line mt-2 text-center" style="color:gray;"></h6>
+
+                <form action="">
+                  <div class="card-3">
+                      <div class="row">
+
+                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                        <div class="col-12 form-group mt-3">
+                          <textarea name="" id=""  name="message"
+                          formControlName="message"
+                          placeholder="الرساله"></textarea>
+                        </div>
+
+                      </div>
+
+                      <button type="submit" class="btn col-3 mt-4 mb-3">تأكيد</button>
+
+                  </div>
+                  </form>
+
+
+              </div>
+              </div>
+
+            </div>
+             </div>
+
+            </div>
+
+        </ng-container>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+

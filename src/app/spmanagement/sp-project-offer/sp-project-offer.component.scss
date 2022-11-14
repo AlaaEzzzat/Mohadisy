@@ -11,15 +11,20 @@
    color:#004057;
 }
 
-.section-2  .card p
+.section-2  .card-2 p
 {
   padding: 1% 2%;
   margin-right: 4%;
 }
 
+.section-2 .card-1 p
+{
+  margin: 1%;
+}
+
 .section-2 .card-1 p span
 {
-  margin-left: 47%;
+  margin-left: 45%;
 }
 
 .card p i
@@ -85,6 +90,11 @@ ul li i
 
 }
 
+.rep a
+{
+  border: none;
+}
+
 
 li
 {
@@ -92,7 +102,7 @@ li
 }
 
 
-.card-2 
+.card-2
 {
 
   font-weight: 500;
@@ -100,6 +110,13 @@ li
 }
 
 
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
 
+}
 
 

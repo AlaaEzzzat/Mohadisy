@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpProjectsComponent } from './sp-projects.component';
+import { SpRequestAcceptComponent } from './sp-request-accept.component';
 
-
-describe('SpProjectsComponent', () => {
-  let component: SpProjectsComponent;
-  let fixture: ComponentFixture<SpProjectsComponent>;
+describe('SpRequestAcceptComponent', () => {
+  let component: SpRequestAcceptComponent;
+  let fixture: ComponentFixture<SpRequestAcceptComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpProjectsComponent ]
+      declarations: [ SpRequestAcceptComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpProjectsComponent);
+    fixture = TestBed.createComponent(SpRequestAcceptComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

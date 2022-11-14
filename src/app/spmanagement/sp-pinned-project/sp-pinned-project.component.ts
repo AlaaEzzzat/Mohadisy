@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
-  selector: 'app-sp-projects',
-  templateUrl: './sp-projects.component.html',
-  styleUrls: ['./sp-projects.component.scss']
+  selector: 'app-sp-pinned-project',
+  templateUrl: './sp-pinned-project.component.html',
+  styleUrls: ['./sp-pinned-project.component.scss']
 })
-export class SpProjectsComponent implements OnInit {
+export class SpPinnedProjectComponent implements OnInit {
 
-
-   Listprojects:Array<any>=[];
+  Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
    AllProjectComponent:Array<any>=[];
    RequiredWorks:Array<any>=[];
@@ -48,13 +47,10 @@ export class SpProjectsComponent implements OnInit {
         break;
       }
      }
-     console.log(this.selectProject);
-
 
     this.projectComponent=[],this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
      subscribe(data=>{
-      console.log(data);
       this.AllProjectComponent=data.data;
 
        for(let component of this.AllProjectComponent)  {
@@ -148,6 +144,5 @@ export class SpProjectsComponent implements OnInit {
 
     });
      }
-
 
   }

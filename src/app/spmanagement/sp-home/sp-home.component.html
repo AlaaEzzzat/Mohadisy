@@ -1,22 +1,19 @@
 <div class="d-flex" id="wrapper">
-  <div id="page-content-wrapper" class="w-100">
+  <div id="page-content-wrapper">
     <app-navbar></app-navbar>
 
-    <div
-      class="container-fluid"
-      style="background-color: #eef0f8; min-height: 100vh; padding-top: 78px"
-    >
-      <div class="row">
+    <div class="container-fluid" style="background-color: #eef0f8">
+      <div class="row" id="aside">
         <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
           <div
-            [hidden]="status"
             class="m-0"
             style="background-color: #004057; font-weight: 600"
             id="sidebar-wrapper"
+            [hidden]="status"
           >
             <div class="list-group list-group-flush">
               <div class="text-white">
-                <div class="p-2 my-4" routerLink="/Spmanagement/mainProfile">
+                <div class="p-2 my-4" routerLink="/Spmanagement/profile">
                   <img
                     src="assets/images/icon1.png"
                     alt=""
@@ -24,7 +21,7 @@
                     width="28px"
                     height="28px"
                   />
-                  <span class="px-2 fontStyle texticon"> الرئيسية</span>
+                  <span class="px-2 fontStyle texticon"> الصفحه الرئيسيه</span>
                 </div>
 
                 <div class="p-2 my-4" routerLink="/Spmanagement/dashboard">
@@ -35,39 +32,30 @@
                     width="28px"
                     height="28px"
                   />
-                  <span class="px-2 fontStyle texticon"> صفحتي الشخصية </span>
+                  <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
+                </div>
+                <div class="p-2 my-4" routerLink="/Spmanagement/projects/new">
+                  <img
+                    src="assets/images/blueprint.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> المشاريع </span>
                 </div>
 
-                <div class="p-2 my-4" routerLink="/Spmanagement/offers">
+                <div class="p-2 my-4" routerLink="/Spmanagement/settings">
                   <img
-                    src="assets/images/blueprint.png"
+                    src="assets/images/settings.png"
                     alt=""
                     srcset=""
                     width="28px"
                     height="28px"
                   />
-                  <span class="px-2 fontStyle texticon"> عروض الأسعار </span>
+                  <span class="px-2 fontStyle texticon"> الإعدادات </span>
                 </div>
-                <div class="p-2 my-4" routerLink="/Spmanagement/project">
-                  <img
-                    src="assets/images/blueprint.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 fontStyle texticon"> مشاريعي </span>
-                </div>
-                <div class="p-2 my-4" routerLink="/Spmanagement/prevWorks">
-                  <img
-                    src="assets/images/blueprint.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 fontStyle texticon"> أعمالي السابقة </span>
-                </div>
+
                 <div class="p-2 my-4" routerLink="/Spmanagement/contributions">
                   <img
                     src="assets/images/id-card.png"
@@ -76,7 +64,7 @@
                     width="28px"
                     height="28px"
                   />
-                  <span class="px-2 fontStyle texticon"> إشتراكاتي </span>
+                  <span class="px-2 fontStyle texticon"> الاشتراكات </span>
                 </div>
                 <div class="p-2 my-4" routerLink="/Spmanagement/messages">
                   <img
@@ -86,7 +74,7 @@
                     width="28px"
                     height="28px"
                   />
-                  <span class="px-2 fontStyle texticon"> رسائلي </span>
+                  <span class="px-2 fontStyle texticon"> الرسائل </span>
                 </div>
                 <div
                   class="p-2 my-4 flex justify-content-between"
@@ -101,24 +89,19 @@
                   />
                   <span class="px-2 fontStyle texticon"> المدفوعات </span>
                 </div>
-                <div class="p-2 my-4" routerLink="/Spmanagement/settings">
-                  <img
-                    src="assets/images/settings.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 fontStyle texticon"> الإعدادات </span>
-                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
 
-        <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'">
-          <router-outlet></router-outlet>
+        <div
+          class="pt-5"
+          [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'"
+        >
+          <div class="pt-3" style="min-height: 90vh">
+            <router-outlet></router-outlet>
+          </div>
         </div>
       </div>
     </div>

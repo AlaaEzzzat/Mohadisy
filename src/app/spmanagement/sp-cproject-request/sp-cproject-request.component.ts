@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sp-projects',
-  templateUrl: './sp-projects.component.html',
-  styleUrls: ['./sp-projects.component.scss']
+  selector: 'app-sp-cproject-request',
+  templateUrl: './sp-cproject-request.component.html',
+  styleUrls: ['./sp-cproject-request.component.scss']
 })
-export class SpProjectsComponent implements OnInit {
+export class SpCprojectRequestComponent implements OnInit {
 
-
-   Listprojects:Array<any>=[];
+  Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
    AllProjectComponent:Array<any>=[];
    RequiredWorks:Array<any>=[];
@@ -19,7 +18,7 @@ export class SpProjectsComponent implements OnInit {
    descWork:Array<any>=[];
    documents:Array<any>=[];
    descDocument:Array<any>=[];
-   page:number=1;
+   page:number=0;
 
   constructor(private api:ApiService) { }
 
@@ -48,13 +47,10 @@ export class SpProjectsComponent implements OnInit {
         break;
       }
      }
-     console.log(this.selectProject);
-
 
     this.projectComponent=[],this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
      subscribe(data=>{
-      console.log(data);
       this.AllProjectComponent=data.data;
 
        for(let component of this.AllProjectComponent)  {
@@ -134,7 +130,6 @@ export class SpProjectsComponent implements OnInit {
       else
       this.descDocument[documentId]=1;
      }
-
 
      changepage(e:any)
      {

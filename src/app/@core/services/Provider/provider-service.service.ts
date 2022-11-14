@@ -20,6 +20,12 @@ export class ProviderServiceService {
       `${environment.baseUrl}/api/Address/getCitiesByRegion/${regionId}`
     );
   }
+  Profile(data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfile`,
+      data
+    );
+  }
 
   getDistricts(citiesId: number): Observable<any> {
     return this._HttpClient.get<any>(
