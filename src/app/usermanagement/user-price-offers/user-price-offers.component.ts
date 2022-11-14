@@ -74,7 +74,6 @@ export class UserPriceOffersComponent implements OnInit {
       this.isActiveService(this.activeService);
     });
     this.clientService.getClientProfile().subscribe((data) => {
-      console.log(data.data);
       this.client = data.data;
     });
   }
@@ -95,7 +94,6 @@ export class UserPriceOffersComponent implements OnInit {
       .subscribe((data: any) => {
         this.projectServicesFullData = data.data;
         console.log('projectOfServices : ');
-        console.log(this.projectServicesFullData);
         this.projectServiesArrays = this.projectServicesFullData.projects;
         /*  *******************/
 
@@ -132,7 +130,6 @@ export class UserPriceOffersComponent implements OnInit {
               });
           }
         }
-        console.log(this.selectedOffer);
       });
   }
   getTime(end: any, start: any) {
@@ -196,16 +193,6 @@ export class UserPriceOffersComponent implements OnInit {
       }
     }
   }
-
-  /*   getProjectComponentById(ComponentId: any) {
-    this.clientService
-      .getProjectComponentById(ComponentId)
-      .subscribe((data) => {
-        componentNames.push(data.data.name)
-        return data.data.name + 'hhhhh';
-      });
-  } */
-
   acceptOffer(offer: any) {
     this.invoiceValue =
       offer.totalCost - offer.cost + offer.cost / offer.numberOfMilestones;
@@ -216,10 +203,8 @@ export class UserPriceOffersComponent implements OnInit {
     };
     this.paymentService.initiatePayment(payData).subscribe({
       next: (response: any) => {
-        console.log(response);
         this._toastr.info(response.Message);
         this.PaymentMethodsList = response.Data.PaymentMethods;
-        console.log(this.PaymentMethodsList);
         this.paymethods = true;
       },
       error: (err: any) => {
@@ -244,7 +229,6 @@ export class UserPriceOffersComponent implements OnInit {
     this.clientPaymentData.customerCivilId = this.client?.idNumber;
     this.paymentService.executePayment(this.clientPaymentData).subscribe({
       next: (response: any) => {
-        console.log(response.Data);
         window.location.href = response.Data.PaymentURL;
       },
       error: (err: any) => {

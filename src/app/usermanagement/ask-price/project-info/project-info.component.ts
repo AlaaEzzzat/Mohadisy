@@ -93,11 +93,9 @@ export class ProjectInfoComponent implements OnInit {
   ngOnInit(): void {
     this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
-      console.log(this.regionsList);
     });
     this.clientService.getAllProjectCategories().subscribe((data: any) => {
       this.projectAllCategory = data.data;
-      console.log(this.projectAllCategory);
     });
     this.clientService.getAllComponent().subscribe((data: any) => {
       this.AllProjectComponent = data.data;
@@ -130,7 +128,6 @@ export class ProjectInfoComponent implements OnInit {
     } else {
       this.addedComponents.map((component: any) => {
         this.project.componentIds.push(component.id);
-        console.log(this.project.componentIds);
       });
     }
     if (this.addedWorks.length == 0) {
@@ -138,7 +135,6 @@ export class ProjectInfoComponent implements OnInit {
     } else {
       this.addedWorks.map((work: any) => {
         this.project.requiredWorkIds.push(work.id);
-        console.log(this.project.requiredWorkIds);
       });
     }
     this.clientService.reuestedProject = this.project;
@@ -146,14 +142,12 @@ export class ProjectInfoComponent implements OnInit {
       .storeProject(this.clientService.reuestedProject)
       .subscribe({
         next: (response: any) => {
-          console.log(response.data);
           this.clientService.reuestedProject = response.data;
 
           this.clientService
             .getAllRequiredFiles(this.project.requiredWorkIds)
             .subscribe({
               next: (response: any) => {
-                console.log(response);
                 this.clientService.projectRequiredFiles = response.data;
                 this.router.navigate([
                   'usermanagement/askprice/uploadRequiredFiles',
@@ -207,7 +201,6 @@ export class ProjectInfoComponent implements OnInit {
           if (data.data == '') {
             this.addingDistrict = true;
           } else {
-            console.log(data.data);
             this.districtsList = data.data;
             this.addingDistrict = false;
           }
@@ -242,7 +235,6 @@ export class ProjectInfoComponent implements OnInit {
             if (data.data == '') {
               this.addingDistrict = true;
             } else {
-              console.log(data.data);
               this.districtsList = data.data;
               this.addingDistrict = false;
             }

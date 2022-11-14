@@ -84,25 +84,19 @@ export class SpCompleteProfileComponent implements OnInit {
       .getAllCompanyClassifications()
       .subscribe((data: any) => {
         this.allCompanies = data.data;
-        console.log(this.allCompanies);
       });
     this.serviceProviderService.getAllBanks().subscribe((data: any) => {
       this.allBanks = data.data;
-      console.log(this.allBanks);
     });
 
     this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
-      console.log(this.regionsList);
     });
 
     /* check complete profie or not */
     this.clientService.checkStatus().subscribe((data: any) => {
-      console.log(data.data);
       this.isComplete = data.data.profileAccepted;
-      console.log(data.data.profileAccepted);
       this.isCreated = data.data.profileCreated;
-      console.log(data.data.profileCreated);
     });
   }
 
@@ -191,7 +185,6 @@ export class SpCompleteProfileComponent implements OnInit {
     const applicationUserId = localStorage.getItem('id')?.replace(/"/g, '');
     this.user = this.completeProfileForm.value;
     this.user.applicationUserId = applicationUserId;
-    console.log(this.user);
     let fullNameArr = this.completeProfileForm
       .get('firstName')
       ?.value.split(' ');
@@ -214,7 +207,6 @@ export class SpCompleteProfileComponent implements OnInit {
     });
     this.user.districtName = districtName;
 
-    console.log(this.user);
     let filesFormDta = new FormData();
     filesFormDta.append('Id', this.completeProfileForm.get('Id')?.value);
     filesFormDta.append(
@@ -235,7 +227,6 @@ export class SpCompleteProfileComponent implements OnInit {
 
     delete this.user.Id;
     delete this.user.Membership;
-    console.log(this.user);
     //send data to profile
     this.serviceProviderService
       .storeIndividualServiceProviderProfile(this.user)
@@ -252,7 +243,6 @@ export class SpCompleteProfileComponent implements OnInit {
 
   onImageUpload(event: any, name: any) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
       const myImage = event.target.files[0];
       this.completeProfileForm.get(name)?.setValue(myImage);
     }
@@ -279,14 +269,12 @@ export class SpCompleteProfileComponent implements OnInit {
 
   _getDistricts() {
     this.selectCity = this.completeProfileForm?.get('city')?.value;
-    console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
           if (data.data == '') {
             this.addingDistrict = true;
           } else {
-            console.log(data.data);
             this.districtsList = data.data;
             this.addingDistrict = false;
           }

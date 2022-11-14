@@ -1,7 +1,9 @@
 <div class="my-3 container-fluid">
-  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap">
+  <div
+    class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
+  >
     <button
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNewProfiles(page)"
       [ngStyle]="{
@@ -12,7 +14,7 @@
       طلبات الانضمام
     </button>
     <button
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 h-75 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getRejectedProfiles(page)"
       [ngStyle]="{
@@ -22,8 +24,8 @@
     >
       طلبات المرفوضه
     </button>
-<button
-      class="btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+    <button
+      class="btn rounded-0 cairo h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="activeAllAcconting(page)"
       [ngStyle]="{
@@ -34,7 +36,7 @@
       الحسابات النشطه
     </button>
     <button
-      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="cairo btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getBlockedProfiles(page)"
       [ngStyle]="{
@@ -45,7 +47,7 @@
       الحسابات المعطله
     </button>
     <button
-      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="cairo btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNonActiveAccount(page)"
       [ngStyle]="{
@@ -56,7 +58,7 @@
       الحسابات غيرالنشطه
     </button>
     <button
-      class="btn btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="cairo btn rounded-0 h-75 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getExpiredProfiles(page)"
       [ngStyle]="{
@@ -79,49 +81,53 @@
     <div>العميل موجود بالفعل</div>
   </div>
 
-  <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind">
-
+  <div
+    class="col-12 d-flex flex-row flex-wrap justify-content-between"
+    *ngIf="isProcessing; else undefind"
+  >
     <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
-            <ng-container *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4">
-              <div class="btn-group bg-white ms-1 rounded-0"   >
-                <button
-                  type="button"
-                  class="btn btn-white dropdown-toggle rounded-0"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  طلبات
-                </button>
-                <ul class="dropdown-menu text-end">
-                  <li><a class="dropdown-item"> المستقل</a></li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      (click)="getNewProfilesCompany(page)"
-                    >
-                      شركات
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" (click)="getCompletedProfiles(page)">
-                      طلبات مكتمله</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      (click)="getNotCompletedProfiles(page)"
-                    >
-                      طلبات غير مكتمله</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </ng-container>
+          <ng-container
+            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4"
+          >
+            <div class="btn-group bg-white ms-1 rounded-0">
+              <button
+                type="button"
+                class="btn btn-white dropdown-toggle rounded-0"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                طلبات
+              </button>
+              <ul class="dropdown-menu text-end">
+                <li><a class="dropdown-item"> المستقل</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="getNewProfilesCompany(page)"
+                  >
+                    شركات
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getCompletedProfiles(page)">
+                    طلبات مكتمله</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="getNotCompletedProfiles(page)"
+                  >
+                    طلبات غير مكتمله</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </ng-container>
           <input
             class="form-control bg-white border-0 rounded-0 w-100"
             type="search"
@@ -137,7 +143,7 @@
 
         <!-- card company -->
         <ng-container *ngFor="let pro of iProfileData | filter: companyName">
-          <div class="card mb-3 border-0 rounded-0 " >
+          <div class="card mb-3 border-0 rounded-0">
             <div
               class="card-body rounded-0"
               (click)="objectProduct(pro, pro.id)"
@@ -232,8 +238,7 @@
                   </ng-template>
 
                   <small class="opacity-75 align-content-end"
-                    >منذ
-                    {{ calculateDiff(pro.dateCreated) }}يوم
+                    >منذ {{ calculateDiff(pro.dateCreated) }}يوم
                   </small>
                 </div>
               </div>
@@ -241,15 +246,14 @@
           </div>
         </ng-container>
         <!-- pagenation -->
-      <div class="col-12">
-          <div class="position-absolute top100" [hidden]="total<=1">
-
+        <div class="col-12">
+          <div class="position-absolute top100" [hidden]="total <= 1">
             <nav aria-label="..." class="w-100 d-flex justify-content-center">
               <ul class="pagination w-100">
                 <li class="page-item">
                   <button
                     (click)="prev()"
-                    class="page-link rounded-0  btn-dark"
+                    class="page-link rounded-0 btn-dark"
                     [disabled]="page <= 1"
                   >
                     السابق
@@ -271,7 +275,7 @@
                 <li class="page-item">
                   <button
                     (click)="next()"
-                    class="page-link rounded-0   btn-dark"
+                    class="page-link rounded-0 btn-dark"
                     [disabled]="page == pagenation.length"
                   >
                     التالي
@@ -279,137 +283,6 @@
                 </li>
               </ul>
             </nav>
-            <!-- <ng-container *ngIf="pagenationNewProfiles">
-              <tr *ngIf="pagenationNewProfiles">
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigits1
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getNewProfiles(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-
-            <ng-container *ngIf="pagenationNotCompletedProfiles">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigitsNotCompletedProfiles
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getNotCompletedProfiles(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-
-            <ng-container *ngIf="pagenationRejectedProfiles">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigits2
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getRejectedProfiles(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-
-            <ng-container *ngIf="pagenationactiveAllAcconting">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigits3
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="activeAllAcconting(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-
-            <ng-container *ngIf="pagenationBlockedProfiles">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigits4
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getBlockedProfiles(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-            <ng-container *ngIf="pagenationNonActiveAccount">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigitsNotCompletedProfiles
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getNonActiveAccount(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container>
-            <ng-container *ngIf="pagenationExpiredProfiles">
-              <tr>
-                <th
-                  scope="row"
-                  *ngFor="
-                    let data of arrayOfDigits6
-                      | paginate: { itemsPerPage: 1, currentPage: page }
-                  "
-                ></th>
-                <td colspan="1"></td>
-                <td colspan="4">
-                  <pagination-controls
-                    (click)="getExpiredProfiles(page)"
-                    (pageChange)="page = $event"
-                  ></pagination-controls>
-                </td>
-              </tr>
-            </ng-container> -->
           </div>
         </div>
 
@@ -418,7 +291,7 @@
     </div>
 
     <!--  -->
-    <div class="col-md-7 sizew col-12 flex-row " [hidden]="!showInformation">
+    <div class="col-md-7 sizew col-12 flex-row" [hidden]="!showInformation">
       <div class="col-12 card mb-3 border-0 rounded-0">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
@@ -436,7 +309,7 @@
                 alt="null"
             /></ng-template>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="card-body">
               <div class="d-flex">
                 <img src="assets/icons/XMLID_1_.svg" />
@@ -471,11 +344,14 @@
               </p>
             </div>
           </div>
-          <div class="col-md-4 ">
-            <div   class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"    >
+          <div class="col-md-5">
+            <div
+              class="d-flex"
+              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"
+            >
               <a
                 type="button"
-                class="btn complete col-4 rounded-0  "
+                class="btn complete col-4 rounded-0"
                 data-bs-toggle="modal"
                 data-bs-target="#changeToAccepted"
               >
@@ -484,7 +360,7 @@
               >
               <a
                 type="button"
-                class="btn notcomplete  col-4 rounded-0"
+                class="btn notcomplete col-4 rounded-0"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
@@ -493,7 +369,7 @@
               >
               <a
                 type="button"
-                class="btn reject  col-4 rounded-0"
+                class="btn reject col-4 rounded-0"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModalReject"
               >
@@ -521,9 +397,12 @@
               > -->
             </div>
             <div
-              class="d-flex justify-content-end ms-3  rounded-0 "
-              *ngIf=" productCurrent.joinRequestStatus.accountStatusId != 1 &&
-                productCurrent.joinRequestStatus.accountStatusId != 4 " >
+              class="d-flex justify-content-end ms-3 rounded-0"
+              *ngIf="
+                productCurrent.joinRequestStatus.accountStatusId != 1 &&
+                productCurrent.joinRequestStatus.accountStatusId != 4
+              "
+            >
               <a
                 type="button"
                 class="btn reject"
@@ -535,7 +414,6 @@
               >
             </div>
           </div>
-
         </div>
       </div>
       <!-- سبب عدم الاكتمال -->
@@ -543,7 +421,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         *ngIf="productCurrent.joinRequestStatus.accountStatusId != 4"
       >
-        <p class="titleInformation fs-6">سبب عدم تاكيد الحساب </p>
+        <p class="titleInformation fs-6">سبب عدم تاكيد الحساب</p>
         <p class="fs-6">{{ productCurrent.joinRequestStatus.description }}</p>
       </div>
       <!--    معلومات عن الشركه-->
@@ -555,7 +433,13 @@
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath&&productCurrent.companyRegisterationNumberFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.companyRegisterationNumberPath &&
+                productCurrent.companyRegisterationNumberFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">
                 سجل التجاري <br />
                 <small class="fs-6 textInformation"
@@ -577,9 +461,14 @@
                   {{ productCurrent.companyRegisterationNumberFile }}
                 </p>
               </a>
-
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="productCurrent.socialInsuranceCertificatePath&&productCurrent.socialInsuranceCertificateFile">
+            <div
+              class="d-flex justify-content-between align-items-center mb-4"
+              *ngIf="
+                productCurrent.socialInsuranceCertificatePath &&
+                productCurrent.socialInsuranceCertificateFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">
                 شهاده التأمينات الاجتماعية
               </p>
@@ -599,7 +488,13 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-4" *ngIf="productCurrent.zakatCertificatePath&&productCurrent.zakatCertificateFile">
+            <div
+              class="d-flex justify-content-between align-items-center mb-4"
+              *ngIf="
+                productCurrent.zakatCertificatePath &&
+                productCurrent.zakatCertificateFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">شهاده الزكاة والدخل</p>
               <a
                 class="bg-light d-flex px-2 align-items-center informationDownload"
@@ -614,7 +509,13 @@
                 <p class="pt-3">{{ productCurrent.zakatCertificateFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4 align-items-center" *ngIf="productCurrent.financialStatementFile&&productCurrent.financialStatementPath">
+            <div
+              class="d-flex justify-content-between mb-4 align-items-center"
+              *ngIf="
+                productCurrent.financialStatementFile &&
+                productCurrent.financialStatementPath
+              "
+            >
               <p class="card-subtitle text-muted fs-6">التقريرالمالي</p>
               <a
                 target="_blank"
@@ -630,7 +531,13 @@
                 <p class="pt-3">{{ productCurrent.financialStatementFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.coCMembershipPath&&productCurrent.coCMembershipFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.coCMembershipPath &&
+                productCurrent.coCMembershipFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">عضوية الفرقة التجارية</p>
               <a
                 target="_blank"
@@ -649,10 +556,15 @@
           </div>
 
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.licensePath&& productCurrent.licenseFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="productCurrent.licensePath && productCurrent.licenseFile"
+            >
               <p class="card-subtitle text-muted fs-6">
                 رقم الرخصة <br />
-                <small class="fs-6 textInformation">{{ productCurrent.licenseNumber }}</small>
+                <small class="fs-6 textInformation">{{
+                  productCurrent.licenseNumber
+                }}</small>
               </p>
               <a
                 target="_blank"
@@ -668,7 +580,13 @@
                 <p class="pt-3">{{ productCurrent.licenseFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath&& productCurrent.companyRegisterationNumberFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.companyRegisterationNumberPath &&
+                productCurrent.companyRegisterationNumberFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">خطاب بنكي برقم البيان</p>
               <a
                 target="_blank"
@@ -686,7 +604,13 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.saudizationCertificatePath&& productCurrent.saudizationCertificateFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.saudizationCertificatePath &&
+                productCurrent.saudizationCertificateFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">شهاده السعوده</p>
               <a
                 target="_blank"
@@ -702,7 +626,13 @@
                 <p>{{ productCurrent.saudizationCertificateFile }}</p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.addedValueRegisterationCertificatePath&& productCurrent.addedValueRegisterationCertificateFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.addedValueRegisterationCertificatePath &&
+                productCurrent.addedValueRegisterationCertificateFile
+              "
+            >
               <p class="card-subtitle text-muted fs-6">ضربيه القيمه المضافه</p>
               <a
                 target="_blank"
@@ -720,7 +650,10 @@
                 </p>
               </a>
             </div>
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.isoPath&& productCurrent.isoFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="productCurrent.isoPath && productCurrent.isoFile"
+            >
               <p class="card-subtitle text-muted fs-6">شهاده الايزو 9001</p>
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
@@ -743,10 +676,15 @@
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.idPath&&productCurrent.idFile">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="productCurrent.idPath && productCurrent.idFile"
+            >
               <p class="card-subtitle text-muted fs-6">
                 صوره البطاقه <br />
-                <small class="fs-6 textInformation">{{ productCurrent.idNumber }} </small>
+                <small class="fs-6 textInformation"
+                  >{{ productCurrent.idNumber }}
+                </small>
               </p>
               <a
                 target="_blank"
@@ -762,10 +700,17 @@
           </div>
 
           <div class="col-lg-5 col-12">
-            <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.membershipFile&&productCurrent.membershipPath">
+            <div
+              class="d-flex justify-content-between mb-4"
+              *ngIf="
+                productCurrent.membershipFile && productCurrent.membershipPath
+              "
+            >
               <p class="card-subtitle text-muted fs-6">
                 رقم العضويه <br />
-                <small class="fs-6 textInformation">{{ productCurrent.membershipNumber }}</small>
+                <small class="fs-6 textInformation">{{
+                  productCurrent.membershipNumber
+                }}</small>
               </p>
               <a
                 target="_blank"
@@ -778,7 +723,9 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3 textInformation">{{ productCurrent.membershipFile }}</p>
+                <p class="pt-3 textInformation">
+                  {{ productCurrent.membershipFile }}
+                </p>
               </a>
             </div>
           </div>
@@ -792,7 +739,7 @@
         <h1 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">الدوله</p>
+            <p class="card-subtitle text-muted fs-6">الدوله</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else cityName"
@@ -801,7 +748,7 @@
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">المدينه</p>
+            <p class="card-subtitle text-muted fs-6">المدينه</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else city"
@@ -810,7 +757,7 @@
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">المنطقه</p>
+            <p class="card-subtitle text-muted fs-6">المنطقه</p>
             <small
               class="fs-6 textInformation"
               *ngIf="
@@ -822,7 +769,7 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">العنوان</p>
+            <p class="card-subtitle text-muted fs-6">العنوان</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.shortAddress; else shortAddress"
@@ -832,16 +779,20 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">عنوان البريد الالكتروني</p>
+            <p class="card-subtitle text-muted fs-6">عنوان البريد الالكتروني</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.applicationUser.email; else emailName"
-              >{{ productCurrent.applicationUser.email}}</small
+              >{{ productCurrent.applicationUser.email }}</small
             >
-            <ng-template #emailName><small  class="fs-6 text-center textInformation" > _ </small></ng-template>
+            <ng-template #emailName
+              ><small class="fs-6 text-center textInformation">
+                _
+              </small></ng-template
+            >
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-muted  fs-6">الجوال</p>
+            <p class="card-subtitle text-muted fs-6">الجوال</p>
             <small
               class="fs-6 textInformation"
               *ngIf="
@@ -854,14 +805,18 @@
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">صندوق البريد</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.postalBox; else box">{{
-              productCurrent.postalBox
-            }}</small>
+            <small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.postalBox; else box"
+              >{{ productCurrent.postalBox }}</small
+            >
             <ng-template #box> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">رمز البريد</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.postalCode; else postcode"
+            <small
+              class="fs-6 textInformation"
+              *ngIf="productCurrent.postalCode; else postcode"
               >{{ productCurrent.postalCode }}
             </small>
             <ng-template #postcode> _ </ng-template>
@@ -872,10 +827,10 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
       >
-        <h1 class="card-title mb-4  titleInformation">معلومات التواصل</h1>
+        <h1 class="card-title mb-4 titleInformation">معلومات التواصل</h1>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">الدوله</p>
+            <p class="card-subtitle text-muted fs-6">الدوله</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else cityName"
@@ -884,7 +839,7 @@
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">المدينه</p>
+            <p class="card-subtitle text-muted fs-6">المدينه</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.district.city.nameEn; else city"
@@ -893,7 +848,7 @@
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">المنطقه</p>
+            <p class="card-subtitle text-muted fs-6">المنطقه</p>
             <small
               class="fs-6 textInformation"
               *ngIf="
@@ -909,7 +864,9 @@
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.streetName; else shortAddress"
-              >{{ productCurrent.streetName }}-{{productCurrent.district.nameAr}}</small
+              >{{ productCurrent.streetName }}-{{
+                productCurrent.district.nameAr
+              }}</small
             >
             <ng-template #shortAddress> _ </ng-template>
           </div>
@@ -917,10 +874,7 @@
             <p class="card-subtitle text-muted fs-6">رقم هاتف المكتب</p>
             <small
               class="fs-6 textInformation"
-              *ngIf="
-                productCurrent.officePhoneNumber;
-                else officePhoneNumber
-              "
+              *ngIf="productCurrent.officePhoneNumber; else officePhoneNumber"
               >{{ productCurrent.officePhoneNumber }}</small
             >
             <ng-template #officePhoneNumber> _ </ng-template>
@@ -935,24 +889,27 @@
             <ng-template #emailName> _ </ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-muted  fs-6">رابط الموقع</p>
+            <p class="card-subtitle text-muted fs-6">رابط الموقع</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.websiteLink; else websiteLink"
-              >{{ productCurrent.websiteLink }}</small>
+              >{{ productCurrent.websiteLink }}</small
+            >
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">صندوق البريد</p>
+            <p class="card-subtitle text-muted fs-6">صندوق البريد</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.postalBox; else box"
               >{{ productCurrent.postalBox }}</small
             >
-            <ng-template #box> <small class="fs-6 text-center textInformation" >_</small> </ng-template>
+            <ng-template #box>
+              <small class="fs-6 text-center textInformation">_</small>
+            </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted  fs-6">رمز البريد</p>
+            <p class="card-subtitle text-muted fs-6">رمز البريد</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.postalCode; else postcode"
@@ -971,7 +928,7 @@
         <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
-            <p class="card-subtitle text-muted  fs-6">الاسم</p>
+            <p class="card-subtitle text-muted fs-6">الاسم</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.representative.firstName; else firstName"
@@ -981,7 +938,7 @@
             <ng-template #firstName> _ </ng-template>
           </div>
           <div>
-            <p class="card-subtitle text-muted  fs-6">رقم التليفون</p>
+            <p class="card-subtitle text-muted fs-6">رقم التليفون</p>
             <small
               class="fs-6 textInformation"
               *ngIf="
@@ -993,7 +950,7 @@
             <ng-template #phoneNumber> _ </ng-template>
           </div>
           <div>
-            <p class="card-subtitle text-muted  fs-6">البريد الالكتروني</p>
+            <p class="card-subtitle text-muted fs-6">البريد الالكتروني</p>
             <small
               class="fs-6 textInformation"
               *ngIf="productCurrent.representative.email; else email"
@@ -1004,9 +961,11 @@
         </div>
       </div>
       <!-- serviceProviderWorks -->
-      <div class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-0 p-3 serviceProviderWorksBg">
+      <div
+        class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-0 p-3 serviceProviderWorksBg"
+      >
         <p>المشاريع السابقه</p>
-        <p>{{productCurrent.serviceProviderWorks.length}} مشروع</p>
+        <p>{{ productCurrent.serviceProviderWorks.length }} مشروع</p>
       </div>
 
       <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
@@ -1079,17 +1038,17 @@
           </div>
         </div>
       </div> -->
-
     </div>
-
   </div>
 
   <ng-template #undefind>
-    <div class="alert alert-danger d-flex align-items-center h2" role="alert" *ngIf="!isProcessing">
-      <div>
-        حاليا لايوجد طلبات
-      </div>
-      </div>
+    <div
+      class="alert alert-danger d-flex align-items-center h2"
+      role="alert"
+      *ngIf="!isProcessing"
+    >
+      <div>حاليا لايوجد طلبات</div>
+    </div>
   </ng-template>
 </div>
 <!-- غير مكتمل -->

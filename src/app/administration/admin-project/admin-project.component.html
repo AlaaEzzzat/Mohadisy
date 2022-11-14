@@ -7,7 +7,7 @@
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getCurrentProjects()"
     >
@@ -18,7 +18,7 @@
         'background-color': newApi === 4 ? '#004958' : '#ffffff',
         color: newApi === 4 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getPendingProject()"
     >
@@ -29,7 +29,7 @@
         'background-color': newApi === 5 ? '#004958' : '#ffffff',
         color: newApi === 5 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getFinishedProjects()"
     >
@@ -41,7 +41,7 @@
         'background-color': newApi === 6 ? '#004958' : '#ffffff',
         color: newApi === 6 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getLateProjects()"
     >
@@ -52,7 +52,7 @@
         'background-color': newApi === 7 ? '#004958' : '#ffffff',
         color: newApi === 7 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getStoppedProjects()"
     >
@@ -143,7 +143,14 @@
                   class=""
                   [hidden]="productCurrent.id != pro.id"
                 />
-                <p class="me-3 fs-6" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region"          >
+                <p
+                  class="me-3 fs-6"
+                  *ngIf="
+                    pro.district.city.region.code &&
+                      pro.district.city.region.nameAr;
+                    else region
+                  "
+                >
                   <span
                     class="fs-6"
                     *ngIf="pro.district.nameAr; else regioncode"
@@ -524,16 +531,17 @@
       </div> -->
       <!--  -->
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-        <h1 class=" titleInformation">نبذه عن المشروع</h1>
+        <h1 class="titleInformation">نبذه عن المشروع</h1>
         <p class="fs-6">{{ productCurrent.subject }}</p>
-    </div>
+      </div>
       <!--  -->
       <div
         class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-2 mb-3"
       >
-        <div class="col-lg-12 col-12 d-flex  bg-white ms-1 align-content-end flex-column p-4"
+        <div
+          class="col-lg-12 col-12 d-flex bg-white ms-1 align-content-end flex-column p-4"
         >
-          <h1 class=" titleInformation">المستندات الخاصه بالعميل</h1>
+          <h1 class="titleInformation">المستندات الخاصه بالعميل</h1>
           <ng-container
             *ngIf="
               productCurrent.clientProjectDocuments.length != 0 &&
@@ -558,10 +566,7 @@
             <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
           </ng-template>
         </div>
-
-
       </div>
-
     </div>
   </div>
 
@@ -575,8 +580,6 @@
     </div>
   </ng-template>
 </div>
-
-
 
 <!--
 <div class="col-lg-6 col-12 p-2 bg-white me-1 align-content-start flex-column p-4">

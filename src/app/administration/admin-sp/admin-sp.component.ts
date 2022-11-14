@@ -47,25 +47,6 @@ export class AdminSPComponent implements OnInit {
   newApi: number = 1;
   total: any = 0;
   pagenation: any = [];
-
-  // arrayOfDigits1: any[] = [];
-  // arrayOfDigits2: any[] = [];
-  // arrayOfDigits3: any[] = [];
-  // arrayOfDigits4: any[] = [];
-  // arrayOfDigits5: any[] = [];
-  // arrayOfDigits6: any[] = [];
-  // arrayOfDigitsNotCompletedProfiles: any[] = [];
-  // pagenationNewProfiles: boolean = false;
-  // pagenationRejectedProfiles: boolean = false;
-  // pagenationactiveAllAcconting: boolean = false;
-  // pagenationBlockedProfiles: boolean = false;
-  // pagenationNonActiveAccount: boolean = false;
-  // pagenationExpiredProfiles: boolean = false;
-  // pagenationNotCompletedProfiles: boolean = false;
-  // pagenationCompletedProfiles: boolean = false;
-  // page: number = 1;
-  // newApi: number = 1;
-  // total: number = 0;
   firstObject: any;
   userformMassage: FormGroup;
   company: any = 'مستقل';
@@ -80,52 +61,6 @@ export class AdminSPComponent implements OnInit {
     this.userformMassage = this.formbuilder.group({
       massage: ['', [Validators.required]],
     });
-    // this.ServicesProvidor.getNewProfiles(this.page).subscribe((value) => {
-    //   this.pagenationNewProfiles = true;
-    //   this.pagenationRejectedProfiles = false;
-    //   this.pagenationactiveAllAcconting = false;
-    //   this.pagenationBlockedProfiles = false;
-    //   this.pagenationNonActiveAccount = false;
-    //   this.pagenationExpiredProfiles = false;
-    //   this.pagenationNotCompletedProfiles= false;
-    //   this.pagenationCompletedProfiles=false;
-
-    //   this.total = value.data.totalPages;
-    //   this.fortest(this.total, this.arrayOfDigits1);
-    // });
-    // this.ServicesProvidor.getRejectedProfiles(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total, this.arrayOfDigits2);
-    // });
-    // this.ServicesProvidor.activeProfile(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total, this.arrayOfDigits3);
-    // });
-
-    // this.ServicesProvidor.getBlockedProfiles(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-    //   // console.log(this.total);
-
-    //   this.fortest(this.total, this.arrayOfDigits4);
-    // });
-    // this.ServicesProvidor.getNonActiveProfiles(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total, this.arrayOfDigits5);
-    // });
-
-    // this.ServicesProvidor.getExpiredProfiles(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total, this.arrayOfDigits6);
-    // });
-    // this.ServicesProvidor.getNotCompletedProfiles(this.page).subscribe((value) => {
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total, this.arrayOfDigitsNotCompletedProfiles);
-    // });
   }
 
   ngOnInit(): void {
@@ -134,7 +69,6 @@ export class AdminSPComponent implements OnInit {
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
-    // console.log( this.pagenation)
   }
   next() {
     if (this.page < this.total) {
@@ -181,27 +115,16 @@ export class AdminSPComponent implements OnInit {
   }
   //6
   getExpiredProfiles(page: any) {
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = true;
-    // this.pagenationNotCompletedProfiles = false;
-
     this.newApi = 6;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getExpiredProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.isProcessing = true;
-          console.log(this.isProcessing);
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -218,24 +141,15 @@ export class AdminSPComponent implements OnInit {
   }
   getNotCompletedProfiles(page: any) {
     this.isProcessing = true;
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = true;
     this.newApi = 8;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getNotCompletedProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -252,25 +166,16 @@ export class AdminSPComponent implements OnInit {
   }
   getCompletedProfiles(page: any) {
     this.isProcessing = true;
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
-    // this.pagenationCompletedProfiles = true;
     this.newApi = 18;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getCompletedProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -288,25 +193,16 @@ export class AdminSPComponent implements OnInit {
   //5
   getBlockedProfiles(page: any) {
     this.isProcessing = true;
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = true;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
-
     this.newApi = 5;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getBlockedProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -324,26 +220,17 @@ export class AdminSPComponent implements OnInit {
   // 1
   getNewProfiles(page: any) {
     this.isProcessing = true;
-    // this.pagenationNewProfiles = true;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
-
     this.newApi = 1;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
 
     this.ServicesProvidor.getNewProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -361,25 +248,16 @@ export class AdminSPComponent implements OnInit {
   //2
   getRejectedProfiles(page: any) {
     this.isProcessing = true;
-
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = true;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
     this.newApi = 2;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getRejectedProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -397,14 +275,6 @@ export class AdminSPComponent implements OnInit {
   //3
   activeAllAcconting(page: any) {
     this.isProcessing = true;
-
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = true;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = false;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
     this.newApi = 3;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
@@ -414,7 +284,7 @@ export class AdminSPComponent implements OnInit {
           this.datas = value.data.activeProfiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -432,26 +302,16 @@ export class AdminSPComponent implements OnInit {
   //4
   getNonActiveAccount(page: any) {
     this.isProcessing = true;
-
-    // this.pagenationNewProfiles = false;
-    // this.pagenationRejectedProfiles = false;
-    // this.pagenationactiveAllAcconting = false;
-    // this.pagenationBlockedProfiles = false;
-    // this.pagenationNonActiveAccount = true;
-    // this.pagenationExpiredProfiles = false;
-    // this.pagenationNotCompletedProfiles = false;
-
     this.newApi = 4;
     sessionStorage.removeItem('ids');
     sessionStorage.removeItem('Productsp');
     this.ServicesProvidor.getNonActiveProfiles(page).subscribe({
       next: (value) => {
-        console.log(value);
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.nonActiveProfiles;
           this.iProfileData = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+
           this.counter(this.total);
           if (this.datas.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -476,24 +336,6 @@ export class AdminSPComponent implements OnInit {
       let tests = this.iProfileData.find((key) => {
         return key.applicationUser.accountType.key == 'CO';
       });
-      console.log(tests);
-      console.log(this.iProfileData);
-
-      //
-      // for(let x of this.datas){
-      //     if(x.applicationUser.accountType.key  === "CO"){
-      //      companys.push(x)
-      //       console.log(companys)
-      //     }else if(x.applicationUser.accountType.key  === "IND"){
-      //       mostaql.push(x)
-      //       console.log(mostaql)
-      //     }
-
-      // }
-      //  let coms =this.datas.filter((Company: any) => {Company.id  === 3101  } );
-      // console.log(coms)
-
-      // console.log( this.datas.filter((Company: any) => {Company.applicationUser.accountType.key  === "CO"  } ))
     });
   }
 
@@ -511,7 +353,6 @@ export class AdminSPComponent implements OnInit {
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('Productsp');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.productCurrent);
   }
 
   // change stutas client
@@ -528,7 +369,6 @@ export class AdminSPComponent implements OnInit {
       ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
-        // console.log(this.iChangeStatus);
         setTimeout(() => {
           this.show = false;
         }, 1000);
@@ -539,7 +379,6 @@ export class AdminSPComponent implements OnInit {
       ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
-        // console.log(this.iChangeStatus);
         setTimeout(() => {
           this.show = false;
         }, 1000);
@@ -561,7 +400,6 @@ export class AdminSPComponent implements OnInit {
       ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
-        // console.log(this.iChangeStatus);
         setTimeout(() => {
           this.show = false;
         }, 1000);
@@ -570,8 +408,6 @@ export class AdminSPComponent implements OnInit {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-        // alert(`${data.message}`);
-        // console.log(this.iChangeStatus!.profileId);
         this.show = true;
         this.messages = data.message;
         setTimeout(() => {
@@ -594,7 +430,6 @@ export class AdminSPComponent implements OnInit {
       ).subscribe((data) => {
         this.show = true;
         this.messages = data.message;
-        // console.log(this.iChangeStatus);
         setTimeout(() => {
           this.show = false;
         }, 1000);
@@ -633,8 +468,6 @@ export class AdminSPComponent implements OnInit {
       this.ServicesProvidor.changeIndividualStatus(
         this.iChangeStatus
       ).subscribe((data) => {
-        // alert(`${data.message}`);
-        // console.log(this.iChangeStatus!.profileId);
         this.show = true;
         this.messages = data.message;
         setTimeout(() => {
@@ -645,7 +478,6 @@ export class AdminSPComponent implements OnInit {
   }
   updatapro(obj: any) {
     this.router.navigate(['./Admin/updata', obj]);
-    console.log(this.currentIndivdual);
   }
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
@@ -671,57 +503,7 @@ export class AdminSPComponent implements OnInit {
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
     let differenceInTime = todayDate.getTime() - sentOnDate.getTime();
-    // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
   }
-
-  // downloadImage(item: string) {
-  //   // let imageUrl=this.productCurrent.companyRegisterationNumberPath
-  //   let imageUrl = item;
-  //   console.log(imageUrl);
-  //   this.getBase64ImageFromURL(imageUrl).subscribe((base64data: any) => {
-  //     console.log(base64data);
-  //     this.base64Image = 'data:image/jpg;base64,' + base64data;
-  //     // save image to disk
-  //     var link = document.createElement('a');
-
-  //     document.body.appendChild(link); // for Firefox
-
-  //     link.setAttribute('href', this.base64Image);
-  //     link.setAttribute('download', 'mrHankey.jpg');
-  //     link.click();
-  //   });
-  // }
-
-  // getBase64ImageFromURL(url: string) {
-  //   return Observable.create((observer: Observer<string>) => {
-  //     const img: HTMLImageElement = new Image();
-  //     img.crossOrigin = 'Anonymous';
-  //     img.src = url;
-  //     if (!img.complete) {
-  //       img.onload = () => {
-  //         observer.next(this.getBase64Image(img));
-  //         observer.complete();
-  //       };
-  //       img.onerror = (err) => {
-  //         observer.error(err);
-  //       };
-  //     } else {
-  //       observer.next(this.getBase64Image(img));
-  //       observer.complete();
-  //     }
-  //   });
-  // }
-
-  // getBase64Image(img: HTMLImageElement) {
-  //   const canvas: HTMLCanvasElement = document.createElement('canvas');
-  //   canvas.width = img.width;
-  //   canvas.height = img.height;
-  //   const ctx: CanvasRenderingContext2D | any = canvas.getContext('2d');
-  //   ctx.drawImage(img, 0, 0);
-  //   const dataURL: string = canvas.toDataURL('image/png');
-
-  //   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
-  // }
 }

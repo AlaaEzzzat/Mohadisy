@@ -20,6 +20,9 @@ button>i ,.typeCom
   font-family:$fontTajawalFamily;
 
 }
+.cairo{
+  font-family: 'cairo';
+}
 .textInformation,a{
   color: $Alltext !important;
   font-family:$fontCairoFamily;
@@ -41,14 +44,7 @@ input[type="search"]{
   line-height:0.5;
   // font-size: 90%;
 }
-.textFontSizeCard{
-  // font-size: 90%;
-}
-.we-25 {
-  // width: 12em !important;
-  // font-size: 1.1em!important;
 
-}
 @media only screen and (min-width: 768px) {
   .sizew
   {

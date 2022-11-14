@@ -8,14 +8,13 @@ import { AdminSettingsService } from './../../@core/services/admin/admin-setting
   styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent implements OnInit {
-  check:boolean;
-  counter:any;
-  constructor(private serNot:AdminSettingsService) {
-this.check=false
-    this.serNot.getUserNotifications(this.check).subscribe((val)=>{
-      this.counter=val.data.length
-      console.log(val.data)
-    })
+  check: boolean;
+  counter: any;
+  constructor(private serNot: AdminSettingsService) {
+    this.check = false;
+    this.serNot.getUserNotifications(this.check).subscribe((val) => {
+      this.counter = val.data.length;
+    });
   }
   status: boolean = false;
 

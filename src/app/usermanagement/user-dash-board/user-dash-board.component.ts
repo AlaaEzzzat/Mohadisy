@@ -23,9 +23,7 @@ export class UserDashBoardComponent implements OnInit {
       .get('https://app.mohandisy.com/api/Dashboard/getClientStatus')
       .subscribe((data) => {
         this.data = data.data;
-        console.log(this.data);
         this.currentProjects = this.data.currentProjects;
-        console.log(this.currentProjects);
         this.renderDouChart();
         this.renderBarChart();
       });

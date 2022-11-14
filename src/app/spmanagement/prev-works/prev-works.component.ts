@@ -45,7 +45,6 @@ export class PrevWorksComponent implements OnInit {
 
     this.work = this.prevWorksForm.value;
     this.work.identifier = '1';
-    console.log(this.work);
     delete this.work.images;
     if (localStorage.getItem('type') == '"CO"') {
       /* send work */
@@ -56,8 +55,6 @@ export class PrevWorksComponent implements OnInit {
             console.log('work Posted');
             this._toastr.info(response.message);
             this.workId = response.data.id;
-            console.log(response);
-            console.log(response.data);
             /* send files */
             this.serviceProviderService
               .storeOrganizationalServiceProviderWorkFilesByWorkId(
@@ -66,7 +63,6 @@ export class PrevWorksComponent implements OnInit {
               )
               .subscribe({
                 next: (response: any) => {
-                  console.log(response);
                   console.log('Image Posted');
                   this.getServiceProviderWorks();
                   this.prevWorksForm.reset();
@@ -88,7 +84,6 @@ export class PrevWorksComponent implements OnInit {
           next: (response: any) => {
             console.log('work Posted');
             this.workId = response.data.id;
-            console.log(response.data);
             /* send files */
             this.serviceProviderService
               .storeIndividualServiceProviderWorkFilesByWorkId(
@@ -117,7 +112,6 @@ export class PrevWorksComponent implements OnInit {
       .getAllProjectCategory()
       .subscribe((data: any) => {
         this.AllProjectCategory = data.data;
-        console.log(this.AllProjectCategory);
       });
     this.getServiceProviderWorks();
   }
@@ -126,7 +120,6 @@ export class PrevWorksComponent implements OnInit {
       .getServiceProviderWorks()
       .subscribe((data: any) => {
         this.allServiceProviderWorks = data.data;
-        console.log(this.allServiceProviderWorks);
       });
   }
   numberOnly(event: any): boolean {
@@ -152,18 +145,14 @@ export class PrevWorksComponent implements OnInit {
   }
   onImageUpload(event: any) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
-      console.log(event.target.files.length);
       Array.from(event.target.files).forEach((file) => {
         this.workImages.push(file);
       });
-      console.log(this.workImages);
     }
   }
   deleteThisWork(workId: any) {
     this.serviceProviderService.deleteServiceProviderWork(workId).subscribe({
       next: (response: any) => {
-        console.log(response);
         this._toastr.info(response.message);
         console.log('work deleted');
         this.getServiceProviderWorks();

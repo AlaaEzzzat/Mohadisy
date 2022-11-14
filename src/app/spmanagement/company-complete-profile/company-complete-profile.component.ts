@@ -113,24 +113,20 @@ export class CompanyCompleteProfileComponent implements OnInit {
 
     this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
-      console.log(this.regionsList);
     });
     this.client.getProjectServicesAndSubService().subscribe((data: any) => {
       this.allProjectService = data.data.projectServices;
     });
     /* check complete profie or not */
     this.client.checkStatus().subscribe((data: any) => {
-      console.log(data.data);
       this.isComplete = data.data.profileAccepted;
-      console.log(data.data.profileAccepted);
+
       this.isCreated = data.data.profileCreated;
-      console.log(data.data.profileCreated);
     });
     this.serviceProviderService
       .getAllProjectCategory()
       .subscribe((data: any) => {
         this.AllProjectCategory = data.data;
-        console.log(this.AllProjectCategory);
       });
     this.getServiceProviderWorks();
   }
@@ -139,15 +135,12 @@ export class CompanyCompleteProfileComponent implements OnInit {
       .getServiceProviderWorks()
       .subscribe((data: any) => {
         this.allServiceProviderWorks = data.data;
-        console.log(this.allServiceProviderWorks);
       });
   }
   deleteThisWork(workId: any) {
     this.serviceProviderService.deleteServiceProviderWork(workId).subscribe({
       next: (response: any) => {
-        console.log(response);
         this._toastr.info(response.message);
-        console.log('work deleted');
         this.getServiceProviderWorks();
       },
       error: (err: any) => {
@@ -161,39 +154,11 @@ export class CompanyCompleteProfileComponent implements OnInit {
       .getProjectSubServicesByServiceId(this.selectedServices)
       .subscribe((data: any) => {
         this.allProjectSubService = data.data;
-        console.log(this.allProjectSubService);
-        console.log(this.allProjectSubService[0]);
       });
   }
 
-  /*  actionOnSubServie(SubId: any) {
-    console.log(SubId);
-    var flag = 0;
-    if (this.selectedSubServices.length > 0) {
-      this.selectedSubServices.map((subService: any) => {
-        if (subService.projectSubServiceId == SubId) {
-          var index = this.selectedSubServices.indexOf(subService);
-          this.selectedSubServices.splice(index, 1);
-          flag = 1;
-        }
-      });
-      if (flag == 0) {
-        this.selectedSubServices.push({
-          projectServiceId: this.selectedServices,
-          projectSubServiceId: SubId,
-        });
-      }
-    } else {
-      this.selectedSubServices.push({
-        projectServiceId: this.selectedServices,
-        projectSubServiceId: SubId,
-      });
-    }
-    console.log(this.selectedSubServices);
-  } */
   onImageUpload(event: any, name: any) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
       const myImage = event.target.files[0];
       this.uplaodedImages.push(myImage);
       this.filesFormData.append(name, myImage);
@@ -306,12 +271,9 @@ export class CompanyCompleteProfileComponent implements OnInit {
   }
   onMultiImageUpload(event: any) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
-      console.log(event.target.files.length);
       Array.from(event.target.files).forEach((file) => {
         this.workImages.push(file);
       });
-      console.log(this.workImages);
     }
   }
   numberOnly(event: any): boolean {
@@ -372,13 +334,11 @@ export class CompanyCompleteProfileComponent implements OnInit {
         .subscribe({
           next: (response: any) => {
             console.log('companyUser');
-            console.log(response);
             this.serviceProviderService
               .storeReprasintative(this.companyPresenter)
               .subscribe({
                 next: (response: any) => {
                   console.log('companyPresenter');
-                  console.log(response);
                   this.serviceProviderService
                     .storeCompanyProfileFiles(this.filesFormData)
                     .subscribe({
@@ -425,14 +385,12 @@ export class CompanyCompleteProfileComponent implements OnInit {
   }
   _getDistricts() {
     this.selectCity = this.completeCampanyProfileForm?.get('city')?.value;
-    console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
           if (data.data == '') {
             this.addingDistrict = true;
           } else {
-            console.log(data.data);
             this.districtsList = data.data;
             this.addingDistrict = false;
           }
@@ -481,7 +439,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
     this.work.projectPrice = this.projectPrice?.value;
     this.work.completionYear = this.completionYear?.value;
     this.work.identifier = '1';
-    console.log(this.work);
     delete this.work.images;
     if (localStorage.getItem('type') == '"CO"') {
       /* send work */
@@ -492,8 +449,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
             console.log('work Posted');
             this._toastr.info(response.message);
             this.workId = response.data.id;
-            console.log(response);
-            console.log(response.data);
+
             /* send files */
             this.serviceProviderService
               .storeOrganizationalServiceProviderWorkFilesByWorkId(
@@ -502,7 +458,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
               )
               .subscribe({
                 next: (response: any) => {
-                  console.log(response);
                   console.log('Image Posted');
                   this.router.navigate(['/Spmanagement/prevWorks']);
                 },
@@ -523,7 +478,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
           next: (response: any) => {
             console.log('work Posted');
             this.workId = response.data.id;
-            console.log(response.data);
             /* send files */
             this.serviceProviderService
               .storeIndividualServiceProviderWorkFilesByWorkId(

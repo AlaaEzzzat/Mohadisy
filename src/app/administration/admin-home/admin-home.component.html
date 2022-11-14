@@ -5,133 +5,160 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg shadow-sm ">
-      <div class="container-fluid">
-        <div>
-          <img src="assets/logo.png" alt="" height="65px" class="w-100 me-2">
-        </div>
-        <!-- <div (click)="clickEvent()" class="mx-lg-3 mx-sm-1 mx-md-1 texticon">
-          <img src="assets/next.png" alt="" srcset="" width="28px" height="28px" class="img-fluid" />
-        </div> -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li>
+    <app-navbar></app-navbar>
+    <div
+      class="container-fluid"
+      style="background-color: #eef0f8; padding-top: 78px"
+    >
+      <div class="row">
+        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
+          <div class="position-sticky top-0">
+            <div
+              class="m-0"
+              style="background-color: #004057; font-weight: 600"
+              id="sidebar-wrapper"
+              [hidden]="status"
+            >
+              <div class="list-group-flush">
+                <div class="text-white">
+                  <div
+                    class="p-2 py-4"
+                    routerLink="/Admin/dashboard"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/Group.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/offers"
+                    routerLinkActive="active"
+                  >
+                    <!-- <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" /> -->
+                    <!-- <i class="fa fa-users fs-4" width="30px" height="30px" ></i> -->
+                    <i class="fa fa-hand-holding-dollar fs-4"></i>
+                    <!-- <mat-icon>users</mat-icon> -->
+                    <span class="px-2 fontStyle texticon"> عروض الأسعار </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/project"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/blueprint.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> المشاريع </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/sp"
+                    routerLinkActive="active"
+                  >
+                    <!-- <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px" /> -->
+                    <i class="fa fa-users fs-4" width="30px" height="30px"></i>
 
-              <div class="form-group has-search">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control border-0 rounded-5 bg-light" placeholder="Search">
-              </div>
-            </li>
-            <li class="nav-item mx-3 bg-light rounded-5 px-2 py-1 text-center">
-              <a class="nav-link active " aria-current="page" href="#">ar</a>
-            </li>
-            <li class="nav-item mx-3 bg-light rounded-circle px-1  text-center">
-              <!-- <a class="nav-link active " aria-current="page" href="#">ar</a> -->
-<div class="position-relative nav-link active">
-
-  <img src="/assets/icons/bell.svg" alt="" srcset="" class="w-75" >
-
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill mt-2 "style="background-color:#18AF9A">
-    {{counter}}
-    <span class="visually-hidden">unread messages</span>
-  </span>
-</div>
-
-            </li>
-            <li class="nav-item mx-3 bg-light rounded-5">
-              <a class="nav-link active " aria-current="page" href="#">
-                <img src="assets/logo.png" alt="" class=" rounded-circle" width="30px" height="30px">
-
-                <span  class="fontStyle">
-                  مرحبا وMohandisy
-                </span>
-
-
-
-
-              </a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
-      <div class="container-fluid " style="background-color: #eef0f8;">
-        <div class="row ">
-          <div class="col-2 mt-0 pe-0 pt-0">
-            <div class="position-sticky  top-0 ">
-              <div class="m-0"  style="background-color: #004057; font-weight: 600" id="sidebar-wrapper" [hidden]="status">
-                <div class=" list-group-flush ">
-                  <div class="text-white">
-
-                    <div class="p-2 my-4"routerLink="/Admin/dashboard" routerLinkActive="active">
-
-                      <img src="assets/images/Group.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
-                    </div>
-                    <div class="p-2 my-4" routerLink="/Admin/offers" routerLinkActive="active">
-                      <!-- <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" /> -->
-                      <!-- <i class="fa fa-users fs-4" width="30px" height="30px" ></i> -->
-                      <i class="fa fa-hand-holding-dollar fs-4"></i>
-                      <!-- <mat-icon>users</mat-icon> -->
-                      <span class="px-2 fontStyle texticon" > عروض الأسعار </span>
-                    </div>
-                    <div class="p-2 my-4" routerLink="/Admin/project" routerLinkActive="active">
-                      <img src="assets/images/blueprint.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> المشاريع  </span>
-                    </div>
-                    <div class="p-2 my-4"routerLink="/Admin/sp" routerLinkActive="active">
-                      <!-- <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px" /> -->
-                      <i class="fa fa-users fs-4" width="30px" height="30px" ></i>
-
-                      <span class="px-2 fontStyle texticon"> مزودي الخدمة </span>
-                    </div>
-                    <div class="p-2 my-4 " routerLink="/Admin/clients" routerLinkActive="active">
-                      <img src="assets/images/icon1.png" alt="" srcset="" width="28px" height="28px"  />
-                      <span class="px-2 fontStyle texticon"> العملاء </span>
-                    </div>
-                    <div class="p-2 my-4"routerLink="/Admin/contributions" routerLinkActive="active">
-                      <img src="assets/images/id-card.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> الاشتراكات  </span>
-                    </div>
-                    <div class="p-2 my-4" routerLink="/Admin/messages" routerLinkActive="active">
-                      <img src="assets/images/chat.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> الرسائل </span>
-                    </div>
-                    <div class="p-2 my-4 flex justify-content-between" routerLink="/Admin/payments" routerLinkActive="active">
-                      <img src="assets/images/hand.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> المدفوعات </span>
-                    </div>
-                    <div class="p-2 my-4" routerLink="/Admin/settings" routerLinkActive="active">
-                      <img src="assets/images/settings.png" alt="" srcset="" width="28px" height="28px" />
-                      <span class="px-2 fontStyle texticon"> الإعدادات </span>
-                    </div>
-                    <!-- <div class="p-2 my-4 px-2" (click)="clickEvent()">
+                    <span class="px-2 fontStyle texticon"> مزودي الخدمة </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/clients"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/icon1.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> العملاء </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/contributions"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/id-card.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> الاشتراكات </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/messages"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/chat.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> الرسائل </span>
+                  </div>
+                  <div
+                    class="p-2 my-4 flex justify-content-between"
+                    routerLink="/Admin/payments"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/hand.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> المدفوعات </span>
+                  </div>
+                  <div
+                    class="p-2 my-4"
+                    routerLink="/Admin/settings"
+                    routerLinkActive="active"
+                  >
+                    <img
+                      src="assets/images/settings.png"
+                      alt=""
+                      srcset=""
+                      width="28px"
+                      height="28px"
+                    />
+                    <span class="px-2 fontStyle texticon"> الإعدادات </span>
+                  </div>
+                  <!-- <div class="p-2 my-4 px-2" (click)="clickEvent()">
                       <img src="assets/images/next.png" alt="" srcset="" width="28px" height="28px" />
                     </div> -->
-                  </div>
                 </div>
               </div>
             </div>
-
           </div>
-            <div class="col-10 mb-3">
-              <router-outlet></router-outlet>
-            </div>
-
-          </div>
-
         </div>
-        <div class="col-12 ">
-          <app-footer></app-footer>
+        <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
+        <div
+          style="min-height: 100vh"
+          [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'"
+        >
+          <router-outlet></router-outlet>
         </div>
+      </div>
+      <div class="col-12">
+        <app-footer></app-footer>
+      </div>
     </div>
-    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#wrapper -->
+</div>

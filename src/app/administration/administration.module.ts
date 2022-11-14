@@ -1,3 +1,4 @@
+import { SharedModule } from './../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdministrationRoutingModule } from './administration-routing.module';
@@ -14,19 +15,19 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {MatSortModule} from '@angular/material/sort';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
 import { TestComponent } from './test/test.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -42,13 +43,10 @@ import {MatMenuModule} from '@angular/material/menu';
     TestComponent,
     AdminSpUpdataComponent,
     FooterComponent,
-    // CountryTransformPipe
-    // CountryTransformPipe
-
-
   ],
   imports: [
-CommonModule,
+    SharedModule,
+    CommonModule,
     AdministrationRoutingModule,
     NgxPaginationModule,
     FormsModule,

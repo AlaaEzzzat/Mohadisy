@@ -6,7 +6,13 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-admin-project',
@@ -30,17 +36,18 @@ export class AdminProjectComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  userformMassage :FormGroup;
-  messages:any;
-  show:boolean=false;
-  showDanger:boolean=false;
-  isProcessing:boolean=true;
+  userformMassage: FormGroup;
+  messages: any;
+  show: boolean = false;
+  showDanger: boolean = false;
+  isProcessing: boolean = true;
   constructor(
     private ServicesProvidor: AdminProjectsService,
-    private _HttpClient: HttpClient ,private formbuilder:FormBuilder
+    private _HttpClient: HttpClient,
+    private formbuilder: FormBuilder
   ) {
-    this.userformMassage=this.formbuilder.group({
-      massage:['',[Validators.required]],
+    this.userformMassage = this.formbuilder.group({
+      massage: ['', [Validators.required]],
     });
   }
 
@@ -88,23 +95,20 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe({
-
-      next:(value) => {
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
-
   }
   // 4
   getPendingProject() {
@@ -113,24 +117,21 @@ export class AdminProjectComponent implements OnInit {
     this.newApi = 4;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
-    {
-      next:  (value) => {
+    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
-    }
-    );
+      },
+    });
   }
   //5
   getFinishedProjects() {
@@ -139,25 +140,21 @@ export class AdminProjectComponent implements OnInit {
     this.newApi = 5;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
-
-     {
-      next:(value) => {
+    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
-     }
-    );
+      },
+    });
   }
   //6
   getLateProjects() {
@@ -171,7 +168,6 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -190,13 +186,12 @@ export class AdminProjectComponent implements OnInit {
     this.isProcessing = true;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
-     {next: (value) => {
+    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -204,8 +199,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
-      }
-  });
+      },
+    });
   }
 
   objectProduct(object?: any, id?: any) {
@@ -328,29 +323,30 @@ export class AdminProjectComponent implements OnInit {
     return differenceInDays;
   }
 
-  calculateDiffEend(sentOn:any){
-
+  calculateDiffEend(sentOn: any) {
     let todayDate = new Date();
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
-    let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
+    let differenceInTime = sentOnDate.getTime() - todayDate.getTime();
     // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
   }
 
   download(url: string, name: any) {
-    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
-      {
-        next:(pptx) => {
-          const blob = new Blob([pptx], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
+    return this._HttpClient
+      .get(url, { responseType: 'arraybuffer' })
+      .subscribe({
+        next: (pptx) => {
+          const blob = new Blob([pptx], {
+            type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          });
           const fileName = name;
           saveAs(blob, fileName);
         },
-    error:(err) => {
+        error: (err) => {
           console.log(err);
-        }
-      }
-    );
+        },
+      });
   }
 }

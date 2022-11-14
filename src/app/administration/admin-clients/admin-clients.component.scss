@@ -6,7 +6,10 @@ $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#F3FBFA;
+.cairo{
+  font-family: "cairo";
 
+}
 a:focus ,a:hover,button:focus ,button:hover {
   background-color :$Alltext!important;
   color: white !important;
@@ -33,19 +36,7 @@ input[type="search"]{
   }
 
 }
-.title
-{
-  // line-height:0.5;
-  // font-size: 90%;
-}
-.textFontSizeCard{
-  // font-size: 90%;
-}
-.we-25 {
-  // width: 12em !important;
-  // font-size: 1.1em!important;
 
-}
 @media only screen and (min-width: 768px) {
   .sizew
   {

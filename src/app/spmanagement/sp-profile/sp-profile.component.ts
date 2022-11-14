@@ -127,8 +127,6 @@ export class SpProfileComponent implements OnInit {
   }
 
   _getCities() {
-    //console.log(this.providerData.get("region").value);
-
     this.selectRegion = this.providerData.get('region').value;
 
     this.provider.getCities(this.selectRegion).subscribe((data) => {
@@ -140,7 +138,6 @@ export class SpProfileComponent implements OnInit {
 
   _getDistricts() {
     this.selectCity = this.providerData.get('city').value;
-    console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
@@ -167,7 +164,6 @@ export class SpProfileComponent implements OnInit {
   _search() {
     var x = this.providerData.get('search').value;
     this.FilterSearch = this.subService.filter((e) => e.name.includes(x));
-    //console.log( this.FilterSearch);
   }
   addSubService(subServiceId: number) {
     this.checkedSubServices[subServiceId] = 1;
@@ -184,36 +180,12 @@ export class SpProfileComponent implements OnInit {
   }
 
   SelectFile_2(event: any) {
-    /*this.Files[1]={
-      "idFile":<File>event.target.files[0].name,
-      "membershipFile":<File>event.target.files[0].name
-     };*/
-
     this.Files[1] = <File>event.target.files[0];
   }
 
   SelectFile_3(event: any) {
     this.Files[2] = <File>event.target.files[0];
   }
-
-  // onFileChange(event: any) {
-  //   const reader = new FileReader();
-
-  //   if (event.target.files && event.target.files.length) {
-  //     const [file] = event.target.files;
-
-  //     reader.readAsDataURL(file);
-
-  //     reader.onload = () => {
-  //       this.imageSrc = reader.result as string;
-
-  //       this.providerData.patchValue({
-  //         fileSource: reader.result,
-  //       });
-  //     };
-  //   }
-  // }
-
   onSubmit() {
     this.providerData.value['servicetype'] = [];
 
@@ -221,9 +193,6 @@ export class SpProfileComponent implements OnInit {
       if (this.checkedSubServices[e.id])
         this.providerData.value['servicetype'].push(e.id);
     });
-    console.log(this.providerData.value);
-
-    //console.log(this.providerData.value['servicetype']);
 
     var formFiles: any = new FormData();
 
@@ -231,24 +200,7 @@ export class SpProfileComponent implements OnInit {
     formFiles.append('CompanyRegisteration', this.Files[1]);
     formFiles.append('License', this.Files[2]);
 
-    //console.log(formFiles);
-
-    /*var formFiles=
-     {
-      'CompanyLogo':this.Files[0],
-      'CompanyRegisteration':this.Files[1],
-      'License':this.Files[3]
-     }*/
-
-    this.provider.Files(formFiles).subscribe((data) => {
-      console.log(data);
-    });
-
-    /*var formRdata:any=new FormData();
-      formRdata.append('firstName',this.providerData.value['representative_name']);
-      formRdata.append('lastName',this.providerData.value['representative_lastName']);
-      formRdata.append('email',this.providerData.value['representative_email']);
-      formRdata.append('phoneNumber',this.providerData.value['representative_phone']);*/
+    this.provider.Files(formFiles).subscribe((data) => {});
 
     var formRdata = {
       firstName: this.providerData.value['representative_name'],
@@ -257,19 +209,8 @@ export class SpProfileComponent implements OnInit {
       phoneNumber: this.providerData.value['representative_phone'],
     };
 
-    this.provider.representative(formRdata).subscribe((data) => {
-      console.log(data);
-    });
+    this.provider.representative(formRdata).subscribe((data) => {});
 
-    this.provider.getR().subscribe((data) => {
-      console.log(data);
-    });
-
-    /*this.provider.storeProfile(this.providerData.value).subscribe((data) => {
-      console.log(data);
-
-    });*/
-
-    //    })
+    this.provider.getR().subscribe((data) => {});
   }
 }

@@ -66,7 +66,6 @@ export class PaymentComponent implements OnInit {
     console.log(this.clientPaymentData);
     this.paymentService.executePayment(this.clientPaymentData).subscribe({
       next: (response: any) => {
-        console.log(response.Data);
         window.location.href = response.Data.PaymentURL;
       },
       error: (err: any) => {
@@ -81,7 +80,6 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientService.getClientProfile().subscribe((data) => {
-      console.log(data.data);
       this.client = data.data;
     });
   }

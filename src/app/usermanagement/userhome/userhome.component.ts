@@ -15,21 +15,10 @@ export class UserhomeComponent implements OnInit {
   clickEvent() {
     this.status = !this.status;
   }
-  constructor(
-    private router: Router,
-    private clientService: ClientService /*  public signalrService: SignalrService */
-  ) {}
+  constructor(private router: Router, private clientService: ClientService) {}
 
-  ngOnInit(): void {
-    /*  this.signalrService.startConnection();
-    setTimeout(() => {
-      this.signalrService.askServerListener();
-      this.signalrService.askServer();
-    }, 2000); */
-  }
-  /*   ngOnDestroy(): void {
-    this.signalrService.hubConnection.off('askServerResponse');
-  } */
+  ngOnInit(): void {}
+
   search() {}
   signOut() {
     localStorage.clear();
@@ -42,7 +31,6 @@ export class UserhomeComponent implements OnInit {
     if (formType.value.type) {
       this.showpopup = false;
       this.clientService.requestedServiceId = formType.value.type;
-      console.log(this.clientService.requestedServiceId);
       this.router.navigate(['usermanagement/askprice/projectInfo']);
     }
   }
@@ -52,7 +40,6 @@ export class UserhomeComponent implements OnInit {
       .getProjectServicesAndSubService()
       .subscribe((data: any) => {
         this.allServices = data.data.projectServices;
-        console.log(this.allServices);
         this.showpopup = true;
       });
   }
