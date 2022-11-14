@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -12,7 +11,22 @@ import { AdminMessagesComponent } from './admin-messages/admin-messages.componen
 import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
+import { TestComponent } from './test/test.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -25,10 +39,29 @@ import { AdminSPComponent } from './admin-sp/admin-sp.component';
     AdminPaymentsComponent,
     AdminSettingsComponent,
     AdminSPComponent,
+    TestComponent,
+    AdminSpUpdataComponent,
+    FooterComponent,
+    // CountryTransformPipe
+    // CountryTransformPipe
+
+
   ],
   imports: [
-    CommonModule,
+CommonModule,
     AdministrationRoutingModule,
+    NgxPaginationModule,
+    FormsModule,
+    Ng2SearchPipeModule,
+    MatSortModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatBadgeModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    MatMenuModule,
   ],
 })
 export class AdministrationModule {}

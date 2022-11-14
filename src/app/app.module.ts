@@ -16,11 +16,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent ],
   imports: [
+SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule,
     AccountModule,
     CoreModule,
     HttpClientModule,
@@ -28,6 +28,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     FormsModule,
     NgbModule,
+
+
+
+
   ],
   providers: [
     {
