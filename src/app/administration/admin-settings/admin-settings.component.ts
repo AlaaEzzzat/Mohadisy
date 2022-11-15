@@ -23,6 +23,8 @@ export class AdminSettingsComponent implements OnInit {
   iProfileAdmin :any|undefined=undefined;
   state :any=0
   profileChange:admin={} as admin;
+  datas:any;
+  usersActive:any[]=[]
   constructor(private adminSettingsService:AdminSettingsService,private formbuilder:FormBuilder) {
     this.userformlogin=this.formbuilder.group({
       lastName:['',[Validators.required]],
@@ -33,6 +35,7 @@ export class AdminSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.newApi=1;
+  
 
 }
 getProfileAdmin(){
@@ -69,6 +72,13 @@ updateAdminProfile(){
 
 changeAndGetClint(){
   this.state=3
+  this.adminSettingsService.getActiveUsers().subscribe({
+    next:((data)=>{
+      console.log(data.data.activeUsers)
+      this.usersActive=data.data.activeUsers
+      
+    })
+  })
 
 }
 changeFirstOrLastName(){
