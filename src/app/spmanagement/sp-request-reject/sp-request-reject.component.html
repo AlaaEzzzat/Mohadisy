@@ -19,7 +19,7 @@
               style="background:#004958; color:white;">
               <p><i class="far fa-user "></i>
                 <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                <a class="btn text-success">استشارات</a>
+                <a class="btn">استشارات</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
                 {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -34,7 +34,7 @@
               style="background:white;  color:#004057;">
               <p><i class="far fa-user "></i>
                 <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                <a class="btn text-success">استشارات</a>
+                <a class="btn ">استشارات</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
                 {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -129,11 +129,11 @@
                       <div>
                         <li (click)="toggoleComponent(component.id)">
                           <ng-container *ngIf="descComponent[component.id]==1">
-                            <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                            <i class="fa fa-angle-down " aria-hidden="true"></i>
                           </ng-container>
 
                           <ng-container *ngIf="descComponent[component.id]!=1">
-                            <i class="fa fa-greater-than text-success"></i>
+                            <i class="fa fa-greater-than "></i>
                           </ng-container>
 
                           {{component.name}}
@@ -201,11 +201,11 @@
                     <div>
                       <li (click)="toggoleDocument(document.id)">
                         <ng-container *ngIf="descDocument[document.id]==1">
-                          <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                          <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </ng-container>
 
                         <ng-container *ngIf="descDocument[document.id]!=1">
-                          <i class="fa fa-greater-than text-success"></i>
+                          <i class="fa fa-greater-than "></i>
                         </ng-container>
                         {{document.file}}
                       </li>

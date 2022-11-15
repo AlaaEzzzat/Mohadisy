@@ -232,7 +232,7 @@ export class SpProjectRequestComponent implements OnInit {
           {
             "cost":this.totalcostMilestone[i],
             "percentage":(Number)(this.Precentage[i]),
-            "requiredWorkId":null,
+            "requiredWorkId":1,
             "isFirstMilestone":true,
             "isLastMilestone": false,
             "message":this.OfferData.get('message').value
@@ -246,7 +246,7 @@ export class SpProjectRequestComponent implements OnInit {
           {
             "cost":this.totalcostMilestone[i],
             "percentage":(Number)(this.Precentage[i]),
-            "requiredWorkId": null,
+            "requiredWorkId": 1,
             "isFirstMilestone":false,
             "isLastMilestone": true,
             "message":this.OfferData.get('message').value

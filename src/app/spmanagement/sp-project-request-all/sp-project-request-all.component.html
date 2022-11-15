@@ -12,7 +12,7 @@
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">استشارات</a>
+                  <a class="btn">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -27,7 +27,7 @@
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">استشارات</a>
+                  <a class="btn">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -65,14 +65,14 @@
                     <div class="row ">
 
                       <div class="col-5">
-                        كود الطلب : <span>{{selectProject.code}}</span>
+                        كود الطلب : <span>{{selectProject?.code}}</span>
                       </div>
                       <div class="col-1">|</div>
                       <div class="col-5">
-                        اسم المشروع : <span>{{selectProject.name}}</span>
+                        اسم المشروع : <span>{{selectProject?.name}}</span>
                       </div>
                     </div>
-                    <p class="pt-4">موضوع المشروع:<span>{{selectProject.subject}}</span></p>
+                    <p class="pt-4">موضوع المشروع:<span>{{selectProject?.subject}}</span></p>
                   </div>
 
                    <div class="col-1 rep">
@@ -90,8 +90,8 @@
             <div class="col-12 mt-3 ">
               <div class="card card-2">
                 <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
-                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory.name}}</span></p>
-                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory.name}}</span></p>
+                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
+                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory?.name}}</span></p>
               </div>
             </div>
 
@@ -99,11 +99,11 @@
             <div class="col-12 mt-3">
               <div class="card card-2">
                 <p>عنوان المشروع :
-                  <span>{{selectProject.district.nameAr}} , {{selectProject.district.city.nameAr}} ,
-                    {{selectProject.district.city.region.nameAr}} </span>
+                  <span>{{selectProject.district?.nameAr}} , {{selectProject.district?.city?.nameAr}} ,
+                    {{selectProject.district?.city?.region?.nameAr}} </span>
                 </p>
-                <p>رقم القطعه : <span>{{selectProject.plotNumber}} </span></p>
-                <p>رقم المخطط التنظيمى : <span>{{selectProject.organizationalChartNumber}}</span></p>
+                <p>رقم القطعه : <span>{{selectProject?.plotNumber}} </span></p>
+                <p>رقم المخطط التنظيمى : <span>{{selectProject?.organizationalChartNumber}}</span></p>
               </div>
             </div>
 
@@ -117,18 +117,18 @@
                         <div>
                           <li (click)="toggoleComponent(component.id)">
                             <ng-container *ngIf="descComponent[component.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                              <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </ng-container>
 
                             <ng-container *ngIf="descComponent[component.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
+                              <i class="fa fa-greater-than "></i>
                             </ng-container>
 
-                            {{component.name}}
+                            {{component?.name}}
                           </li>
 
                           <ng-container *ngIf="descComponent[component.id]==1">
-                            <p>{{component.description}} مشروع مشروع مشروع</p>
+                            <p>{{component?.description}}</p>
                           </ng-container>
 
                         </div>
@@ -148,13 +148,13 @@
 
                           <li (click)="toggoleWork(work.id)">
                             <ng-container *ngIf="descWork[work.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                              <i class="fa fa-angle-down " aria-hidden="true"></i>
                             </ng-container>
 
                             <ng-container *ngIf="descWork[work.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
+                              <i class="fa fa-greater-than "></i>
                             </ng-container>
-                            {{work.name}}
+                            {{work?.name}}
                           </li>
 
                           <ng-container *ngIf="descWork[work.id]">
@@ -162,7 +162,7 @@
                               <ng-container *ngFor="let requiredDocument of work.requiredDocuments">
 
                                 <li>
-                                  <p>{{requiredDocument.name}}</p>
+                                  <p>{{requiredDocument?.name}}</p>
                                 </li>
 
                               </ng-container>
@@ -191,8 +191,8 @@
                       <button style="border:none; background-color:transparent;"
                       onclick="downloadFile(document.filePath,document.file)"
                       >
-                        <i class="fa fa-download text-success mt-3" aria-hidden="true"></i>
-                        {{document.file}}
+                        <i class="fa fa-download  mt-3" aria-hidden="true"></i>
+                        {{document?.file}}
                       </button>
 
 

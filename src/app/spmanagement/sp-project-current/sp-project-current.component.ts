@@ -29,8 +29,10 @@ export class SpProjectCurrentComponent implements OnInit {
 
    console.log(data);
    this.Listprojects=data.data.projects;
-   if(this.Listprojects.length>0)
+   if(this.Listprojects.length>0){
    this.result=1;
+   this.selectProject=this.Listprojects[0];
+   }
 
 
    });
