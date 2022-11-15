@@ -7,6 +7,8 @@ import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IrequiredWorks } from 'src/app/@models/irequired-works';
+
 
 @Component({
   selector: 'app-admin-project',
@@ -35,6 +37,10 @@ export class AdminProjectComponent implements OnInit {
   show:boolean=false;
   showDanger:boolean=false;
   isProcessing:boolean=true;
+  requiredWorkId:IrequiredWorks[]=[];
+  requiredWorkIdObject:any[]=[]
+
+  componentId:any[]=[];
   constructor(
     private ServicesProvidor: AdminProjectsService,
     private _HttpClient: HttpClient ,private formbuilder:FormBuilder
@@ -46,6 +52,7 @@ export class AdminProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentProjects();
+
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -98,12 +105,14 @@ export class AdminProjectComponent implements OnInit {
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
+          // this.projectRequiredWorks()
         }
       },error: (error) => {
         this.isProcessing = false;
 
       }
     });
+
 
   }
   // 4
@@ -217,6 +226,8 @@ export class AdminProjectComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
+    this.projectRequiredWorks();
+    this.projectComponents();
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
@@ -352,5 +363,47 @@ export class AdminProjectComponent implements OnInit {
         }
       }
     );
+  }
+
+  projectRequiredWorks(){
+    this.requiredWorkId=[]
+    this.requiredWorkIdObject=[]
+    let requiredWorkIdObjects:any;
+    for(let projectRe of this.productCurrent.projectRequiredWorks){
+      console.log(projectRe.requiredWorkId)
+      this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
+        next:((data)=>{
+          this.requiredWorkId.push(data.data)
+          console.log(this.requiredWorkId)
+
+          for(let requiredWork of this.requiredWorkId){
+            requiredWorkIdObjects=requiredWork
+            for(let requiredWorkObject of requiredWorkIdObjects){
+              this.requiredWorkIdObject.push(requiredWorkObject)
+
+
+            } console.log(this.requiredWorkIdObject)
+
+          }
+
+        })
+      })
+    }
+
+  }
+  projectComponents(){
+    this.componentId=[]
+    for(let projectCom of this.productCurrent.projectComponents){
+      this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
+        next:((data=>{
+              this.componentId.push(data.data.name)
+              // console.log(this.componentId)
+              // console.log(data)
+
+        }))
+      })
+
+    }
+
   }
 }

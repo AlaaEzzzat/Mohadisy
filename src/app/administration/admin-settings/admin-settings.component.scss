@@ -53,8 +53,21 @@ $font15Size:15px;
   }
 }
 .buttonChose{
-  @include titleTotal($font25Size,$fontTajawalFamily);
+ font-family: $fontCairoFamily;
 
+}
+.btndark{
+  background-color: $Alltext;
+  color: #fff;
+  &:hover{
+    background-color: #fff  ;
+  color:$Alltext;
+  border: 1px solid $Alltext;
+  }
+}
+input[type="text"]:focus{
+  border: 1px solid $Alltext;
+  box-shadow: none;
 }
 .buttonAdd{
   background-color: #F3FBFA!important;

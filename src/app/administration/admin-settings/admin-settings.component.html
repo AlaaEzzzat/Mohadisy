@@ -2,8 +2,12 @@
   <div class="col-12 d-flex flex-row justify-content-between">
 
     <div class="col-3">
-      <div class="example-button-row mb-2">
-        <button mat-button class="bg-white col-12 buttonChose border-0 py-2"(click)="getProfileAdmin()">
+      <div class="example-button-row mb-2 ">
+        <button mat-button class="col-12 h3 buttonChose  border-0 py-2"(click)="getProfileAdmin()"
+        [ngStyle]="{
+                'background-color': state===1 ? '#004958' : '#ffffff',
+                color: state===1 ? '#ffffff' : '#000000'
+              }">
           الملف الشخصي
         </button>
       </div>
@@ -11,7 +15,11 @@
       <div class="example-button-row">
         <button
           mat-button
-          class="bg-white mb-2 col-12 buttonChose border-0 py-2"
+          class="col-12 h3 buttonChose  border-0 py-2"(click)="getProfileAdmin()"
+          [ngStyle]="{
+                  'background-color': state===3 ? '#004958' : '#ffffff',
+                  color: state===3 ? '#ffffff' : '#000000'
+                }"
           (click)="changeAndGetClint()"
         >
           المستخدمين
@@ -26,7 +34,7 @@
   <div class="d-flex flex-column col-9 me-3">
 
 
-<div class="card mb-3 border-0 rounded-1" >
+<div class="card mb-3 border-0 rounded-0" >
   <div class="row g-0">
     <div class="col-md-2">
       <img
@@ -81,7 +89,7 @@ class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
 
  <!-- hgfv,tdg -->
 
- <div class="card mb-3 border-0 rounded-1" >
+ <div class="card mb-3 border-0 rounded-0" >
    <div class="row g-0">
      <div class="col-md-2">
        <img
@@ -112,7 +120,7 @@ class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
             </div>
 
 
-            <button (click)="updateAdminProfile()" class="btn btn-dark my-2">حفظ</button>
+            <button (click)="updateAdminProfile()" class="btn btndark my-3 rounded-0 px-3">حفظ</button>
 
           </form>
             <!-- <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5> -->

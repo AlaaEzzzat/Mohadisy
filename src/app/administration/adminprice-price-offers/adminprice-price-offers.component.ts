@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IrequiredWorks } from 'src/app/@models/irequired-works';
 
 @Component({
   selector: 'app-adminprice-price-offers',
@@ -36,6 +37,10 @@ userformMassage :FormGroup;
   show:boolean=false;
   showDanger:boolean=false;
   isProcessing:boolean=true;
+
+  requiredWorkId:IrequiredWorks[]=[];
+  requiredWorkIdObject:any[]=[]
+  componentId:any[]=[];
   constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
@@ -257,6 +262,9 @@ getUnderNegotiationProjects(){
     this.productCurrent=this.productCurrent
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
+    this.projectRequiredWorks()
+    this.projectComponents()
+
     }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
@@ -378,5 +386,45 @@ download(url: string,name:any) {
   )
 
 }
+projectRequiredWorks(){
+  this.requiredWorkId=[]
+  this.requiredWorkIdObject=[]
+  let requiredWorkIdObjects:any;
+  for(let projectRe of this.productCurrent.projectRequiredWorks){
+    console.log(projectRe.requiredWorkId)
+    this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
+      next:((data)=>{
+        this.requiredWorkId.push(data.data)
+        console.log(this.requiredWorkId)
 
+        for(let requiredWork of this.requiredWorkId){
+          requiredWorkIdObjects=requiredWork
+          for(let requiredWorkObject of requiredWorkIdObjects){
+            this.requiredWorkIdObject.push(requiredWorkObject)
+
+
+          } console.log(this.requiredWorkIdObject)
+
+        }
+
+      })
+    })
+  }
+
+}
+projectComponents(){
+  this.componentId=[]
+  for(let projectCom of this.productCurrent.projectComponents){
+    this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
+      next:((data=>{
+            this.componentId.push(data.data.name)
+            console.log(this.componentId)
+            console.log(data)
+
+      }))
+    })
+
+  }
+
+}
 }

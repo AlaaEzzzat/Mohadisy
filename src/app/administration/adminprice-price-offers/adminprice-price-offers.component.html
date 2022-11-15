@@ -130,7 +130,7 @@
             [(ngModel)]="filterTerm"
           />
           <button class="btn position-absolute top-0 start-0" type="submit">
-            <i class="fa fa-search"></i>
+            <img src="/assets/icons/Search.svg" alt="" srcset="">
           </button>
         </div>
         <ng-template #nourmal>
@@ -557,32 +557,46 @@
         </div>
       </div>
       <!--  -->
-      <div
-        class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-2 mb-3"
-      >
-        <div
-          class="col-lg-6 col-12 d-flex p-3 bg-white ms-1 align-content-end flex-column"
-        >
-          <p class="fs-6 textInformation">مكونات المشروع</p>
-          <ng-container *ngFor="let comp of productCurrent.projectComponents">
-            <ul>
-              <li *ngIf="comp.component !=null ">
-                {{ comp.component.name }}
-              </li>
-            </ul>
+      <!--  -->
+      <div  class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-md-2 ps-0 mb-3" >
+        <div class="col-lg-6 col-12 d-flex  p-3 bg-white ms-lg-1 ms-0 align-content-end flex-column mb-lg-0 mb-3">
+        <h2 class="card-title mb-4 titleInformation">مكونات  المشروع</h2>
+
+          <ng-container *ngFor="let comp of componentId">
+            <div class="d-flex align-items-start mb-2">
+              <img
+                class=""
+                width="20px"
+                src="assets/icons/arrow-left.png"
+              />
+              <div class="card-title me-3">
+                <p class="fs-6">
+                {{ comp }}
+                </p>
+              </div>
+            </div>
           </ng-container>
         </div>
-        <div
-          class="col-lg-6 col-12 p-3 bg-white me-1 align-content-start flex-column"
-        >
-          <p class="fs-6 textInformation">الاعمال المطلوبه</p>
+        <div class="col-lg-6 col-12 p-3 bg-white me-lg-1 me-0 align-content-start flex-column" >
+
+          <h2 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h2>
 
           <div>
-            <ul *ngFor="let com of productCurrent.projectRequiredWorks">
-              <li class="text-danger"  *ngIf="com.requiredWork !=null ">
-                {{ com.requiredWork.name }}
-              </li>
-            </ul>
+            <ng-container *ngFor="let reqW of requiredWorkIdObject">
+              <div class="d-flex align-items-start mb-2">
+                <img
+                  class=""
+                  width="20px"
+                  src="assets/icons/arrow-left.png"
+                />
+                <div class="card-title me-3">
+                  <p class="fs-6">
+                  {{ reqW.name }}
+                  </p>
+                </div>
+              </div>
+
+            </ng-container>
           </div>
         </div>
       </div>

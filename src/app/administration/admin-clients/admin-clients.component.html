@@ -79,7 +79,7 @@
             [(ngModel)]="filterTerm"
           />
           <button class="btn position-absolute top-0 start-0" type="submit">
-            <i class="fa fa-search"></i>
+            <img src="/assets/icons/Search.svg" alt="" srcset="">
           </button>
         </div>
 
@@ -93,7 +93,7 @@
               [ngStyle]="{
                 'background-color':
                   productCurrent.id === pro.id ? '#004958' : '#ffffff',
-                color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
+                color: productCurrent.id === pro.id ? '#ffffff' : '#004958'
               }"
             >
               <div class="d-flex align-items-start mb-2">
@@ -106,7 +106,7 @@
                 ><img src="assets/icons/userWh.svg" class=""
               /></ng-template>
                   <div class="card-title me-3 ">
-                  <p *ngIf="pro.firstName; else templateName" class="fs-6" >
+                  <p *ngIf="pro.firstName; else templateName" class="fs-6 textInformation" >
                     {{ pro.firstName }} {{ pro.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
@@ -311,36 +311,48 @@
           </div>
           <div class="col-md-3 col-sm-4">
             <div class="card-body">
-              <p class="me-2">
+              <p class="me-2 fs-6 textInformation">
                 {{ productCurrent.firstName }} {{ productCurrent.lastName }}
               </p>
             </div>
           </div>
           <div class="col-md-7 col-sm-5">
-            <div class="d-flex">
-              <a type="button" class="btn w-25" (click)="changeToAccepted()">
-                <i class="fa-solid fa-check text-muted"></i>
-                <p class="fsvw">مكتمل</p></a
-              >
-              <a type="button" class="btn w-25" (click)="changeToNotComplette()">
-                <i class="fa-solid fa-exclamation"></i>
-                <p class="fsvw">غير مكتمل</p></a
-              >
-              <a type="button" class="btn w-25" (click)="changeToReject()"
-                ><i class="fa-solid fa-xmark"></i>
-                <p class="fsvw" >رفض</p></a
-              >
-              <a type="button" class="btn w-25"
-                ><i class="fa-solid fa-xmark"></i>
-                <p class="fsvw">مراسله</p></a
-              >
+            <div class="d-flex ">
+
+              <a
+              type="button"
+              class="btn complete col-4 rounded-0  "
+              data-bs-toggle="modal"
+              data-bs-target="#changeToAccepted"
+            >
+              <i class="fa-solid fa-check text-secondary"></i>
+              <p>مكتمل</p></a
+            >
+            <a
+              type="button"
+              class="btn notcomplete  col-4 rounded-0"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <i class="fa-solid fa-exclamation"></i>
+              <p>غير مكتمل</p></a
+            >
+            <a
+              type="button"
+              class="btn reject  col-4 rounded-0"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalReject"
+            >
+              <i class="fa-solid fa-xmark"></i>
+              <p>رفض</p></a
+            >
             </div>
           </div>
         </div>
       </div>
 
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-        <h1 class="card-title mb-4 titleInformation">معلومات عن العميل</h1>
+        <h2 class="card-title mb-4 titleInformation">معلومات عن العميل</h2>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
             <div class="d-flex flex-row justify-content-between ">
@@ -677,7 +689,7 @@
       </div>
   </div>
   <ng-template #undefind>
-    <div class="alert alert-danger d-flex align-items-center h2" role="alert" *ngIf="!isProcessing">
+    <div class="alert alert-danger d-flex align-items-center fs-6" role="alert" *ngIf="!isProcessing">
       <div>
         حاليا لايوجد عملاء
       </div>

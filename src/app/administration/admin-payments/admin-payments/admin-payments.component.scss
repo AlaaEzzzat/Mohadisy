@@ -1,0 +1,22 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$fontTajawalFamily: 'Tajawal', sans-serif;
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$bgButton:#F3FBFA;
+ul>li{
+  cursor: pointer;
+  list-style: none !important;
+  background-color: white;
+  color: $Alltext;
+  font-family: $fontCairoFamily;
+
+
+  &.active,&:hover{
+    background-color: $Alltext;
+    font-family: $fontCairoFamily;
+    color: white;
+  }
+}

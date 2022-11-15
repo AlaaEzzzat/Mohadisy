@@ -660,11 +660,11 @@ export class AdminSPComponent implements OnInit {
     );
   }
 
-  fortest(totals: any, arrays: any[]) {
-    for (var i = 1; i <= totals; i++) {
-      arrays.push(i);
-    }
-  }
+  // fortest(totals: any, arrays: any[]) {
+  //   for (var i = 1; i <= totals; i++) {
+  //     arrays.push(i);
+  //   }
+  // }
 
   calculateDiff(sentOn: any) {
     let todayDate = new Date();

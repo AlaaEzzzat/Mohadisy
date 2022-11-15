@@ -7,7 +7,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminProjectComponent } from './admin-project/admin-project.component';
 import { AdminpricePriceOffersComponent } from './adminprice-price-offers/adminprice-price-offers.component';
-import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
+// import { AdminPaymentsComponent } from './admin-payment/admin-payments/admin-payments.component';
 import { AdminContributionsComponent } from './admin-contributions/admin-contributions.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { TestComponentRenderer } from '@angular/core/testing';
@@ -30,7 +30,19 @@ const routes: Routes = [
       { path: 'settings', component: AdminSettingsComponent },
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },
-      { path: 'payments', component: AdminPaymentsComponent },
+      {
+        path: 'payments',
+
+        loadChildren: () =>
+          import('./admin-payments/admin-payments.module').then(
+            (m) => m.AdminPaymentsModule
+          ),
+        // canActivate: [AuthorizedGuard],
+        // data: {
+        //   role: 'Admin',
+        // },
+      },
+      // { path: 'payments', component: AdminPaymentsComponent },
       { path: 'contributions', component: AdminContributionsComponent },
       { path: 'sp', component: AdminSPComponent },
       { path: 'updata', component: AdminSpUpdataComponent },

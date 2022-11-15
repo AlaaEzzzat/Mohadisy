@@ -48,8 +48,8 @@ button>i ,.typeCom
 
  }
 input[type="search"]{
-  &:hover,&:active ,&:focus{
-    border: 0px none transparent !important;
+  &:hover,&.active ,&:focus{
+    // border: 0px none transparent !important;
     box-shadow: none !important;
   }
 
