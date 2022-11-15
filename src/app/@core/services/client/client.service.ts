@@ -118,4 +118,10 @@ export class ClientService {
       `${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`
     );
   }
+
+  getProjectsByService(serviceId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getProjectsByService/${serviceId}`
+    );
+  }
 }

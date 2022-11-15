@@ -20,6 +20,14 @@ export class NavbarComponent implements OnInit {
   clickEvent() {
     this.status = !this.status;
   }
+  profile(){
+    if(localStorage.getItem('role') == '"Client"'){
+      this.router.navigate(["usermanagement/profile"]);
+    }else{
+      this.router.navigate(["spmanagement/profile"]);
 
+    }
+
+  }
   ngOnInit(): void {}
 }

@@ -1,4 +1,5 @@
 <section class="price-offer">
+  
   <div class="container mt-5 fontStyle">
     <div class="row">
       <ng-container *ngFor="let service of projectServices; let i = index">
@@ -620,7 +621,7 @@
                         </ul>
                       </ng-container>
                     </div>
-                  </div>
+                  </div> 
                 </div>
                 <div *ngIf="offer.id == selectedOfferId && seeProjectInfo">
                   <div class="pe-3 py-3 info1 bg-white mb-3 projectInfo">
@@ -703,12 +704,12 @@
                               }}
                             </span>
                             <div>
-                              <a
+                              <span
                                 class="mx-3"
                                 target="_blank"
-                                [href]="document.filePath"
+                                (click)="showImg(document.filePath)"
                                 ><i class="fa fa-eye"></i
-                              ></a>
+                              ></span>
                               <span
                                 (click)="
                                   download(document.filePath, document.file)
@@ -834,12 +835,12 @@
                           }}
                         </span>
                         <div>
-                          <a
-                            class="mx-3"
-                            target="_blank"
-                            [href]="document.filePath"
-                            ><i class="fa fa-eye"></i
-                          ></a>
+                          <span
+                                class="mx-3"
+                                target="_blank"
+                                (click)="showImg(document.filePath)"
+                                ><i class="fa fa-eye"></i
+                              ></span>
                           <span
                             (click)="download(document.filePath, document.file)"
                             ><i class="fa fa-download"></i
@@ -868,6 +869,7 @@
       </div>
     </div>
   </div>
+  
 </section>
 <div *ngIf="paymethods" class="overlay p-5">
   <div class="popup p-4 px-3">
@@ -889,3 +891,17 @@
     </div>
   </div>
 </div>
+<div *ngIf="showModal" class="overlay p-5">
+  <div class="img-popup  p-5 ">
+    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+      >&times;</a
+    >
+    <div id="mymModal" class="mmodal">
+      
+      <img class="mmodal-content my-img" id="img01" [src]="modalSrc">
+      <div id="caption"></div>
+    </div>
+   
+  </div>
+</div>
+

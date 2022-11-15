@@ -45,6 +45,8 @@ export class UserPriceOffersComponent implements OnInit {
   activeProjectReqWorks: any = [];
   activeProjectsComponents: any = [];
   client: any = {};
+  modalSrc :any = "";
+  showModal: boolean = false;
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -170,6 +172,7 @@ export class UserPriceOffersComponent implements OnInit {
 
     this.showProjectProfile = false;
     this.selectedProject = project;
+    console.log(this.selectedProject)
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
 
@@ -217,7 +220,7 @@ export class UserPriceOffersComponent implements OnInit {
     this.clientPaymentData.paymentMethodId = payMethodId;
     this.clientPaymentData.displayCurrencyIso = 'SAR';
     this.clientPaymentData.mobileCountryCode = '+996';
-    this.clientPaymentData.callBackUrl = 'https://www.google.com';
+    this.clientPaymentData.callBackUrl = `https://app.mohandisy.com/api/Milestone/paidMilestone/1`;
     this.clientPaymentData.errorUrl = 'https://www.facebook.com';
     this.clientPaymentData.language = 'ar';
 
@@ -247,5 +250,9 @@ export class UserPriceOffersComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  showImg(src:any){
+    this.showModal = true;
+    this.modalSrc = src;
   }
 }

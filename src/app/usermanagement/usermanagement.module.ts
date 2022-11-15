@@ -14,6 +14,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { PaymentComponent } from './payment/payment.component';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { PaymentComponent } from './payment/payment.component';
     UserhomeComponent,
     ProfilecomplateComponent,
     PaymentComponent,
+    ProjectComponent,
   ],
   imports: [
     SharedModule,

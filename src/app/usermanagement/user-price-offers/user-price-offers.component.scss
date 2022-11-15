@@ -124,35 +124,7 @@ p{
 background-color: #18AF9A;
   }
 }
-/* ********************** */
 
-.popup{
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  z-index: 110000;
-  background-color: #0b7e74;
-  overflow: hidden;
-  font-size: 18px;
-
-}
-.popup .my-popup{
-  padding: 40px 20px;
-    width: 500px;
-    background-image: linear-gradient(135deg,rgpa(255,255,255,0.1),rgpa(255,255,255,0));
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.37);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 25px;
-}
-.popup .my-popup .card-title{
-  font-size: 18px;
-}
-.popup .my-popup  .btn{
-  color: #fff;
-}
 .overlay {
   *{
 font-family: 'cairo';
@@ -166,14 +138,29 @@ font-family: 'cairo';
   transition: opacity 500ms;
 display: flex;
   z-index: 1000;
-  .popup {
-    margin: auto;
+  .popup{
+
     width:450px;
     background: #fff;
+
+  }
+  .img-popup {
+max-width: 90%;
+
+background-color: rgba($color: #e8e8e8, $alpha: 0.4);
+
+  }
+  .popup, .img-popup {
+    margin: auto;
     border-radius: 5px;
     position: relative;
     transition: all 5s ease-in-out;
     height:auto ;
+   
+      .my-img{
+        max-width: 98%;
+      }
+    
 
 .btn{
   margin-top: 20px;
@@ -192,6 +179,7 @@ display: flex;
   font-weight: bold;
   text-decoration: none;
   color: #333;
+
 }
  .close:hover {
   color: #18AF9A;

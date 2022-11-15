@@ -1,3 +1,4 @@
+import { ProjectComponent } from './project/project.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'profile', component: UserProfileComponent },
       { path: 'profilecomplate', component: ProfilecomplateComponent },
       { path: 'payment', component: PaymentComponent },
+      { path: 'project/:id', component: ProjectComponent },
       {
         path: 'askprice',
         loadChildren: () =>
