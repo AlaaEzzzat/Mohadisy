@@ -7,14 +7,14 @@
 
 <div class="section-2 mt-2">
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3">
       <div class="row">
 
         <ng-container *ngFor="let project of Listprojects |
           paginate: {itemsPerPage:5, currentPage: page }"
         >
           <ng-container *ngIf="this.select==project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project.name}}
@@ -30,7 +30,7 @@
 
 
           <ng-container *ngIf="this.select!=project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:white;  color:#004057;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project?.name}}
@@ -157,7 +157,8 @@
 
               <div class="collapse hide pt-3 pb-3" id="item3" data-parent="#accordian">
 
-                    <p>مشروع مشروع مشروع مشروع مشروع مشروع مشروع مشروع
+                    <p>مشروع مشروع مشروع مشروع
+                       مشروع مشروع مشروع مشروع
                       مشروع مشروع مشروع مشروع مشروع</p>
 
                       <div class="row mt-2">
@@ -233,7 +234,7 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2">
             <div class="row">
-              <div class="col-12 p-2 content-1">
+              <div class="col-lg-12 p-2 content-1">
                 <h6>نبذه عن المشروع</h6>
                 <p>مشروع مشروع مشروعمشروعمشروعمشروعمشروعمشر
                   مشروعمشروعمشروعمشروعمشروعمشروع
@@ -248,7 +249,7 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2">
             <div class="row">
-              <div class="col-12 p-2 content-2">
+              <div class="col-lg-12 p-2 content-2">
                 <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
                 <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
                 <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory?.name}}</span></p>
@@ -261,7 +262,7 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2 ">
             <div class="row">
-              <div class="col-12 p-2 content-2">
+              <div class="col-lg-12 p-2 content-2">
                 <p>عنوان المشروع :
                   <span>{{selectProject.district?.nameAr}},{{selectProject.district?.city?.nameAr}},
                     {{selectProject.district?.city?.region?.nameAr}}</span>
@@ -275,9 +276,9 @@
 
 
 
-        <div class="col-12 mt-3">
+        <div class="col-lg-12 mt-3">
           <div class="row">
-            <div class="col-6 mt-3">
+            <div class="col-lg-6 mt-3">
               <div class="card card-3">
                 <h6>مكونات المشروع</h6>
                 <ul>
@@ -306,7 +307,7 @@
               </div>
             </div>
 
-            <div class="col-6 mt-3">
+            <div class="col-lg-6 mt-3">
               <div class="card card-3">
                 <h6>الاعمال المطلوبه</h6>
                 <ul>
@@ -348,7 +349,7 @@
               </div>
             </div>
 
-            <div class="col-6 mt-3">
+            <div class="col-lg-6 mt-3">
               <div class="card card-3">
                 <h6>الملفات الخاصه بالمشروع</h6>
 
@@ -405,7 +406,7 @@
 
 
     <!-----------------Last Section ----------------------->
-    <div class="col-3 mt-4 mb-3 section-4">
+    <div class="col-lg-3 mt-4 mb-3 section-4">
       <div class="row ">
         <div class="col-lg-12">
           <div class="card card-4">
@@ -430,8 +431,8 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-4-1">
             <div class="row">
-              <div class="col-12 text-center">
-                <h2>{{selectProject.area}} <span>متر مكعب</span></h2>
+              <div class="col-lg-12 text-center">
+                <h2>{{selectProject.area}} <span>متر مربع</span></h2>
                 <p>مساحه الارض المقام عليها المشروع</p>
             </div>
           </div>

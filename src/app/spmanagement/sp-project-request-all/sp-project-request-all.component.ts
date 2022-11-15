@@ -21,6 +21,7 @@ export class SpProjectRequestAllComponent implements OnInit {
    documents:Array<any>=[];
    descDocument:Array<any>=[];
    page:number=1;
+   result:number=0;
 
   constructor(private api:ApiService) { }
 
@@ -28,6 +29,9 @@ export class SpProjectRequestAllComponent implements OnInit {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
     this.Listprojects=data.data.priceQuotes;
+    if(this.Listprojects.length>0)
+      this.result=1;
+
 
     });
 

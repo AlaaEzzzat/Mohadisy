@@ -1,3 +1,10 @@
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
+
 
   <div class="section-2 mt-2">
     <div class="row">
@@ -40,7 +47,7 @@
 
 
 
-      <div class="paginate mt-4">
+      <div class="paginate mt-4" *ngIf="result==1">
         <pagination-controls (pageChange)="changepage($event)"
         previousLabel="السابق"
         nextLabel="التالى"
@@ -219,6 +226,7 @@
     </div>
 
   </div>
+
 
 
 

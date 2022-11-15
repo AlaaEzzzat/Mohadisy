@@ -7,7 +7,7 @@
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/new"]'
         [routerLinkActive]='["active"]'
-        class="btn">{{projectstatues[0].nameAr}}</a>
+        class="btn">{{projectstatues[0]?.nameAr}}</a>
       </div>
 
       <div class="col   text-center contnet">
@@ -17,12 +17,12 @@
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/accept"]'
         [routerLinkActive]='["active"]'
-        class="btn" >{{projectstatues[2].nameAr}}</a>
+        class="btn" >{{projectstatues[2]?.nameAr}}</a>
       </div>
 
       <div class="col  text-center contnet">
         <a [routerLink]="['/Spmanagement/projects/reject']" class="btn"
-        [routerLinkActive]='["active"]' >{{projectstatues[1].nameAr}}</a>
+        [routerLinkActive]='["active"]' >{{projectstatues[1]?.nameAr}}</a>
       </div>
 
   </div>
