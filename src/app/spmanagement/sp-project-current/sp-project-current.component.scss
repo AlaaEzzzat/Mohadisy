@@ -361,6 +361,24 @@ a{
   -moz-text-decoration-line: none;
 }
 
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+
 
 
 

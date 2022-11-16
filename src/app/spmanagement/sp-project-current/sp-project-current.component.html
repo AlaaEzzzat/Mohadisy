@@ -47,13 +47,46 @@
         </ng-container>
 
 
-        <div class="paginate mt-4" *ngIf="result==1">
-          <pagination-controls (pageChange)="changepage($event)"
-          previousLabel="السابق"
-          nextLabel="التالى"
-          >
-          </pagination-controls>
-        </div>
+        <nav aria-label="Page navigation" class="mt-4 mb-3">
+          <ul class="pagination">
+
+            <ng-container *ngIf="page==1">
+            <li class="page-item disabled">
+              <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+             <ng-container *ngIf="page!=1">
+              <li class="page-item">
+                <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+              </li>
+              </ng-container>
+
+            <ng-container *ngFor="let p of pages">
+              <ng-container *ngIf="page==p">
+                <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+              </ng-container>
+
+              <ng-container *ngIf="page!=p">
+                <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+              </ng-container>
+
+            </ng-container>
+
+            <ng-container *ngIf="page==pages.length">
+            <li class="page-item disabled">
+              <button class="page-link btn p-1 px-3">التالى</button>
+            </li>
+           </ng-container>
+
+           <ng-container *ngIf="page!=pages.length">
+            <li class="page-item">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+            </li>
+           </ng-container>
+
+          </ul>
+        </nav>
 
       </div>
 
@@ -71,10 +104,7 @@
               <img src="https://www.hiamag.com/sites/default/files/styles/1000xauto/public/article/12/10/2021/xuin10-245131782_1548489262169588_3010436186952909049_n.jpg?itok=jXkdBBx3" alt="image" >
               </div>
 
-              <div class="col-lg-7  mt-3">
-                <p>
-                 ساره عبدالعزيز عبدالحكيم
-                </p>
+              <div class="col-lg-6  mt-3">
                 <p>{{selectProject.clientProfile.firstName}}
                   {{selectProject.clientProfile.lastName}}
                 </p>
