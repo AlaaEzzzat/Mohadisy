@@ -20,6 +20,8 @@ export class SpRequestAcceptComponent implements OnInit {
   descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
+  totalpages: any = 0;
+  pages:Array<any>=[];
 
  constructor(private api:ApiService) { }
 
@@ -29,6 +31,9 @@ export class SpRequestAcceptComponent implements OnInit {
 
    console.log(data);
    this.Listprojects=data.data.priceQuotes;
+   this.totalpages=data.data.totalPages;
+   for(let i=1;i<=this.totalpages;i++)
+    this.pages.push(i);
    if(this.Listprojects.length>0)
    this.result=1;
 

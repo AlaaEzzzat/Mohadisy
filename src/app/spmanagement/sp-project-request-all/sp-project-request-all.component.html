@@ -8,14 +8,13 @@
 
   <div class="section-2 mt-2">
     <div class="row">
-      <div class="col-4">
+      <div class="col-lg-4">
         <div class="row">
 
-          <ng-container *ngFor="let project of Listprojects |
-          paginate: {itemsPerPage:5, currentPage: page }">
+          <ng-container *ngFor="let project of Listprojects">
 
             <ng-container *ngIf="this.select==project.id">
-              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
@@ -30,7 +29,7 @@
 
 
             <ng-container *ngIf="this.select!=project.id">
-              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
@@ -46,46 +45,79 @@
           </ng-container>
 
 
-
-      <div class="paginate mt-4" *ngIf="result==1">
-        <pagination-controls (pageChange)="changepage($event)"
-        previousLabel="السابق"
-        nextLabel="التالى"
-        >
-        </pagination-controls>
-      </div>
-
         </div>
 
+
+      <nav aria-label="Page navigation" class="mt-4 mb-3">
+        <ul class="pagination">
+
+          <ng-container *ngIf="page==1">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+          </li>
+          </ng-container>
+
+           <ng-container *ngIf="page!=1">
+            <li class="page-item">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+          <ng-container *ngFor="let p of pages">
+            <ng-container *ngIf="page==p">
+              <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+            <ng-container *ngIf="page!=p">
+              <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="page==pages.length">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3">التالى</button>
+          </li>
+         </ng-container>
+
+         <ng-container *ngIf="page!=pages.length">
+          <li class="page-item">
+            <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+          </li>
+         </ng-container>
+
+        </ul>
+      </nav>
+
       </div>
 
 
-      <div class="col-8 mt-4 mb-3">
+      <div class="col-lg-8 mt-4 mb-3">
 
         <ng-container *ngIf="select!=0">
           <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
               <div class="card card-2 p-0">
                 <div class="row">
 
-                  <div class="col p-4 ">
+                  <div class="col-lg-10 p-4 ">
                     <div class="row ">
 
-                      <div class="col-5">
+                      <div class="col-lg-5">
                         كود الطلب : <span>{{selectProject?.code}}</span>
                       </div>
-                      <div class="col-1">|</div>
-                      <div class="col-5">
+                      <div class="col-lg-1">|</div>
+                      <div class="col-lg-5">
                         اسم المشروع : <span>{{selectProject?.name}}</span>
                       </div>
                     </div>
                     <p class="pt-4">موضوع المشروع:<span>{{selectProject?.subject}}</span></p>
                   </div>
 
-                   <div class="col-1 rep">
+                   <div class="col-lg-1 rep">
                      <i class="fa-solid fa-handshake">
                     </i>
-                    <a href="/Spmanagement/projects/new/request" class="btn text-white" (click)="addIdProject(selectProject.id)" routerLinkActive="active">الرد</a>
+                    <a href="/Spmanagement/projects/new/request"  style="margin-right:30%;" class="btn text-white" (click)="addIdProject(selectProject.id)" >الرد</a>
                   </div>
 
 
@@ -94,7 +126,7 @@
 
             </div>
 
-            <div class="col-12 mt-3 ">
+            <div class="col-lg-12 mt-3 ">
               <div class="card card-2">
                 <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
                 <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
@@ -114,9 +146,9 @@
               </div>
             </div>
 
-            <div class="col-12 mt-3">
+            <div class="col-lg-12 mt-3">
               <div class="row">
-                <div class="col-6 mt-3">
+                <div class="col-lg-6 mt-3">
                   <div class="card card-3">
                     <h6>مكونات المشروع</h6>
                     <ul>
@@ -145,7 +177,7 @@
                   </div>
                 </div>
 
-                <div class="col-6 mt-3">
+                <div class="col-lg-6 mt-3">
                   <div class="card card-3">
                     <h6>الاعمال المطلوبه</h6>
                     <ul>
@@ -187,7 +219,7 @@
                   </div>
                 </div>
 
-                <div class="col-6 mt-3">
+                <div class="col-lg-6 mt-3">
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
 
@@ -199,7 +231,7 @@
                       onclick="downloadFile(document.filePath,document.file)"
                       >
                         <i class="fa fa-download  mt-3" aria-hidden="true"></i>
-                        {{document?.file}}
+                        {{document?.file.substring(0,40)}}..
                       </button>
 
 

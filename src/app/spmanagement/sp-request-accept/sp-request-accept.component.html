@@ -46,32 +46,48 @@
         </ng-container>
 
 
-        <div class="paginate mt-4" *ngIf="result==1">
-          <pagination-controls (pageChange)="changepage($event)"
-          previousLabel="السابق"
-          nextLabel="التالى"
-          >
-          </pagination-controls>
-        </div>
-
-        <!--- <div class="col-12 card card-1 mt-4" >
-        <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-          <a class="btn text-success">تشطيب</a>
-        </p>
-        <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-        <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
       </div>
 
-      <div class="col-12 card card-1 mt-4">
-        <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-          <a class="btn text-success">تشطيب</a>
-        </p>
-        <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-        <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
-      </div>
-    -->
+      <nav aria-label="Page navigation" class="mt-4 mb-3">
+        <ul class="pagination">
 
-      </div>
+          <ng-container *ngIf="page==1">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+          </li>
+          </ng-container>
+
+           <ng-container *ngIf="page!=1">
+            <li class="page-item">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+          <ng-container *ngFor="let p of pages">
+            <ng-container *ngIf="page==p">
+              <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+            <ng-container *ngIf="page!=p">
+              <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="page==pages.length">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3">التالى</button>
+          </li>
+         </ng-container>
+
+         <ng-container *ngIf="page!=pages.length">
+          <li class="page-item">
+            <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+          </li>
+         </ng-container>
+
+        </ul>
+      </nav>
 
     </div>
 

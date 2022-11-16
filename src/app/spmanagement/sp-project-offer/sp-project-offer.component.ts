@@ -20,7 +20,6 @@ export class SpProjectOfferComponent implements OnInit {
   descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
-  pagenation:any=[];
   totalpages: any = 0;
   pages:Array<any>=[];
 
