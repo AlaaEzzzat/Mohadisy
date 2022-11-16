@@ -124,4 +124,32 @@ export class ClientService {
       `${environment.baseUrl}/api/Project/getProjectsByService/${serviceId}`
     );
   }
+  /* ****************************** */
+  getClientCurrentProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientCurrentProjects/Page/${page}`
+    );
+  }
+  getClientPendingProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientPendingProjects/Page/${page}`
+    );
+  }
+  getClientFinishedProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientFinishedProjects/Page/${page}`
+    );
+  }
+  getClientLateProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientLateProjects/Page/${page}`
+    );
+  }
+  getClientStoppedProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientStoppedProjects/Page/${page}`
+    );
+  }
+
+
 }

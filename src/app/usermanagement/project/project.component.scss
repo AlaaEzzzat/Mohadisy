@@ -1,8 +1,26 @@
-.project{
-      *{
-            color: #004057;
+.projects{
+      
+      .cairo{
+        font-family: 'Cairo';
       }
-      .cairo{ font-family: 'cairo';}
+      .tajawal{
+        font-family: 'Tajawal';
+        font-weight: 500;
+      }
+      .mainColor{
+        color: #004057;
+      }
+        .secondColor{
+          color:#18AF9A;
+        }
+        .mainBk{
+          background-color: #004057;
+          color: #FFF;
+         }
+           .secondBk{
+             background-color:#18AF9A;
+          color: #FFF;
+           }
       .card
       {
          border: none;
@@ -42,14 +60,14 @@ a{
     }
     
     div[role="progressbar"] {
-      --size: 9rem;
+      
       margin: auto;
       --fg: #004057;
       --bg: #def;
       --pgPercentage: var(--value);
       animation: growProgressBar 3s 1 forwards;
-      width: var(--size);
-      height: var(--size);
+      width: 6rem;
+      height: 6rem;
       border-radius: 50%;
       display: grid;
       place-items: center;
@@ -58,7 +76,7 @@ a{
         conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
         ;
       font-family: Helvetica, Arial, sans-serif;
-      font-size: calc(var(--size) / 5);
+      font-size: calc(var(6rem) / 5);
       color: var(--fg);
     }
     

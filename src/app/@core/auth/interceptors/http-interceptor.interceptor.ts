@@ -48,11 +48,10 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((returnedError) => {
         let errorMessage = null;
-
         if (returnedError.error instanceof ErrorEvent) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message} `;
+          errorMessage = ` ${returnedError.error.message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message}`;
+          errorMessage = `${returnedError.error.message}`;
           handled = this.handleServerSideError(returnedError);
         }
 

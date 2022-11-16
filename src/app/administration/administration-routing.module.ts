@@ -35,8 +35,6 @@ const routes: Routes = [
       { path: 'sp', component: AdminSPComponent },
       { path: 'updata', component: AdminSpUpdataComponent },
       { path: 'test', component: TestComponent },
-
-
       { path: '', redirectTo: 'clients', pathMatch: 'full' },
     ],
   },
