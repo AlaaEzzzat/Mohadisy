@@ -60,10 +60,12 @@ const routes: Routes = [
               { path: 'current', component: SpProjectCurrentComponent },
             ],
           },
+
+          { path: 'all', component: SpProjectsComponent },
+         { path: 'all/request', component: SpCprojectRequestComponent },
         ],
       },
-      { path: 'all', component: SpProjectsComponent },
-      { path: 'all/request', component: SpCprojectRequestComponent },
+
 
       { path: 'mainProfile', component: SpMainProfileComponent },
 
