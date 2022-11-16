@@ -21,4 +21,9 @@ export class PaymentService {
       data
     );
   }
+  getMilestones(offerId: number): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Milestone/getMilestonesByOfferId/${offerId}`
+    );
+  }
 }

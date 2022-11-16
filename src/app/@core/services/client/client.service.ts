@@ -125,6 +125,17 @@ export class ClientService {
     );
   }
   /* ****************************** */
+  getMilestonesByOfferId(offerId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Milestone/getMilestonesByOfferId/${offerId}`
+    );
+  }
+  getOfferSenderProfile(profileId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Offer/getOfferSenderProfile/${profileId}`
+    );
+  }
+
   getClientCurrentProjects(page: any): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/Project/getClientCurrentProjects/Page/${page}`
@@ -150,6 +161,4 @@ export class ClientService {
       `${environment.baseUrl}/api/Project/getClientStoppedProjects/Page/${page}`
     );
   }
-
-
 }

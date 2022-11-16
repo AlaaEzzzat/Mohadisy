@@ -45,8 +45,9 @@ export class UserPriceOffersComponent implements OnInit {
   activeProjectReqWorks: any = [];
   activeProjectsComponents: any = [];
   client: any = {};
-  modalSrc :any = "";
+  modalSrc: any = '';
   showModal: boolean = false;
+  fristMilestoneId: any = 0;
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -172,7 +173,7 @@ export class UserPriceOffersComponent implements OnInit {
 
     this.showProjectProfile = false;
     this.selectedProject = project;
-    console.log(this.selectedProject)
+    console.log(this.selectedProject);
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
 
@@ -200,6 +201,17 @@ export class UserPriceOffersComponent implements OnInit {
     this.invoiceValue =
       offer.totalCost - offer.cost + offer.cost / offer.numberOfMilestones;
     console.log(this.invoiceValue);
+    //GET milestones
+    this.paymentService.getMilestones(offer.id).subscribe((data: any) => {
+      console.log(data.data);
+      const milestones = data.data;
+      milestones.map((milestone: any) => {
+        if (milestone.isFirstMilestone) {
+          this.fristMilestoneId = milestone.id;
+          console.log(this.fristMilestoneId);
+        }
+      });
+    });
     var payData = {
       _invoiceAmount: this.invoiceValue,
       _currencyIso: 'SAR',
@@ -208,6 +220,12 @@ export class UserPriceOffersComponent implements OnInit {
       next: (response: any) => {
         this._toastr.info(response.Message);
         this.PaymentMethodsList = response.Data.PaymentMethods;
+        console.log(this.PaymentMethodsList);
+        this.PaymentMethodsList.map((method: any) => {
+          if (method.PaymentMethodId == 2) {
+            this.goToPay(method.PaymentMethodId);
+          }
+        });
         this.paymethods = true;
       },
       error: (err: any) => {
@@ -220,10 +238,9 @@ export class UserPriceOffersComponent implements OnInit {
     this.clientPaymentData.paymentMethodId = payMethodId;
     this.clientPaymentData.displayCurrencyIso = 'SAR';
     this.clientPaymentData.mobileCountryCode = '+996';
-    this.clientPaymentData.callBackUrl = `https://app.mohandisy.com/api/Milestone/paidMilestone/1`;
+    this.clientPaymentData.callBackUrl = `https://app.mohandisy.com/api/Milestone/paidMilestone/${this.fristMilestoneId}`;
     this.clientPaymentData.errorUrl = 'https://www.facebook.com';
     this.clientPaymentData.language = 'ar';
-
     this.clientPaymentData.customerName =
       this.client?.firstName + ' ' + this.client?.lastName;
     this.clientPaymentData.customerMobile =
@@ -251,7 +268,7 @@ export class UserPriceOffersComponent implements OnInit {
       }
     );
   }
-  showImg(src:any){
+  showImg(src: any) {
     this.showModal = true;
     this.modalSrc = src;
   }

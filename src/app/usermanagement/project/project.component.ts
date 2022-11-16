@@ -6,126 +6,176 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
-params:any="";
-activeService: any = 1;
-activeProject: any = 1;
-projectServices: any = [];
-projectServiesArray: any = [];
-projectCategory: any =[
-  {id:1, name:"مشاريع حالية"},
-  {id:2, name:"مشاريع معلقه"},
-  {id:3, name:"مشاريع منتهية"},
-  {id:4, name:"مشاريع متأخرة"},
-  {id:5, name:"مشاريع معطلة"}
- ];
+  params: any = '';
+  activeService: any = 1;
+  activeProject: any = 1;
+  projectServices: any = [];
+  projectServiesArray: any = [];
+  numOfCompltedMilesones: any = 0;
+  projectCategory: any = [
+    { id: 1, name: 'مشاريع حالية' },
+    { id: 2, name: 'مشاريع معلقه' },
+    { id: 3, name: 'مشاريع منتهية' },
+    { id: 4, name: 'مشاريع متأخرة' },
+    { id: 5, name: 'مشاريع معطلة' },
+  ];
 
-activeCategory:any =1;
-  projectId:any='';
-  serviceId:any="";
-  project : any = {};
-  projectsComponents:any = [];
-  projectReqWorks:any = [];
-  numOfMilestonesCompleted:number = 0;
-  showModal:boolean = false;
-  modalSrc:any="";
-
+  activeCategory: any = 1;
+  projectId: any = '';
+  serviceId: any = '';
+  project: any = {};
+  projectsComponents: any = [];
+  projectReqWorks: any = [];
+  numOfMilestonesCompleted: number = 0;
+  showModal: boolean = false;
+  modalSrc: any = '';
+  projectMilestnes: any = [];
   page: number = 1;
   totalpages: any = 0;
   pagenation: any = [];
-
-  constructor( private _HttpClient: HttpClient,private activatedRoute:ActivatedRoute, private clientService:ClientService) { }
- isActiveService(id: any) {
-  this.activeService = id;
-  this.isActiveCategory(this.activeCategory)
+  offerSender: any = {};
+  constructor(
+    private _HttpClient: HttpClient,
+    private activatedRoute: ActivatedRoute,
+    private clientService: ClientService
+  ) {}
+  isActiveService(id: any) {
+    this.activeService = id;
+    this.isActiveCategory(this.activeCategory);
   }
-  isActiveCategory(id:any){
+  isActiveCategory(id: any) {
     this.activeCategory = id;
-    this.projectServiesArray=[];
-    switch(id) {
+    this.projectServiesArray = [];
+    switch (id) {
       case 1:
-         this.clientService.getClientCurrentProjects(this.page).subscribe((data) => {
-          data.data.projects.map((pro:any)=>{
-            if(pro.projectServiceId == this.activeService){
-              this.projectServiesArray.push(pro);
-            }
-          })
-      this.totalpages= data.data.totalPages;
-      this.counter(this.totalpages);
-      console.log(this.projectServiesArray)
-      this.showDetails(this.projectServiesArray[0])
-    /*   this.activeCategory = this.projectServiesArray[0].id;
-      this.isActiveService(this.activeCategory); */
-    });
-    
-        break;
-        case 2:
-           this.clientService.getClientPendingProjects(this.page).subscribe((data) => {
-            data.data.projects.map((pro:any)=>{
-              if(pro.projectServiceId == this.activeService){
+        this.clientService
+          .getClientCurrentProjects(this.page)
+          .subscribe((data) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
               }
-            })
-        this.totalpages= data.data.totalPages;
-        this.counter(this.totalpages);
-        console.log(this.projectServiesArray)
-        this.showDetails(this.projectServiesArray[0])
-    });
-    
-          break;
-          case 3:
-         this.clientService.getClientFinishedProjects(this.page).subscribe((data) => {
-          data.data.projects.map((pro:any)=>{
-            if(pro.projectServiceId == this.activeService){
-              this.projectServiesArray.push(pro);
-            }
-          })
-      this.totalpages= data.data.totalPages;
-      this.counter(this.totalpages);
-      console.log(this.projectServiesArray)
-      this.showDetails(this.projectServiesArray[0])
-    });
-    
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.showDetails(this.projectServiesArray[0]);
+          });
+
         break;
-        case 4:
-         this.clientService.getClientLateProjects(this.page).subscribe((data) => {
-          data.data.projects.map((pro:any)=>{
-            if(pro.projectServiceId == this.activeService){
-              this.projectServiesArray.push(pro);
-            }
-          })
-      this.totalpages= data.data.totalPages;
-      this.counter(this.totalpages);
-      console.log(this.projectServiesArray)
-      this.showDetails(this.projectServiesArray[0])
-    });
-    
+      case 2:
+        this.clientService
+          .getClientPendingProjects(this.page)
+          .subscribe((data) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.showDetails(this.projectServiesArray[0]);
+          });
+
         break;
-        case 5:
-         this.clientService.getClientStoppedProjects(this.page).subscribe((data) => {
-          data.data.projects.map((pro:any)=>{
-            if(pro.projectServiceId == this.activeService){
-              this.projectServiesArray.push(pro);
-            }
-          })
-      this.totalpages= data.data.totalPages;
-      this.counter(this.totalpages);
-      console.log(this.projectServiesArray)
-      this.showDetails(this.projectServiesArray[0])
-    }); 
-    
+      case 3:
+        this.clientService
+          .getClientFinishedProjects(this.page)
+          .subscribe((data) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.showDetails(this.projectServiesArray[0]);
+          });
+
+        break;
+      case 4:
+        this.clientService
+          .getClientLateProjects(this.page)
+          .subscribe((data) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.showDetails(this.projectServiesArray[0]);
+          });
+
+        break;
+      case 5:
+        this.clientService
+          .getClientStoppedProjects(this.page)
+          .subscribe((data) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.showDetails(this.projectServiesArray[0]);
+          });
+
         break;
       default:
-        console.log("nothing")
+        console.log('nothing');
     }
-
   }
-  showDetails(project: any){
- this.project = project;
- this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
- this.mapOnProjectsComponets(project.projectComponents);
+  showDetails(project: any) {
+    this.project = project;
+    this.activeProject = project.id;
+    if (project.offers.length > 0) {
+      this.clientService
+        .getMilestonesByOfferId(project.offers[0]?.id)
+        .subscribe((milestones: any) => {
+          this.projectMilestnes = milestones.data;
+          console.log(this.projectMilestnes);
+          this.projectMilestnes.map((mile: any) => {
+            if (mile.isPaid) {
+              this.numOfCompltedMilesones++;
+            }
+          });
+          console.log(this.numOfCompltedMilesones);
+        });
+      if (project.offers[0]?.individualServiceProviderProfileId) {
+        this.clientService
+          .getOfferSenderProfile(
+            project.offers[0]?.individualServiceProviderProfileId
+          )
+          .subscribe((data: any) => {
+            this.offerSender = data.data;
+            console.log(this.offerSender);
+          });
+      } else {
+        this.clientService
+          .getOfferSenderProfile(
+            project.offers[0]?.organizationalServiceProviderProfileId
+          )
+          .subscribe((data: any) => {
+            this.offerSender = data.data;
+            console.log(this.offerSender);
+          });
+      }
+    }
+    if (project.projectRequiredWorks.length > 0) {
+      this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
+    }
+    if (project.projectComponents.length > 0) {
+      this.mapOnProjectsComponets(project.projectComponents);
+    }
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -133,13 +183,13 @@ activeCategory:any =1;
   next() {
     if (this.page < this.totalpages) {
       this.page = this.page + 1;
-       this.isActiveCategory(this.activeCategory); 
+      this.isActiveCategory(this.activeCategory);
     }
   }
   prev() {
     if (this.page > 1) {
       this.page = this.page - 1;
-      this.isActiveCategory(this.activeCategory); 
+      this.isActiveCategory(this.activeCategory);
     }
   }
   ngOnInit(): void {
@@ -147,17 +197,16 @@ activeCategory:any =1;
       this.projectServices = data.data.projectServices;
       this.activeService = this.projectServices[0].id;
       this.isActiveService(this.activeService);
-   
     });
-    
-/* this.activatedRoute.paramMap.subscribe((paramMap)=>{
+
+    /* this.activatedRoute.paramMap.subscribe((paramMap)=>{
   this.params = paramMap.get('id')?paramMap.get('id') : '';
   this.serviceId = this.params?.split("-")[0];
   this.projectId=this.params?.split("-")[1];
   console.log(this.serviceId)
   this.clientService.getProjectsByService(this.serviceId).subscribe((projects:any)=>{
     console.log(projects.data);
-  
+
 
 projects.data.map((project:any)=>{
   if(project.id == this.projectId){
@@ -214,7 +263,7 @@ projects.data.map((project:any)=>{
       }
     );
   }
-  showImg(src:any){
+  showImg(src: any) {
     this.showModal = true;
     this.modalSrc = src;
   }
