@@ -7,15 +7,14 @@
 
 <div class="section-2 mt-2">
   <div class="row">
-    <div class="col-4">
+    <div class="col-lg-4">
       <div class="row">
 
-        <ng-container *ngFor="let project of Listprojects |
-          paginate: {itemsPerPage:5, currentPage: page }"
+        <ng-container *ngFor="let project of Listprojects "
         >
 
           <ng-container *ngIf="this.select==project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
               <p><i class="far fa-user "></i>
                 <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
@@ -30,7 +29,7 @@
 
 
           <ng-container *ngIf="this.select!=project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:white;  color:#004057;">
               <p><i class="far fa-user "></i>
                 <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
@@ -48,7 +47,7 @@
 
       </div>
 
-      <nav aria-label="Page navigation" class="mt-4 mb-3">
+      <nav aria-label="Page navigation" class="mt-4 mb-3" *ngIf="result==1">
         <ul class="pagination">
 
           <ng-container *ngIf="page==1">
@@ -92,14 +91,14 @@
     </div>
 
 
-    <div class="col-8 mt-4 mb-3">
+    <div class="col-lg-8 mt-4 mb-3">
 
       <ng-container *ngIf="select!=0">
         <div class="row">
-          <div class="col-12">
+          <div class="col-lg-12">
             <div class="card card-2 p-0">
               <div class="row">
-                <div class="col-7 p-2  content">
+                <div class="col-lg-7 p-2  content">
 
                      <p> كود الطلب : {{selectProject.code}}</p>
 
@@ -119,8 +118,8 @@
 
                 </div>
 
-                <div class="col-5 mt-2 text-warning">
-                  <p style="padding-right: 50%;
+                <div class="col-lg-5 mt-2 text-warning">
+                  <p style="padding-right: 70%;
                   font-weight:400;
                   font-size: 15px;
                    ">{{selectProject.projectRequestStatus.projectStatus.nameAr}} </p>
@@ -135,9 +134,9 @@
 
 
 
-          <div class="col-12 mt-3">
+          <div class="col-lg-12 mt-3">
             <div class="row">
-              <div class="col-6 mt-3">
+              <div class="col-lg-6 mt-3">
                 <div class="card card-3">
                   <h6>مكونات المشروع</h6>
                   <ul>
@@ -156,7 +155,7 @@
                         </li>
 
                         <ng-container *ngIf="descComponent[component.id]==1">
-                          <p>{{component.description}} مشروع مشروع مشروع</p>
+                          <p>{{component?.description}}</p>
                         </ng-container>
 
                       </div>
@@ -166,7 +165,7 @@
                 </div>
               </div>
 
-              <div class="col-6 mt-3">
+              <div class="col-lg-6 mt-3">
                 <div class="card card-3">
                   <h6>الاعمال المطلوبه</h6>
                   <ul>
@@ -208,7 +207,7 @@
                 </div>
               </div>
 
-              <div class="col-6 mt-3">
+              <div class="col-lg-6 mt-3">
                 <div class="card card-3">
                   <h6>الملفات الخاصه بالمشروع</h6>
 
