@@ -9,7 +9,6 @@ import { AdminProjectComponent } from './admin-project/admin-project.component';
 import { AdminClientsComponent } from './admin-clients/admin-clients.component';
 import { AdminContributionsComponent } from './admin-contributions/admin-contributions.component';
 import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
-import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -37,7 +36,6 @@ import { MatMenuModule } from '@angular/material/menu';
     AdminClientsComponent,
     AdminContributionsComponent,
     AdminMessagesComponent,
-    AdminPaymentsComponent,
     AdminSettingsComponent,
     AdminSPComponent,
     TestComponent,

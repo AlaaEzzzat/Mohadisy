@@ -362,8 +362,6 @@ class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
           </div>
 
 
-        <!-- </div> -->
-
 
     </div>
 
@@ -375,7 +373,363 @@ class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
 </div>
 </div>
 
+<!-- <div class="container-fluid my-4">
+  <div class="col-12 d-flex flex-row justify-content-between">
+    <div class="col-3">
+      <div class="example-button-row mb-2">
+        <button
+          mat-button
+          class="col-12 h3 buttonChose border-0 py-2"
+          (click)="getProfileAdmin()"
+          [ngStyle]="{
+            'background-color': state === 1 ? '#004958' : '#ffffff',
+            color: state === 1 ? '#ffffff' : '#000000'
+          }"
+        >
+          الملف الشخصي
+        </button>
+      </div>
+
+      <div class="example-button-row">
+        <button
+          mat-button
+          class="col-12 h3 buttonChose border-0 py-2"
+          (click)="getProfileAdmin()"
+          [ngStyle]="{
+            'background-color': state === 3 ? '#004958' : '#ffffff',
+            color: state === 3 ? '#ffffff' : '#000000'
+          }"
+          (click)="changeAndGetClint()"
+        >
+          المستخدمين
+        </button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="state === 1">
+      <div class="d-flex flex-column col-9 me-3">
+        <div class="card mb-3 border-0 rounded-0">
+          <div class="row g-0">
+            <div class="col-md-2">
+              <img
+                src="{{ iProfileAdmin.adminProfile.profilePicturePath }}"
+                class="img-fluid rounded-1 h-100"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title nameProfile">
+                    {{ iProfileAdmin.adminProfile.firstName }}
+                    {{ iProfileAdmin.adminProfile.lastName }}
+                  </h5>
+                  <span class="edit" (click)="changeFirstOrLastName()"
+                    >تعديل
+                  </span>
+                </div>
+
+                <p class="card-text emANumProfile">
+                  {{ iProfileAdmin.phoneNumber }}
+                </p>
+                <p class="card-text emANumProfile">{{ iProfileAdmin.email }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+   
+
+        <div
+          class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
+        >
+          <p class="stutsProfile">تم اضافته <span></span></p>
+          <p class="stutsProfile">
+            منذ {{ iProfileAdmin.adminProfile.dateCreated | date }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
 
 
+    <ng-container *ngIf="state === 2">
+      <div class="d-flex flex-column col-9 me-3">
 
+        <div class="card mb-3 border-0 rounded-0">
+          <div class="row g-0">
+            <div class="col-md-2">
+              <img
+                src="{{ iProfileAdmin.adminProfile.profilePicturePath }}"
+                class="img-fluid rounded-1 h-100"
+                alt="..."
+              />
+            </div>
+            <div class="col-md-10">
+              <div class="card-body">
+                <div class="d-flex flex-column justify-content-between">
+                  <form class="example-form" [formGroup]="userformlogin">
+                    <div class="row g-2">
+                      <div class="col-md">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="firstName"
+                            id="firstName"
+                            placeholder="admin"
+                            value="text"
+                            formControlName="firstName"
+                          />
+                          <label for="firstName">اسم الاول </label>
+                        </div>
+                      </div>
+                      <div class="col-md">
+                        <div class="form-floating">
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="lastName"
+                            id="lastName"
+                            placeholder="admin"
+                            value="text"
+                            formControlName="lastName"
+                          />
+                          <label for="lastName">اسم عائله</label>
+                        </div>
+                      </div>
+                    </div>
 
+                    <button
+                      (click)="updateAdminProfile()"
+                      class="btn btndark my-3 rounded-0 px-3"
+                    >
+                      حفظ
+                    </button>
+                  </form>
+
+                  <p class="card-text emANumProfile">
+                    {{ iProfileAdmin.phoneNumber }}
+                  </p>
+                  <p class="card-text emANumProfile">
+                    {{ iProfileAdmin.email }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white py-2 px-4 d-flex justify-content-between align-items-center"
+        >
+          <p class="stutsProfile">تم اضافته <span></span></p>
+          <p class="stutsProfile">
+            منذ {{ iProfileAdmin.adminProfile.dateCreated | date }}
+          </p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="state === 3">
+      <div class="col-9 me-2">
+        <div class="col-12 me-2 mb-5">
+          <div
+            class="bg-white p-3 mb-3 d-flex justify-content-between align-items-center"
+          >
+            <p class="titles fw-bold" style="color: #004057">المستخدمين</p>
+          </div>
+
+          <div class="d-flex justify-content-between flex-column">
+            <ng-container
+              *ngFor="
+                let user of usersActive"
+            >
+              <div
+                class="col-12 d-flex justify-content-between align-items-center mt-2"
+              >
+                <div
+                  class="bg-white col-12 py-2 d-flex justify-content-between align-items-center flex-lg-row flex-column"
+                >
+                  <div
+                    class="card mb-3 border-0 col-lg-5 col-12 justify-content-center align-items-center"
+                  >
+                    <div
+                      class="row g-0 justify-content-center align-items-center"
+                    >
+                      
+                      <div class="col-md-12 text-lg-end text-center">
+                        <div class="card-body">
+                          <p class="card-text titles" style="color: #18af9a">
+                            {{ user.userName }}
+                          </p>
+                          <p class="card-text titles" style="color: #1d1c1c">
+                            {{ user.email }}
+                          </p>
+                          <p class="card-text titles" style="color: #1d1c1c">
+                            {{ user.phoneNumber }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-evenly align-items-center border-0 col-lg-2 col-12 flex-md-row flex-column"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-primary position-relative badge px-4 py-2 mb-lg-0 mb-2 border-0 rounded-pill fs-6 mx-1"
+                      [ngStyle]="{
+                        'background-color':
+                          user.applicationRole.key === 'SP'
+                            ? '#D1EFEB'
+                            : '#ECD4F4',
+                        color:
+                          user.applicationRole.key === 'SP'
+                            ? '#46BFAE'
+                            : '#CE92E3'
+                      }"
+                    >
+                      {{ user.applicationRole.arabicName }}
+                      <span
+                        class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
+                      >
+                        <img
+                          src="/assets/icons/Group 542.png"
+                          alt=""
+                          sizes=""
+                          srcset=""
+                        />
+                        <span class="visually-hidden">New</span>
+                      </span>
+                    </button>
+                  </div>
+
+                  <div
+                    class="d-flex justify-content-evenly align-items-center col-lg-3 col-12 mx-3 flex-md-row flex-column"
+                  >
+                    <div class="example-button-container col-3 mb-lg-0 mb-2">
+                      <button
+                        mat-mini-fab
+                        disabled
+                        aria-label="Example icon button with a home icon"
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </div>
+
+                    <div
+                      class="example-button-container col-3 border-end py-2 px-2 mb-lg-0 mb-2 text-center align-content-center"
+                    >
+                      <mat-slide-toggle></mat-slide-toggle>
+                    </div>
+
+                    <div
+                      class="example-button-container border-end mb-lg-0 mb-2"
+                    >
+                      <button
+                        class="col-3"
+                        mat-icon-button
+                        disabled
+                        aria-label="Example icon button with a open in new tab icon"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+
+          <div
+            class="p-3 my-3 d-flex justify-content-between align-items-center"
+            style="background-color: #dfdfdf"
+          >
+            <p class="titles fw-bold" style="color: #004057">
+              المستخدمين المعطلين
+            </p>
+          </div>
+          <ng-container  *ngFor="let usersNot of usersNotActive">
+          <div class="col-12 d-flex flex-column justify-content-between align-items-center mb-2">
+            <div
+              class="bg-white col-12 py-2 d-flex justify-content-between align-items-center flex-lg-row flex-column"
+            >
+              <div
+                class="card mb-3 border-0 col-lg-5 col-12 justify-content-center align-items-center"
+              >
+                <div class="row g-0 justify-content-center align-items-center">
+                  <div class="col-md-11 text-lg-end text-center">
+                    <div class="card-body">
+                      <p class="card-text titles" style="color: #18af9a">
+                        {{ usersNot.userName }}
+                      </p>
+                      <p class="card-text titles" style="color: #1d1c1c">
+                        {{ usersNot.email }}
+                      </p>
+                      <p class="card-text titles" style="color: #1d1c1c">
+                        {{ usersNot.phoneNumber }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="d-flex justify-content-evenly align-items-center border-0 col-lg-3 col-12 flex-md-row flex-column"
+              >
+                <button
+                  type="button"
+                  class="btn btn-primary position-relative badge bg-primary px-4 py-2 mb-lg-0 mb-2 rounded-pill fs-6 mx-1"
+                >
+                  عميل
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
+                  >
+                    <img
+                      src="/assets/icons/Group 542.png"
+                      alt=""
+                      sizes=""
+                      srcset=""
+                    />
+                    <span class="visually-hidden">New</span>
+                  </span>
+                </button>
+              </div>
+
+              <div
+                class="d-flex justify-content-evenly align-items-center col-lg-3 col-12 mx-3 flex-md-row flex-column"
+              >
+                <div class="example-button-container col-3 mb-lg-0 mb-2">
+                  <button
+                    mat-mini-fab
+                    disabled
+                    aria-label="Example icon button with a home icon"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+
+                <div
+                  class="example-button-container col-3 border-end py-2 px-2 mb-lg-0 mb-2 text-center align-content-center"
+                >
+                  <mat-slide-toggle></mat-slide-toggle>
+                </div>
+
+                <div class="example-button-container border-end mb-lg-0 mb-2">
+                  <button
+                    class="col-3"
+                    mat-icon-button
+                    disabled
+                    aria-label="Example icon button with a open in new tab icon"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div> -->

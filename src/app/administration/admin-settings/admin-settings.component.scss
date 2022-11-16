@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Tajawal', sans-serif;
+$fontTajawalFamily: 'Cairo', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
@@ -12,6 +12,10 @@ $font40Size:40px;
 $font20Size:20px;
 $font15Size:15px;
 
+.cairo{
+  font-family: "cairo";
+
+}
 
 @mixin titleTotal($fontS,$fontfa){
   font-size: $fontS;
