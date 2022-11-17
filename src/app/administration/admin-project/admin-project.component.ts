@@ -7,6 +7,7 @@ import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IrequiredWorks } from 'src/app/@models/irequired-works';
 // import { IrequiredWorks } from 'src/app/@models/irequired-works';
 
 
@@ -37,7 +38,7 @@ export class AdminProjectComponent implements OnInit {
   show:boolean=false;
   showDanger:boolean=false;
   isProcessing:boolean=true;
-  // requiredWorkId:IrequiredWorks[]=[];
+  requiredWorkId:IrequiredWorks[]=[];
   requiredWorkIdObject:any[]=[]
 
   componentId:any[]=[];
@@ -365,45 +366,45 @@ export class AdminProjectComponent implements OnInit {
     );
   }
 
-  // projectRequiredWorks(){
-  //   this.requiredWorkId=[]
-  //   this.requiredWorkIdObject=[]
-  //   let requiredWorkIdObjects:any;
-  //   for(let projectRe of this.productCurrent.projectRequiredWorks){
-  //     console.log(projectRe.requiredWorkId)
-  //     this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
-  //       next:((data)=>{
-  //         this.requiredWorkId.push(data.data)
-  //         console.log(this.requiredWorkId)
+  projectRequiredWorks(){
+    this.requiredWorkId=[]
+    this.requiredWorkIdObject=[]
+    let requiredWorkIdObjects:any;
+    for(let projectRe of this.productCurrent.projectRequiredWorks){
+      console.log(projectRe.requiredWorkId)
+      this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
+        next:((data)=>{
+          this.requiredWorkId.push(data.data)
+          console.log(this.requiredWorkId)
 
-  //         for(let requiredWork of this.requiredWorkId){
-  //           requiredWorkIdObjects=requiredWork
-  //           for(let requiredWorkObject of requiredWorkIdObjects){
-  //             this.requiredWorkIdObject.push(requiredWorkObject)
+          for(let requiredWork of this.requiredWorkId){
+            requiredWorkIdObjects=requiredWork
+            for(let requiredWorkObject of requiredWorkIdObjects){
+              this.requiredWorkIdObject.push(requiredWorkObject)
 
 
-  //           } console.log(this.requiredWorkIdObject)
+            } console.log(this.requiredWorkIdObject)
 
-  //         }
+          }
 
-  //       })
-  //     })
-  //   }
+        })
+      })
+    }
 
-  // }
-//   projectComponents(){
-//     this.componentId=[]
-//     for(let projectCom of this.productCurrent.projectComponents){
-//       this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
-//         next:((data=>{
-//               this.componentId.push(data.data.name)
-//               // console.log(this.componentId)
-//               // console.log(data)
+  }
+  projectComponents(){
+    this.componentId=[]
+    for(let projectCom of this.productCurrent.projectComponents){
+      this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
+        next:((data=>{
+              this.componentId.push(data.data.name)
+              // console.log(this.componentId)
+              // console.log(data)
 
-//         }))
-//       })
+        }))
+      })
 
-//     }
+    }
 
-//   }
+  }
 }
