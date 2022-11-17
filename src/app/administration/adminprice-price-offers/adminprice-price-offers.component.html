@@ -353,7 +353,7 @@
     </div>
       <!-- معلومات عن العميل -->
       <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h1 class="card-title mb-4 titleInformation">معلومات عن العميل</h1>
+        <h5 class="card-title mb-4 titleInformation">معلومات عن العميل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
             <div class="d-flex flex-row justify-content-between">
@@ -549,10 +549,10 @@
           class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center justify-content-center px-3 pt-4 pb-3"
         >
           <img src="assets/icons/calendar.svg" alt="" srcset="" class="imges" />
-          <h1 class="fs-4 fw-bold" style="color: #004057">
+          <h5 class="fs-4 fw-bold" style="color: #004057">
             {{ calculateDiffEend(productCurrent.pricequoteEndDate) }}
             <sub class="fs-5 fw-normal"> يوم</sub>
-          </h1>
+          </h5>
           <span style="color: #004057">لانتهاء عرض السعر </span>
         </div>
       </div>
@@ -560,7 +560,7 @@
       <!--  -->
       <div  class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-md-2 ps-0 mb-3" >
         <div class="col-lg-6 col-12 d-flex  p-3 bg-white ms-lg-1 ms-0 align-content-end flex-column mb-lg-0 mb-3">
-        <h4 class="card-title mb-4 titleInformation">مكونات  المشروع</h4>
+        <h5 class="card-title mb-4 titleInformation">مكونات  المشروع</h5>
 
           <ng-container *ngFor="let comp of componentId">
             <div class="d-flex align-items-start mb-2">
@@ -579,7 +579,7 @@
         </div>
         <div class="col-lg-6 col-12 p-3 bg-white me-lg-1 me-0 align-content-start flex-column" >
 
-          <h4 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h4>
+          <h5 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h5>
 
           <div>
             <ng-container *ngFor="let reqW of requiredWorkIdObject">
@@ -629,9 +629,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h1 class="modal-title" id="exampleModalLabel">
+        <h5 class="modal-title" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا العرض ؟
-        </h1>
+        </h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -662,9 +662,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب عدم اكتمال عرض
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -720,9 +720,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب تعطيل الحساب
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -778,9 +778,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا العرض ؟
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -819,9 +819,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h1 class="modal-title" id="exampleModalLabel">
+        <h5 class="modal-title" id="exampleModalLabel">
           هل انت متاكد من تفعيل هذاالحساب ؟
-        </h1>
+        </h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -854,7 +854,7 @@
       <div
         class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h4>
+        <h5 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h5>
         <button
           type="button"
           class="btn text-white col-1"
@@ -865,7 +865,7 @@
         </button>
       </div>
       <div class="modal-body my-3 modalbody">
-        <h4 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h4>
+        <h5 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
       </div>
       <div class="modal-footer modalfooter">
         <button

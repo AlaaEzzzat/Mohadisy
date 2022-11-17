@@ -429,7 +429,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
       >
-        <h4 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h4>
+        <h5 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h5>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
@@ -672,7 +672,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
       >
-        <h4 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h4>
+        <h5 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h5>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
@@ -736,7 +736,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
       >
-        <h4 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h4>
+        <h5 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">الدوله</p>
@@ -827,7 +827,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
       >
-        <h4 class="card-title mb-4 titleInformation">معلومات التواصل</h4>
+        <h5 class="card-title mb-4 titleInformation">معلومات التواصل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">الدوله</p>
@@ -925,7 +925,7 @@
         class="col-12 card mb-3 border-0 rounded-0 p-3"
         *ngIf="productCurrent.applicationUser.accountType.key == 'CO'"
       >
-        <h4 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h4>
+        <h5 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h5>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted fs-6">الاسم</p>
@@ -970,7 +970,7 @@
 
       <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
       ">
-        <h4 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h4>
+        <h5 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h5>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted h5">الاسم</p>
@@ -1003,7 +1003,7 @@
       </div> -->
       <!-- معلومات عن الموظفين-->
       <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h4 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h4>
+        <h5 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h5>
         card loop
         <div
           class="d-flex col-12 mb-4"
@@ -1043,7 +1043,7 @@
 
   <ng-template #undefind>
     <div
-      class="alert alert-danger d-flex align-items-center h4"
+      class="alert alert-danger d-flex align-items-center h5"
       role="alert"
       *ngIf="!isProcessing"
     >
@@ -1064,9 +1064,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب عدم اكتمال الحساب
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -1122,9 +1122,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب تعطيل الحساب
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -1180,9 +1180,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا الطلب ؟
-        </h4>
+        </h5>
 
         <button
           type="button"
@@ -1221,9 +1221,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <h4 class="modal-title" id="exampleModalLabel">
+        <h5 class="modal-title" id="exampleModalLabel">
           هل انت متاكد من تفعيل هذاالحساب ؟
-        </h4>
+        </h5>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -1256,7 +1256,7 @@
       <div
         class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h4 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h4>
+        <h5 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h5>
 
         <button
           type="button"
@@ -1268,7 +1268,7 @@
         </button>
       </div>
       <div class="modal-body my-3 modalbody">
-        <h4 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h4>
+        <h5 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
       </div>
       <div class="modal-footer modalfooter">
         <button
