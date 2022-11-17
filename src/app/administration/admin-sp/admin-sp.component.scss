@@ -11,6 +11,7 @@ $bgButton:#F3FBFA;
 a:focus ,a:hover,button:focus ,button:hover {
   background-color :$Alltext!important;
   color: white !important;
+  box-shadow: none !important;
 }
 button>i ,.typeCom
 {
