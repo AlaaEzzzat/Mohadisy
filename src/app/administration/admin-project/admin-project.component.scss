@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Tajawal', sans-serif;
+$fontTajawalFamily: 'Cairo', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
@@ -154,4 +154,19 @@ border: none!important;
 .top100 {
   top: 99% !important;
   right:-5% !important;
+}
+// progress
+.example-margin {
+  margin: 0 10px;
+  color: #18AF9A;
+}
+
+#progress {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  color: #3f51b5;
 }

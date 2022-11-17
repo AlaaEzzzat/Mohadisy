@@ -21,9 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
 import { TestComponent } from './test/test.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -58,6 +58,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatProgressSpinnerModule
   ],
 })
 export class AdministrationModule {}

@@ -22,13 +22,11 @@ button>i ,.typeCom
   // font-family:$fontCairoFamily;
 
 }
-.textInformation,a{
+.textInformation{
   color: $Alltext !important;
-  font-family:$fontCairoFamily;
  }
  .titleInformation{
   color: $Alltext !important;
-  font-family:$fontTajawalFamily;
 
  }
 input[type="search"]{
@@ -228,4 +226,13 @@ border: none!important;
     color: white;
   }
   color: #18AF9A;
+}
+.sayPro{
+
+  background-color: #004057;
+  
+
+}
+.postionCard{
+  right: 24%;
 }

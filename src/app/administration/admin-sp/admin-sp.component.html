@@ -1,6 +1,6 @@
-<div class="my-3 container-fluid">
+<div class="my-3 container-fluid cairo">
   <div
-    class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
+    class=" cairo d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
   >
     <button
       class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
@@ -73,13 +73,7 @@
   <div class="alert alert-success" role="alert" *ngIf="show">
     {{ messages }}
   </div>
-  <div
-    class="alert alert-danger d-flex align-items-center"
-    role="alert"
-    *ngIf="showDanger"
-  >
-    <div>العميل موجود بالفعل</div>
-  </div>
+
 
   <div
     class="col-12 d-flex flex-row flex-wrap justify-content-between"
@@ -103,15 +97,15 @@
                 طلبات
               </button>
               <ul class="dropdown-menu text-end">
-                <!-- <li><a class="dropdown-item"> المستقل</a></li> -->
-                <!-- <li>
+                <li (click)="getNewProfilesMostaql(page)"><a class="dropdown-item"> المستقل</a></li> 
+                 <li>
                   <a
                     class="dropdown-item"
                     (click)="getNewProfilesCompany(page)"
                   >
                     شركات
                   </a>
-                </li> -->
+                </li>
                 <li>
                   <a class="dropdown-item" (click)="getCompletedProfiles(page)">
                     طلبات مكتمله</a

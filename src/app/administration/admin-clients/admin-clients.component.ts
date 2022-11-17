@@ -5,7 +5,13 @@ import { Observable, Observer } from 'rxjs';
 import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
-
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-admin-clients',
   templateUrl: './admin-clients.component.html',
@@ -31,63 +37,16 @@ export class AdminClientsComponent implements OnInit {
   sortedData:IadminClients []=[];
   firstObject:any;
   isProcessing: boolean=false
+  userformMassage: FormGroup;
+  show: boolean = false;
+  showDanger: boolean = false;
+  messages: any;
+ 
+  constructor( private formbuilder: FormBuilder,private ServicesProvidor:AdminClientsService ,private _HttpClient:HttpClient) {
 
-  // arrayNewProfiles:any []=[]
-  // arrayBlockedClientsProfiles:any []=[]
-  // arrayOfDigitsActiveClientAcconting:any []=[]
-  // arrayOfDigitsNonActiveClientAccount:any []=[]
-  // arrayOfDigitsExpiredClientsProfiles:any []=[]
-
-  // pagenationNewProfiles:boolean=false
-  // pagenationActiveClientAcconting:boolean=false
-  // pagenationNonActiveClientAccount:boolean=false
-  // pagenationBlockedClientsProfiles:boolean=false
-  // pagenationExpiredClientsProfiles:boolean=false
-  // arrayOfDigits:any []=[]
-  constructor( private ServicesProvidor:AdminClientsService ,private _HttpClient:HttpClient) {
-
-    // this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe((value) => {
-    //   this.pagenationNewProfiles=true
-    //   this. pagenationActiveClientAcconting=false
-    //   this. pagenationNonActiveClientAccount=false
-    //   this. pagenationBlockedClientsProfiles=false
-    //   this. pagenationExpiredClientsProfiles=false
-
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total,this.arrayNewProfiles)
-
-
-    // });
-    // this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe((value) => {
-
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total,this.arrayOfDigitsActiveClientAcconting)
-
-    // });
-    // this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe((value) => {
-
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total,this.arrayOfDigitsNonActiveClientAccount)
-
-    // });
-    // this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe((value) => {
-
-    //   this.total = value.data.totalPages;
-
-    //   this.objectProduct(this.firstObject,this.firstObject.id)
-    //   this.fortest(this.total,this.arrayBlockedClientsProfiles)
-
-    // });
-    // this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe((value) => {
-
-    //   this.total = value.data.totalPages;
-
-    //   this.fortest(this.total,this.arrayOfDigitsExpiredClientsProfiles)
-
-    // });
+    this.userformMassage = this.formbuilder.group({
+      massage: ['', [Validators.required]],
+    });
   }
 
 
@@ -95,6 +54,9 @@ export class AdminClientsComponent implements OnInit {
     this.getNewClientProfiles()
 
     this.objectProductGet();
+  }
+  get massage() {
+    return this.userformMassage?.get('massage');
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -317,49 +279,68 @@ export class AdminClientsComponent implements OnInit {
 changeToAccepted(){
   this.iChangeStatusCliend={
     profileId:this.idProduct.id,
-    description: "",
+    description: "تم تاكيد المعلومات",
     accountStatusId:5
   }
-  if(this.iChangeStatusCliend.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
-    alert("العميل موجود بالفعل")
-  }else{
+
   this.ServicesProvidor.changeProfileStatus(this.iChangeStatusCliend).subscribe((data)=>{
-    alert(`${data.message}`);
-    console.log(this.iChangeStatusCliend!.profileId)
+    this.show = true;
+        this.messages = data.message;
+        setTimeout(() => {
+          this.show = false;
+        }, 1000);
   })
-}
+
 }
 
-changeToReject(){
+changeToBlock(){
   this.iChangeStatusCliend={
     profileId:this.idProduct.id,
-    description: "",
-    accountStatusId:6
+    description: this.massage?.value,
+    accountStatusId:1
   }
-  if(this.iChangeStatusCliend.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
-    alert("العميل موجود بالفعل")
-  }else{
+  
   this.ServicesProvidor.changeProfileStatus(this.iChangeStatusCliend).subscribe((data)=>{
-    alert(`${data.message}`);
-    console.log(this.iChangeStatusCliend!.profileId)
+    this.show = true;
+        this.messages = data.message;
+        setTimeout(() => {
+          this.show = false;
+        }, 1000);
   })
-}
+
 }
 
 changeToNotComplette(){
   this.iChangeStatusCliend={
     profileId:this.idProduct.id,
-    description: "",
+    description:this.massage?.value,
     accountStatusId:8
   }
-  if(this.iChangeStatusCliend.accountStatusId===this.idProduct.joinRequestStatus.accountStatus.id){
-    alert("العميل موجود بالفعل")
-  }else{
+  
   this.ServicesProvidor.changeProfileStatus(this.iChangeStatusCliend).subscribe((data)=>{
-    alert(`${data.message}`);
-    console.log(this.iChangeStatusCliend!.profileId)
+    this.show = true;
+    this.messages = data.message;
+    setTimeout(() => {
+      this.show = false;
+    }, 3000);
   })
+
 }
+changeToNew(){
+  this.iChangeStatusCliend={
+    profileId:this.idProduct.id,
+    description: "",
+    accountStatusId:4
+  }
+ 
+  this.ServicesProvidor.changeProfileStatus(this.iChangeStatusCliend).subscribe((data)=>{
+    this.show = true;
+        this.messages = data.message;
+        setTimeout(() => {
+          this.show = false;
+        }, 3000);
+  })
+
 }
 
   // downlod file

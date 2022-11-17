@@ -1,5 +1,5 @@
-<div class="m-3">
-  <div class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap">
+<div class="my-3 container-fluid cairo">
+  <div class=" cairo d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap">
     <button
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
@@ -27,7 +27,7 @@
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-lg-3 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNonActiveClientAccount()"
 
@@ -45,7 +45,6 @@
     >
       العملاء المعطلين
     </button>
-
     <button
       [ngStyle]="{
         'background-color': newApi === 5 ? '#004958' : '#ffffff',
@@ -57,13 +56,15 @@
     >
       العملاء المنتهين
     </button>
+    
   </div>
 
+  <div class="alert alert-success" role="alert" *ngIf="show">
+    {{ messages }}
+  </div>
   <div class="col-12 d-flex flex-row flex-wrap justify-content-between" *ngIf="isProcessing;else undefind" >
     <div class="col-md-4 col-12 position-relative">
-      <form
-        class="d-flex flex-column me-3"
-      >
+      <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
@@ -106,7 +107,7 @@
                 ><img src="assets/icons/userWh.svg" class=""
               /></ng-template>
                   <div class="card-title me-3 ">
-                  <p *ngIf="pro.firstName; else templateName" class="fs-6 textInformation" >
+                  <p *ngIf="pro.firstName; else templateName" class="fs-6 " >
                     {{ pro.firstName }} {{ pro.lastName }}
                   </p>
                   <ng-template #templateName> Null firstName </ng-template>
@@ -292,8 +293,6 @@
         </td>
       </tr> -->
 
-
-
     </div>
     <div class="col-md-7 sizew col-12 flex-row">
       <div class="col-12 card mb-3 border-0 rounded-0 p-4">
@@ -344,6 +343,32 @@
               <i class="fa-solid fa-xmark"></i>
               <p>رفض</p></a
             >
+            </div>
+            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1">
+
+              <a
+              type="button"
+              class="btn complete col-4 rounded-0  "
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalchangeToNew"
+            >
+              <i class="fa-solid fa-check text-secondary"></i>
+              <p>تفعيل</p></a
+            >
+            
+            </div>
+            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatus.id != 1 && productCurrent.joinRequestStatus.accountStatus.id != 4">
+
+              <a
+              type="button"
+              class="btn complete col-4 rounded-0  "
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalReject"
+            >
+              <i class="fa-solid fa-check text-secondary"></i>
+              <p>تعطيل</p></a
+            >
+            
             </div>
             
           </div>
@@ -469,26 +494,26 @@
       </div>
       <!-- projects -->
 
-      <!-- <div
-        class="col-12 d-flex flex-row flex-wrap justify-content-between"
+       <div
+        class="col-12 d-flex flex-row "
         *ngIf="productCurrent.joinRequestStatus.accountStatus.id !== 4"
       >
-        <div class="sizewSay col-12">
+        <div class="col-md-5 col-12 ">
             <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1 ">
-              <p class="bodyResine fw-bold align-content-end">
+              <p class=" fw-bold align-content-end">سبب التعطيل 
               </p>
               <small class="titleResone align-content-end">
                 {{ productCurrent.joinRequestStatus.description }}.</small
               >
             </div>
             <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 3 ; ">
-              <p class="bodyResine fw-bold align-content-end">سبب تعطيل الحساب</p>
+              <p class=" fw-bold align-content-end">سبب اغلاق الحساب</p>
               <small class="titleResone align-content-end">
                 {{ productCurrent.joinRequestStatus.description }}.</small
               >
             </div>
           <div class="d-flex flex-column px-4 py-2 bg-white mb-2" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 2 ; ">
-            <p class="bodyResine fw-bold align-content-end">
+            <p class=" fw-bold align-content-end">
               سبب انتهاء الحساب
             </p>
             <small class="titleResone align-content-end">
@@ -507,15 +532,14 @@
           <div
             class="sayPro d-flex justify-content-center px-4 py-1 align-items-center"
           >
-            <a class="btn sayPro text-center" href="#" role="button"
+            <a class="btn sayPro text-white text-center" href="#" role="button"
               >رؤية جميع المشاريع</a
             >
           </div>
         </div>
-        <div class="col-md-7 col-12 mb-1">
+      <div class="col-md-7 col-12 mb-1 me-1">
           <div
-            class="d-flex justify-content-between bg-white px-4 py-1 align-items-center"
-          >
+            class="d-flex justify-content-between bg-white px-4 py-1 align-items-center">
             <h5 class="fw-bold pt-3">تقيم العملاء</h5>
             <div class="align-content-end">
               <span class="ps-1">4/5</span>
@@ -674,12 +698,13 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
-       -->
+       
 
-      </div>
+    </div>
   </div>
+
   <ng-template #undefind>
     <div class="alert alert-danger d-flex align-items-center fs-6" role="alert" *ngIf="!isProcessing">
       <div class="">
@@ -687,4 +712,210 @@
       </div>
       </div>
   </ng-template>
+
+</div>
+
+
+<!-- Modal ub date changeToNew-->
+
+<div
+  class="modal fade"
+  id="exampleModalchangeToNew"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <h5 class="fs-5 text-white">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToNew()"
+        >
+          نعم
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          لا
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- تاكيد -->
+<div
+  class="modal fade"
+  id="changeToAccepted"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          هل انت متاكد من الموافقه علي هذا الطلب ؟
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToAccepted()"
+        >
+          نعم
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          لا
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- تعطيل /الرفض -->
+<div
+  class="modal fade"
+  id="exampleModalReject"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          سبب تعطيل الحساب
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form [formGroup]="userformMassage">
+          <textarea
+            type="text"
+            class="form-control fs-5"
+            placeholder=" سبب الرفض "
+            name="massage"
+            id="massage"
+            cols="50"
+            rows="2"
+            value="text"
+            formControlName="massage"
+          ></textarea>
+        </form>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToBlock()"
+        >
+          حفظ
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          الغاء
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- غير مكتمل -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          سبب عدم اكتمال الحساب
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form [formGroup]="userformMassage">
+          <textarea
+            type="text"
+            class="form-control fs-5"
+            placeholder=" سبب عدم اكتمال "
+            name="massage"
+            id="massage"
+            cols="50"
+            rows="3"
+            value="text"
+            formControlName="massage"
+          ></textarea>
+        </form>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn"
+          data-bs-dismiss="modal"
+          (click)="changeToNotComplette()"
+        >
+          حفظ
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          الغاء
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

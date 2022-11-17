@@ -8,8 +8,8 @@ import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IrequiredWorks } from 'src/app/@models/irequired-works';
-// import { IrequiredWorks } from 'src/app/@models/irequired-works';
-
+import {ThemePalette} from '@angular/material/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-admin-project',
@@ -40,8 +40,12 @@ export class AdminProjectComponent implements OnInit {
   isProcessing:boolean=true;
   requiredWorkId:IrequiredWorks[]=[];
   requiredWorkIdObject:any[]=[]
-
+   set:any
+  //  progress
   componentId:any[]=[];
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
+  values = 50;
   constructor(
     private ServicesProvidor: AdminProjectsService,
     private _HttpClient: HttpClient ,private formbuilder:FormBuilder
@@ -227,8 +231,8 @@ export class AdminProjectComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
-    // this.projectRequiredWorks();
-    // this.projectComponents();
+    this.projectRequiredWorks();
+    this.projectComponents();
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
@@ -370,20 +374,25 @@ export class AdminProjectComponent implements OnInit {
     this.requiredWorkId=[]
     this.requiredWorkIdObject=[]
     let requiredWorkIdObjects:any;
+  
     for(let projectRe of this.productCurrent.projectRequiredWorks){
-      console.log(projectRe.requiredWorkId)
+      // console.log(projectRe.requiredWorkId)
       this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
         next:((data)=>{
           this.requiredWorkId.push(data.data)
-          console.log(this.requiredWorkId)
+          // console.log(this.requiredWorkId)
 
           for(let requiredWork of this.requiredWorkId){
             requiredWorkIdObjects=requiredWork
             for(let requiredWorkObject of requiredWorkIdObjects){
-              this.requiredWorkIdObject.push(requiredWorkObject)
+             
+              this.requiredWorkIdObject.push(requiredWorkObject);
 
 
-            } console.log(this.requiredWorkIdObject)
+            } console.log(this.requiredWorkIdObject)   ;
+             this.set = new Set(this.requiredWorkIdObject)
+            console.log(this.set)
+            
 
           }
 

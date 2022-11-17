@@ -40,6 +40,7 @@ userformMassage :FormGroup;
 
   requiredWorkId:IrequiredWorks[]=[];
   requiredWorkIdObject:any[]=[]
+  set:any
   componentId:any[]=[];
   constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
     this.userformMassage=this.formbuilder.group({
@@ -403,7 +404,8 @@ projectRequiredWorks(){
             this.requiredWorkIdObject.push(requiredWorkObject)
 
 
-          }
+          } this.set = new Set(this.requiredWorkIdObject)
+          console.log(this.set)
 
         }
 

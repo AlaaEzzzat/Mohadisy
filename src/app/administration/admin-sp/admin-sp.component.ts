@@ -329,13 +329,47 @@ export class AdminSPComponent implements OnInit {
 
   // test
   getNewProfilesCompany(page: any) {
-    this.ServicesProvidor.activeProfile(page).subscribe((value) => {
-      let companys: any[] = [] || value.data.profiles;
-      let mostaql: any[] = [];
-      this.iProfileData = value.data.profiles || [];
-      let tests = this.iProfileData.find((key) => {
-        return key.applicationUser.accountType.key == 'CO';
-      });
+    this.iProfileData = [];
+    this.ServicesProvidor.getNewProfiles(page).subscribe({
+      next: (value) => {
+        // iProfileData
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          for (let data of value.data.profiles) {
+            if (data.applicationUser.accountType.key === 'CO') {
+              this.iProfileData.push(data);
+              
+            }
+            this.total = value.data.totalPages;
+            console.log(this.iProfileData);
+          }
+          if (this.iProfileData.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
+    });
+  }
+  getNewProfilesMostaql(page: any) {
+    this.iProfileData = [];
+    this.ServicesProvidor.getNewProfiles(page).subscribe({
+      next: (value) => {
+        // iProfileData
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          for (let data of value.data.profiles) {
+            if (data.applicationUser.accountType.key === 'IND') {
+              this.iProfileData.push(data);
+            
+            }
+            this.total = value.data.totalPages;
+            // console.log(this.iProfileData);
+          }
+          if (this.iProfileData.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
     });
   }
 

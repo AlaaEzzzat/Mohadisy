@@ -28,7 +28,7 @@ export class AdminPaymentsClientsComponent implements OnInit {
       next:((data)=>{
         this.datas=data.data
         this.clientsPayments=this.datas
-        // console.log(this.clientsPayments);
+        console.log(this.clientsPayments);
         
         this.objectProduct(this.clientsPayments[0]) 
       })
@@ -37,7 +37,7 @@ export class AdminPaymentsClientsComponent implements OnInit {
 
   objectProduct(object: any) {
     this.idProduct = object
-    //  console.log( this.idProduct .projects );
+     console.log( this.idProduct .projects );
     for(let costs of this.idProduct.profile.projects){
       this.productCurrent =  costs.offers
       for(let co of this.productCurrent){
@@ -56,7 +56,7 @@ export class AdminPaymentsClientsComponent implements OnInit {
 
   notComplete(){
     this.clientsPayments=[]
-    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+    this.paymentsService.getClientsPaymentsForAdmin().subscribe({
       next:((data)=>{
         for(let dddd of data.data){
        
@@ -73,19 +73,19 @@ export class AdminPaymentsClientsComponent implements OnInit {
   }
   inComplete(){
     this.clientsPayments=[]
-    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+    this.paymentsService.getClientsPaymentsForAdmin().subscribe({
       next:((data)=>{
-        // console.log(data.data)
-        for(let dddd of data.data){
+        console.log(data.data)
+        for(let client of data.data){
        
-        if(dddd.payments > dddd.paid && dddd.paid != 0){
+        if(client.payments > client.paid && client.paid != 0){
           // this.datas+=dddd
           
-          this.clientsPayments.push(dddd)
+          this.clientsPayments.push(client)
           console.log(this.clientsPayments)
-          // this.objectProduct(this.clientsPayments[0]) 
         }
-      }
+      }         
+
        
 
       })
@@ -94,7 +94,7 @@ export class AdminPaymentsClientsComponent implements OnInit {
   complete(){
    
     this.clientsPayments=[]
-    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+    this.paymentsService.getClientsPaymentsForAdmin().subscribe({
       next:((data)=>{
         // console.log(data.data)
         for(let dddd of data.data){

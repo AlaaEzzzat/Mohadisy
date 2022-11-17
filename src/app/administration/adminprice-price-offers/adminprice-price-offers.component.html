@@ -1,6 +1,6 @@
-<div class="m-3">
+<div class="my-3 container-fluid">
   <div
-    class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around"
+    class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around cairo"
   >
     <button
       [ngStyle]="{
@@ -145,7 +145,7 @@
               [(ngModel)]="filterTerm"
             />
             <button class="btn position-absolute top-0 start-0" type="submit">
-              <i class="fa fa-search"></i>
+              <img src="/assets/icons/Search.svg" alt="" srcset="">
             </button>
           </div>
         </ng-template>
@@ -380,12 +380,12 @@
             </div>
           </div>
 
-          <div class="col-lg-4 col-6 mb-4">
+          <div class="col-lg-5 col-6 mb-4">
             <p class="card-subtitle text-muted  fs-6 mb-2">الدوله</p>
             <small class="fs-6 textInformation">المملكه العربيه السعوديه</small>
           </div>
 
-          <div class="col-lg-4 col-6 mb-4">
+          <div class="col-lg-3 col-6 mb-4">
             <p class="card-subtitle text-muted  fs-6 mb-2">المدينه</p>
             <small
               class="fs-6 textInformation"
@@ -406,7 +406,7 @@
             >
             <ng-template #regionName> _ </ng-template>
           </div>
-          <div class="col-lg-4 col-6 mb-4">
+          <div class="col-lg-5 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
             <small
               class="fs-6 textInformation"
@@ -418,7 +418,7 @@
             <ng-template #shortAddress> _ </ng-template>
           </div>
 
-          <div class="col-lg-4 col-6 mb-4">
+          <div class="col-lg-3 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
             <small class="fs-6 textInformation" *ngIf="productCurrent.clientProfile.applicationUser">{{
               productCurrent.clientProfile.applicationUser.phoneNumber
@@ -582,7 +582,7 @@
           <h5 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h5>
 
           <div>
-            <ng-container *ngFor="let reqW of requiredWorkIdObject">
+            <ng-container *ngFor="let reqW of set">
               <div class="d-flex align-items-start mb-2">
                 <img
                   class=""
@@ -600,10 +600,41 @@
           </div>
         </div>
       </div>
+      
       <!--  -->
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
         <p class="fs-6 textInformation">نبذه عن المشروع</p>
         <p class="fs-6 ">{{ productCurrent.subject }}</p>
+      </div>
+      <div class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 "  >
+        <div
+          class="col-lg-12 col-12 d-flex bg-white ms-1 align-content-end flex-column p-3"
+        >
+          <h5 class="titleInformation">المستندات الخاصه بالعميل</h5>
+          <ng-container
+            *ngIf="
+              
+                productCurrent.clientProjectDocuments != null && productCurrent.clientProjectDocuments.length > 0 ;
+              else undefindFile
+            "
+          >
+            <ng-container
+              *ngFor="let comp of productCurrent.clientProjectDocuments"
+            >
+              <a
+                target="_blank"
+                class="informationDownloadClient d-flex px-2 align-items-center"
+                (click)="download(comp.filePath, comp.file)"
+              >
+                <i class="fa fa-download ms-3"></i>
+                <p class="pt-3">{{ comp.file }}</p>
+              </a>
+            </ng-container>
+          </ng-container>
+          <ng-template #undefindFile>
+            <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
@@ -619,36 +650,7 @@
   </ng-template>
 </div>
 
-<div
-  class="modal fade"
-  id="changeToAccepted"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h5 class="modal-title" id="exampleModalLabel">
-          هل انت متاكد من الموافقه علي هذا العرض ؟
-        </h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          الغاء
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          data-bs-dismiss="modal"
-          (click)="changeToAccepted()"
-        >
-          حفظ
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+
 <!-- غير مكتمل -->
 <div
   class="modal fade"
@@ -662,7 +664,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
           سبب عدم اكتمال عرض
         </h5>
 
@@ -720,7 +722,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
           سبب تعطيل الحساب
         </h5>
 
@@ -778,7 +780,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا العرض ؟
         </h5>
 
@@ -796,6 +798,7 @@
           type="button"
           class="btn"
           data-bs-dismiss="modal"
+          
           (click)="changeToAccepted()"
         >
           نعم

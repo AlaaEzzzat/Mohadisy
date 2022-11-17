@@ -5,7 +5,9 @@ $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#CAECE8;
 $textButton:#18AF9A;
-
+.cairo{
+  font-family: 'cairo';
+}
 input[type="search"]{
   &:hover,&.active {
 
@@ -89,7 +91,7 @@ input[type="search"]{
   padding: 5% 3%;
 }
 
-img
+.img
 {
   height: 93%;
 }
