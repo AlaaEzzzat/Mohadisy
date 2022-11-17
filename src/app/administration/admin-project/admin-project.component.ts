@@ -6,13 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+// import { IrequiredWorks } from 'src/app/@models/irequired-works';
+
 
 @Component({
   selector: 'app-admin-project',
@@ -36,23 +32,27 @@ export class AdminProjectComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  userformMassage: FormGroup;
-  messages: any;
-  show: boolean = false;
-  showDanger: boolean = false;
-  isProcessing: boolean = true;
+  userformMassage :FormGroup;
+  messages:any;
+  show:boolean=false;
+  showDanger:boolean=false;
+  isProcessing:boolean=true;
+  // requiredWorkId:IrequiredWorks[]=[];
+  requiredWorkIdObject:any[]=[]
+
+  componentId:any[]=[];
   constructor(
     private ServicesProvidor: AdminProjectsService,
-    private _HttpClient: HttpClient,
-    private formbuilder: FormBuilder
+    private _HttpClient: HttpClient ,private formbuilder:FormBuilder
   ) {
-    this.userformMassage = this.formbuilder.group({
-      massage: ['', [Validators.required]],
+    this.userformMassage=this.formbuilder.group({
+      massage:['',[Validators.required]],
     });
   }
 
   ngOnInit(): void {
     this.getCurrentProjects();
+
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
@@ -95,20 +95,25 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe({
-      next: (value) => {
+
+      next:(value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
+          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
+          // this.projectRequiredWorks()
         }
-      },
-      error: (error) => {
+      },error: (error) => {
         this.isProcessing = false;
-      },
+
+      }
     });
+
+
   }
   // 4
   getPendingProject() {
@@ -117,21 +122,24 @@ export class AdminProjectComponent implements OnInit {
     this.newApi = 4;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe({
-      next: (value) => {
+    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
+    {
+      next:  (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
+          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },
-      error: (error) => {
+      },error: (error) => {
         this.isProcessing = false;
-      },
-    });
+
+      }
+    }
+    );
   }
   //5
   getFinishedProjects() {
@@ -140,21 +148,25 @@ export class AdminProjectComponent implements OnInit {
     this.newApi = 5;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe({
-      next: (value) => {
+    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
+
+     {
+      next:(value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
+          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },
-      error: (error) => {
+      },error: (error) => {
         this.isProcessing = false;
-      },
-    });
+
+      }
+     }
+    );
   }
   //6
   getLateProjects() {
@@ -168,6 +180,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
+          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -186,12 +199,13 @@ export class AdminProjectComponent implements OnInit {
     this.isProcessing = true;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe({
-      next: (value) => {
+    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
+     {next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
+          console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -199,8 +213,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
-      },
-    });
+      }
+  });
   }
 
   objectProduct(object?: any, id?: any) {
@@ -212,6 +226,8 @@ export class AdminProjectComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
+    // this.projectRequiredWorks();
+    // this.projectComponents();
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
@@ -323,30 +339,71 @@ export class AdminProjectComponent implements OnInit {
     return differenceInDays;
   }
 
-  calculateDiffEend(sentOn: any) {
+  calculateDiffEend(sentOn:any){
+
     let todayDate = new Date();
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
-    let differenceInTime = sentOnDate.getTime() - todayDate.getTime();
+    let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
     // To calculate the no. of days between two dates
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
   }
 
   download(url: string, name: any) {
-    return this._HttpClient
-      .get(url, { responseType: 'arraybuffer' })
-      .subscribe({
-        next: (pptx) => {
-          const blob = new Blob([pptx], {
-            type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-          });
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      {
+        next:(pptx) => {
+          const blob = new Blob([pptx], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
           const fileName = name;
           saveAs(blob, fileName);
         },
-        error: (err) => {
+    error:(err) => {
           console.log(err);
-        },
-      });
+        }
+      }
+    );
   }
+
+  // projectRequiredWorks(){
+  //   this.requiredWorkId=[]
+  //   this.requiredWorkIdObject=[]
+  //   let requiredWorkIdObjects:any;
+  //   for(let projectRe of this.productCurrent.projectRequiredWorks){
+  //     console.log(projectRe.requiredWorkId)
+  //     this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
+  //       next:((data)=>{
+  //         this.requiredWorkId.push(data.data)
+  //         console.log(this.requiredWorkId)
+
+  //         for(let requiredWork of this.requiredWorkId){
+  //           requiredWorkIdObjects=requiredWork
+  //           for(let requiredWorkObject of requiredWorkIdObjects){
+  //             this.requiredWorkIdObject.push(requiredWorkObject)
+
+
+  //           } console.log(this.requiredWorkIdObject)
+
+  //         }
+
+  //       })
+  //     })
+  //   }
+
+  // }
+//   projectComponents(){
+//     this.componentId=[]
+//     for(let projectCom of this.productCurrent.projectComponents){
+//       this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
+//         next:((data=>{
+//               this.componentId.push(data.data.name)
+//               // console.log(this.componentId)
+//               // console.log(data)
+
+//         }))
+//       })
+
+//     }
+
+//   }
 }

@@ -47,20 +47,20 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((returnedError) => {
-        let errorMessage = null;
+        let errormessage = null;
 
         if (returnedError.error instanceof ErrorEvent) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message} `;
+          errormessage = `هناك خطأ: ${returnedError.error.Message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message}`;
+          errormessage = `هناك خطأ: ${returnedError.error.Message}`;
           handled = this.handleServerSideError(returnedError);
         }
 
-        this._toastr.error(errorMessage ? errorMessage : returnedError);
+        this._toastr.error(errormessage ? errormessage : returnedError);
 
         if (!handled) {
-          if (errorMessage) {
-            return throwError(errorMessage);
+          if (errormessage) {
+            return throwError(errormessage);
           } else {
             return throwError('Unexpected problem occurred');
           }

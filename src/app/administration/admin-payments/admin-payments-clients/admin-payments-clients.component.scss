@@ -69,3 +69,51 @@ input[type="search"]{
   font-family: "cairo";
 
 }
+
+.card
+{
+  padding:5% 5% 3% 4%;
+  border: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+
+  color:#004057;
+}
+
+.earn
+{
+  padding: 5% 3%;
+}
+
+img
+{
+  height: 93%;
+}
+.bgtran{
+  background-color: transparent !important;
+}
+
+.form-control:disabled {
+  background-color:transparent !important;
+  opacity: inherit !important;
+  border: 0px none none !important;
+}
+#exampleColorInput{
+  border: none !important;
+  appearance: none !important;
+  border-radius: 0% !important;
+  &::-webkit-color-swatch{
+    border: none !important;
+    border-radius: 0% !important;
+
+  }
+  &::-mos-color-swatch{
+    border: none !important;
+    border-radius: 0% !important;
+
+  }
+}
