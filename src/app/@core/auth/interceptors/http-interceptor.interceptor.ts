@@ -48,7 +48,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((returnedError) => {
         let errorMessage = null;
-
+        console.log(returnedError);
         if (returnedError.error instanceof ErrorEvent) {
           errorMessage = `هناك خطأ: ${returnedError.error.message} `;
         } else if (returnedError instanceof HttpErrorResponse) {

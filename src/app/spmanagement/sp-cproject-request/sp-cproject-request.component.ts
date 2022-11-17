@@ -1,5 +1,6 @@
 import { ApiService } from 'src/app/@core/api.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sp-cproject-request',
@@ -8,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SpCprojectRequestComponent implements OnInit {
 
-  Listprojects:Array<any>=[];
+   OfferData:any;
+   Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
    AllProjectComponent:Array<any>=[];
    RequiredWorks:Array<any>=[];
@@ -19,15 +21,30 @@ export class SpCprojectRequestComponent implements OnInit {
    documents:Array<any>=[];
    descDocument:Array<any>=[];
    page:number=0;
+   numberofMilestones:any=[];
 
-  constructor(private api:ApiService) { }
+  constructor(private api:ApiService)
+  {
+    this.OfferData=new FormGroup(
+      {
+        period:new FormControl('',[Validators.required]),
+        cost:new FormControl('',[Validators.required]),
+        numberOfMilestones:new FormControl('',
+       [Validators.required,Validators.max(6),Validators.min(1)]),
+        message:new FormControl(''),
+        projectId:new FormControl('',[Validators.required]),
+        tcost:new FormControl(''),
+        precentage:new FormControl('',[Validators.required])
+
+      });
+
+  }
 
   ngOnInit(): void {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
-
 
     });
 
@@ -142,6 +159,31 @@ export class SpCprojectRequestComponent implements OnInit {
 
 
     });
+     }
+
+     TotalCost()
+     {
+
+     }
+
+     milestones()
+     {
+
+     }
+
+     MilestoneCost(stone:any,precentage:any)
+     {
+
+     }
+
+     workId(id:any,stone:any)
+     {
+
+     }
+
+     onSubmit()
+     {
+
      }
 
 

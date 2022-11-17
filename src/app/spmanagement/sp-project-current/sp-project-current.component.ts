@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sp-project-current',
@@ -22,6 +23,7 @@ export class SpProjectCurrentComponent implements OnInit {
   result:number=0;
   totalpages: any = 0;
   pages:Array<any>=[];
+  Allstages:Array<any>=[];
 
  constructor(private api:ApiService) { }
 
@@ -58,6 +60,14 @@ export class SpProjectCurrentComponent implements OnInit {
        break;
      }
     }
+    console.log(this.selectProject);
+
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+   {
+     //console.log(data);
+     this.Allstages=data.data;
+   }
+   );
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -140,6 +150,26 @@ export class SpProjectCurrentComponent implements OnInit {
      this.descDocument[documentId]=0;
      else
      this.descDocument[documentId]=1;
+    }
+
+    pending(stageid:any)
+    {
+
+      this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending/
+      ${stageid}`).subscribe({
+        next:(data)=>
+        {
+          console.log(data);
+
+            Swal.fire(
+              'تم تعليق المرحله بنجاح'
+            );
+        }
+
+
+
+      });
+
     }
 
 
