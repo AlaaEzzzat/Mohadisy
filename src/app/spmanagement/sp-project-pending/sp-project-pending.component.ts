@@ -1,23 +1,13 @@
+import { ApiService } from './../../@core/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/@core/api.service';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-sp-project-current',
-  templateUrl: './sp-project-current.component.html',
-  styleUrls: ['./sp-project-current.component.scss']
+  selector: 'app-sp-project-pending',
+  templateUrl: './sp-project-pending.component.html',
+  styleUrls: ['./sp-project-pending.component.scss']
 })
-export class SpProjectCurrentComponent implements OnInit {
+export class SpProjectPendingComponent implements OnInit {
 
-   nameStage:any=
-  [
-    "المرحله الاولى",
-    "المرحله الثانيه",
-    "المرحله الثالثه",
-    "المرحله الرابعه",
-    "المرحله الخامسه",
-    "المرحله السادسه"
-  ]
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
@@ -32,24 +22,20 @@ export class SpProjectCurrentComponent implements OnInit {
   result:number=0;
   totalpages: any = 0;
   pages:Array<any>=[];
-  Allstages:Array<any>=[];
-  togglestage:any=[];
-  index:number=0;
 
  constructor(private api:ApiService) { }
 
  ngOnInit(): void {
 
-   this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
+   this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPAcceptedOffers/Page/1").subscribe(data=>{
+
    console.log(data);
-   this.Listprojects=data.data.projects;
+   this.Listprojects=data.data.priceQuotes;
    this.totalpages=data.data.totalPages;
    for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
-   if(this.Listprojects.length>0){
-   this.result=1;
-
-   }
+   if(this.Listprojects.length>0)
+     this.result=1;
 
 
    });
@@ -70,17 +56,6 @@ export class SpProjectCurrentComponent implements OnInit {
        break;
      }
     }
-    console.log(this.selectProject);
-
-    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
-   {
-    this.togglestage=[];
-     this.Allstages=data.data;
-     console.log(this.Allstages);
-     this.index=0;
-
-   }
-   );
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -136,8 +111,6 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
 
-
-
     /*************************************/
     toggoleComponent(componentId:any)
     {
@@ -167,52 +140,19 @@ export class SpProjectCurrentComponent implements OnInit {
      this.descDocument[documentId]=1;
     }
 
-    toggleStage(stageId:any)
-    {
-
-     if(this.togglestage[stageId]==1){
-      this.togglestage[stageId]=0;
-      }
-      else{
-      this.togglestage[stageId]=1;
-      }
-
-    }
-
-    pending(stageid:any)
-    {
-
-      this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending/
-      ${stageid}`).subscribe({
-        next:(data)=>
-        {
-          console.log(data);
-
-            Swal.fire(
-              'تم تعليق المرحله بنجاح'
-            );
-        }
-
-
-
-      });
-
-    }
-
 
     changepage(e:any)
     {
 
      this.page=e;
      console.log(this.page);
-     this.api.get(`https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/${this.page}`).subscribe(data=>{
+     this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
-      this.Listprojects=data.data.projects;
+      this.Listprojects=data.data.priceQuotes;
 
 
    });
     }
 
  }
-
 

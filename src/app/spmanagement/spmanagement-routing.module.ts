@@ -25,6 +25,7 @@ import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.com
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
+import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,7 @@ const routes: Routes = [
             component: SpProjectStatusComponent,
             children: [
               { path: 'current', component: SpProjectCurrentComponent },
+              { path: 'pending', component: SpProjectPendingComponent},
             ],
           },
 

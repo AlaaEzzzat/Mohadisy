@@ -32,6 +32,7 @@ import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.com
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
+import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SpProjectCurrentComponent } from './sp-project-current/sp-project-curre
     SpProjectStatusComponent,
     SpMenuOffersComponent,
     SpProjectCurrentComponent,
+    SpProjectPendingComponent,
   ],
   imports: [
     MatSelectModule,
