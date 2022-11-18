@@ -8,14 +8,14 @@
       </div>-->
 
 
-      <ng-container *ngIf="type!='CO'">
+      <ng-container *ngIf="type==2">
       <div class="col-lg-12  content">
-        <a routerLink="/Spmanagement/projects/new" class="btn request">طلبات انشاءات<span>0</span></a>
+        <a routerLink="/Spmanagement/projects/all" class="btn request">طلبات انشاءات<span>0</span></a>
       </div>
       </ng-container>
 
 
-      <ng-container *ngIf="type=='CO'">
+      <ng-container *ngIf="type!=2">
         <div class="col-lg-12  content">
           <a routerLink="/Spmanagement/projects/new" class="btn request"
          >طلبات الاستشارات <span>0</span></a>

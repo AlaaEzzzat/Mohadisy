@@ -20,6 +20,8 @@ export class SpProjectsComponent implements OnInit {
    documents:Array<any>=[];
    descDocument:Array<any>=[];
    page:number=1;
+   totalpages: any = 0;
+    pages:Array<any>=[];
 
   constructor(private api:ApiService) { }
 
@@ -28,6 +30,9 @@ export class SpProjectsComponent implements OnInit {
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
+    this.totalpages=data.data.totalPages;
+    for(let i=1;i<=this.totalpages;i++)
+      this.pages.push(i);
 
 
     });
@@ -149,5 +154,9 @@ export class SpProjectsComponent implements OnInit {
     });
      }
 
+     addIdProject(id:any)
+     {
+
+     }
 
   }

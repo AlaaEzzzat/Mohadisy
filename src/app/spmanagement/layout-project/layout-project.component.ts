@@ -14,8 +14,14 @@ export class LayoutProjectComponent implements OnInit {
 
   ngOnInit(): void {
 
+   this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>{
+   this.type=data.data.organizationalServiceProviderProfile.projectService.id;
+   console.log(this.type);
+  }
+   );
+
     this.type=localStorage.getItem('type');
-    
+
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
       this.projectstatues=data.data.projectStatues;
 
