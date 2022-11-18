@@ -27,10 +27,10 @@ export class SpProjectPendingComponent implements OnInit {
 
  ngOnInit(): void {
 
-   this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPAcceptedOffers/Page/1").subscribe(data=>{
+   this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPPendingProjects/Page/1").subscribe(data=>{
 
-   console.log(data);
-   this.Listprojects=data.data.priceQuotes;
+   console.log(data.data.projects);
+   this.Listprojects=data.data.projects;
    this.totalpages=data.data.totalPages;
    for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
@@ -146,9 +146,9 @@ export class SpProjectPendingComponent implements OnInit {
 
      this.page=e;
      console.log(this.page);
-     this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+     this.api.get(`https://app.mohandisy.com/api/Project/getOrganizationalSPPendingProjects/Page/${this.page}`).subscribe(data=>{
 
-      this.Listprojects=data.data.priceQuotes;
+      this.Listprojects=data.data.projects;
 
 
    });
