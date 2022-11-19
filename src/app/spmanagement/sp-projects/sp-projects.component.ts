@@ -22,6 +22,7 @@ export class SpProjectsComponent implements OnInit {
    page:number=1;
    totalpages: any = 0;
     pages:Array<any>=[];
+    result:any=0;
 
   constructor(private api:ApiService) { }
 
@@ -33,6 +34,9 @@ export class SpProjectsComponent implements OnInit {
     this.totalpages=data.data.totalPages;
     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
+
+      if(this.Listprojects.length>0)
+     this.result=1;
 
 
     });

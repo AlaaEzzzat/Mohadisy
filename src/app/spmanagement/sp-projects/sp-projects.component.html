@@ -1,11 +1,16 @@
 
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
   <div class="section-2 mt-2">
     <div class="row">
       <div class="col-4">
         <div class="row">
 
-          <ng-container *ngFor="let project of Listprojects |
-          paginate: {itemsPerPage:5, currentPage: page }">
+          <ng-container *ngFor="let project of Listprojects">
 
             <ng-container *ngIf="this.select==project.id">
               <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
@@ -45,7 +50,7 @@
 
 
 
-      <nav aria-label="Page navigation" class="mt-4 mb-3">
+      <nav aria-label="Page navigation" class="mt-4 mb-3" *ngIf="result==1">
         <ul class="pagination">
 
           <ng-container *ngIf="page==1">
