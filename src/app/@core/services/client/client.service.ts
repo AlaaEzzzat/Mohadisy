@@ -161,4 +161,13 @@ export class ClientService {
       `${environment.baseUrl}/api/Project/getClientStoppedProjects/Page/${page}`
     );
   }
+  /* ************************* */
+  
+  getPaymentsForClient(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Payment/getPaymentsForClient`
+    );
+  }
+
+ 
 }

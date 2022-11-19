@@ -1,10 +1,8 @@
-import { IClientPayment } from './../../@models/IClientPayment';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ToastrService } from 'ngx-toastr';
-import { PaymentService } from './../../@core/services/payment/payment.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import moment from "moment";
 
 @Component({
   selector: 'app-payment',
@@ -12,75 +10,77 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent implements OnInit {
-  payForm!: FormGroup;
-  payMethodForm!: FormGroup;
-  payData: any = {};
-  PaymentMethodsList: any = {};
-  second: boolean = false;
-  client: any = {};
-  clientPaymentData: IClientPayment = {} as IClientPayment;
+  allPaidProjectArray:any = [];
+  dataShow:any = [];
+  showModal:boolean =false;
+  location:any="";
+  activeProject:any={}
+  requiredWorks:any= [];
+  activeworksName:any =[]
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder,
-    private paymentService: PaymentService,
     private _toastr: ToastrService,
     private clientService: ClientService
   ) {
-    this.payMethodForm = this.formBuilder.group({
-      PaymentMethod: ['', [Validators.required]],
-    });
+   
   }
-  onSubmit() {
-    this.payData = this.payForm?.value;
-    console.log(this.payForm?.value);
-    this.paymentService.initiatePayment(this.payData).subscribe({
-      next: (response: any) => {
-        console.log(response);
-        this._toastr.info(response.Message);
-        this.PaymentMethodsList = response.Data.PaymentMethods;
-        console.log(this.PaymentMethodsList);
-        this.second = true;
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+ showDetails(project:any){
+  this.showModal =true;
+  this.activeProject = project;
+  project.project.offers[0].milestones.map((mile:any)=>{
+    if(mile.requiredWorkId){
+      this.getrequireWork(mile.requiredWorkId);
+    }
+  })
+ }
+ search(word:any){
+  console.log(word)
+  this.dataShow = [];
+  this.allPaidProjectArray.map((project:any)=>{
+if(project.project.name.search(new RegExp(word, "i")) != -1){
+this.dataShow.push(project);
+}
+  })
+ }
+ getLocation(districtId:any){
+
+ }
+ sortByName(){
+  this.dataShow.sort((a:any, b:any) => a.project.name.localeCompare(b.project.name));
+ }
+ sortByDate(){
+  this.dataShow.map((pro:any)=>{
+    pro.project.dateCreated = new Date(pro.project.dateCreated)
   }
-  onMethodSubmit() {
-    //الدفعه الأولي
-    this.clientPaymentData.invoiceValue = 200;
-
-    this.clientPaymentData.paymentMethodId = this.PaymentMethod?.value;
-    this.clientPaymentData.customerName =
-      this.client?.firstName + ' ' + this.client?.lastName;
-    this.clientPaymentData.displayCurrencyIso = 'SAR';
-    this.clientPaymentData.mobileCountryCode = '+996';
-    this.clientPaymentData.customerMobile =
-      this.client?.applicationUser.phoneNumber;
-    this.clientPaymentData.customerEmail = this.client?.applicationUser.email;
-    this.clientPaymentData.customerCivilId = this.client?.idNumber;
-
-    this.clientPaymentData.callBackUrl = 'https://www.google.com';
-    this.clientPaymentData.errorUrl = 'https://www.facebook.com';
-    this.clientPaymentData.language = 'ar';
-    console.log(this.clientPaymentData);
-    this.paymentService.executePayment(this.clientPaymentData).subscribe({
-      next: (response: any) => {
-        window.location.href = response.Data.PaymentURL;
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
-  }
-
-  get PaymentMethod() {
-    return this.payMethodForm.get('PaymentMethod');
-  }
-
+  );
+  this.dataShow.sort((a:any,b:any)=>{
+    return b.project.dateCreated- a.project.dateCreated;
+  });
+ }
+getrequireWork(reqId:any){
+   this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data:any)=>{
+    this.requiredWorks.push(...data.data);
+  })
+}
+getrequireWorkName(requiredWorkId:any){
+  var mywork = {};
+  this.requiredWorks.map((work:any)=>{
+    console.log(work)
+    console.log(work.name)
+   if( work.id == requiredWorkId){
+    mywork=work;
+    return work?.name;
+   }
+  });
+}
   ngOnInit(): void {
-    this.clientService.getClientProfile().subscribe((data) => {
-      this.client = data.data;
+    this.clientService.getPaymentsForClient().subscribe((data) => {
+      this.allPaidProjectArray = data.data;
+      this.dataShow = this.allPaidProjectArray;
+      console.log(this.allPaidProjectArray)
     });
+  }
+  getDate(date:any){
+   return moment(date).utc().format('YYYY-MM-DD')
   }
 }

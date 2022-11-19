@@ -1,60 +1,255 @@
-<div class="row pt-3" style="min-height: 100vh">
-  <div class="col-md-6">
-    <div class="card-body bg-white p-5" *ngIf="second">
-      <div class="text-center">
-        <label
-          class="mb-4 text-center cairo"
-          style="color: #18af9a; font-weight: bold"
-        >
-          الخطوة التالية
-        </label>
+<section class="payment-section pt-5">
+  
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="row mb-3">
+        <div class="col">
+          <button
+          disabled class=" btn mb-2 cairo w-100 text-white p-2 fontStyle text-center"
+          style="background-color: #18AF9A"
+          >
+            مكتمل 
+          </button>
+        </div>
+        
+        <div class="col">
+          <button
+          style="background-color: #EE9C0F"
+            disabled class=" btn mb-2 cairo w-100 text-white p-2 fontStyle text-center"
+          
+          >
+          غير مكتمل 
+           
+          </button>
+        </div>
+        <div class="col">
+          <button
+          style="background-color: #CC2A2A"
+          disabled class=" btn mb-2 cairo  text-white  w-100 p-2 fontStyle text-center">
+          لم يتم السداد
+          </button>
+        </div>
       </div>
-      <form
-        novalidate
-        [formGroup]="payMethodForm"
-        (ngSubmit)="onMethodSubmit()"
-      >
-        <div class="row">
-          <div class="col-md-12 mb-4">
-            <label class="form-label cairo" for="PaymentMethod"
-              >الدفع من خلال</label
-            >
-            <select
-              name="PaymentMethod"
-              id="PaymentMethod"
-              name="PaymentMethod"
-              class="form-control"
-              formControlName="PaymentMethod"
-              [class.is-valid]="PaymentMethod?.valid"
-              [class.is-invalid]="
-                PaymentMethod?.invalid && PaymentMethod?.touched
-              "
-            >
-              <option>...اختر</option>
-              <ng-container *ngFor="let PaymentMethod of PaymentMethodsList">
-                <option [value]="PaymentMethod.PaymentMethodId">
-                  {{ PaymentMethod.PaymentMethodAr }}
-                </option>
-              </ng-container>
-            </select>
-            <div
-              class="alert alert-warning mt-2"
-              [hidden]="PaymentMethod?.valid || PaymentMethod?.untouched"
-            >
-              <span *ngIf="PaymentMethod?.errors?.['required']">
-                طريقة الدفع مطلوبة</span
-              >
+    </div>
+    <div class="col-md-6">
+
+      <div class="row">
+
+        <div class="col-lg-2 col-3">
+          <div (click)="sortByName()" class="p-2 bg-white text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 27.643 27.042">
+              <path id="Path_2787" data-name="Path 2787" d="M13.831,10l-.263.789-2.329,6.422H11.2v.075L10.075,20.4,10,20.591v1.427h2.4V21l.488-1.39h3.831L17.211,21v1.014h2.4V20.591L19.54,20.4l-1.127-3.117v-.075h-.038l-2.329-6.422L15.784,10Zm16.6,0V32.46l-3.117-3.117-1.69,1.69,5.145,5.183.864.826.864-.826,5.145-5.183-1.69-1.69L32.835,32.46V10ZM14.807,14.394l1.014,2.817H13.793ZM10,24.422v2.4h6.685l-6.347,6.347L10,33.549v2.892h9.615v-2.4H12.93l6.347-6.347.338-.376V24.422Z" transform="translate(-10 -10)" fill="#a6a7aa"/>
+            </svg>
+            
+          </div>
+        </div>
+        <div class="col-lg-2 col-3">
+          <div (click)="sortByDate()" class="p-2 bg-white text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 25.926 25.926">
+              <path id="Path_2786" data-name="Path 2786" d="M14.963,2A12.963,12.963,0,1,0,27.926,14.963,12.977,12.977,0,0,0,14.963,2Zm0,2.16a10.845,10.845,0,1,1-9.452,5.6l1.553.878h.068l6.245,4.49a1.6,1.6,0,0,0,3.072.473l5.334-1.789-.675-2.025-5.3,1.789a1.637,1.637,0,0,0-.844-.236,1.76,1.76,0,0,0-.338.034l-.81-.574h1.148v-1.08H12.33l-1.519-1.08h4.152V9.562H9.325l-1.08-.776-.54.776H5.612a10.818,10.818,0,0,1,.709-1.08h8.642V7.4h-7.7a10.952,10.952,0,0,1,1.215-1.08h6.481V5.241H10.271A10.8,10.8,0,0,1,14.963,4.16Z" transform="translate(-2 -2)" fill="#18af9a"/>
+            </svg>
+            
+          </div>
+        </div>
+        <div class="col">
+          <!-- Another variation with a button -->
+          <div class="input-group">
+            <div class="input-group-append">
+              <button
+                class="btn rounded-0"
+                style="background-color: white"
+                type="button"
+                (click)="search(text.value)">
+                <i class="fa fa-search" style="color: #18af9a"></i>
+              </button>
+            </div>
+            <input
+            #text
+              type="text"
+              class="form-control rounded-0 border border-0 border-end"
+              placeholder="بحث"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <ng-container *ngFor="let project of dataShow">
+    <div class="col-lg-6 col-md-8">
+        <div class="card mb-3 border-0 p-3 w-100" >
+          <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center">
+              <img  [src]="project.project?.offers[0]?.organizationalServiceProviderProfile?.companyLogoPath || project.project?.offers[0]?.individualServiceProviderProfile.name"  class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 d-flex align-items-center">
+              <div class="card-body">
+                <h5 class="card-title">
+                 <div class="d-none ">
+                  <svg  id="XMLID_1_" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 25.877 30.797">
+                    <path id="Path_2828" data-name="Path 2828" d="M14.055,9.09l9.778,1.942a1.64,1.64,0,0,1,1.321,1.62V23.974a1.663,1.663,0,0,1-1.665,1.665H13.5a.55.55,0,0,0,.555-.555v-.555h9.434a.557.557,0,0,0,.555-.555V12.653a.558.558,0,0,0-.433-.544l-9.556-1.887Z" transform="translate(1.484 0.799)" fill="#004057"/>
+                    <path id="Path_2829" data-name="Path 2829" d="M19.775,14a.555.555,0,0,1,0,1.11h-2.22a.555.555,0,1,1,0-1.11Z" transform="translate(1.868 1.338)" fill="#004057"/>
+                    <path id="Path_2830" data-name="Path 2830" d="M19.775,17a.555.555,0,0,1,0,1.11h-2.22a.555.555,0,1,1,0-1.11Z" transform="translate(1.868 1.668)" fill="#004057"/>
+                    <path id="Path_2831" data-name="Path 2831" d="M19.775,20a.555.555,0,0,1,0,1.11h-2.22a.555.555,0,1,1,0-1.11Z" transform="translate(1.868 1.998)" fill="#004057"/>
+                    <path id="Path_2832" data-name="Path 2832" d="M14.11,25.094a.555.555,0,0,1-1.11,0V9.555a.59.59,0,0,1,.2-.433.583.583,0,0,1,.466-.111l.444.089V25.094Z" transform="translate(1.429 0.789)" fill="#004057"/>
+                    <path id="Path_2833" data-name="Path 2833" d="M13.385,23v.555a.55.55,0,0,0,.555.555H9.5a.55.55,0,0,0,.555-.555V23Z" transform="translate(1.044 2.328)" fill="#004057"/>
+                    <path id="Path_2834" data-name="Path 2834" d="M10.775,5a.555.555,0,1,1,0,1.11H8.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.879 0.349)" fill="#004057"/>
+                    <path id="Path_2835" data-name="Path 2835" d="M11.33,8.555a.55.55,0,0,1-.555.555H8.555a.555.555,0,0,1,0-1.11h2.22A.55.55,0,0,1,11.33,8.555Z" transform="translate(0.879 0.679)" fill="#004057"/>
+                    <path id="Path_2836" data-name="Path 2836" d="M10.775,11a.555.555,0,1,1,0,1.11H8.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.879 1.009)" fill="#004057"/>
+                    <path id="Path_2837" data-name="Path 2837" d="M10.775,14a.555.555,0,1,1,0,1.11H8.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.879 1.338)" fill="#004057"/>
+                    <path id="Path_2838" data-name="Path 2838" d="M6.33,14.555a.55.55,0,0,1-.555.555H3.555a.555.555,0,0,1,0-1.11h2.22A.55.55,0,0,1,6.33,14.555Z" transform="translate(0.33 1.338)" fill="#004057"/>
+                    <path id="Path_2839" data-name="Path 2839" d="M5.775,5a.555.555,0,0,1,0,1.11H3.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.33 0.349)" fill="#004057"/>
+                    <path id="Path_2840" data-name="Path 2840" d="M5.775,8a.555.555,0,0,1,0,1.11H3.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.33 0.679)" fill="#004057"/>
+                    <path id="Path_2841" data-name="Path 2841" d="M5.775,11a.555.555,0,0,1,0,1.11H3.555a.555.555,0,0,1,0-1.11Z" transform="translate(0.33 1.009)" fill="#004057"/>
+                    <path id="Path_2842" data-name="Path 2842" d="M9.55,18.665a.557.557,0,0,0-.555-.555H5.665a.55.55,0,0,0-.555.555v4.995H4V18.665A1.663,1.663,0,0,1,5.665,17h3.33a1.663,1.663,0,0,1,1.665,1.665v4.995H9.55Z" transform="translate(0.44 1.668)" fill="#004057"/>
+                    <path id="Path_2843" data-name="Path 2843" d="M5.11,23h5.55v.555a.55.55,0,0,1-.555.555H4.555A.55.55,0,0,1,4,23.555V23Z" transform="translate(0.44 2.328)" fill="#004057"/>
+                    <path id="Path_2844" data-name="Path 2844" d="M1.942.2l12.2,1.854a1.659,1.659,0,0,1,1.4,1.643v6.371l-.444-.089a.583.583,0,0,0-.466.111.59.59,0,0,0-.2.433V3.7a.561.561,0,0,0-.466-.555L1.765,1.3a.307.307,0,0,0-.1-.011.524.524,0,0,0-.355.133.531.531,0,0,0-.2.422V24.953a.557.557,0,0,0,.555.555H4.44v.555a.55.55,0,0,0,.555.555H1.665A1.663,1.663,0,0,1,0,24.953V1.845A1.634,1.634,0,0,1,.588.58,1.666,1.666,0,0,1,1.942.2Z" transform="translate(0 -0.181)" fill="#004057"/>
+                  </svg>
+                 </div>
+                  <svg id="user" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 25.877 30.797">
+                    <g id="Group_1047" data-name="Group 1047" transform="translate(5.435)">
+                      <g id="Group_1046" data-name="Group 1046" transform="translate(0)">
+                        <path id="Path_2887" data-name="Path 2887" d="M118.3,0a7.783,7.783,0,0,0-7.506,8A7.521,7.521,0,1,0,125.8,8,7.783,7.783,0,0,0,118.3,0Z" transform="translate(-110.791)" fill="#004057"/>
+                      </g>
+                    </g>
+                    <g id="Group_1049" data-name="Group 1049" transform="translate(0 16.564)">
+                      <g id="Group_1048" data-name="Group 1048">
+                        <path id="Path_2888" data-name="Path 2888" d="M49.987,253.658a7.614,7.614,0,0,0-.754-1.466,9.284,9.284,0,0,0-6.457-4.33,1.316,1.316,0,0,0-.951.244,7.608,7.608,0,0,1-9.44,0,1.173,1.173,0,0,0-.951-.244,9.218,9.218,0,0,0-6.457,4.33,8.781,8.781,0,0,0-.754,1.466.786.786,0,0,0,.033.663,14.019,14.019,0,0,0,.885,1.4,13.043,13.043,0,0,0,1.508,1.816,20.073,20.073,0,0,0,1.508,1.4,14.218,14.218,0,0,0,17.831,0,14.725,14.725,0,0,0,1.508-1.4A15.847,15.847,0,0,0,49,255.719a12.32,12.32,0,0,0,.885-1.4A.626.626,0,0,0,49.987,253.658Z" transform="translate(-24.165 -247.841)" fill="#004057"/>
+                      </g>
+                    </g>
+                  </svg>
+                  
+                  <span class="me-3">{{project.project?.offers[0]?.organizationalServiceProviderProfile?.companyName || project.project?.offers[0]?.individualServiceProviderProfile.name                  }}</span>
+                  
+                </h5>
+                <p class="card-text">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22">
+                    <g id="blueprint" transform="translate(0 0)">
+                      <g id="Page-1_5_" transform="translate(0 0)">
+                        <g id="_x30_06---Draw-Blueprint" transform="translate(0 0)">
+                          <path id="Shape_33_" d="M359.36,202.688l-.152,1.348a.274.274,0,0,0,.079.223.264.264,0,0,0,.227.079l1.351-.154a.786.786,0,0,0,.076-.021l-1.561-1.561A.743.743,0,0,0,359.36,202.688Z" transform="translate(-346.132 -195.228)" fill="#004057"/>
+                          <path id="Rectangle-path_3_" d="M0,0H6.106V2.452H0Z" transform="translate(13.728 6.736) rotate(-45)" fill="#004057"/>
+                          <path id="Rectangle-path_1_" d="M0,0H.831V2.45H0Z" transform="translate(18.603 1.854) rotate(-45)" fill="#004057"/>
+                          <path id="Shape_32_" d="M544.995,1.857a.406.406,0,0,0,.124-.291.415.415,0,0,0-.124-.3L543.851.124a.415.415,0,0,0-.3-.124.406.406,0,0,0-.29.123L542.682.7l1.732,1.732Z" transform="translate(-522.929 0)" fill="#004057"/>
+                          <path id="Shape_31_" d="M2.383,16.643h.792a.4.4,0,0,0,.4-.4V.4a.4.4,0,0,0-.4-.4H2.383A2.38,2.38,0,0,0,0,2.378V17.718a3.164,3.164,0,0,1,2.378-1.075Z" transform="translate(-0.005 0)" fill="#004057"/>
+                          <path id="Shape_30_" d="M2.5,169.05H21.8a.4.4,0,0,0,.4-.4V152.8a.4.4,0,0,0-.4-.4H19.5l-3.762,3.764a1.552,1.552,0,0,1-.911.434c-1.337.15-1.35.16-1.465.16H7.534v4.359h9.51v-1.981a.4.4,0,1,1,.792,0v5.944a.792.792,0,0,1-.792.792H9.119a.4.4,0,1,1,0-.792h2.774v-3.17H7.534v5.548a.4.4,0,1,1-.792,0v-10.7H5.553a.4.4,0,0,1,0-.793h6.78a1.055,1.055,0,0,1-.037-.392l.15-1.35a1.53,1.53,0,0,1,.449-.925l.9-.9H4.364v10.7a1.189,1.189,0,0,1-1.189,1.189H2.383a2.38,2.38,0,0,0-2.378,2.378v.087A2.457,2.457,0,0,0,2.5,169.05Z" transform="translate(-0.005 -146.859)" fill="#004057"/>
+                          <path id="Rectangle-path_2_" d="M348.363,413.676h4.359v3.17h-4.359Z" transform="translate(-335.683 -398.618)" fill="#004057"/>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  
+                  <span class="me-3">{{project.project?.name}}</span></p>
+                  <p class="card-text">
+                    <svg id="pin" xmlns="http://www.w3.org/2000/svg" width="22" height="25" viewBox="0 0 22 25">
+                      <g id="Group_801" data-name="Group 801" transform="translate(0)">
+                        <g id="Group_800" data-name="Group 800">
+                          <path id="Path_2768" data-name="Path 2768" d="M56.055,0A8.257,8.257,0,0,0,48.08,8.5a10.333,10.333,0,0,0,.677,3.271,14.021,14.021,0,0,0,.922,1.837l5.468,8.827a1.01,1.01,0,0,0,1.817,0L62.433,13.6a13.961,13.961,0,0,0,.922-1.837A10.331,10.331,0,0,0,64.031,8.5,8.257,8.257,0,0,0,56.055,0ZM62.49,11.379a12.847,12.847,0,0,1-.84,1.674l-5.469,8.827c-.108.174-.142.174-.25,0l-5.469-8.827a12.853,12.853,0,0,1-.84-1.675,9.378,9.378,0,0,1-.6-2.883,7.051,7.051,0,1,1,14.074,0A9.386,9.386,0,0,1,62.49,11.379Z" transform="translate(-48.08 0)" fill="#004057"/>
+                          <path id="Path_2769" data-name="Path 2769" d="M116.3,64.008a4.507,4.507,0,1,0,4.222,4.5A4.372,4.372,0,0,0,116.3,64.008Zm0,8a3.505,3.505,0,1,1,3.284-3.5A3.4,3.4,0,0,1,116.3,72Z" transform="translate(-108.327 -60.009)" fill="#004057"/>
+                        </g>
+                      </g>
+                    </svg>
+                    
+                    <span class="me-3 cairo">
+                      {{ project.project.district.nameAr }} ,
+                      {{ project.project.district.city.nameAr }} ,
+                      {{ project.project.district.city.region.nameAr }}</span></p>
+                <button (click)="showDetails(project)" class="p-2 align-items-center w-100 border-0 d-flex cairo justify-content-between showBtn">
+                  المبلغ المدفوع : {{project.paid}} ريال
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="17" viewBox="0 0 30.984 21.248">
+                    <g id="Group_1663" data-name="Group 1663" transform="translate(0 0)">
+                      <g id="Group_1265" data-name="Group 1265" transform="translate(10.507 5)">
+                        <g id="Group_1264" data-name="Group 1264" transform="translate(0 0)">
+                          <path id="Path_2933" data-name="Path 2933" d="M161.4,156.416a5.323,5.323,0,1,0,4.986,5.312A5.161,5.161,0,0,0,161.4,156.416Zm-.378,3.737a1.184,1.184,0,0,0-1.135,1.209h-1.651a2.914,2.914,0,0,1,2.785-2.967Z" transform="translate(-156.416 -156.416)" fill="#18af9a"/>
+                        </g>
+                      </g>
+                      <g id="Group_1267" data-name="Group 1267" transform="translate(0 0)">
+                        <g id="Group_1266" data-name="Group 1266">
+                          <path id="Path_2934" data-name="Path 2934" d="M30.623,91.7c-1.685-2.235-7.7-9.525-15.131-9.525S2.046,89.466.361,91.7a1.853,1.853,0,0,0,0,2.2c1.685,2.235,7.7,9.525,15.131,9.525s13.446-7.29,15.131-9.525A1.853,1.853,0,0,0,30.623,91.7Zm-15.131,8.792a7.709,7.709,0,0,1,0-15.387,7.709,7.709,0,0,1,0,15.387Z" transform="translate(0 -82.176)" fill="#18af9a"/>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
+                  
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <button
-          type="submit"
-          class="btn cairo ms-2 text-white form-control"
-          style="background: #18af9a"
+      </div>
+    </ng-container>
+    <div *ngIf="showModal" class="overlay p-5">
+      <div class="img-popup p-5">
+        <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+          >&times;</a
         >
-          إرسال
-        </button>
-      </form>
+        <div id="mymModal" class="mmodal">
+            <div class="mb-2">
+                <button
+                  class="btn gray d-flex justify-content-between align-items-center btn-accordion w-100 text-end d-flex justify-content-between  rounded-0 px-3"
+                  type="button"
+                  [attr.data-target]="'#item'"
+                  data-toggle="collapse"
+                >
+                  <span class="cairo">{{activeProject.project?.name}}  </span>
+               <div>   <span
+                class="cairo"
+                > ربح  : {{(activeProject.project?.offers[0]?.totalCost - activeProject.project?.offers[0]?.cost).toFixed(2) }} </span
+              >
+              <i class="fas fa-angle-down me-5"></i></div>
+                </button>
+              
+              <div class="card rounded-0 border-0 mt-2 card-2-1">
+                <div id="accordion" >
+                  <div
+                    class=" gray  collapse hide py-3 px-1"
+                    [id]="'item'"
+                    data-parent="#accordian"
+                  >
+                    <div class="cairo  p-2 mb-2">
+                      <ul class=" p-0 list-unstyled">
+                        <ng-container *ngFor="let milestone of activeProject.project?.offers[0]?.milestones ; let i = index ">
+                          <li
+                          [ngStyle]="{'color': milestone.isPaid ? '#18AF9A': '#EE9C0F' }"
+                           class="p-2 d-flex flex-wrap  justify-content-between">
+                            <div class="mb-2" *ngIf="milestone.isFirstMilestone">
+                              <span>الدفعه ({{i+1}}) : </span>
+                            <span class="me-2">  دفعة مقدمه  </span>
+                            <span class="mx-2">|</span>
+                            <span>{{milestone.cost}} ريال</span>
+                            </div>
+                            <div class="mb-2" *ngIf="milestone.isLastMilestone">
+                              <span>الدفعه ({{i+1}}) :</span>
+                            <span class="me-2">  دفعة بعد الإنتهاء </span>
+                            <span class="mx-2">|</span>
+                            <span>{{milestone.cost}} ريال</span>
+                          </div>
+                            <div class="mb-2" *ngIf="!milestone.isLastMilestone && !milestone.isFirstMilestone" >
+                              <span>الدفعه ({{i+1}}) : </span>
+                            <span class="me-2">  {{requiredWorks[milestone.requiredWorkId]?.name}} </span>
+                            <span class="mx-2">|</span>
+                         <span>{{milestone.cost}} ريال</span>
+                              </div>
+                            <div *ngIf="milestone.isPaid">بتاريخ : {{getDate(milestone.paidDate) }}</div>
+                          </li>
+                        </ng-container>
+                        <li></li>
+                        <li></li>
+                      </ul>
+                      <div>
+                        <button class="btn paidbk text-white mx-2 " disabled>تم التسديد</button>
+                        <button class="btn text-white notPaidbk" disabled>لم يتم التسديد بعد</button>
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  
+
+</section>
