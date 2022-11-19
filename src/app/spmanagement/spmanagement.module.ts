@@ -34,6 +34,8 @@ import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
 import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
 import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
+import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
+import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
 
 
 @NgModule({
@@ -71,6 +73,8 @@ import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.
     SpProjectCurrentComponent,
     SpProjectPendingComponent,
     SpCprojectOfferComponent,
+    SpCprojectAcceptComponent,
+    SpCprojectRejectComponent,
     
   ],
   imports: [

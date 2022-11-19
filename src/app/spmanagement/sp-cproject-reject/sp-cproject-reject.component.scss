@@ -1,0 +1,145 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+ .card
+{
+   border: none;
+   padding: 4% ;
+   color:#004057;
+}
+.card-1 a
+{
+  color: #18af9a;
+}
+
+.card-1 p
+{
+
+  margin-top: 1% ;
+  margin-bottom:  1% ;
+}
+
+
+.section-2  .card p
+{
+
+  margin-right: 4%;
+  width: 95%;
+}
+
+.section-2 .card-1 p span
+{
+  margin-left: 45%;
+}
+
+.card p i
+{
+
+  margin-left: 3%;
+
+}
+
+.section-2  .card-1
+{
+  cursor: pointer;
+}
+
+
+
+
+.section-2 .card-2
+{
+  margin: 0;
+  padding: 2% 0% ;
+  width: 95%;
+  margin-right: 4%;
+
+}
+
+.section-2 .card-3
+{
+  margin: 0;
+  padding: 3% 4%;
+  width: 90%;
+  margin-right: 7%;
+
+}
+
+.section-2 .card-3 h6
+{
+
+  margin-right: 13%;
+}
+
+.section-2 .card-3 ul
+{
+  list-style-type: none;
+  padding: 2%;
+  font-size: 14px;
+  color: rgb(87, 86, 86);
+}
+
+ul li i
+{
+  padding: 3%;
+  color: #18af9a;
+
+}
+
+li
+{
+  cursor:pointer;
+}
+
+
+
+.card-2 p
+{
+  margin: 2% 0%;
+
+}
+
+.card-2 .content p
+{
+  padding: 1% ;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.card-3 i
+{
+  color: #18af9a;
+}
+
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
+
+}
+
+
+
