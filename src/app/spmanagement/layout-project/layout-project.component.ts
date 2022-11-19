@@ -16,11 +16,12 @@ export class LayoutProjectComponent implements OnInit {
 
    this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>{
    this.type=data.data.organizationalServiceProviderProfile.projectService.id;
+   localStorage.setItem('typeId',this.type);
    console.log(this.type);
   }
    );
 
-    this.type=localStorage.getItem('type');
+
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
       this.projectstatues=data.data.projectStatues;

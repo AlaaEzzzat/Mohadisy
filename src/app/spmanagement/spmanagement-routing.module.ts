@@ -26,6 +26,7 @@ import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
 import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
+import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
 
 const routes: Routes = [
   {
@@ -52,7 +53,12 @@ const routes: Routes = [
               { path: 'accept', component: SpRequestAcceptComponent },
               { path: 'reject', component: SpRequestRejectComponent },
               { path: 'offer', component: SpProjectOfferComponent },
+
+              { path: 'all', component: SpProjectsComponent },
+              { path: 'all/request', component: SpCprojectRequestComponent },
+              { path: 'alloffer', component: SpCprojectOfferComponent },
             ],
+
           },
           {
             path: 'status',
@@ -63,15 +69,12 @@ const routes: Routes = [
             ],
           },
 
-          { path: 'all', component: SpProjectsComponent },
-         { path: 'all/request', component: SpCprojectRequestComponent },
+
         ],
       },
 
 
       { path: 'mainProfile', component: SpMainProfileComponent },
-
-      { path: 'project', component: SpProjectsComponent },
 
       { path: 'completeProfile', component: SpCompleteProfileComponent },
       { path: 'prevWorks', component: PrevWorksComponent },

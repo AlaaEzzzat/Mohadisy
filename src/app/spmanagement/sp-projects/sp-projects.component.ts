@@ -154,8 +154,9 @@ export class SpProjectsComponent implements OnInit {
     });
      }
 
-     addIdProject(id:any)
+     addIdProject(idProject:any)
      {
+      localStorage.setItem('idproject',idProject);
 
      }
 

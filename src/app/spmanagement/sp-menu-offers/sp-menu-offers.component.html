@@ -4,11 +4,13 @@
 
     <div class="row nav mt-4">
 
+      <ng-container *ngIf="type!=2">
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/new"]'
         [routerLinkActive]='["active"]'
         class="btn">{{projectstatues[0]?.nameAr}}</a>
       </div>
+
 
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
@@ -24,6 +26,34 @@
         <a [routerLink]="['/Spmanagement/projects/reject']" class="btn"
         [routerLinkActive]='["active"]' >{{projectstatues[1]?.nameAr}}</a>
       </div>
+      </ng-container>
+
+
+
+
+      <ng-container *ngIf="type==2">
+        <div class="col   text-center contnet">
+          <a [routerLink]='["/Spmanagement/projects/all"]'
+          [routerLinkActive]='["active"]'
+          class="btn">{{projectstatues[0]?.nameAr}}</a>
+        </div>
+
+
+        <div class="col   text-center contnet">
+          <a [routerLink]='["/Spmanagement/projects/alloffer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
+        </div>
+
+        <div class="col   text-center contnet">
+          <a [routerLink]='["/Spmanagement/projects/allaccept"]'
+          [routerLinkActive]='["active"]'
+          class="btn" >{{projectstatues[2]?.nameAr}}</a>
+        </div>
+
+        <div class="col  text-center contnet">
+          <a [routerLink]="['/Spmanagement/projects/allreject']" class="btn"
+          [routerLinkActive]='["active"]' >{{projectstatues[1]?.nameAr}}</a>
+        </div>
+        </ng-container>
 
   </div>
   </div>

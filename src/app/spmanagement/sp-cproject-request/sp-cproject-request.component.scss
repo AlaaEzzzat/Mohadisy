@@ -128,6 +128,15 @@
  }
 
 
+ .send
+ {
+  background-color: #004057;
+  color: white;
+  padding: 1% 4%;
+  margin-right: 85%;
+
+ }
+
 
 
 
@@ -175,4 +184,34 @@
 {
 
   content:"--------------------------------------------------------------------------------------";
+}
+
+
+
+.page-link
+{
+
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
+
 }
