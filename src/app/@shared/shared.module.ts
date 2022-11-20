@@ -11,6 +11,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { CalendarComponent } from './calendar/calendar.component';
 const routes: Routes = [
   // {path: 'login', component: LoginComponent},
 ];
@@ -22,6 +23,7 @@ const routes: Routes = [
     SplitNameByCommaPipe,
     NotFoundComponent,
     NavbarComponent,
+    CalendarComponent,
   ],
   imports: [
     MatMenuModule,
@@ -43,6 +45,8 @@ const routes: Routes = [
     ArabicNumberPipe,
     SplitNameByCommaPipe,
     NavbarComponent,
+    CalendarComponent,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

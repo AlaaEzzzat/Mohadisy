@@ -6,7 +6,7 @@ import { UsermanagementRoutingModule } from './usermanagement-routing.module';
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserPriceOffersComponent } from './user-price-offers/user-price-offers.component';
-import { UserProjectsComponent } from './user-projects/user-projects.component';
+
 import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.component';
@@ -15,13 +15,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { PaymentComponent } from './payment/payment.component';
 import { ProjectComponent } from './project/project.component';
-
+import { MatCardModule } from "@angular/material/card";
 @NgModule({
   declarations: [
     UserDashBoardComponent,
     UserProfileComponent,
     UserPriceOffersComponent,
-    UserProjectsComponent,
+  
     UserMessagesComponent,
     UserhomeComponent,
     ProfilecomplateComponent,
@@ -30,6 +30,7 @@ import { ProjectComponent } from './project/project.component';
   ],
   imports: [
     SharedModule,
+    MatCardModule,
     MatMenuModule,
     MatIconModule,
     CommonModule,

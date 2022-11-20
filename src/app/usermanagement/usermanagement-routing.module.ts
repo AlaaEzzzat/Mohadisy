@@ -2,7 +2,7 @@ import { ProjectComponent } from './project/project.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserProjectsComponent } from './user-projects/user-projects.component';
+
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

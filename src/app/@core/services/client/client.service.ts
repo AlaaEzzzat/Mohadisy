@@ -10,6 +10,13 @@ export class ClientService {
   reuestedProject: any = {};
   projectRequiredFiles: any = [];
   constructor(private _HttpClient: HttpClient) {}
+ 
+
+  getClientProfile(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Client/getClientProfile`
+    );
+  }
   getProjectServicesAndSubService(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/PriceQuotes/getProjectServicesAndSubService`
@@ -41,11 +48,7 @@ export class ClientService {
     );
   }
   /* ******************************* */
-  /* getAllServics(): Observable<any> {
-    return this._HttpClient.get<any>(
-      `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
-    );
-  } */
+  
   getAllProjectCategories(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
@@ -102,11 +105,7 @@ export class ClientService {
       `${environment.baseUrl}/api/Account/checkAccountStatus`
     );
   }
-  getClientProfile(): Observable<any> {
-    return this._HttpClient.get<any>(
-      `${environment.baseUrl}/api/Client/getClientProfile`
-    );
-  }
+ 
 
   getProjectComponentById(componentId: any): Observable<any> {
     return this._HttpClient.get<any>(

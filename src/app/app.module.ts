@@ -1,3 +1,4 @@
+import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { FormsModule } from '@angular/forms';
 import { HomeModule } from './Layout_HomePage/home.module';
 import { AccountModule } from './account/account.module';
@@ -17,7 +18,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent ],
+  
   imports: [
+CalendarModule,
 SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -28,10 +31,6 @@ SharedModule,
     HomeModule,
     FormsModule,
     NgbModule,
-
-
-
-
   ],
   providers: [
     {
@@ -41,6 +40,7 @@ SharedModule,
     },
     ApiService,
   ],
+ 
   bootstrap: [AppComponent],
 })
 export class AppModule {}

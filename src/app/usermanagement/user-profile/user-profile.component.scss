@@ -1,0 +1,71 @@
+.profile {
+  min-height: 100vh;
+  span,
+  h3,
+  p, .btn {
+    font-family: "cairo";
+    color: #004057;
+  }
+  .bold {
+    font-weight: 600;
+  }
+  .secondColor {
+    color: #18af9a;
+  }
+  .gray {
+    color: #c7c7c7;
+  }
+  .mainBk{
+      background-color: #004057;
+  }
+  .changePic {
+    background-color: rgba($color: #004057, $alpha: 0.74);
+    text-align: center;
+    color: #fff;
+    width: 100%;
+  }
+  .image {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+  }
+  .editBtn {
+    transition: 0.5s ease-in-out;
+  }
+  .editBtn:hover {
+    color: #18af9a;
+  }
+  .map {
+    position: relative;
+    .direction {
+      text-decoration: none;
+      background-color: rgba($color: #18af9a, $alpha: 0.8);
+      text-align: center;
+      color: #fff;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: pointer;
+      transition: 0.5s ease-in-out;
+    }
+    direction:hover{
+      background-color: #18af9a;
+    };
+  }
+  .nationalId {
+    position: relative;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    .over {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.6);
+      color: #fff;
+    }
+  }
+}
