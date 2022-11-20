@@ -19,6 +19,30 @@ a
   -moz-text-decoration-line: none;
 }
 
+.image
+{
+  position: relative;
+}
+
+.image .layout
+{
+
+  position: absolute;
+  background-color: rgba(4, 22, 113, 0.3);
+  bottom:0%;
+  width: 100%;
+  padding:4%;
+
+}
+
+.image .layout button
+{
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding-right: 20%;
+}
+
 
 .card-2
 {
@@ -99,3 +123,56 @@ a
   color: #004057;
 }
 
+
+
+.card-4
+{
+  padding: 19% 15% ;
+  position: relative;
+}
+
+
+.card-4 .layout
+{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(4, 22, 113, 0.3);
+  top:0%;
+  left: 0%;
+  color: white;
+
+}
+
+.card-4 .layout a
+{
+  color: white;
+}
+
+
+.card-5
+{
+  padding:7%;
+
+}
+
+.card-5 p , .card-5 a
+{
+  color:#004057;
+  font-size: 15px;
+}
+
+
+
+.card-5 button
+{
+  background-color: #004057;
+  color:white;
+  padding: 3% 10%;
+}
+
+hr
+{
+  border: none;
+  border-top: 1px dashed rgb(233, 233, 233);
+}
