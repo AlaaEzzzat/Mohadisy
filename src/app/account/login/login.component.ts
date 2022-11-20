@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@core/auth/auth.service';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private clientService: ClientService,
     private router: Router,
-    private _toastr: ToastrService
+    private _toastr: ToastrService,
+    private api:ApiService
   ) {
     this.LoginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -110,6 +112,14 @@ export class LoginComponent implements OnInit {
         } else {
           this._toastr.error(data.data.message);
         }
+
+
+        //get id type of user
+        this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>{
+          var type=data.data.organizationalServiceProviderProfile.projectService.id;
+          localStorage.setItem('typeId',type);
+         }
+          );
       });
   }
   ngOnInit(): void {}

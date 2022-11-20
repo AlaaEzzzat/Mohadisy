@@ -9,12 +9,14 @@ import { ApiService } from 'src/app/@core/api.service';
 export class SpMenuOffersComponent implements OnInit {
 
   projectstatues:any;
-  type:any=0;
-  constructor(private api:ApiService) { }
+  type:number=Number(localStorage?.getItem('typeId'));
+  constructor(private api:ApiService) {
+
+  }
 
   ngOnInit(): void {
 
-    this.type=localStorage.getItem('typeId');
+
     console.log(this.type);
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
       this.projectstatues=data.data.projectStatues;
