@@ -25,7 +25,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
-
 @NgModule({
   declarations: [
     AdminHomeComponent,
