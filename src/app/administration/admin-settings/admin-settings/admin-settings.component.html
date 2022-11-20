@@ -1,0 +1,29 @@
+<div class="container-fluid my-md-3">
+      <div class="col-12 d-flex flex-column flex-md-row justify-content-between">
+        <div class="col-md-3 col-12">
+                  <div class="example-button-row mb-2 "  >
+                        <button
+                        mat-button
+                        class="col-12 h5 buttonChose border-0 py-2 buttonChose"
+                        routerLink="profile" routerLinkActive="active"
+                        >
+                        الملف الشخصي
+                        </button>
+                  </div>
+            
+                  <div class="example-button-row" >
+                        <button
+                        mat-button
+                        routerLink="users" routerLinkActive="active"
+                        class="col-12 h5  border-0 py-2 buttonChose"
+                        
+                        >
+                        المستخدمين
+                        </button>
+                  </div>
+        </div>
+        <div class="d-flex flex-column col-md-9 col-12 me-md-3">
+            <router-outlet></router-outlet>
+        </div>
+      </div>
+</div>

@@ -324,7 +324,7 @@
                   "
                 >
                   <i class="fa fa-download ms-3"></i>
-                  <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
+                  <p class="pt-3 nameDownload">{{ productCurrent.clientProfile.idPath }}</p>
                 </a>
                 <ng-template #idFile>___</ng-template>
                 <!-- </div> -->
@@ -540,13 +540,14 @@
             class="example-margin"
             [color]="color"
             [mode]="mode"
-            [value]="values"
+            [value]="period"
            >
            
         </mat-progress-spinner>
-        <h4  id="progress">{{values}}%</h4>
+        <h4  id="progress">{{period}}%</h4>
           </div>
-          <p class="cairo">  تم الانتهاء من المرحله الاولي</p>
+          <p class="cairo" *ngIf="period==0">  تم البدء في المرحله الاولي</p>
+          <p class="cairo" *ngIf="period>=25">  تم الانتهاء من المرحله الاولي</p>
 
           </div>
         <div class="col-lg-10 col-12 bg-white me-1 p-3">
@@ -735,7 +736,7 @@
       <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 "  *ngIf="productCurrent.projectRequestStatus.projectStatus.id != 3">
         <div class="card col-lg-4 border-0 rounded-0 " >
           <div class="card-body">
-            <p class="card-title text-center"><span class="h2">200</span><sub>متر مكعب</sub></p>
+            <p class="card-title text-center"><span class="h2">{{productCurrent.area}}</span><sub>متر مكعب</sub></p>
             <p class="card-text text-center">مساحة الأرض المقام عليها المشروع</p>
           
           </div>
@@ -749,7 +750,7 @@
         </div>
         <div class="card col-lg-4 border-0 rounded-0 " >
           <div class="card-body">
-            <p class="card-title text-center"><span class="h2">200444</span><sub>ريال </sub></p>
+            <p class="card-title text-center"><span class="h2">{{cost}}</span><sub>ريال </sub></p>
             <p class="card-text text-center">  الميزانبه الخاصه بهذا المشروع</p>
          
           </div>
@@ -827,7 +828,7 @@
                 (click)="download(comp.filePath, comp.file)"
               >
                 <i class="fa fa-download ms-3"></i>
-                <p class="pt-3">{{ comp.file }}</p>
+                <p class="pt-3 nameDownload">{{ comp.file }}</p>
               </a>
             </ng-container>
           </ng-container>

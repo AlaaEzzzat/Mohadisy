@@ -7,6 +7,39 @@
 .main-color {
   color: #18af9a !important;
 }
-i {
-  color: #f3d720;
+// i {
+//   color: #f3d720;
+// }
+text-gary{
+  color: #1D1C1C !important;
+}
+.cairo{
+  font-family: "cairo";
+}
+.cardImg {
+  width: 60px;
+  margin-bottom: 10px;
+
+}
+// #doughnut>legend{
+//   font-size: xx-large !important;
+// }
+// canvas [_ngcontent-jwk-c159] {
+//   aspect-ratio: auto 200 / 240 !important;
+// }
+#progress {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  color: #3f51b5;
+}
+.example-margin {
+  margin: 10px 10px;
+
+  mat-progress-spinner, mat-spinner circle {
+    stroke: #9e26c8 !important;
+  }
 }

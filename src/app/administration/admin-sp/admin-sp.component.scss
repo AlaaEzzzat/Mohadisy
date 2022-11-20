@@ -129,3 +129,21 @@ border: none!important;
   }
   color: #18AF9A;
 }
+.nameDownload{
+  // width:300px;
+  // padding:10px;
+  // background-color:red;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  // &:hover{
+  //   overflow: visible;
+  // }
+}
+.top100{
+  top: 80%!important;
+  right: 10% !important;
+}
+.changeCursor{
+  cursor: pointer !important;
+}

@@ -43,6 +43,9 @@ export class AdminProjectComponent implements OnInit {
    set:any
   //  progress
   componentId:any[]=[];
+  offer:any[]=[];
+  period:any;
+  cost:any;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   values = 50;
@@ -233,6 +236,7 @@ export class AdminProjectComponent implements OnInit {
     this.id = sessionStorage.getItem('idProjects');
     this.projectRequiredWorks();
     this.projectComponents();
+    this.offers()
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
@@ -389,9 +393,10 @@ export class AdminProjectComponent implements OnInit {
               this.requiredWorkIdObject.push(requiredWorkObject);
 
 
-            } console.log(this.requiredWorkIdObject)   ;
+            } 
+            // console.log(this.requiredWorkIdObject)   ;
              this.set = new Set(this.requiredWorkIdObject)
-            console.log(this.set)
+            // console.log(this.set)
             
 
           }
@@ -415,5 +420,25 @@ export class AdminProjectComponent implements OnInit {
 
     }
 
+  }
+  offers(){
+    this.offer=[]
+    for(let projectOffer of this.productCurrent.offers){
+      this.offer.push(projectOffer)
+      
+      // this.period=projectOffer.period
+      this.cost=projectOffer.cost
+
+    } 
+    console.log()
+    switch(this.offer.length){
+      case 1:
+        this.period=0;
+        break;
+      case 2:
+          this.period=25;
+          break;
+
+    }
   }
 }

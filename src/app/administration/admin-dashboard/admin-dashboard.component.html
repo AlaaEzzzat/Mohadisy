@@ -1,109 +1,114 @@
 <section class="container-fluid my-4 ">
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-              <img src="assets/dashboard/visitor.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle">زوار</div>
-              <div class="fw-bold text-center">0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-            <img src="assets/dashboard/partener.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center  fontStyle" style="font-size:0.7rem;">مشترك</div>
-              <div class="fw-bold text-center">75</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- part 1 -->
+  <div class="row cairo">
+    <div class="col-lg-4 ">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+            <!-- <div class="col-12 text-center px-4">
+            </div> -->
+            <img src="assets/dashboard/visitor.png" alt="" class="card-img cardImg">
 
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-             <img src="assets/dashboard/closedprojects.png" alt="" class="img-fluid">
-            </div>
             <div class="w-100">
-              <div class="text-center fontStyle" style="font-size:0.7rem;"> مشروع</div>
-              <div class="fw-bold text-center">5</div>
+              <div class="fw-bold text-center">{{visitorsNumber}}</div>
+              <div class="text-center ">زائر</div>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-             <img src="assets/dashboard/handShakePuple.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle" style="font-size: 14px;">عروض الأسعار</div>
-              <div class="fw-bold text-center">13</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+            <img src="assets/dashboard/partener.png" alt="" class="card-img cardImg">
 
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-              <img src="assets/dashboard/profit_02.png" alt="" class="img-fluid">
-            </div>
             <div class="w-100">
-              <div class="text-center fontStyle" style="font-size:0.7rem;">ارباح </div>
-              <div class="fw-bold text-center">0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-                 <img src="assets/dashboard/cost.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle">مصاريف</div>
-              <div class="fw-bold text-center">10</div>
+              <div class="fw-bold text-center">{{usersNumber}}</div>          
+              <div class="text-center  " >مشترك</div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-4">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+         
+            <img src="assets/dashboard/closedprojects.png" alt="" class="card-img cardImg">
+
+            <div class="w-100">
+              <div class="fw-bold text-center">{{pricequotesNumber}}</div>
+              <div class="text-center " >  عروض اسعار</div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+            <img src="assets/dashboard/handShakePuple.png" alt="" class="card-img cardImg">
+
+            <div class="w-100">
+              <div class="fw-bold text-center">{{projectsNumber}}</div>
+              <div class="text-center " > مشاريع </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-lg-4">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+            <!-- <div class="col-12 text-center px-4">
+            </div> -->
+            <img src="assets/dashboard/profit_02.png" alt="" class="card-img cardImg">
+
+            <div class="w-100">
+              <div class="fw-bold text-center">{{earnings}}</div>              <div class="text-center " > ارباح</div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-4 col-12 mb-4">
+          <div class="col-12 bg-white d-flex flex-column justify-content-evenly align-items-center py-2">
+            <img src="assets/dashboard/cost.png" alt="" class="card-img cardImg">
+
+            <div class="w-100">
+              <div class="fw-bold text-center">{{costs}}</div>              <div class="text-center fontStyle" > مصاريف</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
   </div>
-
-  <div class="row my-2">
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="bg-white p-3 ">
-        <div class="row">
-          <div class="col-6">
-            <div class=" ">
-             <img src="assets/dashboard/providers.png" alt="" class="img-fluid">
+ <!-- part 2 -->
+  <div class="row my-2 cairo">
+      <!-- شركه -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="bg-white p-3 ">
+          <div class="row">
+            <div class="col-6">
+              <div class=" ">
+               <img src="assets/dashboard/providers.png" alt="" class="img-fluid">
+              </div>
+  
             </div>
-
-          </div>
-          <div class="col-6">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">18</div>
-              <h5 class="text-center fontStyle">مزود خدمة شركة</h5>
+            <div class="col-6">
+              <div class="w-100 text-center ">
+                <h1 class="fw-bold">{{orgServiceProviderNumber}}</h1>
+                <h5 class="text-center fw-semibold">مزود خدمة شركة</h5>
+              </div>
+  
             </div>
-
           </div>
         </div>
       </div>
-    </div>
-     <div class="col-12 col-md-6 col-lg-4 mt-2 mt-lg-0">
+  
+    <!-- مستقل -->
+    <div class="col-12 col-md-6 col-lg-4 mt-2 mt-lg-0">
       <div class="bg-white p-3 ">
         <div class="row">
           <div class="col-6">
@@ -113,174 +118,223 @@
 
           </div>
           <div class="col-6">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">15</div>
-              <h5 class="text-center fontStyle" >  مزود خدمة مستقل</h5>
+            <div class="w-100 text-center ">
+            
+              <h1 class="fw-bold">{{indServiceProviderNumber}}</h1>
+              <h5 class="text-center fw-semibold">مزود خدمة مستقل</h5>
             </div>
 
           </div>
         </div>
       </div>
     </div>
+    <!-- عميل -->
     <div class="col-12 col-md-6 col-lg-4 mt-2 mt-lg-0">
       <div class="bg-white p-3 ">
         <div class="row">
-          <div class="col-12 col-md-6 col-lg-4">
+          <div class="col-6">
             <div class=" ">
-             <img src="assets/dashboard/users.png" alt="">
+              <img src="assets/dashboard/users.png" alt="" class="img-fluid">
             </div>
 
           </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">18</div>
-              <h5 class="text-center fontStyle">مزود خدمة شركة</h5>
+          <div class="col-6">
+            <div class="w-100 text-center ">
+            
+              <h1 class="fw-bold">{{cLientsNumber}}</h1>
+              <h5 class="text-center fw-semibold"> عميل </h5>
             </div>
 
           </div>
         </div>
       </div>
     </div>
+  
+  
   </div>
-
-
-  <div class="row my-5">
-    <div class="col-lg-8 col-12 col-md-12 ">
-      <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-        <p class="fontStyle">مسئولي المنصة</p>
-        <p>اضافة مسئول</p>
-
-      </div>
-      <div class="mt-4 bg-white p-2 shadow-sm">
-        <div class="row">
-          <div class="col-4">
-            <img src="assets/avatar.png" alt="" class="rounded-circle" width="100" height="100">
-          </div>
-          <div class="col-4">
-            <p>mohandisy</p>
-            <p>mohandisy@gmail.com</p>
-          </div>
-          <div class="col-4 text-center">
-            <p class="mt-4">Admin</p>
-          </div>
+<!-- part3 -->
+ <div class="row my-4 cairo">
+    <div class="col-lg-6">
+      <div
+        class="bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center  mb-3 h-100 w-100"
+      >
+        <div class="chart" style="width: 300px; " >
+          <canvas  id="doughnut" class="col-12"></canvas>
         </div>
-
       </div>
-      <div class="mt-4 bg-white p-2 shadow-sm">
-        <div class="row">
-          <div class="col-4">
-            <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" width="100" height="100">
-          </div>
-          <div class="col-4">
-            <p>mohandisy</p>
-            <p>mohandisy@gmail.com</p>
-          </div>
-          <div class="col-4 text-center">
-            <p class="mt-4">Admin</p>
-          </div>
-        </div>
+    </div>
+    <div class="col-lg-6">
+      <div
+        class=" ps-5 bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center  mb-3 h-100 w-100"
+      >
+        <div
+          class="col-5 d-flex justify-content-around align-items-center p-3"
+        >
+          <div class=" d-flex justify-content-around align-items-center">
+            <img
+              class="ms-2"
+              src="assets/user/earn.png"
+              alt=""
+              style="width: 100px; border-radius: 50%"
+            />
+            <div style="color: #1a5f78">
+              <h3>{{costs}}</h3>
 
-      </div>
-      <div class="row mt-3">
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-            <h5 class=" fontStyle"> المشاريع الحالية</h5>
-            <p class=" fontStyle">5/5 </p>
-          </div>
-          <div class="mt-4 bg-white p-2">
-            <div class="row">
-              <div class="col-4">
-                <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" width="100" height="100">
-              </div>
-              <div class="col-6">
-                <p class=" fontStyle">اسم العميل: Tamer</p>
-                <p class=" fontStyle">بلد الأقامة: حي العمل</p>
-                <p class=" fontStyle">اسم المشروع: تطوير</p>
-              </div>
-
+              <b > أرباح سنويه </b>
             </div>
-
           </div>
-
-
-
-
-
         </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-            <h5 class="fontStyle"> عروض الأسعار</h5>
-            <p  class="fontStyle">0/13 </p>
+        <div class="col-7">
+          <div class="chart">
+            <canvas id="bar"></canvas>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- part4 -->
+<div class="row my-4 cairo">
+  <div class="col-lg-7">
+      <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-center  mb-2 col-12 py-3 px-5">
+        <h5 class="premary-color">اخر شكاوي المرسله</h5>
+        <p class="main-color">20  شكوي</p>
+      </div>
+    <div class="col-12 d-flex flex-column mb-3 ">
+      <!-- card -->
+      <div class="bg-white rounded-0  d-flex flex-column justify-content-between align-items-center  mb-2 col-12 py-3 px-4">
+        <div class="w-100 d-flex justify-content-between align-items-center ">
+          <p class="h6 text-gary"> <img class="h6 " src="assets/user/user (2).png" > اسم المرسل / محمود علاء </p>
+          <p class="h6 text-gary"> <img class="h6" src="assets/user/calendar.png" >  8/8/2019   - 04:30 pm  </p>
+        </div>
+        <p class=" text-gary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eveniet non ex optio placeat, doloremque quam sint expedita minus suscipit repudiandae. Eos sed dolorum quod. Nemo libero vero sunt molestias.</p>
+      </div>
+      <div class="bg-white rounded-0  d-flex flex-column justify-content-between align-items-center  mb-2 col-12 py-3 px-4">
+        <div class="w-100 d-flex justify-content-between align-items-center ">
+          <p class="h6 text-gary"> <img class="h6 " src="assets/user/user (2).png" > اسم المرسل / محمود علاء </p>
+          <p class="h6 text-gary"> <img class="h6" src="assets/user/calendar.png" >  8/8/2019   - 04:30 pm  </p>
+        </div>
+        <p class=" text-gary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste eveniet non ex optio placeat, doloremque quam sint expedita minus suscipit repudiandae. Eos sed dolorum quod. Nemo libero vero sunt molestias.</p>
+      </div>
+    </div>
 
+    <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-center  mb-2 col-12 py-3 px-5">
+      <h5 class="premary-color">  مسؤلي المنصه</h5>
+      <p class="main-color">  اضافة مسؤل</p>
+    </div>
+    <div class="col-12 d-flex flex-column mb-3 ">
+      <!-- card -->
+      <div class="bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-center  mb-2 col-12 ">
+        <div class="w-25">
+          <img class="w-100" src="assets/profile.png" >
+        </div>
+        <div class="w-75 d-flex flex-column justify-content-evenly align-items-start pe-5 ps-3">
+        <div class="w-100 d-flex flex-row justify-content-between align-items-center ">
+          <p class="h6 text-gary"> محمود علاء </p>
+          <p class="h6  main-color"> مسؤل</p>
+        </div>
+        <p>Mohamed-ahmed12 @gmail.com</p>
+        <p> منذ  11/9/2020</p>
+        
+        </div>
+      </div>
+    
+    </div>
 
-          <div class="mt-4 bg-white p-3 shadow-sm">
-            <div class="row">
-              <div class="col-4">
-                <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" >
-              </div>
-              <div class="col-6">
-                <p  class="fontStyle">اسم العميل: Tamer</p>
-                <p  class="fontStyle">بلد الأقامة: حي العمل</p>
-                <p  class="fontStyle">اسم المشروع: تطوير</p>
-              </div>
-              <div class="col-2">
-                <div class="mt-3">
-
-                  <i class="fa fa-star " aria-hidden="true"></i>
-                  <p  class="fontStyle">5/5</p>
+    <div class="d-flex flex-column  mb-2 col-12 ">
+      <div class="row col-12 m-0 p-0 gx-4 justify-content-between align-items-start">
+        <div class="cairo rounded-0   d-flex flex-column justify-content-between align-items-center  col-md-6 col-12">
+          <div class=" premary-color cairo rounded-0 text-center py-3 px-5 col-12 mb-2" style="background-color: #AADDD6;">
+              <h5>المشاريع الحاليه</h5>
+       
+          </div>
+          <!-- card -->
+            <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12 mb-2" >
+                <div class="col-xxl-2 d-xxl-block d-none">
+                  <img src="assets/avatar.png" alt="" class="col-12">
                 </div>
-              </div>
+                <div class="col-xxl-6 col-8 d-flex flex-column justify-content-evenly align-items-start pe-xxl-3">
+                  <p><small class="premary-color">اسم العميل : </small> <small>محمدالسيد</small></p>
+                  <p><small class="premary-color">بلد الاقامه : </small> <small> السعوديه</small></p>
+                  <p><small class="premary-color"> اسم المشروع : </small> <small>سكنى </small></p>
+
+                </div>
+                <div class="col-4">
+                  <div class="position-relative col-12">
+            
+                    <mat-progress-spinner
+                    class="example-margin"
+                    
+                    [color]="color"
+                    [mode]="mode"
+                    [value]=20
+                   >
+                   
+                </mat-progress-spinner>
+                <h6  id="progress">20%</h6></div>
+                </div>
+          </div>
+          <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12" >
+            <div class="col-xxl-2 d-xxl-block d-none">
+              <img src="assets/avatar.png" alt="" class="col-12">
+            </div>
+            <div class="col-xxl-6 col-8 d-flex flex-column justify-content-evenly align-items-start pe-xxl-3">
+              <p><small class="premary-color">اسم العميل : </small> <small>محمدالسيد</small></p>
+              <p><small class="premary-color">بلد الاقامه : </small> <small> السعوديه</small></p>
+              <p><small class="premary-color"> اسم المشروع : </small> <small>سكنى </small></p>
 
             </div>
+            <div class="col-4">
+              <div class="position-relative col-12">
+        
+                <mat-progress-spinner
+                class="example-margin"
+                
+                [color]="color"
+                [mode]="mode"
+                [value]=20
+               >
+               
+            </mat-progress-spinner>
+            <h6  id="progress">20%</h6></div>
+            </div>
+      </div>
+        </div>
 
+        <div class="cairo rounded-0  d-flex  flex-column  justify-content-between align-items-center  col-md-6 col-12">
+          <div class=" premary-color cairo rounded-0 text-center py-3 px-5 col-12 mb-2" style="background-color: #E5A8A8;">
+            <h5>المشاريع المنتهيه</h5>
+     
+        </div>
+        <!-- card -->
+        <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12 mb-2" >
+                <div class="col-xxl-2 d-xxl-block d-none">
+                  <img src="assets/avatar.png" alt="" class="col-12">
+                </div>
+                <div class="col-xxl-6 col-8 d-flex flex-column justify-content-evenly align-items-start pe-xxl-3">
+                  <p><small class="premary-color">اسم العميل : </small> <small>محمدالسيد</small></p>
+                  <p><small class="premary-color">بلد الاقامه : </small> <small> السعوديه</small></p>
+                  <p><small class="premary-color"> اسم المشروع : </small> <small>سكنى </small></p>
+
+                </div>
+                <div class="col-4 d-flex ">
+                  
+                </div>
           </div>
-
-
-
-
-
-
         </div>
 
-      </div>
-
-    </div>
-    <div class="col-lg-4 col-12 col-md-12 mt-2 mt-lg-0">
-      <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-        <p class="fontStyle">جدول أعمالك</p>
-
-
-
-      </div>
-      <div class="mt-4 bg-white shadow-sm">
-        <div class="d-flex justify-content-between bg-white p-4">
-          <p class="fontStyle"> تقيمات مستخدمي المنصة</p>
-          <p>
-            5/5
-            <i class="fa fa-star" aria-hidden="true"></i>
-          </p>
-        </div>
-
-
-
-      </div>
-      <div class="mt-4 bg-white shadow-sm">
-        <div class="text-center bg-white p-4">
-         <img src="assets/avatar.png" alt="" width="100" height="100">
-
-          <p class="mt-3">
-            ACME 123456
-          </p>
-          <p class="fontStyle">تقييم 3</p>
-        </div>
       </div>
     </div>
+
 
   </div>
 
 
-
+  <div class="col-lg-5">
+    <div class="bg-white rounded-0  d-flex justify-content-around align-items-center  mb-3 col-12">
+    </div>
+ 
+  </div>
+</div>
 
 
 

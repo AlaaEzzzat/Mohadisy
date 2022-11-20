@@ -41,6 +41,8 @@ export class AdminSPComponent implements OnInit {
   // objectpeo: any;
   // productCurrent: any;
   showInformation: boolean = false;
+  showprojectDetails:boolean=false;
+  projectDetails:any;
   name = '';
   id: any;
   page: number = 1;
@@ -382,6 +384,8 @@ export class AdminSPComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     this.id = sessionStorage.getItem('ids');
     this.showInformation = true;
+    this.showprojectDetails=false
+
   }
 
   objectProductGet() {
@@ -389,6 +393,25 @@ export class AdminSPComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
   }
 
+  showProjects(){
+    this.showInformation=false;
+    this.showprojectDetails=false
+
+  }
+  showProjectDetails(obj:any){
+   
+    this.showprojectDetails=true
+    this.projectDetails=obj
+    console.log(this.projectDetails)
+
+  }
+  back(){
+    this.showInformation=true;
+    this.showprojectDetails=false
+  }
+  backTwo(){
+    this.showprojectDetails=false
+  }
   // change stutas client
   changeToAccepted() {
     this.iChangeStatus = {
@@ -526,11 +549,11 @@ export class AdminSPComponent implements OnInit {
     );
   }
 
-  fortest(totals: any, arrays: any[]) {
-    for (var i = 1; i <= totals; i++) {
-      arrays.push(i);
-    }
-  }
+  // fortest(totals: any, arrays: any[]) {
+  //   for (var i = 1; i <= totals; i++) {
+  //     arrays.push(i);
+  //   }
+  // }
 
   calculateDiff(sentOn: any) {
     let todayDate = new Date();

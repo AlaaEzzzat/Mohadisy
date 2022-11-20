@@ -84,7 +84,7 @@ body {
     display: none;
   }
 }
-.p-2.my-4{
+.p-2.my-4,.activeHome{
   cursor: pointer;
   &.active{
     color: white!important;

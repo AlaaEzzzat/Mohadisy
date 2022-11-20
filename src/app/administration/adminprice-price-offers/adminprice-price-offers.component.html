@@ -373,7 +373,7 @@
                 "
               >
                 <i class="fa fa-download  ms-3"></i>
-                <p class="pt-3">{{ productCurrent.clientProfile.idPath }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.clientProfile.idFile }}</p>
               </a>
               <ng-template #idFile>___</ng-template>
               <!-- </div> -->
@@ -627,7 +627,7 @@
                 (click)="download(comp.filePath, comp.file)"
               >
                 <i class="fa fa-download ms-3"></i>
-                <p class="pt-3">{{ comp.file }}</p>
+                <p class="pt-3 nameDownload">{{ comp.file }}</p>
               </a>
             </ng-container>
           </ng-container>

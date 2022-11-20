@@ -9,7 +9,6 @@ import { AdminProjectComponent } from './admin-project/admin-project.component';
 import { AdminClientsComponent } from './admin-clients/admin-clients.component';
 import { AdminContributionsComponent } from './admin-contributions/admin-contributions.component';
 import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
-import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
@@ -23,10 +22,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { TestComponent } from './test/test.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -36,7 +35,6 @@ import { MatMenuModule } from '@angular/material/menu';
     AdminClientsComponent,
     AdminContributionsComponent,
     AdminMessagesComponent,
-    AdminSettingsComponent,
     AdminSPComponent,
     TestComponent,
     AdminSpUpdataComponent,
@@ -58,7 +56,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatMenuModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
 })
 export class AdministrationModule {}
