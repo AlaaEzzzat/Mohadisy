@@ -38,6 +38,7 @@ export class AdminDashboardComponent implements OnInit {
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   values = 50;
+  selected:any
   constructor(private http:AdminDashService) {
     this.cLientsNumber=0
     this.indServiceProviderNumber=0

@@ -31,20 +31,22 @@ export class AdminSettingProfileComponent implements OnInit {
   // usersNotActive: IusersNotAct[] = [];
   datasNotActive: any;
   constructor(private adminSettingsService: AdminSettingsService, private formbuilder: FormBuilder) {
+    this.getProfileAdmin() 
     this.userformlogin = this.formbuilder.group({
-      lastName: ['', [Validators.required]],
+      lastName: [, [Validators.required]],
       firstName: ['', [Validators.required]],
     });
    }
 
   ngOnInit(): void {
-    this.getProfileAdmin() 
+   
   }
   getProfileAdmin() {
     this.state = 1;
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
       this.iProfileAdmin = value.data;
-      console.log(this.iProfileAdmin);
+      this.profileChange=value.data;
+      console.log(this.profileChange);
     });
   }
   get lastName() {

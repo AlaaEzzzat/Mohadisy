@@ -332,11 +332,26 @@
 
 
   <div class="col-lg-5">
+
     <!-- part 1 -->
+    <div class=" rounded-0  d-flex flex-column justify-content-around align-items-center  mb-3 col-12">
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <h5 class="fw-bold pt-3">جدول الاعمال </h5>
+
+      </div>
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <mat-card class="demo-inline-calendar-card">
+          <mat-calendar [(selected)]="selected"></mat-calendar>
+        </mat-card>
+        <p>Selected date: {{selected |date}}</p>
+      </div>
+    </div>
+    <!-- part 2 -->
+  
     <div class=" rounded-0  d-flex flex-column justify-content-around align-items-center  mb-3 col-12">
       <div class="col-md-12 col-12 mb-1 me-1">
         <div class=" bg-white d-flex justify-content-between bg-white px-4 py-1 mb-2 align-items-center">
-          <h5 class="fw-bold pt-3">تقيم العملاء</h5>
+          <h5 class="fw-bold pt-3">تقيمات مستخدمي المنصه </h5>
           <div class="align-content-end">
             <span class="ps-1">4/5</span>
             <mat-icon class="align-text-bottom text-warning">star</mat-icon>
@@ -496,7 +511,7 @@
         </div>
       </div> 
     </div>
-        <!-- part 2 -->
+        <!-- part 3 -->
     <div class=" rounded-0  d-flex flex-column justify-content-around align-items-center  mb-3 col-12">
       <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
         <h5 class="fw-bold pt-3">اخر النشاطات</h5>
@@ -511,3 +526,4 @@
 
 
 </section>
+

@@ -25,6 +25,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -56,6 +59,13 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatMenuModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
   ],
+  providers:[
+    MatDatepickerModule,
+    MatNativeDateModule  
+  ]
 })
 export class AdministrationModule {}
