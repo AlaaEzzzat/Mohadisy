@@ -179,7 +179,7 @@
             aria-current="page"
             (click)="showSubMenu()"
           >
-            <span class="fontStyle"> مرحباً {{ username }} </span>
+            <span class="fontStyle cairo"> مرحباً {{ username }} </span>
             <span class="dotCon">
               <button
                 class="dots"
@@ -195,10 +195,10 @@
                 class="matBtnCon"
               >
                 <button (click)="signOut()" mat-menu-item>
-                  <span> تسجيل خروج</span>
+                  <span class="cairo"> تسجيل خروج</span>
                 </button>
                 <button mat-menu-item (click)="profile()">
-                  <span> المعلومات</span>
+                  <a routerLink="/usermanagement/profile" class="cairo text-decoration-none text-dark"> المعلومات</a>
                 </button>
               </mat-menu>
             </span>

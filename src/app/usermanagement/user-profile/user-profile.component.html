@@ -4,15 +4,23 @@
       <div class="card mb-3 border-0 rounded-0">
         <div class="row g-0">
           <div
+          (click)="editOverview = true"
             class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
           >
-            <img
-              [src]="user.profilePicturePath"
+          <img
+          *ngIf="!userImgChanged"
+          [src]="user.profilePicturePath"
+          class="img-fluid rounded-start"
+          alt="..."
+        />
+        <img
+        *ngIf="userImgChanged"
+              [src]="userImg"
               class="img-fluid rounded-start"
               alt="..."
             />
             <div class="p-2 position-absolute bottom-0 changePic">
-              <input type="file" name="image" id="image" class="image" />
+              <input type="file" (change)="uplaodImg($event, proImg.name)"  #proImg name="profileImage" id="image" class="image" />
               <svg
                 id="photo-camera"
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,10 +89,10 @@
                   </div>
                 </div>
                 <div
-                  class="col-lg-7 py-3 d-flex flex-column justify-content-between"
+                  class="col-lg-7 pt-3 d-flex flex-column justify-content-between"
                 >
                   <div
-                    class="d-flex align-items-baseline justify-content-between"
+                    class="d-flex align-items-baseline justify-content-around"
                   >
                     <h3
                     [ngClass]="user.applicationUser?.isActive?'secondColor':'text-danger'"
@@ -94,7 +102,7 @@
                     </h3>
                     <span class="mx-1 gray"> | </span>
                     <p class="card-text"> رقم التعريف : {{user.idNumber}}</p>
-                    <span class="mx-1 gray"> | </span>
+                    <!-- <span class="mx-1 gray"> | </span>
 
                     <p class="card-text">
                       4/5
@@ -114,7 +122,7 @@
                           stroke-width="1"
                         />
                       </svg>
-                    </p>
+                    </p> -->
                   </div>
                   <div class="d-flex flex-row-reverse">
                     <div>
@@ -211,7 +219,9 @@
           <div class="p-2 bg-white">
             <div class="d-flex justify-content-between p-2">
               <b class="cairo">نبذه مختصره عن المهندس</b>
-              <i class="fa fa-pen editBtn" (click)="editOverview = true"></i>
+              <i class="fa fa-pen editBtn" (click)="editOverview = true">
+               
+              </i>
             </div>
             <p [attr.contenteditable]="editOverview" class="p-2">
               "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت
@@ -227,7 +237,7 @@
         </div>
         <div class="col-md-6">
           <div class="map h-100">
-            <a class="direction p-3 cairo" [href]="map+ location" target="_blank">أحصل على الاتجاهات</a>
+            <a class="direction p-3 cairo" [href]="map+location" target="_blank">أحصل على الاتجاهات</a>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7455039.655145476!2d40.580647886855935!3d24.16625830320905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2sSaudi%20Arabia!5e0!3m2!1sen!2seg!4v1668864519770!5m2!1sen!2seg"
               style="border: 0; width: 100%; height: 100%"
@@ -239,12 +249,18 @@
         </div>
         <div class="col-md-6 mt-3">
           <div class="nationalId">
-            <img [src]="user.idPath" />
+            <img *ngIf="!idPicChanged" [src]="user.idPath" />
+            <img *ngIf="idPicChanged" [src]="idImgeUrl" />
             <div class="over">
               <div class="d-flex p-3 justify-content-between">
                 <span class="bold text-white">إثبات الهويه</span>
-                <div>
-                  <i class="fa fa-pen ms-2"></i>
+                <div class="d-flex">
+                  <div class="position-relative" (click)="editOverview = true">
+                    
+                    <i class="position-absolute fa fa-pen ms-2">
+                    </i>
+                    <input (change)="uplaodImg($event , idPic.name)" #idPic type="file" style="opacity: 0; width: 20px;" name="idPic">
+                  </div>
                   <svg
                     (click)="download(user.idPath, user.idFile)"
                     xmlns="http://www.w3.org/2000/svg"
@@ -277,7 +293,7 @@
         <div class="col-12 mt-5 d-flex justify-content-center"
         
         >
-          <button [hidden]="!editOverview" [disabled]="!editOverview" class="btn mainBk  text-white p-2 px-3" >حفظ التعديلات</button>
+          <button [hidden]="!editOverview" (click)="saveChanges()" class="btn mainBk  text-white p-2 px-3" >حفظ التعديلات</button>
         </div>
       </div>
     </div>
@@ -438,7 +454,7 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
                 deserunt dicta obcaecati ipsa quasi a sit fugit fuga excepturi
                 hic aliquid cupiditate corporis quam dolorem soluta, laboriosam
-                quisquam culpa id./p>
+                quisquam culpa id.
               </p>
 
               <div class="d-flex pt-3 justify-content-between">

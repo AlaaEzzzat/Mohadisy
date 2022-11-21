@@ -9,7 +9,7 @@
 
           <div class="card-body p-0">
             <h5 class="card-title">المشاريع</h5>
-            <p class="card-text">{{ data!.overview?.projectsNumber }}</p>
+            <p class="card-text">{{ data.overview.projectsNumber }}</p>
           </div>
         </div>
       </div>
@@ -22,7 +22,7 @@
           <div class="card-body p-0">
             <h5 class="card-title">المشاريع المنتهيه</h5>
             <p class="card-text">
-              {{ data!.overview?.completedProjectsNumber }}
+              {{ data.overview.completedProjectsNumber }}
             </p>
           </div>
         </div>
@@ -34,11 +34,12 @@
           <img class="card-img cardImg" src="assets/user/delay.png" />
 
           <div class="card-body p-0">
-            <h5 class="card-title">مشاريع متأخره</h5>
+            <h5 class="card-title">مشاريع المعلقة</h5>
             <p class="card-text">3</p>
           </div>
         </div>
       </div>
+      <app-calendar></app-calendar>
       <div class="col-md-3 col-lg-2 col-sm-12">
         <div
           class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
@@ -46,37 +47,14 @@
           <img class="card-img cardImg" src="assets/user/order.png" />
 
           <div class="card-body p-0">
-            <h5 class="card-title">الطلبات</h5>
+            <h5 class="card-title">طلباتي</h5>
             <p class="card-text">
-              {{ data!.overview?.pricequotesNumber }}
+              {{ data.overview.pricequotesNumber }}
             </p>
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/rate.png" />
 
-          <div class="card-body p-0">
-            <h5 class="card-title">تقيم عملاء</h5>
-            <p class="card-text">8</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/prof.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">ربح</h5>
-            <p class="card-text">20000$</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
   <section class="">
@@ -91,31 +69,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div
-          class="row rounded-2 cardShadow bg-white d-flex justify-content-ceter align-items-center mb-3 w-100 h-100"
-        >
-          <div
-            class="col-4 d-flex justify-content-around align-items-center p-3"
-          >
-            <div class="info text-center">
-              <img
-                class="mb-2"
-                src="assets/user/earn.png"
-                alt=""
-                style="width: 100px; border-radius: 50%"
-              />
-              <h5>
-                <b style="color: #1a5f78"> أرباح سنويه: </b>
-                70 ألف
-              </h5>
-            </div>
-          </div>
-          <div class="col-8">
-            <div class="chart">
-              <canvas id="bar"></canvas>
-            </div>
-          </div>
-        </div>
+   
       </div>
     </div>
   </section>
@@ -222,17 +176,7 @@
             </div>
           </div>
           <div class="col-lg-6 col-xl-4 mb-3">
-            <div class="issus">
-              <h5 class="py-3 text-center alert-warning">issus</h5>
-              <div>
-                <!-- *ngFor="let pro of this.currentProjects; let i = index" -->
-                <div class="card cardShadow mb-3 px-3">
-                  <div class="card-body">
-                    <p>تم الانتهاء من جميع الاقسام و باقي رفع المنتج</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

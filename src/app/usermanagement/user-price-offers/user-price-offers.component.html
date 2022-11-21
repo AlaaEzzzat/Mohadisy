@@ -73,7 +73,7 @@
                         <span (click)="showProject()">عرض المشروع</span>
                       </button>
                       <button mat-menu-item>
-                        <span>حذف المشروع</span>
+                        <span (click)="deleteProject(project.id)">حذف المشروع</span>
                       </button>
                     </mat-menu>
                   </div>
@@ -464,9 +464,11 @@
                               />
                             </svg>
 
-                            <p class="p-0 m-0 me-3 mainColor">
-                              يتم تسديد المبلغ علي
-                              {{ offer.numberOfMilestones }} دفعات
+                            <p class="p-0 m-0 me-3 mainColor d-flex justify-content-between w-100" (click)="showMilestones=true">
+                             <span> يتم تسديد المبلغ علي
+                              {{ offer.numberOfMilestones }} دفعات</span>
+                              <i class="fa fa-eye ms-3" ></i>
+
                             </p>
                           </div>
                         </div>
@@ -869,33 +871,15 @@
     </div>
   </div>
 </section>
-<!-- <div *ngIf="paymethods" class="overlay p-5">
-  <div class="popup p-4 px-3">
-    <a class="close" style="cursor: pointer" (click)="paymethods = false"
-      >&times;</a
-    >
-    <label style="font-weight: bolld">الدفع من خلال </label>
-    <div class="content p-1 text-center">
-      <ng-container *ngFor="let method of PaymentMethodsList">
-        <button
-          [hidden]="method.PaymentMethodId != 2"
-          class="btn cairo mainBk p-3 ms-2 text-white title"
-          (click)="goToPay(method.PaymentMethodId)"
-        >
-          {{ method.PaymentMethodAr }}
-        </button>
-      </ng-container>
-    </div>
-  </div>
-</div> -->
-<div *ngIf="showModal" class="overlay p-5">
+
+<div *ngIf="showMilestones" class="overlay p-5">
   <div class="img-popup p-5">
-    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+    <a class="close" style="cursor: pointer" (click)="showMilestones = !showMilestones"
       >&times;</a
     >
     <div id="mymModal" class="mmodal">
       <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
-      <div id="caption"></div>
+      <div id="caption">fdfbdfbdfbfbfdbd</div>
     </div>
   </div>
 </div>

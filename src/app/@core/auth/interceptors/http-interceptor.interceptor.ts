@@ -47,7 +47,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((returnedError) => {
-        let errorMessage = null;
+        let errorMessage: string | null | undefined = null;
         if (returnedError.error instanceof ErrorEvent) {
           errorMessage = ` ${returnedError.error.message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
@@ -55,16 +55,16 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
           handled = this.handleServerSideError(returnedError);
         }
 
-        this._toastr.error(errorMessage ? errorMessage : returnedError);
+        this._toastr.error(errorMessage ? errorMessage :  "حدث خطأ ما ربما يكون من الإنترنت ");
 
         if (!handled) {
           if (errorMessage) {
-            return throwError(errorMessage);
+            return throwError(errorMessage || "خطأ");
           } else {
             return throwError('Unexpected problem occurred');
           }
         } else {
-          return of(returnedError);
+          return of(returnedError|| "خطأ");
         }
       })
     );

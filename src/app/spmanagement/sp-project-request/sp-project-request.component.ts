@@ -243,7 +243,7 @@ export class SpProjectRequestComponent implements OnInit {
       }else if(Number(this.WorkId[i])==9)
       {
         Allmilestones.push(
-          {
+          { 
             "cost":this.totalcostMilestone[i],
             "percentage":(Number)(this.Precentage[i]),
             "requiredWorkId": null,

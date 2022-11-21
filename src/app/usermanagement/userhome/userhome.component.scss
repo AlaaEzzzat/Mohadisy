@@ -3,6 +3,9 @@ body {
 }
 
 #sidebar-wrapper {
+  span{
+    font-family: 'cairo';
+  }
   min-height: 100vh;
   margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;

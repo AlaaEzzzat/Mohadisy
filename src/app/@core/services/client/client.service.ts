@@ -67,6 +67,12 @@ export class ClientService {
       data
     );
   }
+  deleteProject(projectId: any) {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Project/deleteProject/${projectId}`,""
+    );
+  }
+  
   //return project
 
   storeProjectFiles(idProject: any, files: any) {

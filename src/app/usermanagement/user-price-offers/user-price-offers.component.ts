@@ -48,6 +48,7 @@ export class UserPriceOffersComponent implements OnInit {
   modalSrc: any = '';
   showModal: boolean = false;
   fristMilestoneId: any = 0;
+  showMilestones:boolean= false;
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -89,6 +90,12 @@ export class UserPriceOffersComponent implements OnInit {
       this.projectServicesFullData = data.data;
       this.projectServiesArrays = this.projectServicesFullData.projects;
       this.showOffers(this.projectServiesArrays[0]);
+    });
+  }
+  deleteProject(id:any){
+    this.clientService.deleteProject(id).subscribe(data=>{
+      this._toastr.info(data.message);
+      this.getAllProjectServices();
     });
   }
   getAllProjectServices() {

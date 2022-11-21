@@ -1,3 +1,4 @@
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from './../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +7,6 @@ import { UsermanagementRoutingModule } from './usermanagement-routing.module';
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserPriceOffersComponent } from './user-price-offers/user-price-offers.component';
-
 import { UserMessagesComponent } from './user-messages/user-messages.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { ProfilecomplateComponent } from './profilecomplate/profilecomplate.component';
@@ -36,6 +36,7 @@ import { MatCardModule } from "@angular/material/card";
     CommonModule,
     UsermanagementRoutingModule,
     FormsModule,
+    NgxSpinnerModule,
     ReactiveFormsModule,
     NgCircleProgressModule.forRoot({
       // set defaults here

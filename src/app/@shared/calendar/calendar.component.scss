@@ -1,3 +1,16 @@
 .demo-inline-calendar-card {
-      width: 100%;
-    }
+  width: 300px;
+}
+
+
+.calendar-wrapper {
+    max-width: 500px;
+    min-width: 200px;
+    border: 1px solid #e7e7e7;
+    border-radius: 6px;
+    margin: 8px;
+}
+
+.igx-calendar{
+    border-radius: 4px;
+}

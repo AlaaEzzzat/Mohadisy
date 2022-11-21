@@ -12,8 +12,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CalendarComponent } from './calendar/calendar.component';
+
 const routes: Routes = [
-  // {path: 'login', component: LoginComponent},
+
 ];
 
 @NgModule({
