@@ -120,7 +120,7 @@
 
 
 
- .card-3 input[type="submit"]
+ .card-3 input[type="submit"],.card-3 .add
  {
    background-color: #18af9a;
    color: white;
@@ -206,6 +206,19 @@
   background-color: #004057;
   color:white;
 }
+
+.stage
+ {
+  margin-top: 8%;
+  color: #004057;
+  font-weight: 700;
+ }
+
+input::placeholder
+ {
+
+  padding-right: 2%;
+ }
 
 .noresult
 {

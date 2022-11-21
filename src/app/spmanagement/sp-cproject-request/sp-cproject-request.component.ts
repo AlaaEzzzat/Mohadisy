@@ -29,11 +29,14 @@ export class SpCprojectRequestComponent implements OnInit {
    totalpages: any = 0;
    pages:Array<any>=[];
    result:any=1;
-  Precentage:Array<number>=[];
-  WorkId:Array<number>=[];
+   Precentage:Array<number>=[];
+   WorkId:Array<number>=[];
   check:any=true;
   totalcostMilestone:Array<any>=[];
-  totalcost:any=0;
+   totalcost:any=0;
+   addmaterial:Array<any>=[];
+   id:number=0;
+   AddMaterials:Array<any>=[];
 
 
   constructor(private api:ApiService ,private router:Router)
@@ -52,10 +55,10 @@ export class SpCprojectRequestComponent implements OnInit {
         sizingMethod:new FormControl('',[Validators.required]),
         contractTerms:new FormControl('',[Validators.required]),
         disputeResolution:new FormControl('',[Validators.required]),
-        costMaterial:new FormControl('',[Validators.required]),
-        name:new FormControl('',[Validators.required]),
+        costMaterial:new FormControl(''),
+        name:new FormControl(''),
         description:new FormControl(''),
-        materialTypeId:new FormControl('',[Validators.required])
+        materialTypeId:new FormControl('')
 
       });
 
@@ -274,9 +277,38 @@ export class SpCprojectRequestComponent implements OnInit {
 
      }
 
-     Material()
+     addMaterial()
+     {
+      this.id++;
+      var nameM;
+
+      for(let i=0;i<this.material.length;i++)
+      {
+        if(this.material[i].id==Number(this.OfferData.get('materialTypeId').value))
+        {
+          nameM=this.material[i].name;
+          break;
+
+        }
+      }
+      this.addmaterial.push( {
+        "id":this.id,
+        "materialName":nameM,
+        "materialTypeId": this.OfferData.get('materialTypeId').value,
+        "name": this.OfferData.get('name').value,
+        "cost": this.OfferData.get('costMaterial').value,
+        "description": this.OfferData.get('description').value
+        })
+
+
+     }
+
+     deleteMaterial(materialId:any)
      {
 
+
+      this.addmaterial=this.addmaterial.filter(data=>data.id!=materialId);
+      console.log(this.addmaterial);
 
      }
 
@@ -345,14 +377,25 @@ export class SpCprojectRequestComponent implements OnInit {
 
 
 
+       this.AddMaterials=[];
+       for(let i=0;i<this.addmaterial.length;i++)
+       {
+        this.AddMaterials.push({
+          "materialTypeId": this.addmaterial[i].materialTypeId,
+          "name": this.addmaterial[i].name,
+          "cost": this.addmaterial[i].cost,
+          "description": this.addmaterial[i].description
+          });
+
+       }
+
+
 
         this.api.postJson("https://app.mohandisy.com/api/Offer/validateCostAndPeriod",checkData).subscribe(data=>
          {
            this.check=data.isError;
+
          });
-
-
-
 
          if(this.check==false)
          {
@@ -368,15 +411,7 @@ export class SpCprojectRequestComponent implements OnInit {
            "contractTerms":this.OfferData.get('contractTerms').value,
            "disputeResolution":this.OfferData.get('disputeResolution').value,
            "contractorCommitments":this.OfferData.get('contractorCommitments').value,
-           "materials":
-           [
-            {
-            "materialTypeId": this.OfferData.get('materialTypeId').value,
-            "name": this.OfferData.get('name').value,
-            "cost": this.OfferData.get('costMaterial').value,
-            "description": this.OfferData.get('description').value
-            }
-           ]
+           "materials":this.AddMaterials
 
          }
 
@@ -392,9 +427,16 @@ export class SpCprojectRequestComponent implements OnInit {
 
          } );
 
+          }
 
 
-     }
+
+
+
+
+
+
+
    }
 
 
