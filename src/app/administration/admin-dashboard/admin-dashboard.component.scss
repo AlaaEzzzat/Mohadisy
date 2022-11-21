@@ -44,6 +44,63 @@ text-gary{
   }
 }
 .postionCard{
-  right: 22%;
+  right: 27%;
   bottom: 5%;
+}
+.E9CCF2{
+ background-color: #C4E8C9;
+ color: rgb(22, 22, 22) !important;
+}
+.D9CCF2{
+  background-color: #C9EDE8;
+  color: rgb(22, 22, 22) !important;
+
+}
+.C4D3D8{
+  background-color: #C4D3D8;
+  color: rgb(22, 22, 22) !important;
+
+}
+.D1F2FE{
+  background-color: #D1F2FE;
+  color: rgb(22, 22, 22) !important;
+
+}
+.E2FD{
+  background-color: #97E2FD;
+  color: rgb(22, 22, 22) !important;
+
+}
+@media (min-width: 1400px){
+.col2{
+  flex: 0 0 auto;
+    width: 11.333333%;
+}
+}
+
+.scrolls
+{
+  height: 60vh !important;
+  overflow: hidden;
+  &:hover{
+    overflow-y: auto !important;
+
+  }
+
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #d3d3d3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#d3d3d3;
+  border-radius: 10px;
+
 }

@@ -13,4 +13,13 @@ export class AdminDashService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Dashboard/getAdminStatus`);
 
   }
+
+  getCurrentProjectsForAdmin(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getCurrentProjectsForAdmin/Page/${page}`);
+  }
+  getFinishedProjectsForAdmin(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getFinishedProjectsForAdmin/Page/${page}`);
+  }
 }
