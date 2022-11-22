@@ -107,12 +107,12 @@ export class AdminClientsComponent implements OnInit {
     this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe({
       next:(value) => {
         if(value !=null && value != undefined &&value.data.totalPages != 0) {
-          console.log(value)
+          // console.log(value)
 
       this.datas = value.data.profiles
       this.iProfileData = this.datas;
       this.total = value.data.totalPages;
-      console.log(this.total)
+      // console.log(this.total)
       this.counter(this.total);
       this.firstObject=this.iProfileData[0]
       this.objectProduct(this.firstObject,this.firstObject.id)
@@ -139,9 +139,10 @@ export class AdminClientsComponent implements OnInit {
 
         this.datas = value.data.profiles
         this.iProfileData = this.datas;
-        this.total = value.data.totalPages;  console.log(this.total)
+        this.total = value.data.totalPages; 
+        //  console.log(this.total)
         this.counter(this.total);
-        console.log(value)
+        // console.log(value)
         this.firstObject=this.iProfileData[0]
         this.objectProduct(this.firstObject,this.firstObject.id)}
         else{
@@ -166,7 +167,8 @@ export class AdminClientsComponent implements OnInit {
 
         this.datas = value.data.profiles
         this.iProfileData = this.datas;
-        this.total = value.data.totalPages;  console.log(this.total)
+        this.total = value.data.totalPages; 
+        //  console.log(this.total)
         this.counter(this.total);
         this.firstObject=this.iProfileData[0]
         this.objectProduct(this.firstObject,this.firstObject.id);
@@ -191,9 +193,10 @@ export class AdminClientsComponent implements OnInit {
 
         this.datas = value.data.profiles
         this.iProfileData = this.datas;
-        this.total = value.data.totalPages;  console.log(this.total)
+        this.total = value.data.totalPages; 
+        //  console.log(this.total)
         this.counter(this.total);
-        console.log(this.datas)
+        // console.log(this.datas)
         this.firstObject=this.iProfileData[0]
         this.objectProduct(this.firstObject,this.firstObject.id)
       }else{
@@ -218,7 +221,7 @@ export class AdminClientsComponent implements OnInit {
         this.iProfileData = this.datas;
         this.total = value.data.totalPages;  console.log(this.total)
         this.counter(this.total);
-        console.log(this.iProfileData)
+        // console.log(this.iProfileData)
         this.firstObject=this.iProfileData[0]
         this.objectProduct(this.firstObject,this.firstObject.id);
       } else{
@@ -262,7 +265,7 @@ export class AdminClientsComponent implements OnInit {
     sessionStorage.setItem('id', id);
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.productCurrent);
+    // console.log(this.productCurrent);
     this.id = sessionStorage.getItem('id');
 
 
@@ -271,7 +274,7 @@ export class AdminClientsComponent implements OnInit {
 
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.idProductSessionStorage);
+    // console.log(this.idProductSessionStorage);
 
 
   }

@@ -90,7 +90,7 @@
         <div
           class="d-flex position-relative mb-3"
           *ngIf="
-            productCurrent.projectRequestStatus.projectStatus.id === 1;
+            productCurrent.projectRequestStatus?.projectStatus.id === 1;
             else nourmal
           "
         >
@@ -286,12 +286,12 @@
     </div>
 
     <div class="col-md-7 sizew col-12 flex-row">
-      <div class="col-12 card mb-3 border-0 rounded-0 p-4">
+      <div class="col-12 card mb-3 border-0 rounded-0 px-3">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-lg-2 col-sm-3">
             <img
-              src="{{ productCurrent.clientProfile.profilePicturePath }}"
-              class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
+              src="{{ productCurrent.clientProfile?.profilePicturePath }}"
+              class="img-fluid rounded-0 w-75  py-2"
               alt="null"
             />
           </div>
@@ -299,15 +299,15 @@
           <div class="col-md-5 col-sm-4">
             <div class="card-body">
               <p class="me-2 fs-6">
-                {{ productCurrent.clientProfile.firstName }}
-                {{ productCurrent.clientProfile.lastName }}
+                {{ productCurrent.clientProfile?.firstName }}
+                {{ productCurrent.clientProfile?.lastName }}
               </p>
             </div>
           </div>
 
           <div class="col-md-5 col-sm-5">
 
-            <div class="d-flex" *ngIf="productCurrent.projectRequestStatus.projectStatus.id === 1">
+            <div class="d-flex" *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 1">
               <a
                 type="button"
                 class="btn complete col-4 rounded-0"
@@ -340,13 +340,13 @@
       </div>
       <!-- سبب عدم الاكتمال -->
       <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
-        *ngIf="productCurrent.projectRequestStatus.projectStatus.id === 9"
+        *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 9"
       >
         <p class="typeCom   fs-6">سبب رفض العرض  </p>
         <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
       </div>
       <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
-      *ngIf="productCurrent.projectRequestStatus.projectStatus.id === 6"
+      *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 6"
     >
       <p class="typeCom   fs-6">سبب عدم اكتمال العرض  </p>
       <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
@@ -359,10 +359,10 @@
             <div class="d-flex flex-row justify-content-between">
               <p class="card-subtitle text-muted fs-6">رقم الهوية</p>
 
-              <p class="fs-6 textInformation">{{ productCurrent.clientProfile.idNumber }}</p>
+              <p class="fs-6 textInformation">{{ productCurrent.clientProfile?.idNumber }}</p>
 
               <a
-                *ngIf="productCurrent.clientProfile.idPath; else idFile"
+                *ngIf="productCurrent.clientProfile?.idPath; else idFile"
                 target="_blank"
                 class="informationDownload bg-light d-flex px-2 align-items-center"
                 (click)="
@@ -373,7 +373,7 @@
                 "
               >
                 <i class="fa fa-download  ms-3"></i>
-                <p class="pt-3 nameDownload">{{ productCurrent.clientProfile.idFile }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.clientProfile?.idFile }}</p>
               </a>
               <ng-template #idFile>___</ng-template>
               <!-- </div> -->
@@ -389,7 +389,7 @@
             <p class="card-subtitle text-muted  fs-6 mb-2">المدينه</p>
             <small
               class="fs-6 textInformation"
-              *ngIf="productCurrent.district.city.nameAr; else city"
+              *ngIf="productCurrent.district?.city?.nameAr; else city"
               >{{ productCurrent.district.city.nameAr }}</small
             >
             <ng-template #city> _ </ng-template>
@@ -399,7 +399,7 @@
             <small
               class="fs-6 textInformation"
               *ngIf="
-                productCurrent.district.city.region.nameAr;
+                productCurrent.district?.city?.region?.nameAr;
                 else regionName
               "
               >{{ productCurrent.district.city.region.nameAr }}</small
@@ -410,7 +410,7 @@
             <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
             <small
               class="fs-6 textInformation"
-              *ngIf="productCurrent.clientProfile.streetName; else shortAddress"
+              *ngIf="productCurrent?.clientProfile?.streetName; else shortAddress"
             >
               {{ productCurrent.clientProfile.streetName }} -
               {{ productCurrent.district.city.region.nameAr }}</small
@@ -420,7 +420,7 @@
 
           <div class="col-lg-3 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.clientProfile.applicationUser">{{
+            <small class="fs-6 textInformation" *ngIf="productCurrent?.clientProfile?.applicationUser">{{
               productCurrent.clientProfile.applicationUser.phoneNumber
             }}</small>
           </div>
@@ -431,7 +431,7 @@
             <small
               class="fs-6 textInformation"
               *ngIf="
-                productCurrent.clientProfile.applicationUser ;
+                productCurrent.clientProfile?.applicationUser ;
                 else emailName
               "
               >{{
@@ -451,7 +451,7 @@
           <div class="d-flex flex-row col-12 mb-5">
             <div class="col-4">
               <p class="card-subtitle text-muted fs-6 mb-2">اسم المشروع</p>
-              <small class="fs-6 textInformation" *ngIf="productCurrent.name; else namecode"
+              <small class="fs-6 textInformation" *ngIf="productCurrent?.name; else namecode"
                 >{{ productCurrent.name }}
               </small>
               <ng-template #namecode> _ </ng-template>
@@ -463,7 +463,7 @@
               <small
                 class="fs-6 textInformation"
                 *ngIf="
-                  productCurrent.projectCategory.name;
+                  productCurrent?.projectCategory?.name;
                   else projectCategoryname
                 "
                 >{{ productCurrent.projectCategory.name }}
@@ -471,14 +471,14 @@
               <ng-template #projectCategoryname> _ </ng-template>
             </div>
             <div class="col-4"  *ngIf="
-            productCurrent.projectSubCategory">
+            productCurrent?.projectSubCategory">
               <p class="card-subtitle text-muted fs-6 mb-2">
                 التصنيف الفرعي
               </p>
               <small
                 class="fs-6 textInformation"
                 *ngIf="
-                  productCurrent.projectSubCategory;
+                  productCurrent?.projectSubCategory;
                   else projectSubCategoryname
                 "
                 >{{ productCurrent.projectSubCategory.name }}
@@ -491,7 +491,7 @@
               <p class="card-subtitle text-muted fs-6 mb-2">اسم المدينه</p>
               <small
                 class="fs-6 textInformation"
-                *ngIf="productCurrent.district.city.nameAr; else city"
+                *ngIf="productCurrent?.district?.city?.nameAr; else city"
                 >{{ productCurrent.district.city.nameAr }}</small
               >
               <ng-template #city> _ </ng-template>
@@ -501,7 +501,7 @@
               <small
                 class="fs-6 textInformation"
                 *ngIf="
-                  productCurrent.district.city.region.nameAr;
+                  productCurrent?.district?.city?.region?.nameAr;
                   else regionName
                 "
                 >{{ productCurrent.district.city.region.nameAr }}</small
@@ -513,7 +513,7 @@
               <small
                 class="fs-6 textInformation"
                 *ngIf="
-                  productCurrent.clientProfile.streetName;
+                  productCurrent?.clientProfile?.streetName;
                   else shortAddress
                 "
               >
@@ -526,7 +526,7 @@
               <p class="card-subtitle text-muted fs-6 mb-2">رقم القطعه</p>
               <small
                 class="fs-6 textInformation"
-                *ngIf="productCurrent.plotNumber; else plotNumber"
+                *ngIf="productCurrent?.plotNumber; else plotNumber"
               >
                 {{ productCurrent.plotNumber }}</small
               >

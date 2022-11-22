@@ -82,7 +82,7 @@
 
         <div class="d-flex position-relative mb-3">
           <ng-container
-            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4"
+            *ngIf="productCurrent?.joinRequestStatus?.accountStatus?.id === 4"
           >
             <div class="btn-group bg-white ms-1 rounded-0">
               <button
@@ -287,7 +287,7 @@
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
             <img
-              *ngIf="productCurrent.profilePicturePath; else company"
+              *ngIf="productCurrent?.profilePicturePath; else company"
               src="{{ productCurrent.profilePicturePath }}"
               class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
               alt="null"
@@ -295,7 +295,7 @@
 
             <ng-template #company>
               <img
-                src="{{ productCurrent.companyLogoPath }}"
+                src="{{ productCurrent?.companyLogoPath }}"
                 class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
                 alt="null"
             /></ng-template>
@@ -306,18 +306,18 @@
                 <img src="assets/icons/XMLID_1_.svg" />
 
                 <p class="fs-6 me-3 pt-2">
-                  {{ productCurrent.applicationUser.accountType.typeName }}
+                  {{ productCurrent?.applicationUser?.accountType?.typeName }}
                 </p>
               </div>
               <p
                 class="card-text fs-6"
-                *ngIf="productCurrent.companyName; else ind"
+                *ngIf="productCurrent?.companyName; else ind"
               >
                 {{ productCurrent.companyName }}
               </p>
               <ng-template #ind>
                 <p class="card-text fs-6">
-                  {{ productCurrent.firstName }} {{ productCurrent.lastName }}
+                  {{ productCurrent?.firstName }} {{ productCurrent?.lastName }}
                 </p>
               </ng-template>
 
@@ -326,7 +326,7 @@
                 <!-- ?? -->
                 <span
                   class="typeCom fs-6"
-                  *ngIf="productCurrent.projectService; else mstql"
+                  *ngIf="productCurrent?.projectService; else mstql"
                   >{{ productCurrent.projectService.name }}</span
                 >
                 <ng-template #mstql>
@@ -338,7 +338,7 @@
           <div class="col-md-5">
             <div
               class="d-flex"
-              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"
+              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 4"
             >
               <a
                 type="button"
@@ -371,7 +371,7 @@
 
             <div
               class="d-flex justify-content-end ms-3 rounded-0"
-              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 1"
+              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 1"
             >
               <a
                 type="button"
@@ -390,8 +390,8 @@
             <div
               class="d-flex justify-content-end ms-3 rounded-0"
               *ngIf="
-                productCurrent.joinRequestStatus.accountStatusId != 1 &&
-                productCurrent.joinRequestStatus.accountStatusId != 4
+                productCurrent?.joinRequestStatus?.accountStatusId != 1 &&
+                productCurrent?.joinRequestStatus?.accountStatusId != 4
               "
             >
               <a
@@ -410,7 +410,7 @@
     <div *ngIf="showInformation "> 
               <!-- سبب عدم الاكتمال -->
       <div  class="col-12 card mb-3 border-0 rounded-0 p-3"
-        *ngIf="productCurrent.joinRequestStatus.accountStatusId != 4" >
+        *ngIf="productCurrent?.joinRequestStatus?.accountStatusId != 4" >
         <p class="titleInformation fs-6">سبب عدم تاكيد الحساب</p>
         <p class="fs-6">{{ productCurrent.joinRequestStatus.description }}</p>
       </div>
@@ -949,7 +949,7 @@
                   <mat-icon>chevron_left</mat-icon>
                 </div>
                 <div class="row row-cols-3 col-12">
-                  <div class="col-xxl-4 col-md-6"*ngFor="let item of productCurrent.serviceProviderWorks">
+                  <div class="col-xxl-4 col-md-6"*ngFor="let item of productCurrent?.serviceProviderWorks">
                     <div class=" border-0 rounded-0 ">
 
                         <div class="col-12 position-relative" (click)="showProjectDetails(item)">

@@ -119,7 +119,7 @@
     
           <div class="modal-body p-5">
             <div class="mb-4" >
-              <ng-container *ngFor="let projects of idProduct.profile.projects">
+              <ng-container *ngFor="let projects of idProduct?.profile?.projects">
               <mat-accordion >
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                   class="bgsecondary">

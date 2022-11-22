@@ -22,4 +22,7 @@ export class AdminDashService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getFinishedProjectsForAdmin/Page/${page}`);
   }
+  getMilestonesByOfferId(offerId:any){
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Milestone/getMilestonesByOfferId/${offerId}`)
+  }
 }

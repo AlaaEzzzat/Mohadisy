@@ -16,27 +16,44 @@
 
             </div>
             <div class="col-4 align-items-center justify-content-end d-flex  ">
-              <small class="fw-semibold ps-3">{{pricequotesCost | number}}</small>
+              <small class="fw-semibold ps-3" >{{pricequotes?.totalCost }}</small>
              
             </div>
           </div>
-          <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
-            <div class="badge rounded-circle col2  D9CCF2 p-2  text-center " >
-              <p class="text-center my-2">جديد</p> <hr class="m-0 "/>
-              <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+          <div class="col-12  d-flex  justify-content-between align-items-center mt-3 ">
+            <div class="d-flex flex-column">
+                <div class="badge circle  D9CCF2 p-2  text-center " >
+                  <p class="text-center my-2">{{pricequotes?.newPricequotesNumber | number}}</p> <hr class="m-0 "/>
+                  <p class="text-center mt-2">{{pricequotes?.newPricequotesCost | number}}</p>
+                </div>
+                <small class="text-center ">جديد</small>
+
             </div>
-            <div class="badge rounded-circle col2  D9CCF2 p-2 text-center " >
-              <p class="text-center my-2">مقبول</p> <hr class="m-0 "/>
-              <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+            <div class="d-flex flex-column">
+            <div class="badge circle D9CCF2 p-2 text-center " >
+              <p class="text-center my-2">{{pricequotes?.acceptedPricequotesNumber | number}}</p> <hr class="m-0 "/>
+              <p class="text-center mt-2">{{pricequotes?.acceptedPricequotesCost | number}}</p>
+            </div><small class="text-center ">مقبول</small>
+
             </div>
-            <div class="badge rounded-circle col2  D9CCF2 p-2 text-center " >
-              <p class="text-center my-2"> غير مكتمل</p> <hr class="m-0 "/>
-              <p class="text-center mt-2"> {{pricequotesCost | number}}</p>
+            
+            <div class="d-flex flex-column">
+              <div class="badge circle  D9CCF2 p-2 text-center " >
+                <p class="text-center my-2"> {{pricequotes?.notCompletedPricequotesNumber | number}} </p> <hr class="m-0 "/>
+                <p class="text-center mt-2"> {{pricequotes?.notCompletedPricequotesCost | number}}</p>
+              </div>
+                <small class="text-center ">غير مكتمل</small>
+
             </div>
-            <div class="badge rounded-circle col2  D9CCF2 p-2 text-center " >
-              <p class="text-center my-2">مرفوض</p> <hr class="m-0 "/>
-              <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+
+            <div class="d-flex flex-column">
+              <div class="badge circle  D9CCF2 p-2 text-center " >
+                <p class="text-center my-2">{{pricequotes?.rejectedPricequotesNumber | number}}</p> <hr class="m-0 "/>
+                <p class="text-center mt-2">{{pricequotes?.rejectedPricequotesCost | number}}</p>
+              </div><small class="text-center ">مرفوض</small>
+  
             </div>
+          
             
       
            </div>
@@ -57,7 +74,7 @@
           </div>
           <div class="col-12 d-flex  justify-content-between align-items-center">
             <div class="fw-bold D9CCF2 badge col-5">{{pricequotesNumber|number}}</div>
-          <div class="fw-bold D9CCF2 badge col-5">{{pricequotesCost|number}}</div>
+          <div class="fw-bold D9CCF2 badge col-5">{{indServiceProviderNumber|number}}</div>
           </div>
           
         </div>
@@ -220,27 +237,38 @@
 
           </div>
           <div class="col-4 align-items-center justify-content-end d-flex  ">
-            <small class="fw-semibold ps-3">{{projectsCost | number}}</small>
+            <small class="fw-semibold ps-3">{{projects?.totalCost | number}}</small>
            
           </div>
         </div>
         <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
-          <div class=" badge rounded-circle col2 E9CCF2 p-2  text-center" >
-            <p class="text-center my-2">جديد</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projectsCost | number}}</p>
+          <div class="d-flex flex-column">
+          <div class=" badge circle E9CCF2 p-2  text-center" >
+            <p class="text-center my-2">{{projects?.newProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.newProjectsCost | number}}</p>
+          </div>                <small class="text-center ">جديد</small>
+
           </div>
-          <div class="badge rounded-circle col2  E9CCF2 p-2 text-center " >
-            <p class="text-center my-2">مقبول</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projectsCost | number}}</p>
+          <div class="d-flex flex-column">
+          <div class="badge circle E9CCF2 p-2 text-center " >
+            <p class="text-center my-2">{{projects?.acceptedProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.acceptedProjectsCost | number}}</p>
           </div>
-          <div class="badge rounded-circle col2 E9CCF2 p-2 text-center" >
-            <p class="text-center my-2"> غير مكتمل</p> <hr class="m-0 "/>
-            <p class="text-center mt-2"> {{projectsCost | number}}</p>
-          </div>
-          <div class="badge rounded-circle col2   E9CCF2 p-2 text-center " >
-            <p class="text-center my-2">مرفوض</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projectsCost | number}}</p>
-          </div>
+          <small class="text-center ">مقبول</small>
+        </div>
+          <div class="d-flex flex-column">
+          <div class="badge circle E9CCF2 p-2 text-center" >
+            <p class="text-center my-2">  {{projects?.notCompletedProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2"> {{projects?.notCompletedProjectsCost | number}}</p>
+          </div>                <small class="text-center ">غير مكتمل</small>
+        </div>
+          <div class="d-flex flex-column">
+          <div class="badge circle  E9CCF2 p-2 text-center " >
+            <p class="text-center my-2">{{projects?.rejectedProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.rejectedProjectsCost | number}}</p>
+          </div>                <small class="text-center ">مرفوض</small>
+        </div>
+          
           
 
          </div>
@@ -266,26 +294,26 @@
 
       </div>
       <div class="col-4 align-items-center justify-content-end d-flex  ">
-        <small class="fw-semibold ps-3">{{indServiceProviderNumber | number}}</small>
+        <small class="fw-semibold ps-3">{{individualSP?.totalIndividualSPNumber | number}}</small>
        
       </div>
     </div>
     <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
-      <div class="badge rounded-circle col-2  E2FD p-2  text-center " >
+      <div class="badge circle  E2FD p-2  text-center " >
         <p class="text-center my-2">جديد</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{individualSP?.newIndividualSPNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  E2FD p-2 text-center " >
+      <div class="badge circle  E2FD p-2 text-center " >
         <p class="text-center my-2">مقبول</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{individualSP?.acceptedIndividualSPNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  E2FD p-2 text-center " >
+      <div class="badge circle  E2FD p-2 text-center " >
         <p class="text-center my-2"> غير مكتمل</p> <hr class="m-0 "/>
-        <p class="text-center mt-2"> {{pricequotesCost | number}}</p>
+        <p class="text-center mt-2"> {{individualSP?.notCompletedIndividualSPNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  E2FD p-2 text-center " >
+      <div class="badge circle  E2FD p-2 text-center " >
         <p class="text-center my-2">مرفوض</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{individualSP?.rejectedIndividualSPNumber | number}}</p>
       </div>
       
 
@@ -307,26 +335,26 @@
 
     </div>
     <div class="col-4 align-items-center justify-content-end d-flex  ">
-      <small class="fw-semibold ps-3">{{orgServiceProviderNumber | number}}</small>
+      <small class="fw-semibold ps-3">{{organizationalSP?.totalOrganizationalSPNumber | number}}</small>
      
     </div>
   </div>
   <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
-    <div class=" badge rounded-circle col-2 D1F2FE p-2  text-center" >
+    <div class=" badge circle D1F2FE p-2  text-center" >
       <p class="text-center my-2">جديد</p> <hr class="m-0 "/>
-      <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+      <p class="text-center mt-2">{{organizationalSP?.newOrganizationalSPNumber | number}}</p>
     </div>
-    <div class="badge rounded-circle col-2  D1F2FE p-2 text-center " >
+    <div class="badge circle  D1F2FE p-2 text-center " >
       <p class="text-center my-2">مقبول</p> <hr class="m-0 "/>
-      <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+      <p class="text-center mt-2">{{organizationalSP?.acceptedOrganizationalSPNumber | number}}</p>
     </div>
-    <div class="badge rounded-circle col-2  D1F2FE p-2 text-center" >
+    <div class="badge circle  D1F2FE p-2 text-center" >
       <p class="text-center my-2"> غير مكتمل</p> <hr class="m-0 "/>
-      <p class="text-center mt-2"> {{pricequotesCost | number}}</p>
+      <p class="text-center mt-2"> {{organizationalSP?.notCompletedOrganizationalSPNumber | number}}</p>
     </div>
-    <div class="badge rounded-circle col-2  D1F2FE p-2 text-center " >
+    <div class="badge circle  D1F2FE p-2 text-center " >
       <p class="text-center my-2">مرفوض</p> <hr class="m-0 "/>
-      <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+      <p class="text-center mt-2">{{organizationalSP?.rejectedOrganizationalSPNumber | number}}</p>
     </div>
     
 
@@ -347,26 +375,26 @@
   
       </div>
       <div class="col-4 align-items-center justify-content-end d-flex  ">
-        <small class="fw-semibold ps-3">{{cLientsNumber | number}}</small>
+        <small class="fw-semibold ps-3">{{clients?.totalClientsNumber | number}}</small>
        
       </div>
     </div>
     <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
-      <div class=" badge rounded-circle col-2 C4D3D8 p-2  text-center" >
+      <div class=" badge circle C4D3D8 p-2  text-center" >
         <p class="text-center my-2">جديد</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{clients?.newClientsNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  C4D3D8 p-2 text-center " >
+      <div class="badge circle  C4D3D8 p-2 text-center " >
         <p class="text-center my-2">مقبول</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{clients?.acceptedClientsNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  C4D3D8 p-2 text-center" >
-        <p class="text-center my-2">  منتهي</p> <hr class="m-0 "/>
-        <p class="text-center mt-2"> {{pricequotesCost | number}}</p>
+      <div class="badge circle  C4D3D8 p-2 text-center" >
+        <p class="text-center my-2">  غيرمكتمل</p> <hr class="m-0 "/>
+        <p class="text-center mt-2"> {{clients?.notCompletedClientsNumber | number}}</p>
       </div>
-      <div class="badge rounded-circle col-2  C4D3D8 p-2 text-center " >
+      <div class="badge circle  C4D3D8 p-2 text-center " >
         <p class="text-center my-2">مرفوض</p> <hr class="m-0 "/>
-        <p class="text-center mt-2">{{pricequotesCost | number}}</p>
+        <p class="text-center mt-2">{{clients?.rejectedClientsNumber | number}}</p>
       </div>
       
   
@@ -482,46 +510,47 @@
   </div>
 <!-- part4 -->
 <div class="row my-4 cairo">
-  <div class="col-lg-7">
-      <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-center  mb-2 col-12 py-3 px-5">
-        <h5 class="premary-color">اخر شكاوي المرسله</h5>
-        <p class="main-color">{{complaints.length}}  شكوي</p>
+  <div class="col-lg-9">
+      <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
+        <h5 class="premary-color col-10">اخر شكاوي المرسله</h5>
+        <p class="main-color col-2 text-start">{{complaints.length}}  شكوي</p>
       </div>
-    <div class="col-12 d-flex flex-column mb-3 ">
+    <div class="col-12 d-flex flex-column mb-3">
       <!-- card -->
-      <div class="bg-white rounded-0  d-flex flex-column justify-content-between align-items-center  mb-2 col-12 py-3 px-4" *ngFor="let item of complaints">
+      <div class="bg-white rounded-0  d-flex flex-column justify-content-between align-items-start  mb-2 col-12 px-4 py-3" *ngFor="let item of complaints">
         <div class="w-100 d-flex justify-content-between  ">
-          <p class="h6 text-gary"> <img class="h6 " src="assets/user/user (2).png" > اسم المرسل /  {{item.applicationUser.userName}} </p>
-          <p class="h6 text-gary"> <img class="h6" src="assets/user/calendar.png" >  {{item.dateCreated|date}}</p>
+          <p class="h6 text-gary col-10"> <img class="h6 " src="assets/user/user (2).png" > اسم المرسل /  {{item.applicationUser.userName}} </p>
+          <p class="h6 text-gary col-2 text-start"> <img class="h6" src="assets/user/calendar.png" >  {{item.dateCreated|date:'d/M/yyyy' }}</p>
         </div>
         <p class=" text-gary text-end">{{item.content}}</p>
       </div>
       
     </div>
-
-    <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-center  mb-2 col-12 py-3 px-5">
+<!-- مسؤلي -->
+    <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-start  mb-2 col-12 py-3 px-4">
       <h5 class="premary-color">  مسؤلي المنصه</h5>
-      <p class="main-color">  اضافة مسؤل</p>
+      <!-- <p class="main-color">  اضافة مسؤل</p> -->
     </div>
     <div class="col-12 d-flex flex-column mb-3 ">
       <!-- card -->
-      <div class="bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-center  mb-2 col-12 ">
-        <div class="w-25">
-          <img class="w-100" src="assets/profile.png" >
+      <div class="bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
+        <div class="col-3 ">
+          <img class="w-50" src="assets/profile.png" >
         </div>
-        <div class="w-75 d-flex flex-column justify-content-evenly align-items-start pe-5 ps-3">
-        <div class="w-100 d-flex flex-row justify-content-between align-items-center ">
-          <p class="h6 text-gary"> محمود علاء </p>
-          <p class="h6  main-color"> مسؤل</p>
-        </div>
-        <p>Mohamed-ahmed12 @gmail.com</p>
-        <p> منذ  11/9/2020</p>
+        <div class=" col-9  d-flex flex-column justify-content-evenly align-items-start ">
+          <div class="w-100 d-flex flex-row justify-content-between align-items-center ">
+            <p class="h6 text-gary col-10"> {{ iProfileAdmin?.adminProfile?.firstName }}
+              {{ iProfileAdmin?.adminProfile?.lastName }}  </p>
+            <p class="h6  main-color col-2 text-start"> مسؤل</p>
+          </div>
+        <p>{{ iProfileAdmin?.email }}</p>
+        <p> منذ  {{iProfileAdmin?.adminProfile?.dateCreated|date :'d/M/yyyy' }}</p>
         
         </div>
       </div>
     
     </div>
-
+<!-- المشاريع -->
     <div class="d-flex flex-column  mb-2 col-12 ">
       <div class="row col-12 m-0 p-0 gx-4 justify-content-between align-items-start">
         <div class="cairo rounded-0   d-flex flex-column justify-content-between align-items-center  col-md-6 col-12">
@@ -533,27 +562,30 @@
           <div class="d-flex flex-column scrolls col-12">
             <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12 mb-2" *ngFor="let itemC of objectCurrentProjects">
                 <div class="col-xxl-2 d-xxl-block d-none">
-                  <img src="{{itemC.clientProfile.profilePicturePath}}" alt="" class="col-12">
+                  <img src="{{itemC?.clientProfile?.profilePicturePath}}" alt="" class="col-12">
                 </div>
-                <div class="col-xxl-6 col-8 d-flex flex-column justify-content-evenly align-items-start pe-xxl-3" >
-                  <p><small class="premary-color">اسم العميل : </small> <small>{{itemC.clientProfile.firstName}} {{itemC.clientProfile.lastName}}</small></p>
-                  <p><small class="premary-color">بلد الاقامه : </small> <small> {{itemC.district.city.nameAr}}</small></p>
-                  <p><small class="premary-color"> اسم المشروع : </small> <small>{{itemC.name}} </small></p>
+                <div class="col-xxl-6 col-8 d-flex flex-column  pe-xxl-3" >
+                  <p class="col-12 text-end"><small class="premary-color">اسم العميل : </small> <small>{{itemC?.clientProfile?.firstName}} {{itemC?.clientProfile?.lastName}}</small></p>
+                  <p class="col-12 text-end"><small class="premary-color">بلد الاقامه : </small> <small> {{itemC.district.city.nameAr}}</small></p>
+                  <p class="col-12 text-end"><small class="premary-color"> اسم المشروع : </small> <small>{{itemC.name}} </small></p>
 
                 </div>
                 <div class="col-4">
-                  <div class="position-relative col-12">
-            
+                  <div class="position-relative col-12" >
+            <ng-container *ngIf="itemC.offers.length>0">
                     <mat-progress-spinner
                     class="example-margin"
                     
                     [color]="color"
                     [mode]="mode"
-                    [value]=20
+                    [value]=percentage[0]
                    >
                    
                 </mat-progress-spinner>
-                <h6  id="progress">20%</h6></div>
+                <h6  id="progress">{{percentage[0]}}%</h6>
+              </ng-container>
+              </div>
+                
                 </div>
           </div>
         </div>
@@ -566,25 +598,29 @@
         </div>
         <!-- card -->
         <div class="d-flex flex-column scrolls col-12">
-          <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12 mb-2" *ngFor="let item of objectLatest">
+          <div class="d-flex bg-white cairo rounded-0 text-center py-3 px-4 col-12 mb-2" *ngFor="let item of objectLatest">
             <div class="col-xxl-2 d-xxl-block d-none">
               <img src="assets/avatar.png" alt="" class="col-12">
             </div>
-            <div class="col-xxl-8 col-10 d-flex flex-column justify-content-evenly align-items-start pe-xxl-3">
-              <p><small class="premary-color">اسم العميل : </small> <small>{{item.clientProfile.firstName}} {{item.clientProfile.lastName}}</small></p>
-              <p><small class="premary-color">بلد الاقامه : </small> <small> {{item.clientProfile.district.city.nameAr}}</small></p>
-              <p><small class="premary-color"> اسم المشروع : </small> <small>{{item.name}} </small></p>
+            <div class="col-xxl-8 col-10 d-flex flex-column  pe-xxl-3">
+              <p class="col-12 text-end"><small class="premary-color text-nowrap">اسم العميل : </small> <small>{{item.clientProfile.firstName}} {{item.clientProfile.lastName}}</small></p>
+              <p class="col-12 text-end"><small class="premary-color ">بلد الاقامه : </small> <small> {{item.district.city.nameAr}}</small></p>
+              <p class="col-12 text-end"><small class="premary-color "> اسم المشروع : </small> <small>{{item.name}} </small></p>
 
             </div>
             <div class="col-2 text-center">
               <mat-icon style="color: #F3D720 ;">star</mat-icon>
-              <p> <small>5/5</small>
+              <p>
+                 <small>5/5</small>
               </p>
             </div>
       </div>
-      <div class="d-flex flex-column  col-12 alert alert-danger" role="alert"[hidden]="error===null">
-        {{error}}
-      </div>
+      <ng-template [hidden]="error===null">
+        <div class="d-flex flex-column  col-12 alert alert-danger" role="alert">
+          {{error}}
+        </div>
+      </ng-template>
+      
         </div>
       
         </div>
@@ -596,7 +632,7 @@
   </div>
 
 
-  <div class="col-lg-5">
+  <div class="col-lg-3">
 
     <!-- part 1 -->
     <div class=" rounded-0  d-flex flex-column justify-content-around align-items-center  mb-3 col-12">
@@ -608,7 +644,10 @@
         <!-- <mat-card class="demo-inline-calendar-card"> -->
           <mat-calendar [(selected)]="selected"></mat-calendar>
         <!-- </mat-card> -->
-        <p>Selected date: {{selected |date}}</p>
+      </div>
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <p class="fw-bold pt-3"> {{selected | date:'d/M/yyyy' }}</p>
+
       </div>
     </div>
     <!-- part 2 -->
@@ -641,20 +680,7 @@
                   <div class="card-body text-center">
                     <p class="card-title fs-6">{{item.userName}}</p>
                     <div class="d-flex flex-row justify-content-center">
-                      <!-- <mat-icon class="align-text-bottom text-warning">star</mat-icon -->
-                      >
-                      <!-- <mat-icon class="align-text-bottom text-warning"
-                        >star</mat-icon
-                      >
-                      <mat-icon class="align-text-bottom text-warning"
-                        >star</mat-icon
-                      >
-                      <mat-icon class="align-text-bottom text-warning"
-                        >star</mat-icon
-                      >
-                      <mat-icon class="align-text-bottom text-warning"
-                        >star</mat-icon
-                      > -->
+                      
                          <span class="ps-1">{{item.stars}}/5</span>
             <mat-icon class="align-text-bottom text-warning">star</mat-icon> 
                     </div>
@@ -664,21 +690,22 @@
               </div>
              
               <div
-                class="carousel-indicators pt-5justify-content-start align-content-start position-absolute postionCard m-0"
+                class="carousel-indicators pt-5justify-content-start align-content-start position-absolute postionCard m-0 d-none"
                 style="width: 18rem"
               >
                 <div class="pt-4 mt-5">
                 
-                  <button *ngFor="let item of testimonials ;let i =index"
+                  <!-- <button *ngFor="let item of testimonials ;let i =index" -->
+                    <button
                     type="button"
                     data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide-to="1"
+                    data-bs-slide-to='0'
                     class="active rounded-pill bg-dark py-1 px-1 border-0"
                     aria-current="true"
                     aria-label="Slide 1"
                   >
                 </button>
-                  <!-- <button
+                  <button
                     type="button"
                     data-bs-target="#carouselExampleCaptions"
                     data-bs-slide-to="1"
@@ -689,9 +716,9 @@
                     type="button"
                     data-bs-target="#carouselExampleCaptions"
                     data-bs-slide-to="2"
-                    aria-label="Slide 2"
+                    aria-label="Slide 3"
                     class="rounded-pill bg-dark py-1 px-1 border-0"
-                  ></button> -->
+                  ></button>
                 </div>
               </div>
             </div>

@@ -15,32 +15,26 @@ import { ProfileData } from 'src/app/@models/profile-data';
 Chart.register(...registerables);
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { first, of, range, take } from 'rxjs';
+import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent implements OnInit {
-  cLientsNumber: number;
-  indServiceProviderNumber: number;
-  orgServiceProviderNumber: number;
+  clients: any;
+  individualSP: any;
+  organizationalSP: any;
   visitorsNumber: number;
 error:any;
-  usersNumber: number;
-  projectsNumber: number;
-  projectsCost: number;
-  pricequotesNumber: number;
-  pricequotesCost: number;
-  earnings: number;
-  costs: number;
+  costs: number=0;
   data: any;
   period: any;
   cost: any;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   values = 50;
-  selected: any;
+  selected: any=new Date()
   chart: any;
   testimonials:any;
   objectTestimonials:any[]=[]
@@ -50,39 +44,34 @@ error:any;
    objectLatest: any[] =[]
    currentProjects:any;
    objectCurrentProjects:any[]=[]
+   offersIdCurrentProjects:any
    complaints:any[]=[]
-  constructor(private http: AdminDashService) {
-    this.cLientsNumber = 0;
-    this.indServiceProviderNumber = 0;
-    this.orgServiceProviderNumber = 0;
+   pricequotes:any;
+   projects:any;
+   overview:any;
+   percentage:any[]=[]
+   milestonesData:any[]=[];
+   test:any=0
+   iProfileAdmin: any | undefined = undefined;
+
+  constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService) {
+    
     this.visitorsNumber = 0;
-    this.usersNumber = 0;
-    this.projectsNumber = 0;
-    this.projectsCost = 0;
-    this.pricequotesNumber = 0;
-    this.pricequotesCost = 0;
-    this.earnings = 0;
-    this.costs = 0;
   }
   ngOnInit() {
+    this.getProfileAdmin() 
     this.currentProjectsForAdmin();
     this.http.adminDashboard().subscribe({
       next: (value) => {
-        // console.log(value.data.testimonials);
+        // console.log(value.data);
         this.data = value.data;
-        this.cLientsNumber = value.data.users.cLientsNumber;
-        this.indServiceProviderNumber =
-          value.data.users.indServiceProviderNumber;
-        this.orgServiceProviderNumber =
-          value.data.users.orgServiceProviderNumber;
-        this.visitorsNumber = value.data.overview.visitorsNumber;
-        this.usersNumber = value.data.overview.usersNumber;
-        this.projectsNumber = value.data.overview.projectsNumber;
-        this.projectsCost = value.data.overview.projectsCost;
-        this.pricequotesNumber = value.data.overview.pricequotesNumber;
-        this.pricequotesCost = value.data.overview.pricequotesCost;
-        this.earnings = value.data.overview.earnings;
-        this.costs = value.data.overview.costs;
+        this.overview=value.data.overview
+        this.pricequotes= value.data.overview.pricequotes;
+        this.projects= this.overview.projects
+        this.clients =  this.overview.clients;
+        this.individualSP =  this.overview.individualSP;
+        this.organizationalSP =this.overview.organizationalSP
+        this.costs=Math.ceil(this.projects.acceptedProjectsCost * 0.01)
         this.chart = value.data.adminChart;
 
         this.testimonials =value.data.testimonials
@@ -102,32 +91,63 @@ error:any;
 
   this.http.getFinishedProjectsForAdmin(1).subscribe({
     next: (value) => {
-      console.log(value);
+      this.error=null
+      // console.log(value);
       this. latestProjects=value .data.projects
       for(let x of this. latestProjects){
         if(this.objectLatest.length<5){
           this.objectLatest.push(x)
         }
-        console.log(this.objectLatest)
+        // console.log(this.objectLatest)
 
       }
     
     },error:(er)=>{
-      // console.log(er)
+      console.log(er)
       this.error=er
     }})
 
     this.http.getCurrentProjectsForAdmin(1).subscribe({
       next: (value) => {
-        console.log(value);
+       
         this. currentProjects=value.data.projects
         for(let x of this. currentProjects){
           if(this.objectCurrentProjects.length<6){
             this.objectCurrentProjects.push(x)
-          }
-          console.log(this.objectCurrentProjects)
+            
+          } 
+          // console.log(this.objectCurrentProjects);
+         
   
         }
+        for(let item of this.objectCurrentProjects){
+          if(item.offers.length>0){
+            for(let id of item.offers){
+              this.http.getMilestonesByOfferId(id.id).subscribe(((data)=>{
+                this.milestonesData=data.data
+                // console.log(this.milestonesData)
+                this.test =0
+                for(let miles of this.milestonesData){
+                  
+                  console.log(miles.isPaid)
+                  if(miles.isPaid){
+                    this.test += miles.percentage
+                    this.percentage.push(this.test)
+                  }
+                  console.log(this.percentage)
+
+                }
+
+              }))
+  
+            }
+          }else{
+            let notOffer ="لايوجد عرض سعر"
+            console.log(notOffer)
+
+          }
+         
+         }
       
       }})
   
@@ -166,6 +186,13 @@ error:any;
     });
   }
 
+  getProfileAdmin() {
+    // this.state = 1;
+    this.adminSettingsService.getAdminProfile().subscribe((value) => {
+      this.iProfileAdmin = value.data;
+      console.log(this.iProfileAdmin);
+    });
+  }
   renderBarChart() {
     const myChart = new Chart('bar', {
       type: 'bar',
@@ -189,13 +216,13 @@ error:any;
             label: ` مشاريع`,
             borderColor: ['#e55353'],
             backgroundColor: ['#e55353'],
-            data: [45, 47, 32, 56, 70, 60, 45, 47, 32, 56, 70, 60],
+            data: [0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 5, 0],
           },
           {
-            label: `صفقات`,
+            label: `عروض الاسعار`,
             borderColor: ['#dca239'],
             backgroundColor: ['#dca239'],
-            data: [36, 50, 60, 40, 34, 32, 36, 50, 60, 40, 34, 32],
+            data: [0, 0, 0, 0, 0, 0, 1, 2, 2, 5, 5, 0],
           },
         ],
       },
@@ -222,4 +249,25 @@ error:any;
       },
     });
   }
+}
+
+interface offers{
+  "id": 2163,
+  "offerId": 92,
+  "cost": 5.0,
+  "percentage": 25.0,
+  "isFirstMilestone": true,
+  "requiredWorkId": 1,
+  "isLastMilestone": false,
+  "milestoneStatusId": 2,
+  "isPaid": true,
+  "paidDate": "2022-10-17T12:18:00",
+  "requiredWork": null,
+  "milestoneStatus": {
+      "id": 2,
+      "nameAr": "جاري العمل",
+      "nameEn": "CurrentWork",
+      "milestones": []
+  },
+  "offer": null
 }

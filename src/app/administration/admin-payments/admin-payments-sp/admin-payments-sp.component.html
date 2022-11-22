@@ -42,20 +42,26 @@
             <div class="card border-0 rounded-0 ">
               <div class="row">
                 <div class="col-4 d-sm-block d-none">
-                <img src="{{pro.profile.companyLogoPath}}" alt="image" class="img-fluid img ">
+                <img src="{{pro.profile.companyLogoPath}}" alt="image" class="img-fluid img " *ngIf="pro.profile.companyLogoPath  ; else imge">
+                <ng-template #imge>
+                  <img src="{{pro.profile.profilePicturePath}}" alt="image" class="img-fluid img " *ngIf="pro.profile.profilePicturePath ; else imge2">
+                </ng-template>
+                <ng-template #imge2> <img src="https://picsum.photos/200/300" alt="image" class="img-fluid img ">
+                </ng-template>
                 </div>
                 <div class="col-sm-8 col-12 mt-3">
                   <p>
                     <img class="" src="assets/icons/user.svg" class="ms-1 fs-6"/>
-                    <span>  {{pro.profile.companyName}} </span><br>
+                    <span *ngIf="pro.profile.companyName ;else names">  {{pro.profile.companyName}} </span><br>
                     <!-- <span>Sara AbdElaziz AbdElahkim</span> -->
+                    <ng-template #names>{{pro.profile.firstName}} {{pro.profile.lastName}}</ng-template>
                   </p>
       
                   <p>
                     <img src="assets/icons/Group 801.svg" class="ms-1" />
                     <span>{{pro.profile.streetName}}</span>
                   </p>
-                  <p>
+                  <p *ngIf="pro.profile.officeMobileNumber">
                     <img src="assets/icons/Phone.svg"  class="ms-1"/>
                     <span>{{pro.profile.officeMobileNumber}}</span>
                   </p>
@@ -133,7 +139,7 @@
     
           <div class="modal-body p-5">
             <div class="mb-4">
-              <ng-container *ngFor="let projects of idProduct.profile.offers">
+              <ng-container *ngFor="let projects of idProduct?.profile?.offers">
 
               <mat-accordion >
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
@@ -141,7 +147,8 @@
                   <!-- <mat-expansion-panel-header class="col-12 justify-content-between rounded-0"
                     [hidden]="panelOpenState === true"> -->
                     <mat-expansion-panel-header class="col-12 justify-content-between rounded-0">
-                      <mat-panel-title class="col-8"> {{idProduct.profile.companyName}}  </mat-panel-title>
+                      <mat-panel-title class="col-8" *ngIf="idProduct?.profile?.companyName ;else name"> {{idProduct?.profile?.companyName}}  </mat-panel-title>
+                      <ng-template  #name><mat-panel-title class="col-8"> {{idProduct?.profile?.firstName}}  </mat-panel-title>                      </ng-template>
                       <mat-panel-title class="text-mint col-3">
                       ربح : {{ platformProfit }} 
                     </mat-panel-title>

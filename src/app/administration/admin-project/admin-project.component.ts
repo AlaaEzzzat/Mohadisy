@@ -10,6 +10,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { IrequiredWorks } from 'src/app/@models/irequired-works';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
 
 @Component({
   selector: 'app-admin-project',
@@ -46,12 +47,17 @@ export class AdminProjectComponent implements OnInit {
   offer:any[]=[];
   period:any;
   cost:any;
+  deliveryDate:any
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   values = 50;
+  percentage:any=0
+  milestonesData:any[]=[];
+  test:any=0
   constructor(
     private ServicesProvidor: AdminProjectsService,
-    private _HttpClient: HttpClient ,private formbuilder:FormBuilder
+    private _HttpClient: HttpClient ,private formbuilder:FormBuilder,
+    private http: AdminDashService
   ) {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
@@ -109,7 +115,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -232,16 +238,53 @@ export class AdminProjectComponent implements OnInit {
     sessionStorage.setItem('idProjects', id);
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
     this.projectRequiredWorks();
     this.projectComponents();
     this.offers()
+    // console.log(this.productCurrent.offers);
+  let  objectCurrentProjects:any[]=this.productCurrent
+  console.log(objectCurrentProjects);
+    
+      if(this.productCurrent.offers.length>0){
+        for(let id of this.productCurrent.offers){
+          // console.log(id.id)
+          this.http.getMilestonesByOfferId(id.id).subscribe(((data)=>{
+            this.milestonesData=data.data
+            console.log(this.milestonesData)
+            this.percentage =0
+            for(let miles of this.milestonesData){
+                        console.log(miles)
+
+              console.log(miles.isPaid)
+              if(miles.isPaid){
+                this.percentage += miles.percentage
+                // this.percentage.push(this.test)
+                this.test =miles.milestoneStatus.nameAr
+
+              }
+              console.log(this.percentage)
+
+            }
+
+          }))
+
+        }
+      }else{
+        let notOffer ="لايوجد عرض سعر"
+        console.log(notOffer)
+        this.percentage =0
+        this.test =''
+
+      }
+     
+     
+
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.idProductSessionStorage);
+    // console.log(this.idProductSessionStorage);
   }
 
   //   // change stutas client
@@ -427,6 +470,7 @@ export class AdminProjectComponent implements OnInit {
       this.offer.push(projectOffer)
       
       // this.period=projectOffer.period
+      this.deliveryDate=projectOffer.deliveryDate
       this.cost=projectOffer.cost
 
     } 
