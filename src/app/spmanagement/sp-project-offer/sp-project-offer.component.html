@@ -224,23 +224,22 @@
                 <div class="col-lg-6 mt-3">
                   <div class="card card-3">
                     <h6>الملفات الخاصه بالمشروع</h6>
+                    <ul>
+                      <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+                        <div>
 
-                  <ul>
-                    <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                      <div>
-
-                      <button style="border:none; background-color:transparent;"
-                      onclick="downloadFile(document.filePath,document.file)"
-                      >
-                        <i class="fa fa-download  mt-3" aria-hidden="true"></i>
-                        {{document.file}}
-                      </button>
+                        <button style="border:none; background-color:transparent;"
+                        onclick="downloadFile(document.filePath,document.file)"
+                        >
+                          <i class="fa fa-download  mt-3" aria-hidden="true"></i>
+                          {{document?.file.substring(0,40)}}..
+                        </button>
 
 
-                      </div>
+                        </div>
 
-                    </ng-container>
-                  </ul>
+                      </ng-container>
+                    </ul>
                   </div>
 
                 </div>

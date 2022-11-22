@@ -341,27 +341,16 @@
             <div class="col-lg-6 mt-3">
               <div class="card card-3">
                 <h6>الملفات الخاصه بالمشروع</h6>
-
                 <ul>
                   <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
                     <div>
-                      <li (click)="toggoleDocument(document.id)">
-                        <ng-container *ngIf="descDocument[document.id]==1">
-                          <i class="fa fa-angle-down " aria-hidden="true"></i>
-                        </ng-container>
 
-                        <ng-container *ngIf="descDocument[document.id]!=1">
-                          <i class="fa fa-greater-than "></i>
-                        </ng-container>
-                        {{document.file}}
-                      </li>
-
-
-                      <ng-container *ngIf="descDocument[document.id]">
-                        <ul>
-                          <li> {{document.filePath}}</li>
-                        </ul>
-                      </ng-container>
+                    <button style="border:none; background-color:transparent;"
+                    onclick="downloadFile(document.filePath,document.file)"
+                    >
+                      <i class="fa fa-download  mt-3" aria-hidden="true"></i>
+                      {{document?.file.substring(0,40)}}..
+                    </button>
 
 
                     </div>
