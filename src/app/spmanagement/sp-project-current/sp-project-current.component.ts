@@ -17,7 +17,8 @@ export class SpProjectCurrentComponent implements OnInit {
     "المرحله الرابعه",
     "المرحله الخامسه",
     "المرحله السادسه"
-  ]
+  ];
+  selected:Date|null=null;
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
@@ -35,6 +36,8 @@ export class SpProjectCurrentComponent implements OnInit {
   Allstages:Array<any>=[];
   togglestage:any=[];
   index:number=0;
+  calcPrecentage:number=0;
+  statusStage:any="لم يتم الانتهاء من اى مرحله";
 
  constructor(private api:ApiService) { }
 
@@ -199,6 +202,24 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
+    finished(stageid:any)
+    {
+      this.calcPrecentage+=(100.0/Number(this.Allstages.length));
+      this.api.get(`https://app.mohandisy.com/api/Milestone/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
+        next:(data)=>
+        {
+          console.log(data);
+
+            Swal.fire(
+              'تم انهاء المرحله بنجاح'
+            );
+        }
+
+
+
+      })
+
+    }
 
     changepage(e:any)
     {

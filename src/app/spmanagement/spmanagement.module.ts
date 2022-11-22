@@ -37,6 +37,11 @@ import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.
 import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
 import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 
 @NgModule({
   declarations: [
@@ -75,7 +80,7 @@ import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reje
     SpCprojectOfferComponent,
     SpCprojectAcceptComponent,
     SpCprojectRejectComponent,
-    
+
   ],
   imports: [
     MatSelectModule,
@@ -87,6 +92,27 @@ import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reje
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgCircleProgressModule.forRoot({
+      "radius": 60,
+      "space": -10,
+      "outerStrokeGradient": true,
+      "outerStrokeWidth": 10,
+      "outerStrokeColor": "#4882c2",
+      "outerStrokeGradientStopColor": "#53a9ff",
+      "innerStrokeColor": "#e7e8ea",
+      "innerStrokeWidth": 10,
+      "title": "",
+      "animateTitle": false,
+      "animationDuration": 1000,
+      "showUnits": false,
+      "showBackground": false,
+      "clockwise": false,
+      "startFromZero": false,
+      "lazy": true
+    }),
   ],
+
 })
 export class SPmanagementModule {}

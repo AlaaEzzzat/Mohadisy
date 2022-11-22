@@ -23,7 +23,7 @@
               <p><i class="fa fa-location-dot "></i>
                 العنوان: {{project.district?.nameAr}},{{project.district.city?.nameAr}},
                  {{project.district.city.region?.nameAr}} </p>
-              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.dateCreated}}</p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
             </div>
           </ng-container>
 
@@ -39,14 +39,14 @@
               <p><i class="fa fa-location-dot "></i>
                 العنوان: {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
                  {{project.district?.city?.region?.nameAr}} </p>
-              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.dateCreated}}</p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
             </div>
           </ng-container>
 
         </ng-container>
 
 
-        <nav aria-label="Page navigation" class="mt-4 mb-3">
+        <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
           <ul class="pagination">
 
             <ng-container *ngIf="page==1">
@@ -100,11 +100,11 @@
         <div class="col-lg-12 info">
           <div class="card card-infoP">
             <div class="row">
-              <div class="col-lg-2">
+              <div class="col-lg-3">
               <img src="{{selectProject.clientProfile.profilePicturePath}}" alt="image" >
               </div>
 
-              <div class="col-lg-6  mt-4">
+              <div class="col-lg-5  mt-4">
                 <p>{{selectProject.clientProfile.firstName}}
                   {{selectProject.clientProfile.lastName}}
                 </p>
@@ -127,8 +127,18 @@
           <div class="card card-2">
             <div class="row">
               <div class="col-lg-12 pt-4 px-4 pb-5 content-prec text-center">
-                <div class="precent">60%</div>
-                 <p class="mt-3">تم الانتهاء من اربع مراحل خلال المشروع
+                <circle-progress
+                [percent]="calcPrecentage"
+                [radius]="50"
+                [outerStrokeWidth]="10"
+                [innerStrokeWidth]="8"
+                [outerStrokeColor]="'#18af9a'"
+                [innerStrokeColor]="'#C7E596'"
+                [animation]="true"
+                [animationDuration]="300"
+                title="{{calcPrecentage}}%"
+              ></circle-progress>
+                 <p class="mt-3">{{statusStage}}
                 </p>
               </div>
             </div>
@@ -154,30 +164,30 @@
                     <ng-container *ngIf="togglestage[stage.id]==1">
                   <div class="pt-3 pb-3 ">
                     <input type="hidden" [value]="stage.id" formControlName="stageId"/>
-                   <p>مشروع مشروع مشروع مشروع مشروع مشروع مشروع مشروع
-                     مشروع مشروع مشروع مشروع مشروع</p>
+                   <p>{{selectProject?.subject}}</p>
 
                      <div class="row mt-2 text-center">
                       <div class="col-lg-6 mt-2">
-                       <p><i class="fa fa-file-pdf-o" style="color:red;"></i>اسم الملف</p>
+                       <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; margin-left: 3%;"></i>اسم الملف</a>
                       </div>
                       <div class="col-lg-6 mt-2">
-                        <p><i class="fa-solid fa-image" style="color:green;"></i> صوره للموقع</p>
+                        <a href=""><i class="fa-solid fa-image" style="color:green;"></i> صوره للموقع</a>
                       </div>
 
                       <div class="col-lg-12 px-2 mt-2" style="font-size:14px ;">
                         <div class="row">
                           <div class="col-lg-4">
-                            <button class="btn" >تعديل </button>
+                            <button class="btn" type="button">تعديل </button>
+                            <span style="margin-right: 5%;"> | </span>
                           </div>
 
                           <div class="col-lg-4">
-                            <button class="btn">انهاء مرحله</button>
+                            <button class="btn" type="button" (click)="finished(stage.id)">انهاء مرحله</button>
+                            <span style="margin-right: 2%;"> | </span>
                           </div>
 
-
                           <div class="col-lg-4">
-                            <button class="btn" (click)="pending(stage.id)">تعليق</button>
+                            <button class="btn"  type="button" (click)="pending(stage.id)">تعليق</button>
                           </div>
                         </div>
 
@@ -217,9 +227,7 @@
             <div class="row">
               <div class="col-lg-12 p-2 content-1">
                 <h6>نبذه عن المشروع</h6>
-                <p>مشروع مشروع مشروعمشروعمشروعمشروعمشروعمشر
-                  مشروعمشروعمشروعمشروعمشروعمشروع
-                  وعمشروعمشروعمشروعمشروعمشروعمشروعمشروع
+                <p>{{selectProject?.subject}}
                 </p>
               </div>
             </div>
@@ -439,6 +447,18 @@
 
 
         <div class="col-lg-12 mt-2">
+          <div class="card card-date">
+            <div class="row">
+              <div class="col-lg-12 " class="calender">
+              <mat-calendar [(selected)]="selected" ></mat-calendar>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
           <div class="card card-4-4">
             <div class="row">
               <div class="col-lg-6 mt-2">
@@ -459,18 +479,15 @@
           <div class="card card-4-5">
             <div class="row">
             <div class="col-lg-12">
-           <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
-            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
-            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
-            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت</p>
+           <p>{{selectProject?.subject}}</p>
                  </div>
                  <div class="col-lg-12 mt-4">
                   <div class="row">
                     <div class="col-lg-6">
-                     <p><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px;"></i>اسم الملف</p>
+                     <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px; margin-left: 3%;"></i>اسم الملف</a>
                     </div>
                     <div class="col-lg-6">
-                      <p><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</p>
+                      <a href=""><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</a>
                     </div>
 
                    </div>
