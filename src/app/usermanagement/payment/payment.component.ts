@@ -104,12 +104,11 @@ export class PaymentComponent implements OnInit {
     });
   }
   getrequireWorkName(requiredWorkId: any) {
-    var mywork = {};
     this.requiredWorks.map((work: any) => {
       console.log(work);
       console.log(work.name);
       if (work.id == requiredWorkId) {
-        mywork = work;
+        
         return work?.name;
       }
     });

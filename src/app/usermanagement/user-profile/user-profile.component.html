@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-8">
       <div class="card mb-3 border-0 rounded-0">
-        <div class="row g-0">
+        <div class="row position-relative">
           <div
           (click)="editOverview = true"
             class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
@@ -12,6 +12,7 @@
           [src]="user.profilePicturePath"
           class="img-fluid rounded-start"
           alt="..."
+          style="width: 150px;"
         />
         <img
         *ngIf="userImgChanged"
@@ -20,7 +21,7 @@
               alt="..."
             />
             <div class="p-2 position-absolute bottom-0 changePic">
-              <input type="file" (change)="uplaodImg($event, proImg.name)"  #proImg name="profileImage" id="image" class="image" />
+              <input type="file" (change)="uplaodImg($event, proImg.name)"  #proImg name="profileImage" id="image" style="width: 20px;" class="image" />
               <svg
                 id="photo-camera"
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,14 +79,25 @@
               <span class="me-2 text-white">تغيير الصوره</span>
             </div>
           </div>
-          <div class="col-lg-10">
-            <div class="card-body">
+          <div class="col-lg-10 d-flex align-items-center">
+            <div class="card-body"> 
               <div class="row">
                 <div class="col-lg-5">
                   <div class="cairo">
-                    <h3 class="card-title bold">{{user.firstName + " " + user.lastName}}</h3>
-                    <p class="card-text secondColor">{{user.applicationUser?.phoneNumber}}</p>
-                    <p class="card-text secondColor">{{user.applicationUser?.email}}</p>
+                    <p class="card-title bold d-flex justify-content-around" (click)=" editName=true">
+                      <input  id="name" type="text" [autofocus]="editName" [(ngModel)]="name" class="bold editable">
+                      <!-- <span>{{user.firstName + " " + user.lastName}}</span> -->
+                      <i (click)="focusMyInput('#name')" class="fa fa-pencil"></i>
+                    </p>
+                    <p class="card-text secondColor d-flex justify-content-around" (click)="editOverview = true">
+                      <input  id="phone" type="text" [(ngModel)]="phoneNumber" class=" bold editable">
+                      <!-- <span>{{user.applicationUser?.phoneNumber}}</span> -->
+                      <i (click)="focusMyInput('#phone')"  class="fa fa-pencil"></i>
+                    </p>
+                    <p class="card-text secondColor d-flex justify-content-around" (click)="editOverview = true">
+                      <input id="email" type="text" [(ngModel)]="email" class="bold editable">
+                    <!--  <span> {{user.applicationUser?.email}}</span> -->
+                     <i (click)="focusMyInput('#email')" class="fa fa-pencil"></i></p>
                   </div>
                 </div>
                 <div
@@ -102,27 +114,7 @@
                     </h3>
                     <span class="mx-1 gray"> | </span>
                     <p class="card-text"> رقم التعريف : {{user.idNumber}}</p>
-                    <!-- <span class="mx-1 gray"> | </span>
-
-                    <p class="card-text">
-                      4/5
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="17"
-                        height="17"
-                        viewBox="0 0 17.855 16.78"
-                      >
-                        <path
-                          id="Path_2609"
-                          data-name="Path 2609"
-                          d="M741.979,177.73l-2.518,4.063-5.38,1.431L737.63,187l-.343,5.208v.286l4.693-2.175,5.151,2.175-.458-5.036,3.434-4.235-5.208-1.2-2.518-4.693Z"
-                          transform="translate(-733.144 -176.5)"
-                          fill="#f3d720"
-                          stroke="#f3d720"
-                          stroke-width="1"
-                        />
-                      </svg>
-                    </p> -->
+                    
                   </div>
                   <div class="d-flex flex-row-reverse">
                     <div>
@@ -216,35 +208,12 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <div class="p-2 bg-white">
-            <div class="d-flex justify-content-between p-2">
-              <b class="cairo">نبذه مختصره عن المهندس</b>
-              <i class="fa fa-pen editBtn" (click)="editOverview = true">
-               
-              </i>
-            </div>
-            <p [attr.contenteditable]="editOverview" class="p-2">
-              "لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت
-              دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا .
-              يوت انيم أد مينيم فينايم,كيواس نوستريد أكسير سيتاشن يللأمكو
-              لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس أيوتي
-              أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم
-              دولار أيو فيجايت نيولا باراياتيور. أيكسسيبتيور ساينت أوككايكات
-              كيوبايداتات نون بروايدينت ,سيونت ان كيولبا كيو أوفيسيا
-              ديسيريونتموليت انيم أيدي ايست لابوريوم."
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6">
           <div class="map h-100">
             <a class="direction p-3 cairo" [href]="map+location" target="_blank">أحصل على الاتجاهات</a>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7455039.655145476!2d40.580647886855935!3d24.16625830320905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2sSaudi%20Arabia!5e0!3m2!1sen!2seg!4v1668864519770!5m2!1sen!2seg"
               style="border: 0; width: 100%; height: 100%"
             ></iframe>
-            <!--  <agm-map [latitude]="lat" [longitude]="lng">
-                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-                  </agm-map> -->
           </div>
         </div>
         <div class="col-md-6 mt-3">
@@ -569,10 +538,7 @@
                 >
                 
               </div>
-              <div>
               
-                  <app-calendar></app-calendar>
-                </div>
             </div>
           </div>
         </div>

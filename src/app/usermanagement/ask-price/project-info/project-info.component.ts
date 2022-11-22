@@ -264,7 +264,7 @@ export class ProjectInfoComponent implements OnInit {
     const index = this.addedWorks.indexOf(this.activeWork);
     if (index > -1) {
       this.addedWorks.splice(index, 1);
-      this.activeWork = {};
+      this.activeWork = {}; 
     }
   }
   deleteAllWorks() {

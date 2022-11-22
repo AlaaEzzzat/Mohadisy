@@ -4,7 +4,9 @@
     width: 100%;
     z-index: 1000;
     background-color: #FFF;
-
+.mainColor{
+  color: #1a5f78;
+}
   .collapse{
     .nav-item{
       .search-con{
@@ -40,3 +42,34 @@
   .dots:focus{ border: none; }
 }
 .dotCon:focus{ border: none; }
+.notificationDiv{
+  position: absolute;
+  left: -65px;
+  top: 59px;
+width: 200px;
+height: 300px;
+overflow-y: auto;
+overflow-x: 0;
+background-color: #18af9a;
+}
+/* .notificationBtn::before{
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 38px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  z-index: 998;
+  border-bottom: 20px solid #18af9a;
+} */
+.searchBox{
+  width: 450px
+}
+@media (max-width:768px) {
+  .searchBox{
+    margin-bottom: 20px;
+    width: 250px
+  }
+}

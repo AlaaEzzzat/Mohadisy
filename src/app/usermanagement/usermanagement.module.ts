@@ -1,3 +1,4 @@
+import { AutoFocus } from './../@shared/directives/auto-focus';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from './../@shared/shared.module';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,7 @@ import { ProjectComponent } from './project/project.component';
 import { MatCardModule } from "@angular/material/card";
 @NgModule({
   declarations: [
+    AutoFocus,
     UserDashBoardComponent,
     UserProfileComponent,
     UserPriceOffersComponent,

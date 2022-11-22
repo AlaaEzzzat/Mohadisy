@@ -5,7 +5,7 @@ import { PaymentService } from './../../@core/services/payment/payment.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
-
+import moment from 'moment';
 @Component({
   selector: 'app-user-price-offers',
   templateUrl: './user-price-offers.component.html',
@@ -49,6 +49,7 @@ export class UserPriceOffersComponent implements OnInit {
   showModal: boolean = false;
   fristMilestoneId: any = 0;
   showMilestones:boolean= false;
+  projectMilestons:any =[];
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -92,11 +93,20 @@ export class UserPriceOffersComponent implements OnInit {
       this.showOffers(this.projectServiesArrays[0]);
     });
   }
-  deleteProject(id:any){
-    this.clientService.deleteProject(id).subscribe(data=>{
-      this._toastr.info(data.message);
-      this.getAllProjectServices();
-    });
+  
+  getMilestonse(selectedOfferId:any) {
+    this.projectMilestons=[];
+    this.clientService
+            .getMilestonesByOfferId(selectedOfferId)
+            .subscribe((data: any) => {
+              this.projectMilestons = data.data;
+              console.log(this.projectMilestons)
+              this.projectMilestons.map((mile: any) => {
+                if (mile.requiredWorkId) {
+                  this.getrequireWork(mile.requiredWorkId);
+                }
+              });
+            });
   }
   getAllProjectServices() {
     this.clientService
@@ -105,15 +115,11 @@ export class UserPriceOffersComponent implements OnInit {
         this.projectServicesFullData = data.data;
         console.log('projectOfServices : ');
         this.projectServiesArrays = this.projectServicesFullData.projects;
-        /*  *******************/
-
-        /*  *******************/
         this.totalpages = this.projectServicesFullData.totalPages;
         this.counter(this.totalpages);
 
         this.activeProject = this.projectServiesArrays[0].id;
         this.selectedProject = this.projectServiesArrays[0];
-
         this.projectServiesArrays.map((project: any) => {
           if (project.id == this.activeProject) {
             this.offersOfSelectedProject = project.offers;
@@ -122,6 +128,12 @@ export class UserPriceOffersComponent implements OnInit {
         if (this.offersOfSelectedProject.length > 0) {
           this.selectedOffer = this.offersOfSelectedProject[0];
           this.selectedOfferId = this.offersOfSelectedProject[0]?.id;
+          /* this.getMilestonse(this.selectedOfferId);
+          this.selectedOffer.milestones.map((mile: any) => {
+            if (mile.requiredWorkId) {
+              this.getrequireWork(mile.requiredWorkId);
+            } 
+          }); */
           if (this.selectedOffer.organizationalServiceProviderProfileId) {
             this.clientService
               .getOfferSender(
@@ -141,6 +153,27 @@ export class UserPriceOffersComponent implements OnInit {
           }
         }
       });
+  }
+  /* getRequirName(reqId:any){
+    this.requiredWorks.map((req:any)=>{
+      if(req.id == reqId){
+        console.log(req)
+        return req.name;
+      }
+    })
+  } */
+  requiredWorks:any=[];
+  getrequireWork(reqId: any) {
+    this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {
+      const index = this.requiredWorks.findIndex((e:any) => e.id == data.data[0].id);
+      if (index == -1) {
+        this.requiredWorks.push(...data.data);
+      }
+      console.log(this.requiredWorks)
+    });
+  }
+  getDate(date: any) {
+    return moment(date).utc().format('YYYY-MM-DD');
   }
   getTime(end: any, start: any) {
     var startDate = new Date(start);
@@ -187,6 +220,7 @@ export class UserPriceOffersComponent implements OnInit {
     if (this.offersOfSelectedProject.length > 0) {
       this.selectedOffer = this.offersOfSelectedProject[0];
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
+      this.getMilestonse(this.selectedOfferId);
       if (this.selectedOffer.organizationalServiceProviderProfileId) {
         this.clientService
           .getOfferSender(
@@ -275,8 +309,27 @@ export class UserPriceOffersComponent implements OnInit {
       }
     );
   }
+  deleteProject(id:any){
+    this.clientService.deleteProject(id).subscribe(data=>{
+      this._toastr.info(data.message);
+      this.getAllProjectServices();
+    });
+  }
   showImg(src: any) {
+    console.log(this.requiredWorks)
+    console.log(this.projectMilestons)
     this.showModal = true;
     this.modalSrc = src;
   }
+  requiredWorksNames(reqId:any){
+    var name
+    this.requiredWorks.map((work:any)=>{
+if(work.id==reqId){
+  name = work.name;
 }
+    })
+    return name;
+
+  }
+}
+ 

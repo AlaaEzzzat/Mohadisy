@@ -173,6 +173,37 @@ export class ClientService {
       `${environment.baseUrl}/api/Payment/getPaymentsForClient`
     );
   }
+  /* ******************EDIT PROFILE****** */
+  
+  updateClientProfile(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Client/updateClientProfile`,
+      data
+    );
+  }
+  storeClientIdFile(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Client/storeClientIdFile`,
+      data
+    );
+  }
+  changeProfilePicture(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Profile/changeProfilePicture`,
+      data
+    );
+  }
+  /* ***************NOTIFICATION*********************** */
+  getUserNotifications(justUnSeen:boolean): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Notification/getUserNotifications/${justUnSeen}`
+    );
+  }
 
- 
+  readNotification( notificationId: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Notification/readNotification/${notificationId}`,
+      ''
+    );
+  }
 }

@@ -215,13 +215,15 @@ export class ProfilecomplateComponent implements OnInit {
     this.citiesList = [];
     this.selectRegion = this.registerForm?.get('region')?.value;
     if (this.selectRegion != 0 && this.selectRegion != null)
-      this.provider.getCities(this.selectRegion).subscribe(
-        (data) => {
+      this.provider.getCities(this.selectRegion).subscribe({
+        next:(data) => {
           this.citiesList = data.data;
         },
-        (error) => {
+        error: (error) => {
           console.log('error');
         }
+      }
+        
       );
   }
 
@@ -229,18 +231,20 @@ export class ProfilecomplateComponent implements OnInit {
     this.selectCity = this.registerForm?.get('city')?.value;
     console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
-      this.provider.getDistricts(this.selectCity).subscribe(
-        (data) => {
-          if (data.data == '') {
-            this.addingDistrict = true;
-          } else {
-            this.districtsList = data.data;
-            this.addingDistrict = false;
-          }
-        },
-        (error) => {
-          this.addingDistrict = true;
-        }
+      this.provider.getDistricts(this.selectCity).subscribe({
+next:(data) => {
+  if (data.data == '') {
+    this.addingDistrict = true;
+  } else {
+    this.districtsList = data.data;
+    this.addingDistrict = false;
+  }
+},
+error:(error) => {
+  this.addingDistrict = true;
+}
+      }
+        
       );
   }
   addAdress(district: any) {

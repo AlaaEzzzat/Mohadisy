@@ -1,5 +1,10 @@
 .profile {
   min-height: 100vh;
+  .editable{
+    border:none;
+    outline:none;
+    background:transparent;
+ }
   span,
   h3,
   p, .btn {

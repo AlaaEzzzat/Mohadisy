@@ -54,11 +54,13 @@ export class ProjectComponent implements OnInit {
         this.clientService
           .getClientCurrentProjects(this.page)
           .subscribe((data) => {
+            console.log(data)
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
               }
             });
+            console.log(this.projectServiesArray)
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
@@ -195,7 +197,9 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
+      console.log(this.projectServices)
       this.activeService = this.projectServices[0].id;
+      console.log(this.activeService)
       this.isActiveService(this.activeService);
     });
 

@@ -464,11 +464,9 @@
                               />
                             </svg>
 
-                            <p class="p-0 m-0 me-3 mainColor d-flex justify-content-between w-100" (click)="showMilestones=true">
-                             <span> يتم تسديد المبلغ علي
-                              {{ offer.numberOfMilestones }} دفعات</span>
-                              <i class="fa fa-eye ms-3" ></i>
-
+                            <p class="p-0 m-0 me-3 mainColor " style="cursor: pointer;" (click)="showImg('')">
+                              يتم تسديد المبلغ علي
+                              {{ offer.numberOfMilestones }} دفعات
                             </p>
                           </div>
                         </div>
@@ -871,15 +869,122 @@
     </div>
   </div>
 </section>
-
-<div *ngIf="showMilestones" class="overlay p-5">
+<div *ngIf="showModal" class="overlay p-5">
   <div class="img-popup p-5">
-    <a class="close" style="cursor: pointer" (click)="showMilestones = !showMilestones"
+    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
       >&times;</a
     >
-    <div id="mymModal" class="mmodal">
+    <div *ngIf="modalSrc" id="mymModal" class="mmodal">
       <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
-      <div id="caption">fdfbdfbdfbfbfdbd</div>
+      <div id="caption"></div>
+    </div>
+    <div *ngIf="!modalSrc" id="mymModal" class="mmodal">
+      <div id="caption" class="p-3 bg-white">
+        <table class="table bg-white p-2" >
+          <thead>
+            <tr>
+              <th class="" scope="col">الدفعة</th>
+              <th scope="col">المرحلة</th>
+              <th scope="col">التكلفه</th>
+              <th scope="col">التاريخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="
+                let milestone of projectMilestons;
+                let i = index
+              "
+            >
+              <tr>
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid
+                        ? '#18AF9A'
+                        : '#EE9C0F'
+                    }"
+                    class="bold"
+                    >الدفعه ({{ i + 1 }}) :
+                  </span>
+                </td>
+
+                <td>
+                  <div
+                    class="mb-2"
+                    *ngIf="milestone.isFirstMilestone"
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة مقدمه
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="milestone.isLastMilestone"
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة بعد الإنتهاء
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="
+                      !milestone.isLastMilestone &&
+                      !milestone.isFirstMilestone
+                    "
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      {{
+                        requiredWorksNames(milestone.requiredWorkId)
+                      }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid
+                        ? '#18AF9A'
+                        : '#EE9C0F'
+                    }"
+                    >{{ milestone.cost }} ريال</span
+                  >
+                </td>
+                <td>
+                  <div
+                    class="text-dark bold"
+                    *ngIf="milestone.isPaid"
+                  >
+                     {{ getDate(milestone.paidDate) }}
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
