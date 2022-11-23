@@ -139,6 +139,11 @@ export class SpRequestRejectComponent implements OnInit {
      this.descDocument[documentId]=1;
     }
 
+    downloadFile(id:any,file:any)
+    {
+
+    }
+
 
     changepage(e:any)
     {

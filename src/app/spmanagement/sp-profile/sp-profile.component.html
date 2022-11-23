@@ -1,17 +1,20 @@
 
 <div class="row mt-3">
-  <div class="col-lg-8">
+  <div class="col-lg-9">
     <div class="row">
 
       <div class="col-lg-3">
         <div class="card image">
           <div class="row">
             <div class="col-lg-12">
-              <img src="https://www.hiamag.com/sites/default/files/styles/1000xauto/public/article/12/10/2021/xuin10-245131782_1548489262169588_3010436186952909049_n.jpg?itok=jXkdBBx3" alt="imag" class="img-fluid">
-              <div class="layout">
-                <button>تغيير الصوره
+              <img src="{{profile.organizationalServiceProviderProfile.                profilePicturePath}}" alt="imag" class="img-fluid">
+              <div class="layout ">
+                <label for="file" class="custom-file-upload">
+                <input type="file" />
+                  تغيير الصوره
                   <i class="fa fa-camera"></i>
-                </button>
+                </label>
+
               </div>
             </div>
           </div>
@@ -25,20 +28,12 @@
               <div class="row">
                 <div class="col-lg-12">
                   <p>ساره غازى عبدالعزيز</p>
-
                 </div>
                 <div class="col-lg-12">
-                  <p>Sara Ghazy AbdElaziz</p>
-
-                </div>
-
-                <div class="col-lg-12">
-                  <a href="">123456</a>
-                  <span class="d"> | </span>
-                  <a href="">123456</a>
+                  <a href="">{{profile.phoneNumber}}</a>
                 </div>
                 <div class="col-lg-12 mt-2">
-                  <a href="" class="">sara@gmail.com</a>
+                  <a href="" class="">{{profile.email}}</a>
                 </div>
               </div>
 
@@ -100,8 +95,11 @@
       <div class="col-lg-6">
         <div class="card">
           <div class="row">
-            <div class="col-lg-12">
-              <iframe src="https://www.google.com/maps/d/embed?mid=17tkzmG8256_xUXDG5BYue1gZwRI&hl=en&ehbc=2E312F" class="w-100 h-100"></iframe>
+            <div class="col-lg-12 w-100">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7455039.655145476!2d40.580647886855935!3d24.16625830320905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2sSaudi%20Arabia!5e0!3m2!1sen!2seg!4v1668864519770!5m2!1sen!2seg"
+              style="border: 0; width: 100%; height:24vh;" >
+
+             </iframe>
             </div>
           </div>
         </div>
@@ -110,75 +108,86 @@
 
     <div class="row mt-3">
       <div class="col-lg-4">
-        <div class="card card-4 bg-primary">
-
-          <div class="row">
+        <div class="card card-4 ">
+          <div class="row mb-3">
             <div class="col-lg-12">
-              <img src="" alt="">
+              <img src="{{profile.organizationalServiceProviderProfile.companyRegisterationNumberPath}}" alt="" class="img-fluid">
 
               <div class="layout">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6  mx-3 mt-3">
                     <p>الرخص التجاريه</p>
                   </div>
 
-                  <div class="col-lg-6">
+                  <div class="col-lg-3   mt-3">
                     <a href=""><i class="fa fa-edit"></i></a>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <a href=""></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
 
 
       <div class="col-lg-4">
-        <div class="card card-4 bg-primary">
-          <div class="row">
+        <div class="card card-4 ">
+          <div class="row mb-3">
             <div class="col-lg-12">
-              <img src="" alt="">
+              <img src="{{profile.organizationalServiceProviderProfile.companyRegisterationNumberPath}}" alt="" class="img-fluid">
 
               <div class="layout">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6 mx-3 mt-3">
                     <p>الرخص التجاريه</p>
                   </div>
-                  <div class="col-lg-6">
+
+                  <div class="col-lg-3  mt-3">
                     <a href=""><i class="fa fa-edit"></i></a>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <a href=""></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-
         </div>
-        </div>
+      </div>
 
 
 
       <div class="col-lg-4">
-        <div class="card card-4 bg-primary">
-          <div class="row">
+        <div class="card card-4 ">
+          <div class="row mb-3">
             <div class="col-lg-12">
-              <img src="" alt="">
+              <img src="{{profile.organizationalServiceProviderProfile.companyRegisterationNumberPath}}" alt="" class="img-fluid">
 
               <div class="layout">
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-6  mx-3 mt-3">
                     <p>الرخص التجاريه</p>
                   </div>
-                  <div class="col-lg-6">
+
+                  <div class="col-lg-3  mt-3">
                     <a href=""><i class="fa fa-edit"></i></a>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <a href=""></a>
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
@@ -293,7 +302,7 @@
 
 
 
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <div class="row">
 
       <div class="col-lg-12">
@@ -350,7 +359,7 @@
           <div class="row">
             <div class="col-lg-12">
               <p>
-                3,سبتمبر ,2021
+                3,سبتمبر,2021
               </p>
             </div>
           </div>
@@ -427,12 +436,10 @@
                     <textarea name="" id="" cols="" rows=""></textarea>
                   </div>
 
-                  <div class="col-lg-6 form-group">
-                    <input type="file" class="form-control">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <input type="file" class="form-control">
-                  </div>
+
+
+
+
 
                  <input type="submit" class="btn" value="اضافه">
 

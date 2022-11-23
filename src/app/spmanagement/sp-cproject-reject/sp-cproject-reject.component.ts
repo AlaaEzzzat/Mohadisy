@@ -140,6 +140,12 @@ export class SpCprojectRejectComponent implements OnInit {
     }
 
 
+    downloadFile(id:any,file:any)
+    {
+
+    }
+
+
     changepage(e:any)
     {
 

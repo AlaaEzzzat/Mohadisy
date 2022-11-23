@@ -141,6 +141,11 @@ export class SpRequestAcceptComponent implements OnInit {
     }
 
 
+    downloadFile(id:any,file:any)
+    {
+
+    }
+
     changepage(e:any)
     {
 

@@ -416,6 +416,8 @@ export class SpCprojectRequestComponent implements OnInit {
          }
 
 
+         console.log(AllData);
+
          this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
          {
            next:(data)=>{

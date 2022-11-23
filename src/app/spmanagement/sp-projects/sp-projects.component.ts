@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
@@ -26,7 +27,7 @@ export class SpProjectsComponent implements OnInit {
 
   constructor(private api:ApiService) { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
@@ -142,6 +143,12 @@ export class SpProjectsComponent implements OnInit {
       this.descDocument[documentId]=0;
       else
       this.descDocument[documentId]=1;
+     }
+
+
+     downloadFile(id:any,file:any)
+     {
+
      }
 
 
