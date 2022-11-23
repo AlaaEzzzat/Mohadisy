@@ -114,7 +114,7 @@
                     <div class="row">
                       <div class="col-lg-12 form-group ">
                         <label for="period" class="label-control">مده المشروع</label>
-                        <input type="text" class="form-control " name="period" formControlName="period" placeholder="مده المشروع" required
+                        <input type="text" class="form-control px-5" name="period" formControlName="period" placeholder="مده المشروع" required
                       [class.is-valid]="OfferData.get('period')?.valid"
                       [class.is-invalid]="OfferData.get('period')?.invalid && OfferData.get('period')?.touched">
                         <div
@@ -128,7 +128,7 @@
 
                       <div class="col-lg-6 form-group mt-3">
                         <label for="cost" class="label-control mb-2">السعر</label>
-                        <input type="number" class="form-control cost" name="cost"
+                        <input type="number" class="form-control cost px-5" name="cost"
                         formControlName="cost"
                          placeholder="السعر" (ngModelChange)="TotalCost()" required
                       [class.is-valid]="OfferData.get('cost')?.valid"
@@ -144,14 +144,14 @@
 
                       <div class="col-lg-6 form-group mt-4" >
                         <label for="cost" class="label-control mb-2"></label>
-                        <input type="text" class="form-control cost" name="costAr"  [disabled]="true"
+                        <input type="text" class="form-control cost px-5" name="costAr"  [disabled]="true"
                          placeholder="السعر" >
                       </div>
 
 
                       <div class="col-lg-6 form-group mt-3">
                         <label for="cost" class="label-control mb-2">رسوم اداريه</label>
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control px-5"
                          [disabled]="true"  [disabled]="true"
                         value="%1" placeholder="%1" >
                       </div>
@@ -166,7 +166,7 @@
 
                       <div class="col-lg-12 form-group mt-3">
                         <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
-                        <input type="number" class="form-control" name="numberOfMilestones" min="1" max="6"
+                        <input type="number" class="form-control px-5" name="numberOfMilestones" min="1" max="6"
                         formControlName="numberOfMilestones" (ngModelChange)="milestones()"
                          placeholder="عدد مراحل الدفع"
                          required
@@ -193,7 +193,7 @@
 
                         <div class="col-lg-3  form-group  mt-5">
                           <div class="input-group">
-                            <input type="text" class="form-control mx-0" name="percentage{{stone}}" placeholder="50%"
+                            <input type="text" class="form-control mx-0 " name="percentage{{stone}}" placeholder="50%"
                             formControlName="precentage"
                             (ngModelChange)="MilestoneCost(stone,this.OfferData.get('precentage').value)">
                             <span  class="input-group-text-right px-3 text-white pt-3" style="background-color:#004057;">%</span>
