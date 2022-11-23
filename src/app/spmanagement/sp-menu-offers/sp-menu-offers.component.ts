@@ -20,10 +20,13 @@ export class SpMenuOffersComponent implements OnInit {
 
     console.log(this.type);
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
-      if(data.Error==false){
+
+      console.log(data);
+      if(data.isError==false){
         this.offers=1;
       this.projectstatues=data.data.projectStatues;
       }
+      
 
     })
   }
