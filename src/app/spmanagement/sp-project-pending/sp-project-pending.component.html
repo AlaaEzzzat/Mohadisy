@@ -45,7 +45,7 @@
         </ng-container>
 
 
-        <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
+        <nav aria-label="Page navigation" class="mt-4 mb-3 col-lg-12"  *ngIf="result==1">
           <ul class="pagination">
 
             <ng-container *ngIf="page==1">
@@ -95,7 +95,26 @@
 
     <ng-container *ngIf="select!=0">
     <div class="col-lg-6 mt-4 mb-3 section-3">
+
       <div class="row">
+        <div class="col-lg-12 mt-2">
+          <div class="card card-2">
+            <div class="row">
+              <div class="col-lg-9 p-2 content-1">
+                <h6>سبب التعليق</h6>
+                <p>{{selectProject?.subject}}
+                </p>
+              </div>
+              <div class="col-lg-3 p-2 content-1">
+                <button class="btn" (click)="current()">تفعيل المشروع</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="row mt-2">
         <div class="col-lg-12 info">
           <div class="card card-infoP">
             <div class="row">

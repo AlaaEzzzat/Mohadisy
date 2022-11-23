@@ -10,6 +10,7 @@ export class SpMenuOffersComponent implements OnInit {
 
   projectstatues:any;
   type:number=Number(localStorage?.getItem('typeId'));
+  offers:number=0;
   constructor(private api:ApiService) {
 
   }
@@ -19,7 +20,10 @@ export class SpMenuOffersComponent implements OnInit {
 
     console.log(this.type);
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
+      if(data.Error==false){
+        this.offers=1;
       this.projectstatues=data.data.projectStatues;
+      }
 
     })
   }

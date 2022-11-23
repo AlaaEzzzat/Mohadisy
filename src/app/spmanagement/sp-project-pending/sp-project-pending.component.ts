@@ -1,5 +1,7 @@
 import { ApiService } from './../../@core/api.service';
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-sp-project-pending',
@@ -24,7 +26,7 @@ export class SpProjectPendingComponent implements OnInit {
   pages:Array<any>=[];
   selected:number=Date.now();
 
- constructor(private api:ApiService) { }
+ constructor(private api:ApiService,private router:Router) { }
 
  ngOnInit(): void {
 
@@ -141,6 +143,33 @@ export class SpProjectPendingComponent implements OnInit {
      this.descDocument[documentId]=1;
     }
 
+    current()
+    {
+      
+      this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+      {
+       
+        console.log(data.data);
+   
+      }
+      );
+
+      /*this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${projectId}`).subscribe(
+        {
+         
+            next:(data)=>{
+
+              Swal.fire(
+                'تم تفعيل المشروع'
+              );
+              this.router.navigate(['/Spmanagement/projects/status/pending']);
+              }
+
+          
+        }
+      );*/
+
+    }
 
     downloadFile(id:any,file:any)
     {

@@ -96,7 +96,7 @@
 {
   margin:2% 0%;
 }
-.section-2 .card-3 input
+.section-2 .card-3 input , button
 {
   padding: 2%;
   height: 7vh;
@@ -120,7 +120,7 @@
 
 
 
- .card-3 input[type="submit"],.card-3 .add
+ .card-3 input[type="submit"],.card-3 .add , .card-3 button
  {
    background-color: #18af9a;
    color: white;
@@ -219,7 +219,10 @@ input::placeholder
 
   padding-right: 2%;
  }
-
+input:target
+{
+  padding-right: 10%;
+}
 .noresult
 {
   text-align: center;
@@ -227,4 +230,12 @@ input::placeholder
   font-weight: 700;
   color: #004057;
 
+}
+thead
+{
+  background-color: #18af9a;
+}
+thead tr
+{
+color:white;
 }

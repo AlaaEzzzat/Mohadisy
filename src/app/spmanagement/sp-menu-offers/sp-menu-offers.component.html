@@ -4,7 +4,7 @@
 
     <div class="row nav mt-4">
 
-      <ng-container *ngIf="type==1">
+      <ng-container *ngIf="type==1 && offers==1">
       <div class="col   text-center contnet">
         <a [routerLink]='["/Spmanagement/projects/new"]'
         [routerLinkActive]='["active"]'
@@ -31,7 +31,7 @@
 
 
 
-      <ng-container *ngIf="type==2">
+      <ng-container *ngIf="type==2 && offers==1">
         <div class="col   text-center contnet">
           <a [routerLink]='["/Spmanagement/projects/all"]'
           [routerLinkActive]='["active"]'

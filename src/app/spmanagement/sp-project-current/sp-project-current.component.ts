@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
@@ -41,7 +42,7 @@ export class SpProjectCurrentComponent implements OnInit {
   statusStage:any="لم يتم الانتهاء من اى مرحله";
   Reason:any;
 
- constructor(private api:ApiService) { 
+ constructor(private api:ApiService,private router:Router) { 
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
@@ -192,10 +193,11 @@ export class SpProjectCurrentComponent implements OnInit {
         next:(data)=>
         {
           console.log(data);
-
+        
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
+            this.router.navigate(['/Spmanagement/projects/status/pending']);
         }
 
 
