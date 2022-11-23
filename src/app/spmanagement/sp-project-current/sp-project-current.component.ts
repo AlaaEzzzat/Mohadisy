@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
 
@@ -18,7 +19,7 @@ export class SpProjectCurrentComponent implements OnInit {
     "المرحله الخامسه",
     "المرحله السادسه"
   ];
-  selected:Date|null=null;
+  selected:number=Date.now();
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
@@ -38,8 +39,15 @@ export class SpProjectCurrentComponent implements OnInit {
   index:number=0;
   calcPrecentage:number=0;
   statusStage:any="لم يتم الانتهاء من اى مرحله";
+  Reason:any;
 
- constructor(private api:ApiService) { }
+ constructor(private api:ApiService) { 
+  this.Reason=new FormGroup(
+    {
+      reason:new FormControl('',[Validators.required]),
+
+    });
+ }
 
  ngOnInit(): void {
 
@@ -162,13 +170,7 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
+ 
 
     toggleStage(stageId:any)
     {
@@ -237,6 +239,11 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
    });
+    }
+
+    onSubmit()
+    {
+
     }
 
  }

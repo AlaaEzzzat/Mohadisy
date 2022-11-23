@@ -10,8 +10,7 @@
     <div class="col-lg-3">
       <div class="row">
 
-        <ng-container *ngFor="let project of Listprojects"
-        >
+        <ng-container *ngFor="let project of Listprojects">
           <ng-container *ngIf="select==project.id">
             <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
@@ -148,8 +147,8 @@
         <div class="col-lg-8 mt-2">
           <div class="row">
 
-            <ng-container *ngFor="let stage of Allstages ; let i=index ; i+1 ">
-            <div class="col-lg-12 mt-1">
+            <ng-container *ngFor="let stage of Allstages ; let i=index;">
+             <div class="col-lg-12 mt-1">
               <h2 class="card">
                 <button class="btn btn-accordion w-100 acc" type="button"
                 (click)="toggleStage(stage.id)" >
@@ -163,8 +162,8 @@
                   <div id="accordion">
                     <ng-container *ngIf="togglestage[stage.id]==1">
                   <div class="pt-3 pb-3 ">
-                    <input type="hidden" [value]="stage.id" formControlName="stageId"/>
-                   <p>{{selectProject?.subject}}</p>
+              
+                    <p>{{selectProject?.subject}}</p>
 
                      <div class="row mt-2 text-center">
                       <div class="col-lg-6 mt-2">
@@ -187,7 +186,47 @@
                           </div>
 
                           <div class="col-lg-4">
-                            <button class="btn"  type="button" (click)="pending(stage.id)">تعليق</button>
+                            <ng-container *ngIf="stage.milestoneStatusId==2">
+                              <button class="btn"  type="button" 
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">تعليق</button>
+                            </ng-container>
+                            
+                            <ng-container *ngIf="stage.milestoneStatusId!=2">
+                              <button class="btn"  type="button"  disabled>تعليق</button>
+                            </ng-container>
+                            <!------------Start Modal------------->
+                            <div class="modal fade  mt-5" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                 <div class="modal-header">
+                                  <button type="button" class="btn" data-bs-dismiss="modal" >
+                                    <i class="far fa-circle-xmark"></i>
+                                  </button>
+                                 </div>
+                                   
+                                
+                                 <form [formGroup]="Reason" onsubmit="onSubmit()">
+                                  <div class="modal-body">
+                                    <h4>اكتب سبب التعليق</h4>
+                                    <div class="form-group">
+                                      <textarea class="form-control mt-3" formControlName="reason"></textarea>
+                                    </div>
+                                   
+                                  </div>
+                                  <div class="modal-footer">
+
+                                    <button type="submit" class="btn"
+                                    (click)="pending(stage.id)"
+                                    >ارسال</button>
+                                  </div>
+                                 </form>
+                             
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <!-------------End Modal-------------------->
                           </div>
                         </div>
 
@@ -453,7 +492,7 @@
             <div class="row">
               <div class="col-lg-6 mt-2">
                 <h2>
-                  3 سبتمبر , 2021
+                  {{selected |date:'mediumDate'}}
                 </h2>
               </div>
               <div class="col-lg-6">

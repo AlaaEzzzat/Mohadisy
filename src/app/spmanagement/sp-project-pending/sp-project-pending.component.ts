@@ -22,6 +22,7 @@ export class SpProjectPendingComponent implements OnInit {
   result:number=0;
   totalpages: any = 0;
   pages:Array<any>=[];
+  selected:number=Date.now();
 
  constructor(private api:ApiService) { }
 
@@ -140,6 +141,11 @@ export class SpProjectPendingComponent implements OnInit {
      this.descDocument[documentId]=1;
     }
 
+
+    downloadFile(id:any,file:any)
+    {
+
+    }
 
     changepage(e:any)
     {
