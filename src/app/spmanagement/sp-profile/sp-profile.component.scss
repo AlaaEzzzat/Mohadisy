@@ -78,5 +78,108 @@ font-style: normal;
 font-weight: 400;
 font-size: 12px;
 color: #64748B;
-width: 95%;
+width: 94%;
+}
+
+/**********************section 1*******************/
+.section-1 p
+{
+  padding:0;
+  margin:0;
+}
+.section-1 .profile
+{
+  width: 70%;
+  height: 28vh;
+ margin-top: 10% ;
+ margin-right: 13%;
+}
+
+.section-1 h4
+{
+ font-family: "Cairo";
+ text-align: center;
+ font-size: 16px;
+
+}
+
+.section-1 .info p
+{
+  font-family: "Cairo";
+  font-size: 12px;
+  color: #64748B;
+}
+
+.section-1 p a
+{
+  color:#18AF9A;
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
+  font-family: "Cairo";
+   font-size: 18px;
+  font-weight: 500;
+}
+
+.section-1 .info-sp
+{
+  font-size: 16px;
+  font-family: "Cairo";
+  color: #64748B;
+  font-weight: 500;
+
+}
+.section-1 .info-sp i
+{
+  background-color: #E2E8F0;
+  width: 7.5%;
+  height: 3vh;
+  border-radius: 90%;
+  -webkit-border-radius: 90%;
+  -moz-border-radius: 90%;
+  -ms-border-radius: 90%;
+  -o-border-radius: 90%;
+  font-size: 11px;
+  margin-right: 5%;
+  padding: 1.7% 1.6%;
+}
+
+.link
+{
+   width: 13%;
+  padding: 2%;
+}
+
+
+
+.btn-accordion
+{
+  width: 90%;
+  font-family: "Cairo";
+  padding:3% 3%;
+  background-color: #F1F5F9;
+  font-weight:600 ;
+  text-align: right;
+  font-size: 15px;
+}
+
+
+
+.acc-card
+{
+   width: 85%;
+  font-family: "Cairo";
+  padding:3% 3%;
+  background-color: #F1F5F9;
+  font-size: 15px;
+  margin-right: 2%;
+  color:#475569;
+
+}
+
+.acc-card i
+{
+
+  font-weight: 400;
+  font-size: 17px;
+  color:#475569;
 }

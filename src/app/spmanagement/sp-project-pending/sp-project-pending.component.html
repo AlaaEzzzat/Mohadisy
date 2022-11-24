@@ -102,7 +102,7 @@
             <div class="row">
               <div class="col-lg-9 p-2 content-1">
                 <h6>سبب التعليق</h6>
-                <p>{{selectProject?.subject}}
+                <p>{{selectProject.projectRequestStatus?.notes}}
                 </p>
               </div>
               <div class="col-lg-3 p-2 content-1">
@@ -112,7 +112,7 @@
           </div>
         </div>
       </div>
-    
+
 
       <div class="row mt-2">
         <div class="col-lg-12 info">
@@ -197,48 +197,48 @@
                             <ng-container *ngIf="descComponent[component.id]==1">
                               <i class="fa fa-angle-down " aria-hidden="true"></i>
                             </ng-container>
-    
+
                             <ng-container *ngIf="descComponent[component.id]!=1">
                               <i class="fa fa-greater-than "></i>
                             </ng-container>
-    
+
                             {{component.name}}
                           </li>
-    
+
                           <ng-container *ngIf="descComponent[component.id]==1">
                             <p>{{component.description}} </p>
                           </ng-container>
-    
+
                         </div>
                       </ng-container>
-    
+
                     </ul>
                   </div>
                 </div>
 
-           
+
                   <div class="col-lg-12 mt-3">
                     <div class="card card-3">
                       <h6>الملفات الخاصه بالمشروع</h6>
                       <ul>
                         <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                          
-                          
+
+
                           <li style="border:none; background-color:transparent;"
                           (click)="downloadFile(document.filePath,document.file)"
                           >
                             <i class="fa fa-download  mt-2" aria-hidden="true"></i>
                             {{document?.file.substring(0,25)}}..
                           </li>
-    
+
                         </ng-container>
                       </ul>
-    
+
                     </div>
-      
+
                   </div>
-              
-              
+
+
               </div>
             </div>
 
@@ -284,7 +284,7 @@
               </div>
             </div>
 
-           
+
 
 
 
@@ -313,7 +313,7 @@
               </div>
               <div class="col-lg-5 mt-2">
                 <p>
-                  م : ساره عبدالعزيز عبدالحكيم
+                  م : {{Representative.firstName}} {{Representative.lastName}}
                 </p>
               </div>
               <div class="col-lg-5">

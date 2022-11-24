@@ -41,8 +41,9 @@ export class SpProjectCurrentComponent implements OnInit {
   calcPrecentage:number=0;
   statusStage:any="لم يتم الانتهاء من اى مرحله";
   Reason:any;
+  Representative:any;
 
- constructor(private api:ApiService,private router:Router) { 
+ constructor(private api:ApiService,private router:Router) {
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
@@ -65,6 +66,15 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
    });
+
+   this.api.get("https://app.mohandisy.com/api/Representative/getRepresentative").subscribe(
+    data=>
+    {
+      this.Representative=data.data;
+
+    }
+   );
+
 
  }
 
@@ -171,7 +181,7 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
- 
+
 
     toggleStage(stageId:any)
     {
@@ -188,18 +198,24 @@ export class SpProjectCurrentComponent implements OnInit {
     pending(stageid:any)
     {
 
-      this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending/
-      ${stageid}`).subscribe({
+
+      var pendingData=
+      {
+        "milestoneId":stageid,
+        "reason":this.Reason.get('reason').value
+      }
+      this.api.postJson("https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending",pendingData).subscribe({
         next:(data)=>
         {
           console.log(data);
-        
+
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
             this.router.navigate(['/Spmanagement/projects/status/pending']);
-        }
+            return;
 
+        }
 
 
       });

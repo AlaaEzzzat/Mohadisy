@@ -25,6 +25,7 @@ export class SpProjectPendingComponent implements OnInit {
   totalpages: any = 0;
   pages:Array<any>=[];
   selected:number=Date.now();
+  Representative:any;
 
  constructor(private api:ApiService,private router:Router) { }
 
@@ -43,6 +44,14 @@ export class SpProjectPendingComponent implements OnInit {
 
    });
 
+   this.api.get("https://app.mohandisy.com/api/Representative/getRepresentative").subscribe(
+    data=>
+    {
+      this.Representative=data.data;
+
+    }
+   );
+
  }
 
 
@@ -59,6 +68,9 @@ export class SpProjectPendingComponent implements OnInit {
        break;
      }
     }
+
+
+
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -145,18 +157,47 @@ export class SpProjectPendingComponent implements OnInit {
 
     current()
     {
-      
       this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
       {
-       
-        console.log(data.data);
-   
+
+        var stones=data.data
+        console.log(stones);
+      for(let i=0;i<stones.length;i++)
+      {
+
+        if(Number(stones[i].milestoneStatusId)==4)
+        {
+          console.log(stones[i].id);
+
+          this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${Number(stones[i].id)}`).subscribe
+          ({
+            next:(data)=>
+           {
+          console.log(data);
+
+            Swal.fire(
+              'تم تفعيل المشروع بنجاح'
+            );
+            this.router.navigate(['/Spmanagement/projects/status/current']);
+           }
+
+        }
+
+            );
+
+            return;
+
+        }
+      }
+
+
       }
       );
 
+
       /*this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${projectId}`).subscribe(
         {
-         
+
             next:(data)=>{
 
               Swal.fire(
@@ -165,7 +206,7 @@ export class SpProjectPendingComponent implements OnInit {
               this.router.navigate(['/Spmanagement/projects/status/pending']);
               }
 
-          
+
         }
       );*/
 
