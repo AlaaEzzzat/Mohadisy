@@ -212,13 +212,15 @@ export class SpProjectCurrentComponent implements OnInit {
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
+
             this.router.navigate(['/Spmanagement/projects/status/pending']);
-            return;
 
         }
 
 
       });
+
+
 
     }
 
