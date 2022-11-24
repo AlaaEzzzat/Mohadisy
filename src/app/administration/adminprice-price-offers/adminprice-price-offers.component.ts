@@ -195,7 +195,35 @@ getUnderNegotiationProjects(){
 
     );
   }
+  // getStoppedProjects() {
+  //   this.isProcessing = true;
+  //   sessionStorage.removeItem('idProjects')
+  //   sessionStorage.removeItem('projects')
 
+  //   this.ServicesProvidor.getUnderNegotiationProjectsForAdmin(this.page).subscribe({
+  //     next:(value) => {
+  //       if(value !=null || value != undefined) {
+
+  //         this.dataPriceQuotes = value.data.projects;
+  //         this.iadminPriceQuotes = this.dataPriceQuotes;
+  //         this.total = value.data.totalPages;            this.counter(this.total);
+  //         this.firstObject = this.iadminPriceQuotes[0];
+  //           this.objectProduct(this.firstObject, this.firstObject.id);
+  //           // console.log(this.firstObject.projectRequiredWorks);
+  //           // this.isProcessing = false;
+
+  //       }
+
+  //       },error: (error) => {
+  //             this.isProcessing = false;
+
+  //           }
+  //   }
+
+
+
+  //   );
+  // }
   getNotCompletedProjectsForAdmin() {
     this.isProcessing = true;
     this.newApi = 3;

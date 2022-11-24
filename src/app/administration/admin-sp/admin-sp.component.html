@@ -330,8 +330,8 @@
                   >{{ productCurrent.projectService.name }}</span
                 >
                 <ng-template #mstql>
-                  <span class="typeCom">استشارات</span></ng-template
-                >
+                  <!-- <span class="typeCom">استشارات</span> -->
+                  </ng-template >
               </p>
             </div>
           </div>
@@ -949,20 +949,21 @@
                   <mat-icon>chevron_left</mat-icon>
                 </div>
                 <div class="row row-cols-3 col-12">
-                  <div class="col-xxl-4 col-md-6"*ngFor="let item of productCurrent?.serviceProviderWorks">
+                  <ng-container *ngFor="let items of objFilePath" >
+                  <div class="col-xxl-4 col-md-6" *ngFor="let item of items">
                     <div class=" border-0 rounded-0 ">
 
                         <div class="col-12 position-relative" (click)="showProjectDetails(item)">
-                          <img src="https://picsum.photos/200" alt="image" class="img-fluid opacity-75 col-12 changeCursor" style="height: 200px;">
+                          <img src={{item?.filePath}} alt="image" class="img-fluid opacity-75 col-12 changeCursor" style="height: 200px;">
 
                       <div class="col-10 position-absolute top100 text-white d-flex justify-content-between cairo">
-                         <p > {{item.projectName}} </p>
+                         <p > {{item?.serviceProviderWork.projectName}} </p>
                          <p class="fs-6 fw-light">4/5<mat-icon style="color: #f3d720 ; font-size: medium;">star</mat-icon></p>
                       </div>                      
                         
                       </div>
                     </div>
-                  </div>
+                  </div></ng-container>
               
                   
               
@@ -979,10 +980,10 @@
                   <mat-icon>chevron_left</mat-icon>
                 </div>
                 <!-- <h5 class="card-title">{{item.projectName}}</h5> -->
-                <div class="d-flex flex-xxl-nowrap  flex-wrap justify-content-xxl-around  col-12 cairo ">
+                <div class="d-flex flex-xxl-nowrap  flex-wrap justify-content-xxl-around  col-12 cairo " *ngFor="let item of objFilePath">
                   <div class="card col-xxl-4 col-md-6 col-12  border-0 rounded-0 p-3">
                     <div class="card-body">
-                      <h5 class="card-title titleInformation">{{projectDetails.projectName}}</h5>
+                      <h5 class="card-title titleInformation">{{projectDetails?.serviceProviderWork.projectName}}</h5>
                       <small class="card-text">
                         <small class="text-muted fs-6">  تصنيف المشروع </small>
                         <!-- ?? -->
@@ -991,13 +992,13 @@
                           *ngIf="productCurrent.projectService; else mstql"
                           >{{ productCurrent.projectService.name }}</small>
                         <ng-template #mstql>
-                          <small class="typeCom">استشارات</small></ng-template>
+                          <small class="typeCom">مقاولات</small></ng-template>
                       </small>
-                      <p class="card-text"><span class="titleInformation">اسم العميل : </span>{{projectDetails.ownerName}}</p>
+                      <p class="card-text"><span class="titleInformation">اسم العميل : </span>{{projectDetails?.serviceProviderWork.ownerName}}</p>
                   
                     </div>
                   </div>
-                  <div class="card col-xxl-5 col-md-6 col-12  border-0 rounded-0 text-center p-3">
+                  <!-- <div class="card col-xxl-5 col-md-6 col-12  border-0 rounded-0 text-center p-3">
                     <div class="card-body">
                       <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath &&  productCurrent.companyRegisterationNumberFile "  >
                       <p class="card-title titleInformation h5 ">  هيئه المقاولين </p>
@@ -1025,10 +1026,10 @@
             </div>
                    
                     </div>
-                  </div>
+                  </div> -->
                   <div class="card col-xxl-2 col-md-6 col-12  border-0 rounded-0 text-center">
                     <div class="card-body">
-                      <h2 class="card-title titleInformation">{{projectDetails.projectPrice}} <br/> ريال</h2>
+                      <h2 class="card-title titleInformation">{{projectDetails.serviceProviderWork.projectPrice}} <br/> ريال</h2>
                       <p class="card-text text-secondary fs-6">ميزانية المشروع</p>
                   
                     </div>

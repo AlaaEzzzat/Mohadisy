@@ -80,6 +80,12 @@ export class AdminServiceProvidorService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`)
   }
 
+  getServiceProviderWorkFilesByWorkId(id:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${id}`)
+  }
+
+
   changeOrganizationalStatus(objectStatus:IChangeStatus):Observable<any>
   {
     return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/changeProfileStatus`,JSON.stringify(objectStatus), this.httpoptions).pipe(retry(3),catchError((err)=>{
@@ -98,6 +104,8 @@ export class AdminServiceProvidorService {
       })
     }))
   }
+
+
 
 
   updateOrganizationalUpdateProfile(objectStatus:any):Observable<any>

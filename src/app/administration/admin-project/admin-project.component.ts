@@ -54,6 +54,9 @@ export class AdminProjectComponent implements OnInit {
   percentage:any=0
   milestonesData:any[]=[];
   test:any=0
+  organizationalServiceProviderProfileId:any;
+  individualServiceProviderProfileId:any;
+  projectResponsible:any
   constructor(
     private ServicesProvidor: AdminProjectsService,
     private _HttpClient: HttpClient ,private formbuilder:FormBuilder,
@@ -116,6 +119,7 @@ export class AdminProjectComponent implements OnInit {
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
           // console.log(this.total);
+          console.log(this.iadminPriceQuotes);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -143,7 +147,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+          console.log(this.iadminPriceQuotes);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -170,7 +174,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -194,7 +198,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -219,7 +223,7 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.total);
+          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -244,19 +248,27 @@ export class AdminProjectComponent implements OnInit {
     this.offers()
     // console.log(this.productCurrent.offers);
   let  objectCurrentProjects:any[]=this.productCurrent
-  console.log(objectCurrentProjects);
+  // console.log(objectCurrentProjects);
     
       if(this.productCurrent.offers.length>0){
         for(let id of this.productCurrent.offers){
-          // console.log(id.id)
+          if(id.organizationalServiceProviderProfileId !=null){
+            this.organizationalServiceProviderProfileId=id.organizationalServiceProviderProfileId;
+            console.log(this.organizationalServiceProviderProfileId)
+            this.getProjectResponsible(this.organizationalServiceProviderProfileId)
+
+          }else if(id.individualServiceProviderProfileId != null){
+            this.individualServiceProviderProfileId=id.individualServiceProviderProfileId
+            this.getProjectResponsible(this.individualServiceProviderProfileId)
+          }
           this.http.getMilestonesByOfferId(id.id).subscribe(((data)=>{
             this.milestonesData=data.data
-            console.log(this.milestonesData)
+            // console.log(this.milestonesData)
             this.percentage =0
             for(let miles of this.milestonesData){
-                        console.log(miles)
+              //           console.log(miles)
 
-              console.log(miles.isPaid)
+              // console.log(miles.isPaid)
               if(miles.isPaid){
                 this.percentage += miles.percentage
                 // this.percentage.push(this.test)
@@ -272,7 +284,7 @@ export class AdminProjectComponent implements OnInit {
         }
       }else{
         let notOffer ="لايوجد عرض سعر"
-        console.log(notOffer)
+        // console.log(notOffer)
         this.percentage =0
         this.test =''
 
@@ -281,12 +293,19 @@ export class AdminProjectComponent implements OnInit {
      
 
   }
+
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     // console.log(this.idProductSessionStorage);
   }
+  getProjectResponsible( id:any){
+    this.ServicesProvidor.getOfferSenderProfile(id).subscribe({next:((data)=>{
+      // console.log(data.data)
+      this.projectResponsible=data.data
+    })})
 
+  }
   //   // change stutas client
   //   //2
   //   changeToAccepted() {
@@ -470,7 +489,8 @@ export class AdminProjectComponent implements OnInit {
       this.offer.push(projectOffer)
       
       // this.period=projectOffer.period
-      this.deliveryDate=projectOffer.deliveryDate
+      this.deliveryDate=projectOffer.period
+      
       this.cost=projectOffer.cost
 
     } 

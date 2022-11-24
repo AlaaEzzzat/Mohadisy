@@ -16,6 +16,8 @@ Chart.register(...registerables);
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user-register';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -53,17 +55,30 @@ error:any;
    milestonesData:any[]=[];
    test:any=0
    iProfileAdmin: any | undefined = undefined;
-
-  constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService) {
-    
+   arrays:any[]=[]
+   choseAcountType:AccountType[]=[];
+   newAccountform: FormGroup;
+   userdata:any
+   iadminOfficialUserRegister!:IadminOfficialUserRegister
+   admins:any[]=[]
+  constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder
+    ) {
+      this.newAccountform = this.formbuilder.group({
+        username: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(20),]],
+        Password: ['', [Validators.required,Validators.minLength(10)]], 
+        email: ['',[Validators.required, Validators.email]],
+        phoneNumber: ['', [Validators.required]],
+        officialRoleId: ['', [Validators.required]]
+      });
     this.visitorsNumber = 0;
   }
   ngOnInit() {
+    this.showUserDashboard()
     this.getProfileAdmin() 
     this.currentProjectsForAdmin();
     this.http.adminDashboard().subscribe({
       next: (value) => {
-        // console.log(value.data);
+        console.log(value.data);
         this.data = value.data;
         this.overview=value.data.overview
         this.pricequotes= value.data.overview.pricequotes;
@@ -79,31 +94,47 @@ error:any;
         this.renderDouChart();
         this.renderBarChart();
         // for(let oneTestimonials of this.testimonials){
-        //   this.objectTestimonials.push(oneTestimonials)
-        // }          console.log(this.objectTestimonials)
+        //   // this.objectTestimonials.push(oneTestimonials)
+        //   console.log(oneTestimonials.stars)
+        // }          
 
         
       },
     });
 
   }
+  get username() {
+    return this.newAccountform?.get('username');
+  }
+  get officialRoleId() {
+    return this.newAccountform?.get('officialRoleId');
+  }
+  get Password() {
+    return this.newAccountform?.get('Password');
+  }
+  get email() {
+    return this.newAccountform?.get('email');
+  }
+  get phoneNumber() {
+    return this.newAccountform?.get('phoneNumber');
+  }
+  get f() {
+    return this.newAccountform.controls;
+  }
  currentProjectsForAdmin(){
 
   this.http.getFinishedProjectsForAdmin(1).subscribe({
     next: (value) => {
       this.error=null
-      // console.log(value);
       this. latestProjects=value .data.projects
       for(let x of this. latestProjects){
         if(this.objectLatest.length<5){
           this.objectLatest.push(x)
         }
-        // console.log(this.objectLatest)
 
       }
     
     },error:(er)=>{
-      console.log(er)
       this.error=er
     }})
 
@@ -115,9 +146,7 @@ error:any;
           if(this.objectCurrentProjects.length<6){
             this.objectCurrentProjects.push(x)
             
-          } 
-          // console.log(this.objectCurrentProjects);
-         
+          }          
   
         }
         for(let item of this.objectCurrentProjects){
@@ -129,12 +158,12 @@ error:any;
                 this.test =0
                 for(let miles of this.milestonesData){
                   
-                  console.log(miles.isPaid)
+                  // console.log(miles.isPaid)
                   if(miles.isPaid){
                     this.test += miles.percentage
                     this.percentage.push(this.test)
                   }
-                  console.log(this.percentage)
+                  // console.log(this.percentage)
 
                 }
 
@@ -186,11 +215,17 @@ error:any;
     });
   }
 
+    fortest(totals: any,) {
+    for (var i = 1; i <= totals; i++) {
+      this.arrays.push(i);
+      console.log(this.arrays)
+    }
+  }
   getProfileAdmin() {
     // this.state = 1;
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
       this.iProfileAdmin = value.data;
-      console.log(this.iProfileAdmin);
+      // console.log(this.iProfileAdmin);
     });
   }
   renderBarChart() {
@@ -249,6 +284,37 @@ error:any;
       },
     });
   }
+ chiseOfficialRoles(){
+  this.iadminOfficialUserRegister
+ this.http.getOfficialRoles().subscribe({next:((roles)=>{
+  console.log(roles.data)
+  this.userdata=roles.data
+ })})
+ }
+ addAccount(){
+  this.iadminOfficialUserRegister={
+    "userName": this.username?.value,
+    "email": this.email?.value,
+    "Password": this.Password?.value,
+    "phoneNumber":this.phoneNumber?.value,
+    "officialRoleId": this.officialRoleId?.value
+  }
+  console.log(this.iadminOfficialUserRegister)
+  this.http.officialUserRegister(this.iadminOfficialUserRegister).subscribe({next:((va)=>{alert(va.message)}),error:(er)=>{
+    alert(er)
+  }})
+
+ }
+ showUserDashboard(){
+  this.http.getUsersDashboard().subscribe({next:(data)=>{
+    this.admins=data.data.activatedUsers
+    console.log(this.admins)
+
+  },error:(er)=>{
+    alert(er.message)
+  }})
+ }
+
 }
 
 interface offers{
@@ -270,4 +336,16 @@ interface offers{
       "milestones": []
   },
   "offer": null
+}
+
+interface AccountType{
+  "isActive": false,
+  "arabicName": string,
+  "key": string,
+  "accountTypes": any,
+  "isAvailableForServiceProviders": boolean,
+  "id": string,
+  "name": string,
+  "normalizedName": string,
+  "concurrencyStamp": string
 }

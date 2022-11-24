@@ -7,7 +7,7 @@
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
         color: newApi === 1 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-3 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNewProjectsForAdmin()"
     >
@@ -18,7 +18,7 @@
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-3 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNotCompletedProjectsForAdmin()"
     >
@@ -30,12 +30,12 @@
         color: newApi === 4 ? '#ffffff' : '#000000'
       }"
       (click)="getRejectedProjectsForAdmin()"
-      class="btn rounded-0 col-lg-3 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
     >
       عروض مرفوضة
     </button>
-    <!-- <button
+    <button
       [ngStyle]="{
         'background-color': newApi === 10 ? '#004958' : '#ffffff',
         'color': newApi === 10 ? '#ffffff' : '#000000'
@@ -44,7 +44,7 @@
       (click)="getUnderNegotiationProjects()"
     >
     عروض تحت التفاوض
-    </button>  -->
+    </button> 
 
     <button
       [ngStyle]="{
@@ -52,11 +52,10 @@
         color: newApi === 6 ? '#ffffff' : '#000000'
       }"
       (click)="getAcceptedProjectsForAdmin()"
-      class="btn rounded-0 col-lg-3 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
     >
-      عروض تحت التفاوض
-    </button>
+عروض مكتمله    </button>
     <!-- <button
       [ngStyle]="{
         'background-color': newApi === 7 ? '#004958' : '#ffffff',

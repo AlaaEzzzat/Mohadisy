@@ -26,7 +26,7 @@ export class AdminPaymentsSpComponent implements OnInit {
       next:((data)=>{
         this.datas=data.data
         this.spPayments=this.datas
-        // console.log(this.spPayments)
+        console.log(this.spPayments)
         this.objectProduct(this.spPayments[0]) 
   
       })
@@ -39,8 +39,9 @@ export class AdminPaymentsSpComponent implements OnInit {
  
 
     for(let costs of this.idProduct.profile.offers){
-      // console.log(  );
-      this.platformProfit= Math.ceil(costs.totalCost - costs.cost)
+      this.platformProfit= Math.ceil(costs.totalCost - costs.cost);
+            // console.log(  costs.project.name );
+
     }
     
     // for(let costs of this.idProduct.profile.offers){

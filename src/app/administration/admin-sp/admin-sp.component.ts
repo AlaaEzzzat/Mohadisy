@@ -54,6 +54,8 @@ export class AdminSPComponent implements OnInit {
   company: any = 'مستقل';
   productCurrent: any;
   isProcessing: boolean = true;
+  filePath:any;
+  objFilePath:any[]=[]
   constructor(
     private router: Router,
     private _HttpClient: HttpClient,
@@ -396,6 +398,10 @@ export class AdminSPComponent implements OnInit {
   showProjects(){
     this.showInformation=false;
     this.showprojectDetails=false
+    for(let item of this.productCurrent?.serviceProviderWorks){
+      // console.log(item.id)
+      this.getServiceProviderWorkFiles(item.id)
+    }
 
   }
   showProjectDetails(obj:any){
@@ -403,7 +409,23 @@ export class AdminSPComponent implements OnInit {
     this.showprojectDetails=true
     this.projectDetails=obj
     console.log(this.projectDetails)
+    // let set =new Set( this.projectDetails)
+    // console.log(set)
 
+  }
+  getServiceProviderWorkFiles(id:any){
+    this.objFilePath=[]
+    this.ServicesProvidor.getServiceProviderWorkFilesByWorkId(id).subscribe({next:(data)=>{
+      
+      this.objFilePath.push(data.data)
+      console.log(this.objFilePath)
+    //    let set =new Set( this.objFilePath)
+    // console.log(set)
+      // for(let file of data.data){
+      //   console.log()
+      //   this.filePath=file.filePath
+      // }
+    }})
   }
   back(){
     this.showInformation=true;

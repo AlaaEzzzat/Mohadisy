@@ -88,6 +88,14 @@ text-gary{
   }
 
 }
+.scrollsAdmins{
+  height:147px !important;
+  overflow: hidden;
+  &:hover{
+    overflow-y: auto !important;
+
+  }
+}
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -110,4 +118,22 @@ width: 300px;
 }.circle{
   width: 70px;
   border-radius: 50%;
+}
+.modaltitle{
+  background-color: #18AF9A !important;
+  >h2,>button{
+    color: white !important;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.addAccount{
+  cursor: pointer;
 }

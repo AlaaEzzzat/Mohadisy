@@ -1,13 +1,13 @@
 <section class="container-fluid my-4 ">
 
   <!-- part 1 -->
-  <div class="row cairo mb-3">
+  <div class="row cairo mb-2">
    
     
         <div class="col-lg-6">
 
-        <div class="col-lg-12  col-12 mb-4 ">
-          <div class="d-flex flex-column bg-white p-3  rounded-3 shadow">
+        <div class="col-lg-12  col-12 mb-3 ">
+          <div class="d-flex flex-column bg-white p-3   shadow">
           <div class="col-12  d-flex  justify-content-evenly align-items-center ">
          
             <div class="col-8 d-flex align-items-center justify-content-start">
@@ -227,8 +227,8 @@
    
     <div class="col-lg-6">
 
-      <div class="col-lg-12  col-12 mb-4 ">
-        <div class="d-flex flex-column bg-white p-3  rounded-3 shadow">
+      <div class="col-lg-12  col-12 mb-3 ">
+        <div class="d-flex flex-column bg-white p-3 ">
         <div class="col-12  d-flex  justify-content-evenly align-items-center ">
        
           <div class="col-8 d-flex align-items-center justify-content-start">
@@ -279,13 +279,13 @@
    
   </div>
  <!-- part 2 -->
- <div class="row cairo mb-3">
+ <div class="row cairo mb-2">
    
     
   <div class="col-lg-4">
 
-  <div class="col-lg-12  col-12 mb-4 ">
-    <div class="d-flex flex-column bg-white p-3  rounded-3 shadow">
+  <div class="col-lg-12  col-12 mb-3 ">
+    <div class="d-flex flex-column bg-white p-3  ">
     <div class="col-12  d-flex  justify-content-evenly align-items-center ">
    
       <div class="col-8 d-flex align-items-center justify-content-start">
@@ -325,8 +325,8 @@
 
 <div class="col-lg-4">
 
-<div class="col-lg-12  col-12 mb-4 ">
-  <div class="d-flex flex-column bg-white p-3  rounded-3 shadow">
+<div class="col-lg-12  col-12 mb-3 ">
+  <div class="d-flex flex-column bg-white p-3  ">
   <div class="col-12  d-flex  justify-content-evenly align-items-center ">
  
     <div class="col-8 d-flex align-items-center justify-content-start">
@@ -365,8 +365,8 @@
 </div> 
 <div class="col-lg-4">
 
-  <div class="col-lg-12  col-12 mb-4 ">
-    <div class="d-flex flex-column bg-white p-3  rounded-3 shadow">
+  <div class="col-lg-12  col-12 mb-3 ">
+    <div class="d-flex flex-column bg-white p-3  ">
     <div class="col-12  d-flex  justify-content-evenly align-items-center ">
    
       <div class="col-8 d-flex align-items-center justify-content-start">
@@ -469,7 +469,7 @@
   
   </div> -->
 <!-- part3 -->
- <div class="row my-4 cairo">
+ <div class="row mb-3 cairo">
     <div class="col-lg-6">
       <div
         class="bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center  mb-3 h-100 w-100"
@@ -509,7 +509,7 @@
     </div>
   </div>
 <!-- part4 -->
-<div class="row my-4 cairo">
+<div class="row mb-3 cairo">
   <div class="col-lg-9">
       <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
         <h5 class="premary-color col-10">اخر شكاوي المرسله</h5>
@@ -527,24 +527,28 @@
       
     </div>
 <!-- مسؤلي -->
-    <div class="cairo bg-white rounded-0  d-flex justify-content-between align-items-start  mb-2 col-12 py-3 px-4">
+<!-- <div class="d-flex flex-column scrolls col-12"> -->
+
+    <div class=" cairo bg-white rounded-0  d-flex justify-content-between align-items-start  mb-2 col-12 py-3 px-4">
       <h5 class="premary-color">  مسؤلي المنصه</h5>
-      <!-- <p class="main-color">  اضافة مسؤل</p> -->
+      <p class="main-color addAccount" (click)="chiseOfficialRoles()"   data-bs-toggle="modal"
+      data-bs-target="#exampleModalReject">  اضافة مسؤل</p>
     </div>
-    <div class="col-12 d-flex flex-column mb-3 ">
+    <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
       <!-- card -->
-      <div class="bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
+      <div *ngFor="let item of admins" class=" bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
         <div class="col-3 ">
-          <img class="w-50" src="assets/profile.png" >
+          <img class="w-50" src={{item?.adminProfile?.profilePicturePath}} >
         </div>
         <div class=" col-9  d-flex flex-column justify-content-evenly align-items-start ">
           <div class="w-100 d-flex flex-row justify-content-between align-items-center ">
-            <p class="h6 text-gary col-10"> {{ iProfileAdmin?.adminProfile?.firstName }}
-              {{ iProfileAdmin?.adminProfile?.lastName }}  </p>
-            <p class="h6  main-color col-2 text-start"> مسؤل</p>
+            <p class="h6 text-gary col-10"> {{ item?.userName}}</p>
+            <p class="h6  main-color col-2 text-start" *ngFor="let items of item.roles"> {{items?.arabicName}}</p>
           </div>
-        <p>{{ iProfileAdmin?.email }}</p>
-        <p> منذ  {{iProfileAdmin?.adminProfile?.dateCreated|date :'d/M/yyyy' }}</p>
+        <p>{{ item?.email }}</p>
+        <p>{{ item?.phoneNumber }}</p>
+
+        <!-- <p> منذ  {{iProfileAdmin?.adminProfile?.dateCreated|date :'d/M/yyyy' }}</p> -->
         
         </div>
       </div>
@@ -680,8 +684,8 @@
                   <div class="card-body text-center">
                     <p class="card-title fs-6">{{item.userName}}</p>
                     <div class="d-flex flex-row justify-content-center">
-                      
-                         <span class="ps-1">{{item.stars}}/5</span>
+
+                         <span class="ps-1" >{{item.stars}}/5</span>
             <mat-icon class="align-text-bottom text-warning">star</mat-icon> 
                     </div>
                     
@@ -741,4 +745,189 @@
 
 
 </section>
+
+<div
+  class="modal fade"
+  id="exampleModalReject"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مسؤل جديد
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form  [formGroup]="newAccountform"
+        (ngSubmit)="addAccount()" novalidate>
+          <label class="form-label">نوع الحساب</label>
+          <select
+            class="form-control"
+            formControlName="officialRoleId"
+            [ngClass]="{
+              'is-invalid':
+                f['officialRoleId'].errors && f['officialRoleId'].touched
+            }"
+          >
+            <option *ngFor="let user of userdata" [value]="user.id">
+              {{ user.arabicName }}
+            </option>
+          </select>
+          <div
+          *ngIf="f['officialRoleId'].errors && f['officialRoleId'].touched"
+          class="alert alert-warning mt-2"
+        >
+          <div *ngIf="f['officialRoleId'].errors['required']">
+            من فضلك ادخل نوع الحساب
+          </div>
+          
+        </div>
+        
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="username"
+                >اسم المستخدم</label
+              >
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                name="username"
+                formControlName="username"
+                [ngClass]="{
+                  'is-invalid':
+                    f['username'].errors && f['username'].touched
+                }"
+              />
+              <div
+                *ngIf="f['username'].errors && f['username'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['username'].errors['required']">
+                  من فضلك ادخل اسم المستخدم
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="email"
+                >البريد الالكتروني</label
+              >
+              <input
+                type="email"
+                id="email"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f['email'].errors && f['email'].touched
+                }"
+              />
+              <div
+                *ngIf="f['email'].errors && f['email'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['email'].errors['required']">
+                  من فضلك ادخل البريد الالكتروني
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="phoneNumber"
+                >رقم الهاتف
+              </label>
+              <input
+                type="phoneNumber"
+                id="phoneNumber"
+                name="phoneNumber"
+                formControlName="phoneNumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    f['phoneNumber'].errors && f['phoneNumber'].touched
+                }"
+              />
+              <div
+                *ngIf="
+                  f['phoneNumber'].errors && f['phoneNumber'].touched
+                "
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['phoneNumber'].errors['required']">
+                  من فضلك ادخل رقم الهاتف
+                </div>
+                <div *ngIf="f['phoneNumber'].errors['pattern']">
+                  من فضلك ادخل رقم هاتف صحيح
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="Password"
+                >كلمة المرور</label
+              >
+              <input
+                type="password"
+                id="Password"
+                name="Password"
+                formControlName="Password"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    f['Password'].errors && f['Password'].touched
+                }"
+              />
+              <div
+                *ngIf="f['Password'].errors && f['Password'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['Password'].errors['required']">
+                  من فضلك ادخل كلمة المرور
+                </div>
+                <div *ngIf="f['Password'].errors['minlength']">
+                   من فضلك ادخل كلمة المرور اكبر من 10
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+          data-bs-dismiss="modal"
+          type="submit"
+          [disabled]="!newAccountform.valid"
+          class="btn btn-lg ms-2 text-white form-control  mb-3"
+          style="background: #18AF9A"
+        >
+          انشاء مسؤل جديد
+        </button>
+        <button type="button"  data-bs-dismiss="modal"
+        class="btn btn-lg ms-2 text-white form-control btn-secondary"
+      
+        >
+          الغاء
+        </button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
 

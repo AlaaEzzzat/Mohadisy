@@ -44,7 +44,7 @@
                 <div class="col-4 d-sm-block d-none">
                 <img src="{{pro.profile.companyLogoPath}}" alt="image" class="img-fluid img " *ngIf="pro.profile.companyLogoPath  ; else imge">
                 <ng-template #imge>
-                  <img src="{{pro.profile.profilePicturePath}}" alt="image" class="img-fluid img " *ngIf="pro.profile.profilePicturePath ; else imge2">
+                  <img src="{{pro?.profile.profilePicturePath}}" alt="image" class="img-fluid img " *ngIf="pro?.profile?.profilePicturePath ; else imge2">
                 </ng-template>
                 <ng-template #imge2> <img src="https://picsum.photos/200/300" alt="image" class="img-fluid img ">
                 </ng-template>
@@ -147,8 +147,10 @@
                   <!-- <mat-expansion-panel-header class="col-12 justify-content-between rounded-0"
                     [hidden]="panelOpenState === true"> -->
                     <mat-expansion-panel-header class="col-12 justify-content-between rounded-0">
-                      <mat-panel-title class="col-8" *ngIf="idProduct?.profile?.companyName ;else name"> {{idProduct?.profile?.companyName}}  </mat-panel-title>
-                      <ng-template  #name><mat-panel-title class="col-8"> {{idProduct?.profile?.firstName}}  </mat-panel-title>                      </ng-template>
+                      <mat-panel-title class="col-8" *ngIf="projects?.project.name ;else name"> {{projects?.project.name }}  </mat-panel-title>
+                      <ng-template  #name><mat-panel-title class="col-8"> {{idProduct?.profile?.firstName}}  </mat-panel-title>         
+                        <!-- <li>{{projects.milestones.project.name}}</li> -->
+                      </ng-template>
                       <mat-panel-title class="text-mint col-3">
                       ربح : {{ platformProfit }} 
                     </mat-panel-title>
