@@ -155,3 +155,7 @@ input::placeholder
   background-color: #004057;
   color:white;
 }
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }

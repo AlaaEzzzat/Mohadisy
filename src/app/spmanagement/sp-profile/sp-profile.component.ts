@@ -15,7 +15,7 @@ import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 })
 export class SpProfileComponent implements OnInit {
 
-  selected:Date|null=null;
+  selected:any=Date.now();
   profile:any;
   constructor(
     private provider: ProviderServiceService,

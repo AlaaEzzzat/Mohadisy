@@ -13,7 +13,7 @@
 {
   color: #004057;
   font-weight: 600;
-  font-size: 17px;
+  font-size: 16px;
   margin-top: 5%;
   font-family: 'Cairo';
   font-style: normal;
@@ -52,6 +52,7 @@ h4
   padding: 2% 3% 3% 0%;
   border: 1px solid #E2E8F0;
   border-radius: 16px;
+  font-size: 15px ;
 }
 .card-2 p
 {
@@ -69,6 +70,7 @@ h4
   font-style: normal;
   font-weight: 400;
 
+
 }
 
 .date
@@ -76,11 +78,60 @@ h4
   font-family: 'Cairo';
 font-style: normal;
 font-weight: 400;
-font-size: 12px;
+font-size: 10.2px;
 color: #64748B;
-width: 94%;
+
 }
 
+.choose ul
+{
+  margin-left: 6%;
+}
+.choose ul li
+{
+
+  list-style-type: none;
+  padding:0;
+
+}
+
+.choose .card
+{
+  padding:7% 0%;
+
+}
+.choose ul li button
+{
+  font-size: 12px;
+  padding: 0;
+  font-family: 'Cairo';
+  font-style: normal;
+  color: #64748B;
+  font-weight: 300;
+}
+
+
+.choose ul li:hover
+{
+  background-color: #F1F5F9;
+}
+
+.choose-toggle
+{
+  color: #64748B;
+  margin-right: 60%;
+  padding:0;
+  font-size: 18px;
+  border: none;
+}
+
+.btn:focus {
+outline: none;
+box-shadow: none;
+}
+.btn:hover {
+  color: #64748B;
+  }
 /**********************section 1*******************/
 .section-1 p
 {
@@ -182,4 +233,174 @@ width: 94%;
   font-weight: 400;
   font-size: 17px;
   color:#475569;
+}
+
+.card-1-2
+{
+  padding: 2% 4%;
+  font-size: 16px;
+  font-weight: 400;
+  color:#475569;
+  font-family: "Cairo"
+
+}
+.card-1-2 p
+{
+  padding:1%;
+}
+
+.card-1-2 .files
+{
+  background-color: #F1F5F9;
+  padding: 3% 5%;
+}
+.card-1-2 .files a
+{
+  padding: 6%;
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
+  color:#475569;
+  font-family: "Cairo";
+  font-size: 13px;
+
+}
+.calender
+{
+  background-color: #F1F5F9;
+}
+
+.mat-calendar
+{
+
+  background-color: #F1F5F9;
+
+}
+
+
+
+
+
+::ng-deep .mat-calendar-body-cell-content {
+  background-color: white ;
+  color: black;
+  width: 100%;
+  border-radius: 25% !important;
+  -webkit-border-radius: 25% !important;
+  -moz-border-radius: 25% !important;
+  -ms-border-radius: 25% !important;
+  -o-border-radius: 25% !important;
+}
+
+
+
+::ng-deep .mat-calendar-table-header , ::ng-deep .mat-calendar-body-label
+{
+  color: black;
+}
+
+::ng-deep .mat-focus-indicator
+{
+  background-color: white;
+
+
+}
+
+
+::ng-deep .mat-calendar-body-selected
+{
+  background-color: #18AF9A ;
+  color: white;
+
+
+}
+
+
+.section-1 .dir
+{
+  font-family: "Cairo";
+  font-size: 16px;
+  color: #64748B;
+  font-weight: 600;
+}
+
+.section-1 .dir i
+{
+  background-color: #E2E8F0;
+  width: 7.5%;
+  height: 3vh;
+  border-radius: 90%;
+  -webkit-border-radius: 90%;
+  -moz-border-radius: 90%;
+  -ms-border-radius: 90%;
+  -o-border-radius: 90%;
+  font-size: 11px;
+  margin-right: 3%;
+  padding: 1.7% 2.7%;
+}
+
+
+.map iframe
+{
+  border-radius: 10%;
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  -ms-border-radius: 10%;
+  -o-border-radius: 10%;
+  padding:4%;
+  height: 40vh;
+  position: relative;
+}
+
+.layout
+{
+  position: absolute;
+  width: 92%;
+  background-color: rgba(0,0,0,.5);
+  bottom:4%;
+  padding:4% 5%;
+  color:white;
+  text-align: center;
+   margin-right: 4%;
+   border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+
+}
+
+.represent
+{
+  background-color: #F1F5F9;
+  width: 90%;
+  margin-right: 5%;
+  margin-top: 3%;
+  padding: 3%;
+  margin-bottom: 15%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.represent .info-sp
+{
+  font-size: 12px;
+}
+
+.represent .info-rep
+{
+  font-size: 12px;
+
+  font-family: "Cairo";
+  color: #64748B;
+  font-weight: 500;
+
+}
+.represent .info-rep i
+{
+  width: 18%;
+  height: 3vh;
+
+  padding: 4%;
+
+
 }
