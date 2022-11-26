@@ -1,3 +1,4 @@
+import { ChatComponent } from './chat/chat.component';
 import { ProjectComponent } from './project/project.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path: 'dashboard', component: UserDashBoardComponent },
       { path: 'messages', component: UserMessagesComponent },
       { path: 'project', component: ProjectComponent },
+      { path: 'chat', component: ChatComponent },
       
 
       { path: 'offers', component: UserPriceOffersComponent },

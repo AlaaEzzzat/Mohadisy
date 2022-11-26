@@ -20,7 +20,7 @@ export class ProjectComponent implements OnInit {
     { id: 2, name: 'مشاريع معلقه' },
     { id: 3, name: 'مشاريع منتهية' },
     { id: 4, name: 'مشاريع متأخرة' },
-    { id: 5, name: 'مشاريع معطلة' },
+    
   ];
 
   activeCategory: any = 1;
@@ -64,7 +64,8 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.showDetails(this.projectServiesArray[0]);
+            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
+
           });
 
         break;
@@ -80,7 +81,8 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.showDetails(this.projectServiesArray[0]);
+            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
+
           });
 
         break;
@@ -96,7 +98,8 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.showDetails(this.projectServiesArray[0]);
+            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
+
           });
 
         break;
@@ -112,7 +115,7 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.showDetails(this.projectServiesArray[0]);
+            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
           });
 
         break;
@@ -128,7 +131,8 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.showDetails(this.projectServiesArray[0]);
+            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
+
           });
 
         break;
@@ -137,6 +141,7 @@ export class ProjectComponent implements OnInit {
     }
   }
   showDetails(project: any) {
+    console.log(project)
     this.project = project;
     this.activeProject = project.id;
     if (project.offers.length > 0) {

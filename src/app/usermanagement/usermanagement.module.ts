@@ -17,6 +17,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PaymentComponent } from './payment/payment.component';
 import { ProjectComponent } from './project/project.component';
 import { MatCardModule } from "@angular/material/card";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ChatComponent } from './chat/chat.component';
 @NgModule({
   declarations: [
     AutoFocus,
@@ -29,6 +33,7 @@ import { MatCardModule } from "@angular/material/card";
     ProfilecomplateComponent,
     PaymentComponent,
     ProjectComponent,
+    ChatComponent,
   ],
   imports: [
     SharedModule,
@@ -37,9 +42,12 @@ import { MatCardModule } from "@angular/material/card";
     MatIconModule,
     CommonModule,
     UsermanagementRoutingModule,
-    FormsModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
     NgxSpinnerModule,
+    FormsModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     NgCircleProgressModule.forRoot({
       // set defaults here
       radius: 100,

@@ -12,6 +12,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { CalendarComponent } from './calendar/calendar.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 const routes: Routes = [
 
@@ -25,6 +26,7 @@ const routes: Routes = [
     NotFoundComponent,
     NavbarComponent,
     CalendarComponent,
+    LandingComponent,
   ],
   imports: [
     MatMenuModule,

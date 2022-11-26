@@ -206,6 +206,7 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
   showOffers(project: any) {
+    console.log(project)
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
     console.log(this.activeProjectReqWorks);

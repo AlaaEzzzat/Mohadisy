@@ -11,7 +11,7 @@ export class LayoutComponent {
 
   imageSrc?: string ;
 
-  myForm;
+  myForm!: FormGroup;
 
  
 

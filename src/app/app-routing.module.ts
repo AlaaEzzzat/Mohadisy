@@ -1,3 +1,4 @@
+import { LandingComponent } from './@shared/components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizedGuard } from './@core/auth/guards/authorized.guard';
@@ -8,7 +9,7 @@ import { HomepageComponent } from './Layout_HomePage/homepage/homepage.component
 const routes: Routes = [
   {
     path: '',
-    component: HomepageComponent,
+    component: LandingComponent,
   },
   {
     path: 'account',

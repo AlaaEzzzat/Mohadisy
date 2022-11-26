@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 export class UserProfileComponent implements OnInit {
   editOverview: boolean = false;
   map: string = 'https://www.google.com/maps/place/';
+  selected: Date = new Date();
   user: any = {};
   location: any = '';
   showpopup: boolean = false;

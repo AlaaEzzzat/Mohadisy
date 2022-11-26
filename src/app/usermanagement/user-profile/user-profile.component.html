@@ -1,6 +1,6 @@
 <div class="profile mt-5">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="card mb-3 border-0 rounded-0">
         <div class="row position-relative">
           <div
@@ -83,7 +83,7 @@
             <div class="card-body"> 
               <div class="row">
                 <div class="col-lg-5">
-                  <div class="cairo">
+                  <div class="cairo mb-3">
                     <p class="card-title bold d-flex justify-content-around" (click)=" editName=true">
                       <input  id="name" type="text" [autofocus]="editName" [(ngModel)]="name" class="bold editable">
                       <!-- <span>{{user.firstName + " " + user.lastName}}</span> -->
@@ -94,14 +94,13 @@
                       <!-- <span>{{user.applicationUser?.phoneNumber}}</span> -->
                       <i (click)="focusMyInput('#phone')"  class="fa fa-pencil"></i>
                     </p>
-                    <p class="card-text secondColor d-flex justify-content-around" (click)="editOverview = true">
-                      <input id="email" type="text" [(ngModel)]="email" class="bold editable">
+                    <p class="card-text secondColor " (click)="editOverview = true">
+                      <span class="bold pe-4">{{email}}</span></p>
                     <!--  <span> {{user.applicationUser?.email}}</span> -->
-                     <i (click)="focusMyInput('#email')" class="fa fa-pencil"></i></p>
                   </div>
                 </div>
                 <div
-                  class="col-lg-7 pt-3 d-flex flex-column justify-content-between"
+                  class="col-lg-7 d-flex flex-column justify-content-between"
                 >
                   <div
                     class="d-flex align-items-baseline justify-content-around"
@@ -116,7 +115,7 @@
                     <p class="card-text"> رقم التعريف : {{user.idNumber}}</p>
                     
                   </div>
-                  <div class="d-flex flex-row-reverse">
+                  <div class="d-flex flex-row-reverse ms-4">
                     <div>
                       <a>
                         <svg
@@ -267,7 +266,7 @@
       </div>
     </div>
 
-    <div class="mb-2 col-md-4">
+    <div class="mb-2 col-md-3">
       <div class="bg-white text-center p-2 mb-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -405,17 +404,27 @@
         </svg>
         <b style="cursor: pointer;" class="cairo me-2 secondColor">أرسال عرض عمل </b>
       </div>
-      <p class="bg-white p-2 px-3">جدول أعمالك</p>
-
-      <div class="mb-2">
-        <div class="bg-white">
-          <div
-            class="btn btn-accordion align-items-center w-100 text-end d-flex justify-content-between"
-          >
-            <span class="cairo"> 3,سبتمبر, 2022 </span>
-            <i class="fas fa-pen secontColor"></i>
-          </div>
+      
+      <div class="my-2">
+    
+        <div
+        class="rounded-0 d-flex flex-column justify-content-around mt-2  align-items-center mb-0  "
+      >
+        <div class="bg-white w-100  py-3 " >
+          <h3 class="cairo fw-bold text-center m-0 p-0 cairo">جدول الاعمال</h3>
         </div>
+        <div class="col-12 bg-white px-4 py-1 mb-2">
+          <!-- <mat-card class="demo-inline-calendar-card"> -->
+          <mat-calendar [(selected)]="selected"></mat-calendar>
+          <!-- </mat-card> -->
+          
+        </div>
+        <div class="w-100 bg-white py-3 " >
+          <h3 class="cairo fw-bold  text-center m-0 p-0 cairo">
+            <span>تاريخ : </span>
+            {{selected | date}} </h3>
+        </div>
+      </div>
         <div class="bg-white mt-2 card-2-1">
           <div id="accordion" class="">
             <div class="p-3" id="item">
@@ -541,6 +550,7 @@
               
             </div>
           </div>
+       
         </div>
       </div>
     </div>
