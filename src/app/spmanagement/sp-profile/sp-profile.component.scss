@@ -97,7 +97,7 @@ color: #64748B;
 
 .choose .card
 {
-  padding:7% 0%;
+  padding:0%;
 
 }
 .choose ul li button
@@ -119,7 +119,7 @@ color: #64748B;
 .choose-toggle
 {
   color: #64748B;
-  margin-right: 60%;
+  margin-right: 69%;
   padding:0;
   font-size: 18px;
   border: none;
@@ -132,6 +132,50 @@ box-shadow: none;
 .btn:hover {
   color: #64748B;
   }
+
+.card-registeration
+  {
+    padding:0;
+    position: absolute;
+    width: 30%;
+    left: 3%;
+    top:72%;
+    z-index: 1;
+    border: none;
+    border-radius: 0%;
+    -webkit-border-radius: 0%;
+    -moz-border-radius: 0%;
+    -ms-border-radius: 0%;
+    -o-border-radius: 0%;
+}
+  .card-registeration  li
+  {
+    padding:0% 4%;
+    list-style-type: none;
+
+  }
+
+  .card-registeration  li:hover
+  {
+    background-color: #F1F5F9;
+  }
+  .card-registeration  li button
+  {
+    padding: 0%;
+    font-size: 10px;
+    font-family: "Cairo";
+
+  }
+  .card-registeration  li button i
+  {
+    font-size: 11px;
+
+  }
+
+  .acc-card .fa-image
+  {
+    font-size: 14px;
+  }
 /**********************section 1*******************/
 .section-1 p
 {
@@ -140,10 +184,16 @@ box-shadow: none;
 }
 .section-1 .profile
 {
-  width: 70%;
-  height: 28vh;
+ width: 70%;
+ height: 26vh;
  margin-top: 10% ;
  margin-right: 13%;
+ border-radius: 60%;
+ -webkit-border-radius: 60%;
+ -moz-border-radius: 60%;
+ -ms-border-radius: 60%;
+ -o-border-radius: 60%;
+
 }
 
 .section-1 h4
@@ -247,6 +297,7 @@ box-shadow: none;
 .card-1-2 p
 {
   padding:1%;
+  line-height: 1.6;
 }
 
 .card-1-2 .files
@@ -264,10 +315,7 @@ box-shadow: none;
   font-size: 13px;
 
 }
-.calender
-{
-  background-color: #F1F5F9;
-}
+
 
 .mat-calendar
 {
@@ -402,5 +450,21 @@ box-shadow: none;
 
   padding: 4%;
 
+
+}
+
+
+@media only screen and (max-width: 768px) {
+ .acc-toggle
+ {
+
+  margin-right: 20% !important;
+ }
+ .acc-toggle button
+ {
+
+  //background-color: #004057;
+  padding:3%;
+ }
 
 }

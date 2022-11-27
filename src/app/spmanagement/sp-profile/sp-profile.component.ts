@@ -17,6 +17,15 @@ export class SpProfileComponent implements OnInit {
 
   selected:any=Date.now();
   profile:any;
+  infoProject:Array<any>=[];
+  ServiceProviderWork:any;
+  representative:any;
+  registeration:any=0;
+  registeration1:any=0;
+  registeration2:any=0;
+  registeration3:any=0;
+  registeration4:any=0;
+
   constructor(
     private provider: ProviderServiceService,
     private api: ApiService
@@ -29,7 +38,20 @@ export class SpProfileComponent implements OnInit {
       {
         this.profile=data.data;
         console.log(this.profile);
-      })
+      });
+
+      this.api.get("https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorks").subscribe(data=>
+      {
+        //console.log(data);
+        this.ServiceProviderWork=data.data;
+
+      });
+
+      this.api.get("https://app.mohandisy.com/api/Representative/getRepresentative").subscribe(data=>
+      {
+        this.representative=data.data;
+
+      });
 
   }
 
@@ -37,7 +59,37 @@ export class SpProfileComponent implements OnInit {
 
 
 
+  toggle(projectId:number)
+  {
+
+    if(this.infoProject[projectId]!=1)
+    this.infoProject[projectId]=1;
+    else
+    this.infoProject[projectId]=0;
+
+  }
 
 
+  register_1()
+  {
+    this.registeration1=!this.registeration1;
+  }
+
+  register_2()
+  {
+    this.registeration2=!this.registeration2;
+  }
+
+  register_3()
+  {
+    this.registeration3=!this.registeration3;
+
+  }
+
+  register_4()
+  {
+    this.registeration4=!this.registeration4;
+
+  }
 
 }

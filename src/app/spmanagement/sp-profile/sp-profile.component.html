@@ -3,8 +3,8 @@
     <div class="card section-1">
       <div class="row">
         <div class="col-lg-12">
-          <img src="/assets/icons/spcompany.png" alt="" class="img-fluid profile">
-          <h4 class="mt-3">مجموعه الزيادى للمقاولات العامه</h4>
+          <img src="{{profile?.organizationalServiceProviderProfile?.companyLogoPath}}" alt="" class="img-fluid profile">
+          <h4 class="mt-3">{{profile?.organizationalServiceProviderProfile?.companyName}}</h4>
 
           <div class="row text-center info">
             <div class="col-lg-5 mt-3">
@@ -14,7 +14,7 @@
 
             </div>
             <div class="col-lg-7 mt-3">
-              <p>رقم التعريف : #123444</p>
+              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.postalCode}}</p>
             </div>
           </div>
 
@@ -27,7 +27,7 @@
 
           <p class="info-sp mt-3">
             <i class="fas fa-phone"></i>
-            0123456744
+           {{profile?.phoneNumber}}
           </p>
           <p class="info-sp mt-2">
             <i class="fa fa-envelope-open-o"></i>
@@ -101,8 +101,9 @@
                   <div class="col-lg-12 card acc-card mt-1">
                     <div class="row">
                       <div class="col-lg-9">
-                        الخدمه الرئيسيه : استشارات هندسيه
-                      </div>
+                        الخدمه الرئيسيه :
+                        {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
+                         </div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1">
                         </i>
@@ -113,8 +114,10 @@
                   <div class="col-lg-12 card acc-card mt-1">
                     <div class="row">
                       <div class="col-lg-9">
-                        الخدمه الفرعيه : ترميم
-                      </div>
+                        الخدمه الفرعيه :
+                        {{profile?.organizationalServiceProviderProfile?.ospprofileSubServices
+                          [0]?.projectSubService.name}}
+                        </div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1"></i>
                       </div>
@@ -149,50 +152,170 @@
 
             <div class="collapse hide" id="item2" data-parent="#accordian">
               <div class="row">
+
                 <div class="col-lg-12 card acc-card mt-1">
                   <div class="row">
-                    <div class="col-lg-9">
-                      <i class="fal fa-file-image"></i>
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
                       الرخص التجاريه
                     </div>
-                    <div class="col-lg-3">
-                      <i class="fa fa-edit mx-3 mt-1"></i>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration1==1">
+                        <button class="btn choose-toggle" (click)="register_1()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration1!=1">
+                      <button class="btn choose-toggle" (click)="register_1()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
                     </div>
+                    <ng-container *ngIf="registeration1==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
                   </div>
                 </div>
 
+
                 <div class="col-lg-12 card acc-card mt-1">
                   <div class="row">
-                    <div class="col-lg-9">
-                      الخدمه الرئيسيه : استشارات هندسيه
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الرخص التجاريه
                     </div>
-                    <div class="col-lg-3">
-                      <i class="fa fa-edit mx-3 mt-1">
-                      </i>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration2==1">
+                        <button class="btn choose-toggle" (click)="register_2()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration2!=1">
+                      <button class="btn choose-toggle" (click)="register_2()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
                     </div>
+                    <ng-container *ngIf="registeration2==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
                   </div>
                 </div>
 
+
                 <div class="col-lg-12 card acc-card mt-1">
                   <div class="row">
-                    <div class="col-lg-9">
-                      الخدمه الفرعيه : ترميم
+                    <div class="col-lg-9 " style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الرخص التجاريه
                     </div>
-                    <div class="col-lg-3">
-                      <i class="fa fa-edit mx-3 mt-1"></i>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration3==1">
+                        <button class="btn choose-toggle" (click)="register_3()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration3!=1">
+                      <button class="btn choose-toggle" (click)="register_3()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
                     </div>
+                    <ng-container *ngIf="registeration3==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
                   </div>
                 </div>
 
 
                 <div class="col-lg-12 card acc-card mt-1">
                   <div class="row">
-                    <div class="col-lg-9">
-                      الدخل الشنوى : 20,000 ريال سعودى
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الرخص التجاريه
                     </div>
-                    <div class="col-lg-3">
-                      <i class="fa fa-edit mx-3 mt-1"></i>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration4==1">
+                        <button class="btn choose-toggle" (click)="register_4()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration4!=1">
+                      <button class="btn choose-toggle" (click)="register_4()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
                     </div>
+                    <ng-container *ngIf="registeration4==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
                   </div>
                 </div>
               </div>
@@ -207,7 +330,11 @@
             العنوان
           </p>
 
-          <p class="mx-2 mt-2">السعوديه , الرياض , منطقه المصانع</p>
+          <p class="mx-2 mt-2">
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.region?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.nameAr}}
+          </p>
 
           <div class="row">
             <div class="col-lg-12">
@@ -225,19 +352,23 @@
               <div class="card represent">
                 <div class="row">
                   <div class="col-lg-4">
-                    <img src="https://www.hiamag.com/sites/default/files/styles/1000xauto/public/article/12/10/2021/xuin10-245131782_1548489262169588_3010436186952909049_n.jpg?itok=jXkdBBx3" alt="" class="img-fluid">
+                    <img src="{{representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="" class="img-fluid">
                   </div>
 
                   <div class="col-lg-8 mt-1">
-                    <h6>م/ساره عبالعزيز</h6>
+                    <h6>
+                      م/
+                      {{profile?.organizationalServiceProviderProfile?. representative?.firstName}}
+                      {{profile?.organizationalServiceProviderProfile?. representative?.lastName}}
+                    </h6>
                     <p class="info-sp">ممثل الشركه على المنصه</p>
                     <p class="info-rep mt-2 " style="margin-right:38%;">
-                      0123456744
+                     {{profile?.organizationalServiceProviderProfile?. representative?.phoneNumber}}
                       <i class="fas fa-phone"></i>
                     </p>
-                    <p class="info-rep">
-                      sara12345@gmail.com
-                      <i class="fa fa-envelope-open-o"></i>
+                    <p class="info-rep" style="margin-right:10%;">
+                      {{profile?.organizationalServiceProviderProfile?. representative?.email}}
+                      <i class="fa fa-envelope-open-o" ></i>
                     </p>
                   </div>
 
@@ -267,7 +398,7 @@
           <div class="row">
             <div class="col-lg-8">
               <h5>
-                <i class="fas fa-star"></i>
+                <i class="far fa-building"></i>
                 المشاريع السابقه
 
               </h5>
@@ -285,8 +416,8 @@
           <div class="row">
             <div class="col-lg-8">
               <h5>
-                <i class="fas fa-star"></i>
-                ستوات الخبره
+                <i class="fas fa-award"></i>
+                سنوات الخبره
 
               </h5>
             </div>
@@ -323,7 +454,7 @@
       </div>
 
       <div class="col-lg-5 mt-2">
-        <div class="card card-1 calender">
+        <div class="card  calender">
           <div class="row">
             <div class="col-lg-12">
               <mat-calendar [(selected)]="selected" ></mat-calendar>
@@ -420,15 +551,28 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
-        <h4>المشاريع السابقه</h4>
+        <div class="row">
+          <div class="col-lg-9">
+            <h4>المشاريع السابقه</h4>
+          </div>
+          <div class="col-lg-3">
+            <a href="" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
+              اضافه مشروع
+              <i class="fa fa-plus-square"></i>
+            </a>
+
+          </div>
+        </div>
+
       </div>
 
+      <ng-container *ngFor="let project of ServiceProviderWork">
       <div class="col-lg-6 mt-2">
         <div class="card card-2">
           <div class="row">
             <div class="col-lg-8">
-              <p>اسم المشروع : <span>مشروع ترميم مستشفى الاورام</span></p>
-              <p>اسم العميل : <span>وزاره الصحه</span></p>
+              <p>اسم المشروع : <span>{{project.projectName}}</span></p>
+              <p>اسم العميل : <span>{{project.ownerName}}</span></p>
               <p>مده التنفيذ : <span>عام ونصف</span></p>
 
                 <div class="row pt-2 date">
@@ -442,119 +586,46 @@
             </div>
 
             <div class="col-lg-4 choose">
-              <button class="btn choose-toggle">
-                <i class="fa fa-times-circle-o"></i>
+
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <button class="btn choose-toggle" (click)="toggle(project.id)">
+                  <i class="fa fa-times-circle-o"></i>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="infoProject[project.id]!=1">
+              <button class="btn choose-toggle" (click)="toggle(project.id)">
+                <i class="fa fa-ellipsis-h"></i>
               </button>
+            </ng-container>
 
-              <ul class="card">
-                <li>
-                  <button class="btn">
-                    <i class="fa fa-eye"></i>
-                    فتح
-                  </button>
-                </li>
 
-                <li>
-                  <button class="btn">
-                    <i class="fa fa-telegram-plane"></i>
-                    ارسال
-                  </button>
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <ul class="card">
+                  <li>
+                    <button class="btn">
+                      <i class="fa fa-eye"></i>
+                      فتح
+                    </button>
+                  </li>
 
-                </li>
+                  <li>
+                   <button class="btn">
+                    <i class="fa fa-edit"></i>
+                    تعديل
+                   </button>
+                  </li>
+                </ul>
+              </ng-container>
 
-                <li>
-                 <button class="btn">
-                  <i class="fa fa-edit"></i>
-                  نعديل
-                 </button>
-                </li>
-              </ul>
+
             </div>
 
           </div>
         </div>
       </div>
+      </ng-container>
 
-
-      <div class="col-lg-6 mt-2">
-        <div class="card card-2">
-          <div class="row">
-            <div class="col-lg-10">
-              <p>اسم المشروع : <span>مشروع ترميم مستشفى الاورام</span></p>
-              <p>اسم العميل : <span>وزاره الصحه</span></p>
-              <p>مده التنفيذ : <span>عام ونصف</span></p>
-
-                <div class="row pt-2 date">
-                  <div class="col-lg-5">
-                    تاريخ البدء : 2 مايو 2019
-                  </div>
-                  <div class="col-lg-6">
-                    تاريخ الانتهاء : 4 مايو 2019
-                  </div>
-                </div>
-
-            </div>
-            <div class="col-lg-2">
-              <div class="padge ">45</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="col-lg-6 mt-2">
-        <div class="card card-2">
-          <div class="row">
-            <div class="col-lg-10">
-              <p>اسم المشروع : <span>مشروع ترميم مستشفى الاورام</span></p>
-              <p>اسم العميل : <span>وزاره الصحه</span></p>
-              <p>مده التنفيذ : <span>عام ونصف</span></p>
-
-                <div class="row pt-2 date">
-                  <div class="col-lg-5">
-                    تاريخ البدء : 2 مايو 2019
-                  </div>
-                  <div class="col-lg-6">
-                    تاريخ الانتهاء : 4 مايو 2019
-                  </div>
-                </div>
-
-            </div>
-            <div class="col-lg-2">
-              <div class="padge ">45</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="col-lg-6 mt-2">
-        <div class="card card-2">
-          <div class="row">
-            <div class="col-lg-10">
-              <p>اسم المشروع : <span>مشروع ترميم مستشفى الاورام</span></p>
-              <p>اسم العميل : <span>وزاره الصحه</span></p>
-              <p>مده التنفيذ : <span>عام ونصف</span></p>
-
-                <div class="row pt-2 date">
-                  <div class="col-lg-5">
-                    تاريخ البدء : 2 مايو 2019
-                  </div>
-                  <div class="col-lg-6">
-                    تاريخ الانتهاء : 4 مايو 2019
-                  </div>
-                </div>
-
-            </div>
-            <div class="col-lg-2">
-              <div class="padge ">45</div>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
 

@@ -244,17 +244,6 @@
 
                     </div>
 
-                    <button type="button" class="btn col-3 mt-4 mb-2"
-
-                    [disabled]="OfferData.get('cost')?.errors?.['required'] ||
-                       OfferData.get('period')?.errors?.['required']||
-                       OfferData.get('numberOfMilestones')?.errors?.['required']
-                       "
-
-                    >
-                    تأكيد
-                    </button>
-
                 </div>
 
 
@@ -301,9 +290,7 @@
 
                       </div>
 
-                      <button type="button" class="btn col-3 mt-4 mb-3" >
-                        تأكيد
-                        </button>
+
 
                   </div>
 
@@ -362,9 +349,7 @@
 
                       </div>
 
-                      <button type="button" class="btn col-3 mt-4 mb-3" >
-                        تأكيد
-                        </button>
+
 
                   </div>
 
@@ -412,9 +397,7 @@
 
                       </div>
 
-                      <button type="submit" class="btn col-3 mt-4 mb-3" >
-                        تأكيد
-                      </button>
+                     
 
                   </div>
 
@@ -513,7 +496,7 @@
                             <td>{{m.name}}</td>
                             <td>{{m.description}}</td>
                             <td>{{m.cost}}</td>
-                            <td><button type="button" class="btn" style="color:#004057; font-size:20px;"
+                            <td><button type="button" class="btn" style="font-size:20px;"
                                (click)="deleteMaterial(m.id)">
                               <i class="fa fa-trash"></i>
                             </button></td>
@@ -532,7 +515,7 @@
 
 
               </div>
-              
+
               </div>
 
             </div>
