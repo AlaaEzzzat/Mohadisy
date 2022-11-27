@@ -1,4 +1,4 @@
-import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { ProjectComponent } from './project/project.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';

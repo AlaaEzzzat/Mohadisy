@@ -1,6 +1,6 @@
+import { SharedModule } from './../@shared/shared.module';
 import { AutoFocus } from './../@shared/directives/auto-focus';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SharedModule } from './../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,20 +20,17 @@ import { MatCardModule } from "@angular/material/card";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ChatComponent } from './chat/chat.component';
 @NgModule({
   declarations: [
     AutoFocus,
     UserDashBoardComponent,
     UserProfileComponent,
     UserPriceOffersComponent,
-  
     UserMessagesComponent,
     UserhomeComponent,
     ProfilecomplateComponent,
     PaymentComponent,
-    ProjectComponent,
-    ChatComponent,
+    ProjectComponent
   ],
   imports: [
     SharedModule,
@@ -49,7 +46,6 @@ import { ChatComponent } from './chat/chat.component';
     ReactiveFormsModule,
     MatNativeDateModule,
     NgCircleProgressModule.forRoot({
-      // set defaults here
       radius: 100,
       outerStrokeWidth: 8,
       innerStrokeWidth: 6,

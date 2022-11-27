@@ -1,3 +1,4 @@
+import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { SpContributionsComponent } from './sp-contributions/sp-contributions.component';
@@ -34,6 +35,8 @@ const routes: Routes = [
       { path: 'spmanagementHome', component: SpHomeComponent },
       { path: 'dashboard', component: SpDashBoardComponent },
       { path: 'messages', component: SpMessagesComponent },
+      { path: 'chat', component: ChatComponent },
+
       { path: 'offers', component: SpPriceOffersComponent },
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'profile', component: SpProfileComponent },

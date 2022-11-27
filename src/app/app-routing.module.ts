@@ -1,3 +1,5 @@
+import { ChatComponent } from './@shared/components/chat/chat.component';
+
 import { LandingComponent } from './@shared/components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,15 +21,10 @@ const routes: Routes = [
 
   {
     path: 'Admin',
-
     loadChildren: () =>
       import('./administration/administration.module').then(
         (m) => m.AdministrationModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Admin',
-    // },
   },
   {
     path: 'Spmanagement',
@@ -35,10 +32,6 @@ const routes: Routes = [
       import('./spmanagement/spmanagement.module').then(
         (m) => m.SPmanagementModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Service provider',
-    // },
   },
   {
     path: 'usermanagement',
@@ -46,10 +39,6 @@ const routes: Routes = [
       import('./usermanagement/usermanagement.module').then(
         (m) => m.UsermanagementModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Client',
-    // },
   },
   { path: '**', component: NotFoundComponent },
 ];

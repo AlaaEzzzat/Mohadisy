@@ -128,12 +128,6 @@ export class UserPriceOffersComponent implements OnInit {
         if (this.offersOfSelectedProject.length > 0) {
           this.selectedOffer = this.offersOfSelectedProject[0];
           this.selectedOfferId = this.offersOfSelectedProject[0]?.id;
-          /* this.getMilestonse(this.selectedOfferId);
-          this.selectedOffer.milestones.map((mile: any) => {
-            if (mile.requiredWorkId) {
-              this.getrequireWork(mile.requiredWorkId);
-            } 
-          }); */
           if (this.selectedOffer.organizationalServiceProviderProfileId) {
             this.clientService
               .getOfferSender(
@@ -154,14 +148,6 @@ export class UserPriceOffersComponent implements OnInit {
         }
       });
   }
-  /* getRequirName(reqId:any){
-    this.requiredWorks.map((req:any)=>{
-      if(req.id == reqId){
-        console.log(req)
-        return req.name;
-      }
-    })
-  } */
   requiredWorks:any=[];
   getrequireWork(reqId: any) {
     this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {

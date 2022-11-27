@@ -20,8 +20,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [AppComponent ],
   
   imports: [
-CalendarModule,
-SharedModule,
+    CalendarModule,
+    SharedModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AccountModule,

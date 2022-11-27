@@ -1,3 +1,4 @@
+import { ChatComponent } from './components/chat/chat.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -27,6 +28,7 @@ const routes: Routes = [
     NavbarComponent,
     CalendarComponent,
     LandingComponent,
+    ChatComponent
   ],
   imports: [
     MatMenuModule,
@@ -49,6 +51,7 @@ const routes: Routes = [
     SplitNameByCommaPipe,
     NavbarComponent,
     CalendarComponent,
+    ChatComponent
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
