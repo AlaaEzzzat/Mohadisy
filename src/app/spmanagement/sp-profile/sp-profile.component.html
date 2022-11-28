@@ -14,7 +14,7 @@
 
             </div>
             <div class="col-lg-7 mt-3">
-              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.postalCode}}</p>
+              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumber}}</p>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
           </p>
           <p class="info-sp mt-2">
             <i class="fa fa-envelope-open-o"></i>
-            sara12345@gmail.com
+            {{profile?.email}}
           </p>
 
           <div class="row">
@@ -91,7 +91,7 @@
                 <div class="row">
                   <div class="col-lg-12 card acc-card mt-1">
                     <div class="row">
-                      <div class="col-lg-9">saraghazy@gmail.com</div>
+                      <div class="col-lg-9">{{profile?.email}}</div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1"></i>
                       </div>
@@ -246,11 +246,11 @@
                     <ng-container *ngIf="registeration3==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn" (click)="getPdf(profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath)
-                          ">
+                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn" target="_blank"
+                          >
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
@@ -288,10 +288,10 @@
                     <ng-container *ngIf="registeration4==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <a class="btn" target="_blank" href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
 
@@ -393,7 +393,7 @@
               </h5>
             </div>
             <div class="col-lg-4">
-              <div class="padge ">45</div>
+              <div class="padge ">{{ServiceProviderWork?.length}}</div>
             </div>
           </div>
         </div>
@@ -427,7 +427,7 @@
               </h5>
             </div>
             <div class="col-lg-4">
-              <div class="padge">4/5</div>
+              <div class="padge">{{avgRate}}/5</div>
             </div>
           </div>
         </div>
@@ -439,7 +439,39 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
-        <h4>جدول أعمالك</h4>
+        <div class="row">
+          <div class="col-lg-4">
+            <h4>جدول أعمالك</h4>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-6">
+                <a class="btn" style="color:#18AF9A;">
+                  اضافه حدث
+                  <i class="fa fa-calendar"></i>
+                </a>
+              </div>
+
+              <div class="col-lg-6 mt-2" >
+                <p style="font-size: 18px; color: #64748B; font-weight: 500;">7 ابريل , 2022</p>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <div class="col-lg-4">
+            <a href="" class="btn" style="color:#18AF9A; margin-right:65%; font-family:'Cairo' ;">
+               تعديل
+              <i class="fa fa-edit"></i>
+            </a>
+          </div>
+
+        </div>
+
       </div>
 
       <div class="col-lg-5 mt-2">

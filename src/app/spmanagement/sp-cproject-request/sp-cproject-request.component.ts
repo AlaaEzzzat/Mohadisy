@@ -79,7 +79,8 @@ export class SpCprojectRequestComponent implements OnInit {
     if(this.Listprojects.length>0)
     this.result=1;
 
-    this.showData(this.select);
+
+    console.log(this.Listprojects);
 
     });
 
@@ -109,7 +110,6 @@ export class SpCprojectRequestComponent implements OnInit {
       if(project.id==this.select)
       {
         this.selectProject=project;
-        console.log(this.selectProject);
 
         break;
       }
@@ -308,7 +308,7 @@ export class SpCprojectRequestComponent implements OnInit {
 
 
       this.addmaterial=this.addmaterial.filter(data=>data.id!=materialId);
-      console.log(this.addmaterial);
+     
 
      }
 
@@ -416,7 +416,7 @@ export class SpCprojectRequestComponent implements OnInit {
          }
 
 
-         console.log(AllData);
+         //console.log(AllData);
 
          this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
          {

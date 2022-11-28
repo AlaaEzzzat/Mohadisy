@@ -27,6 +27,7 @@ export class SpProfileComponent implements OnInit {
   registeration4:any=0;
   workFile:any;
   index:number=0;
+  avgRate:number=0;
 
 
   constructor(
@@ -55,6 +56,22 @@ export class SpProfileComponent implements OnInit {
         this.representative=data.data;
 
       });
+
+
+       this.api.get("https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus").subscribe(data=>
+        {
+          var rate=data.data.testimonials;
+
+          console.log(rate);
+          for(let i=0;i<rate.length;i++)
+          {
+           this.avgRate+=Number(rate[i].stars);
+
+          }
+
+          this.avgRate/=(rate.length);
+        }
+        );
 
   }
 
