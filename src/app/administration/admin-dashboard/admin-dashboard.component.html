@@ -244,29 +244,29 @@
         <div class="col-12  d-flex  justify-content-between align-items-center mt-3">
           <div class="d-flex flex-column">
           <div class=" badge circle E9CCF2 p-2  text-center" >
-            <p class="text-center my-2">{{projects?.newProjectsNumber | number}}</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projects?.newProjectsCost | number}}</p>
-          </div>                <small class="text-center ">جديد</small>
+            <p class="text-center my-2">{{projects?.currentProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.currentProjectsCost | number}}</p>
+          </div>                <small class="text-center ">حالي</small>
 
           </div>
           <div class="d-flex flex-column">
           <div class="badge circle E9CCF2 p-2 text-center " >
-            <p class="text-center my-2">{{projects?.acceptedProjectsNumber | number}}</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projects?.acceptedProjectsCost | number}}</p>
+            <p class="text-center my-2">{{projects?.finishedProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.finishedProjectsCost | number}}</p>
           </div>
-          <small class="text-center ">مقبول</small>
+          <small class="text-center ">منتهي</small>
         </div>
           <div class="d-flex flex-column">
           <div class="badge circle E9CCF2 p-2 text-center" >
-            <p class="text-center my-2">  {{projects?.notCompletedProjectsNumber | number}}</p> <hr class="m-0 "/>
-            <p class="text-center mt-2"> {{projects?.notCompletedProjectsCost | number}}</p>
-          </div>                <small class="text-center ">غير مكتمل</small>
+            <p class="text-center my-2">  {{projects?.pendingProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2"> {{projects?.pendingProjectsCost | number}}</p>
+          </div>                <small class="text-center ">معلق </small>
         </div>
           <div class="d-flex flex-column">
           <div class="badge circle  E9CCF2 p-2 text-center " >
-            <p class="text-center my-2">{{projects?.rejectedProjectsNumber | number}}</p> <hr class="m-0 "/>
-            <p class="text-center mt-2">{{projects?.rejectedProjectsCost | number}}</p>
-          </div>                <small class="text-center ">مرفوض</small>
+            <p class="text-center my-2">{{projects?.stoppedProjectsNumber | number}}</p> <hr class="m-0 "/>
+            <p class="text-center mt-2">{{projects?.stoppedProjectsCost | number}}</p>
+          </div>                <small class="text-center ">متوقف</small>
         </div>
           
           
@@ -494,7 +494,7 @@
               style="width: 100px; border-radius: 50%"
             />
             <div style="color: #1a5f78">
-              <h3>{{costs}}</h3>
+              <h3>20000</h3>
 
               <b > أرباح سنويه </b>
             </div>
@@ -537,13 +537,13 @@
     <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
       <!-- card -->
       <div *ngFor="let item of admins" class=" bg-white rounded-0  d-flex flex-lg-row flex-column justify-content-between align-items-start  mb-2 col-12 px-4 py-3">
-        <div class="col-3 ">
+        <!-- <div class="col-3 ">
           <img class="w-50" src={{item?.adminProfile?.profilePicturePath}} >
-        </div>
-        <div class=" col-9  d-flex flex-column justify-content-evenly align-items-start ">
+        </div> -->
+        <div class=" col-12  d-flex flex-column justify-content-evenly align-items-start ">
           <div class="w-100 d-flex flex-row justify-content-between align-items-center ">
             <p class="h6 text-gary col-10"> {{ item?.userName}}</p>
-            <p class="h6  main-color col-2 text-start" *ngFor="let items of item.roles"> {{items?.arabicName}}</p>
+            <p class="h6  main-color col-2 text-start"> {{item?.applicationRole?.arabicName}}</p>
           </div>
         <p>{{ item?.email }}</p>
         <p>{{ item?.phoneNumber }}</p>
@@ -574,23 +574,23 @@
                   <p class="col-12 text-end"><small class="premary-color"> اسم المشروع : </small> <small>{{itemC.name}} </small></p>
 
                 </div>
-                <div class="col-4">
+                <!-- <div class="col-4">
                   <div class="position-relative col-12" >
-            <ng-container *ngIf="itemC.offers.length>0">
-                    <mat-progress-spinner
+                  <ng-container *ngIf="itemC.offers.length>0">
+                    <mat-progress-spinner 
                     class="example-margin"
                     
                     [color]="color"
                     [mode]="mode"
-                    [value]=percentage[0]
+                    [value]=test
                    >
                    
                 </mat-progress-spinner>
-                <h6  id="progress">{{percentage[0]}}%</h6>
+                <h6  id="progress">{{test}}%</h6>
               </ng-container>
               </div>
                 
-                </div>
+                </div> -->
           </div>
         </div>
         </div>
@@ -650,7 +650,22 @@
         <!-- </mat-card> -->
       </div>
       <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
-        <p class="fw-bold pt-3"> {{selected | date:'d/M/yyyy' }}</p>
+        <p class="fw-semibold pt-3"> {{selected| date:'d/M/yyyy' }}</p>
+      </div>
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <p class="fw-semibold pt-3 main-color d-flex justify-content-between"> {{appointments?.name}} <small class="fw-normal">{{appointments?.dateCreated | date:'d/M/yyyy' }}</small> </p>
+        <p class="fw-normal "> {{appointments?.description}}</p>
+
+        <div *ngFor="let item of appointmentFiles">
+            <p class=""><span><img src="assets/dashboard/picture.png" alt="" *ngIf="item.fileType==='.png'||item.fileType==='.jpg'||item.fileType==='.svg'" > <img src="assets/dashboard/pdf.png" *ngIf="item.fileType==='.pdf'"> </span> <span>   {{item.fileName}}</span></p>
+        </div>
+      </div>
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <p class="fw-semibold pt-3" style="color: #4B4A4A;"> تم دخول {{usernames}} الى المنصه الساعه  <span class="main-color">11:20 am</span></p>
+
+      </div>
+      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
+        <p class="pt-3"> <img src="assets/dashboard/add.png" class="ms-2"> <span style="color: #C7C7C7;"> اضافه حدث الى هذا اليوم</span> </p>
 
       </div>
     </div>
@@ -684,10 +699,15 @@
                   <div class="card-body text-center">
                     <p class="card-title fs-6">{{item.userName}}</p>
                     <div class="d-flex flex-row justify-content-center">
+                         <span class="ps-1" > {{item.stars}}/5</span>
+                         <!-- <mat-icon class="align-text-bottom text-warning">star</mat-icon>  -->
+                         <mat-icon style="color: #F3D720 ;"class="align-text-bottom">star</mat-icon>
 
-                         <span class="ps-1" >{{item.stars}}/5</span>
-            <mat-icon class="align-text-bottom text-warning">star</mat-icon> 
+                       
                     </div>
+                    <!-- <span *ngFor="let star of starList">
+                      <i class="{{star}}"></i>
+                    </span> -->
                     
                   </div>
                 </div>
@@ -903,6 +923,9 @@
                 <div *ngIf="f['Password'].errors['minlength']">
                    من فضلك ادخل كلمة المرور اكبر من 10
                 </div>
+                <div *ngIf="f['Password'].errors['pattern']">
+                  من فضلك ادخل كلمة المرور  بها A-z و [$ @ $ ! % * ? &]
+               </div>
               </div>
             </div>
           </div>
@@ -931,3 +954,5 @@
 
 
 
+
+<div id="toast-container" class="toast-bottom-right toast-container"></div>

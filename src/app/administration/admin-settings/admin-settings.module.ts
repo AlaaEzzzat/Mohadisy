@@ -5,6 +5,7 @@ import { AdminSettingProfileComponent } from './admin-setting-profile/admin-sett
 import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatButtonModule} from '@angular/material/button';
 
 import { Routes ,RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
@@ -31,6 +32,7 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatIconModule,
     NgxPaginationModule,
+    MatButtonModule,
     RouterModule.forChild(routes)
   ]
 })

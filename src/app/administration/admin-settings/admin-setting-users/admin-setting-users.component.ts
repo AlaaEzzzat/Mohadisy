@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
-
+interface Ichecked{
+  "isActive": boolean,
+  "userId": string
+}
 @Component({
   selector: 'app-admin-setting-users',
   templateUrl: './admin-setting-users.component.html',
@@ -15,14 +18,16 @@ export class AdminSettingUsersComponent implements OnInit {
   usersNotActive: IusersNotAct[] = [];
   datasNotActive: any;
   page:any=1
+  checked :any;
+  changeStuseAcount !:Ichecked;
   constructor( private adminSettingsService: AdminSettingsService,) { }
 
   ngOnInit(): void {
-    this.getActiveUsers(this.state);
+    this.getActiveUsers();
     this.getNonActiveUsers();
   }
-  getActiveUsers(event:any) {
-    this.state=event
+  getActiveUsers() {
+    // this.state=event
     this.adminSettingsService.getActiveUsers().subscribe({
       next: (data) => {
         this.datas = data.data.activeUsers;
@@ -31,12 +36,7 @@ export class AdminSettingUsersComponent implements OnInit {
       },
     });
   }
-  handlePageChange(event: any) {
-    this.state = event;
-  }
-  // handlePageChangenot(event: any) {
-  //   this.page = event;
-  // }
+
   getNonActiveUsers() {
     this.adminSettingsService.getNonActiveUsers().subscribe({
       next: (data) => {
@@ -45,6 +45,42 @@ export class AdminSettingUsersComponent implements OnInit {
         console.log(this.datasNotActive);
       },
     });
+  }
+  changeAccountActivation(id:any,checked:boolean){
+    if(checked===false){
+      this.changeStuseAcount={
+        "isActive": true,
+        "userId": id
+      }
+      this.adminSettingsService.changeAccountActivation(this.changeStuseAcount).subscribe({error:(er)=>{
+        alert(er.message)
+      },
+      next:(correct)=>{
+        alert(correct.message)
+        this.getActiveUsers();
+        this.getNonActiveUsers();
+
+      }
+    })
+    }else{
+      this.changeStuseAcount={
+        "isActive": false,
+        "userId": id
+      }
+
+      this.adminSettingsService.changeAccountActivation(this.changeStuseAcount).subscribe({error:(er)=>{
+        alert(er.message)
+      },
+      next:(correct)=>{
+        alert(correct.message)
+        this.getActiveUsers();
+        this.getNonActiveUsers();
+
+      }
+    })
+    }
+   
+    console.log(this.changeStuseAcount)
   }
 }
 interface IuserAct {

@@ -1,13 +1,11 @@
 <div class="m-3 cairo">
-    <div
-      class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around cairo" 
-    >
+    <div class="d-flex flex-row mb-3 col-12 flex-xl-nowrap flex-wrap justify-content-around cairo" >
       <button
         [ngStyle]="{
           'background-color': newApi === 3 ? '#004958' : '#ffffff',
           color: newApi === 3 ? '#ffffff' : '#000000'
         }"
-        class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getCurrentProjects()"
       >
@@ -18,7 +16,7 @@
           'background-color': newApi === 4 ? '#004958' : '#ffffff',
           color: newApi === 4 ? '#ffffff' : '#000000'
         }"
-        class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getPendingProject()"
       >
@@ -29,7 +27,7 @@
           'background-color': newApi === 5 ? '#004958' : '#ffffff',
           color: newApi === 5 ? '#ffffff' : '#000000'
         }"
-        class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getFinishedProjects()"
       >
@@ -41,7 +39,7 @@
           'background-color': newApi === 6 ? '#004958' : '#ffffff',
           color: newApi === 6 ? '#ffffff' : '#000000'
         }"
-        class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getLateProjects()"
       >
@@ -52,7 +50,7 @@
           'background-color': newApi === 7 ? '#004958' : '#ffffff',
           color: newApi === 7 ? '#ffffff' : '#000000'
         }"
-        class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getStoppedProjects()"
       >

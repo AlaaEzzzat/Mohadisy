@@ -150,3 +150,18 @@ border: none!important;
   text-overflow:ellipsis;
  
 }
+.person{
+  select:focus {
+    outline: none !important;
+}
+}
+.active{
+  background-color: #004057;
+  color:#FFF;
+ .name{
+  color: #FFF;
+ }
+ .icon{
+  color: #FFF;
+ }
+}

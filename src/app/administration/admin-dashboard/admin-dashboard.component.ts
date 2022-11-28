@@ -51,7 +51,7 @@ error:any;
    pricequotes:any;
    projects:any;
    overview:any;
-   percentage:any[]=[]
+   percentage:any=new Set()
    milestonesData:any[]=[];
    test:any=0
    iProfileAdmin: any | undefined = undefined;
@@ -61,11 +61,18 @@ error:any;
    userdata:any
    iadminOfficialUserRegister!:IadminOfficialUserRegister
    admins:any[]=[]
+   appointments:any
+   appointmentFiles:any[]=[]
+   usernames: string ;
+  //  value = 0; //addition of .5
+  //  starList: string[] = [];
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder
     ) {
+      this.usernames= localStorage.getItem('name')?.replace(/"/g, '') || '';
       this.newAccountform = this.formbuilder.group({
         username: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(20),]],
-        Password: ['', [Validators.required,Validators.minLength(10)]], 
+        Password: ['', [Validators.required,Validators.minLength(10),
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{10,}')]], 
         email: ['',[Validators.required, Validators.email]],
         phoneNumber: ['', [Validators.required]],
         officialRoleId: ['', [Validators.required]]
@@ -73,7 +80,8 @@ error:any;
     this.visitorsNumber = 0;
   }
   ngOnInit() {
-    this.showUserDashboard()
+    // this.reve()
+    // this.showUserDashboard()
     this.getProfileAdmin() 
     this.currentProjectsForAdmin();
     this.http.adminDashboard().subscribe({
@@ -88,15 +96,19 @@ error:any;
         this.organizationalSP =this.overview.organizationalSP
         this.costs=Math.ceil(this.projects.acceptedProjectsCost * 0.01)
         this.chart = value.data.adminChart;
-
+        this.admins=value.data.officialUsers
         this.testimonials =value.data.testimonials
-        this.complaints=value.data.complaints
+        this.complaints=value.data.complaints;
+        this.appointments=value.data.appointments.latestAppointment;
+        this.appointmentFiles=this.appointments.appointmentFiles
+        console.log(this.appointmentFiles);
+
         this.renderDouChart();
         this.renderBarChart();
-        // for(let oneTestimonials of this.testimonials){
-        //   // this.objectTestimonials.push(oneTestimonials)
-        //   console.log(oneTestimonials.stars)
-        // }          
+        for(let oneTestimonials of this.testimonials){
+          this.objectTestimonials.push(oneTestimonials)
+          // console.log(oneTestimonials.stars)
+        }          
 
         
       },
@@ -122,7 +134,7 @@ error:any;
     return this.newAccountform.controls;
   }
  currentProjectsForAdmin(){
-
+  let i=0 
   this.http.getFinishedProjectsForAdmin(1).subscribe({
     next: (value) => {
       this.error=null
@@ -143,36 +155,44 @@ error:any;
        
         this. currentProjects=value.data.projects
         for(let x of this. currentProjects){
-          if(this.objectCurrentProjects.length<6){
+          if(this.objectCurrentProjects.length<5){
             this.objectCurrentProjects.push(x)
             
           }          
   
         }
         for(let item of this.objectCurrentProjects){
+          // console.log(item.offers.length)
+        //  console.log(item.offers)
+
           if(item.offers.length>0){
             for(let id of item.offers){
-              this.http.getMilestonesByOfferId(id.id).subscribe(((data)=>{
-                this.milestonesData=data.data
-                // console.log(this.milestonesData)
-                this.test =0
-                for(let miles of this.milestonesData){
-                  
+              this.http.getMilestonesByOfferId(id.id).subscribe({
+                error:(er)=>{
+                  // console.log(er);
+                },next:((data)=>{
+                  this.milestonesData=data.data
+                  // console.log(this.milestonesData)
+                  this.test =0
+                  for(let miles of this.milestonesData ){
+                 
                   // console.log(miles.isPaid)
-                  if(miles.isPaid){
-                    this.test += miles.percentage
-                    this.percentage.push(this.test)
+                    if(miles.isPaid){
+                      this.test += miles.percentage
+                    
+                     
+                    }
+
+  
                   }
-                  // console.log(this.percentage)
-
-                }
-
-              }))
+  
+                })
+              })
   
             }
           }else{
             let notOffer ="لايوجد عرض سعر"
-            console.log(notOffer)
+            // console.log(notOffer)
 
           }
          
@@ -314,6 +334,23 @@ error:any;
     alert(er.message)
   }})
  }
+//  reve(){
+//   for(let item of this.objectTestimonials){
+//     this.value=item.stars
+//   }
+//   let i=1;
+//     for(i=1; i<=5; i++) {
+//       if(i<= this.value) {
+//         this.starList.push("fas fa-star text-warning");
+//       } else if(i <= this.value+0.5) {
+//         this.starList.push("fas fa-star-half text-warning");
+//       } else {
+//         this.starList.push("far fa-star");
+//       }
+//     }
+//   }
+
+ 
 
 }
 

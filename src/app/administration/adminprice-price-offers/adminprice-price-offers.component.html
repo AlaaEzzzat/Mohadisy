@@ -1,13 +1,12 @@
 <div class="my-3 container-fluid">
-  <div
-    class="d-flex flex-row mb-3 col-12 flex-lg-nowrap flex-wrap justify-content-around cairo"
-  >
+  <div class="d-flex flex-row mb-3 col-12 flex-xl-nowrap flex-wrap justify-content-around cairo" >
+
     <button
       [ngStyle]="{
         'background-color': newApi === 1 ? '#004958' : '#ffffff',
         color: newApi === 1 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNewProjectsForAdmin()"
     >
@@ -18,7 +17,7 @@
         'background-color': newApi === 3 ? '#004958' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
       (click)="getNotCompletedProjectsForAdmin()"
     >
@@ -30,7 +29,7 @@
         color: newApi === 4 ? '#ffffff' : '#000000'
       }"
       (click)="getRejectedProjectsForAdmin()"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
     >
       عروض مرفوضة
@@ -40,7 +39,7 @@
         'background-color': newApi === 10 ? '#004958' : '#ffffff',
         'color': newApi === 10 ? '#ffffff' : '#000000'
       }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"      role="button"
+      class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       (click)="getUnderNegotiationProjects()"
     >
     عروض تحت التفاوض
@@ -52,7 +51,7 @@
         color: newApi === 6 ? '#ffffff' : '#000000'
       }"
       (click)="getAcceptedProjectsForAdmin()"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
     >
 عروض مكتمله    </button>
@@ -80,8 +79,8 @@
   >
     <div>العميل موجود بالفعل</div>
   </div>
-
-  <div  class="col-12 d-flex flex-row flex-wrap justify-content-between"  *ngIf="isProcessing; else undefind">
+<ng-container *ngIf="isProcessing; else undefind">
+  <div  class="col-12 d-flex flex-row flex-wrap justify-content-between" >
     <div class="col-md-4 col-12  position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
@@ -284,7 +283,7 @@
       </form>
     </div>
 
-    <div class="col-md-7 sizew col-12 flex-row">
+    <div class="col-md-7 sizew col-12 flex-row" *ngIf="newApi != 10; else underNegotiationProjects" >
       <div class="col-12 card mb-3 border-0 rounded-0 px-3">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-lg-2 col-sm-3">
@@ -636,16 +635,56 @@
         </div>
       </div>
     </div>
+
+    <ng-template #underNegotiationProjects>
+    
+         
+          <div class="col-md-7 sizew col-12 flex-row">
+            <!-- <div *ngIf="offersOfSelectedProject.length > 0 && !showProjectProfile"> -->
+              <div>
+              <div style="cursor: pointer"
+                class="person p-3 d-flex mb-3 active text-white w-100">
+                <div class="w-50">مقدم الطلب : </div>
+                <select
+                  class="active"
+                  style="width: 90%; color: #fff; border: 0"
+                  name="offers"
+                  id="offers"
+                  [(ngModel)]="selectedOfferId"
+                >
+                  <ng-container
+                    *ngFor="let offer of offersOfSelectedProject; let i = index"
+                  >
+                    <option [value]="offer.id" class="active text-white">
+                      {{
+                        offer.offerSender?.companyName
+                          ? offer.offerSender?.companyName
+                          : offer.offerSender?.firstName +
+                            " " +
+                            offer.offerSender?.lastName
+                      }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+             
+            
+        </div>
+        </div> 
+    
+    </ng-template>
   </div>
 
+  
+</ng-container>
   <ng-template #undefind>
-    <div
+    <!-- <div
       class="alert alert-danger d-flex align-items-center"
       role="alert"
       *ngIf="!isProcessing"
     >
       <div>حاليا لايوجد عروض</div>
-    </div>
+    </div> -->
   </ng-template>
 </div>
 
@@ -881,6 +920,126 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           لا
         </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- new -->
+<!-- <div *ngIf="showModal" class="overlay p-5">
+  <div class="img-popup p-5">
+    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+      >&times;</a
+    >
+    <div *ngIf="modalSrc" id="mymModal" class="mmodal">
+      <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
+      <div id="caption"></div>
+    </div>
+    <div *ngIf="!modalSrc" id="mymModal" class="mmodal">
+      <div id="caption" class="p-3 bg-white">
+        <table class="table bg-white p-2" >
+          <thead>
+            <tr>
+              <th class="" scope="col">الدفعة</th>
+              <th scope="col">المرحلة</th>
+              <th scope="col">التكلفه</th>
+              <th scope="col">التاريخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="
+                let milestone of projectMilestons;
+                let i = index
+              "
+            >
+              <tr>
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid
+                        ? '#18AF9A'
+                        : '#EE9C0F'
+                    }"
+                    class="bold"
+                    >الدفعه ({{ i + 1 }}) :
+                  </span>
+                </td>
+
+                <td>
+                  <div
+                    class="mb-2"
+                    *ngIf="milestone.isFirstMilestone"
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة مقدمه
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="milestone.isLastMilestone"
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة بعد الإنتهاء
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="
+                      !milestone.isLastMilestone &&
+                      !milestone.isFirstMilestone
+                    "
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid
+                          ? '#18AF9A'
+                          : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      {{
+                        requiredWorksNames(milestone.requiredWorkId)
+                      }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid
+                        ? '#18AF9A'
+                        : '#EE9C0F'
+                    }"
+                    >{{ milestone.cost }} ريال</span
+                  >
+                </td>
+                <td>
+                  <div
+                    class="text-dark bold"
+                    *ngIf="milestone.isPaid"
+                  >
+                     {{ getDate(milestone.paidDate) }}
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>

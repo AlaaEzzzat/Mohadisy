@@ -63,7 +63,7 @@ export class AdminSettingsService {
 
   changeAccountActivation(id:any):Observable<any>
   {
-    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Account/changeAccountActivation`,JSON.stringify(id), this.httpoptions).pipe(retry(3),catchError((err)=>{
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Account/changeAccountActivation`,JSON.stringify(id), this.httpoptions).pipe(retry(2),catchError((err)=>{
       return throwError(()=>{
         return new Error('Error occured please try again.')
 
