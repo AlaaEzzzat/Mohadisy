@@ -124,17 +124,6 @@
                     </div>
                   </div>
 
-
-                  <div class="col-lg-12 card acc-card mt-1">
-                    <div class="row">
-                      <div class="col-lg-9">
-                        الدخل الشنوى : 20,000 ريال سعودى
-                      </div>
-                      <div class="col-lg-3">
-                        <i class="fa fa-edit mx-3 mt-1"></i>
-                      </div>
-                    </div>
-                  </div>
                 </div>
             </div>
 
@@ -157,7 +146,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الرخص التجاريه
+                      الهويه
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration1==1">
@@ -175,7 +164,7 @@
                     <ng-container *ngIf="registeration1==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <button class="btn" >
                             <i class="fa fa-eye"></i>
                             فتح
                           </button>
@@ -198,7 +187,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الرخص التجاريه
+                    العضويه
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration2==1">
@@ -239,7 +228,7 @@
                   <div class="row">
                     <div class="col-lg-9 " style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الرخص التجاريه
+                      السجل التجارى
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration3==1">
@@ -257,13 +246,12 @@
                     <ng-container *ngIf="registeration3==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <button class="btn" (click)="getPdf(profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath)
+                          ">
                             <i class="fa fa-eye"></i>
                             فتح
                           </button>
                         </li>
-
-                
 
                         <li>
                          <button class="btn">
@@ -282,7 +270,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الرخص التجاريه
+                      الرخصه
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration4==1">
@@ -318,6 +306,7 @@
                     </ng-container>
                   </div>
                 </div>
+
               </div>
           </div>
 
@@ -556,7 +545,7 @@
             <h4>المشاريع السابقه</h4>
           </div>
           <div class="col-lg-3">
-            <a href="" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
+            <a href="/Spmanagement/prevWorks" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
               اضافه مشروع
               <i class="fa fa-plus-square"></i>
             </a>
@@ -603,17 +592,25 @@
               <ng-container *ngIf="infoProject[project.id]==1">
                 <ul class="card">
                   <li>
-                    <button class="btn">
+                    <button class="btn w-100" type="button" (click)="projectImage(project.id)"
+                    data-bs-toggle="modal"  [attr.data-bs-target]="'#project'+project.id"
+                    >
+                     <p style="padding-left:50% ;">
                       <i class="fa fa-eye"></i>
-                      فتح
+                      فتح</p>
+
                     </button>
                   </li>
 
                   <li>
-                   <button class="btn">
+
+                   <a class="btn w-100" href="/Spmanagement/prevWorks">
+                    <p style="padding-left:50% ;">
                     <i class="fa fa-edit"></i>
                     تعديل
-                   </button>
+                    </p>
+                   </a>
+
                   </li>
                 </ul>
               </ng-container>
@@ -624,6 +621,57 @@
           </div>
         </div>
       </div>
+
+
+      <div class="modal fade "  [id]="'project'+project.id" >
+        <div class="modal-dialog  modal-xl " >
+
+          <button type="button" class="close btn" data-bs-dismiss="modal"
+          style="font-size: 40px; color:gainsboro; "
+          >
+            <i>&times;</i>
+          </button>
+
+          <div class="modal-content w-100 border-0" style="background-color:transparent;">
+            <div class="modal-body ">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <ng-container *ngFor="let file of workFile ; let i=index;">
+                    <div *ngIf="i==0" class="carousel-item active">
+
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                    <div *ngIf="i!=0" class="carousel-item">
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                  </ng-container>
+                </div>
+
+              </div>
+
+            </div>
+
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
       </ng-container>
 
 
@@ -635,3 +683,8 @@
 
 
 </div>
+
+
+
+
+

@@ -25,6 +25,9 @@ export class SpProfileComponent implements OnInit {
   registeration2:any=0;
   registeration3:any=0;
   registeration4:any=0;
+  workFile:any;
+  index:number=0;
+
 
   constructor(
     private provider: ProviderServiceService,
@@ -42,7 +45,7 @@ export class SpProfileComponent implements OnInit {
 
       this.api.get("https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorks").subscribe(data=>
       {
-        //console.log(data);
+        console.log(data);
         this.ServiceProviderWork=data.data;
 
       });
@@ -58,6 +61,18 @@ export class SpProfileComponent implements OnInit {
 
 
 
+  projectImage(workId:any)
+  {
+    this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
+    {
+      this.workFile=data.data;
+      console.log(workId);
+      console.log(data);
+
+    });
+  }
+
+
 
   toggle(projectId:number)
   {
@@ -69,6 +84,14 @@ export class SpProfileComponent implements OnInit {
 
   }
 
+  getPdf(url:any)
+  {
+    /*var blob = new Blob([url], {type: 'application/pdf'});
+
+     var blobURL = URL.createObjectURL(blob);
+     console.log(blobURL);
+     window.open(blobURL);*/
+  }
 
   register_1()
   {
