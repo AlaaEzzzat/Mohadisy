@@ -21,6 +21,9 @@ export class SpProjectRequestAllComponent implements OnInit {
    documents:Array<any>=[];
    descDocument:Array<any>=[];
    page:number=1;
+   result:number=0;
+   totalpages: any = 0;
+  pages:Array<any>=[];
 
   constructor(private api:ApiService) { }
 
@@ -28,6 +31,12 @@ export class SpProjectRequestAllComponent implements OnInit {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
     this.Listprojects=data.data.priceQuotes;
+    this.totalpages=data.data.totalPages;
+    for(let i=1;i<=this.totalpages;i++)
+      this.pages.push(i);
+    if(this.Listprojects.length>0)
+      this.result=1;
+
 
     });
 
@@ -130,6 +139,10 @@ export class SpProjectRequestAllComponent implements OnInit {
 
 
 
+     downloadFile(id:any,file:any)
+     {
+
+     }
 
 
      changepage(e:any)

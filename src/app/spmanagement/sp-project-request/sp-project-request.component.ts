@@ -27,6 +27,8 @@ export class SpProjectRequestComponent implements OnInit {
   Precentage:Array<number>=[];
   WorkId:Array<number>=[];
   check:any=true;
+  totalpages: any = 0;
+  pages:Array<any>=[];
 
   constructor(private api:ApiService,private router:Router)
   {
@@ -35,7 +37,7 @@ export class SpProjectRequestComponent implements OnInit {
       period:new FormControl('',[Validators.required]),
       cost:new FormControl('',[Validators.required]),
       numberOfMilestones:new FormControl('',
-     [Validators.required,Validators.max(6)]),
+     [Validators.required,Validators.max(6),Validators.min(1)]),
       message:new FormControl(''),
       projectId:new FormControl('',[Validators.required]),
       tcost:new FormControl(''),
@@ -53,6 +55,9 @@ export class SpProjectRequestComponent implements OnInit {
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
+    this.totalpages=data.data.totalPages;
+   for(let i=1;i<=this.totalpages;i++)
+    this.pages.push(i);
     this.SelectIdProject();
 
     });
@@ -216,6 +221,8 @@ export class SpProjectRequestComponent implements OnInit {
 
   }
 
+ 
+
   onSubmit()
   {
 
@@ -232,7 +239,7 @@ export class SpProjectRequestComponent implements OnInit {
           {
             "cost":this.totalcostMilestone[i],
             "percentage":(Number)(this.Precentage[i]),
-            "requiredWorkId":null,
+            "requiredWorkId":1,
             "isFirstMilestone":true,
             "isLastMilestone": false,
             "message":this.OfferData.get('message').value
@@ -246,7 +253,7 @@ export class SpProjectRequestComponent implements OnInit {
           { 
             "cost":this.totalcostMilestone[i],
             "percentage":(Number)(this.Precentage[i]),
-            "requiredWorkId": null,
+            "requiredWorkId": 1,
             "isFirstMilestone":false,
             "isLastMilestone": true,
             "message":this.OfferData.get('message').value
@@ -279,12 +286,11 @@ export class SpProjectRequestComponent implements OnInit {
       "milestonesPercentages":Allprecentage
     }
 
-    console.log(checkData);
+
 
 
      this.api.postJson("https://app.mohandisy.com/api/Offer/validateCostAndPeriod",checkData).subscribe(data=>
       {
-        console.log(data.isError);
         this.check=data.isError;
       });
 
@@ -307,8 +313,6 @@ export class SpProjectRequestComponent implements OnInit {
         "ContractorCommitments":null
 
       }
-
-      console.log(AllData);
 
 
       this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(

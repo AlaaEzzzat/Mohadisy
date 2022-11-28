@@ -7,53 +7,84 @@
 
 <div class="section-2 mt-2">
   <div class="row">
-    <div class="col-3">
+    <div class="col-lg-3">
       <div class="row">
 
-        <ng-container *ngFor="let project of Listprojects |
-          paginate: {itemsPerPage:5, currentPage: page }"
-        >
-          <ng-container *ngIf="this.select==project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+        <ng-container *ngFor="let project of Listprojects">
+          <ng-container *ngIf="select==project.id">
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
               <p><i class="far fa-building "></i>
-                <span> اسم المشروع :{{project.name}}</span>
-                <a class="btn text-success">(مشروع استشارى)</a>
+                <span> اسم المشروع :{{project.name}}
+                  <a class="btn">(مشروع استشارى)</a>
+                </span>
               </p>
               <p><i class="fa fa-location-dot "></i>
-               العنوان: {{project.district?.nameAr}},{{project.district.city?.nameAr}},
-                {{project.district.city.region?.nameAr}} </p>
-              <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+                العنوان: {{project.district?.nameAr}},{{project.district.city?.nameAr}},
+                 {{project.district.city.region?.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
             </div>
           </ng-container>
 
 
           <ng-container *ngIf="this.select!=project.id">
-            <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:white;  color:#004057;">
               <p><i class="far fa-building "></i>
-                <span> اسم المشروع :{{project.name}}
-                  <a class="btn text-success">(مشروع استشارى)</a>
+                <span> اسم المشروع :{{project?.name}}
+                  <a class="btn">(مشروع استشارى)</a>
                 </span>
-
               </p>
               <p><i class="fa fa-location-dot "></i>
-                العنوان: {{project.district?.nameAr}},{{project.district.city?.nameAr}},
-                 {{project.district.city.region?.nameAr}} </p>
-              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.dateCreated}}</p>
+                العنوان: {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                 {{project.district?.city?.region?.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
             </div>
           </ng-container>
 
         </ng-container>
 
 
-        <div class="paginate mt-4" *ngIf="result==1">
-          <pagination-controls (pageChange)="changepage($event)"
-          previousLabel="السابق"
-          nextLabel="التالى"
-          >
-          </pagination-controls>
-        </div>
+        <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
+          <ul class="pagination">
+
+            <ng-container *ngIf="page==1">
+            <li class="page-item disabled">
+              <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+             <ng-container *ngIf="page!=1">
+              <li class="page-item">
+                <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+              </li>
+              </ng-container>
+
+            <ng-container *ngFor="let p of pages">
+              <ng-container *ngIf="page==p">
+                <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+              </ng-container>
+
+              <ng-container *ngIf="page!=p">
+                <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+              </ng-container>
+
+            </ng-container>
+
+            <ng-container *ngIf="page==pages.length">
+            <li class="page-item disabled">
+              <button class="page-link btn p-1 px-3">التالى</button>
+            </li>
+           </ng-container>
+
+           <ng-container *ngIf="page!=pages.length">
+            <li class="page-item">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+            </li>
+           </ng-container>
+
+          </ul>
+        </nav>
 
       </div>
 
@@ -62,20 +93,20 @@
 
     <!------------------------------------>
 
+    <ng-container *ngIf="select!=0">
     <div class="col-lg-6 mt-4 mb-3 section-3">
       <div class="row">
         <div class="col-lg-12 info">
           <div class="card card-infoP">
             <div class="row">
-              <div class="col-lg-2">
-              <img src="https://www.hiamag.com/sites/default/files/styles/1000xauto/public/article/12/10/2021/xuin10-245131782_1548489262169588_3010436186952909049_n.jpg?itok=jXkdBBx3" alt="image" >
+              <div class="col-lg-3">
+              <img src="{{selectProject.clientProfile.profilePicturePath}}" alt="image" >
               </div>
 
-              <div class="col-lg-7 mt-3">
-                <p>
-                 ساره عبدالعزيز عبدالحكيم
+              <div class="col-lg-5  mt-4">
+                <p>{{selectProject.clientProfile.firstName}}
+                  {{selectProject.clientProfile.lastName}}
                 </p>
-                <p>Sara AbdElaziz AbdElahkim</p>
               </div>
 
               <div class="col-lg-3 mt-4">
@@ -95,8 +126,18 @@
           <div class="card card-2">
             <div class="row">
               <div class="col-lg-12 pt-4 px-4 pb-5 content-prec text-center">
-                <div class="precent">60%</div>
-                 <p class="mt-3">تم الانتهاء من اربع مراحل خلال المشروع
+                <circle-progress
+                [percent]="calcPrecentage"
+                [radius]="50"
+                [outerStrokeWidth]="10"
+                [innerStrokeWidth]="8"
+                [outerStrokeColor]="'#18af9a'"
+                [innerStrokeColor]="'#C7E596'"
+                [animation]="true"
+                [animationDuration]="300"
+                title="{{calcPrecentage}}%"
+              ></circle-progress>
+                 <p class="mt-3">{{statusStage}}
                 </p>
               </div>
             </div>
@@ -106,117 +147,110 @@
         <div class="col-lg-8 mt-2">
           <div class="row">
 
-            <div class="col-lg-12 mt-1">
-              <h2 class="card">
-                <button class="btn btn-accordion w-100 acc" type="button"
-                data-target="#item2" data-toggle="collapse" >المرحله الاولى
-                <i class="fas fa-angle-down"></i>
-              </button>
-              </h2>
-              <div class="card mt-2 card-2-1">
-              <div id="accordion">
-              <div class="collapse hide" id="item2" data-parent="#accordian">
-               <p>مشروع مشروع مشروع مشروع مشروع مشروع مشروع مشروع
-                 مشروع مشروع مشروع مشروع مشروع</p>
-
-                 <div class="row">
-                  <div class="col-lg-4">
-                   <p><i class="fa fa-file-pdf-o" style="color:red;"></i>اسم الملف</p>
-                  </div>
-                  <div class="col-lg-3">
-                    <p><i class="fa-solid fa-image" style="color:green;"></i> صوره للموقع</p>
-                  </div>
-
-                  <div class="col-lg-5">
-                    <a href="">تعديل</a>
-                    <span>| </span>
-                    <a href="">انهاء المرحله</a>
-                    <span> | </span>
-                    <a href="">تعليق</a>
-                  </div>
-                 </div>
-              </div>
-
-              </div>
-
-            </div>
-             </div>
-
-
+            <ng-container *ngFor="let stage of Allstages ; let i=index;">
              <div class="col-lg-12 mt-1">
               <h2 class="card">
                 <button class="btn btn-accordion w-100 acc" type="button"
-                data-target="#item3" data-toggle="collapse" >المرحله الثانيه
+                (click)="toggleStage(stage.id)" >
+                {{nameStage[i]}}
                 <i class="fas fa-angle-down"></i>
               </button>
               </h2>
-              <div class="card mt-2">
-              <div id="accordion">
 
-              <div class="collapse hide" id="item3" data-parent="#accordian">
-                <form action="">
-                  <div class="card-3">
-                      <div class="row">
 
-                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+                <div class="card mt-2 card-2-1">
+                  <div id="accordion">
+                    <ng-container *ngIf="togglestage[stage.id]==1">
+                  <div class="pt-3 pb-3 ">
 
-                        <div class="col-12 form-group mt-3">
-                          <textarea name="" id=""  name="message"
-                          formControlName="message"
-                          placeholder="الرساله"></textarea>
+                    <p>{{selectProject?.subject}}</p>
+
+                     <div class="row mt-2 text-center">
+                      <div class="col-lg-6 mt-2">
+                       <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; margin-left: 3%;"></i>اسم الملف</a>
+                      </div>
+                      <div class="col-lg-6 mt-2">
+                        <a href=""><i class="fa-solid fa-image" style="color:green;"></i> صوره للموقع</a>
+                      </div>
+
+                      <div class="col-lg-12 px-2 mt-2" style="font-size:14px ;">
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <button class="btn" type="button">تعديل </button>
+                            <span style="margin-right: 5%;"> | </span>
+                          </div>
+
+                          <div class="col-lg-4">
+                            <button class="btn" type="button" (click)="finished(stage.id)">انهاء مرحله</button>
+                            <span style="margin-right: 2%;"> | </span>
+                          </div>
+
+                          <div class="col-lg-4">
+                            <ng-container *ngIf="stage.milestoneStatusId==2">
+                              <button class="btn"  type="button"
+                            data-bs-toggle="modal" data-bs-target="#staticBackdrop">تعليق</button>
+                            </ng-container>
+
+                            <ng-container *ngIf="stage.milestoneStatusId!=2">
+                              <button class="btn"  type="button"  disabled>تعليق</button>
+                            </ng-container>
+                            <!------------Start Modal------------->
+                            <div class="modal fade  mt-5" id="staticBackdrop" >
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                 <div class="modal-header">
+                                  <button type="button" class="btn" data-bs-dismiss="modal" >
+                                    <i class="far fa-circle-xmark"></i>
+                                  </button>
+                                 </div>
+
+
+                                 <form [formGroup]="Reason" onsubmit="onSubmit()">
+                                  <div class="modal-body">
+                                    <h4>اكتب سبب التعليق</h4>
+                                    <div class="form-group">
+                                      <textarea class="form-control mt-3" formControlName="reason"></textarea>
+                                    </div>
+
+                                  </div>
+                                  <div class="modal-footer">
+
+                                    <button type="submit" class="btn"
+                                    (click)="pending(stage.id)"
+                                    >ارسال</button>
+                                  </div>
+                                 </form>
+
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <!-------------End Modal-------------------->
+                          </div>
                         </div>
 
                       </div>
 
-                      <button type="submit" class="btn col-3 mt-4 mb-3">ارسال</button>
+                     </div>
+                  </div>
+
+                </ng-container>
 
                   </div>
-                  </form>
+
+                </div>
 
 
-              </div>
-              </div>
 
-            </div>
+
              </div>
 
-
-             <div class="col-lg-12 mt-1">
-              <h2 class="card">
-                <button class="btn btn-accordion w-100 acc" type="button"
-                data-target="#item4" data-toggle="collapse" >المرحله الثالثه
-                <i class="fas fa-angle-down"></i>
-              </button>
-              </h2>
-              <div class="card mt-2">
-              <div id="accordion">
-
-              <div class="collapse hide" id="item4" data-parent="#accordian">
-                <form action="">
-                  <div class="card-3">
-                      <div class="row">
-
-                        <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
-
-                        <div class="col-12 form-group mt-3">
-                          <textarea name="" id=""  name="message"
-                          formControlName="message"
-                          placeholder="الرساله"></textarea>
-                        </div>
-
-                      </div>
-
-                      <button type="submit" class="btn col-3 mt-4 mb-3">ارسال</button>
-
-                  </div>
-                  </form>
+            </ng-container>
 
 
-              </div>
-              </div>
 
-            </div>
-             </div>
+
 
           </div>
 
@@ -230,11 +264,9 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2">
             <div class="row">
-              <div class="col-12 p-2 content-1">
+              <div class="col-lg-12 p-2 content-1">
                 <h6>نبذه عن المشروع</h6>
-                <p>مشروع مشروع مشروعمشروعمشروعمشروعمشروعمشر
-                  مشروعمشروعمشروعمشروعمشروعمشروع
-                  وعمشروعمشروعمشروعمشروعمشروعمشروعمشروع
+                <p>{{selectProject?.subject}}
                 </p>
               </div>
             </div>
@@ -245,10 +277,10 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2">
             <div class="row">
-              <div class="col-12 p-2 content-2">
-                <p>صلاحيه عرض السعر: <span>30</span></p>
-                <p>التصنيف الرئيسى للمشروع: <span>مشروع رئيسى</span></p>
-                <p>التصنيف الفرعى للمشروع: <span>مشروع فرعى</span></p>
+              <div class="col-lg-12 p-2 content-2">
+                <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
+                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
+                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory?.name}}</span></p>
               </div>
             </div>
           </div>
@@ -258,12 +290,13 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-2 ">
             <div class="row">
-              <div class="col-12 p-2 content-2">
+              <div class="col-lg-12 p-2 content-2">
                 <p>عنوان المشروع :
-                  <span>اسيوط </span>
+                  <span>{{selectProject.district?.nameAr}},{{selectProject.district?.city?.nameAr}},
+                    {{selectProject.district?.city?.region?.nameAr}}</span>
                 </p>
-                <p>رقم القطعه : <span>1234567</span></p>
-                <p>رقم المخطط التنظيمى : <span>1234567</span></p>
+                <p>رقم القطعه : <span>{{selectProject?.plotNumber}}</span></p>
+                <p>رقم المخطط التنظيمى : <span>{{selectProject?.organizationalChartNumber}}</span></p>
               </div>
             </div>
           </div>
@@ -271,38 +304,66 @@
 
 
 
-        <div class="col-12 mt-3">
+        <div class="col-lg-12">
           <div class="row">
-            <div class="col-6 mt-3">
-              <div class="card card-3">
-                <h6>مكونات المشروع</h6>
-                <ul>
-                  <ng-container *ngFor="let component of projectComponent">
-                    <div>
-                      <li (click)="toggoleComponent(component.id)">
-                        <ng-container *ngIf="descComponent[component.id]==1">
-                          <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                        </ng-container>
+            <div class="col-lg-6 mt-3">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card card-3">
+                    <h6>مكونات المشروع</h6>
+                    <ul>
+                      <ng-container *ngFor="let component of projectComponent">
+                        <div>
+                          <li (click)="toggoleComponent(component.id)">
+                            <ng-container *ngIf="descComponent[component.id]==1">
+                              <i class="fa fa-angle-down " aria-hidden="true"></i>
+                            </ng-container>
 
-                        <ng-container *ngIf="descComponent[component.id]!=1">
-                          <i class="fa fa-greater-than text-success"></i>
-                        </ng-container>
+                            <ng-container *ngIf="descComponent[component.id]!=1">
+                              <i class="fa fa-greater-than "></i>
+                            </ng-container>
 
-                        {{component.name}}
-                      </li>
+                            {{component.name}}
+                          </li>
 
-                      <ng-container *ngIf="descComponent[component.id]==1">
-                        <p>{{component.description}} مشروع مشروع مشروع</p>
+                          <ng-container *ngIf="descComponent[component.id]==1">
+                            <p>{{component.description}} </p>
+                          </ng-container>
+
+                        </div>
                       </ng-container>
 
-                    </div>
-                  </ng-container>
+                    </ul>
+                  </div>
+                </div>
 
-                </ul>
+
+                  <div class="col-lg-12 mt-3">
+                    <div class="card card-3">
+                      <h6>الملفات الخاصه بالمشروع</h6>
+                      <ul>
+                        <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+
+
+                          <li style="border:none; background-color:transparent;"
+                          (click)="downloadFile(document.filePath,document.file)"
+                          >
+                            <i class="fa fa-download  mt-2" aria-hidden="true"></i>
+                            {{document?.file.substring(0,25)}}..
+                          </li>
+
+                        </ng-container>
+                      </ul>
+
+                    </div>
+
+                  </div>
+
+
               </div>
             </div>
 
-            <div class="col-6 mt-3">
+            <div class="col-lg-6 mt-3">
               <div class="card card-3">
                 <h6>الاعمال المطلوبه</h6>
                 <ul>
@@ -312,11 +373,11 @@
 
                       <li (click)="toggoleWork(work.id)">
                         <ng-container *ngIf="descWork[work.id]==1">
-                          <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                          <i class="fa fa-angle-down " aria-hidden="true"></i>
                         </ng-container>
 
                         <ng-container *ngIf="descWork[work.id]!=1">
-                          <i class="fa fa-greater-than text-success"></i>
+                          <i class="fa fa-greater-than "></i>
                         </ng-container>
                         {{work.name}}
                       </li>
@@ -344,45 +405,7 @@
               </div>
             </div>
 
-            <div class="col-6 mt-3">
-              <div class="card card-3">
-                <h6>الملفات الخاصه بالمشروع</h6>
 
-                <ul>
-                  <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                    <div>
-                      <li (click)="toggoleDocument(document.id)">
-                        <ng-container *ngIf="descDocument[document.id]==1">
-                          <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                        </ng-container>
-
-                        <ng-container *ngIf="descDocument[document.id]!=1">
-                          <i class="fa fa-greater-than text-success"></i>
-                        </ng-container>
-                        {{document.file}}
-                      </li>
-
-
-                      <ng-container *ngIf="descDocument[document.id]">
-                        <ul>
-                          <li> {{document.filePath}}</li>
-                        </ul>
-                      </ng-container>
-
-
-                    </div>
-
-                  </ng-container>
-                </ul>
-
-
-
-
-
-
-              </div>
-
-            </div>
 
 
 
@@ -401,7 +424,7 @@
 
 
     <!-----------------Last Section ----------------------->
-    <div class="col-3 mt-4 mb-3 section-4">
+    <div class="col-lg-3 mt-4 mb-3 section-4">
       <div class="row ">
         <div class="col-lg-12">
           <div class="card card-4">
@@ -411,11 +434,11 @@
               </div>
               <div class="col-lg-5 mt-2">
                 <p>
-                  م : ساره عبدالعزيز عبدالحكيم
+                  م : {{Representative?.firstName}} {{Representative?.lastName}}
                 </p>
               </div>
               <div class="col-lg-5">
-                <a class="btn text-success">(مسئول عن المشروع)</a>
+                <a class="btn">(مسئول عن المشروع)</a>
               </div>
 
             </div>
@@ -426,8 +449,8 @@
         <div class="col-lg-12 mt-2">
           <div class="card card-4-1">
             <div class="row">
-              <div class="col-12 text-center">
-                <h2>200 <span>متر مكعب</span></h2>
+              <div class="col-lg-12 text-center">
+                <h2>{{selectProject.area}} <span>متر مربع</span></h2>
                 <p>مساحه الارض المقام عليها المشروع</p>
             </div>
           </div>
@@ -439,8 +462,8 @@
           <div class="card card-4-2">
             <div class="row">
               <div class="col-lg-9 text-center">
-                <h2>100,000 <span>ريال</span></h2>
-                <p>مساحه الارض المقام عليها المشروع</p>
+                <h2>{{selectProject.offers[0]?.cost}}<span>ريال</span></h2>
+                <p>الميزانيه الخاصه بهذا المشروع</p>
             </div>
             <div class="col-lg-3">
               <a href="">عرض</a>
@@ -453,15 +476,27 @@
 
 
         <div class="col-lg-12 mt-2">
+          <div class="card card-date">
+            <div class="row">
+              <div class="col-lg-12 " class="calender">
+              <mat-calendar [(selected)]="selected" ></mat-calendar>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
           <div class="card card-4-4">
             <div class="row">
               <div class="col-lg-6 mt-2">
                 <h2>
-                  3 سبتمبر , 2021
+                  {{selected |date:'mediumDate'}}
                 </h2>
               </div>
               <div class="col-lg-6">
-                <a class="btn text-success">تعديل المحتوى</a>
+                <a class="btn">تعديل المحتوى</a>
               </div>
 
             </div>
@@ -473,18 +508,15 @@
           <div class="card card-4-5">
             <div class="row">
             <div class="col-lg-12">
-           <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور
-            أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس نوستريد
-            أكسير سيتاشن يللأمكو لابورأس نيسي يت أليكيوب أكس أيا كوممودو كونسيكيوات . ديواس
-            أيوتي أريري دولار إن ريبريهينديرأيت فوليوبتاتي فيلايت أيسسي كايلليوم دولار أيو فيجايت</p>
+           <p>{{selectProject?.subject}}</p>
                  </div>
                  <div class="col-lg-12 mt-4">
                   <div class="row">
                     <div class="col-lg-6">
-                     <p><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px;"></i>اسم الملف</p>
+                     <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px; margin-left: 3%;"></i>اسم الملف</a>
                     </div>
                     <div class="col-lg-6">
-                      <p><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</p>
+                      <a href=""><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</a>
                     </div>
 
                    </div>
@@ -507,6 +539,7 @@
 
     </div>
 
+    </ng-container>
 
   </div>
 

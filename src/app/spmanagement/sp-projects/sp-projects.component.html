@@ -1,18 +1,23 @@
 
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
   <div class="section-2 mt-2">
     <div class="row">
       <div class="col-4">
         <div class="row">
 
-          <ng-container *ngFor="let project of Listprojects |
-          paginate: {itemsPerPage:5, currentPage: page }">
+          <ng-container *ngFor="let project of Listprojects">
 
             <ng-container *ngIf="this.select==project.id">
-              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:#004958; color:white;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <a class="btn">تشطيب</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -23,11 +28,11 @@
 
 
             <ng-container *ngIf="this.select!=project.id">
-              <div class="col-12 card card-1 mt-4" (click)="showData(project.id)"
+              <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:white;  color:#004057;">
                 <p><i class="far fa-user "></i>
                   <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
-                  <a class="btn text-success">تشطيب</a>
+                  <a class="btn">تشطيب</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
                   {{project.district.nameAr}},{{project.district.city.nameAr}},
@@ -39,64 +44,82 @@
           </ng-container>
 
 
-          <div class="paginate mt-4">
-            <pagination-controls (pageChange)="changepage($event)"
-            previousLabel="السابق"
-            nextLabel="التالى"
-            >
-            </pagination-controls>
           </div>
 
 
 
-          <!--- <div class="col-12 card card-1 mt-4" >
-          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-            <a class="btn text-success">تشطيب</a>
-          </p>
-          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
-        </div>
 
-        <div class="col-12 card card-1 mt-4">
-          <p><i class="fa fa-user "></i><span>ساره عبدالعزيز</span>
-            <a class="btn text-success">تشطيب</a>
-          </p>
-          <p><i class="fa fa-location-dot "></i>النزهه الدجديده, القاهره</p>
-          <p><i class="fa fa-clock-four "></i>25/8/1-11:00am</p>
-        </div>
-      -->
 
-        </div>
+      <nav aria-label="Page navigation" class="mt-4 mb-3" *ngIf="result==1">
+        <ul class="pagination">
+
+          <ng-container *ngIf="page==1">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+          </li>
+          </ng-container>
+
+           <ng-container *ngIf="page!=1">
+            <li class="page-item">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+          <ng-container *ngFor="let p of pages">
+            <ng-container *ngIf="page==p">
+              <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+            <ng-container *ngIf="page!=p">
+              <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="page==pages.length">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3">التالى</button>
+          </li>
+         </ng-container>
+
+         <ng-container *ngIf="page!=pages.length">
+          <li class="page-item">
+            <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+          </li>
+         </ng-container>
+
+        </ul>
+      </nav>
 
       </div>
 
 
-      <div class="col-8 mt-4 mb-3">
+      <div class="col-lg-8 mt-4 mb-3">
 
         <ng-container *ngIf="select!=0">
           <div class="row">
-            <div class="col-12">
+            <div class="col-lg-12">
               <div class="card card-2 p-0">
                 <div class="row">
 
-                  <div class="col p-4 ">
+                  <div class="col-lg-10 p-4 ">
                     <div class="row ">
 
-                      <div class="col-5">
-                        كود الطلب : <span>{{selectProject.code}}</span>
+                      <div class="col-lg-5">
+                        كود الطلب : <span>{{selectProject?.code}}</span>
                       </div>
-                      <div class="col-1">|</div>
-                      <div class="col-5">
-                        اسم المشروع : <span>{{selectProject.name}}</span>
+                      <div class="col-lg-1">|</div>
+                      <div class="col-lg-5">
+                        اسم المشروع : <span>{{selectProject?.name}}</span>
                       </div>
                     </div>
-                    <p class="pt-4">موضوع المشروع:<span>{{selectProject.subject}}</span></p>
+                    <p class="pt-4">موضوع المشروع:<span>{{selectProject?.subject}}</span></p>
                   </div>
 
-                  <div class="col-1 rep">
+                   <div class="col-lg-1 rep">
                      <i class="fa-solid fa-handshake">
                     </i>
-                    <a href="/Spmanagement/projects/all/request" class="btn text-white" >الرد</a>
+                    <a href="/Spmanagement/projects/all/request"  style="margin-right:30%;" class="btn text-white" (click)="addIdProject(selectProject.id)" >الرد</a>
                   </div>
 
 
@@ -105,11 +128,11 @@
 
             </div>
 
-            <div class="col-12 mt-3 ">
+            <div class="col-lg-12 mt-3 ">
               <div class="card card-2">
                 <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
-                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory.name}}</span></p>
-                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory.name}}</span></p>
+                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
+                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory?.name}}</span></p>
               </div>
             </div>
 
@@ -117,129 +140,116 @@
             <div class="col-12 mt-3">
               <div class="card card-2">
                 <p>عنوان المشروع :
-                  <span>{{selectProject.district.nameAr}} , {{selectProject.district.city.nameAr}} ,
-                    {{selectProject.district.city.region.nameAr}} </span>
+                  <span>{{selectProject.district?.nameAr}} , {{selectProject.district?.city?.nameAr}} ,
+                    {{selectProject.district?.city?.region?.nameAr}} </span>
                 </p>
-                <p>رقم القطعه : <span>{{selectProject.plotNumber}} </span></p>
-                <p>رقم المخطط التنظيمى : <span>{{selectProject.organizationalChartNumber}}</span></p>
+                <p>رقم القطعه : <span>{{selectProject?.plotNumber}} </span></p>
+                <p>رقم المخطط التنظيمى : <span>{{selectProject?.organizationalChartNumber}}</span></p>
               </div>
             </div>
 
-            <div class="col-12 mt-3">
+            <div class="col-lg-12 mt-3">
               <div class="row">
-                <div class="col-6 mt-3">
-                  <div class="card card-3">
-                    <h6>مكونات المشروع</h6>
-                    <ul>
-                      <ng-container *ngFor="let component of projectComponent">
-                        <div>
-                          <li (click)="toggoleComponent(component.id)">
-                            <ng-container *ngIf="descComponent[component.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                            </ng-container>
-
-                            <ng-container *ngIf="descComponent[component.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
-                            </ng-container>
-
-                            {{component.name}}
-                          </li>
-
-                          <ng-container *ngIf="descComponent[component.id]==1">
-                            <p>{{component.description}} مشروع مشروع مشروع</p>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="card card-3">
+                        <h6>مكونات المشروع</h6>
+                        <ul>
+                          <ng-container *ngFor="let component of projectComponent">
+                            <div>
+                              <li (click)="toggoleComponent(component.id)">
+                                <ng-container *ngIf="descComponent[component.id]==1">
+                                  <i class="fa fa-angle-down " aria-hidden="true"></i>
+                                </ng-container>
+        
+                                <ng-container *ngIf="descComponent[component.id]!=1">
+                                  <i class="fa fa-greater-than "></i>
+                                </ng-container>
+        
+                                {{component.name}}
+                              </li>
+        
+                              <ng-container *ngIf="descComponent[component.id]==1">
+                                <p>{{component.description}} </p>
+                              </ng-container>
+        
+                            </div>
                           </ng-container>
-
+        
+                        </ul>
+                      </div>
+                    </div>
+    
+               
+                      <div class="col-lg-12 mt-3">
+                        <div class="card card-3">
+                          <h6>الملفات الخاصه بالمشروع</h6>
+                          <ul>
+                            <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+                              
+                              
+                              <li style="border:none; background-color:transparent;"
+                              (click)="downloadFile(document.filePath,document.file)"
+                              >
+                                <i class="fa fa-download  mt-3" aria-hidden="true"></i>
+                                {{document?.file.substring(0,35)}}..
+                              </li>
+        
+                            </ng-container>
+                          </ul>
+        
                         </div>
-                      </ng-container>
-
-                    </ul>
+          
+                      </div>
+                  
+                  
                   </div>
                 </div>
-
-                <div class="col-6 mt-3">
+    
+                <div class="col-lg-6 ">
                   <div class="card card-3">
                     <h6>الاعمال المطلوبه</h6>
                     <ul>
                       <ng-container *ngFor="let work of this.RequiredWorks">
-
+    
                         <div>
-
+    
                           <li (click)="toggoleWork(work.id)">
                             <ng-container *ngIf="descWork[work.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
+                              <i class="fa fa-angle-down " aria-hidden="true"></i>
                             </ng-container>
-
+    
                             <ng-container *ngIf="descWork[work.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
+                              <i class="fa fa-greater-than "></i>
                             </ng-container>
                             {{work.name}}
                           </li>
-
+    
                           <ng-container *ngIf="descWork[work.id]">
                             <ul>
                               <ng-container *ngFor="let requiredDocument of work.requiredDocuments">
-
+    
                                 <li>
                                   <p>{{requiredDocument.name}}</p>
                                 </li>
-
+    
                               </ng-container>
                             </ul>
-
+    
                           </ng-container>
-
+    
                         </div>
-
-
+    
+    
                       </ng-container>
-
-
+    
+    
                     </ul>
                   </div>
                 </div>
-
-                <div class="col-6 mt-3">
-                  <div class="card card-3">
-                    <h6>الملفات الخاصه بالمشروع</h6>
-
-                    <ul>
-                      <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-                        <div>
-                          <li (click)="toggoleDocument(document.id)">
-                            <ng-container *ngIf="descDocument[document.id]==1">
-                              <i class="fa fa-angle-down text-success" aria-hidden="true"></i>
-                            </ng-container>
-
-                            <ng-container *ngIf="descDocument[document.id]!=1">
-                              <i class="fa fa-greater-than text-success"></i>
-                            </ng-container>
-                            {{document.file}}
-                          </li>
-
-
-                          <ng-container *ngIf="descDocument[document.id]">
-                            <ul>
-                              <li> {{document.filePath}}</li>
-                            </ul>
-                          </ng-container>
-
-
-                        </div>
-
-                      </ng-container>
-                    </ul>
-
-
-
-
-
-
-                  </div>
-
-                </div>
-
-
-
+  
+    
               </div>
 
             </div>
@@ -253,6 +263,8 @@
     </div>
 
   </div>
+
+
 
 
 

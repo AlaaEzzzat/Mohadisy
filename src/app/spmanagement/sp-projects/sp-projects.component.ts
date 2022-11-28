@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
@@ -20,14 +21,23 @@ export class SpProjectsComponent implements OnInit {
    documents:Array<any>=[];
    descDocument:Array<any>=[];
    page:number=1;
+   totalpages: any = 0;
+    pages:Array<any>=[];
+    result:any=0;
 
   constructor(private api:ApiService) { }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
 
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
+    this.totalpages=data.data.totalPages;
+    for(let i=1;i<=this.totalpages;i++)
+      this.pages.push(i);
+
+      if(this.Listprojects.length>0)
+     this.result=1;
 
 
     });
@@ -136,6 +146,12 @@ export class SpProjectsComponent implements OnInit {
      }
 
 
+     downloadFile(id:any,file:any)
+     {
+
+     }
+
+
      changepage(e:any)
      {
 
@@ -149,5 +165,10 @@ export class SpProjectsComponent implements OnInit {
     });
      }
 
+     addIdProject(idProject:any)
+     {
+      localStorage.setItem('idproject',idProject);
+
+     }
 
   }

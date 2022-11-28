@@ -1,607 +1,688 @@
+<div class="row container-fluid">
+  <div class="col-lg-3 mt-3 mb-3">
+    <div class="card section-1">
+      <div class="row">
+        <div class="col-lg-12">
+          <img src="{{profile?.organizationalServiceProviderProfile?.companyLogoPath}}" alt="" class="img-fluid profile">
+          <h4 class="mt-3">{{profile?.organizationalServiceProviderProfile?.companyName}}</h4>
+          <div class="row text-center info">
+            <div class="col-lg-5 mt-3">
+              <p>حساب نشط
+                <i class="fa fa-circle" style="color:#10B981; font-size:8px;"></i>
+              </p>
+            </div>
+            <div class="col-lg-7 mt-3">
+              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.postalCode}}</p>
+            </div>
+          </div>
 
-<form
-  [formGroup]="providerData"
-  (ngSubmit)="onSubmit()"
-  class="form-control border-0"
-  novalidate
-> 
-  <div *ngIf="secandform == false">
-    <h5 class="mb-5 mt-5 bd-title" dir="rtl">المعلومات الشخصية</h5>
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label mb-3" for="username">
-          اسم المستخدم
-        </label>
-        <input
-          type="text"
-          id="username"
-          class="form-control form-control-lg"
-          name="username"
-          formControlName="username"
-          placeholder="اسم المستخدم"
-          [class.is-valid]="
-            providerData.get('username')?.valid &&
-            (providerData.get('username')?.dirty ||
-              providerData.get('username')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('username')?.invalid &&
-            (providerData.get('username')?.dirty ||
-              providerData.get('username')?.touched)
-          "
-        />
+          <p class="edit text-center mt-4">
+            <a href="#" >
+              <i class="fa fa-edit"></i>
+              تعديل الملف الشخصى
+          </a>
+          </p>
 
-        <div
-          *ngIf="
-            providerData.get('username')?.invalid &&
-            (providerData.get('username').dirty ||
-              providerData.get('username').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('username').errors?.['required']">
-            Name is required.
-          </div>
-          <div *ngIf=" providerData.get('username').errors?.['minlength']">
-            Name must be at least 4 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label mb-3" for="companyName">
-          اسم الشركة
-        </label>
-        <input
-          type="text"
-          id="companyName"
-          class="form-control form-control-lg"
-          name="companyName"
-          formControlName="companyName"
-          placeholder="اسم الشركة"
-          [class.is-valid]="
-            providerData.get('companyName')?.valid &&
-            (providerData.get('companyName')?.dirty ||
-              providerData.get('companyName')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('companyName')?.invalid &&
-            (providerData.get('companyName')?.dirty ||
-              providerData.get('companyName')?.touched)
-          "
-        />
+          <p class="info-sp mt-3">
+            <i class="fas fa-phone"></i>
+           {{profile?.phoneNumber}}
+          </p>
+          <p class="info-sp mt-2">
+            <i class="fa fa-envelope-open-o"></i>
+            sara12345@gmail.com
+          </p>
 
-        <div
-          *ngIf="
-            providerData.get('companyName')?.invalid &&
-            (providerData.get('companyName').dirty ||
-              providerData.get('companyName').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('companyName').errors?.['required']">
-            companyName is required.
-          </div>
-          <div *ngIf=" providerData.get('companyName').errors?.['minlength']">
-            companyName must be at least 4 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label mb-3" for="email">
-          البريد الالكتروني</label
-        >
+          <div class="row">
 
-        <input
-          type="text"
-          id="email"
-          name="email"
-          formControlName="email"
-          class="form-control form-control-lg form-group"
-          placeholder="البريد الالكتروني"
-          [class.is-valid]="
-            providerData.get('email')?.valid &&
-            (providerData.get('email')?.dirty ||
-              providerData.get('email')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('email')?.invalid &&
-            (providerData.get('email')?.dirty ||
-              providerData.get('email')?.touched)
-          "
-        />
+            <div class="col-lg-1 link mx-1"></div>
 
-        <div
-          *ngIf="
-            providerData.get('email')?.invalid &&
-            (providerData.get('email').dirty ||
-              providerData.get('email').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('email').errors?.['required']">
-            email is required.
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/global.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="">
+                <img src="/assets/icons/in.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="">
+                <img src="/assets/icons/fac.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/be.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/twitter.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+
+
+
+
+
+
           </div>
-          <div *ngIf=" providerData.get('email').errors?.['email']">
-            email must be example@example.com
+
+          <div class="row" id="accordion">
+            <div  class="col-lg-12 mt-3 mx-3">
+              <h2>
+                <button class="btn btn-accordion" type="button"
+                data-target="#item1" data-toggle="collapse">نظره عامه عن الشركه
+                  <i class="fas fa-angle-down" style=" margin-right: 36%;"></i>
+              </button>
+              </h2>
+
+
+              <div class="collapse hide" id="item1" data-parent="#accordian">
+                <div class="row">
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">saraghazy@gmail.com</div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        الخدمه الرئيسيه :
+                        {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
+                         </div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1">
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        الخدمه الفرعيه :
+                        {{profile?.organizationalServiceProviderProfile?.ospprofileSubServices
+                          [0]?.projectSubService.name}}
+                        </div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
           </div>
+
+
+          <div class="col-lg-12 mx-3 mt-2">
+            <h2>
+              <button class="btn btn-accordion" type="button"
+              data-target="#item2" data-toggle="collapse">الاوراق والتراخيص
+                <i class="fas fa-angle-down" style=" margin-right: 46%;"></i>
+            </button>
+            </h2>
+
+
+            <div class="collapse hide" id="item2" data-parent="#accordian">
+              <div class="row">
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الهويه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration1==1">
+                        <button class="btn choose-toggle" (click)="register_1()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration1!=1">
+                      <button class="btn choose-toggle" (click)="register_1()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration1==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn" >
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                    العضويه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration2==1">
+                        <button class="btn choose-toggle" (click)="register_2()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration2!=1">
+                      <button class="btn choose-toggle" (click)="register_2()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration2==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9 " style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      السجل التجارى
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration3==1">
+                        <button class="btn choose-toggle" (click)="register_3()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration3!=1">
+                      <button class="btn choose-toggle" (click)="register_3()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration3==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn" (click)="getPdf(profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath)
+                          ">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الرخصه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration4==1">
+                        <button class="btn choose-toggle" (click)="register_4()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration4!=1">
+                      <button class="btn choose-toggle" (click)="register_4()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration4==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <button class="btn">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </button>
+                        </li>
+
+
+                        <li>
+                         <button class="btn">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
         </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label mb-3" for="phone_number">
-          رقم التلفون</label
-        >
-        <div class="form-group d-inline-block form-control">
-          <input
-            type="text"
-            id="phone_number"
-            name="phone_number"
-            class="mx-1"
-            formControlName="phone_number"
-            placeholder="رقم التلفون"
-            [class.is-numbervalid]="
-              providerData.get('phone_number')?.valid &&
-              (providerData.get('phone_number')?.dirty ||
-                providerData.get('phone_number')?.touched)
-            "
-            [class.is-invalid]="
-              providerData.get('phone_number')?.invalid &&
-              (providerData.get('phone_number')?.dirty ||
-                providerData.get('phone_number')?.touched)
-            "
-          />
-        </div>
-        <div
-          *ngIf="
-            providerData.get('phone_number')?.invalid &&
-            (providerData.get('phone_number').dirty ||
-              providerData.get('phone_number').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('phone_number').errors?.['required']">
-            phone number is required.
+
           </div>
-          <div *ngIf=" providerData.get('phone_number').errors?.['pattern']">
-            phone number must be 11 number
+
+          <p class="dir mt-2">
+            <i class="fa fa-map-marker"></i>
+            العنوان
+          </p>
+
+          <p class="mx-2 mt-2">
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.region?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.nameAr}}
+          </p>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card map mt-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14934528.881396683!2d54.10216827104652!3d23.956011965265986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2z2KfZhNiz2LnZiNiv2YrYqQ!5e0!3m2!1sar!2seg!4v1669392006602!5m2!1sar!2seg"   loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                </iframe>
+                <div class="layout">
+                  <p>احصل على الاتجاهات</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="card represent">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <img src="{{representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="" class="img-fluid">
+                  </div>
+
+                  <div class="col-lg-8 mt-1">
+                    <h6>
+                      م/
+                      {{profile?.organizationalServiceProviderProfile?. representative?.firstName}}
+                      {{profile?.organizationalServiceProviderProfile?. representative?.lastName}}
+                    </h6>
+                    <p class="info-sp">ممثل الشركه على المنصه</p>
+                    <p class="info-rep mt-2 " style="margin-right:38%;">
+                     {{profile?.organizationalServiceProviderProfile?. representative?.phoneNumber}}
+                      <i class="fas fa-phone"></i>
+                    </p>
+                    <p class="info-rep" style="margin-right:10%;">
+                      {{profile?.organizationalServiceProviderProfile?. representative?.email}}
+                      <i class="fa fa-envelope-open-o" ></i>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+
+
+
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-3">
-        <label class="form-label mb-3" for="companyPhoneNum">
-          رقم تليفون الشركة</label
-        >
+  </div>
 
-        <div class="form-group d-inline-block form-control">
-          <input
-            type="number"
-            id="companyPhoneNum"
-            name="companyPhoneNum"
-            class="border-0 shadow-none mx-1"
-            formControlName="companyPhoneNum"
-            placeholder="رقم تليفون الشركة"
-            [class.is-valid]="
-              providerData.get('companyPhoneNum')?.valid &&
-              (providerData.get('companyPhoneNum')?.dirty ||
-                providerData.get('companyPhoneNum')?.touched)
-            "
-            [class.is-invalid]="
-              providerData.get('companyPhoneNum')?.invalid &&
-              (providerData.get('companyPhoneNum')?.dirty ||
-                providerData.get('companyPhoneNum')?.touched)
-            "
-          />
-        </div>
+  </div>
 
-        <div
-          *ngIf="
-            providerData.get('companyPhoneNum')?.invalid &&
-            (providerData.get('companyPhoneNum').dirty ||
-              providerData.get('companyPhoneNum').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf=" providerData.get('companyPhoneNum').errors?.['required']"
-          >
-            phone number is required.
-          </div>
-          <div *ngIf=" providerData.get('companyPhoneNum').errors?.['pattern']">
-            phone number must be 11 number
+
+  <!--------------Part 2---------------->
+  <div class="col-lg-9">
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <h4>نظره عامه</h4>
+      </div>
+      <div class="col-lg-4 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="far fa-building"></i>
+                المشاريع السابقه
+
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge ">45</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-4">
-        <label class="form-label mb-3" for="site_url">
-          الموقع الالكتروني(http://www.sample.com)</label
-        >
 
-        <input
-          type="text"
-          id="site_url"
-          name="site_url"
-          formControlName="site_url"
-          class="form-control form-control-lg form-group"
-          placeholder="http://www.sample.com"
-          [class.is-valid]="
-            providerData.get('site_url')?.valid &&
-            (providerData.get('site_url')?.dirty ||
-              providerData.get('site_url')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('site_url')?.invalid &&
-            (providerData.get('site_url')?.dirty ||
-              providerData.get('site_url')?.touched)
-          "
-        />
-        <div
-          *ngIf="
-            providerData.get('site_url')?.invalid &&
-            (providerData.get('site_url').dirty ||
-              providerData.get('site_url').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('site_url').errors?.['required']">
-            site_url is required.
-          </div>
-          <div *ngIf=" providerData.get('site_url').errors?.['pattern']">
-            site_url must be http://www.sample.com
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <label for="projectServiceId " class="control-label mb-3">
-          خدمات
-        </label>
+      <div class="col-lg-4 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="fas fa-award"></i>
+                سنوات الخبره
 
-        <select
-          name="projectServiceId"
-          id="projectServiceId"
-          class="form-control form-control-lg"
-          formControlName="projectServiceId" (change)="_subServices()">
-          <ng-container *ngFor="let service of servicesType">
-            <option [value]="service.id">{{service.name}}</option>
-          </ng-container>
-        </select>
-
-        <div
-          *ngIf="
-            providerData.get('projectServiceId')?.invalid &&
-            (providerData.get('projectServiceId').dirty ||
-              providerData.get('projectServiceId').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('projectServiceId').errors?.['required']">
-            servicetype is required.
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge ">45</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!--<div class="col-3">
-        <label for="search_name_input" class="control-label mb-3">
-         خدمات فرعيه
-        </label>
-        <select
-          filterEnabled="true"
-          name="search_name_input"
-          id="search_name_input"
-          class="form-control"
-        >
-          <option value="">value one</option>
-          <option value="">value tow</option>
-        </select>
+        <div class="col-lg-4 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="fas fa-star"></i>
+                التقييم
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge">4/5</div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      </div>-->
-
-      <ng-container *ngIf="providerData.get('projectServiceId').value">
-        <div class="col-3">
-          <label for="search_name_input " class="control-label mb-3">
-            خدمات فرعيه
-          </label>
+    </div>
 
 
-          <input type="text" class="form-control" (keyup)="_search()" formControlName="search"
-            placeholder="مكونات المشروع" />
 
-          <ng-container *ngFor="let i of  subService">
-              <ng-container *ngIf="checkedSubServices[i.id]==1">
-                <button class="btn btn-primary mx-2 my-2" (click)="deleteSubService(i.id)">{{i.name}}
-                  <i class="fa fa-trash"></i>
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <h4>جدول أعمالك</h4>
+      </div>
+
+      <div class="col-lg-5 mt-2">
+        <div class="card  calender">
+          <div class="row">
+            <div class="col-lg-12">
+              <mat-calendar [(selected)]="selected" ></mat-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-7 mt-2">
+        <div class="card card-1-2">
+          <div class="row">
+            <div class="col-lg-12">
+              <p>
+                .دریگ رارق هدافتسا دروم اساسا یحارط دوجوم یایند لها هتسویپ تالاوس یوگباوج و یلصا یاهدرواتسد ینیچفورح لماش زاین دروم نامزو دسر نایاپ هب پیات تخس طیارش و اهراکهار هئارا رد دوجوم یراوشد و مامت هک تشاد دیما ناوت یم تروص نیا رد. درک داجیا یسراف نابز رد ورشیپ گنهرف و یقالخ ناحارط صوصخلا یلع یا هنایار ناحارط یارب ار یرتشیب تخانش اهرازفا مرن اب ات دبلط یم ار ناصصختم و هعماج ناوارف تخانش هدنیآ و لاح ،هتشذگ دصرد هس و تصش رد یدایز یاهباتک. دشاب یم یدربراک یاهرازبا دوبهب فده اب عونتم یاهدربراک و زاین دروم یژولونکت یلعف طیارش یارب و تسا مزال هک نانچنآرطس و نوتس رد هلجم و همانزور هکلب نوتم و اهرگپاچ. تسا کیفارگ ناحارط زا هدافتسا اب و پاچ تعنص زا.
+              </p>
+
+              <div class="row">
+
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-file"></i>
+                      اسم الملف
+                    </a>
+                </div>
+
+
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-file"></i>
+                      اسم الملف
+                    </a>
+                </div>
+
+
+
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-file"></i>
+                      اسم الملف
+                    </a>
+                </div>
+                </div>
+
+
+
+
+                <div class="row">
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-image"></i>
+                      اسم الملف
+                    </a>
+                  </p>
+
+                </div>
+
+
+
+
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-image"></i>
+                      اسم الملف
+                    </a>
+                </div>
+
+
+
+
+                <div class="col-lg-4 mt-1">
+                  <p class="files">
+                    <a href="">
+                      <i class="fa fa-image"></i>
+                      اسم الملف
+                    </a>
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <div class="row">
+          <div class="col-lg-9">
+            <h4>المشاريع السابقه</h4>
+          </div>
+          <div class="col-lg-3">
+            <a href="/Spmanagement/prevWorks" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
+              اضافه مشروع
+              <i class="fa fa-plus-square"></i>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <ng-container *ngFor="let project of ServiceProviderWork">
+      <div class="col-lg-6 mt-2">
+        <div class="card card-2">
+          <div class="row">
+            <div class="col-lg-8">
+              <p>اسم المشروع : <span>{{project.projectName}}</span></p>
+              <p>اسم العميل : <span>{{project.ownerName}}</span></p>
+              <p>مده التنفيذ : <span>عام ونصف</span></p>
+
+                <div class="row pt-2 date">
+                  <div class="col-lg-5">
+                    تاريخ البدء : 2 مايو 2019
+                  </div>
+                  <div class="col-lg-6">
+                    تاريخ الانتهاء : 4 مايو 2019
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 choose">
+
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <button class="btn choose-toggle" (click)="toggle(project.id)">
+                  <i class="fa fa-times-circle-o"></i>
                 </button>
-
               </ng-container>
 
-
-          </ng-container>
-
-          <ul>
-            <ng-container *ngFor="let i of FilterSearch">
-              <ng-container *ngIf="checkedSubServices[i.id]!=1">
-                <li (click)="addSubService(i.id)"><span class="dropdown-item">{{i.name}}</span></li>
-              </ng-container>
+              <ng-container *ngIf="infoProject[project.id]!=1">
+              <button class="btn choose-toggle" (click)="toggle(project.id)">
+                <i class="fa fa-ellipsis-h"></i>
+              </button>
             </ng-container>
-          </ul>
+
+
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <ul class="card">
+                  <li>
+                    <button class="btn w-100" type="button" (click)="projectImage(project.id)"
+                    data-bs-toggle="modal"  [attr.data-bs-target]="'#project'+project.id"
+                    >
+                     <p style="padding-left:50% ;">
+                      <i class="fa fa-eye"></i>
+                      فتح</p>
+
+                    </button>
+                  </li>
+
+                  <li>
+
+                   <a class="btn w-100" href="/Spmanagement/prevWorks">
+                    <p style="padding-left:50% ;">
+                    <i class="fa fa-edit"></i>
+                    تعديل
+                    </p>
+                   </a>
+
+                  </li>
+                </ul>
+              </ng-container>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade "  [id]="'project'+project.id" >
+        <div class="modal-dialog  modal-xl " >
+
+          <button type="button" class="close btn" data-bs-dismiss="modal"
+          style="font-size: 40px; color:gainsboro; "
+          >
+            <i>&times;</i>
+          </button>
+
+          <div class="modal-content w-100 border-0" style="background-color:transparent;">
+            <div class="modal-body ">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <ng-container *ngFor="let file of workFile ; let i=index;">
+                    <div *ngIf="i==0" class="carousel-item active">
+
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                    <div *ngIf="i!=0" class="carousel-item">
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                  </ng-container>
+                </div>
+
+              </div>
+
+            </div>
+
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+
+          </div>
+
 
         </div>
+
+      </div>
+
+
+
       </ng-container>
 
 
 
 
 
-
-
-    </div>
-    <hr class="mt-5" />
-    <div class="row mt-5">
-      <div class="col-1">
-        <h5 class="mb-5 bd-title" dir="rtl">العنوان</h5>
-      </div>
-      <div class="col-11">
-        <div class="row mt-5">
-          <div class="col-4">
-            <label for="region" class="control-label mb-3">
-              منطقه
-            </label>
-            <select name="region" id="region" class="form-control form-control-lg" formControlName="region"
-            (change)="_getCities()">
-            <option [value]="0" disabled>----اختر----</option>
-            <ng-container *ngFor="let region of regionsList">
-              <option [value]="region.id">{{region.nameAr}}</option>
-            </ng-container>
-          </select>
-          </div>
-          <div class="col-4">
-            <label for="city" class="control-label mb-3">
-              المدينة
-            </label>
-            <select name="city" id="city" class="form-control form-control-lg" formControlName="city"
-            (change)="_getDistricts()">
-            <option [value]="0" disabled>----اختر----</option>
-              <ng-container *ngFor="let city of citiesList">
-                <option [value]="city.id">{{city.nameAr}}</option>
-              </ng-container>
-            </select>
-          </div>
-
-          <div class="col-4">
-            <label for="district" class="control-label mb-3">
-              الحى
-            </label>
-            <select
-              name="district"
-              id="district"
-              class="form-control form-control-lg"
-            >
-               <option [value]="0" disabled>----اختر----</option>
-               <ng-container *ngFor="let district of districtsList">
-                <option [value]="district.id">{{district.nameAr}}</option>
-              </ng-container>
-            </select>
-          </div>
-        </div>
-        <div class="row my-4">
-          <div class="col-2">
-            <label class="form-label mb-3" for="buildNo">
-              رقم المبنى
-            </label>
-
-            <input
-              type="number"
-              id="buildNo"
-              name="buildNo"
-              formControlName="buildNo"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-2">
-            <label class="form-label mb-3" for="postal_box">
-              الرقم الاضافي
-            </label>
-
-            <input
-              type="number"
-              id="postal_box"
-              name="postal_box"
-              formControlName="postal_box"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-3">
-            <label class="form-label mb-3" for="postal_code">
-              الرمز بريد
-            </label>
-
-            <input
-              type="number"
-              id="postal_code"
-              name="postal_code"
-              formControlName="postal_code"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-5">
-            <label class="form-label mb-3" for="StreetName">
-              اسم الشارع
-            </label>
-            <input
-              type="text"
-              id="StreetName"
-              name="StreetName"
-              formControlName="StreetName"
-              class="form-control form-control-lg form-group"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row my-5">
-      <div class="col-8"></div>
-      <div class="col-4">
-        <button
-          class="btn btn-success-style form-control"
-          type="submit"
-          (click)="secandform = true"
-
-          (click)="secandform = true" >
-          <i class="fa fa-floppy-disk" aria-hidden="true"></i>
-          حفظ استكمال البيانات
-        </button>
-      </div>
     </div>
   </div>
 
 
-  <div *ngIf="secandform == true">
-    <h5 class="mb-5 mt-5 bd-title" dir="rtl">المستندات المرفقة</h5>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <label for="file" class="mb-2">
-          شعار الشركة
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="inputGroupFile"
-            placeholder="mohamed"
-            formControlName="logo"
-          />
-          <label class="btn btn-primary " for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="registration_number">
+</div>
 
-            السجل التجارى</label
-          >
-          <input
-            type="number"
-            id="registration_number"
-            name="registration_number"
-            formControlName="registration_number"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <label for="attach_register" class="mb-2">
-          ارفاق
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="attach_register"
-            placeholder="mohamed"
-            formControlName="attach_register"
-            name="attach_register"
-          />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="licences_number">
-            رقم رخصة هيئة المهندسين
-          </label>
-          <input
-            type="number"
-            id="licences_number"
-            name="licences_number"
-            formControlName="licences_number"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="CompNum">
-            تاريخ الرخصة
-          </label>
-          <input
-            type="date"
-            id="CompNum"
-            name="CompNum"
-            formControlName="CompNum"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="CompNum">
-            تاريخ الانتهاء
-          </label>
-          <input
-            type="date"
-            id="CompNum"
-            name="CompNum"
-            formControlName="CompNum"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <label for="attach_licences" class="mb-2">
-          ارفاق
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="attach_licences"
-            placeholder="mohamed"
-            formControlName="attach_licences"
-            name="attach_licences"
-          />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
-    <div class="row my-5">
-      <div class="col-7"></div>
-      <div class="col-3">
-        <button class="btn btn-success-style form-control" type="submit">
-          <i class="fa fa-floppy-disk" aria-hidden="true"></i>
-          حفظ استكمال البيانات
-        </button>
-      </div>
-      <div class="col-2">
-        <button
-          class="btn btn-success-style form-control "
-          (click)="secandform = false"
-        >
-          <i class="fa fa-backward" aria-hidden="true"></i>
-          السابق
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
+
+
 

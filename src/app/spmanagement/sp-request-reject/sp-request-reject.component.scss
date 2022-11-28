@@ -10,6 +10,10 @@
    padding: 4% ;
    color:#004057;
 }
+.card-1 a
+{
+  color: #18af9a;
+}
 
 .card-1 p
 {
@@ -81,6 +85,7 @@
 ul li i
 {
   padding: 3%;
+  color: #18af9a;
 
 }
 
@@ -104,6 +109,28 @@ li
   font-size: 14px;
 }
 
+.card-3 i
+{
+  color: #18af9a;
+}
+
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
 
 .noresult
 {
@@ -115,4 +142,8 @@ li
 }
 
 
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
 

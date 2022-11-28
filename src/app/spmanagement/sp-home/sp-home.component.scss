@@ -83,4 +83,21 @@ body {
   }
 }
 
+.list-group div
+{
+  cursor: pointer;
+}
+
+.active
+{
+  background-color: #2eb6a42b;
+
+}
+
+
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
 

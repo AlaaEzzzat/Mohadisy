@@ -2,9 +2,9 @@
   <div id="page-content-wrapper">
     <app-navbar></app-navbar>
 
-    <div class="container-fluid" style="background-color: #eef0f8">
+    <div class="container-fluid mt-3" style="background-color: #F8FAFC;">
       <div class="row" id="aside">
-        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
+        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2 mt-5">
           <div
             class="m-0"
             style="background-color: #004057; font-weight: 600"
@@ -13,7 +13,7 @@
           >
             <div class="list-group list-group-flush">
               <div class="text-white">
-                <div class="p-2 my-4" routerLink="/Spmanagement/profile">
+                <div class="pt-2 my-4 " routerLink="/Spmanagement/profile"  [routerLinkActive]="['active']">
                   <img
                     src="assets/images/icon1.png"
                     alt=""
@@ -24,7 +24,7 @@
                   <span class="px-2 fontStyle texticon"> الصفحه الرئيسيه</span>
                 </div>
 
-                <div class="p-2 my-4" routerLink="/Spmanagement/dashboard">
+                <div class="p-2 my-4" routerLink="/Spmanagement/dashboard" [routerLinkActive]="['active']">
                   <img
                     src="assets/images/Group.png"
                     alt=""
@@ -34,7 +34,7 @@
                   />
                   <span class="px-2 fontStyle texticon"> لوحة التحكم </span>
                 </div>
-                <div class="p-2 my-4" routerLink="/Spmanagement/projects/new">
+                <div class="p-2 my-4" routerLink="/Spmanagement/projects" [routerLinkActive]="['active']">
                   <img
                     src="assets/images/blueprint.png"
                     alt=""
@@ -53,9 +53,10 @@
                     height="28px"
                   />
                   <span class="px-2 fontStyle texticon"> اعمالي السابقة </span>
+
                 </div>
 
-                <div class="p-2 my-4" routerLink="/Spmanagement/settings">
+                <div class="p-2 my-4" routerLink="/Spmanagement/settings" [routerLinkActive]="['active']">
                   <img
                     src="assets/images/settings.png"
                     alt=""
@@ -66,7 +67,7 @@
                   <span class="px-2 fontStyle texticon"> الإعدادات </span>
                 </div>
 
-                <div class="p-2 my-4" routerLink="/Spmanagement/contributions">
+                <div class="p-2 my-4" routerLink="/Spmanagement/contributions" [routerLinkActive]="['active']">
                   <img
                     src="assets/images/id-card.png"
                     alt=""
@@ -77,6 +78,7 @@
                   <span class="px-2 fontStyle texticon"> الاشتراكات </span>
                 </div>
                 <div class="p-2 my-4" routerLink="/Spmanagement/chat">
+
                   <img
                     src="assets/images/chat.png"
                     alt=""
@@ -86,9 +88,23 @@
                   />
                   <span class="px-2 fontStyle texticon"> الرسائل </span>
                 </div>
+
+
+                <div class="p-2 my-4" routerLink="/Spmanagement/projects/status" [routerLinkActive]="['active']">
+                  <img
+                    src="assets/images/blueprint.png"
+                    alt=""
+                    srcset=""
+                    width="28px"
+                    height="28px"
+                  />
+                  <span class="px-2 fontStyle texticon"> مشاريعى</span>
+                </div>
+
+
                 <div
                   class="p-2 my-4 flex justify-content-between"
-                  routerLink="/Spmanagement/payments"
+                  routerLink="/Spmanagement/payments" [routerLinkActive]="['active']"
                 >
                   <img
                     src="assets/images/hand.png"

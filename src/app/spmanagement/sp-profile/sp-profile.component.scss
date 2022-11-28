@@ -1,90 +1,517 @@
-* {
-  margin: 0px;
+
+
+.card
+{
+  border:none;
+
+}
+.card-1
+{
+  padding:7% 11%;
+}
+.card-1 h5
+{
+  color: #004057;
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 5%;
+  font-family: 'Cairo';
+  font-style: normal;
+
+}
+h4
+{
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+
+}
+
+.card-1 .padge
+{
+  width: 80%;
+  height: 6vh;
+  border-radius: 55%;
+  -webkit-border-radius: 55%;
+  -moz-border-radius: 55%;
+  -ms-border-radius: 55%;
+  -o-border-radius: 55%;
+  text-align: center;
+  background: #D1FAE5;
+  color:#18AF9A;
+  font-weight: 600;
+  line-height: 40px;
+  font-family: 'Cairo';
+  font-style: normal;
+  margin-right: 30%;
+}
+
+.card-2
+{
+  padding: 2% 3% 3% 0%;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  font-size: 15px ;
+}
+.card-2 p
+{
+  padding:0;
+  margin: 0;
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 600;
+  padding-top: 2.5%;
+}
+
+.card-2 p span
+{
+  font-family: 'Cairo';
+  font-style: normal;
+  font-weight: 400;
+
+
+}
+
+.date
+{
+  font-family: 'Cairo';
+font-style: normal;
+font-weight: 400;
+font-size: 10.2px;
+color: #64748B;
+
+}
+
+.choose ul
+{
+  margin-left: 6%;
+}
+.choose ul li
+{
+
+  list-style-type: none;
+  padding:0;
+
+}
+
+.choose .card
+{
+  padding:0%;
+
+}
+.choose ul li .btn
+{
+  border: none;
+  padding: 0;
+
+}
+
+.choose ul li .btn p
+{
+  font-size: 12px;
+  padding: 0;
+  font-family: 'Cairo';
+  font-style: normal;
+  color: #64748B;
+  font-weight: 300;
+}
+
+.choose ul li:hover
+{
+  background-color: #F1F5F9;
+}
+
+.choose-toggle
+{
+  color: #64748B;
+ margin-right: 69%;
+  padding:0;
+  font-size: 18px;
+  border: none;
+
+}
+
+
+
+
+.btn:focus {
+outline: none;
+box-shadow: none;
+}
+.btn:hover {
+  color: #64748B;
+  }
+
+.card-registeration
+  {
+    padding:0;
+    position: absolute;
+    width: 30%;
+    left: 3%;
+    top:72%;
+    z-index: 1;
+    border: none;
+    border-radius: 0%;
+    -webkit-border-radius: 0%;
+    -moz-border-radius: 0%;
+    -ms-border-radius: 0%;
+    -o-border-radius: 0%;
+}
+  .card-registeration  li
+  {
+    padding:0% 4%;
+    list-style-type: none;
+
+  }
+
+  .card-registeration  li:hover
+  {
+    background-color: #F1F5F9;
+  }
+  .card-registeration  li .btn
+  {
+    padding: 0%;
+    font-size: 10px;
+    font-family: "Cairo";
+
+  }
+  .card-registeration  li .btn i
+  {
+    font-size: 11px;
+
+  }
+
+  .acc-card .fa-image
+  {
+    font-size: 14px;
+  }
+
+.carousel-item
+{
+  height: 70vh ;
+}
+
+.carousel-item img
+{
+  height: 100%;
+}
+
+
+.modal-dialog
+{
+  padding:0% 10%;
+  position: relative;
+}
+.carousel-control-prev
+{
+  right:100%;
+  color: white;
+}
+
+
+.carousel-control-next
+{
+  right:-14%;
+   color: white;
+}
+
+/**********************section 1*******************/
+.section-1 p
+{
+  padding:0;
+  margin:0;
+}
+.section-1 .profile
+{
+ width: 70%;
+ height: 26vh;
+ margin-top: 10% ;
+ margin-right: 13%;
+ border-radius: 60%;
+ -webkit-border-radius: 60%;
+ -moz-border-radius: 60%;
+ -ms-border-radius: 60%;
+ -o-border-radius: 60%;
+
+}
+
+.section-1 h4
+{
+ font-family: "Cairo";
+ text-align: center;
+ font-size: 16px;
+
+}
+
+.section-1 .info p
+{
+  font-family: "Cairo";
+  font-size: 12px;
+  color: #64748B;
+}
+
+.section-1 p a
+{
+  color:#18AF9A;
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
+  font-family: "Cairo";
+   font-size: 18px;
+  font-weight: 500;
+}
+
+.section-1 .info-sp
+{
+  font-size: 16px;
+  font-family: "Cairo";
+  color: #64748B;
+  font-weight: 500;
+
+}
+.section-1 .info-sp i
+{
+  background-color: #E2E8F0;
+  width: 7.5%;
+  height: 3vh;
+  border-radius: 90%;
+  -webkit-border-radius: 90%;
+  -moz-border-radius: 90%;
+  -ms-border-radius: 90%;
+  -o-border-radius: 90%;
+  font-size: 11px;
+  margin-right: 5%;
+  padding: 1.7% 1.6%;
+}
+
+.link
+{
+   width: 13%;
+  padding: 2%;
+}
+
+
+
+.btn-accordion
+{
+  width: 90%;
+  font-family: "Cairo";
+  padding:3% 3%;
+  background-color: #F1F5F9;
+  font-weight:600 ;
+  text-align: right;
   font-size: 15px;
 }
-label {
-  color: #004057;
-  // font-weight: bold;
-}
-.custom-file-button {
-  label {
-    color: white;
-    background-color: #004057;
-    border: 0px;
-    font-weight: 100;
-  }
-  input[type="file"] {
-    margin-left: -2px !important;
 
-    &::-webkit-file-upload-button {
-      display: none;
-    }
-    &::file-selector-button {
-      display: none;
-    }
-  }
-}
-h5 {
-  font-weight: bolder;
-  // font-family: 'Times New Roman', Times, serif;
-  font-size: 18px;
- // color: #18af9a;
- color: #004057;
-}
-.btn-success-style {
-  background-color: #18af9a;
-  color: #fff;
-  //padding: 3% 0%;
-}
-form-group{
-  padding: 2px;
-  width: auto;
-}
-.form-group:focus {
-  color: #212529;
-  background-color: #fff;
 
-  outline: 0;
-}
-.form-group input {
-  display: inline-block;
-  width: auto;
-  border: none;
-  border-left: none;
-}
-.form-group input:focus {
-  box-shadow: none;
-  border: none;
-}
-.carousel-indicators button {
-  display: inline-block;
-  width: 10px;
-  height: 20px;
-  margin: 10px;
-  text-indent: 0;
-  cursor: pointer;
-  border: none;
-  background-color: #004057;
-}
-.carousel-indicators .active {
-  width: 20px;
-  height: 20px;
-  margin: 10px;
-  // background-color: #18AF9A;
+
+.acc-card
+{
+   width: 85%;
+  font-family: "Cairo";
+  padding:3% 3%;
+  background-color: #F1F5F9;
+  font-size: 15px;
+  margin-right: 2%;
+  color:#475569;
+
 }
 
-input{
+.acc-card i
+{
+
+  font-weight: 400;
+  font-size: 17px;
+  color:#475569;
+}
+
+.card-1-2
+{
+  padding: 2% 4%;
+  font-size: 16px;
+  font-weight: 400;
+  color:#475569;
+  font-family: "Cairo"
+
+}
+.card-1-2 p
+{
+  padding:1%;
+  line-height: 1.6;
+}
+
+.card-1-2 .files
+{
+  background-color: #F1F5F9;
+  padding: 3% 5%;
+}
+.card-1-2 .files a
+{
+  padding: 6%;
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
+  color:#475569;
+  font-family: "Cairo";
+  font-size: 13px;
+
+}
+
+
+.mat-calendar
+{
+
+  background-color: #F1F5F9;
+
+}
+
+
+
+
+
+::ng-deep .mat-calendar-body-cell-content {
+  background-color: white ;
+  color: black;
+  width: 100%;
+  border-radius: 25% !important;
+  -webkit-border-radius: 25% !important;
+  -moz-border-radius: 25% !important;
+  -ms-border-radius: 25% !important;
+  -o-border-radius: 25% !important;
+}
+
+
+
+::ng-deep .mat-calendar-table-header , ::ng-deep .mat-calendar-body-label
+{
+  color: black;
+}
+
+::ng-deep .mat-focus-indicator
+{
+  background-color: white;
+
+
+}
+
+
+::ng-deep .mat-calendar-body-selected
+{
+  background-color: #18AF9A ;
+  color: white;
+
+
+}
+
+
+.section-1 .dir
+{
+  font-family: "Cairo";
+  font-size: 16px;
+  color: #64748B;
+  font-weight: 600;
+}
+
+.section-1 .dir i
+{
+  background-color: #E2E8F0;
+  width: 7.5%;
+  height: 3vh;
+  border-radius: 90%;
+  -webkit-border-radius: 90%;
+  -moz-border-radius: 90%;
+  -ms-border-radius: 90%;
+  -o-border-radius: 90%;
+  font-size: 11px;
+  margin-right: 3%;
+  padding: 1.7% 2.7%;
+}
+
+
+.map iframe
+{
+  border-radius: 10%;
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  -ms-border-radius: 10%;
+  -o-border-radius: 10%;
+  padding:4%;
+  height: 40vh;
+  position: relative;
+}
+
+.layout
+{
+  position: absolute;
+  width: 92%;
+  background-color: rgba(0,0,0,.5);
+  bottom:4%;
+  padding:4% 5%;
+  color:white;
+  text-align: center;
+   margin-right: 4%;
+   border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+
+}
+
+.represent
+{
+  background-color: #F1F5F9;
+  width: 90%;
+  margin-right: 5%;
+  margin-top: 3%;
+  padding: 3%;
+  margin-bottom: 15%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.represent .info-sp
+{
   font-size: 12px;
 }
 
-
-label
+.represent .info-rep
 {
-  margin:  0%;
+  font-size: 12px;
+
+  font-family: "Cairo";
+  color: #64748B;
+  font-weight: 500;
+
+}
+.represent .info-rep i
+{
+  width: 18%;
+  height: 3vh;
+
+  padding: 4%;
+
+
 }
 
-input[type="file"] + .btn
+
+.workfile
 {
-  margin: 0;
+  width: 100%;
+
 }
 
+
+@media only screen and (max-width: 768px) {
+ .acc-toggle
+ {
+
+  margin-right: 20% !important;
+ }
+ .acc-toggle button
+ {
+
+  //background-color: #004057;
+  padding:3%;
+ }
+
+}

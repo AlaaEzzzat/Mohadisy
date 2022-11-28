@@ -26,6 +26,10 @@ import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.com
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
+import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
+import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
+import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
+import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
 
 const routes: Routes = [
   {
@@ -54,23 +58,30 @@ const routes: Routes = [
               { path: 'accept', component: SpRequestAcceptComponent },
               { path: 'reject', component: SpRequestRejectComponent },
               { path: 'offer', component: SpProjectOfferComponent },
+
+              { path: 'all', component: SpProjectsComponent },
+              { path: 'all/request', component: SpCprojectRequestComponent },
+              { path: 'alloffer', component: SpCprojectOfferComponent },
+              { path: 'allaccept', component: SpCprojectAcceptComponent },
+              { path: 'allreject', component: SpCprojectRejectComponent },
             ],
+
           },
           {
             path: 'status',
             component: SpProjectStatusComponent,
             children: [
               { path: 'current', component: SpProjectCurrentComponent },
+              { path: 'pending', component: SpProjectPendingComponent},
             ],
           },
+
+
         ],
       },
-      { path: 'all', component: SpProjectsComponent },
-      { path: 'all/request', component: SpCprojectRequestComponent },
+
 
       { path: 'mainProfile', component: SpMainProfileComponent },
-
-      { path: 'project', component: SpProjectsComponent },
 
       { path: 'completeProfile', component: SpCompleteProfileComponent },
       { path: 'prevWorks', component: PrevWorksComponent },

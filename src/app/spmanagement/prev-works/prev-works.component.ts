@@ -20,6 +20,7 @@ export class PrevWorksComponent implements OnInit {
   workImages: any = [];
   AllProjectCategory: any = [];
   allServiceProviderWorks: any = [];
+  showpopup:Boolean=false;
   constructor(
     private fb: FormBuilder,
     private _toastr: ToastrService,

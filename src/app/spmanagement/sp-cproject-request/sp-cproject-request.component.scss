@@ -65,7 +65,10 @@
 }
 
 
-
+.card-1 a
+{
+  color: #18af9a;
+}
 
 
 .card-2
@@ -93,7 +96,7 @@
 {
   margin:2% 0%;
 }
-.section-2 .card-3 input
+.section-2 .card-3 input , button
 {
   padding: 2%;
   height: 7vh;
@@ -103,7 +106,7 @@
 .section-2 .card-3 textarea
 {
   width: 100%;
-  height: 60%;
+  height: 70%;
   padding: 2%;
 }
 
@@ -117,12 +120,25 @@
 
 
 
-.card-3 button
-{
+ .card-3 input[type="submit"],.card-3 .add , .card-3 button
+ {
+   background-color: #18af9a;
+   color: white;
+   margin-right: 75%;
+ }
+
+
+ .send
+ {
   background-color: #004057;
   color: white;
-  margin-right: 75%;
-}
+  padding: 1% 4%;
+  margin-right: 85%;
+
+ }
+
+
+
 
 
 
@@ -169,3 +185,61 @@
 
   content:"--------------------------------------------------------------------------------------";
 }
+
+
+
+.page-link
+{
+
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+
+.stage
+ {
+  margin-top: 8%;
+  color: #004057;
+  font-weight: 700;
+ }
+
+input::placeholder
+ {
+
+  padding-right: 2%;
+ }
+input:target
+{
+  padding-right: 10%;
+}
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
+
+}
+thead
+{
+  background-color: #18af9a;
+}
+thead tr
+{
+color:white;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }

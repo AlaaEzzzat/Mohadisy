@@ -13,8 +13,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
 
 const routes: Routes = [
 
@@ -31,6 +32,7 @@ const routes: Routes = [
     LandingComponent,
     ChatComponent,
     ScrollToBottomDirective,
+    MyCalendarComponent,
   ],
   imports: [
     MatMenuModule,

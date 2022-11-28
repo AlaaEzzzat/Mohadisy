@@ -11,6 +11,10 @@
    color:#004057;
 }
 
+.card-1 a
+{
+  color: #18af9a;
+}
 .section-2  .card-2 p
 {
   padding: 1% 2%;
@@ -105,6 +109,12 @@ ul li i
 li
 {
   cursor:pointer;
+
+}
+
+.card-3 i
+{
+  color:#18af9a;
 }
 
 
@@ -117,6 +127,38 @@ li
 
 
 
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
 
 
+
+
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
+
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
 

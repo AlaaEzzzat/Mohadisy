@@ -1,5 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sp-project-current',
@@ -8,6 +11,16 @@ import { ApiService } from 'src/app/@core/api.service';
 })
 export class SpProjectCurrentComponent implements OnInit {
 
+   nameStage:any=
+  [
+    "المرحله الاولى",
+    "المرحله الثانيه",
+    "المرحله الثالثه",
+    "المرحله الرابعه",
+    "المرحله الخامسه",
+    "المرحله السادسه"
+  ];
+  selected:number=Date.now();
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
@@ -20,20 +33,48 @@ export class SpProjectCurrentComponent implements OnInit {
   descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
+  totalpages: any = 0;
+  pages:Array<any>=[];
+  Allstages:Array<any>=[];
+  togglestage:any=[];
+  index:number=0;
+  calcPrecentage:number=0;
+  statusStage:any="لم يتم الانتهاء من اى مرحله";
+  Reason:any;
+  Representative:any;
 
- constructor(private api:ApiService) { }
+ constructor(private api:ApiService,private router:Router) {
+  this.Reason=new FormGroup(
+    {
+      reason:new FormControl('',[Validators.required]),
+
+    });
+ }
 
  ngOnInit(): void {
 
    this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
-
    console.log(data);
    this.Listprojects=data.data.projects;
-   if(this.Listprojects.length>0)
+   this.totalpages=data.data.totalPages;
+   for(let i=1;i<=this.totalpages;i++)
+    this.pages.push(i);
+   if(this.Listprojects.length>0){
    this.result=1;
+
+   }
 
 
    });
+
+   this.api.get("https://app.mohandisy.com/api/Representative/getRepresentative").subscribe(
+    data=>
+    {
+      this.Representative=data.data;
+
+    }
+   );
+
 
  }
 
@@ -51,6 +92,17 @@ export class SpProjectCurrentComponent implements OnInit {
        break;
      }
     }
+    console.log(this.selectProject);
+
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+   {
+    this.togglestage=[];
+     this.Allstages=data.data;
+     console.log(this.Allstages);
+     this.index=0;
+
+   }
+   );
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -106,6 +158,8 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
 
+
+
     /*************************************/
     toggoleComponent(componentId:any)
     {
@@ -127,14 +181,72 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
-    toggoleDocument(documentId:any)
+
+
+    toggleStage(stageId:any)
     {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
+
+     if(this.togglestage[stageId]==1){
+      this.togglestage[stageId]=0;
+      }
+      else{
+      this.togglestage[stageId]=1;
+      }
+
     }
 
+    pending(stageid:any)
+    {
+
+
+      var pendingData=
+      {
+        "milestoneId":stageid,
+        "reason":this.Reason.get('reason').value
+      }
+      this.api.postJson("https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending",pendingData).subscribe({
+        next:(data)=>
+        {
+          console.log(data);
+
+            Swal.fire(
+              'تم تعليق المرحله بنجاح'
+            );
+
+            this.router.navigate(['/Spmanagement/projects/status/pending']);
+
+        }
+
+
+      });
+
+
+
+    }
+
+    finished(stageid:any)
+    {
+      this.calcPrecentage+=(100.0/Number(this.Allstages.length));
+      this.api.get(`https://app.mohandisy.com/api/Milestone/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
+        next:(data)=>
+        {
+          console.log(data);
+
+            Swal.fire(
+              'تم انهاء المرحله بنجاح'
+            );
+        }
+
+
+
+      })
+
+    }
+
+    downloadFile(id:any,file:any)
+    {
+
+    }
 
     changepage(e:any)
     {
@@ -147,6 +259,11 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
    });
+    }
+
+    onSubmit()
+    {
+
     }
 
  }

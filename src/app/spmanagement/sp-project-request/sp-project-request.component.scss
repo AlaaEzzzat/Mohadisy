@@ -13,6 +13,11 @@
     color:#004057;
  }
 
+ .card-1 a
+ {
+   color: #18af9a;
+ }
+
  .section-2 .card-1 p
  {
    margin-right: 5%;
@@ -81,7 +86,7 @@
 
  .return
  {
-   margin-right: 94%;
+   margin-right: 90%;
    text-decoration-line: none;
    -moz-text-decoration-line: none;
    color:#198754;
@@ -89,7 +94,7 @@
  }
 
 
- button
+ input[type="submit"]
  {
    background-color: #004057;
    color: white;
@@ -133,5 +138,24 @@ input::placeholder
    padding-right: 7%;
 
 }
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
 
+}
 
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }

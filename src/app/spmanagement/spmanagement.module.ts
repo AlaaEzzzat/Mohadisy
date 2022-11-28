@@ -32,6 +32,16 @@ import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.com
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
+import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pending.component';
+import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
+import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
+import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { NgCircleProgressModule } from 'ng-circle-progress';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +76,11 @@ import { SpProjectCurrentComponent } from './sp-project-current/sp-project-curre
     SpProjectStatusComponent,
     SpMenuOffersComponent,
     SpProjectCurrentComponent,
+    SpProjectPendingComponent,
+    SpCprojectOfferComponent,
+    SpCprojectAcceptComponent,
+    SpCprojectRejectComponent,
+
   ],
   imports: [
     MatSelectModule,
@@ -77,6 +92,27 @@ import { SpProjectCurrentComponent } from './sp-project-current/sp-project-curre
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgCircleProgressModule.forRoot({
+      "radius": 60,
+      "space": -10,
+      "outerStrokeGradient": true,
+      "outerStrokeWidth": 10,
+      "outerStrokeColor": "#4882c2",
+      "outerStrokeGradientStopColor": "#53a9ff",
+      "innerStrokeColor": "#e7e8ea",
+      "innerStrokeWidth": 10,
+      "title": "",
+      "animateTitle": false,
+      "animationDuration": 1000,
+      "showUnits": false,
+      "showBackground": false,
+      "clockwise": false,
+      "startFromZero": false,
+      "lazy": true
+    }),
   ],
+
 })
 export class SPmanagementModule {}

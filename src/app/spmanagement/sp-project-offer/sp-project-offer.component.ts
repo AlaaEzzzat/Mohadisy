@@ -20,6 +20,8 @@ export class SpProjectOfferComponent implements OnInit {
   descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
+  totalpages: any = 0;
+  pages:Array<any>=[];
 
  constructor(private api:ApiService) { }
 
@@ -27,12 +29,22 @@ export class SpProjectOfferComponent implements OnInit {
 
    this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
    this.Listprojects=data.data.projects;
+   console.log(data);
+   this.totalpages=data.data.totalPages;
+   for(let i=1;i<=this.totalpages;i++)
+    this.pages.push(i);
+
    if(this.Listprojects.length>0)
    this.result=1;
 
    });
 
  }
+
+
+
+
+
 
 
  showData(idProject:number)
@@ -132,16 +144,21 @@ export class SpProjectOfferComponent implements OnInit {
      this.descDocument[documentId]=1;
     }
 
+
+    downloadFile(id:any,file:any)
+    {
+
+    }
+    
     changepage(e:any)
     {
 
      this.page=e;
-     console.log(this.page);
-     this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/subServiceId/1003/Page/${this.page}`).subscribe(data=>{
+     this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/
+     ${this.page}`).subscribe(data=>{
 
-      this.Listprojects=data.data.priceQuotes;
-      if(this.Listprojects.length>0)
-     this.result=1;
+      this.Listprojects=data.data.projects;
+      console.log(data);
 
 
    });

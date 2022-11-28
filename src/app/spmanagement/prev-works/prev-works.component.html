@@ -248,13 +248,13 @@
                   <ng-container
                     *ngFor="let img of work.serviceProviderWorkFiles"
                   >
-                    <li class="mb-1">
-                      <a target="_blank" [href]="img.filePath">{{
+                    <li (click)="showpopup=true" class="mb-1">
+                      <p>{{
                         img.file.split("\\").slice(-1)[0].length > 15
                           ? img.file.split("\\").slice(-1)[0].substr(0, 15) +
                             "..."
                           : img.file.split("\\").slice(-1)[0]
-                      }}</a>
+                      }}</p>
                     </li>
                   </ng-container>
                 </ul>
