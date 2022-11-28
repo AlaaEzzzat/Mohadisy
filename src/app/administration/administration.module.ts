@@ -9,8 +9,6 @@ import { AdminProjectComponent } from './admin-project/admin-project.component';
 import { AdminClientsComponent } from './admin-clients/admin-clients.component';
 import { AdminContributionsComponent } from './admin-contributions/admin-contributions.component';
 import { AdminMessagesComponent } from './admin-messages/admin-messages.component';
-import { AdminPaymentsComponent } from './admin-payments/admin-payments.component';
-import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 import { AdminSPComponent } from './admin-sp/admin-sp.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
@@ -22,12 +20,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CountryTransformPipe } from '../@shared/Pipes/country-transform.pipe';
 import { TestComponent } from './test/test.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -37,8 +37,6 @@ import { MatMenuModule } from '@angular/material/menu';
     AdminClientsComponent,
     AdminContributionsComponent,
     AdminMessagesComponent,
-    AdminPaymentsComponent,
-    AdminSettingsComponent,
     AdminSPComponent,
     TestComponent,
     AdminSpUpdataComponent,
@@ -60,6 +58,14 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
   ],
+  providers:[
+    MatDatepickerModule,
+    MatNativeDateModule  
+  ]
 })
 export class AdministrationModule {}

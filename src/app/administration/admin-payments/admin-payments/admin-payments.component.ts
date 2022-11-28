@@ -10,6 +10,7 @@ export class AdminPaymentsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -122,3 +122,32 @@
   }
 
 }
+
+.carousel-item
+{
+  height: 70vh ;
+}
+
+.carousel-item img
+{
+  height: 100%;
+}
+
+
+.modal-dialog
+{
+  padding:0% 10%;
+  position: relative;
+}
+.carousel-control-prev
+{
+  right:100%;
+  color: white;
+}
+
+
+.carousel-control-next
+{
+  right:-14%;
+   color: white;
+}

@@ -46,6 +46,11 @@ export class AdminProjectsService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getStoppedProjectsForAdmin/Page/${page}`);
   }
+
+  getOfferSenderProfile(id:any){
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Offer/getOfferSenderProfile/${id}`);
+
+  }
   // PriceQuotes
 
   getNewProjectsForAdmin(page:number):Observable<any>
@@ -87,5 +92,16 @@ export class AdminProjectsService {
 
       })
     }))
+  }
+
+  //
+
+  getRequiredWorkByWorkId(requiredWorkId:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`);
+  }
+  getProjectComponentById(componentId:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getProjectComponentById/${componentId}`);
   }
 }

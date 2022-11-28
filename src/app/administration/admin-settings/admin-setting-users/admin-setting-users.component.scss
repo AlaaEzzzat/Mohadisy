@@ -1,49 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Tajawal', sans-serif;
+
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#F3FBFA;
-$font25Size:25px;
-$font18Size:18px;
-$font16Size:16px;
-$font40Size:40px;
-$font20Size:20px;
-$font15Size:15px;
 
 
-@mixin titleTotal($fontS,$fontfa){
-  font-size: $fontS;
-  font-family:$fontfa;
-}
 
 
-@mixin text18{
-  font-size: $font18Size;
-  font-family:$fontCairoFamily ;
-}
-@mixin text20{
-  font-size: $font20Size;
-  font-family:$fontCairoFamily ;
-}
-@mixin text16{
-  font-size: $font16Size;
-  font-family:$fontCairoFamily ;
-}
-@mixin text15{
-  font-size: $font15Size;
-  font-family:$fontCairoFamily ;
-}
 
-.sizeSvg{
-  width: 12%;
-}
-.sizeText{
-@include titleTotal($font40Size,$fontTajawalFamily )
-}
+
 .sizeAc{
-  @include text20();
   background-color: $Alltext!important;
   color: white;
   &.sizeAc{
@@ -53,8 +21,21 @@ $font15Size:15px;
   }
 }
 .buttonChose{
-  @include titleTotal($font25Size,$fontTajawalFamily);
+ font-family: $fontCairoFamily;
 
+}
+.btndark{
+  background-color: $Alltext;
+  color: #fff;
+  &:hover{
+    background-color: #fff  ;
+  color:$Alltext;
+  border: 1px solid $Alltext;
+  }
+}
+input[type="text"]:focus{
+  border: 1px solid $Alltext;
+  box-shadow: none;
 }
 .buttonAdd{
   background-color: #F3FBFA!important;
@@ -74,16 +55,16 @@ $font15Size:15px;
   margin-top: 16px;
 }
 .nameProfile{
-  @include text20();
+
   color:$Alltext
 }
 .emANumProfile{
-  @include text20();
+ 
   color:$textColor
 
 }
 .stutsProfile ,.edit{
-  @include text15();
+ 
   color: #4B4A4A;
   span {
     color: $textColor!important;
@@ -94,15 +75,15 @@ $font15Size:15px;
   color: $textColor!important;
 
 }
-.titles
-{
-  @include titleTotal($font25Size,$fontTajawalFamily);
+// .titles
+// {
+//   @include titleTotal($font25Size,$fontTajawalFamily);
 
-}
-.reson{
-  @include titleTotal($font20Size,$fontTajawalFamily )
+// }
+// .reson{
+//   @include titleTotal($font20Size,$fontTajawalFamily )
 
-}
+// }
 .reson>.col-3.me-4.pe-1{
   color: $Alltext;
 }
@@ -112,4 +93,33 @@ $font15Size:15px;
 button.active{
   background-color: #004057  !important;
   color:#fff !important;
+}
+
+// 
+.scrolls
+{
+  height: 60vh !important;
+  overflow: hidden;
+  &:hover{
+    overflow-y: auto !important;
+
+  }
+
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #d3d3d3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#d3d3d3;
+  border-radius: 10px;
+
 }

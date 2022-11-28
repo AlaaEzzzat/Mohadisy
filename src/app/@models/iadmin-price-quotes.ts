@@ -1,7 +1,7 @@
 export interface IadminPriceQuotes {
   id: any;
-  plotNumber:any;
-  rganizationalChartNumber:any;
+  plotNumber: any;
+  rganizationalChartNumber: any;
   clientProfileId: any;
   projectServiceId: any;
   projectSubServiceId: any;
@@ -15,7 +15,7 @@ export interface IadminPriceQuotes {
   subject: any;
   code: any;
   projectRequestStatusId: any;
-  projectRequestStatus:{
+  projectRequestStatus: {
     id: any;
     rejectionReasonId: any;
     notes: any;
@@ -29,66 +29,71 @@ export interface IadminPriceQuotes {
   isOpenForOffers: boolean;
   pricequoteEndDate: any;
   requiredWorksNotes: any;
-  clientProfile:any |  undefined|{
-    id: any;
-    applicationUserId:any;
-    applicationUser: any | {
-      id: any;
-      roleId: any;
-      accountId: any;
-      organizationalServiceProviderProfile: any;
-      individualServiceProviderProfile: any;
-      applicationRole: any;
-      accountType: any;
-      emailVerifyToken: any;
-      passResetToken: any;
-      complaints: any [];
-      testimonials: any[];
-      appointments: any;
-      adminProfile: any;
-      isActive: true;
-      connectionId: any;
-      accountActivationApplicationUserWhoTakeDecision: any;
-      accountActivationApplicationUsers: [];
-      messageReceivers: any;
-      messageSenders: any;
-      serviceProviderPartnerships: any;
-      roles: any;
-      userName: any;
-      normalizedUserName:any;
-      email: any;
-      normalizedEmail: any;
-      emailConfirmed: true;
-      passwordHash: any;
-      securityStamp: any;
-      concurrencyStamp: any;
-      phoneany: any;
-      phoneanyConfirmed: any;
-      twoFactorEnabled: any;
-      lockoutEnd: any;
-      lockoutEnabled: any;
-      accessFailedCount: any;
-    };
-    firstName: any;
-    lastName: any;
-    idFile: any;
-    neighborhood: any;
-    streetName: any;
-    buildingany: any;
-    additionalany: any;
-    postalCode: any;
-    joinRequestStatusId: any;
-    districtId: any;
-    dateCreated: any;
-    idany: any;
-    accountOverview: any;
-    profilePictureFile: any|  undefined;
-    district: any;
-    joinRequestStatus: any;
-    projects: any[];
-    profilePicturePath: any;
-    idPath: any;
-  };
+  clientProfile:
+    | any
+    | undefined
+    | {
+        id: any;
+        applicationUserId: any;
+        applicationUser:
+          | any
+          | {
+              id: any;
+              roleId: any;
+              accountId: any;
+              organizationalServiceProviderProfile: any;
+              individualServiceProviderProfile: any;
+              applicationRole: any;
+              accountType: any;
+              emailVerifyToken: any;
+              passResetToken: any;
+              complaints: any[];
+              testimonials: any[];
+              appointments: any;
+              adminProfile: any;
+              isActive: true;
+              connectionId: any;
+              accountActivationApplicationUserWhoTakeDecision: any;
+              accountActivationApplicationUsers: [];
+              messageReceivers: any;
+              messageSenders: any;
+              serviceProviderPartnerships: any;
+              roles: any;
+              userName: any;
+              normalizedUserName: any;
+              email: any;
+              normalizedEmail: any;
+              emailConfirmed: true;
+              passwordHash: any;
+              securityStamp: any;
+              concurrencyStamp: any;
+              phoneany: any;
+              phoneanyConfirmed: any;
+              twoFactorEnabled: any;
+              lockoutEnd: any;
+              lockoutEnabled: any;
+              accessFailedCount: any;
+            };
+        firstName: any;
+        lastName: any;
+        idFile: any;
+        neighborhood: any;
+        streetName: any;
+        buildingany: any;
+        additionalany: any;
+        postalCode: any;
+        joinRequestStatusId: any;
+        districtId: any;
+        dateCreated: any;
+        idany: any;
+        accountOverview: any;
+        profilePictureFile: any | undefined;
+        district: any;
+        joinRequestStatus: any;
+        projects: any[];
+        profilePicturePath: any;
+        idPath: any;
+      };
   district: {
     id: 11102522001;
     cityId: 2522;
@@ -201,7 +206,17 @@ export interface IadminPriceQuotes {
     projects: [];
   };
   projectSubService: any;
-  clientProjectDocuments: [];
+  clientProjectDocuments: [
+    {
+      dateCreated: '2022-11-15T21:01:00';
+      file: '63804142852570850501.jpg';
+      filePath: 'https://app.mohandisy.com/files/Projects/63804142852570850501.jpg';
+      id: 1165;
+      projectId: 1201;
+      requiredDocument: null;
+      requiredDocumentId: 1;
+    }
+  ];
   negotiations: [];
   offers: [];
   projectComponents: [
@@ -429,7 +444,7 @@ export interface IadminPriceQuotes {
               requiredDocuments: [];
             },
             {
-              id:any ;
+              id: any;
               name: any;
               projectServiceId: 1;
               projectRequiredWorks: [
@@ -441,7 +456,7 @@ export interface IadminPriceQuotes {
               requiredDocuments: any[];
             },
             {
-              id:any;
+              id: any;
               name: any;
               projectServiceId: 1;
               projectRequiredWorks: [
