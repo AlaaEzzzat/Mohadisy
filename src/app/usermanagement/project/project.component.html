@@ -406,7 +406,10 @@
                           <h4 class="card-text cairo">
                             {{ offerSender.companyName || offerSender.name }}
                           </h4>
-                          <p class="card-text d-flex align-items-center">
+                          <p
+                            (click)="startChat = true"
+                            class="card-text d-flex align-items-center"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="22"
@@ -526,7 +529,7 @@
                             data-parent="#accordian"
                           >
                             <p class="cairo p-2 mb-2">
-                              {{project.projectRequestStatus.notes}}
+                              {{ project.projectRequestStatus.notes }}
                             </p>
                           </div>
                         </div>
@@ -540,7 +543,6 @@
                   <div class="bg-white p-3">
                     <label class="head mb-3 cairo">نبذه عن المشروع </label>
                     <p class="cairo">
-                     
                       {{ project.subject }}
                     </p>
                   </div>
@@ -828,6 +830,45 @@
     <div id="mymModal" class="mmodal">
       <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
       <div id="caption"></div>
+    </div>
+  </div>
+</div>
+<div class="overlay p-5" *ngIf="startChat">
+  <div class="popup p-5">
+    <a class="close" style="cursor: pointer" (click)="startChat = false"
+      >&times;</a
+    >
+    <div class="content">
+      <div class="message-input">
+        <div class="wrap">
+          <input
+            #textInput
+            type="text"
+            placeholder="اكتب رسالتك ..."
+            class="cairo"
+          />
+          <i class="fa-solid fa-paperclip attachment" aria-hidden="true">
+            <input
+              (change)="onFileUpload($event)"
+              #fileImage
+              type="file"
+              alt=""
+              name="attatch"
+              id="attatch"
+              class="attatch"
+            />
+            <small *ngIf="fileMessage">{{ fileMessage.name }}</small> </i
+          ><!--  (click)="sendMessage()" -->
+          <button
+            (click)="
+              sendMessage(textInput.value, offerSender.applicationUserId)
+            "
+            class="submit"
+          >
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

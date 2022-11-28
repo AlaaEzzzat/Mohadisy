@@ -86,9 +86,7 @@ a{
     }
     /* ********************* */
     .overlay {
-      *{
-    font-family: 'cairo';
-      }
+     
       position: fixed;
       top: 0;
       bottom: 0;
@@ -144,4 +142,67 @@ a{
      .close:hover {
       color: #18AF9A;
     }
-    
+    .message-input {
+		
+			
+			.wrap {
+				position: relative;
+			
+				input {
+					font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+					float: right;
+					border-radius: 0px 10px 10px 0 ;
+					width: calc(100% - 50px);
+					padding: 12px ;
+					font-size: 0.8em;
+          border: 1px solid #004057;
+
+					color: #004057;
+
+					&:focus {
+						outline: none;
+					}
+				}
+				
+				.attachment {
+					position: absolute;
+					left: 60px;
+					z-index: 4;
+					margin-top: 10px;
+					font-size: 1.4em;
+					color: #004057;
+					opacity: .5;
+					cursor: pointer;
+					
+					&:hover {
+						opacity: 1;
+					}
+					.attatch{
+						opacity: 0;
+						position: relative;
+						width: 31px;
+						padding: 0;
+						left: -19px;
+					  }
+					}
+				}
+
+				button {
+					float: right;
+					border: none;
+					width: 50px;
+					padding: 12px 0;
+					cursor: pointer;
+          border: 1px solid #004057;
+					background: #004057;
+					color: #FFF;
+					
+					&:hover {
+						background: #18AF9A;
+					}
+					
+					&:focus {
+						outline: none;
+					}
+				}
+			}

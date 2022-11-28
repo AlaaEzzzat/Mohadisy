@@ -1,5 +1,5 @@
 <section class="chat">
-  <div id="frame">
+  <div id="frame"  #scrollMe [scrollTop]="scrollMe.scrollHeight">
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-md-4 col-2 h-100">
@@ -13,7 +13,7 @@
                   alt=""
                 />
                 
-                <p class="me-3">{{userType == 'Client'?clientProfile.firstName+ ' '+ clientProfile.lastName:userType == 'CO'?clientProfile.organizationalServiceProviderProfile?.companyName:clientProfile.organizationalServiceProviderProfile?.companyLogoPath}}</p>
+                <p class="me-4">{{userType == 'Client'?clientProfile.firstName+ ' '+ clientProfile.lastName:userType == 'CO'?clientProfile.organizationalServiceProviderProfile?.companyName:clientProfile.organizationalServiceProviderProfile?.companyLogoPath}}</p>
 
                 <div id="status-options">
                   <ul>
@@ -37,7 +37,6 @@
                         <li class="contact" (click)="showMessage(user)" >
                               <div class="wrap d-flex align-items-center">
                                 <div>
-                                <!--   <span class="contact-status online"></span> -->
                                   <img
                                     [src]="user.profilePicture?user.profilePicture:'' "
                                     alt=""
@@ -45,7 +44,7 @@
                                 </div>
                                 <div class="meta me-3">
                                   <p class="name m-0">{{user.fullName}}</p>
-                                  <p class="preview">{{user.lastMessage }}</p>
+                                  <p class="preview">{{user.lastMessage.length > 15 ? user.lastMessage.substr(0,15) + '...':user.lastMessage }}</p>
                                 </div>
                               </div>
                             </li>
@@ -64,21 +63,22 @@
         </div>
       
       <div class="col-md-8 col-10 h-100">
-            <div class="content">
-              <div *ngIf="userType == 'Client'" class="contact-profile">
+            <div *ngIf="activeUser" class="content">
+              <div  class="contact-profile">
                 <img [src]="activeUser.profilePicture" alt="" />
                 <p>{{activeUser.fullName}}</p>
           </div>
-          <div *ngIf="userType == 'CO'" class="contact-profile">
-            <img [src]="activeUser.organizationalServiceProviderProfile?.companyLogoPath" alt="" />
-            <p>{{activeUser.organizationalServiceProviderProfile?.companyName}}</p>
-      </div>
-                   <div class="messages">
+         
+                   <div class="messages" >
                         <ul>
                               <ng-container *ngFor="let msg of activeChatUserChat">
-                                    <li class="" [ngClass]="msg.senderId ==clientProfile.applicationUserId? 'sent':'replies' ">
+                                    <li class="" [ngClass]="msg.senderId ==clientProfile.applicationUserId || msg.senderId ==clientProfile.id? 'sent':'replies' ">
                                           <img [src]="msg.senderId ==clientProfile.applicationUserId? clientProfile.profilePicturePath :activeUser.profilePicture " alt="" />
-                                          <p>{{msg.content}}</p>
+                                          <p *ngIf="msg.messageType.type == 'Text'" class="cairo">{{msg.content}}</p>
+                                          <img class="imgMsg mb-2" [src]="msg.content" *ngIf="msg.messageType.type == 'Image'" />
+                                          <p *ngIf="msg.messageType.type == 'File'" class="cairo">{{msg.content.split("/").slice(-1)[0] }}
+                                            <i class="fa fa-download me-3" (click)="download(msg.content, msg.content.split('/').slice(-1)[0])"></i>
+                                          </p>
                                     </li>
                               </ng-container>
                         </ul>
@@ -88,8 +88,8 @@
                         <input #textInput type="text" placeholder="اكتب رسالتك ..." class="cairo" />
                         <i class="fa fa-paperclip attachment" aria-hidden="true">
                               <input (change)="onFileUpload($event)" #fileImage type="file" alt="" name="attatch" id="attatch" class="attatch">
-                              <small *ngIf="this.fileMessage">{{this.fileMessage.name}}</small>
-                        </i><!--  (click)="sendMessage()" -->
+                              <small *ngIf="fileMessage">{{fileMessage.name}}</small>
+                        </i>
                         <button (click)="sendMessage(textInput.value,activeUser.id)" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
                   </div>

@@ -1,6 +1,8 @@
+import { ChatService } from './../../@core/services/chat/chat.service';
+import { IMessage } from './../../@models/message';
 import { HttpClient } from '@angular/common/http';
 import { ClientService } from './../../@core/services/client/client.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
 @Component({
@@ -15,6 +17,7 @@ export class ProjectComponent implements OnInit {
   projectServices: any = [];
   projectServiesArray: any = [];
   numOfCompltedMilesones: any = 0;
+  startChat:boolean = false;
   projectCategory: any = [
     { id: 1, name: 'مشاريع حالية' },
     { id: 2, name: 'مشاريع معلقه' },
@@ -26,6 +29,7 @@ export class ProjectComponent implements OnInit {
   activeCategory: any = 1;
   projectId: any = '';
   serviceId: any = '';
+  message:IMessage = {} as IMessage;
   project: any = {};
   projectsComponents: any = [];
   projectReqWorks: any = [];
@@ -40,7 +44,9 @@ export class ProjectComponent implements OnInit {
   constructor(
     private _HttpClient: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private chatService: ChatService,
+    private router: Router
   ) {}
   isActiveService(id: any) {
     this.activeService = id;
@@ -207,31 +213,6 @@ export class ProjectComponent implements OnInit {
       console.log(this.activeService)
       this.isActiveService(this.activeService);
     });
-
-    /* this.activatedRoute.paramMap.subscribe((paramMap)=>{
-  this.params = paramMap.get('id')?paramMap.get('id') : '';
-  this.serviceId = this.params?.split("-")[0];
-  this.projectId=this.params?.split("-")[1];
-  console.log(this.serviceId)
-  this.clientService.getProjectsByService(this.serviceId).subscribe((projects:any)=>{
-    console.log(projects.data);
-
-
-projects.data.map((project:any)=>{
-  if(project.id == this.projectId){
-    this.project = project;
-    this.mapOnProjectsComponets(this.project.projectComponents
-      );
-      this.mapOnProjectsReuiredWorks(this.project.projectRequiredWorks);
-    console.log(this.projectId);
-    console.log(this.project);
-  }
-})
-  })
-
-
-
-}) */
   }
   mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
     this.projectReqWorks = [];
@@ -275,5 +256,39 @@ projects.data.map((project:any)=>{
   showImg(src: any) {
     this.showModal = true;
     this.modalSrc = src;
+  }
+  fileMessage:any = '';
+  onFileUpload(event: any) {
+    if (event.target.files.length > 0) {
+      const myfile = event.target.files[0];
+      this.fileMessage = myfile;
+      console.log(this.fileMessage)
+      console.log(this.fileMessage.name)
+    }
+  }
+  sendMessage(message: string, receiverId:string) {
+    var type:number=1;
+    this.message.content = message;
+    this.message.messageTypeId = type;
+    this.message.receiverId = receiverId;
+    this.sendMessageToEndPoint(this.message,receiverId);
+    if(this.fileMessage){
+      type=2;
+    this.message.content = this.fileMessage;
+    this.message.messageTypeId = type;
+    this.message.receiverId = receiverId;
+      this.sendMessageToEndPoint(this.fileMessage,receiverId);
+    }
+  }
+  sendMessageToEndPoint(message:any,receiverId:any){
+    this.chatService.sendMessage(message).subscribe({
+      next: (data: any) => {
+        console.log(data);
+        this.router.navigate(['/usermanagement/chat']);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
   }
 }

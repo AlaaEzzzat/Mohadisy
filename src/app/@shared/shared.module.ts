@@ -1,3 +1,4 @@
+import { ScrollToBottomDirective } from './directives/scroll-to-bottom';
 import { ChatComponent } from './components/chat/chat.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,7 +29,8 @@ const routes: Routes = [
     NavbarComponent,
     CalendarComponent,
     LandingComponent,
-    ChatComponent
+    ChatComponent,
+    ScrollToBottomDirective,
   ],
   imports: [
     MatMenuModule,

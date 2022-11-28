@@ -43,5 +43,10 @@ export class ChatService {
     );
   }
   
- 
+  sendMessageFile(messageId: any, file:any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Chat/sendMessageFile/${messageId}`,
+      file
+    );
+  }
 }

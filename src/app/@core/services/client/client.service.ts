@@ -118,6 +118,12 @@ export class ClientService {
       `${environment.baseUrl}/api/Project/getProjectComponentById/${componentId}`
     );
   }
+  
+  getMaterialsByOfferId(offerId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Offer/getMaterialsByOfferId/${offerId}`
+    );
+  }
   getRequiredWorkByWorkId(requiredWorkId: any): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`

@@ -608,15 +608,15 @@
                     </div>
                     <div class="cairo p-3 bg-white" *ngIf="usedMaterials">
                       <div
-                        *ngIf="!offer.materials.length"
+                        *ngIf="usedMaterialsArray.length == 0"
                         class="cairo bg-white"
                       >
                         المواد المستخدمة غير مذكورة
                       </div>
 
-                      <ng-container *ngIf="offer.materials.length">
-                        <ul *ngFor="let mat of offer.materials">
-                          <li>{{ mat }}</li>
+                      <ng-container *ngIf="usedMaterialsArray.length">
+                        <ul *ngFor="let mat of usedMaterialsArray">
+                          <li>{{ mat.name }}</li>
                         </ul>
                       </ng-container>
                     </div>

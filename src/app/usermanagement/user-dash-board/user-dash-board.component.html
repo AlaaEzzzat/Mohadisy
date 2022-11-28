@@ -85,58 +85,41 @@
           >
           <div>
             <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.newProjectsNumber | number }}</p>
+              <p class="text-center mt-2">{{ data.overview?.projects.currentProjectsNumber | number }}</p>
               <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.newProjectsCost | number }}</p>
+              <p class="text-center mt-2">{{ data.overview?.projects.currentProjectsCost | number }}</p>
             </div>
-            <p class="text-center my-2">جديدة</p>
+            <p class="text-center my-2">حالي</p>
           </div>
           <div>
             <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.acceptedProjectsNumber | number }}</p>
+              <p class="text-center mt-2">{{ data.overview?.projects.finishedProjectsNumber | number }}</p>
               <hr class="m-0" />
-              <p class="text-center mt-2">{{data.overview?.projects.acceptedProjectsCost
+              <p class="text-center mt-2">{{data.overview?.projects.finishedProjectsCost
                 | number }}</p>
             </div>
-            <p class="text-center my-2">مقبولة</p>
-          </div>
-          <!-- <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ completedProjects.length | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ completedProjectsCost | number }}</p>
-            </div>
-            <p class="text-center my-2"> مكتمل</p>
-          </div> -->
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ completedProjects.length
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ completedProjectsCost
-                | number }}</p>
-            </div>
-            <p class="text-center my-2">  مكتمل</p>
+            <p class="text-center my-2">مكتمل</p>
           </div>
           <div>
             <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.notCompletedProjectsNumber
+              <p class="text-center mt-2">{{ data.overview?.projects.pendingProjectsNumber
                 | number }}</p>
               <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.notCompletedProjectsCost
+              <p class="text-center mt-2">{{ data.overview?.projects.pendingProjectsCost
                 | number }}</p>
             </div>
-            <p class="text-center my-2"> غير مكتمل</p>
+            <p class="text-center my-2">  معلق</p>
           </div>
-          <!-- <div>
+          <div>
             <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{data.overview?.projects.rejectedProjectsCost
+              <p class="text-center mt-2">{{ data.overview?.projects.stoppedProjectsNumber
                 | number }}</p>
               <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.rejectedProjectsNumber                | number }}</p>
+              <p class="text-center mt-2">{{ data.overview?.projects.stoppedProjectsCost
+                | number }}</p>
             </div>
-            <p class="text-center my-2">مرفوضه</p>
-          </div> -->
+            <p class="text-center my-2"> موقوف </p>
+          </div>
           </div>
         </div>
       </div>

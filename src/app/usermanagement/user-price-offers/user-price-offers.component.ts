@@ -37,6 +37,7 @@ export class UserPriceOffersComponent implements OnInit {
   rules: boolean = false;
   seeProjectInfo: boolean = false;
   usedMaterials: boolean = false;
+  usedMaterialsArray:any=[]
   showProjectProfile: boolean = false;
   paymethods: boolean = false;
   invoiceValue: any = 0;
@@ -193,6 +194,7 @@ export class UserPriceOffersComponent implements OnInit {
   }
   showOffers(project: any) {
     console.log(project)
+   
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
     console.log(this.activeProjectReqWorks);
@@ -208,6 +210,12 @@ export class UserPriceOffersComponent implements OnInit {
       this.selectedOffer = this.offersOfSelectedProject[0];
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
       this.getMilestonse(this.selectedOfferId);
+      if(this.selectedProject.projectService.id == 2){
+        this.clientService.getMaterialsByOfferId(this.selectedOfferId).subscribe((data:any)=>{
+          this.usedMaterialsArray = data.data
+          console.log(data.data)
+        })
+      }
       if (this.selectedOffer.organizationalServiceProviderProfileId) {
         this.clientService
           .getOfferSender(
