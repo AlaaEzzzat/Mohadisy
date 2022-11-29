@@ -1,6 +1,6 @@
-<div class="my-3 container-fluid">
+<div class="my-3 container-fluid cairo">
   <div
-    class="d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
+    class=" cairo d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
   >
     <button
       class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
@@ -73,25 +73,16 @@
   <div class="alert alert-success" role="alert" *ngIf="show">
     {{ messages }}
   </div>
-  <div
-    class="alert alert-danger d-flex align-items-center"
-    role="alert"
-    *ngIf="showDanger"
-  >
-    <div>العميل موجود بالفعل</div>
-  </div>
 
-  <div
-    class="col-12 d-flex flex-row flex-wrap justify-content-between"
-    *ngIf="isProcessing; else undefind"
-  >
+
+  <div class="col-12 d-flex flex-row flex-wrap justify-content-between"  *ngIf="isProcessing; else undefind" >
     <div class="col-md-4 col-12 position-relative">
       <form class="d-flex flex-column me-3">
         <!-- search company -->
 
         <div class="d-flex position-relative mb-3">
           <ng-container
-            *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4"
+            *ngIf="productCurrent?.joinRequestStatus?.accountStatus?.id === 4"
           >
             <div class="btn-group bg-white ms-1 rounded-0">
               <button
@@ -103,8 +94,8 @@
                 طلبات
               </button>
               <ul class="dropdown-menu text-end">
-                <li><a class="dropdown-item"> المستقل</a></li>
-                <li>
+                <li (click)="getNewProfilesMostaql(page)"><a class="dropdown-item"> المستقل</a></li> 
+                 <li>
                   <a
                     class="dropdown-item"
                     (click)="getNewProfilesCompany(page)"
@@ -228,12 +219,12 @@
                     class="fs-6"
                     *ngIf="pro.officePhoneNumber; else mostcal"
                   >
-                    {{ pro.officePhoneNumber }} (966+)</small
+                    {{ pro.officePhoneNumber }} </small
                   >
 
                   <ng-template #mostcal>
                     <small class="fs-6">
-                      {{ pro.applicationUser.phoneNumber }} (966+)
+                      {{ pro.applicationUser.phoneNumber }} 
                     </small>
                   </ng-template>
 
@@ -247,7 +238,7 @@
         </ng-container>
         <!-- pagenation -->
         <div class="col-12">
-          <div class="position-absolute top100" [hidden]="total <= 1">
+          <div  [hidden]="total <= 1">
             <nav aria-label="..." class="w-100 d-flex justify-content-center">
               <ul class="pagination w-100">
                 <li class="page-item">
@@ -291,12 +282,12 @@
     </div>
 
     <!--  -->
-    <div class="col-md-7 sizew col-12 flex-row" [hidden]="!showInformation">
+    <div class="col-md-7 sizew col-12 flex-row" >
       <div class="col-12 card mb-3 border-0 rounded-0">
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-md-2">
             <img
-              *ngIf="productCurrent.profilePicturePath; else company"
+              *ngIf="productCurrent?.profilePicturePath; else company"
               src="{{ productCurrent.profilePicturePath }}"
               class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
               alt="null"
@@ -304,7 +295,7 @@
 
             <ng-template #company>
               <img
-                src="{{ productCurrent.companyLogoPath }}"
+                src="{{ productCurrent?.companyLogoPath }}"
                 class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
                 alt="null"
             /></ng-template>
@@ -315,18 +306,18 @@
                 <img src="assets/icons/XMLID_1_.svg" />
 
                 <p class="fs-6 me-3 pt-2">
-                  {{ productCurrent.applicationUser.accountType.typeName }}
+                  {{ productCurrent?.applicationUser?.accountType?.typeName }}
                 </p>
               </div>
               <p
                 class="card-text fs-6"
-                *ngIf="productCurrent.companyName; else ind"
+                *ngIf="productCurrent?.companyName; else ind"
               >
                 {{ productCurrent.companyName }}
               </p>
               <ng-template #ind>
                 <p class="card-text fs-6">
-                  {{ productCurrent.firstName }} {{ productCurrent.lastName }}
+                  {{ productCurrent?.firstName }} {{ productCurrent?.lastName }}
                 </p>
               </ng-template>
 
@@ -335,19 +326,19 @@
                 <!-- ?? -->
                 <span
                   class="typeCom fs-6"
-                  *ngIf="productCurrent.projectService; else mstql"
+                  *ngIf="productCurrent?.projectService; else mstql"
                   >{{ productCurrent.projectService.name }}</span
                 >
                 <ng-template #mstql>
-                  <span class="typeCom">استشارات</span></ng-template
-                >
+                  <!-- <span class="typeCom">استشارات</span> -->
+                  </ng-template >
               </p>
             </div>
           </div>
           <div class="col-md-5">
             <div
               class="d-flex"
-              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 4"
+              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 4"
             >
               <a
                 type="button"
@@ -380,7 +371,7 @@
 
             <div
               class="d-flex justify-content-end ms-3 rounded-0"
-              *ngIf="productCurrent.joinRequestStatus.accountStatusId === 1"
+              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 1"
             >
               <a
                 type="button"
@@ -399,8 +390,8 @@
             <div
               class="d-flex justify-content-end ms-3 rounded-0"
               *ngIf="
-                productCurrent.joinRequestStatus.accountStatusId != 1 &&
-                productCurrent.joinRequestStatus.accountStatusId != 4
+                productCurrent?.joinRequestStatus?.accountStatusId != 1 &&
+                productCurrent?.joinRequestStatus?.accountStatusId != 4
               "
             >
               <a
@@ -416,20 +407,17 @@
           </div>
         </div>
       </div>
-      <!-- سبب عدم الاكتمال -->
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        *ngIf="productCurrent.joinRequestStatus.accountStatusId != 4"
-      >
+    <div *ngIf="showInformation "> 
+              <!-- سبب عدم الاكتمال -->
+      <div  class="col-12 card mb-3 border-0 rounded-0 p-3"
+        *ngIf="productCurrent?.joinRequestStatus?.accountStatusId != 4" >
         <p class="titleInformation fs-6">سبب عدم تاكيد الحساب</p>
         <p class="fs-6">{{ productCurrent.joinRequestStatus.description }}</p>
       </div>
       <!--    معلومات عن الشركه-->
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
-      >
-        <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
+      <div  class="col-12 card mb-3 border-0 rounded-0 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"   >
+        <h5 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h5>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
@@ -457,7 +445,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">
+                <p class="pt-3 nameDownload">
                   {{ productCurrent.companyRegisterationNumberFile }}
                 </p>
               </a>
@@ -483,7 +471,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">
+                <p class="pt-3 nameDownload">
                   {{ productCurrent.socialInsuranceCertificateFile }}
                 </p>
               </a>
@@ -506,7 +494,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.zakatCertificateFile }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.zakatCertificateFile }}</p>
               </a>
             </div>
             <div
@@ -528,7 +516,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.financialStatementFile }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.financialStatementFile }}</p>
               </a>
             </div>
             <div
@@ -550,7 +538,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.coCMembershipFile }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.coCMembershipFile }}</p>
               </a>
             </div>
           </div>
@@ -577,7 +565,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.licenseFile }}</p>
+                <p class="pt-3 nameDownload">{{ productCurrent.licenseFile }}</p>
               </a>
             </div>
             <div
@@ -599,7 +587,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">
+                <p class="pt-3 nameDownload">
                   {{ productCurrent.companyRegisterationNumberFile }}
                 </p>
               </a>
@@ -623,7 +611,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p>{{ productCurrent.saudizationCertificateFile }}</p>
+                <p  class="pt-3 nameDownload">{{ productCurrent.saudizationCertificateFile }}</p>
               </a>
             </div>
             <div
@@ -645,7 +633,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">
+                <p  class="pt-3 nameDownload">
                   {{ productCurrent.addedValueRegisterationCertificateFile }}
                 </p>
               </a>
@@ -662,17 +650,15 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">{{ productCurrent.isoFile }}</p>
+                <p  class="pt-3 nameDownload">{{ productCurrent.isoFile }}</p>
               </a>
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
-      >
-        <h1 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h1>
+      <div  class="col-12 card mb-3 border-0 rounded-0 p-3"
+        [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"    >
+        <h5 class="card-title mb-4 titleInformation">الاوراق الثبوتيه</h5>
 
         <div class="d-flex flex-row flex-wrap justify-content-between">
           <div class="col-lg-5 col-12">
@@ -692,7 +678,7 @@
                 (click)="download(productCurrent.idPath, productCurrent.idFile)"
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3">
+                <p  class="pt-3 nameDownload">
                   {{ productCurrent.idFile }}
                 </p>
               </a>
@@ -723,7 +709,7 @@
                 "
               >
                 <i class="fa fa-download typeCom ms-3"></i>
-                <p class="pt-3 textInformation">
+                <p class="pt-3 nameDownload">
                   {{ productCurrent.membershipFile }}
                 </p>
               </a>
@@ -732,11 +718,8 @@
         </div>
       </div>
       <!-- معلومات التواصل -->
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        [hidden]="productCurrent.applicationUser.accountType.key === 'CO'"
-      >
-        <h1 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h1>
+      <div  class="col-12 card mb-3 border-0 rounded-0 p-3"  [hidden]="productCurrent.applicationUser.accountType.key === 'CO'" >
+        <h5 class="card-title mb-4 h5 titleInformation">معلومات التواصل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">الدوله</p>
@@ -823,11 +806,8 @@
           </div>
         </div>
       </div>
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        [hidden]="productCurrent.applicationUser.accountType.key != 'CO'"
-      >
-        <h1 class="card-title mb-4 titleInformation">معلومات التواصل</h1>
+      <div class="col-12 card mb-3 border-0 rounded-0 p-3"  [hidden]="productCurrent.applicationUser.accountType.key != 'CO'" >
+        <h5 class="card-title mb-4 titleInformation">معلومات التواصل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted fs-6">الدوله</p>
@@ -919,13 +899,9 @@
           </div>
         </div>
       </div>
-
       <!-- معلومات عن ممثل الموقع -->
-      <div
-        class="col-12 card mb-3 border-0 rounded-0 p-3"
-        *ngIf="productCurrent.applicationUser.accountType.key == 'CO'"
-      >
-        <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
+      <div  class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'" >
+        <h5 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h5>
         <div class="d-flex justify-content-between flex-wrap">
           <div>
             <p class="card-subtitle text-muted fs-6">الاسم</p>
@@ -960,90 +936,124 @@
           </div>
         </div>
       </div>
-      <!-- serviceProviderWorks -->
-      <div
-        class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-0 p-3 serviceProviderWorksBg"
-      >
-        <p>المشاريع السابقه</p>
+      <!-- serviceProviderWorks المشاريع السابقه -->
+      <div class="col-12 d-flex justify-content-between align-items-center mb-3 border-0 rounded-0 p-3 cairo serviceProviderWorksBg"   >
+        <p (click)="showProjects()" class="changeCursor">المشاريع السابقه</p>
         <p>{{ productCurrent.serviceProviderWorks.length }} مشروع</p>
       </div>
-
-      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
-      ">
-        <h1 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h1>
-        <div class="d-flex justify-content-between flex-wrap">
-          <div>
-            <p class="card-subtitle text-muted h5">الاسم</p>
-            <small
-              class="fs-6 "
-              *ngIf="productCurrent.representative.firstName; else firstName"
-              >{{ productCurrent.representative.firstName }}{{ productCurrent.representative.lastName }}</small
-            >
-            <ng-template #firstName> _ </ng-template>
-          </div>
-          <div>
-            <p class="card-subtitle text-muted h5">رقم التليفون</p>
-            <small
-              class="fs-6 "
-              *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
-              >{{ productCurrent.representative.phoneNumber }} 966+
-            </small>
-            <ng-template #phoneNumber> _ </ng-template>
-          </div>
-          <div>
-            <p class="card-subtitle text-muted h5">البريد الالكتروني</p>
-            <small
-              class="fs-6 "
-              *ngIf="productCurrent.representative.email; else email"
-              >{{ productCurrent.representative.email }}</small
-            >
-            <ng-template #email> _ </ng-template>
-          </div>
-        </div>
-      </div> -->
-      <!-- معلومات عن الموظفين-->
-      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-        <h1 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h1>
-        card loop
-        <div
-          class="d-flex col-12 mb-4"
-          *ngFor="let employes of productCurrent.district.employees"
-        >
-          <div class="d-flex col-6 flex-column">
-            <p
-              class="card-subtitle text-muted h5"
-              *ngIf="productCurrent.representative.name; else employeeName"
-            >
-              الاسم
-            </p>
-            <small class="fs-6 ">{{
-              productCurrent.district.employees.name
-            }}</small>
-            <ng-template #employeeName> _ </ng-template>
-          </div>
-          <div class="d-flex col-6 flex-column">
-            <p
-              class="card-subtitle text-muted h5"
-              *ngIf="
-                productCurrent.representative.employeeLevel;
-                else employeeLevel
-              "
-            >
-              المستوى
-            </p>
-            <small class="fs-6 ">{{
-              productCurrent.district.employees.employeeLevel
-            }}</small>
-            <ng-template #employeeLevel> _ </ng-template>
-          </div>
-        </div>
-      </div> -->
     </div>
+      <div class="col-12  border-0 rounded-0 " >
+              <ng-container  *ngIf="showInformation !=true && showprojectDetails!=true">
+                <div class=" col-12 d-flex justify-content-end align-items-center cairo fs-6 titleInformation changeCursor" (click)="back()">              
+                  <p class="pt-2">الرجوع</p>
+                  <mat-icon>chevron_left</mat-icon>
+                </div>
+                <div class="row row-cols-3 col-12">
+                  <ng-container *ngFor="let items of objFilePath" >
+                  <div class="col-xxl-4 col-md-6" *ngFor="let item of items">
+                    <div class=" border-0 rounded-0 ">
+
+                        <div class="col-12 position-relative" (click)="showProjectDetails(item)">
+                          <img src={{item?.filePath}} alt="image" class="img-fluid opacity-75 col-12 changeCursor" style="height: 200px;">
+
+                      <div class="col-10 position-absolute top100 text-white d-flex justify-content-between cairo">
+                         <p > {{item?.serviceProviderWork.projectName}} </p>
+                         <p class="fs-6 fw-light">4/5<mat-icon style="color: #f3d720 ; font-size: medium;">star</mat-icon></p>
+                      </div>                      
+                        
+                      </div>
+                    </div>
+                  </div></ng-container>
+              
+                  
+              
+              
+                
+              
+              
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="showprojectDetails ===true ">
+                <div class=" col-12 d-flex justify-content-end align-items-center cairo fs-6 titleInformation changeCursor" (click)="backTwo()">              
+                  <p class="pt-2">الرجوع</p>
+                  <mat-icon>chevron_left</mat-icon>
+                </div>
+                <!-- <h5 class="card-title">{{item.projectName}}</h5> -->
+                <div class="d-flex flex-xxl-nowrap  flex-wrap justify-content-xxl-around  col-12 cairo " *ngFor="let item of objFilePath">
+                  <div class="card col-xxl-4 col-md-6 col-12  border-0 rounded-0 p-3">
+                    <div class="card-body">
+                      <h5 class="card-title titleInformation">{{projectDetails?.serviceProviderWork.projectName}}</h5>
+                      <small class="card-text">
+                        <small class="text-muted fs-6">  تصنيف المشروع </small>
+                        <!-- ?? -->
+                        <small
+                          class=" fs-6"
+                          *ngIf="productCurrent.projectService; else mstql"
+                          >{{ productCurrent.projectService.name }}</small>
+                        <ng-template #mstql>
+                          <small class="typeCom">مقاولات</small></ng-template>
+                      </small>
+                      <p class="card-text"><span class="titleInformation">اسم العميل : </span>{{projectDetails?.serviceProviderWork.ownerName}}</p>
+                  
+                    </div>
+                  </div>
+                  <!-- <div class="card col-xxl-5 col-md-6 col-12  border-0 rounded-0 text-center p-3">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath &&  productCurrent.companyRegisterationNumberFile "  >
+                      <p class="card-title titleInformation h5 ">  هيئه المقاولين </p>
+                      <a target="_blank"
+                        class="informationDownload bg-light d-flex px-2 align-items-center"
+                        (click)="download( productCurrent.companyRegisterationNumberPath,  productCurrent.companyRegisterationNumberFile )" >
+                        <i class="fa fa-download typeCom ms-3"></i>
+                        <p class="pt-3 nameDownload">
+                          {{ productCurrent.companyRegisterationNumberFile }}
+                        </p>
+                      </a>
+                    </div>
+                    <div  class="d-flex justify-content-between mb-4" *ngIf="productCurrent.companyRegisterationNumberPath && productCurrent.companyRegisterationNumberFile ">
+              <p class="card-title titleInformation h5">   هيئه المهندسين</p>
+              <a
+                target="_blank"
+                class="informationDownload bg-light d-flex px-2 align-items-center"
+                (click)=" download( productCurrent.companyRegisterationNumberPath,
+                    productCurrent.companyRegisterationNumberFile   ) " >
+                <i class="fa fa-download typeCom ms-3"></i>
+                <p class="pt-3 nameDownload">
+                  {{ productCurrent.companyRegisterationNumberFile }}
+                </p>
+              </a>
+            </div>
+                   
+                    </div>
+                  </div> -->
+                  <div class="card col-xxl-2 col-md-6 col-12  border-0 rounded-0 text-center">
+                    <div class="card-body">
+                      <h2 class="card-title titleInformation">{{projectDetails.serviceProviderWork.projectPrice}} <br/> ريال</h2>
+                      <p class="card-text text-secondary fs-6">ميزانية المشروع</p>
+                  
+                    </div>
+                  </div>
+              
+                  
+              
+              
+                
+              
+              
+                </div>
+              </ng-container>
+            
+      </div>
+   
+    </div>
+    
+    
   </div>
 
   <ng-template #undefind>
     <div
-      class="alert alert-danger d-flex align-items-center h2"
+      class="alert alert-danger d-flex align-items-center h5"
       role="alert"
       *ngIf="!isProcessing"
     >
@@ -1064,9 +1074,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h2 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب عدم اكتمال الحساب
-        </h2>
+        </h5>
 
         <button
           type="button"
@@ -1122,9 +1132,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h2 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           سبب تعطيل الحساب
-        </h2>
+        </h5>
 
         <button
           type="button"
@@ -1180,9 +1190,9 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h2 class="modal-title col-11" id="exampleModalLabel">
+        <h5 class="modal-title col-11" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا الطلب ؟
-        </h2>
+        </h5>
 
         <button
           type="button"
@@ -1211,39 +1221,6 @@
 </div>
 
 <!-- تفعيل -->
-<!-- <div
-  class="modal fade"
-  id="exampleModalAccepte"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <h1 class="modal-title" id="exampleModalLabel">
-          هل انت متاكد من تفعيل هذاالحساب ؟
-        </h1>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          لا
-        </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          data-bs-dismiss="modal"
-          (click)="accepted()"
-        >
-        نعم
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Modal ub date-->
-
 <div
   class="modal fade"
   id="exampleModalAccepte"
@@ -1256,7 +1233,7 @@
       <div
         class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h2 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h2>
+        <h5 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h5>
 
         <button
           type="button"
@@ -1268,7 +1245,7 @@
         </button>
       </div>
       <div class="modal-body my-3 modalbody">
-        <h2 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h2>
+        <h5 class="fs-5">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
       </div>
       <div class="modal-footer modalfooter">
         <button
@@ -1286,3 +1263,75 @@
     </div>
   </div>
 </div>
+
+      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3" *ngIf="productCurrent.applicationUser.accountType.key == 'CO'
+      ">
+        <h5 class="card-title mb-4 titleInformation">معلومات عن ممثل الموقع</h5>
+        <div class="d-flex justify-content-between flex-wrap">
+          <div>
+            <p class="card-subtitle text-muted h5">الاسم</p>
+            <small
+              class="fs-6 "
+              *ngIf="productCurrent.representative.firstName; else firstName"
+              >{{ productCurrent.representative.firstName }}{{ productCurrent.representative.lastName }}</small
+            >
+            <ng-template #firstName> _ </ng-template>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted h5">رقم التليفون</p>
+            <small
+              class="fs-6 "
+              *ngIf="productCurrent.representative.phoneNumber; else phoneNumber"
+              >{{ productCurrent.representative.phoneNumber }} 966+
+            </small>
+            <ng-template #phoneNumber> _ </ng-template>
+          </div>
+          <div>
+            <p class="card-subtitle text-muted h5">البريد الالكتروني</p>
+            <small
+              class="fs-6 "
+              *ngIf="productCurrent.representative.email; else email"
+              >{{ productCurrent.representative.email }}</small
+            >
+            <ng-template #email> _ </ng-template>
+          </div>
+        </div>
+      </div> -->
+      <!-- معلومات عن الموظفين-->
+      <!-- <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+        <h5 class="card-title mb-4 h5 titleInformation">معلومات عن الموظفين</h5>
+        card loop
+        <div
+          class="d-flex col-12 mb-4"
+          *ngFor="let employes of productCurrent.district.employees"
+        >
+          <div class="d-flex col-6 flex-column">
+            <p
+              class="card-subtitle text-muted h5"
+              *ngIf="productCurrent.representative.name; else employeeName"
+            >
+              الاسم
+            </p>
+            <small class="fs-6 ">{{
+              productCurrent.district.employees.name
+            }}</small>
+            <ng-template #employeeName> _ </ng-template>
+          </div>
+          <div class="d-flex col-6 flex-column">
+            <p
+              class="card-subtitle text-muted h5"
+              *ngIf="
+                productCurrent.representative.employeeLevel;
+                else employeeLevel
+              "
+            >
+              المستوى
+            </p>
+            <small class="fs-6 ">{{
+              productCurrent.district.employees.employeeLevel
+            }}</small>
+            <ng-template #employeeLevel> _ </ng-template>
+          </div>
+        </div>
+      </div> -->
+    

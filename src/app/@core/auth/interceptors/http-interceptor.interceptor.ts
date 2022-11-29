@@ -50,6 +50,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
         let errorMessage: string | null | undefined = null;
         if (returnedError.error instanceof ErrorEvent) {
+
           errorMessage = ` ${returnedError.error.message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
           errorMessage = `${returnedError.error.message}`;
@@ -62,6 +63,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         if (!handled) {
           if (errorMessage) {
             return throwError(errorMessage || "خطأ");
+
           } else {
             return throwError('Unexpected problem occurred');
           }

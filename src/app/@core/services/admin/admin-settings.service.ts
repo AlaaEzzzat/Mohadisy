@@ -49,4 +49,28 @@ export class AdminSettingsService {
       })
     }));
   }
+
+  getActiveUsers():Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Admin/getActiveUsers`);
+  }
+
+  getNonActiveUsers():Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Admin/getNonActiveUsers`);
+  }
+  // /api/Account/changeAccountActivation
+
+  changeAccountActivation(id:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/Account/changeAccountActivation`,JSON.stringify(id), this.httpoptions).pipe(retry(2),catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }));
+  }
+
+
 }
+

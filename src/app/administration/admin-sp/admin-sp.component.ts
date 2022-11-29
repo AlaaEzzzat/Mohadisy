@@ -41,6 +41,8 @@ export class AdminSPComponent implements OnInit {
   // objectpeo: any;
   // productCurrent: any;
   showInformation: boolean = false;
+  showprojectDetails:boolean=false;
+  projectDetails:any;
   name = '';
   id: any;
   page: number = 1;
@@ -52,6 +54,8 @@ export class AdminSPComponent implements OnInit {
   company: any = 'مستقل';
   productCurrent: any;
   isProcessing: boolean = true;
+  filePath:any;
+  objFilePath:any[]=[]
   constructor(
     private router: Router,
     private _HttpClient: HttpClient,
@@ -329,13 +333,47 @@ export class AdminSPComponent implements OnInit {
 
   // test
   getNewProfilesCompany(page: any) {
-    this.ServicesProvidor.activeProfile(page).subscribe((value) => {
-      let companys: any[] = [] || value.data.profiles;
-      let mostaql: any[] = [];
-      this.iProfileData = value.data.profiles || [];
-      let tests = this.iProfileData.find((key) => {
-        return key.applicationUser.accountType.key == 'CO';
-      });
+    this.iProfileData = [];
+    this.ServicesProvidor.getNewProfiles(page).subscribe({
+      next: (value) => {
+        // iProfileData
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          for (let data of value.data.profiles) {
+            if (data.applicationUser.accountType.key === 'CO') {
+              this.iProfileData.push(data);
+              
+            }
+            this.total = value.data.totalPages;
+            console.log(this.iProfileData);
+          }
+          if (this.iProfileData.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
+    });
+  }
+  getNewProfilesMostaql(page: any) {
+    this.iProfileData = [];
+    this.ServicesProvidor.getNewProfiles(page).subscribe({
+      next: (value) => {
+        // iProfileData
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          for (let data of value.data.profiles) {
+            if (data.applicationUser.accountType.key === 'IND') {
+              this.iProfileData.push(data);
+            
+            }
+            this.total = value.data.totalPages;
+            // console.log(this.iProfileData);
+          }
+          if (this.iProfileData.length != 0) {
+            this.firstObject = this.iProfileData[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
     });
   }
 
@@ -348,6 +386,8 @@ export class AdminSPComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     this.id = sessionStorage.getItem('ids');
     this.showInformation = true;
+    this.showprojectDetails=false
+
   }
 
   objectProductGet() {
@@ -355,6 +395,45 @@ export class AdminSPComponent implements OnInit {
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
   }
 
+  showProjects(){
+    this.showInformation=false;
+    this.showprojectDetails=false
+    for(let item of this.productCurrent?.serviceProviderWorks){
+      // console.log(item.id)
+      this.getServiceProviderWorkFiles(item.id)
+    }
+
+  }
+  showProjectDetails(obj:any){
+   
+    this.showprojectDetails=true
+    this.projectDetails=obj
+    console.log(this.projectDetails)
+    // let set =new Set( this.projectDetails)
+    // console.log(set)
+
+  }
+  getServiceProviderWorkFiles(id:any){
+    this.objFilePath=[]
+    this.ServicesProvidor.getServiceProviderWorkFilesByWorkId(id).subscribe({next:(data)=>{
+      
+      this.objFilePath.push(data.data)
+      console.log(this.objFilePath)
+    //    let set =new Set( this.objFilePath)
+    // console.log(set)
+      // for(let file of data.data){
+      //   console.log()
+      //   this.filePath=file.filePath
+      // }
+    }})
+  }
+  back(){
+    this.showInformation=true;
+    this.showprojectDetails=false
+  }
+  backTwo(){
+    this.showprojectDetails=false
+  }
   // change stutas client
   changeToAccepted() {
     this.iChangeStatus = {
@@ -492,11 +571,11 @@ export class AdminSPComponent implements OnInit {
     );
   }
 
-  fortest(totals: any, arrays: any[]) {
-    for (var i = 1; i <= totals; i++) {
-      arrays.push(i);
-    }
-  }
+  // fortest(totals: any, arrays: any[]) {
+  //   for (var i = 1; i <= totals; i++) {
+  //     arrays.push(i);
+  //   }
+  // }
 
   calculateDiff(sentOn: any) {
     let todayDate = new Date();

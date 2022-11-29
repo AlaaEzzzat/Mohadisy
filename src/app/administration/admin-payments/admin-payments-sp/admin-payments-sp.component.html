@@ -1,0 +1,218 @@
+<div class="col-12 container-fluid">
+      <div class="col-12 d-flex align-items-center justify-content-around px-2 flex-wrap">
+        <div  class="col-lg-2 col-sm-3 col-12">
+          <button type="button" class="btn btn-success rounded-0 w-100 text-white" (click)="complete()">
+            مكتمل السداد
+          </button>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-12 mt-sm-0 mt-3">
+          <button type="button" class="btn btn-danger rounded-0 w-100 text-white" (click)="notComplete()">
+            لم يتم السداد
+          </button>
+        </div>
+        <div class="col-lg-3 col-sm-4 col-12 mt-sm-0 mt-3">
+          <button type="button" class="btn btn-warning rounded-0 w-100 text-white" (click)="inComplete()">
+            غير مكتمل السداد
+          </button>
+        </div>
+       
+        <div class="d-flex position-relative col-lg-4 col-12 mt-lg-0 mt-3">
+          <!-- Example single danger button -->
+          <input
+    
+            type="search"
+            class="form-control border-0 rounded-0 w-100" list="datalistOptions" id="exampleDataList"
+            placeholder="Search for name ,number,location,etc"
+            aria-label="Search"
+            name="filterTerm"
+            [(ngModel)]="companyName"
+          />
+          <button class="btn position-absolute start-0"  type="submit">
+            <img src="../../../../assets/icons/Search.svg" alt="" srcset="">
+          </button>
+        </div>
+      </div>
+      <!-- <div class="alert alert-danger mt-5" role="alert" *ngIf="nocomPay">
+         لا يوجد مدفةعات مكتملة السداد <a  class="alert-link" (click)="getServiceProvidersPaymentsForAdmin()">العوده الي الصفحه الرئيسيه</a>.
+      </div> -->
+      <div class="col-12 d-flex flex-wrap py-4 px-sm-3">
+        <!-- <div class="row row-cols-1 row-cols-md-3 g-4"></div> -->
+        <div class="row col-12">
+          <div class="col-xxl-4 col-md-6 mt-4" *ngFor="let pro of spPayments | filter: companyName">
+            <div class="card border-0 rounded-0 ">
+              <div class="row">
+                <div class="col-4 d-sm-block d-none">
+                <img src="{{pro.profile.companyLogoPath}}" alt="image" class="img-fluid img " *ngIf="pro.profile.companyLogoPath  ; else imge">
+                <ng-template #imge>
+                  <img src="{{pro?.profile.profilePicturePath}}" alt="image" class="img-fluid img " *ngIf="pro?.profile?.profilePicturePath ; else imge2">
+                </ng-template>
+                <ng-template #imge2> <img src="https://picsum.photos/200/300" alt="image" class="img-fluid img ">
+                </ng-template>
+                </div>
+                <div class="col-sm-8 col-12 mt-3">
+                  <p>
+                    <img class="" src="assets/icons/user.svg" class="ms-1 fs-6"/>
+                    <span *ngIf="pro.profile.companyName ;else names">  {{pro.profile.companyName}} </span><br>
+                    <!-- <span>Sara AbdElaziz AbdElahkim</span> -->
+                    <ng-template #names>{{pro.profile.firstName}} {{pro.profile.lastName}}</ng-template>
+                  </p>
+      
+                  <p>
+                    <img src="assets/icons/Group 801.svg" class="ms-1" />
+                    <span>{{pro.profile.streetName}}</span>
+                  </p>
+                  <p *ngIf="pro.profile.officeMobileNumber">
+                    <img src="assets/icons/Phone.svg"  class="ms-1"/>
+                    <span>{{pro.profile.officeMobileNumber}}</span>
+                  </p>
+      
+                  <!-- <p class="earn d-flex justify-content-between" style="background-color:#ced4da;"  
+                   data-bs-toggle="modal"
+                   (click)="objectProduct(pro)"
+                  data-bs-target="#exampleModal">
+                    <span >إجمالي السعر :{{pro.payments}} </span>
+                    <i class="fa fa-eye"></i>
+                  </p> -->
+                  <p class="earn d-flex justify-content-between" *ngIf="pro.payments>pro.paid
+                    " style="background-color:#fbe8c7; color:#ee9c0f;"  
+                    (click)="objectProduct(pro)"
+                    
+                     data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                      <span >إجمالي السعر : {{pro.payments}}</span>
+                      <i class="fa fa-eye"></i>
+                    </p>
+                    <p class="earn d-flex justify-content-between" *ngIf="pro.payments===pro.paid && pro.paid !=0"
+                     style="background-color:#caece8; color:#71cdc1;"  
+                      (click)="objectProduct(pro)"
+                      
+                       data-bs-toggle="modal"
+                      data-bs-target="#exampleModal">
+                        <span >إجمالي السعر : {{pro.payments}}</span>
+                        <i class="fa fa-eye"></i>
+                      </p>
+                      <p class="earn d-flex justify-content-between" *ngIf="pro.paid ==0"
+                      style="background-color:#f3cece; color:#d65353;"  
+                       (click)="objectProduct(pro)"
+                       
+                        data-bs-toggle="modal"
+                       data-bs-target="#exampleModal">
+                         <span >إجمالي السعر : {{pro.payments}}</span>
+                         <i class="fa fa-eye"></i>
+                       </p>
+      
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          
+      
+      
+        
+      
+      
+        </div>
+        <!-- cart -->
+    
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content rounded-0 position-relative">
+          <button
+            type="button"
+            class="btn ps-2 rounded-0 position-absolute top-0 start50 translate-middle"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <mat-icon style="font-size: 30px ;">close</mat-icon>
+          </button>
+    
+          <div class="modal-body p-5">
+            <div class="mb-4">
+              <ng-container *ngFor="let projects of idProduct?.profile?.offers">
+
+              <mat-accordion >
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                  class="bgsecondary">
+                  <!-- <mat-expansion-panel-header class="col-12 justify-content-between rounded-0"
+                    [hidden]="panelOpenState === true"> -->
+                    <mat-expansion-panel-header class="col-12 justify-content-between rounded-0">
+                      <mat-panel-title class="col-8" *ngIf="projects?.project.name ;else name"> {{projects?.project.name }}  </mat-panel-title>
+                      <ng-template  #name><mat-panel-title class="col-8"> {{idProduct?.profile?.firstName}}  </mat-panel-title>         
+                        <!-- <li>{{projects.milestones.project.name}}</li> -->
+                      </ng-template>
+                      <mat-panel-title class="text-mint col-3">
+                      ربح : {{ platformProfit }} 
+                    </mat-panel-title>
+    
+                  </mat-expansion-panel-header>
+                  <div class="col-12 d-flex justify-content-between">
+                    <div class="mt-3 col-6">
+                      <ul class=" col-12 list-group list-group-flush border-0 bgtran" >
+                        <ng-container *ngFor="let item of projects.milestones ;let i =index">
+                        <li class="list-group-item border-0 bgtran"   [ngStyle]="{
+                          'color': item.isPaid === true ? '#18AF9A' : '#ee9c0f'
+                        }">  الدفعه {{i+1}} : {{item.cost}}  ريال</li>
+                        </ng-container>
+                      </ul>                  
+                    </div>
+                    <!-- <div class="mt-3 col-6 d-flex ">
+                  <div class="col-6">
+                    <ul class="list-group">
+                      <li class="list-group-item">الدفعه الاولى : </li>
+                      <li class="list-group-item">الدفعه الثانيه : </li>
+                      <li class="list-group-item">الدفعه الثالثه : </li>
+                      <li class="list-group-item">الدفعه الرابعه : </li>
+                    </ul>
+                  </div>
+                  <div class="col-5">
+                    <ul class="list-group">
+                      <li class="list-group-item">1</li>
+                      <li class="list-group-item">1</li>
+                      <li class="list-group-item">1</li>
+                      <li class="list-group-item">1</li>
+                      <li class="list-group-item">1</li>
+                    </ul>
+                  </div> -->
+                      <!-- <ul class=" col-12 list-group list-group-flush border-0 bgtran" >
+                        <ng-container *ngFor="let item of projects.milestones ;let i =index">
+                        <li class="list-group-item border-0 bgtran">  الدفعه {{projects.milestones[0].cost}} </li>
+                        <li class="list-group-item border-0 bgtran">  الدفعه {{projects.milestones[1].cost}} </li>
+                        <li class="list-group-item border-0 bgtran">  الدفعه {{projects.milestones[0].cost}} </li>
+                        <li class="list-group-item border-0 bgtran">  الدفعه {{projects.milestones[0].cost}} </li>
+
+                        </ng-container>
+                      </ul>                   -->
+                    <!-- </div> -->
+                    <div class="mt-3 col-6 d-flex text-end align-content-start">
+                          <div class=" col-6 d-flex justify-content-end align-items-end">
+                          <label  class="form-label">تم التسديد </label>
+                          <input type="color" class="form-control form-control-color border-0 rounded-0 " id="exampleColorInput" value="#18AF9A"  disabled></div>
+                          <div class=" col-6 d-flex justify-content-end align-items-end">
+                          <label  class="form-label">لم يتم التسليم بعد </label>
+                          <input type="color" class="form-control form-control-color border-0 rounded-0 " id="exampleColorInput" value="#ee9c0f"  disabled>
+                        </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </ng-container>
+            </div>
+    
+    
+       
+    
+          </div>
+        </div>
+      </div>
+    </div>

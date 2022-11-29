@@ -1,15 +1,17 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Tajawal', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#F3FBFA;
-
+.cairo{
+  font-family: "cairo";
+}
 a:focus ,a:hover,button:focus ,button:hover {
   background-color :$Alltext!important;
   color: white !important;
+  box-shadow: none !important;
 }
 button>i ,.typeCom
 {
@@ -24,8 +26,6 @@ button>i ,.typeCom
  }
  .titleInformation{
   color: $Alltext !important;
-  font-family:$fontTajawalFamily;
-
  }
 input[type="search"]{
   &:hover,&:active ,&:focus{
@@ -71,13 +71,12 @@ color: #000 !important;
 }
 .top100 {
   top: 99% !important;
-  right:-7% !important;
+  right:-5% !important;
 }
 .modaltitle{
   background-color: $textColor !important;
   >h2,>button{
     color: white !important;
-    font-family: $fontTajawalFamily;
   }
   >button:focus,>button:active{
 box-shadow: none !important;
@@ -129,4 +128,22 @@ border: none!important;
     color: white;
   }
   color: #18AF9A;
+}
+.nameDownload{
+  // width:300px;
+  // padding:10px;
+  // background-color:red;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  // &:hover{
+  //   overflow: visible;
+  // }
+}
+.top100{
+  top: 80%!important;
+  right: 10% !important;
+}
+.changeCursor{
+  cursor: pointer !important;
 }
