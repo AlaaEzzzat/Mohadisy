@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -47,14 +48,11 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((returnedError) => {
-
         let errorMessage: string | null | undefined = null;
         if (returnedError.error instanceof ErrorEvent) {
-
           errorMessage = ` ${returnedError.error.message} `;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `${returnedError.error?.message}`;
-
+          errorMessage = `${returnedError.error.message}`;
           handled = this.handleServerSideError(returnedError);
         }
 
@@ -63,7 +61,6 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         if (!handled) {
           if (errorMessage) {
             return throwError(errorMessage || "خطأ");
-
           } else {
             return throwError('Unexpected problem occurred');
           }
@@ -93,3 +90,5 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     return handled;
   }
 }
+
+
