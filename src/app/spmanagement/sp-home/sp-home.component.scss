@@ -4,25 +4,6 @@ body {
 span{
   font-family: 'cairo';
 }
-
-#sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  -webkit-transition: margin 0.25s ease-out;
-  -moz-transition: margin 0.25s ease-out;
-  -o-transition: margin 0.25s ease-out;
-  transition: margin 0.25s ease-out;
-}
-
-#sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
-}
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
-}
-
 #page-content-wrapper {
   min-width: 100vw;
 }
@@ -32,10 +13,6 @@ span{
 }
 
 @media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-
   #page-content-wrapper {
     min-width: 0;
     width: 100%;
@@ -60,7 +37,6 @@ span{
   padding-top: 10px;
   padding-bottom: 10px;
 }
-
 .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
@@ -75,30 +51,25 @@ span{
 .form-control-feedback {
   margin-right: 13em;
 }
-@media (max-width: 480px) {
-  .texticon {
+@media (max-width: 767px) {
+  .list-group .title{
     display: none;
-  }
-}
-@media (max-width: 810px) {
-  .texticon {
-    display: none;
-  }
+    }
+    .list-group .items{
+      text-align: center;
+    }
 }
 
 .list-group div
 {
   cursor: pointer;
 }
-
 .active
 {
   background-color: #2eb6a42b;
+  width: fit-content;
 
 }
-
-
-
 .btn:focus {
   outline: none;
   box-shadow: none;

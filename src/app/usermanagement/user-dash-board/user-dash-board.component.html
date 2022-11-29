@@ -1,131 +1,21 @@
-<section class=" clientDashBoard container-fluid my-4">
-  <!-- part 1 -->
-  <div class="row cairo mb-3">
-
-    <div class="col-lg-6">
-      <div class="col-lg-12 col-12 mb-4">
-        <div class="d-flex flex-column bg-white p-4 rounded-3 shadow">
-          <div class="col-12 d-flex justify-content-evenly align-items-center">
-            <div class="col-8 d-flex align-items-center justify-content-start">
-              <img
-              src="assets/dashboard/partener.png"
-                alt=""
-                class="card-img cardImg"
-              />
-              <span class="me-4"> عروض اسعار</span>
-            </div>
-            <div class="col-4 align-items-center justify-content-end d-flex">
-              <small class="fw-semibold ps-3">{{ data.overview?.pricequotesNumber | number }}</small>
-            </div>
-          </div>
-          <div
-            class="col-12 d-flex justify-content-between align-items-center mt-3"
-          >
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.newPricequotesNumber
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.newPricequotesCost | number }}</p>
-            </div>
-            <p class="text-center my-2">جديدة</p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.acceptedPricequotesNumber
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.acceptedPricequotesCost
-                | number }}</p>
-            </div>
-            <p class="text-center my-2">مقبوله</p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.notCompletedPricequotesNumber
-                | number }}</p>
-                <hr class="m-0" />
-              <p class="text-center mt-2">{{data.overview?.pricequotes?.notCompletedPricequotesCost | number }}</p>
-
-            </div>
-            <p class="text-center my-2"> غير مكتمل </p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.pricequotes?.rejectedPricequotesCost
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{data.overview?.pricequotes?.rejectedPricequotesNumber
-                | number }}</p>
-            </div>
-            <p class="text-center my-2">مرفوضة</p>
-          </div>
-          </div>
-        </div>
-      </div>
+<section class="clientDashBoard my-4">
+  <div class="row cairo">
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        type="pricequotes"
+        [data]="data.overview?.pricequotes"
+        circleColor="D9CCF2"
+      ></app-dashboard-card>
     </div>
-    <div class="col-lg-6">
-      <div class="col-lg-12 col-12 mb-4">
-        <div class="d-flex flex-column bg-white p-4 rounded-3 shadow">
-          <div class="col-12 d-flex justify-content-evenly align-items-center">
-            <div class="col-8 d-flex align-items-center justify-content-start">
-              <img
-                src="assets/dashboard/cost.png"
-                alt=""
-                class="card-img cardImg"
-              />
-              <span class="me-4"> مشاريع</span>
-            </div>
-            <div class="col-4 align-items-center justify-content-end d-flex">
-              <small class="fw-semibold ps-3">{{ data.overview?.projectsNumber | number }}</small>
-            </div>
-          </div>
-          <div
-            class="col-12 d-flex justify-content-between align-items-center mt-3"
-          >
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.currentProjectsNumber | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.currentProjectsCost | number }}</p>
-            </div>
-            <p class="text-center my-2">حالي</p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.finishedProjectsNumber | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{data.overview?.projects.finishedProjectsCost
-                | number }}</p>
-            </div>
-            <p class="text-center my-2">مكتمل</p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.pendingProjectsNumber
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.pendingProjectsCost
-                | number }}</p>
-            </div>
-            <p class="text-center my-2">  معلق</p>
-          </div>
-          <div>
-            <div class="badge rounded-circle circle E9CCF2 p-2 text-center">
-              <p class="text-center mt-2">{{ data.overview?.projects.stoppedProjectsNumber
-                | number }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ data.overview?.projects.stoppedProjectsCost
-                | number }}</p>
-            </div>
-            <p class="text-center my-2"> موقوف </p>
-          </div>
-          </div>
-        </div>
-      </div>
+
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        type="projects"
+        [data]="data.overview?.projects"
+        circleColor="E9CCF2"
+      ></app-dashboard-card>
     </div>
   </div>
-  <!-- part 2 -->
 
   <div class="row my-4 cairo">
     <div class="col-lg-9">
@@ -145,7 +35,7 @@
             class="row m-0 p-0 gx-4 justify-content-between align-items-start"
           >
             <div
-              class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+              class="cairo mt-3 rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
             >
               <div
                 class="premary-color cairo rounded-0 text-center py-3 m w-100 mb-2"
@@ -156,18 +46,23 @@
               <!-- card -->
               <div class="d-flex flex-column scrolls col-12">
                 <div>
-                  <!-- *ngFor="let pro of this.currentProjects; let i = index" -->
                   <div
                     *ngFor="let pro of this.currentProjects; let i = index"
                     class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
                   >
                     <div>
-                      <img class="cardImg" [src]="pro.offerSender?.profilePicturePath" alt="" />
+                      <img
+                        class="cardImg"
+                        [src]="pro.offerSender?.profilePicturePath"
+                        alt=""
+                      />
                     </div>
                     <div class="card-body">
                       <p class="card-text mb-1 cardText">
                         <strong>اسم المسؤل :</strong>
-                        {{ pro.offerSender?.name ||pro.offerSender?.companyName }}
+                        {{
+                          pro.offerSender?.name || pro.offerSender?.companyName
+                        }}
                         <!--   علاء عزت -->
                       </p>
                       <p class="card-text mb-1 cardText">
@@ -187,7 +82,7 @@
             </div>
 
             <div
-              class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+              class="cairo mt-3 rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
             >
               <div
                 class="premary-color cairo rounded-0 text-center py-3 col-12 mb-2"
@@ -197,37 +92,42 @@
               </div>
               <!-- card -->
               <div class="d-flex flex-column scrolls col-12">
-                <div
-                >
+                <div>
                   <div
-                  *ngFor="let pro of this.completedProjects; let i = index"
-                  class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
-                >
-                  <div>
-                    <img class="cardImg" [src]="pro.offerSender?.profilePicturePath" alt="" />
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text mb-1 cardText">
-                      <strong>اسم المسؤل :</strong>
-                      {{ pro.offerSender?.name ||pro.offerSender?.companyName }}
-                      <!--   علاء عزت -->
-                    </p>
-                    <p class="card-text mb-1 cardText">
-                      <strong>بلد الاقامه :</strong>
-                      {{ pro.district.city.region.nameAr }}
-                      <!-- الرياض -->
-                    </p>
-                    <p class="card-text mb-0 cardText">
-                      <strong>إسم المشروع :</strong>
-                      {{ pro.name }}
-                      <!--      نطوير -->
-                    </p>
-                  </div>
-                  <div class="col-2 text-center">
+                    *ngFor="let pro of this.completedProjects; let i = index"
+                    class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
+                  >
+                    <div>
+                      <img
+                        class="cardImg"
+                        [src]="pro.offerSender?.profilePicturePath"
+                        alt=""
+                      />
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text mb-1 cardText">
+                        <strong>اسم المسؤل :</strong>
+                        {{
+                          pro.offerSender?.name || pro.offerSender?.companyName
+                        }}
+                        <!--   علاء عزت -->
+                      </p>
+                      <p class="card-text mb-1 cardText">
+                        <strong>بلد الاقامه :</strong>
+                        {{ pro.district.city.region.nameAr }}
+                        <!-- الرياض -->
+                      </p>
+                      <p class="card-text mb-0 cardText">
+                        <strong>إسم المشروع :</strong>
+                        {{ pro.name }}
+                        <!--      نطوير -->
+                      </p>
+                    </div>
+                    <!--  <div class="col-2 text-center">
                     <mat-icon style="color: #f3d720">star</mat-icon>
                     <p><small>5/5</small></p>
+                  </div> -->
                   </div>
-                </div>
                 </div>
               </div>
             </div>
@@ -241,19 +141,25 @@
         <div
           class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
         >
-          <div class="col-12 bg-white py-3 mb-2" >
-            <h3 class="cairo fw-bold  text-center m-0 p-0 cairo">جدول الاعمال</h3>
+          <div class="col-12 bg-white py-3 mb-2">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
+              جدول الاعمال
+            </h3>
           </div>
-          <div class="col-12 bg-white px-4 py-1 mb-2">
-            <!-- <mat-card class="demo-inline-calendar-card"> -->
-            <mat-calendar [(selected)]="selected"></mat-calendar>
-            <!-- </mat-card> -->
-            
+          <div class="col-12 mb-2">
+            <div class="card calender">
+              <div class="row">
+                <div class="col-lg-12">
+                  <mat-calendar [(selected)]="selected"></mat-calendar>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-12 bg-white py-3 mb-2" >
-            <h3 class="cairo fw-bold  text-center m-0 p-0 cairo">
+          <div class="col-12 bg-white py-3 mb-2">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
               <span>تاريخ : </span>
-              {{selected | date}} </h3>
+              {{ selected | date }}
+            </h3>
           </div>
         </div>
       </div>

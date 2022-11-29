@@ -8,6 +8,55 @@ import { AdminSettingsService } from './../../@core/services/admin/admin-setting
   styleUrls: ['./admin-home.component.scss'],
 })
 export class AdminHomeComponent implements OnInit {
+  data:any=[
+  
+    {
+    title:"لوحة التحكم ",
+    routing:"/Admin/dashboard",
+    image:"assets/icons/growth.png"
+  },
+  {
+    title:" عروض الأسعار  ",
+    routing:"/Admin/offers",
+    image:"assets/icons/blueprint.png"
+  },
+  {
+    title:"المشاريع  ",
+    image:"assets/images/blueprint.png",
+    routing:"/Admin/project"
+  },
+
+  {
+    title:" مزودي الخدمة    ",
+    image:"assets/icons/employee (1).png",
+    routing:"/Admin/sp"
+  },
+  {
+    title:"العملاء  ",
+    routing:"/Admin/clients",
+    image:"assets/icons/user (3).png"
+  },
+  {
+    title:"الرسائل  ",
+    routing:"/Admin/chat",
+    image:"assets/images/chat.png"
+  },
+  {
+    title:"الاشتراكات  ",
+    routing:"/Admin/contributions",
+    image:"assets/images/id-card.png"
+  },
+  {
+    title:"المدفوعات  ",
+    routing:"/Admin/payments",
+    image:"assets/images/hand.png"
+  },
+  {
+    title:"الإعدادات  ",
+    routing:"/Admin/settings",
+    image:"assets/images/settings.png"
+  }
+]
   check: boolean;
   counter: any;
   constructor(private serNot: AdminSettingsService) {

@@ -41,10 +41,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     UsermanagementRoutingModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule,
     NgCircleProgressModule.forRoot({
       radius: 100,
       outerStrokeWidth: 8,

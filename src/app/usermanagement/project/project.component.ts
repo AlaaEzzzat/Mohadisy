@@ -16,7 +16,7 @@ export class ProjectComponent implements OnInit {
   activeProject: any = 1;
   projectServices: any = [];
   projectServiesArray: any = [];
-  numOfCompltedMilesones: any = 0;
+  numOfCompltedMilesones: any = 0; 
   startChat:boolean = false;
   projectCategory: any = [
     { id: 1, name: 'مشاريع حالية' },

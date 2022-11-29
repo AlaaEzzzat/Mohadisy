@@ -1,5 +1,4 @@
 <div id="wrapper " class="container-fluid">
-  <!-- Page Content -->
   <div id="page-content-wrapper">
     <app-navbar></app-navbar>
     <div
@@ -7,107 +6,9 @@
       style="background-color: #eef0f8; padding-top: 78px"
     >
       <div class="row">
-        <div class="position-fixed pe-0 col-2 col-md-3 col-lg-2">
-          <div
-            class="m-0"
-            style="background-color: #004057; font-weight: 600"
-            id="sidebar-wrapper"
-            [hidden]="status"
-          >
-            <div class="list-group list-group-flush">
-              <div class="text-white items">
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/dashboard"
-                >
-                  <img
-                    src="assets/images/Group.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 title fontStyle"> لوحة التحكم </span>
-                </div>
+        
+        <app-sidebar [data]="data"></app-sidebar> 
 
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/offers"
-                >
-                  <!--   <img
-                    src="assets/images/blueprint.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  /> -->
-                  <i class="fa fa-hand-holding-dollar fs-4"></i>
-                  <span class="px-2 title fontStyle"> عروض الأسعار </span>
-                </div>
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/project"
-                >
-                  <img
-                    src="assets/images/blueprint.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 title fontStyle"> مشاريعي </span>
-                </div>
-
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/profile"
-                >
-                  <img
-                    src="assets/images/profile.svg"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 title fontStyle"> معلوماتي </span>
-                </div>
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/payment"
-                >
-                <i class="fa fa-hand-holding-dollar fs-4"></i>
-                  <span class="px-2 title fontStyle"> المدفوعات </span>
-                </div>
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/chat"
-                >
-                  <img
-                    src="assets/images/chat.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 title fontStyle"> رسائلي </span>
-                </div>
-                <div
-                  class="p-2 my-4 pe-3 sidebar-item"
-                  routerLink="/usermanagement/messages"
-                >
-                  <img
-                    src="assets/images/chat.png"
-                    alt=""
-                    srcset=""
-                    width="28px"
-                    height="28px"
-                  />
-                  <span class="px-2 title fontStyle"> إرسال شكوي </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
         <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'">
           <router-outlet></router-outlet>
@@ -115,8 +16,6 @@
       </div>
     </div>
   </div>
-  <!-- /#page-content-wrapper -->
-
   <div class="overlay p-5" *ngIf="showpopup">
     <div class="popup p-5">
       <h5 class="text-center mb-4">نوع طلب السعر</h5>
@@ -146,8 +45,6 @@
     </div>
   </div>
 </div>
-<!-- /#wrapper -->
-
 <span
   (click)="openPriceRequest()"
   class="btn cairo p-3 px-4 text-white askBtn"
@@ -161,10 +58,4 @@
 >
   طلب عرض السعر
 </span>
-<!-- <ngx-spinner
-  bdColor="rgba(24, 175, 154, 0.8)"
-  size="medium"
-  color="#fff"
-  type="ball-scale-multiple"
-  [fullScreen]="true"
-  ><p class="cairo" style="color: white">تحميل...</p></ngx-spinner> -->
+<app-msg-to-admin></app-msg-to-admin>

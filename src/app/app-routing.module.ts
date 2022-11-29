@@ -1,3 +1,5 @@
+import { UserAuthGuard } from './@shared/Guards/user-auth.guard';
+import { SpAuthGuard } from './@shared/Guards/sp-auth.guard';
 import { ChatComponent } from './@shared/components/chat/chat.component';
 
 import { LandingComponent } from './@shared/components/landing/landing.component';
@@ -17,6 +19,7 @@ const routes: Routes = [
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
+   
   },
 
   {
@@ -32,6 +35,7 @@ const routes: Routes = [
       import('./spmanagement/spmanagement.module').then(
         (m) => m.SPmanagementModule
       ),
+      canActivate:[SpAuthGuard]
   },
   {
     path: 'usermanagement',
@@ -39,6 +43,8 @@ const routes: Routes = [
       import('./usermanagement/usermanagement.module').then(
         (m) => m.UsermanagementModule
       ),
+      canActivate:[UserAuthGuard]
+
   },
   { path: '**', component: NotFoundComponent },
 ];
