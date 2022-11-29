@@ -235,12 +235,12 @@ error:any;
     });
   }
 
-    fortest(totals: any,) {
-    for (var i = 1; i <= totals; i++) {
-      this.arrays.push(i);
-      console.log(this.arrays)
-    }
-  }
+    // fortest(totals: any,) {
+    // for (var i = 1; i <= totals; i++) {
+    //   this.arrays.push(i);
+    //   console.log(this.arrays)
+    // }
+  // }
   getProfileAdmin() {
     // this.state = 1;
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
@@ -386,3 +386,4 @@ interface AccountType{
   "normalizedName": string,
   "concurrencyStamp": string
 }
+
