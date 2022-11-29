@@ -59,6 +59,20 @@ export class AdminDashService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Dashboard/getUsers`)
 
   }
-  
+   // /api/Appointment/getAppointments
+   appointmentsEndAndStartDte(date:any):Observable<any>
+   {
+     return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/getAppointments`,JSON.stringify(date), this.httpoptions);
+   }
+   // /api/Appointment/storeAppointmentFiles/{appointmentId}
+   storeAppointmentFiles(date:any,appointmentId:any):Observable<any>
+   {
+     return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,JSON.stringify(date), this.httpoptions);
+   }
+   // /api/Appointment/storeAppointment
+   storeAppointment(object:any):Observable<any>
+   {
+     return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointment`,JSON.stringify(object), this.httpoptions);
+   }
 
 }
