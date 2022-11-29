@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-sp-project-current',
   templateUrl: './sp-project-current.component.html',
@@ -43,10 +44,12 @@ export class SpProjectCurrentComponent implements OnInit {
   Reason:any;
   Representative:any;
 
+
  constructor(private api:ApiService,private router:Router) {
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
+
 
     });
  }
@@ -57,7 +60,7 @@ export class SpProjectCurrentComponent implements OnInit {
    console.log(data);
    this.Listprojects=data.data.projects;
    this.totalpages=data.data.totalPages;
-   for(let i=1;i<=this.totalpages;i++)
+   for(let i=1;i<=10;i++)
     this.pages.push(i);
    if(this.Listprojects.length>0){
    this.result=1;
@@ -71,6 +74,7 @@ export class SpProjectCurrentComponent implements OnInit {
     data=>
     {
       this.Representative=data.data;
+      console.log( this.Representative);
 
     }
    );
@@ -92,7 +96,7 @@ export class SpProjectCurrentComponent implements OnInit {
        break;
      }
     }
-    console.log(this.selectProject);
+    //console.log(this.selectProject);
 
     this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
    {
@@ -100,8 +104,17 @@ export class SpProjectCurrentComponent implements OnInit {
      this.Allstages=data.data;
      console.log(this.Allstages);
      this.index=0;
+     this.calcPrecentage=0;
+     for(let i=0;i<this.Allstages.length;i++)
+     {
+      if(this.Allstages[i].milestoneStatusId==3)
+      {
+        this.calcPrecentage+=(100.0/this.Allstages.length);
+      }
+     }
 
    }
+
    );
 
    this.projectComponent=[],this.RequiredWorks=[];
@@ -161,7 +174,7 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
     /*************************************/
-    toggoleComponent(componentId:any)
+    /*toggoleComponent(componentId:any)
     {
 
      if(this.descComponent[componentId])
@@ -170,17 +183,7 @@ export class SpProjectCurrentComponent implements OnInit {
      this.descComponent[componentId]=1;
 
 
-    }
-
-    toggoleWork(workId:any)
-    {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
+    }*/
 
 
     toggleStage(stageId:any)
@@ -195,8 +198,10 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
-    pending(stageid:any)
+    pending(stageid:number)
     {
+
+      console.log(stageid);
 
 
       var pendingData=
@@ -204,22 +209,20 @@ export class SpProjectCurrentComponent implements OnInit {
         "milestoneId":stageid,
         "reason":this.Reason.get('reason').value
       }
+      console.log(pendingData);
       this.api.postJson("https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending",pendingData).subscribe({
         next:(data)=>
         {
-          console.log(data);
 
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
 
-            this.router.navigate(['/Spmanagement/projects/status/pending']);
-
         }
-
 
       });
 
+      this.router.navigate(['/Spmanagement/projects/status/pending']);
 
 
     }
@@ -227,24 +230,28 @@ export class SpProjectCurrentComponent implements OnInit {
     finished(stageid:any)
     {
       this.calcPrecentage+=(100.0/Number(this.Allstages.length));
-      this.api.get(`https://app.mohandisy.com/api/Milestone/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
+
+      this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
         next:(data)=>
         {
           console.log(data);
-
             Swal.fire(
               'تم انهاء المرحله بنجاح'
             );
-        }
 
+            this.router.navigate(['/Spmanagement/projects/status/current'],{skipLocationChange: true});
+            return;
+        }
 
 
       })
 
     }
 
-    downloadFile(id:any,file:any)
+    downloadFile(filepath:any,file:any)
     {
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(filepath, file);
 
     }
 
@@ -257,14 +264,10 @@ export class SpProjectCurrentComponent implements OnInit {
 
       this.Listprojects=data.data.projects;
 
-
    });
     }
 
-    onSubmit()
-    {
 
-    }
 
  }
 

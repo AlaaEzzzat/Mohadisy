@@ -45,46 +45,48 @@
         </ng-container>
 
 
-        <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
-          <ul class="pagination">
-
-            <ng-container *ngIf="page==1">
-            <li class="page-item disabled">
-              <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
-            </li>
-            </ng-container>
-
-             <ng-container *ngIf="page!=1">
-              <li class="page-item">
-                <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+        <div class="col-lg-12">
+          <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
+            <ul class="pagination">
+              <ng-container *ngIf="page==1">
+              <li class="page-item disabled">
+                <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
               </li>
               </ng-container>
 
-            <ng-container *ngFor="let p of pages">
-              <ng-container *ngIf="page==p">
-                <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+               <ng-container *ngIf="page!=1">
+                <li class="page-item">
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+                </li>
+                </ng-container>
+
+              <ng-container *ngFor="let p of pages">
+                <ng-container *ngIf="page==p">
+                  <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
+                <ng-container *ngIf="page!=p">
+                  <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
               </ng-container>
 
-              <ng-container *ngIf="page!=p">
-                <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
-              </ng-container>
+              <ng-container *ngIf="page==pages.length">
+                <li class="page-item disabled" >
+                  <button class="page-link btn p-1 px-3">التالى</button>
+                </li>
+               </ng-container>
 
-            </ng-container>
+               <ng-container *ngIf="page!=pages.length">
+                <li class="page-item" >
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+                </li>
+               </ng-container>
 
-            <ng-container *ngIf="page==pages.length">
-            <li class="page-item disabled">
-              <button class="page-link btn p-1 px-3">التالى</button>
-            </li>
-           </ng-container>
+            </ul>
+          </nav>
+        </div>
 
-           <ng-container *ngIf="page!=pages.length">
-            <li class="page-item">
-              <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
-            </li>
-           </ng-container>
-
-          </ul>
-        </nav>
 
       </div>
 
@@ -135,10 +137,16 @@
                 [innerStrokeColor]="'#C7E596'"
                 [animation]="true"
                 [animationDuration]="300"
-                title="{{calcPrecentage}}%"
+                title="{{calcPrecentage.toFixed(2)}}%"
               ></circle-progress>
-                 <p class="mt-3">{{statusStage}}
+                 <p class="mt-3" *ngIf="calcPrecentage!=0">
+              تم الانتهاء  {{calcPrecentage.toFixed(2)}}% من المراحل
                 </p>
+
+                <p class="mt-3" *ngIf="calcPrecentage==0">
+                  {{statusStage}}
+                </p>
+
               </div>
             </div>
           </div>
@@ -156,8 +164,6 @@
                 <i class="fas fa-angle-down"></i>
               </button>
               </h2>
-
-
                 <div class="card mt-2 card-2-1">
                   <div id="accordion">
                     <ng-container *ngIf="togglestage[stage.id]==1">
@@ -167,7 +173,7 @@
 
                      <div class="row mt-2 text-center">
                       <div class="col-lg-6 mt-2">
-                       <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; margin-left: 3%;"></i>اسم الملف</a>
+                       <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}" target="_blank"><i class="fa fa-file-pdf-o" style="color:red; margin-left: 3%;"></i>اسم الملف</a>
                       </div>
                       <div class="col-lg-6 mt-2">
                         <a href=""><i class="fa-solid fa-image" style="color:green;"></i> صوره للموقع</a>
@@ -175,24 +181,29 @@
 
                       <div class="col-lg-12 px-2 mt-2" style="font-size:14px ;">
                         <div class="row">
-                          <div class="col-lg-4">
-                            <button class="btn" type="button">تعديل </button>
-                            <span style="margin-right: 5%;"> | </span>
+
+                          <div class="col-lg-5">
+
+                            <ng-container *ngIf="stage.milestoneStatusId!=3">
+                              <button class="btn" type="button" (click)="finished(stage.id)">انهاء مرحله
+                              </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="stage.milestoneStatusId==3">
+                              <button class="btn mt-2" type="button" disabled>انهاء مرحله</button>
+                            </ng-container>
+
+                            <span style="margin-right: 15%;"> | </span>
                           </div>
 
-                          <div class="col-lg-4">
-                            <button class="btn" type="button" (click)="finished(stage.id)">انهاء مرحله</button>
-                            <span style="margin-right: 2%;"> | </span>
-                          </div>
-
-                          <div class="col-lg-4">
+                          <div class="col-lg-3">
                             <ng-container *ngIf="stage.milestoneStatusId==2">
                               <button class="btn"  type="button"
                             data-bs-toggle="modal" data-bs-target="#staticBackdrop">تعليق</button>
                             </ng-container>
 
                             <ng-container *ngIf="stage.milestoneStatusId!=2">
-                              <button class="btn"  type="button"  disabled>تعليق</button>
+                              <button class="btn mt-2"  type="button"  disabled>تعليق</button>
                             </ng-container>
                             <!------------Start Modal------------->
                             <div class="modal fade  mt-5" id="staticBackdrop" >
@@ -204,17 +215,16 @@
                                   </button>
                                  </div>
 
-
-                                 <form [formGroup]="Reason" onsubmit="onSubmit()">
+                                 <form [formGroup]="Reason">
                                   <div class="modal-body">
                                     <h4>اكتب سبب التعليق</h4>
+
                                     <div class="form-group">
                                       <textarea class="form-control mt-3" formControlName="reason"></textarea>
                                     </div>
 
                                   </div>
                                   <div class="modal-footer">
-
                                     <button type="submit" class="btn"
                                     (click)="pending(stage.id)"
                                     >ارسال</button>
@@ -241,16 +251,9 @@
 
                 </div>
 
-
-
-
              </div>
 
             </ng-container>
-
-
-
-
 
           </div>
 
@@ -314,22 +317,10 @@
                     <ul>
                       <ng-container *ngFor="let component of projectComponent">
                         <div>
-                          <li (click)="toggoleComponent(component.id)">
-                            <ng-container *ngIf="descComponent[component.id]==1">
-                              <i class="fa fa-angle-down " aria-hidden="true"></i>
-                            </ng-container>
-
-                            <ng-container *ngIf="descComponent[component.id]!=1">
+                          <li>
                               <i class="fa fa-greater-than "></i>
-                            </ng-container>
-
-                            {{component.name}}
+                               {{component.name}}
                           </li>
-
-                          <ng-container *ngIf="descComponent[component.id]==1">
-                            <p>{{component.description}} </p>
-                          </ng-container>
-
                         </div>
                       </ng-container>
 
@@ -343,7 +334,6 @@
                       <h6>الملفات الخاصه بالمشروع</h6>
                       <ul>
                         <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
-
 
                           <li style="border:none; background-color:transparent;"
                           (click)="downloadFile(document.filePath,document.file)"
@@ -368,39 +358,13 @@
                 <h6>الاعمال المطلوبه</h6>
                 <ul>
                   <ng-container *ngFor="let work of this.RequiredWorks">
-
                     <div>
-
-                      <li (click)="toggoleWork(work.id)">
-                        <ng-container *ngIf="descWork[work.id]==1">
-                          <i class="fa fa-angle-down " aria-hidden="true"></i>
-                        </ng-container>
-
-                        <ng-container *ngIf="descWork[work.id]!=1">
+                      <li>
                           <i class="fa fa-greater-than "></i>
-                        </ng-container>
-                        {{work.name}}
-                      </li>
-
-                      <ng-container *ngIf="descWork[work.id]">
-                        <ul>
-                          <ng-container *ngFor="let requiredDocument of work.requiredDocuments">
-
-                            <li>
-                              <p>{{requiredDocument.name}}</p>
-                            </li>
-
-                          </ng-container>
-                        </ul>
-
-                      </ng-container>
-
-                    </div>
-
-
+                           {{work.name}}
+                         </li>
+                      </div>
                   </ng-container>
-
-
                 </ul>
               </div>
             </div>
@@ -430,15 +394,15 @@
           <div class="card card-4">
             <div class="row">
               <div class="col-lg-2 mt-1">
-              <img src="https://www.hiamag.com/sites/default/files/styles/1000xauto/public/article/12/10/2021/xuin10-245131782_1548489262169588_3010436186952909049_n.jpg?itok=jXkdBBx3" alt="image" class="w-80">
+              <img src="{{Representative.organizationalServiceProviderProfile.profilePicturePath}}" alt="image" class="w-80">
               </div>
-              <div class="col-lg-5 mt-2">
+              <div class="col-lg-5 mt-3">
                 <p>
                   م : {{Representative?.firstName}} {{Representative?.lastName}}
                 </p>
               </div>
-              <div class="col-lg-5">
-                <a class="btn">(مسئول عن المشروع)</a>
+              <div class="col-lg-5 ">
+                <p class="mt-3" style="color:#18af9a; font-size: 10px;">(مسئول عن المشروع)</p>
               </div>
 
             </div>

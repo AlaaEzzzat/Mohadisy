@@ -1,15 +1,14 @@
-import { ApiService } from './../../@core/api.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
-import {  Router } from '@angular/router';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
-  selector: 'app-sp-project-pending',
-  templateUrl: './sp-project-pending.component.html',
-  styleUrls: ['./sp-project-pending.component.scss']
+  selector: 'app-sp-project-finished',
+  templateUrl: './sp-project-finished.component.html',
+  styleUrls: ['./sp-project-finished.component.scss']
 })
-export class SpProjectPendingComponent implements OnInit {
-
+export class SpProjectFinishedComponent implements OnInit {
+  selected:number=Date.now();
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
@@ -24,22 +23,29 @@ export class SpProjectPendingComponent implements OnInit {
   result:number=0;
   totalpages: any = 0;
   pages:Array<any>=[];
-  selected:number=Date.now();
+  Allstages:Array<any>=[];
+  togglestage:any=[];
+  index:number=0;
+  Reason:any;
   Representative:any;
 
- constructor(private api:ApiService,private router:Router) { }
+
+ constructor(private api:ApiService,private router:Router) {
+
+ }
 
  ngOnInit(): void {
 
-   this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPPendingProjects/Page/1").subscribe(data=>{
-
-   console.log(data.data.projects);
+   this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPFinishedProjects/Page/1").subscribe(data=>{
+   console.log(data);
    this.Listprojects=data.data.projects;
    this.totalpages=data.data.totalPages;
-   for(let i=1;i<=this.totalpages;i++)
+   for(let i=1;i<=10;i++)
     this.pages.push(i);
-   if(this.Listprojects.length>0)
-     this.result=1;
+   if(this.Listprojects.length>0){
+   this.result=1;
+
+   }
 
 
    });
@@ -48,9 +54,11 @@ export class SpProjectPendingComponent implements OnInit {
     data=>
     {
       this.Representative=data.data;
+      console.log( this.Representative);
 
     }
    );
+
 
  }
 
@@ -68,9 +76,19 @@ export class SpProjectPendingComponent implements OnInit {
        break;
      }
     }
+    //console.log(this.selectProject);
+
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+   {
+    this.togglestage=[];
+     this.Allstages=data.data;
+     console.log(this.Allstages);
+     this.index=0;
 
 
+   }
 
+   );
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -126,8 +144,10 @@ export class SpProjectPendingComponent implements OnInit {
 
 
 
+
+
     /*************************************/
-    toggoleComponent(componentId:any)
+    /*toggoleComponent(componentId:any)
     {
 
      if(this.descComponent[componentId])
@@ -136,81 +156,22 @@ export class SpProjectPendingComponent implements OnInit {
      this.descComponent[componentId]=1;
 
 
-    }
+    }*/
 
-    toggoleWork(workId:any)
+
+    toggleStage(stageId:any)
     {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
 
-    }
-
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
-
-    current()
-    {
-      this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
-      {
-
-        var stones=data.data
-        console.log(stones);
-      for(let i=0;i<stones.length;i++)
-      {
-
-        if(Number(stones[i].milestoneStatusId)==4)
-        {
-          console.log(stones[i].id);
-
-          this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${Number(stones[i].id)}`).subscribe
-          ({
-            next:(data)=>
-           {
-          console.log(data);
-
-            Swal.fire(
-              'تم تفعيل المشروع بنجاح'
-            );
-            this.router.navigate(['/Spmanagement/projects/status/current']);
-           }
-
-        }
-
-            );
-
-            return;
-
-        }
+     if(this.togglestage[stageId]==1){
+      this.togglestage[stageId]=0;
+      }
+      else{
+      this.togglestage[stageId]=1;
       }
 
-
-      }
-      );
-
-
-      /*this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${projectId}`).subscribe(
-        {
-
-            next:(data)=>{
-
-              Swal.fire(
-                'تم تفعيل المشروع'
-              );
-              this.router.navigate(['/Spmanagement/projects/status/pending']);
-              }
-
-
-        }
-      );*/
-
     }
+
+
 
     downloadFile(filepath:any,file:any)
     {
@@ -224,7 +185,7 @@ export class SpProjectPendingComponent implements OnInit {
 
      this.page=e;
      console.log(this.page);
-     this.api.get(`https://app.mohandisy.com/api/Project/getOrganizationalSPPendingProjects/Page/${this.page}`).subscribe(data=>{
+     this.api.get(`https://app.mohandisy.com/api/Project/getOrganizationalSPFinishedProjects/Page/${this.page}`).subscribe(data=>{
 
       this.Listprojects=data.data.projects;
 
@@ -232,5 +193,8 @@ export class SpProjectPendingComponent implements OnInit {
    });
     }
 
+
+
  }
+
 

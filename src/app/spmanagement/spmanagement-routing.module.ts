@@ -1,9 +1,8 @@
+import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { SpContributionsComponent } from './sp-contributions/sp-contributions.component';
-
-import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
@@ -73,15 +72,13 @@ const routes: Routes = [
             children: [
               { path: 'current', component: SpProjectCurrentComponent },
               { path: 'pending', component: SpProjectPendingComponent},
+              { path: 'finished', component: SpProjectFinishedComponent},
             ],
           },
 
 
         ],
       },
-
-
-      { path: 'mainProfile', component: SpMainProfileComponent },
 
       { path: 'completeProfile', component: SpCompleteProfileComponent },
       { path: 'prevWorks', component: PrevWorksComponent },

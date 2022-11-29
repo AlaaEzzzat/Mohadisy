@@ -162,3 +162,20 @@ li
   box-shadow: none;
   }
 
+  .rep a
+  {
+    color:white;
+  }
+
+  .rep:hover
+  {
+    cursor: pointer;
+    background-color: transparent;
+    color:#004057;
+
+    a
+    {
+      color: #004057;
+    }
+
+  }
