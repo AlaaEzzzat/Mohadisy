@@ -1,7 +1,9 @@
 body {
   overflow-x: hidden !important;
 }
-
+span{
+  font-family: 'cairo';
+}
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;

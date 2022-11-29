@@ -1,3 +1,4 @@
+import { AdminSettingsService } from './../../../@core/services/admin/admin-settings.service';
 import { ScrollToBottomDirective } from './../../directives/scroll-to-bottom';
 import { HttpClient } from '@angular/common/http';
 import { ProviderServiceService } from './../../../@core/services/Provider/provider-service.service';
@@ -17,22 +18,22 @@ export class ChatComponent implements OnInit {
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('fileImage') fileImage!: ElementRef;
   @ViewChild(ScrollToBottomDirective) scroll!: ScrollToBottomDirective;
-  
+
   constructor(
     private clientService: ClientService,
     private providerService: ProviderServiceService,
     private chatService: ChatService,
-    private _HttpClient: HttpClient
+    private _HttpClient: HttpClient,
+    private adminSettingsService: AdminSettingsService
   ) {}
-  clientProfile: any = {};
+  senderProfile: any = {};
   userCahts: any = [];
   messageTypes: any = [];
   userType: any = '';
   ngOnInit(): void {
-
     if (localStorage.getItem('role') == '"Client"') {
       this.clientService.getClientProfile().subscribe((data: any) => {
-        this.clientProfile = data.data;
+        this.senderProfile = data.data;
         this.userType = 'Client';
         console.log(data.data);
         console.log(this.userType);
@@ -41,19 +42,28 @@ export class ChatComponent implements OnInit {
       this.providerService.getR().subscribe((data: any) => {
         console.log(data.data);
         this.userType = 'CO';
-        this.clientProfile = data.data;
+        this.senderProfile = data.data;
         console.log(this.userType);
-        console.log();
+      });
+    } else if (localStorage.getItem('role') == '"Admin"') {
+      this.adminSettingsService.getAdminProfile().subscribe((data: any) => {
+        this.userType = 'Admin';
+        this.senderProfile = data.data;
+        console.log(data.data);
       });
     }
-    this.chatService.getUserChats().subscribe((data: any) => {
-      console.log(data.data);
-      this.userCahts = data.data;
-    });
+   this.getUserChatsF();
 
     this.chatService.getMessageTypes().subscribe((data: any) => {
       console.log(data.data);
       this.messageTypes = data.data;
+    });
+  }
+  getUserChatsF(){
+    this.chatService.getUserChats().subscribe((data: any) => {
+      console.log(data.data);
+      this.dataShow = data.data;
+      this.userCahts = data.data;
     });
   }
 
@@ -86,6 +96,7 @@ export class ChatComponent implements OnInit {
         console.log(data);
         this.ClearInputs();
         this.getChatWithUser(receiverId);
+        this.getUserChatsF();
       },
       error: (error: any) => {
         console.log(error);
@@ -96,13 +107,12 @@ export class ChatComponent implements OnInit {
     this.textInput.nativeElement.value = '';
     this.fileImage.nativeElement.value = '';
   }
-  isFileImage(file:any) {
+  isFileImage(file: any) {
     return file && file['type'].split('/')[0] === 'image';
-}
+  }
   sendMessage(message: string, receiverId: string) {
-    
-console.log(this.isFileImage(this.fileMessage))
-     var type: number = 1;
+    console.log(this.isFileImage(this.fileMessage));
+    var type: number = 1;
     if (message) {
       this.message.content = message;
       this.message.messageTypeId = type;
@@ -111,7 +121,7 @@ console.log(this.isFileImage(this.fileMessage))
     }
     if (this.fileMessage) {
       console.log(receiverId);
-      this.isFileImage(this.fileMessage)?type=2:type=3;
+      this.isFileImage(this.fileMessage) ? (type = 2) : (type = 3);
       this.message.content = '';
       this.message.messageTypeId = type;
       this.message.receiverId = receiverId;
@@ -126,7 +136,8 @@ console.log(this.isFileImage(this.fileMessage))
           this.chatService.sendMessageFile(msgID, fileFormData).subscribe({
             next: (data: any) => {
               console.log(data);
-              this.fileMessage={}
+              this.fileMessage = {};
+              this.getUserChatsF();
               this.getChatWithUser(receiverId);
             },
             error: (error: any) => {
@@ -138,7 +149,7 @@ console.log(this.isFileImage(this.fileMessage))
           console.log(error);
         },
       });
-    } 
+    }
   }
 
   fileMessage: any = '';
@@ -162,5 +173,14 @@ console.log(this.isFileImage(this.fileMessage))
       }
     );
   }
-  
+  dataShow:any=[]
+  search(word: any) {
+    console.log(word)
+    this.dataShow = [];
+    this.userCahts.map((project: any) => {
+      if (project.fullName.search(new RegExp(word, 'i')) != -1) {
+        this.dataShow.push(project);
+      }
+    });
+  }
 }
