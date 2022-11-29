@@ -123,26 +123,13 @@ export class SpRequestAcceptComponent implements OnInit {
 
     }
 
-    toggoleWork(workId:any)
+   
+
+
+    downloadFile(filepath:any,file:any)
     {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
-
-
-    downloadFile(id:any,file:any)
-    {
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(filepath, file);
 
     }
 

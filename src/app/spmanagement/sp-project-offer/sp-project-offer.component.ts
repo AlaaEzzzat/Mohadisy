@@ -116,40 +116,18 @@ export class SpProjectOfferComponent implements OnInit {
 
 
     /*************************************/
-    toggoleComponent(componentId:any)
-    {
-
-     if(this.descComponent[componentId])
-     this.descComponent[componentId]=0;
-     else
-     this.descComponent[componentId]=1;
-
-
-    }
-
-    toggoleWork(workId:any)
-    {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
-
-
-    downloadFile(id:any,file:any)
-    {
-
-    }
     
+
+
+
+
+    downloadFile(filepath:any,file:any)
+    {
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(filepath, file);
+
+    }
+
     changepage(e:any)
     {
 

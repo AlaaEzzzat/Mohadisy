@@ -148,21 +148,10 @@
                       <ul>
                         <ng-container *ngFor="let component of projectComponent">
                           <div>
-                            <li (click)="toggoleComponent(component.id)">
-                              <ng-container *ngIf="descComponent[component.id]==1">
-                                <i class="fa fa-angle-down " aria-hidden="true"></i>
-                              </ng-container>
-
-                              <ng-container *ngIf="descComponent[component.id]!=1">
+                            <li>
                                 <i class="fa fa-greater-than "></i>
-                              </ng-container>
-
                               {{component.name}}
                             </li>
-
-                            <ng-container *ngIf="descComponent[component.id]==1">
-                              <p>{{component.description}} </p>
-                            </ng-container>
 
                           </div>
                         </ng-container>
@@ -205,30 +194,11 @@
 
                       <div>
 
-                        <li (click)="toggoleWork(work.id)">
-                          <ng-container *ngIf="descWork[work.id]==1">
-                            <i class="fa fa-angle-down " aria-hidden="true"></i>
-                          </ng-container>
+                        <li>
 
-                          <ng-container *ngIf="descWork[work.id]!=1">
-                            <i class="fa fa-greater-than "></i>
-                          </ng-container>
+                          <i class="fa fa-greater-than "></i>
                           {{work.name}}
                         </li>
-
-                        <ng-container *ngIf="descWork[work.id]">
-                          <ul>
-                            <ng-container *ngFor="let requiredDocument of work.requiredDocuments">
-
-                              <li>
-                                <p>{{requiredDocument.name}}</p>
-                              </li>
-
-                            </ng-container>
-                          </ul>
-
-                        </ng-container>
-
                       </div>
 
 
