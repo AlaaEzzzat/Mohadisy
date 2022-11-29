@@ -139,8 +139,10 @@ export class SpProjectRequestAllComponent implements OnInit {
 
 
 
-     downloadFile(id:any,file:any)
+     downloadFile(filepath:any,file:any)
      {
+       var FileSaver = require('file-saver');
+       FileSaver.saveAs(filepath, file);
 
      }
 

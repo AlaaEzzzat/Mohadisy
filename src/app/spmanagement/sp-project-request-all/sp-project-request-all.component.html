@@ -115,9 +115,11 @@
                   </div>
 
                    <div class="col-lg-1 rep">
-                     <i class="fa-solid fa-handshake">
-                    </i>
-                    <a href="/Spmanagement/projects/new/request"  style="margin-right:30%;" class="btn" (click)="addIdProject(selectProject.id)" >الرد</a>
+                    <a href="/Spmanagement/projects/new/request"  style="margin-right:30%;" class="btn" (click)="addIdProject(selectProject.id)" >
+                      <i class="fa-solid fa-handshake pb-2">
+                      </i>
+                      الرد
+                    </a>
                   </div>
 
 
@@ -157,7 +159,6 @@
                           <ng-container *ngFor="let component of projectComponent">
                             <div>
                               <li>
-
                                   <i class="fa fa-greater-than "></i>
                                   {{component.name}}
                               </li>
@@ -203,29 +204,10 @@
 
                         <div>
 
-                          <li (click)="toggoleWork(work.id)">
-                            <ng-container *ngIf="descWork[work.id]==1">
-                              <i class="fa fa-angle-down " aria-hidden="true"></i>
-                            </ng-container>
-
-                            <ng-container *ngIf="descWork[work.id]!=1">
-                              <i class="fa fa-greater-than "></i>
-                            </ng-container>
+                          <li>
+                            <i class="fa fa-greater-than "></i>
                             {{work.name}}
                           </li>
-
-                          <ng-container *ngIf="descWork[work.id]">
-                            <ul>
-                              <ng-container *ngFor="let requiredDocument of work.requiredDocuments">
-
-                                <li>
-                                  <p>{{requiredDocument.name}}</p>
-                                </li>
-
-                              </ng-container>
-                            </ul>
-
-                          </ng-container>
 
                         </div>
 
