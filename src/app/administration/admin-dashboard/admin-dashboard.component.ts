@@ -18,6 +18,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user-register';
+// import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user-register';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -66,8 +67,13 @@ error:any;
    usernames: string ;
   //  value = 0; //addition of .5
   //  starList: string[] = [];
+  idPicChanged: boolean = false;
+  idImgeUrl: any = '';
+  imagesArray: any = [];
+  userImg: any = '';
+  userImgChanged: boolean = false;
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder
-    ) {
+    ) {this.getProfileAdmin()
       this.usernames= localStorage.getItem('name')?.replace(/"/g, '') || '';
       this.newAccountform = this.formbuilder.group({
         username: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(20),]],
@@ -245,7 +251,7 @@ error:any;
     // this.state = 1;
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
       this.iProfileAdmin = value.data;
-      // console.log(this.iProfileAdmin);
+      console.log(this.iProfileAdmin);
     });
   }
   renderBarChart() {
@@ -350,7 +356,89 @@ error:any;
 //     }
 //   }
 
- 
+uplaodImg(e: any, name: any) {
+  let reader = new FileReader();
+  if (e.target.files && e.target.files.length > 0) {
+    let file = e.target.files[0];
+    console.log(file);
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (name == 'idPic') {
+        this.idPicChanged = true;
+        this.idImgeUrl = reader.result;
+        //push {name : file} in array of images
+        this.imagesArray.push({
+          name: "idPic",
+          file: file,
+        })
+      } else if (name == 'profileImage') {
+        this.userImg = reader.result;
+        //push {name : file} in array of images
+        this.imagesArray.push({
+          name: "profileImage",
+          file: file,
+        })
+        this.userImgChanged = true;
+      }
+    };
+  }
+}
+// saveChanges(){
+//   let imageIdformData = new FormData();
+//   let imageprofileformData = new FormData();
+//   let idPic = "";
+//   let profileImage = '';
+//   if(this.imagesArray.length>0){
+//     this.imagesArray.map((img:any)=>{
+//       if(img['name'] == 'idPic'){
+//         idPic = img['file'];
+//         imageIdformData.append('idImage', idPic);
+//         this.clientService.storeClientIdFile(imageIdformData).subscribe({
+//           next: (response: any) => {
+//             console.log('Image Posted');
+//           },
+//           error: (err: any) => {
+//             console.log(err);
+//           },
+//         });
+//       }else if(img['name'] == 'profileImage'){
+//         profileImage = img['file'];
+//         imageprofileformData.append('profilePicture', profileImage);
+//         this.clientService.changeProfilePicture(imageprofileformData).subscribe({
+//           next: (response: any) => {
+//             console.log('Image Posted');
+//           },
+//           error: (err: any) => {
+//             console.log(err);
+//           },
+//         });
+//       }
+//     })
+
+//   }
+  
+//   //send image to end point
+  
+  
+// //edited fields
+// this.user.applicationUser.phoneNumber = this.phoneNumber;
+// this.user.applicationUser.email = this.email;
+// var nameArr= this.name.split(" ");
+// this.user.firstName = nameArr[0];
+// nameArr.shift();
+// this.user.lastName = nameArr.join(" ");
+
+//  this.clientService.updateClientProfile(this.user).subscribe({
+//     next: (response: any) => {
+//       console.log('profile edited');
+//     },
+//     error: (err: any) => {
+//       console.log(err);
+//     },
+//   });
+  
+// }
+
 
 }
 
