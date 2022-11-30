@@ -1,112 +1,218 @@
 <div class="d-flex flex-column bg-white p-2 rounded-3 shadow">
-      <div class="row px-5 d-flex justify-content-evenly align-items-center">
-        <div class="col-8 ">
-          <img
-            src="assets/dashboard/cost.png"
-            alt=""
-            class="card-img cardImg"
-          />
-          <span class="me-4"> {{
-            type == "projects" ?"المشاريع"
-                  : type=="pricequotes"? "عروض الأسعار"
-                  : 0
-            }}</span>
-        </div>
-        <div class="col-4 align-items-center justify-content-end d-flex">
-    
-          <span [class]="'badge p-2 circle ' + circleColor">{{
-            type == "projects" ? data?.totalNumber 
-            : type=="pricequotes"?data?.totalNumber
-            : 0
-            }}</span>
-
-        </div>
-      </div>
-      <div class="row  mt-3"
-          >
-          <div class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column">
-            <div [class]="'badge rounded-circle circle   p-2 text-center '+ circleColor">
-              <p class="text-center mt-2">{{ 
-                  type == "projects" ? data?.currentProjectsNumber 
-                  : type=="pricequotes"?data?.newPricequotesNumber
-                  : 0
-              
-            
-            }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{
-                  type == "projects" ? data?.currentProjectsCost 
-                  : type=="pricequotes"?data?.newPricequotesCost
-                  : 0
-                 
-            
-            }}</p>
-            </div>
-            <p class="text-center my-2">{{
-                  type == "projects" ? "حالي"
-                  : type=="pricequotes"?"جديدة"
-                  : 0}}</p>
-          </div>
-          <div class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column">
-            <div [class]="'badge rounded-circle circle p-2 text-center ' + circleColor">
-              <p class="text-center mt-2">{{
-                  type == "projects" ? data?.finishedProjectsNumber 
-            : type=="pricequotes"?data?.acceptedPricequotesNumber
-            : 0
-                   }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{
-                  type == "projects" ? data?.finishedProjectsCost 
-                  : type=="pricequotes"?data?.acceptedPricequotesCost
-                  : 0
-                }}</p>
-            </div>
-            <p class="text-center my-2">{{
-                  type == "projects" ? "مكتملة"
-                  : type=="pricequotes"? "مقبولة"
-                  : 0}}</p>
-          </div>
-
-
-
-          <div class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column">
-            <div [class]="'badge rounded-circle circle p-2 text-center ' + circleColor">
-              <p class="text-center mt-2">{{
-                  type == "projects" ? data?.pendingProjectsNumber 
-                  : type=="pricequotes"?data?.notCompletedPricequotesNumber
-                  : 0 }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{
-                  type == "projects" ? data?.pendingProjectsCost 
-                  : type=="pricequotes"?data?.notCompletedPricequotesCost
-                  : 0 
-                }}</p>
-            </div>
-            <p class="text-center my-2">  {{
-                  type == "projects" ? "معلقه"
-                  : type=="pricequotes"?"غير مكتملة"
-                  : 0 
-            }}</p>
-          </div>
-          <div class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column">
-            <div [class]="'badge rounded-circle circle p-2 text-center ' + circleColor">
-              <p class="text-center mt-2">{{ 
-                  type == "projects" ? data?.stoppedProjectsNumber 
-                  : type=="pricequotes"?data?.rejectedPricequotesCost
-                  : 0 
-                 }}</p>
-              <hr class="m-0" />
-              <p class="text-center mt-2">{{ 
-                  type == "projects" ? data?.stoppedProjectsCost 
-                  : type=="pricequotes"?data?.rejectedPricequotesNumber
-                  : 0 
-                  }}</p>
-            </div>
-            <p class="text-center my-2"> {{ 
-                  type == "projects" ? "موقوف" 
-                  : type=="pricequotes"?"مرفوضة"
-                  : 0 
-                  }} </p>
-          </div>
-          </div>
+  <div class="row px-5 d-flex justify-content-evenly align-items-center">
+    <div class="col-8">
+      <img src="assets/dashboard/cost.png" alt="" class="card-img cardImg" />
+      <span class="me-4">
+        {{
+          type == "projects"
+            ? "المشاريع"
+            : type == "pricequotes"
+            ? "عروض الأسعار"
+            : type =="indSp"
+            ? "مزود الخدمه (مستقل)" 
+            : type =="comSp"
+            ? "مزود الخدمه (الشركه)" 
+            : type =="client"
+            ? "العملاء" : ""
+        }}</span
+      >
     </div>
+    <div class="col-4 align-items-center justify-content-end d-flex">
+      <span [class]="'badge p-2 circle ' + circleColor">{{
+        type == "projects"
+          ? data?.totalNumber
+          : type == "pricequotes"
+          ? data?.totalNumber
+          : type =="indSp"
+          ?data?.totalIndividualSPNumber
+          : type =="comSp"
+          ? data?.totalOrganizationalSPNumber
+          : type =="client"
+          ?data?.totalClientsNumber
+           : ""
+      }}</span>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div
+      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+    >
+      <div
+        [class]="'badge rounded-circle circle   p-2 text-center ' + circleColor"
+      >
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.currentProjectsNumber
+              : type == "pricequotes"
+              ? data?.newPricequotesNumber
+              : type =="indSp"
+              ? "جديد" 
+              : type =="comSp"
+              ? "جديد"
+              : type =="client"
+              ? "جديد" : ""
+          }}
+        </p>
+        <hr class="m-0" />
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.currentProjectsCost
+              : type == "pricequotes"
+              ? data?.newPricequotesCost
+              : type =="indSp"
+              ? data.newIndividualSPNumber 
+              : type =="comSp"
+              ?data.newOrganizationalSPNumber
+              : type =="client"
+              ?data.newClientsNumber : ""
+          }}
+        </p>
+      </div>
+      <p class="text-center my-2">
+        {{ type == "projects" ? "حالي" : type == "pricequotes" ? "جديدة" : "" }}
+      </p>
+    </div>
+    <div
+      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+    >
+      <div
+        [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
+      >
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.finishedProjectsNumber
+              : type == "pricequotes"
+              ? data?.acceptedPricequotesNumber
+              : type =="indSp"
+              ? "مقبول"
+              : type =="comSp"
+              ? "مقبول"
+              : type =="client"
+              ? "مقبول" : ""
+          }}
+        </p>
+        <hr class="m-0" />
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.finishedProjectsCost
+              : type == "pricequotes"
+              ? data?.acceptedPricequotesCost
+              : type =="indSp"
+              ? data.acceptedIndividualSPNumber
+              : type =="comSp"
+              ?data.acceptedOrganizationalSPNumber
+              : type =="client"
+              ? data.acceptedClientsNumber
+               : ""
+          }}
+        </p>
+      </div>
+      <p class="text-center my-2">
+        {{
+          type == "projects" 
+          ? "مكتملة" 
+          : type == "pricequotes" 
+          ? "مقبولة" : ""
+        }}
+      </p>
+    </div>
+
+    <div
+      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+    >
+      <div
+        [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
+      >
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.pendingProjectsNumber
+              : type == "pricequotes"
+              ? data?.notCompletedPricequotesNumber
+              : type =="indSp"
+              ? "غير مكتمل"
+              : type =="comSp"
+              ? "غير مكتمل"
+              : type =="client"
+              ?  "غير مكتمل": ""
+          }}
+        </p>
+        <hr class="m-0" />
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.pendingProjectsCost
+              : type == "pricequotes"
+              ? data?.notCompletedPricequotesCost
+              : type =="indSp"
+              ? data.notCompletedIndividualSPNumber
+              : type =="comSp"
+              ?data.notCompletedOrganizationalSPNumber
+              : type =="client"
+              ? data.notCompletedClientsNumber
+              : ""
+          }}
+        </p>
+      </div>
+      <p class="text-center my-2">
+        {{
+          type == "projects"
+            ? "معلقه"
+            : type == "pricequotes"
+            ? "غير مكتملة"
+            : ""
+        }}
+      </p>
+    </div>
+    <div
+      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+    >
+      <div
+        [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
+      >
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.stoppedProjectsNumber
+              : type == "pricequotes"
+              ? data?.rejectedPricequotesCost
+              : type =="indSp"
+              ? "مرفوضة"
+              : type =="comSp"
+              ? "مرفوضة"
+              : type =="client"
+              ? "مرفوضة" : ""
+          }}
+        </p>
+        <hr class="m-0" />
+        <p class="text-center mt-2">
+          {{
+            type == "projects"
+              ? data?.stoppedProjectsCost
+              : type == "pricequotes"
+              ? data?.rejectedPricequotesNumber
+              : type =="indSp"
+              ? data.rejectedIndividualSPNumber
+              : type =="comSp"
+              ? data.rejectedOrganizationalSPNumber
+              : type =="client"
+              ? data.rejectedClientsNumber : ""
+          }}
+        </p>
+      </div>
+      <p class="text-center my-2">
+        {{
+          type == "projects" 
+          ? "موقوف" 
+          : type == "pricequotes" 
+          ? "مرفوضة" 
+          : ""
+        }}
+      </p>
+    </div>
+  </div>
+</div>

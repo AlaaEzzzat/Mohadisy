@@ -30,8 +30,8 @@ export class SpHomeComponent implements OnInit {
     routing:"/Spmanagement/prevWorks"
   },
   {
-    title:"المدفوعات  ",
-    routing:"/Spmanagement/payment",
+    title:"الإيرادات  ",
+    routing:"/Spmanagement/payments",
     image:"assets/images/Group.png"
   },
   {

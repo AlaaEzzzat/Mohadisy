@@ -1,3 +1,4 @@
+import { SharedModule } from './../../@shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminPaymentsClientsComponent } from './admin-payments-clients/admin-payments-clients.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
     AdminPaymentsComponent
   ],
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     Ng2SearchPipeModule,

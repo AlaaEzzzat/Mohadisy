@@ -18,6 +18,8 @@ import { LandingComponent } from './components/landing/landing.component';
 import { MsgToAdminComponent } from './components/msg-to-admin/msg-to-admin.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { PaymentCardComponent } from './components/payment-card/payment-card.component';
+import { PaymentLayoutComponent } from './components/payment-layout/payment-layout.component';
 
 const routes: Routes = [
 
@@ -36,6 +38,8 @@ const routes: Routes = [
     MsgToAdminComponent,
     SidebarComponent,
     DashboardCardComponent,
+    PaymentCardComponent,
+    PaymentLayoutComponent,
   ],
   imports: [
     MatMenuModule,
@@ -60,7 +64,9 @@ const routes: Routes = [
     ChatComponent,
     MsgToAdminComponent,
     SidebarComponent,
-    DashboardCardComponent
+    DashboardCardComponent,
+    PaymentCardComponent,
+    PaymentLayoutComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
