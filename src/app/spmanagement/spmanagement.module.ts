@@ -41,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
+import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-fin
     SpCprojectAcceptComponent,
     SpCprojectRejectComponent,
     SpProjectFinishedComponent,
+    SpRequestEditComponent,
 
   ],
   imports: [

@@ -1,18 +1,14 @@
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
-import Swal from 'sweetalert2';
-
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-sp-project-request',
-  templateUrl: './sp-project-request.component.html',
-  styleUrls: ['./sp-project-request.component.scss']
+  selector: 'app-sp-request-edit',
+  templateUrl: './sp-request-edit.component.html',
+  styleUrls: ['./sp-request-edit.component.scss']
 })
-export class SpProjectRequestComponent implements OnInit {
+export class SpRequestEditComponent implements OnInit {
 
   OfferData:any;
   Listprojects:Array<any>=[];
@@ -52,15 +48,21 @@ export class SpProjectRequestComponent implements OnInit {
 
     this.select=localStorage.getItem('idproject');
 
-    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
+    console.log(this.select);
 
-    this.Listprojects=data.data.priceQuotes;
+    this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
+
+    this.Listprojects=data.data.projects;
     this.totalpages=data.data.totalPages;
-   for(let i=1;i<=this.totalpages;i++)
+    console.log(this.Listprojects);
+     for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
     this.SelectIdProject();
 
     });
+
+    this.page=Number(localStorage.getItem("page"));
+    this.changepage(this.page);
 
 
 
@@ -69,42 +71,17 @@ export class SpProjectRequestComponent implements OnInit {
 
   SelectIdProject()
   {
+    console.log(this.Listprojects);
     for(let project of this.Listprojects)
     {
       if(project.id==this.select)
       {
         this.selectProject=project;
 
-        console.log(this.selectProject);
-
         break;
       }
      }
 
-
-    this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
-   (data=>{
-
-     for(let work of data.data)
-     {
-
-          for(let w of this.selectProject.projectRequiredWorks)
-         {
-           if(w.requiredWorkId==work.id)
-           {
-             this.RequiredWorks.push({
-               "name":work.name,
-               "id":work.id,
-               "requiredDocuments":work.requiredDocuments
-           });
-           }
-         }
-
-
-     }
-
-
-     });
   }
 
   showData(idProject:number)
@@ -118,10 +95,9 @@ export class SpProjectRequestComponent implements OnInit {
   {
 
    this.page=e;
-   console.log(this.page);
-   this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+   this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
 
-    this.Listprojects=data.data.priceQuotes;
+    this.Listprojects=data.data.projects;
 
 
  });
@@ -315,16 +291,7 @@ export class SpProjectRequestComponent implements OnInit {
       }
 
 
-      this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
-      {
-        next:(data)=>{
-        Swal.fire(
-          'تم تقديم العرض بنجاح'
-        );
-        this.router.navigate(['/Spmanagement/projects/new']);
-        }
 
-      } );
 
 
 

@@ -116,7 +116,7 @@ export class SpProjectOfferComponent implements OnInit {
 
 
     /*************************************/
-    
+
 
 
 
@@ -144,8 +144,8 @@ export class SpProjectOfferComponent implements OnInit {
 
     addIdProject(idProject:any)
     {
-     console.log(idProject);
-
+      localStorage.setItem("idproject",idProject);
+      localStorage.setItem("page",`${this.page}`);
 
     }
 

@@ -29,6 +29,7 @@ import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pendi
 import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
 import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
 import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
+import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
               { path: 'accept', component: SpRequestAcceptComponent },
               { path: 'reject', component: SpRequestRejectComponent },
               { path: 'offer', component: SpProjectOfferComponent },
+              { path: 'offer/edit', component:SpRequestEditComponent },
 
               { path: 'all', component: SpProjectsComponent },
               { path: 'all/request', component: SpCprojectRequestComponent },

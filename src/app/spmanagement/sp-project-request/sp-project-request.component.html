@@ -19,8 +19,6 @@
               </div>
             </ng-container>
 
-
-
             <ng-container *ngIf="this.select!=project.id">
               <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
                 style="background:white;  color:#004057;">
@@ -160,8 +158,9 @@
               <div
               class="alert alert-danger"
               [hidden]="OfferData.get('numberOfMilestones')?.valid ||OfferData.get('numberOfMilestones')?.untouched" >
-              <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']
-              " >يجب ادخال عددمراحل اقل من 7 </span>
+              <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['pattern']" >يجب ادخال عددمراحل اقل من 7 </span>
+
+              <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']" >عدد المراحل مطلوب</span>
 
             </div>
               </div>
