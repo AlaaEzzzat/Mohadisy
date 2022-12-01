@@ -62,11 +62,11 @@
               : type == "pricequotes"
               ? data?.newPricequotesCost
               : type =="indSp"
-              ? data.newIndividualSPNumber 
+              ? data?.newIndividualSPNumber 
               : type =="comSp"
-              ?data.newOrganizationalSPNumber
+              ?data?.newOrganizationalSPNumber
               : type =="client"
-              ?data.newClientsNumber : ""
+              ?data?.newClientsNumber : ""
           }}
         </p>
       </div>
@@ -102,11 +102,11 @@
               : type == "pricequotes"
               ? data?.acceptedPricequotesCost
               : type =="indSp"
-              ? data.acceptedIndividualSPNumber
+              ? data?.acceptedIndividualSPNumber
               : type =="comSp"
-              ?data.acceptedOrganizationalSPNumber
+              ?data?.acceptedOrganizationalSPNumber
               : type =="client"
-              ? data.acceptedClientsNumber
+              ? data?.acceptedClientsNumber
                : ""
           }}
         </p>
@@ -149,11 +149,11 @@
               : type == "pricequotes"
               ? data?.notCompletedPricequotesCost
               : type =="indSp"
-              ? data.notCompletedIndividualSPNumber
+              ? data?.notCompletedIndividualSPNumber
               : type =="comSp"
-              ?data.notCompletedOrganizationalSPNumber
+              ?data?.notCompletedOrganizationalSPNumber
               : type =="client"
-              ? data.notCompletedClientsNumber
+              ? data?.notCompletedClientsNumber
               : ""
           }}
         </p>
@@ -196,11 +196,11 @@
               : type == "pricequotes"
               ? data?.rejectedPricequotesNumber
               : type =="indSp"
-              ? data.rejectedIndividualSPNumber
+              ? data?.rejectedIndividualSPNumber
               : type =="comSp"
-              ? data.rejectedOrganizationalSPNumber
+              ? data?.rejectedOrganizationalSPNumber
               : type =="client"
-              ? data.rejectedClientsNumber : ""
+              ? data?.rejectedClientsNumber : ""
           }}
         </p>
       </div>

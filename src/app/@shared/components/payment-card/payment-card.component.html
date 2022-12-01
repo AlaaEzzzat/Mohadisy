@@ -13,8 +13,7 @@
             : type == 'clientForAdmin'
             ? project.profile?.profilePicturePath
             : type == 'spForAdmin'
-            ? project.profile?.companyLogoPath ||
-              project.profile?.profilePicturePath
+            ? (project.profile?.companyLogoFile?project.profile?.companyLogoPath: project.profile?.profilePicturePath)
             : ''
         "
         class="img-fluid rounded-start"
@@ -278,7 +277,7 @@
             type == "client" || type == "sp"
               ? project.project?.name
               : type == "clientForAdmin"
-              ? project.profile?.firstName + " " + project.profile?.lastName
+              ? project.profile?.projects[0].name
               : type == "spForAdmin"
               ? project.profile?.offers[0]?.project?.name
               : ""

@@ -84,6 +84,7 @@
             </div>
             <input
               #text
+              (change)="search(text.value)"
               type="text"
               class="form-control rounded-0 border border-0 border-end"
               placeholder="بحث"
@@ -94,7 +95,9 @@
     </div>
   </div>
   <div class="row mt-5 pe-3">
-    <ng-container *ngFor="let project of data">
+  
+    <ng-container *ngFor="let project of dataShow.length >0?
+       dataShow : data">
       <div class="col-xxl-4 col-lg-6 col-md-12">
         <div class="pb-4 w-100 h-100">
           <app-payment-card
@@ -127,7 +130,7 @@
                   userType == "client" || userType == "sp"
                     ? activeProject.project?.name
                     : userType == "spForAdmin"
-                    ? activeProject.profile.offers[0].project.name
+                    ? activeProject.profile?.offers[0]?.project?.name
                     : userType == "clientForAdmin"
                     ? activeProject.profile?.projects[0]?.name
                     : ""
@@ -144,8 +147,8 @@
                         ).toFixed(2)
                       : userType == "spForAdmin"
                       ? (
-                          activeProject.profile.offers[0]?.totalCost -
-                          activeProject.profile.offers[0]?.cost
+                          activeProject.profile?.offers[0]?.totalCost -
+                          activeProject.profile?.offers[0]?.cost
                         ).toFixed(2)
                       : userType == "clientForAdmin"
                       ? (
