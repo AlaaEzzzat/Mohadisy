@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/@core/api.service';
   styleUrls: ['./sp-projects.component.scss']
 })
 export class SpProjectsComponent implements OnInit {
-
+  pagenation:any=[]
 
    Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
@@ -33,6 +33,7 @@ export class SpProjectsComponent implements OnInit {
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
+    this.counter(this.totalpages);
     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
 
@@ -150,7 +151,29 @@ export class SpProjectsComponent implements OnInit {
      {
 
      }
-
+     counter(x: number) {
+      this.pagenation = [...Array(x).keys()];
+    }
+     next=()=> {
+      if (this.page < this.totalpages) {
+        this.page = this.page + 1;
+        this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+          this.Listprojects=data.data.priceQuotes;
+          this.totalpages=data.data.totalPages;
+    this.counter(this.totalpages);
+       });
+      }
+    }
+    prev= ()=> {
+      if (this.page > 1) {
+        this.page = this.page - 1;
+        this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+          this.Listprojects=data.data.priceQuotes;
+          this.totalpages=data.data.totalPages;
+    this.counter(this.totalpages);
+       });
+      }
+    }
 
      changepage(e:any)
      {

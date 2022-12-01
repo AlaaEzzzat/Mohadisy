@@ -22,6 +22,7 @@ import { PaymentCardComponent } from './components/payment-card/payment-card.com
 import { PaymentLayoutComponent } from './components/payment-layout/payment-layout.component';
 import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 const routes: Routes = [
 
@@ -44,6 +45,7 @@ const routes: Routes = [
     PaymentLayoutComponent,
     CarouselRateComponent,
     ProjectCardComponent,
+    PaginationComponent,
   ],
   imports: [
     MatMenuModule,
@@ -73,6 +75,7 @@ const routes: Routes = [
     PaymentLayoutComponent,
     CarouselRateComponent,
     ProjectCardComponent,
+    PaginationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
