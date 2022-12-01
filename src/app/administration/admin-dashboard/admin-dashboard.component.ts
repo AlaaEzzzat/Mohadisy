@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {
   startOfDay,
   endOfDay,
@@ -18,6 +19,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user-register';
+import moment from 'moment';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -64,6 +66,11 @@ error:any;
    appointments:any
    appointmentFiles:any[]=[]
    usernames: string ;
+   appointment!:appoint;
+   newappointment: FormGroup;
+   dateSelected!:dateSe
+   FileformData = new FormData();
+   file:any
   //  value = 0; //addition of .5
   //  starList: string[] = [];
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder
@@ -77,12 +84,18 @@ error:any;
         phoneNumber: ['', [Validators.required]],
         officialRoleId: ['', [Validators.required]]
       });
+      this.newappointment=this.formbuilder.group({
+        name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
+       description: ['', [Validators.required]],
+       imageFile: [''],
+      });
     this.visitorsNumber = 0;
   }
   ngOnInit() {
-    // this.reve()
+
+    this. getappointDate()
     // this.showUserDashboard()
-    this.getProfileAdmin() 
+
     this.currentProjectsForAdmin();
     this.http.adminDashboard().subscribe({
       next: (value) => {
@@ -99,9 +112,10 @@ error:any;
         this.admins=value.data.officialUsers
         this.testimonials =value.data.testimonials
         this.complaints=value.data.complaints;
+        // عاوزه تتعدل
         this.appointments=value.data.appointments.latestAppointment;
         this.appointmentFiles=this.appointments.appointmentFiles
-        console.log(this.appointmentFiles);
+        console.log(value.data.appointments.appointments);
 
         this.renderDouChart();
         this.renderBarChart();
@@ -133,6 +147,19 @@ error:any;
   get f() {
     return this.newAccountform.controls;
   }
+  get name() {
+    return this.newappointment?.get('name');
+  }
+  get description() {
+    return this.newappointment?.get('description');
+  }
+  get appoins() {
+    return this.newappointment.controls;
+  }
+  get imageFile(){
+    return this.newappointment?.get('imageFile');
+
+  }
  currentProjectsForAdmin(){
   let i=0 
   this.http.getFinishedProjectsForAdmin(1).subscribe({
@@ -145,6 +172,7 @@ error:any;
         }
 
       }
+      console.log(this.objectLatest)
     
     },error:(er)=>{
       this.error=er
@@ -241,12 +269,58 @@ error:any;
       console.log(this.arrays)
     }
   }
-  getProfileAdmin() {
-    // this.state = 1;
+  getappointDate() {
+   let date=moment(this.selected).utc().format('YYYY-MM-DD h:mm A')
+    let dateSelected={
+      
+        "startDate": date,
+        "endDate": date
+      } 
+      console.log(dateSelected)
+      this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
+        console.log(date)
+      }),error:(er=>{
+        console.log(er.message)
+      })})
+    
+  }
+  uplaodFile(e: any) {
+  
+    if (e.target.files && e.target.files.length > 0) {
+      this.file = e.target.files[0];
+     
+      this.FileformData.append('file', this.file);
+
+    }      console.log(this.file);
+
+  }
+
+
+creatMeeting() {
+    
+  let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
-      this.iProfileAdmin = value.data;
-      // console.log(this.iProfileAdmin);
+      this.iProfileAdmin = value.data.adminProfile.applicationUserId;
     });
+    this.appointment={
+      "applicationUserId": this.iProfileAdmin,
+      "name": this.name?.value,
+      "description": this.description?.value,
+      "dateCreated": date
+    }
+    this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+      console.log(data)
+      console.log(data.data.appointmentId)
+      this.http.storeAppointmentFiles(data.data.appointmentId,this.file).subscribe({next:(req)=>{
+        console.log(req.message)
+      },error:(er)=>{
+        console.log(er.message)
+
+      }})
+    }),error:(er)=>{
+      console.log(er.message)
+    }})
+    console.log(this.appointment);
   }
   renderBarChart() {
     const myChart = new Chart('bar', {
@@ -320,7 +394,7 @@ error:any;
     "officialRoleId": this.officialRoleId?.value
   }
   console.log(this.iadminOfficialUserRegister)
-  this.http.officialUserRegister(this.iadminOfficialUserRegister).subscribe({next:((va)=>{alert(va.message)}),error:(er)=>{
+  this.http.officialUserRegister(this.iadminOfficialUserRegister).subscribe({next:((va)=>{alert(va)}),error:(er)=>{
     alert(er)
   }})
 
@@ -334,24 +408,17 @@ error:any;
     alert(er.message)
   }})
  }
-//  reve(){
-//   for(let item of this.objectTestimonials){
-//     this.value=item.stars
-//   }
-//   let i=1;
-//     for(i=1; i<=5; i++) {
-//       if(i<= this.value) {
-//         this.starList.push("fas fa-star text-warning");
-//       } else if(i <= this.value+0.5) {
-//         this.starList.push("fas fa-star-half text-warning");
-//       } else {
-//         this.starList.push("far fa-star");
-//       }
-//     }
-//   }
+
+
 
  
 
+}
+interface appoint{
+  "applicationUserId": "1b146acc-ebff-4c65-9edf-64d5f046d8a3",
+  "name": "fffff",
+  "description": "dpdflkpdlf;",
+  "dateCreated": string
 }
 
 interface offers{
@@ -385,4 +452,9 @@ interface AccountType{
   "name": string,
   "normalizedName": string,
   "concurrencyStamp": string
+}
+interface dateSe{
+      
+  "startDate": string,
+  "endDate": string
 }

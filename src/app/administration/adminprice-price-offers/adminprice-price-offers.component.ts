@@ -39,12 +39,19 @@ userformMassage :FormGroup;
   isProcessing:boolean=true;
   offersOfSelectedProject: any = [];
   showProjectProfile: boolean = false;
-  selectedOfferId: any = 0;
+
 
   requiredWorkId:IrequiredWorks[]=[];
   requiredWorkIdObject:any[]=[]
   set:any
   componentId:any[]=[];
+  organizationalServiceProviderProfileId:any;
+  individualServiceProviderProfileId:any;
+  projectResponsible:any
+  projNumber:any
+  resOffer:any[]=[]
+  selectedOfferId: boolean = true;
+  productCurrentOffers:any[]=[]
   constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
@@ -129,16 +136,16 @@ getUnderNegotiationProjects(){
   sessionStorage.removeItem('projects')
   this.ServicesProvidor.getUnderNegotiationProjectsForAdmin(this.page).subscribe({
       next:(value) => {
-        console.log(value);
+        console.log(value.data.priceQuotes);
 
         if(value !=null || value != undefined) {
-          this.dataPriceQuotes = value.data.projects;
+          this.dataPriceQuotes = value.data.priceQuotes;
           this.iadminPriceQuotes = this.dataPriceQuotes;
           this.total = value.data.totalPages;
           this.counter(this.total);
-          this.firstObject = this.iadminPriceQuotes[0];
+          this.firstObject = this.dataPriceQuotes[0];
             this.objectProduct(this.firstObject, this.firstObject.id);
-            // console.log(this.firstObject.projectRequiredWorks);
+            console.log(this.firstObject);
         }
         },error: (error) => {
               this.isProcessing = false;
@@ -265,15 +272,62 @@ getUnderNegotiationProjects(){
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
     this.productCurrent=this.productCurrent
-    // console.log(this.productCurrent);
+    console.log(this.productCurrent);
     this.id = sessionStorage.getItem('idProjects');
     this.projectRequiredWorks()
     this.projectComponents()
+
+    // get offers
+    
+    if(this.productCurrent.offers.length>0){
+      this.productCurrentOffers=[]
+      for( this.projNumber of this.productCurrent.offers){
+        console.log(this.projNumber)
+        this.productCurrentOffers.push(this.projNumber)
+    
+
+      }        
+      // console.log(test)
+    }else{
+      this.productCurrentOffers=[]
+
+      let notOffer ="لايوجد عرض سعر"
+      // console.log(notOffer)
+    
+
+    }
 
     }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
+    console.log(this.productCurrent);
+
+  }
+  getProjectResponsible(obj:any){
+    // this.resOffer=[]
+    let idPerson=0
+    if(obj.organizationalServiceProviderProfileId !=null){
+      idPerson=obj.organizationalServiceProviderProfileId
+
+    }else if(obj.individualServiceProviderProfileId != null){
+      idPerson=obj.individualServiceProviderProfileId
+
+    }
+  
+    this.ServicesProvidor.getOfferSenderProfile(idPerson).subscribe({next:((data)=>{
+      this.projectResponsible=data.data
+      // this.resOffer.push(this.projectResponsible)
+      console.log(this.projectResponsible)
+
+    })})
+
+  }
+  resOffersOnProj(){
+    this.selectedOfferId=false;
+  }
+  back(){
+    this.selectedOfferId=true;
 
   }
   get massage(){
