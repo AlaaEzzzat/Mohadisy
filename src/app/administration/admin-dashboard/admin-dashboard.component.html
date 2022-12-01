@@ -266,7 +266,7 @@
         <div class="col-12 bg-white px-4 py-1 mb-2">
           <h5 class="fw-bold pt-3">جدول الاعمال</h5>
         </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2" (click)="getappointDate()">
+        <div class="col-12 bg-white px-4 py-1 mb-2" (click)="getappointDate()" >
           <!-- <mat-card class="demo-inline-calendar-card"> -->
           <mat-calendar [(selected)]="selected"></mat-calendar>
           <!-- </mat-card> -->
@@ -274,14 +274,14 @@
         <div class="col-12 bg-white px-4 py-1 mb-2">
           <p class="fw-semibold pt-3">{{ selected | date: "d/M/yyyy" }}</p>
         </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2">
+        <div class="col-12 bg-white px-4 py-1 mb-2" *ngIf="dateOpt!=null;else notfound">
           <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
-            {{ appointments?.name }}
+            {{ dateOpt?.name }}
             <small class="fw-normal">{{
-              appointments?.dateCreated | date: "d/M/yyyy"
+              dateOpt?.dateCreated | date: "d/M/yyyy"
             }}</small>
           </p>
-          <p class="fw-normal">{{ appointments?.description }}</p>
+          <p class="fw-normal">{{ dateOpt?.description }}</p>
 
           <div *ngFor="let item of appointmentFiles">
             <p class="">
@@ -304,6 +304,18 @@
             </p>
           </div>
         </div>
+        <ng-template #notfound>
+          <div class="col-12 bg-white px-4 py-1 mb-2" >
+            <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
+              {{ erDateOp}}
+              <small class="fw-normal">{{
+                dateOpt?.dateCreated | date: "d/M/yyyy"
+              }}</small>
+            </p>
+  
+          
+          </div>
+        </ng-template>
         <!-- <div class="col-12 bg-white px-4 py-1 mb-2">
           <p class="fw-semibold pt-3" style="color: #4b4a4a">
             تم دخول {{ usernames }} الى المنصه الساعه

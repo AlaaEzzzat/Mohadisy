@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnChanges, SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {
   startOfDay,
@@ -25,7 +25,7 @@ import moment from 'moment';
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss'],
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent implements OnInit,OnChanges {
   clients: any;
   individualSP: any;
   organizationalSP: any;
@@ -70,9 +70,9 @@ error:any;
    newappointment: FormGroup;
    dateSelected!:dateSe
    FileformData = new FormData();
-   file:any
-  //  value = 0; //addition of .5
-  //  starList: string[] = [];
+   file:any;
+   dateOpt:any;
+   erDateOp:any;
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder
     ) {
       this.usernames= localStorage.getItem('name')?.replace(/"/g, '') || '';
@@ -91,9 +91,12 @@ error:any;
       });
     this.visitorsNumber = 0;
   }
+  ngOnChanges() {
+    this.getappointDate()
+  }
   ngOnInit() {
 
-    this. getappointDate()
+    this.getappointDate()
     // this.showUserDashboard()
 
     this.currentProjectsForAdmin();
@@ -114,7 +117,7 @@ error:any;
         this.complaints=value.data.complaints;
         // عاوزه تتعدل
         this.appointments=value.data.appointments.latestAppointment;
-        this.appointmentFiles=this.appointments.appointmentFiles
+      
         console.log(value.data.appointments.appointments);
 
         this.renderDouChart();
@@ -276,11 +279,20 @@ error:any;
         "startDate": date,
         "endDate": date
       } 
-      console.log(dateSelected)
+      console.log(dateSelected);
       this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
-        console.log(date)
+        console.log(date.data);
+       
+        for(let dates of date.data){
+          this.dateOpt=dates
+
+        }
+        console.log(this.dateOpt)
+        this.appointmentFiles=this.dateOpt.appointmentFiles
       }),error:(er=>{
-        console.log(er.message)
+        console.log(er)
+        this.dateOpt=null
+        this.erDateOp=er
       })})
     
   }
