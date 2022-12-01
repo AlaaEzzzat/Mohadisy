@@ -167,76 +167,8 @@
             <div class="bg-white text-center py-3 mb-2">
               <h5 class="fw-bold text-center m-0 p-0 cairo">تقيمات العملاء</h5>
             </div>
-            <div
-              id="carouselExampleCaptions"
-              class="carousel slide"
-              data-bs-ride="false"
-            >
-              <div class="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide-to="0"
-                  class="active"
-                  aria-current="true"
-                  aria-label="Slide 1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
-                ></button>
-              </div>
-              <div class="carousel-inner">
-                <ng-container *ngFor="let slide of testimonials">
-                  <div class="carousel-item h-100 w-100 active">
-                    <div
-                      class="card d-flex justify-content-center align-items-center p-3 border-0 rounded-0 bg-white pb-5"
-                    >
-                      <img
-                        src="{{ slide.profilePicture }}"
-                        class="card-img-top rounded-circle w-25"
-                        alt="..."
-                      />
-                      <div class="card-body text-center">
-                        <p class="card-title fs-6">{{ slide.userName }}</p>
-                        <div class="d-flex flex-row justify-content-center">
-                          <span class="ps-1"> {{ slide.stars }}/5</span>
-                          <mat-icon
-                            style="color: #f3d720"
-                            class="align-text-bottom"
-                            >star</mat-icon
-                          >
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev"
-              >
-                <i class="fa fa-chevron-left"></i>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next"
-              >
-                <i class="fa fa-chevron-right"></i>
-              </button>
-            </div>
+            <app-carousel-rate [testimonials]="testimonials"></app-carousel-rate>
+            
           </div>
         </div>
       </div>

@@ -20,6 +20,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { PaymentCardComponent } from './components/payment-card/payment-card.component';
 import { PaymentLayoutComponent } from './components/payment-layout/payment-layout.component';
+import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 const routes: Routes = [
 
@@ -40,6 +42,8 @@ const routes: Routes = [
     DashboardCardComponent,
     PaymentCardComponent,
     PaymentLayoutComponent,
+    CarouselRateComponent,
+    ProjectCardComponent,
   ],
   imports: [
     MatMenuModule,
@@ -66,7 +70,9 @@ const routes: Routes = [
     SidebarComponent,
     DashboardCardComponent,
     PaymentCardComponent,
-    PaymentLayoutComponent
+    PaymentLayoutComponent,
+    CarouselRateComponent,
+    ProjectCardComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

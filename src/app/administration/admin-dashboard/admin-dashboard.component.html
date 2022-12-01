@@ -3,6 +3,7 @@
   <div class="row cairo mb-2">
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
+      grid="col-sm-3 col-6"
         type="pricequotes"
         [data]="pricequotes"
         circleColor="D9CCF2"
@@ -11,6 +12,7 @@
 
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
+      grid="col-sm-3 col-6"
         type="projects"
         [data]="projects"
         circleColor="E9CCF2"
@@ -19,23 +21,26 @@
   </div>
   <!-- part 2 -->
   <div class="row cairo mb-2">
-    <div class="col-lg-4">
+    <div class=" col-lg-4 mb-3">
       <app-dashboard-card
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="indSp"
         [data]="individualSP"
         circleColor="D9CCF2"
       ></app-dashboard-card>
     </div>
 
-    <div class="col-lg-4">
+    <div class=" col-lg-4 mb-3">
       <app-dashboard-card
+      grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="comSp"
         [data]="organizationalSP"
         circleColor="D9CCF2"
       ></app-dashboard-card>
     </div>
-    <div class="col-lg-4">
+    <div class=" col-lg-4 mb-3">
       <app-dashboard-card
+      grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="client"
         [data]="clients"
         circleColor="D9CCF2"
@@ -323,95 +328,15 @@
           >
             <h5 class="fw-bold pt-3 pb-2">تقيمات مستخدمي المنصه</h5>
             <div class="align-content-end">
-              <!-- <span class="ps-1">4/5</span>
-            <mat-icon class="align-text-bottom text-warning">star</mat-icon> -->
-            </div>
-          </div>
-          <div class="position-relative mt-2">
-            <div
-              id="carouselExampleCaptions"
-              class="carousel slide"
-              data-bs-ride="carousel"
-            >
-              <div class="carousel-inner">
-                <div
-                  class="carousel-item active"
-                  *ngFor="let item of testimonials"
-                >
-                  <div
-                    class="card d-flex justify-content-center align-items-center p-3 border-0 rounded-0 bg-white pb-5"
-                  >
-                    <img
-                      src="{{ item.profilePicture }}"
-                      class="card-img-top rounded-circle w-25"
-                      alt="..."
-                    />
-                    <div class="card-body text-center">
-                      <p class="card-title fs-6">{{ item.userName }}</p>
-                      <div class="d-flex flex-row justify-content-center">
-                        <span class="ps-1"> {{ item.stars }}/5</span>
-                        <!-- <mat-icon class="align-text-bottom text-warning">star</mat-icon>  -->
-                        <mat-icon
-                          style="color: #f3d720"
-                          class="align-text-bottom"
-                          >star</mat-icon
-                        >
-                      </div>
-                      <!-- <span *ngFor="let star of starList">
-                      <i class="{{star}}"></i>
-                    </span> -->
-                    </div>
-                  </div>
-                </div>
 
-                <div
-                  class="carousel-indicators pt-5justify-content-start align-content-start position-absolute postionCard m-0 d-none"
-                  style="width: 18rem"
-                >
-                  <div class="pt-4 mt-5">
-                    <!-- <button *ngFor="let item of testimonials ;let i =index" -->
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleCaptions"
-                      data-bs-slide-to="0"
-                      class="active rounded-pill bg-dark py-1 px-1 border-0"
-                      aria-current="true"
-                      aria-label="Slide 1"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleCaptions"
-                      data-bs-slide-to="1"
-                      aria-label="Slide 2"
-                      class="rounded-pill bg-dark py-1 px-1 border-0"
-                    ></button>
-                    <button
-                      type="button"
-                      data-bs-target="#carouselExampleCaptions"
-                      data-bs-slide-to="2"
-                      aria-label="Slide 3"
-                      class="rounded-pill bg-dark py-1 px-1 border-0"
-                    ></button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
+          <app-carousel-rate [testimonials]="testimonials"></app-carousel-rate>
         </div>
       </div>
-      <!-- part 3 -->
-      <!-- <div class=" rounded-0  d-flex flex-column justify-content-around align-items-center  mb-3 col-12">
-      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
-        <h5 class="fw-bold pt-3">اخر النشاطات</h5>
-      </div>
-      <div class=" col-12 bg-white  px-4 py-1 mb-2 ">
-        <p class=" pt-3"> يجب أن يكون الأمر كذلك ، من الضروري أن تتسبب في حدوث مشكلة. يجب أن يكون الأمر كذلك ، من الضروري أن تتسبب في حدوث مشكلة. </p>
-      </div>
-    </div> -->
     </div>
   </div>
 </section>
-
 <div
   class="modal fade"
   id="exampleModalReject"
@@ -581,5 +506,4 @@
     </div>
   </div>
 </div>
-
 <div id="toast-container" class="toast-bottom-right toast-container"></div>

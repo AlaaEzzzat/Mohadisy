@@ -107,17 +107,44 @@ export class PaymentLayoutComponent implements OnInit {
  
   }
   sortByName() {
-    this.data.sort((a: any, b: any) =>
+    if(this.userType=="sp" || this.userType=="client"){
+      this.data.sort((a: any, b: any) =>
       a.project.name.localeCompare(b.project.name)
     );
+    }else if (this.userType == 'spForAdmin') {
+      this.data.sort((a: any, b: any) =>
+      a.profile.offers[0].project.name.localeCompare(b.profile.offers[0].project.name)
+    );
+    } else if (this.userType == 'clientForAdmin') {
+      this.data.sort((a: any, b: any) =>
+      a.profile.projects[0].name.localeCompare(b.profile.projects[0].name)
+    );
+    }
   }
   sortByDate() {
+  if(this.userType=="sp" || this.userType=="client"){
     this.data.map((pro: any) => {
       pro.project.dateCreated = new Date(pro.project.dateCreated);
     });
     this.data.sort((a: any, b: any) => {
       return b.project.dateCreated - a.project.dateCreated;
     });
+  }else if (this.userType == 'spForAdmin') {
+    this.data.map((pro: any) => {
+      pro.profile.offers[0].project.dateCreated = new Date(pro.profile.offers[0].project.dateCreated);
+    });
+    this.data.sort((a: any, b: any) => {
+      return b.profile.offers[0].project.dateCreated - a.profile.offers[0].project.dateCreated;
+    });
+  } else if (this.userType == 'clientForAdmin') {
+    this.data.map((pro: any) => {
+      pro.profile.projects[0].dateCreated = new Date( pro.profile.projects[0].dateCreated);
+    });
+    this.data.sort((a: any, b: any) => {
+      return b.profile.projects[0].dateCreated - a.profile.projects[0].dateCreated;
+    });
+  }
+
   }
   getrequireWork(reqId: any) {
     this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {
