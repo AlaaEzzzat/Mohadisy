@@ -23,6 +23,7 @@ import { PaymentLayoutComponent } from './components/payment-layout/payment-layo
 import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ComplaintComponent } from './components/complaint/complaint.component';
 
 const routes: Routes = [
 
@@ -46,6 +47,7 @@ const routes: Routes = [
     CarouselRateComponent,
     ProjectCardComponent,
     PaginationComponent,
+    ComplaintComponent,
   ],
   imports: [
     MatMenuModule,

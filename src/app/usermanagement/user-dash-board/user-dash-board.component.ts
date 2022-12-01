@@ -33,6 +33,7 @@ export class UserDashBoardComponent implements OnInit {
         console.log(data.data)
         this.currentProjects = this.data.currentProjects;
         this.currentProjects.map((project:any)=>{
+          /* this.getClientProfileByID(project.id); */
           this.currentProjectsCost += project.offers[0].totalCost; 
           if(project.offers.length>0){
             this.getOfferSender(project);
@@ -50,6 +51,7 @@ export class UserDashBoardComponent implements OnInit {
         this.renderDouChart();
       });
   }
+  
   getOfferSender(project:any){
     if (project.offers[0]?.individualServiceProviderProfileId) {
       this.clientService
