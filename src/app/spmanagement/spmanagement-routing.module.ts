@@ -50,7 +50,7 @@ const routes: Routes = [
         component: LayoutProjectComponent,
         children: [
           {
-            path: '',
+            path: 'price-offers',
             component: SpMenuOffersComponent,
             children: [
               { path: 'new', component: SpProjectRequestAllComponent },
