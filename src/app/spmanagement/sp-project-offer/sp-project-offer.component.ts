@@ -29,7 +29,7 @@ export class SpProjectOfferComponent implements OnInit {
 
    this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
    this.Listprojects=data.data.projects;
-   console.log(data);
+
    this.totalpages=data.data.totalPages;
    for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
@@ -60,6 +60,20 @@ export class SpProjectOfferComponent implements OnInit {
        break;
      }
     }
+
+
+    /*this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0]?.id}`).subscribe(data=>
+   {
+
+    console.log(data.data);
+    
+  
+   }
+
+
+   );*/
+
+
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").

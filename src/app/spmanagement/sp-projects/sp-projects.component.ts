@@ -37,7 +37,7 @@ export class SpProjectsComponent implements OnInit {
       this.pages.push(i);
 
       if(this.Listprojects.length>0)
-     this.result=1;
+       this.result=1;
 
 
     });
@@ -143,6 +143,7 @@ export class SpProjectsComponent implements OnInit {
      addIdProject(idProject:any)
      {
       localStorage.setItem('idproject',idProject);
+      localStorage.setItem("page",`${this.page}`);
 
      }
 

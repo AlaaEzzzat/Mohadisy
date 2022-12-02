@@ -15,7 +15,7 @@ import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
 })
 export class SpProfileComponent implements OnInit {
 
-  selected:any=Date.now();
+  selected: Date = new Date();
   profile:any;
   infoProject:Array<any>=[];
   ServiceProviderWork:any;
@@ -28,6 +28,7 @@ export class SpProfileComponent implements OnInit {
   workFile:any;
   index:number=0;
   avgRate:number=0;
+  copmpleteProfile:number=0;
 
 
   constructor(
@@ -42,11 +43,50 @@ export class SpProfileComponent implements OnInit {
       {
         this.profile=data.data;
         console.log(this.profile);
+        if(this.profile?.organizationalServiceProviderProfile?.licenseFile!=null)
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+        if(this.profile?.organizationalServiceProviderProfile?.zakatCertificateFile!=null)
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+
+        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+        
+
+        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+
+        
+
+        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
       });
 
       this.api.get("https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorks").subscribe(data=>
       {
-        console.log(data);
+       // console.log(data);
         this.ServiceProviderWork=data.data;
 
       });
@@ -62,7 +102,7 @@ export class SpProfileComponent implements OnInit {
         {
           var rate=data.data.testimonials;
 
-          console.log(rate);
+         // console.log(rate);
           for(let i=0;i<rate.length;i++)
           {
            this.avgRate+=Number(rate[i].stars);
@@ -83,8 +123,6 @@ export class SpProfileComponent implements OnInit {
     this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
     {
       this.workFile=data.data;
-      console.log(workId);
-      console.log(data);
 
     });
   }
@@ -101,14 +139,7 @@ export class SpProfileComponent implements OnInit {
 
   }
 
-  getPdf(url:any)
-  {
-    /*var blob = new Blob([url], {type: 'application/pdf'});
-
-     var blobURL = URL.createObjectURL(blob);
-     console.log(blobURL);
-     window.open(blobURL);*/
-  }
+ 
 
   register_1()
   {

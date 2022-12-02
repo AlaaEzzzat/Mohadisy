@@ -117,27 +117,7 @@ export class SpProjectRequestAllComponent implements OnInit {
 
 
      /*************************************/
-     toggoleComponent(componentId:any)
-     {
-
-      if(this.descComponent[componentId])
-      this.descComponent[componentId]=0;
-      else
-      this.descComponent[componentId]=1;
-
-
-     }
-
-     toggoleWork(workId:any)
-     {
-      if(this.descWork[workId])
-      this.descWork[workId]=0;
-      else
-      this.descWork[workId]=1;
-
-     }
-
-
+  
 
      downloadFile(filepath:any,file:any)
      {
@@ -162,10 +142,9 @@ export class SpProjectRequestAllComponent implements OnInit {
 
      addIdProject(idProject:any)
      {
-      console.log(idProject);
-
+     
       localStorage.setItem('idproject',idProject);
-
+      localStorage.setItem("page",`${this.page}`);
 
      }
 

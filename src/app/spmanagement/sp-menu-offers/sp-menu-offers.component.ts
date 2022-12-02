@@ -17,11 +17,8 @@ export class SpMenuOffersComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-    console.log(this.type);
     this.api.get("https://app.mohandisy.com/api/PriceQuotes/getProjectServicesAndSubServiceAndStatues").subscribe(data=>{
 
-      console.log(data);
       if(data.isError==false){
         this.offers=1;
       this.projectstatues=data.data.projectStatues;

@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sp-request-edit',
@@ -48,30 +49,69 @@ export class SpRequestEditComponent implements OnInit {
 
     this.select=localStorage.getItem('idproject');
 
-    console.log(this.select);
-
-    this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
-
-    this.Listprojects=data.data.projects;
-    this.totalpages=data.data.totalPages;
-    console.log(this.Listprojects);
-     for(let i=1;i<=this.totalpages;i++)
-    this.pages.push(i);
-    this.SelectIdProject();
-
-    });
-
     this.page=Number(localStorage.getItem("page"));
-    this.changepage(this.page);
+
+    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
+
+      this.totalpages=data.data.totalPages;
+       this.Listprojects=data.data.projects;
+       for(let i=1;i<=this.totalpages;i++)
+       this.pages.push(i);
+      this.SelectIdProject();
+
+      this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.selectProject?.offers[0]?.cost}`).subscribe(data=>{
+      this.totalcost=data.data;
+      this.checkDataStage();
+      this.Initial();
+    });
+   
+    });
+     
+     
+    
+    
+
+    
+
+
 
 
 
   }
 
+  Initial()
+  {
+
+    this.OfferData.get('numberOfMilestones').setValue(this.selectProject?.offers[0]?.numberOfMilestones);
+      this.OfferData.get('period').setValue(this.selectProject?.offers[0]?.period);
+      this.OfferData.get('cost').setValue(this.selectProject?.offers[0]?.cost);
+      this.OfferData.get('message').setValue(this.selectProject?.offers[0]?.message);
+
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+       {
+    
+        console.log(data.data);
+        var stages=data.data;
+        for(let i=0;i<stages.length;i++){
+        this.Precentage[i+1]=stages[i].percentage;
+        this.totalcostMilestone[i+1]=stages[i].cost;
+        if(stages[i].isFirstMilestone==true)
+        this.WorkId[i+1]=8;
+        else if(stages[i].isLastMilestone==true)
+        this.WorkId[i+1]=9;
+        else
+        this.WorkId[i+1]=stages[i].requiredWorkId;  
+      
+       }
+
+       }
+
+       );
+  }
 
   SelectIdProject()
   {
-    console.log(this.Listprojects);
+
     for(let project of this.Listprojects)
     {
       if(project.id==this.select)
@@ -82,13 +122,41 @@ export class SpRequestEditComponent implements OnInit {
       }
      }
 
+     console.log(this.selectProject);
+
+
+     
+    this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
+    (data=>{
+ 
+      for(let work of data.data)
+      {
+ 
+           for(let w of this.selectProject.projectRequiredWorks)
+          {
+            if(w.requiredWorkId==work.id)
+            {
+              this.RequiredWorks.push({
+                "name":work.name,
+                "id":work.id,
+                "requiredDocuments":work.requiredDocuments
+            });
+            }
+          }
+ 
+ 
+      }
+ 
+ 
+      });
+
   }
 
   showData(idProject:number)
   {
     this.select=idProject;
-    this.OfferData.reset();
     this.SelectIdProject();
+    this.Initial();
   }
 
   changepage(e:any)
@@ -97,8 +165,8 @@ export class SpRequestEditComponent implements OnInit {
    this.page=e;
    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
 
+   this.totalpages=data.totalPages;
     this.Listprojects=data.data.projects;
-
 
  });
   }
@@ -107,6 +175,7 @@ export class SpRequestEditComponent implements OnInit {
   {
     this.numberofMilestones=[];
     var milestones=this.OfferData.get('numberOfMilestones').value;
+
     if(milestones<=6){
     for(let i=1;i<=milestones;i++)
     {
@@ -122,7 +191,7 @@ export class SpRequestEditComponent implements OnInit {
     this.totalcost=0;
 
     if(this.OfferData.get('cost').value){
-    this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData.get('cost').value}`).subscribe(data=>{
+    this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData?.get('cost').value}`).subscribe(data=>{
 
 
       this.totalcost=data.data;
@@ -131,13 +200,13 @@ export class SpRequestEditComponent implements OnInit {
 
     });
      }else{
-      var milestones=(Number)(this.OfferData.get('numberOfMilestones').value);
-      console.log(milestones);
+      var milestones=(Number)(this.OfferData?.get('numberOfMilestones').value);
       if(milestones<=6){
       for(let i=1;i<=milestones;i++)
       {
       this.Precentage[i]=0,
       this.totalcostMilestone[i]=0;
+      
 
       }
        }
@@ -167,7 +236,7 @@ export class SpRequestEditComponent implements OnInit {
     if(stage=="1"&&precentage)
     {
       this.api.get(`https://app.mohandisy.com/api/Offer/getFirstMilestoneCost?cost=
-      ${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+      ${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
       {
 
 
@@ -178,7 +247,7 @@ export class SpRequestEditComponent implements OnInit {
       });
     }else if(precentage)
     {
-      this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+      this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
       {
 
         this.totalcostMilestone[stage]=data.data;
@@ -202,8 +271,9 @@ export class SpRequestEditComponent implements OnInit {
   onSubmit()
   {
 
-    var Allprecentage=[],Allmilestones=[];
+    var Allprecentage=new Array(),Allmilestones=new Array();
 
+    console.log(this.OfferData.get('numberOfMilestones').value);
     for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
     {
       Allprecentage.push((Number)(this.Precentage[i]));
@@ -218,7 +288,7 @@ export class SpRequestEditComponent implements OnInit {
             "requiredWorkId":1,
             "isFirstMilestone":true,
             "isLastMilestone": false,
-            "message":this.OfferData.get('message').value
+            "message":this.OfferData?.get('message').value
 
           }
         );
@@ -232,7 +302,7 @@ export class SpRequestEditComponent implements OnInit {
             "requiredWorkId": 1,
             "isFirstMilestone":false,
             "isLastMilestone": true,
-            "message":this.OfferData.get('message').value
+            "message":this.OfferData?.get('message').value
 
           }
         );
@@ -246,7 +316,7 @@ export class SpRequestEditComponent implements OnInit {
           "requiredWorkedId":Number(this.WorkId[i]),
           "isFirstMilestone":false,
           "isLastMilestone": false,
-          "message":this.OfferData.get('message').value
+          "message":this.OfferData?.get('message').value
         }
       );
       }
@@ -263,39 +333,52 @@ export class SpRequestEditComponent implements OnInit {
     }
 
 
+    console.log("check data : ", checkData);
 
 
      this.api.postJson("https://app.mohandisy.com/api/Offer/validateCostAndPeriod",checkData).subscribe(data=>
       {
         this.check=data.isError;
+
+        if(this.check==false)
+        {
+        var AllData=
+        {
+          "projectId":Number(this.select),
+          "period":this.OfferData.get('period').value,
+          "cost":this.OfferData.get('cost').value,
+          "message":this.OfferData.get('message').value,
+          "numberOfMilestones":Number(this.OfferData.get('numberOfMilestones').value),
+          "milestones":Allmilestones,
+          "SizingMethod":null,
+          "ContractTerms":null,
+          "DisputeResolution":null,
+          "ContractorCommitments":null
+  
+        }
+  
+        console.log("all data : ",AllData);
+        this.api.postJson("https://app.mohandisy.com/api/Offer/updateOffer",AllData).subscribe(
+          {
+            next:(data)=>{
+            Swal.fire(
+              'تم تعديل العرض بنجاح'
+            );
+            this.router.navigate(['/Spmanagement/projects/offer/edit']);
+            }
+    
+          } );
+    }
+
+
       });
 
 
 
 
-      if(this.check==false)
-      {
-      var AllData=
-      {
-        "projectId":Number(this.select),
-        "period":this.OfferData.get('period').value,
-        "cost":this.OfferData.get('cost').value,
-        "message":this.OfferData.get('message').value,
-        "numberOfMilestones":Number(this.OfferData.get('numberOfMilestones').value),
-        "milestones":Allmilestones,
-        "SizingMethod":null,
-        "ContractTerms":null,
-        "DisputeResolution":null,
-        "ContractorCommitments":null
-
-      }
+     
 
 
-
-
-
-
-  }
 }
 
 

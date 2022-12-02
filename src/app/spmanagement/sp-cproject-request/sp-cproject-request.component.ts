@@ -67,9 +67,9 @@ export class SpCprojectRequestComponent implements OnInit {
   ngOnInit(): void {
 
     this.select=localStorage.getItem('idproject');
+    this.page=Number(localStorage.getItem("page"));
 
-
-    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
+    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
@@ -78,9 +78,6 @@ export class SpCprojectRequestComponent implements OnInit {
 
     if(this.Listprojects.length>0)
     this.result=1;
-
-
-    console.log(this.Listprojects);
 
     });
 
@@ -156,7 +153,6 @@ export class SpCprojectRequestComponent implements OnInit {
      {
 
       this.page=e;
-      console.log(this.page);
       this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
        this.Listprojects=data.data.priceQuotes;

@@ -187,7 +187,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                    العضويه
+                       شهاده الزكاه والدخل
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration2==1">
@@ -205,10 +205,11 @@
                     <ng-container *ngIf="registeration2==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn" target="_blank"
+                          >
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
@@ -380,9 +381,35 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
+       
+        <ng-container *ngIf="copmpleteProfile!=100">
+        <a routerLink="" class="completeprofile">
+          <p style="color:#18AF9A;">استكمل بياناتك</p>
+        </a>
+        </ng-container>
+
+        <ng-container *ngIf="copmpleteProfile==100">
+        <p style="color:#64748B;">تم استكمال بياناتك</p>
+        </ng-container>
+        
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100" 
+            [style.width]="copmpleteProfile+'%'">
+
+              {{copmpleteProfile}}%
+            </div>
+          </div>
+         
+  
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
         <h4>نظره عامه</h4>
       </div>
-      <div class="col-lg-4 mt-2">
+      <div class="col-lg-6 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -400,7 +427,7 @@
       </div>
 
 
-      <div class="col-lg-4 mt-2">
+      <!--<div class="col-lg-4 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -415,9 +442,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
 
-        <div class="col-lg-4 mt-2">
+        <div class="col-lg-6 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -454,7 +481,7 @@
               </div>
 
               <div class="col-lg-6 mt-2" >
-                <p style="font-size: 18px; color: #64748B; font-weight: 500;">7 ابريل , 2022</p>
+                <p style="font-size: 18px; color: #64748B; font-weight: 500;">{{selected | date}}</p>
               </div>
 
             </div>

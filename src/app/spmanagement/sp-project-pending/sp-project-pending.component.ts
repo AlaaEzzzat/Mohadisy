@@ -24,7 +24,7 @@ export class SpProjectPendingComponent implements OnInit {
   result:number=0;
   totalpages: any = 0;
   pages:Array<any>=[];
-  selected:number=Date.now();
+  selected: Date = new Date();
   Representative:any;
 
  constructor(private api:ApiService,private router:Router) { }

@@ -51,14 +51,15 @@ export class SpProjectRequestComponent implements OnInit {
 
 
     this.select=localStorage.getItem('idproject');
+    this.page=Number(localStorage.getItem("page"));
 
-    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/1").subscribe(data=>{
+    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
-   for(let i=1;i<=this.totalpages;i++)
-    this.pages.push(i);
-    this.SelectIdProject();
+    for(let i=1;i<=this.totalpages;i++)
+      this.pages.push(i);
+      this.SelectIdProject();
 
     });
 
@@ -118,7 +119,7 @@ export class SpProjectRequestComponent implements OnInit {
   {
 
    this.page=e;
-   console.log(this.page);
+  
    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
@@ -226,7 +227,7 @@ export class SpProjectRequestComponent implements OnInit {
   onSubmit()
   {
 
-    var Allprecentage=[],Allmilestones=[];
+    var Allprecentage=new Array(),Allmilestones=new Array();
 
     for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
     {
@@ -292,12 +293,8 @@ export class SpProjectRequestComponent implements OnInit {
      this.api.postJson("https://app.mohandisy.com/api/Offer/validateCostAndPeriod",checkData).subscribe(data=>
       {
         this.check=data.isError;
-      });
 
-
-
-
-      if(this.check==false)
+        if(this.check==false)
       {
       var AllData=
       {
@@ -329,6 +326,12 @@ export class SpProjectRequestComponent implements OnInit {
 
 
   }
+      });
+
+
+
+
+      
 }
 
 

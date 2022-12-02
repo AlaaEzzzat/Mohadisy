@@ -7,7 +7,7 @@
 }
 .card-1
 {
-  padding:7% 11%;
+  padding:3% 7%;
 }
 .card-1 h5
 {
@@ -30,18 +30,18 @@ h4
 
 .card-1 .padge
 {
-  width: 80%;
-  height: 6vh;
-  border-radius: 55%;
-  -webkit-border-radius: 55%;
-  -moz-border-radius: 55%;
-  -ms-border-radius: 55%;
-  -o-border-radius: 55%;
+  width: 55%;
+  height: 7vh;
+  border-radius: 70%;
+  -webkit-border-radius: 70%;
+  -moz-border-radius: 70%;
+  -ms-border-radius: 70%;
+  -o-border-radius: 70%;
   text-align: center;
   background: #D1FAE5;
   color:#18AF9A;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 50px;
   font-family: 'Cairo';
   font-style: normal;
   margin-right: 30%;
@@ -357,14 +357,13 @@ box-shadow: none;
 }
 
 
+
 .mat-calendar
 {
 
   background-color: #F1F5F9;
 
 }
-
-
 
 
 
@@ -498,6 +497,22 @@ box-shadow: none;
 {
   width: 100%;
 
+}
+
+
+.progress
+{
+ height: 4vh;
+}
+.progress-bar
+{
+  background-color: #18AF9A;
+}
+
+.completeprofile
+{
+  text-decoration-line: none;
+  -moz-text-decoration-line: none;
 }
 
 

@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/@core/api.service';
   styleUrls: ['./sp-project-finished.component.scss']
 })
 export class SpProjectFinishedComponent implements OnInit {
-  selected:number=Date.now();
+  selected: Date = new Date();
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
