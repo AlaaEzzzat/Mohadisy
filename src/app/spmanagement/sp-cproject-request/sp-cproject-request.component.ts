@@ -77,7 +77,7 @@ export class SpCprojectRequestComponent implements OnInit {
     this.pages.push(i);
 
     if(this.Listprojects.length>0)
-    this.result=1;
+     this.result=1;
 
     });
 

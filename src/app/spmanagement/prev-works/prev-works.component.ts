@@ -7,6 +7,7 @@ import {
   Validators,
   ValidatorFn,
 } from '@angular/forms';
+import { ApiService } from 'src/app/@core/api.service';
 
 @Component({
   selector: 'app-prev-works',
@@ -21,10 +22,13 @@ export class PrevWorksComponent implements OnInit {
   AllProjectCategory: any = [];
   allServiceProviderWorks: any = [];
   showpopup:Boolean=false;
+  index:number=0;
+  workFile:any;
   constructor(
     private fb: FormBuilder,
     private _toastr: ToastrService,
-    private serviceProviderService: ServiceProviderService
+    private serviceProviderService: ServiceProviderService,
+    private api:ApiService
   ) {
     this.prevWorksForm = this.fb.group({
       projectCategoryId: ['', [Validators.required]],
@@ -163,6 +167,20 @@ export class PrevWorksComponent implements OnInit {
       },
     });
   }
+
+
+
+  projectImage(workId:any)
+  {
+    this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
+    {
+      this.workFile=data.data;
+
+    });
+  }
+
+
+
   get f() {
     return this.prevWorksForm.controls;
   }
