@@ -52,24 +52,31 @@ overflow-y: auto;
 overflow-x: 0;
 background-color: #18af9a;
 }
-/* .notificationBtn::before{
-  content: "";
-  position: absolute;
-  left: 5px;
-  top: 38px;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  z-index: 998;
-  border-bottom: 20px solid #18af9a;
-} */
+
 .searchBox{
-  width: 450px
+  width: 345px;
+ }
+@media (min-width:1400px){
+  .searchBox{
+    width: 450px;
+   }
 }
-@media (max-width:768px) {
+@media (max-width:992px) {
+  .collapse .navbar-nav{
+    width: 100%;
+    justify-content: center;
+    margin: 0 !important;
+
+  }
+  .collapse .navbar-nav :nth-child(1){
+    margin-bottom: 10px;
+  }
+  .collapse .navbar-nav :nth-child(2){
+    margin-right: 0 !important;
+  }
   .searchBox{
     margin-bottom: 20px;
     width: 250px
   }
+
 }

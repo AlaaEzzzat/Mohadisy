@@ -1,0 +1,32 @@
+<div
+  class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
+>
+  <div class="card-body">
+    <p class="card-text mb-1">
+      <strong>إسم المشروع :</strong>
+      {{ pro.name }}
+    </p>
+    <p
+      class="card-text mb-1"
+      *ngIf="userType == 'Admin' || userType == 'client'"
+    >
+      <strong>اسم المسؤل :</strong>
+      {{ pro.offerSender?.name || pro.offerSender?.companyName }}
+    </p>
+    <p
+      class="card-text mb-1"
+      *ngIf="userType == 'Admin' || userType == 'sp'"
+    >
+      <strong>اسم العميل :</strong>
+      {{ pro.clientProfile?.firstName + " " + pro.clientProfile?.lastName }}
+    </p>
+
+    <p class="card-text ">
+      <strong>بلد الاقامه :</strong>
+      {{
+        pro.district?.city?.region?.nameAr ||
+          pro.clientProfile?.district?.city?.region?.nameAr
+      }}
+    </p>
+  </div>
+</div>

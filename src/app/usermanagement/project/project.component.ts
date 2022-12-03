@@ -1,3 +1,4 @@
+import { ComplaintService } from './../../@core/services/complaint/complaint.service';
 import { ChatService } from './../../@core/services/chat/chat.service';
 import { IMessage } from './../../@models/message';
 import { HttpClient } from '@angular/common/http';
@@ -16,20 +17,20 @@ export class ProjectComponent implements OnInit {
   activeProject: any = 1;
   projectServices: any = [];
   projectServiesArray: any = [];
-  numOfCompltedMilesones: any = 0; 
-  startChat:boolean = false;
+  numOfCompltedMilesones: any = 0;
+  startChat: boolean = false;
+  startComplaint: boolean = false;
   projectCategory: any = [
     { id: 1, name: 'مشاريع حالية' },
     { id: 2, name: 'مشاريع معلقه' },
     { id: 3, name: 'مشاريع منتهية' },
     { id: 4, name: 'مشاريع متأخرة' },
-    
   ];
 
   activeCategory: any = 1;
   projectId: any = '';
   serviceId: any = '';
-  message:IMessage = {} as IMessage;
+  message: IMessage = {} as IMessage;
   project: any = {};
   projectsComponents: any = [];
   projectReqWorks: any = [];
@@ -46,7 +47,8 @@ export class ProjectComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private clientService: ClientService,
     private chatService: ChatService,
-    private router: Router
+    private router: Router,
+    private complaintService: ComplaintService
   ) {}
   isActiveService(id: any) {
     this.activeService = id;
@@ -60,18 +62,19 @@ export class ProjectComponent implements OnInit {
         this.clientService
           .getClientCurrentProjects(this.page)
           .subscribe((data) => {
-            console.log(data)
+            console.log(data);
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
               }
             });
-            console.log(this.projectServiesArray)
+            console.log(this.projectServiesArray);
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
-
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
           });
 
         break;
@@ -87,8 +90,9 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
-
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
           });
 
         break;
@@ -104,8 +108,9 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
-
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
           });
 
         break;
@@ -121,7 +126,9 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
           });
 
         break;
@@ -137,8 +144,9 @@ export class ProjectComponent implements OnInit {
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
             console.log(this.projectServiesArray);
-            this.projectServiesArray.length > 0? this.showDetails(this.projectServiesArray[0]) : '';
-
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
           });
 
         break;
@@ -147,7 +155,7 @@ export class ProjectComponent implements OnInit {
     }
   }
   showDetails(project: any) {
-    console.log(project)
+    console.log(project);
     this.project = project;
     this.activeProject = project.id;
     if (project.offers.length > 0) {
@@ -208,9 +216,9 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
-      console.log(this.projectServices)
+      console.log(this.projectServices);
       this.activeService = this.projectServices[0].id;
-      console.log(this.activeService)
+      console.log(this.activeService);
       this.isActiveService(this.activeService);
     });
   }
@@ -257,30 +265,30 @@ export class ProjectComponent implements OnInit {
     this.showModal = true;
     this.modalSrc = src;
   }
-  fileMessage:any = '';
+  fileMessage: any = '';
   onFileUpload(event: any) {
     if (event.target.files.length > 0) {
       const myfile = event.target.files[0];
       this.fileMessage = myfile;
-      console.log(this.fileMessage)
-      console.log(this.fileMessage.name)
+      console.log(this.fileMessage);
+      console.log(this.fileMessage.name);
     }
   }
-  sendMessage(message: string, receiverId:string) {
-    var type:number=1;
+  sendMessage(message: string, receiverId: string) {
+    var type: number = 1;
     this.message.content = message;
     this.message.messageTypeId = type;
     this.message.receiverId = receiverId;
-    this.sendMessageToEndPoint(this.message,receiverId);
-    if(this.fileMessage){
-      type=2;
-    this.message.content = this.fileMessage;
-    this.message.messageTypeId = type;
-    this.message.receiverId = receiverId;
-      this.sendMessageToEndPoint(this.fileMessage,receiverId);
+    this.sendMessageToEndPoint(this.message, receiverId);
+    if (this.fileMessage) {
+      type = 2;
+      this.message.content = this.fileMessage;
+      this.message.messageTypeId = type;
+      this.message.receiverId = receiverId;
+      this.sendMessageToEndPoint(this.fileMessage, receiverId);
     }
   }
-  sendMessageToEndPoint(message:any,receiverId:any){
+  sendMessageToEndPoint(message: any, receiverId: any) {
     this.chatService.sendMessage(message).subscribe({
       next: (data: any) => {
         console.log(data);
@@ -291,4 +299,8 @@ export class ProjectComponent implements OnInit {
       },
     });
   }
+  toggleStatus = () => {
+    this.startChat = false;
+    this.startComplaint = false;
+  };
 }

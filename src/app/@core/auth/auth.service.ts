@@ -16,18 +16,14 @@ export class AuthService {
     private router: Router,
     private Api: ApiService
   ) {}
-
   signup(url: string, body: {}): Observable<any> {
     return this.Api.postJson(url, body);
   }
-
   login(url: string, body: {}): Observable<any> {
     this.isLogin = true;
     localStorage.setItem('STATE', 'true');
     return this.Api.postJson(url, body);
-    // return this._http.post(url, body);
   }
-
   authenticate(): boolean {
     const loggedIn = localStorage.getItem('STATE');
     if (loggedIn == 'true') this.isLogin = true;

@@ -60,13 +60,13 @@ export class UserPriceOffersComponent implements OnInit {
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
   }
-  next() {
+  next=()=> {
     if (this.page < this.totalpages) {
       this.page = this.page + 1;
       this.getAllProjectServices();
     }
   }
-  prev() {
+  prev= ()=> {
     if (this.page > 1) {
       this.page = this.page - 1;
       this.getAllProjectServices();

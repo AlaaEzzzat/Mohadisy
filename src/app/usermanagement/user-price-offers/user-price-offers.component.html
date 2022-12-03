@@ -76,48 +76,9 @@
                 </div>
               </ng-container>
 
-              <nav aria-label="..." class="w-100 d-flex justify-content-center">
-                <ul class="pagination w-100">
-                  <li class="page-item">
-                    <button
-                      (click)="prev()"
-                      class="page-link mainColor"
-                      [disabled]="page <= 1"
-                    >
-                      السابق
-                    </button>
-                  </li>
-
-                  <ng-container
-                    class="page-item"
-                    *ngFor="let mypage of pagenation; let i = index"
-                  >
-                    <li class="page-item">
-                      <a
-                        class="page-link mainColor"
-                        [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
-                        >{{ mypage + 1 }}</a
-                      >
-                    </li>
-                  </ng-container>
-                  <li class="page-item">
-                    <button
-                      (click)="next()"
-                      class="page-link mainColor"
-                      [disabled]="page == pagenation.length"
-                    >
-                      التالي
-                    </button>
-                  </li>
-                </ul>
-              </nav>
+             <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
             </div>
-            <!--   <div
-              *ngIf="projectServiesArrays.length == 0"
-              class="bg-white text-center projectInfo p-5 mb-3"
-            >
-              <h3>لا توجد مشاريع</h3>
-            </div> -->
+           
           </div>
           <div class="col-md-8">
             <div

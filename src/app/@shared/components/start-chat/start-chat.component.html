@@ -1,0 +1,43 @@
+<div class="overlay p-5" *ngIf="startingChat">
+  <div class="popup p-5">
+    <a class="close" style="cursor: pointer" (click)="toggleStatus()"
+      >&times;</a
+    >
+    <div class="content">
+      <label class="form-label fw-bold cairo">
+        {{ process == "chat" ? "الرسالة" : "تقديم شكوي" }}
+      </label>
+      <div class="message-input d-flex flex-column justify-content-center">
+        <div class="wrap">
+          <input
+            class="form-control"
+            #textInput
+            type="text"
+            placeholder="اكتب شيئاً ..."
+            class="cairo"
+          />
+          <i
+            *ngIf="process == 'chat'"
+            class="fa-solid fa-paperclip attachment"
+            aria-hidden="true"
+          >
+            <input
+              (change)="onFileUpload($event)"
+              #fileImage
+              type="file"
+              alt=""
+              name="attatch"
+              id="attatch"
+              class="attatch"
+            />
+            <small *ngIf="fileMessage">{{ fileMessage.name }}</small>
+          </i>
+        </div>
+        <button (click)="sendMessage(textInput.value)" class="btn submit">
+          <span class="mx-2">{{ process == "chat" ? "إرسال" : "تقديم" }}</span>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

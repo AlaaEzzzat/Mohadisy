@@ -1,3 +1,5 @@
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ScrollToBottomDirective } from './directives/scroll-to-bottom';
 import { ChatComponent } from './components/chat/chat.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -20,10 +22,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
 import { PaymentCardComponent } from './components/payment-card/payment-card.component';
 import { PaymentLayoutComponent } from './components/payment-layout/payment-layout.component';
+import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { ComplaintComponent } from './components/complaint/complaint.component';
+import { StartChatComponent } from './components/start-chat/start-chat.component';
+import { CalenderComponent } from './components/calender/calender.component';
 
-const routes: Routes = [
-
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -40,8 +46,16 @@ const routes: Routes = [
     DashboardCardComponent,
     PaymentCardComponent,
     PaymentLayoutComponent,
+    CarouselRateComponent,
+    ProjectCardComponent,
+    PaginationComponent,
+    ComplaintComponent,
+    StartChatComponent,
+    CalenderComponent,
   ],
   imports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatMenuModule,
     MatIconModule,
     ReactiveFormsModule,
@@ -66,7 +80,12 @@ const routes: Routes = [
     SidebarComponent,
     DashboardCardComponent,
     PaymentCardComponent,
-    PaymentLayoutComponent
+    PaymentLayoutComponent,
+    CarouselRateComponent,
+    ProjectCardComponent,
+    CalenderComponent,
+    PaginationComponent,
+    StartChatComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

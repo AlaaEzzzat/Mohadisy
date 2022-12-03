@@ -12,10 +12,10 @@ import jsPDF from 'jspdf';
   styleUrls: ['./payment-layout.component.scss'],
 })
 export class PaymentLayoutComponent implements OnInit {
-  @Input() data: any;
+  @Input() data: any = [];
   @Input() userType: any = '';
   allPaidProjectArray: any = [];
-  dataShow: any;
+  dataShow: any = [];
   showModal: boolean = false;
   location: any = '';
   activeProject: any = {};
@@ -31,17 +31,18 @@ export class PaymentLayoutComponent implements OnInit {
     doc.addFileToVFS('Amiri-Regular.ttf', AmiriRegular);
     doc.addFont('Amiri-Regular.ttf', 'Amiri', 'normal');
 
-    doc.setFont('Amiri'); 
+    doc.setFont('Amiri');
     doc.setFontSize(12);
 
-    var testText =
-      'إذا لم تستح فاصنع ما شئت';
+    var testText = 'إذا لم تستح فاصنع ما شئت';
 
     doc.text(testText, 50, 50);
 
     doc.save('test.pdf');
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.dataShow);
+  }
   showDetails = (project: any) => {
     console.log(project);
     this.showModal = true;
@@ -78,26 +79,72 @@ export class PaymentLayoutComponent implements OnInit {
     }
   };
   search(word: any) {
+    this.dataShow =[]
+    if (this.userType == 'client' || this.userType == 'sp') {
+      this.data.map((project: any) => {
+        if (project.project?.name.search(new RegExp(word, 'i')) != -1) {
+          this.dataShow.push(project);
+        }
+      });
+      console.log(this.dataShow);
+    } else if (this.userType == 'spForAdmin') {
+      this.data.map((project: any) => {
+        if (project.profile?.offers[0]?.project?.name.search(new RegExp(word, 'i')) != -1) {
+          this.dataShow.push(project);
+        }
+      });
+
+    } else if (this.userType == 'clientForAdmin') {
+      this.data.map((project: any) => {
+        if (project.profile?.projects[0]?.name.search(new RegExp(word, 'i')) != -1) {
+          this.dataShow.push(project);
+        }
+      });
+    }
     console.log(word);
-    this.dataShow = [];
-    this.allPaidProjectArray.map((project: any) => {
-      if (project.project.name.search(new RegExp(word, 'i')) != -1) {
-        this.dataShow.push(project);
-      }
-    });
+    this.allPaidProjectArray = this.data;
+    console.log(this.allPaidProjectArray);
+ 
   }
   sortByName() {
-    this.dataShow.sort((a: any, b: any) =>
+    if(this.userType=="sp" || this.userType=="client"){
+      this.data.sort((a: any, b: any) =>
       a.project.name.localeCompare(b.project.name)
     );
+    }else if (this.userType == 'spForAdmin') {
+      this.data.sort((a: any, b: any) =>
+      a.profile.offers[0].project.name.localeCompare(b.profile.offers[0].project.name)
+    );
+    } else if (this.userType == 'clientForAdmin') {
+      this.data.sort((a: any, b: any) =>
+      a.profile.projects[0].name.localeCompare(b.profile.projects[0].name)
+    );
+    }
   }
   sortByDate() {
-    this.dataShow.map((pro: any) => {
+  if(this.userType=="sp" || this.userType=="client"){
+    this.data.map((pro: any) => {
       pro.project.dateCreated = new Date(pro.project.dateCreated);
     });
-    this.dataShow.sort((a: any, b: any) => {
+    this.data.sort((a: any, b: any) => {
       return b.project.dateCreated - a.project.dateCreated;
     });
+  }else if (this.userType == 'spForAdmin') {
+    this.data.map((pro: any) => {
+      pro.profile.offers[0].project.dateCreated = new Date(pro.profile.offers[0].project.dateCreated);
+    });
+    this.data.sort((a: any, b: any) => {
+      return b.profile.offers[0].project.dateCreated - a.profile.offers[0].project.dateCreated;
+    });
+  } else if (this.userType == 'clientForAdmin') {
+    this.data.map((pro: any) => {
+      pro.profile.projects[0].dateCreated = new Date( pro.profile.projects[0].dateCreated);
+    });
+    this.data.sort((a: any, b: any) => {
+      return b.profile.projects[0].dateCreated - a.profile.projects[0].dateCreated;
+    });
+  }
+
   }
   getrequireWork(reqId: any) {
     this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {

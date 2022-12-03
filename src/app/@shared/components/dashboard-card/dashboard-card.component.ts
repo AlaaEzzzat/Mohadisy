@@ -9,6 +9,7 @@ export class DashboardCardComponent implements OnInit {
   @Input() data:any={};
   @Input() type = "";
   @Input() circleColor:string="";
+  @Input() grid:any=""
   constructor() { }
 
   ngOnInit(): void {

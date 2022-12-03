@@ -47,24 +47,25 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(1),
       catchError((returnedError) => {
-        let errorMessage: string | null | undefined = null;
+        let errorMessage = null;
+
         if (returnedError.error instanceof ErrorEvent) {
-          errorMessage = ` ${returnedError.error.message} `;
+          errorMessage = returnedError.error?.message;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `${returnedError.error.message}`;
+          errorMessage = returnedError.error?.message;
           handled = this.handleServerSideError(returnedError);
         }
 
-        this._toastr.error(errorMessage ? errorMessage :  "حدث خطأ ما ربما يكون من الإنترنت ");
+        this._toastr.error(errorMessage ? errorMessage : returnedError);
 
         if (!handled) {
           if (errorMessage) {
-            return throwError(errorMessage || "خطأ");
+            return throwError(errorMessage);
           } else {
             return throwError('Unexpected problem occurred');
           }
         } else {
-          return of(returnedError|| "خطأ");
+          return of(returnedError);
         }
       })
     );
@@ -76,12 +77,12 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
     switch (error.status) {
       case 401:
         this._toastr.error('Please login again.');
-        localStorage.removeItem('token');
+
         handled = true;
         break;
       case 403:
         this._toastr.error('Please login again.');
-        localStorage.removeItem('token');
+
         handled = true;
         break;
     }
