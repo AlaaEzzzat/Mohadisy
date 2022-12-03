@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./userhome.component.scss'],
 })
 export class UserhomeComponent implements OnInit {
-  startChatwithAdmin: boolean = false;
   data: any = [
     {
       title: 'لوحة التحكم ',
@@ -50,16 +49,16 @@ export class UserhomeComponent implements OnInit {
   username: string = localStorage.getItem('name')?.replace(/"/g, '') || '';
   showpopup: boolean = false;
   allServices: any = [];
-  clickEvent() {
-    this.status = !this.status;
-  }
+  startChatwithAdmin: boolean = false;
   constructor(private router: Router, private clientService: ClientService) {}
-
-  ngOnInit(): void {}
-
   toggleStatus = () => {
     this.startChatwithAdmin = false;
   };
+  clickEvent() {
+    this.status = !this.status;
+  }
+  ngOnInit(): void {}
+
   signOut() {
     localStorage.clear();
     this.router.navigate(['/account/login']);
