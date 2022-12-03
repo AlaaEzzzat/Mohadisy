@@ -25,6 +25,7 @@ export class SpProfileComponent implements OnInit {
   registeration2:any=0;
   registeration3:any=0;
   registeration4:any=0;
+  registeration5:any=0;
   workFile:any;
   index:number=0;
   avgRate:number=0;
@@ -39,7 +40,11 @@ export class SpProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>
+
+
+
+
+      this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>
       {
         this.profile=data.data;
         console.log(this.profile);
@@ -63,9 +68,9 @@ export class SpProfileComponent implements OnInit {
 
         }
 
-        
 
-        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+
+        if(this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile!=null
           )
         {
           this.copmpleteProfile+=(100/5.0);
@@ -73,9 +78,9 @@ export class SpProfileComponent implements OnInit {
         }
 
 
-        
 
-        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+
+        if(this.profile?.organizationalServiceProviderProfile?.iBanFile!=null
           )
         {
           this.copmpleteProfile+=(100/5.0);
@@ -139,7 +144,7 @@ export class SpProfileComponent implements OnInit {
 
   }
 
- 
+
 
   register_1()
   {
@@ -160,6 +165,12 @@ export class SpProfileComponent implements OnInit {
   register_4()
   {
     this.registeration4=!this.registeration4;
+
+  }
+
+  register_5()
+  {
+    this.registeration5=!this.registeration5;
 
   }
 

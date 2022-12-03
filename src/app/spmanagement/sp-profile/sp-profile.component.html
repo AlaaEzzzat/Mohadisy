@@ -146,7 +146,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الهويه
+                      خطاب بنكى برقم الايبان
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration1==1">
@@ -164,14 +164,15 @@
                     <ng-container *ngIf="registeration1==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn" >
+                          <a class="btn w-100" target="_blank"  style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.iBanFile}}">
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -205,7 +206,8 @@
                     <ng-container *ngIf="registeration2==1">
                       <ul class="card card-registeration">
                         <li>
-                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn" target="_blank"
+                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
                           >
                             <i class="fa fa-eye"></i>
                             فتح
@@ -213,7 +215,7 @@
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -247,7 +249,8 @@
                     <ng-container *ngIf="registeration3==1">
                       <ul class="card card-registeration">
                         <li>
-                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn" target="_blank"
+                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
                           >
                             <i class="fa fa-eye"></i>
                             فتح
@@ -255,7 +258,7 @@
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -289,7 +292,8 @@
                     <ng-container *ngIf="registeration4==1">
                       <ul class="card card-registeration">
                         <li>
-                          <a class="btn" target="_blank" href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
+                          <a class="btn w-100" target="_blank" style="padding-left:50% ;"
+                           href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
                             <i class="fa fa-eye"></i>
                             فتح
                           </a>
@@ -297,7 +301,49 @@
 
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-10" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      شهاده التأمينات الاجتماعيه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration5==1">
+                        <button class="btn choose-toggle" (click)="register_5()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration5!=1">
+                      <button class="btn choose-toggle" (click)="register_5()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration5==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a class="btn w-100 " target="_blank" style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile}}">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -381,7 +427,7 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
-       
+
         <ng-container *ngIf="copmpleteProfile!=100">
         <a routerLink="" class="completeprofile">
           <p style="color:#18AF9A;">استكمل بياناتك</p>
@@ -391,17 +437,17 @@
         <ng-container *ngIf="copmpleteProfile==100">
         <p style="color:#64748B;">تم استكمال بياناتك</p>
         </ng-container>
-        
+
           <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100" 
+            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100"
             [style.width]="copmpleteProfile+'%'">
 
               {{copmpleteProfile}}%
             </div>
           </div>
-         
-  
+
+
       </div>
     </div>
 
