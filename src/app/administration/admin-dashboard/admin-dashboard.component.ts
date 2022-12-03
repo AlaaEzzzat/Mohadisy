@@ -77,6 +77,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder,private clientService: ClientService,
     ) {
+    
       this.visitorsNumber = 0;
       this.usernames= localStorage.getItem('name')?.replace(/"/g, '') || '';
       this.newAccountform = this.formbuilder.group({
@@ -98,8 +99,8 @@ export class AdminDashboardComponent implements OnInit {
   // }
   ngOnInit() {
 
-    this.getappointDate()
-    // this.showUserDashboard()
+    // this.getappointDate(this.selected)
+    this.showUserDashboard()
 
 
     // this.getProfileAdmin();
@@ -121,15 +122,15 @@ export class AdminDashboardComponent implements OnInit {
         this.testimonials =value.data.testimonials
         this.complaints=value.data.complaints;
         // عاوزه تتعدل
-        this.appointments=value.data.appointments.latestAppointment;
+        // this.appointments=value.data.appointments.latestAppointment;
       
-        console.log(value.data.appointments.appointments);
+        // console.log(value.data.appointments.appointments);
         this.admins = value.data.officialUsers;
         this.testimonials = value.data.testimonials;
         this.complaints = value.data.complaints;
-        this.appointments = value.data.appointments.latestAppointment;
-        this.appointmentFiles = this.appointments.appointmentFiles;
-        console.log(this.appointmentFiles);
+        // this.appointments = value.data.appointments.latestAppointment;
+        // this.appointmentFiles = this.appointments.appointmentFiles;
+        // console.log(this.appointmentFiles);
 
         this.renderDouChart();
         this.renderBarChart();
@@ -299,72 +300,101 @@ renderDouChart() {
   });
 }
 
-fortest(totals: any) {
-  for (var i = 1; i <= totals; i++) {
-    this.arrays.push(i);
-    console.log(this.arrays);
-  }
-}
-getappointDate() {
- let date=moment(this.selected).utc().format('YYYY-MM-DD h:mm A')
-  let dateSelected={
+// fortest(totals: any) {
+//   for (var i = 1; i <= totals; i++) {
+//     this.arrays.push(i);
+//     console.log(this.arrays);
+//   }
+// }
+// getappointDate(selected:any) {
+//  let date=moment(selected).utc().format('YYYY-MM-DD h:mm A')
+//   let dateSelected={
     
-      "startDate": date,
-      "endDate": date
-    } 
-    console.log(dateSelected);
-    this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
-      console.log(date.data);
+//       "startDate": date,
+//       "endDate": date
+//     } 
+//     console.log(dateSelected);
+//     this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
+//       console.log(date.data);
      
-      for(let dates of date.data){
-        this.dateOpt=dates
+//       for(let dates of date.data){
+//         this.dateOpt=dates
 
-      }
-      console.log(this.dateOpt)
-      this.appointmentFiles=this.dateOpt.appointmentFiles
-    }),error:(er=>{
-      console.log(er)
-      this.dateOpt=null
-      this.erDateOp=er
-    })})
+//       }
+//       console.log(this.dateOpt)
+//       this.appointmentFiles=this.dateOpt.appointmentFiles
+//     }),error:(er=>{
+//       console.log(er)
+//       this.dateOpt=null
+//       this.erDateOp=er
+//     })})
   
-}
-uplaodFile(e: any) {
+// }
+// uplaodFile(e: any) {
 
-  if (e.target.files && e.target.files.length > 0) {
-    this.file = e.target.files[0];
+//   if (e.target.files && e.target.files.length > 0) {
+//     this.file = e.target.files[0];
    
-    this.FileformData.append('file', this.file);
+//     this.FileformData.append('file', this.file);
+//     console.log(this.FileformData);
 
-  }      console.log(this.file);
+//   }      console.log(this.file);
 
-}
-creatMeeting() {
+// }
+// creatMeeting() {
     
-  let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
-    this.adminSettingsService.getAdminProfile().subscribe((value) => {
-      this.iProfileAdmin = value.data.adminProfile.applicationUserId;
-    });
-    this.appointment={
-      "applicationUserId": this.iProfileAdmin,
-      "name": this.name?.value,
-      "description": this.description?.value,
-      "dateCreated": date
-    }
-    this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
-      console.log(data)
-      console.log(data.data.appointmentId)
-      this.http.storeAppointmentFiles(data.data.appointmentId,this.file).subscribe({next:(req)=>{
-        console.log(req.message)
-      },error:(er)=>{
-        console.log(er.message)
+//   let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
+//     this.adminSettingsService.getAdminProfile().subscribe((value) => {
+//       this.iProfileAdmin = value.data.adminProfile.applicationUserId;
+//       console.log
+//     });
+//     this.appointment={
+//       "applicationUserId": this.iProfileAdmin,
+//       "name": this.name?.value,
+//       "description": this.description?.value,
+//       "dateCreated": date
+//     }
+//     this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+//       console.log(data)
+//       console.log(data.data.appointmentId)
+//       this.http.storeAppointmentFiles(data.data.appointmentId,this.file).subscribe({next:(req)=>{
+//         console.log(req.message)
+//       },error:(er)=>{
+//         console.log(er.message)
 
-      }})
-    }),error:(er)=>{
-      console.log(er.message)
-    }})
-    console.log(this.appointment);
-  }
+//       }})
+//     }),error:(er)=>{
+//       console.log(er.message)
+//     }})
+//     console.log(this.appointment);
+//   }
+  
+// creatMeeting() {
+//   this.iProfileAdmin=localStorage.getItem('id')
+//   console.log(this.iProfileAdmin)
+//   let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
+  
+//     this.appointment={
+//       "applicationUserId": this.iProfileAdmin,
+//       "name": this.name?.value,
+//       "description": this.description?.value,
+//       "dateCreated": date
+//     }
+//     this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+//       console.log(data)
+//       console.log(data.data.id)
+//       this.http.storeAppointmentFiles(data.data.id,this.FileformData).subscribe({next:(req)=>{
+//         console.log(req)
+//       },error:(er)=>{
+//         console.log(er)
+
+//       }})
+//     }),error:(er)=>{
+//       console.log(er)
+//     }})
+//     console.log(this.appointment);
+   
+//   }
   renderBarChart() {
     const myChart = new Chart('bar', {
       type: 'bar',
@@ -523,4 +553,8 @@ interface appoint{
   "name": "fffff",
   "description": "dpdflkpdlf;",
   "dateCreated": string
+}
+
+function getappointDate(selected: any) {
+  throw new Error('Function not implemented.');
 }

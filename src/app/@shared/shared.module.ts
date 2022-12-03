@@ -13,6 +13,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { LandingComponent } from './components/landing/landing.component';
 import { MsgToAdminComponent } from './components/msg-to-admin/msg-to-admin.component';
@@ -24,6 +25,7 @@ import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
+import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
 
 const routes: Routes = [
 
@@ -48,6 +50,7 @@ const routes: Routes = [
     ProjectCardComponent,
     PaginationComponent,
     ComplaintComponent,
+    WorkScheduleComponent,
   ],
   imports: [
     MatMenuModule,
@@ -56,6 +59,7 @@ const routes: Routes = [
     CommonModule,
     NgxSpinnerModule,
     RouterModule,
+    MatDatepickerModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
@@ -77,7 +81,8 @@ const routes: Routes = [
     PaymentLayoutComponent,
     CarouselRateComponent,
     ProjectCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    WorkScheduleComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

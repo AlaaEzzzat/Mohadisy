@@ -206,77 +206,7 @@
 
     <div class="col-lg-3">
       <!-- part 1 جدول الاعمال-->
-      <div
-        class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
-      >
-        <div class="col-12 bg-white px-4 py-1 mb-2">
-          <h5 class="fw-bold pt-3">جدول الاعمال</h5>
-        </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2" (click)="getappointDate()" >
-          <!-- <mat-card class="demo-inline-calendar-card"> -->
-
-          <mat-calendar [(selected)]="selected"></mat-calendar>
-        </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2">
-          <p class="fw-semibold pt-3">{{ selected | date: "d/M/yyyy" }}</p>
-        </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2" *ngIf="dateOpt!=null;else notfound">
-          <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
-            {{ dateOpt?.name }}
-            <small class="fw-normal">{{
-              dateOpt?.dateCreated | date: "d/M/yyyy"
-            }}</small>
-          </p>
-          <p class="fw-normal">{{ dateOpt?.description }}</p>
-
-          <div *ngFor="let item of appointmentFiles">
-            <p class="">
-              <span
-                ><img
-                  src="assets/dashboard/picture.png"
-                  alt=""
-                  *ngIf="
-                    item.fileType === '.png' ||
-                    item.fileType === '.jpg' ||
-                    item.fileType === '.svg'
-                  "
-                />
-                <img
-                  src="assets/dashboard/pdf.png"
-                  *ngIf="item.fileType === '.pdf'"
-                />
-              </span>
-              <span> {{ item.fileName }}</span>
-            </p>
-          </div>
-        </div>
-        <ng-template #notfound>
-          <div class="col-12 bg-white px-4 py-1 mb-2" >
-            <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
-              {{ erDateOp}}
-              <small class="fw-normal">{{
-                dateOpt?.dateCreated | date: "d/M/yyyy"
-              }}</small>
-            </p>
-  
-          
-          </div>
-        </ng-template>
-        <!-- <div class="col-12 bg-white px-4 py-1 mb-2">
-          <p class="fw-semibold pt-3" style="color: #4b4a4a">
-            تم دخول {{ usernames }} الى المنصه الساعه
-            <span class="main-color">11:20 am</span>
-          </p>
-        </div> -->
-        <!-- <div class="col-12 bg-white px-4 py-1 mb-2"> -->
-          <div class=" col-12 bg-white  px-4 py-1 mb-2 " data-bs-toggle="modal" data-bs-target="#addAppointment">
-
-          <p class="pt-3">
-            <img src="assets/dashboard/add.png" class="ms-2" />
-            <span style="color: #c7c7c7"> اضافه حدث الى هذا اليوم</span>
-          </p>
-        </div>
-      </div>
+     <app-work-schedule></app-work-schedule>
       <!-- part 2 -->
 
       <div
@@ -463,7 +393,7 @@
     </div>
   </div>
 </div>
-
+<!-- 
 <div
   class="modal fade"
   id="addAppointment"
@@ -542,11 +472,13 @@
           </div>
           <div class="mb-3">
             <label for="formFile" class="form-label">اضافه ملف</label>
-            <input class="form-control"  type="file"
+            <input class="form-control" 
+            type="file"
             #image
             id="imageFile"
             (change)="uplaodFile($event)"
             name="imageFile"
+            
            >
           </div>
          
@@ -572,6 +504,6 @@
     </div>
   </div>
 </div>
-
+ -->
 
 <div id="toast-container" class="toast-bottom-right toast-container"></div>
