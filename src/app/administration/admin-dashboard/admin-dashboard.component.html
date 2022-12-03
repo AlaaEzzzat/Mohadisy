@@ -3,7 +3,7 @@
   <div class="row cairo mb-2">
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
-      grid="col-sm-3 col-6"
+        grid="col-sm-3 col-6"
         type="pricequotes"
         [data]="pricequotes"
         circleColor="D9CCF2"
@@ -12,57 +12,57 @@
 
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
-      grid="col-sm-3 col-6"
+        grid="col-sm-3 col-6"
         type="projects"
         [data]="projects"
-        circleColor="E9CCF2"
+        circleColor="C4D3D8"
       ></app-dashboard-card>
     </div>
   </div>
   <!-- part 2 -->
   <div class="row cairo mb-2">
-    <div class=" col-lg-4 mb-3">
+    <div class="col-lg-4 mb-3">
       <app-dashboard-card
         grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="indSp"
         [data]="individualSP"
-        circleColor="D9CCF2"
+        circleColor="D1F2FE"
       ></app-dashboard-card>
     </div>
 
-    <div class=" col-lg-4 mb-3">
+    <div class="col-lg-4 mb-3">
       <app-dashboard-card
-      grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="comSp"
         [data]="organizationalSP"
-        circleColor="D9CCF2"
+        circleColor="E2FD"
       ></app-dashboard-card>
     </div>
-    <div class=" col-lg-4 mb-3">
+    <div class="col-lg-4 mb-3">
       <app-dashboard-card
-      grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
         type="client"
         [data]="clients"
-        circleColor="D9CCF2"
+        circleColor="E9CCF2"
       ></app-dashboard-card>
     </div>
   </div>
   <!-- part3 -->
   <div class="row mb-3 cairo">
-    <div class="col-lg-6">
+    <div class="col-lg-6 mb-3">
       <div
-        class="bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center mb-3 h-100 w-100"
+        class="bg-white rounded-3 shadow d-flex justify-content-around align-items-center p-3 h-100 w-100"
       >
-        <div class="chart" style="width: 300px">
-          <canvas id="doughnut" class="col-12"></canvas>
+        <div class="chart" style="width: 250px">
+          <canvas id="doughnut" class="col-12 "></canvas>
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 mb-3">
       <div
-        class="ps-5 bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center mb-3 h-100 w-100"
+        class="m-0 bg-white rounded-3 shadow row h-100 w-100"
       >
-        <div class="col-5 d-flex justify-content-around align-items-center p-3">
+        <div class="col-md-5 d-flex justify-content-around align-items-center p-3">
           <div class="d-flex justify-content-around align-items-center">
             <img
               class="ms-2"
@@ -77,8 +77,8 @@
             </div>
           </div>
         </div>
-        <div class="col-7">
-          <div class="chart">
+        <div class="col-md-7 d-flex justify-content-around align-items-center h-100">
+          <div class="chart w-100">
             <canvas id="bar"></canvas>
           </div>
         </div>
@@ -113,9 +113,6 @@
           <p class="text-gary text-end">{{ item.content }}</p>
         </div>
       </div>
-      <!-- مسؤلي -->
-      <!-- <div class="d-flex flex-column scrolls col-12"> -->
-
       <div
         class="cairo bg-white rounded-0 d-flex justify-content-between align-items-start mb-2 col-12 py-3 px-4"
       >
@@ -130,14 +127,10 @@
         </p>
       </div>
       <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
-        <!-- card -->
         <div
           *ngFor="let item of admins"
           class="bg-white rounded-0 d-flex flex-lg-row flex-column justify-content-between align-items-start mb-2 col-12 px-4 py-3"
         >
-          <!-- <div class="col-3 ">
-          <img class="w-50" src={{item?.adminProfile?.profilePicturePath}} >
-        </div> -->
           <div
             class="col-12 d-flex flex-column justify-content-evenly align-items-start"
           >
@@ -151,12 +144,9 @@
             </div>
             <p>{{ item?.email }}</p>
             <p>{{ item?.phoneNumber }}</p>
-
-            <!-- <p> منذ  {{iProfileAdmin?.adminProfile?.dateCreated|date :'d/M/yyyy' }}</p> -->
           </div>
         </div>
       </div>
-      <!-- المشاريع -->
       <div class="d-flex flex-column mb-2 col-12">
         <div
           class="row col-12 m-0 p-0 gx-4 justify-content-between align-items-start"
@@ -170,33 +160,13 @@
             >
               <h5>المشاريع الحاليه</h5>
             </div>
-            <!-- card -->
             <div class="d-flex flex-column scrolls col-12">
-              <div
-                class="d-flex bg-white cairo rounded-0 text-center py-3 px-3 col-12 mb-2"
-                *ngFor="let itemC of objectCurrentProjects"
-              >
-                <div class="col-xxl-2 d-xxl-block d-none">
-                  <img
-                    src="{{ itemC?.clientProfile?.profilePicturePath }}"
-                    alt=""
-                    class="col-12"
-                  />
-                </div>
-                <div class="col-xxl-6 col-8 d-flex flex-column pe-xxl-3">
-                  <p class="col-12 text-end">
-                    <small class="premary-color">اسم العميل : </small>
-                    <small
-                      >{{ itemC?.clientProfile?.firstName }}
-                      {{ itemC?.clientProfile?.lastName }}</small
-                    >
-                  </p>
-                  <p class="col-12 text-end">
-                    <small class="premary-color">بلد الاقامه : </small>
-                    <small> {{ itemC.district.city.nameAr }}</small>
-                  </p>
-                </div>
-              </div>
+              <ng-container *ngFor="let item of objectCurrentProjects">
+                <app-project-card
+                  userType="Admin"
+                  [pro]="item"
+                ></app-project-card>
+              </ng-container>
             </div>
           </div>
 
@@ -211,47 +181,23 @@
             </div>
             <!-- card -->
             <div class="d-flex flex-column scrolls col-12">
-              <div
-                class="d-flex bg-white cairo rounded-0 text-center py-3 px-4 col-12 mb-2"
-                *ngFor="let item of objectLatest"
-              >
-                <div class="col-xxl-2 d-xxl-block d-none">
-                  <img src="assets/avatar.png" alt="" class="col-12" />
-                </div>
-                <div class="col-xxl-8 col-10 d-flex flex-column pe-xxl-3">
-                  <p class="col-12 text-end">
-                    <small class="premary-color text-nowrap"
-                      >اسم العميل :
-                    </small>
-                    <small
-                      >{{ item.clientProfile.firstName }}
-                      {{ item.clientProfile.lastName }}</small
-                    >
-                  </p>
-                  <p class="col-12 text-end">
-                    <small class="premary-color">بلد الاقامه : </small>
-                    <small> {{ item.district.city.nameAr }}</small>
-                  </p>
-                  <p class="col-12 text-end">
-                    <small class="premary-color"> اسم المشروع : </small>
-                    <small>{{ item.name }} </small>
-                  </p>
-                </div>
-                <div class="col-2 text-center">
-                  <mat-icon style="color: #f3d720">star</mat-icon>
-                  <p>
-                    <small>5/5</small>
-                  </p>
-                </div>
-              </div>
-              <ng-template [hidden]="error === null">
-                <div
-                  class="d-flex flex-column col-12 alert alert-danger"
-                  role="alert"
-                >
-                  {{ error }}
-                </div>
-              </ng-template>
+              <ng-container *ngFor="let item of objectLatest">
+                <app-project-card
+                  userType="Admin"
+                  [pro]="item"
+                ></app-project-card>
+              </ng-container>
+
+       <div [hidden]="error === null">
+
+         <div
+           class="d-flex flex-column col-12 alert alert-danger"
+           role="alert"
+         >
+           {{ error }}
+         </div>
+       </div>
+      
             </div>
           </div>
         </div>
@@ -268,8 +214,8 @@
         </div>
         <div class="col-12 bg-white px-4 py-1 mb-2" (click)="getappointDate()" >
           <!-- <mat-card class="demo-inline-calendar-card"> -->
+
           <mat-calendar [(selected)]="selected"></mat-calendar>
-          <!-- </mat-card> -->
         </div>
         <div class="col-12 bg-white px-4 py-1 mb-2">
           <p class="fw-semibold pt-3">{{ selected | date: "d/M/yyyy" }}</p>
@@ -341,9 +287,6 @@
             class="bg-white d-flex justify-content-between bg-white px-4 py-1 mb-2 align-items-center"
           >
             <h5 class="fw-bold pt-3 pb-2">تقيمات مستخدمي المنصه</h5>
-            <div class="align-content-end">
-
-            </div>
           </div>
           <app-carousel-rate [testimonials]="testimonials"></app-carousel-rate>
         </div>

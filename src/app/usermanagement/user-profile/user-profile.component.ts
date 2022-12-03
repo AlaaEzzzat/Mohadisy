@@ -81,6 +81,7 @@ export class UserProfileComponent implements OnInit {
       };
     }
   }
+  
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
