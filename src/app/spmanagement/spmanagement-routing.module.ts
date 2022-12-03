@@ -6,7 +6,6 @@ import { SpContributionsComponent } from './sp-contributions/sp-contributions.co
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
-import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SpDashBoardComponent } from './sp-dash-board/sp-dash-board.component';
@@ -40,8 +39,6 @@ const routes: Routes = [
       { path: 'dashboard', component: SpDashBoardComponent },
       { path: 'messages', component: SpMessagesComponent },
       { path: 'chat', component: ChatComponent },
-
-      { path: 'offers', component: SpPriceOffersComponent },
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },

@@ -1,5 +1,5 @@
 <section class="price-offer">
-  <div class="container mt-5 fontStyle">
+  <div class="container-fluid mt-5 fontStyle">
     <div class="row">
       <ng-container *ngFor="let service of projectServices; let i = index">
         <div class="col">
@@ -14,7 +14,7 @@
         </div>
       </ng-container>
 
-      <div class="col-12">
+      <div class="col-12 m-0 p-0">
         <div class="row py-5">
           <div class="col-md-4">
             <div *ngIf="projectServiesArrays.length > 0" class="cards">
@@ -48,13 +48,9 @@
 
                     <i class="fa-regular fa-circle-ellipsis-vertical"></i>
                   </div>
-
-                  <div
-                    class="secondColor bg-white rounded-5 text-center p-2"
-                    style="min-width: 36px; height: 36px; font-weight: 600"
-                  >
-                    {{ project.offers.length }} رد
-                  </div>
+                  <span class="badge bg-white mt-1 mainColor" style="height: fit-content;
+                  padding: 10px;">{{ project.offers.length }} رد</span>
+                  
                   <div class="position-absolute dotCon">
                     <button
                       class="dots"
@@ -85,7 +81,7 @@
                   <li class="page-item">
                     <button
                       (click)="prev()"
-                      class="page-link"
+                      class="page-link mainColor"
                       [disabled]="page <= 1"
                     >
                       السابق
@@ -98,7 +94,7 @@
                   >
                     <li class="page-item">
                       <a
-                        class="page-link"
+                        class="page-link mainColor"
                         [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
                         >{{ mypage + 1 }}</a
                       >
@@ -107,7 +103,7 @@
                   <li class="page-item">
                     <button
                       (click)="next()"
-                      class="page-link"
+                      class="page-link mainColor"
                       [disabled]="page == pagenation.length"
                     >
                       التالي

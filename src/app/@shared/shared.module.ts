@@ -13,9 +13,13 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { CalendarComponent } from './components/calendar/calendar.component';
+
 import { LandingComponent } from './components/landing/landing.component';
-import { MyCalendarComponent } from './components/my-calendar/my-calendar.component';
+import { MsgToAdminComponent } from './components/msg-to-admin/msg-to-admin.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { PaymentCardComponent } from './components/payment-card/payment-card.component';
+import { PaymentLayoutComponent } from './components/payment-layout/payment-layout.component';
 
 const routes: Routes = [
 
@@ -28,11 +32,14 @@ const routes: Routes = [
     SplitNameByCommaPipe,
     NotFoundComponent,
     NavbarComponent,
-    CalendarComponent,
     LandingComponent,
     ChatComponent,
     ScrollToBottomDirective,
-    MyCalendarComponent,
+    MsgToAdminComponent,
+    SidebarComponent,
+    DashboardCardComponent,
+    PaymentCardComponent,
+    PaymentLayoutComponent,
   ],
   imports: [
     MatMenuModule,
@@ -54,9 +61,12 @@ const routes: Routes = [
     ArabicNumberPipe,
     SplitNameByCommaPipe,
     NavbarComponent,
-    CalendarComponent,
-    ChatComponent
-
+    ChatComponent,
+    MsgToAdminComponent,
+    SidebarComponent,
+    DashboardCardComponent,
+    PaymentCardComponent,
+    PaymentLayoutComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

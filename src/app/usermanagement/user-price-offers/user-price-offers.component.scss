@@ -33,6 +33,7 @@
 
       .textcard{
         font-weight: 400;
+        font-family: 'cairo';
 
       }
       .icon{
@@ -98,6 +99,9 @@ p{
   font-family: "Cairo";
   font-size: 16px;
     font-weight: 700;
+}
+span{
+  font-family: 'cairo';
 }
   }
   .person{
@@ -183,4 +187,15 @@ background-color: rgba($color: #e8e8e8, $alpha: 0.4);
 }
  .close:hover {
   color: #18AF9A;
+}
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
 }

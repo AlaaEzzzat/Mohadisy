@@ -15,6 +15,7 @@ import { TestComponent } from './test/test.component';
 // import { AdminSettingUsersComponent } from './admin-setting-users/admin-setting-users.component';
 // import { AdminSettingChangeProfileComponent } from './admin-setting-change-profile/admin-setting-change-profile.component';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
+import { ChatComponent } from '../@shared/components/chat/chat.component';
 
 const routes: Routes = [
   // { path: '', component: AdminHomeComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
       { path: 'adminHome', component: AdminHomeComponent },
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'clients', component: AdminClientsComponent },
-      { path: 'messages', component: AdminMessagesComponent },
+      { path: 'chat', component: ChatComponent },
       // { path: 'settings', component: AdminSettingsComponent },
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },

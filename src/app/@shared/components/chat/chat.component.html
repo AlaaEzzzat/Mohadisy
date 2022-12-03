@@ -5,15 +5,23 @@
         <div class="col-md-4 col-2 h-100">
           <div id="sidepanel">
             <div id="profile">
-              <div class="wrap">
+              <div class="wrap d-flex align-items-center">
                 <img
                   id="profile-img"
-                  [src]="userType == 'Client'?clientProfile.profilePicturePath:userType == 'CO'?clientProfile.organizationalServiceProviderProfile?.companyLogoPath:clientProfile.organizationalServiceProviderProfile?.companyLogoPath"
+                  [src]="
+                  userType == 'Client'?senderProfile.profilePicturePath:
+                  userType =='Admin'?senderProfile.adminProfile.profilePicturePath :
+                  userType == 'CO'?senderProfile.organizationalServiceProviderProfile?.companyLogoPath:
+                  senderProfile.organizationalServiceProviderProfile?.companyLogoPath"
                   class="online"
                   alt=""
                 />
                 
-                <p class="me-4">{{userType == 'Client'?clientProfile.firstName+ ' '+ clientProfile.lastName:userType == 'CO'?clientProfile.organizationalServiceProviderProfile?.companyName:clientProfile.organizationalServiceProviderProfile?.companyLogoPath}}</p>
+                <p class="m-0 me-4  cairo">{{
+                  userType == 'Client'?senderProfile.firstName+ ' '+ senderProfile.lastName:
+                  userType =='Admin'?senderProfile.adminProfile.firstName + ' ' + senderProfile.adminProfile.lastName :
+                  userType == 'CO'?senderProfile.organizationalServiceProviderProfile?.companyName:
+                  senderProfile.organizationalServiceProviderProfile?.companyLogoPath}}</p>
 
                 <div id="status-options">
                   <ul>
@@ -27,13 +35,13 @@
             </div>
             <div id="search" class="d-flex">
               <label for=""
-                ><i class="fa fa-search" aria-hidden="true"></i
+                ><i (click)="search(text.value)" class="fa fa-search" aria-hidden="true"></i
               ></label>
-              <input type="text" placeholder="بحث ..." />
+              <input type="text" #text placeholder="بحث ..." />
             </div>
             <div id="contacts">
               <ul class="p-0 m-0">
-                  <ng-container *ngFor="let user of userCahts">
+                  <ng-container *ngFor="let user of dataShow">
                         <li class="contact" (click)="showMessage(user)" >
                               <div class="wrap d-flex align-items-center">
                                 <div>
@@ -72,8 +80,8 @@
                    <div class="messages" >
                         <ul>
                               <ng-container *ngFor="let msg of activeChatUserChat">
-                                    <li class="" [ngClass]="msg.senderId ==clientProfile.applicationUserId || msg.senderId ==clientProfile.id? 'sent':'replies' ">
-                                          <img [src]="msg.senderId ==clientProfile.applicationUserId? clientProfile.profilePicturePath :activeUser.profilePicture " alt="" />
+                                    <li class="" [ngClass]="msg.senderId ==senderProfile.applicationUserId || msg.senderId ==senderProfile.id? 'sent':'replies' ">
+                                          <img [src]="msg.senderId ==senderProfile.applicationUserId? senderProfile.profilePicturePath :activeUser.profilePicture " alt="" />
                                           <p *ngIf="msg.messageType.type == 'Text'" class="cairo">{{msg.content}}</p>
                                           <img class="imgMsg mb-2" [src]="msg.content" *ngIf="msg.messageType.type == 'Image'" />
                                           <p *ngIf="msg.messageType.type == 'File'" class="cairo">{{msg.content.split("/").slice(-1)[0] }}

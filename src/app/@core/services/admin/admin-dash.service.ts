@@ -29,7 +29,10 @@ export class AdminDashService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Dashboard/getAdminStatus`);
 
   }
-
+ 
+  getServiceProviderStatus(){
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Dashboard/getServiceProviderStatus`)
+  }
   getCurrentProjectsForAdmin(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getCurrentProjectsForAdmin/Page/${page}`);

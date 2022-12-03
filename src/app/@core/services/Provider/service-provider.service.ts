@@ -131,4 +131,10 @@ export class ServiceProviderService {
       `${environment.baseUrl}/api/ProjectService/GetProjectSubServicesByServiceId/${serviceId}`
     );
   }
+  /* ********************************** */
+  getPaymentsForServiceProvider(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Payment/getPaymentsForServiceProvider`
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from './../@shared/shared.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +12,7 @@ import { SpMessagesComponent } from './sp-messages/sp-messages.component';
 import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
-import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
+
 import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
@@ -38,7 +39,7 @@ import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reje
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
@@ -51,7 +52,7 @@ import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.compon
     SpMessagesComponent,
     SpPaymentsComponent,
     SpProjectsComponent,
-    SpPriceOffersComponent,
+
     SpHomeComponent,
     SpProfileComponent,
     SpCompleteProfileComponent,
@@ -62,7 +63,6 @@ import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.compon
     SpMessagesComponent,
     SpPaymentsComponent,
     SpProjectsComponent,
-    SpPriceOffersComponent,
     SpHomeComponent,
     SpProfileComponent,
     SpProjectRequestComponent,
@@ -85,9 +85,11 @@ import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.compon
 
   ],
   imports: [
+    CarouselModule ,
     MatSelectModule,
     MatFormFieldModule,
     SharedModule,
+    MatIconModule,
     CommonModule,
     SPmanagementRoutingModule,
     FormsModule,
