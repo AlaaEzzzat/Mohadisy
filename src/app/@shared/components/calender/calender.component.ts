@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-calender',
@@ -7,7 +13,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalenderComponent implements OnInit {
   selected: Date = new Date();
-  constructor() {}
+  @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
 
-  ngOnInit(): void {}
+  pickDate(date: any): void {
+    console.log(date);
+    this.onDatePicked.emit(date);
+  }
+  constructor() {}
+  ngOnInit(): void {
+    this.pickDate(this.selected);
+  }
 }

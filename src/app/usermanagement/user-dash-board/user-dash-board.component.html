@@ -99,7 +99,13 @@
             </h3>
           </div>
           <div class="col-12 mb-2">
-            <app-calender></app-calender>
+            <div class="card calender">
+              <div class="row">
+                <div class="col-lg-12">
+                  <mat-calendar [(selected)]="selected"></mat-calendar>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col-12 bg-white py-3 mb-2">
             <h3 class="cairo fw-bold text-center m-0 p-0 cairo">

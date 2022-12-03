@@ -72,7 +72,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
   }
 
   private handleServerSideError(error: HttpErrorResponse): boolean {
-    let handled: boolean = false;
+    /*  let handled: boolean = false;
 
     switch (error.status) {
       case 401:
@@ -86,7 +86,7 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         handled = true;
         break;
     }
-
-    return handled;
+ */
+    return true;
   }
 }

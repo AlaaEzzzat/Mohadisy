@@ -24,7 +24,6 @@ export class UserDashBoardComponent implements OnInit {
   completedProjectsCost: any = 0;
   currentProjectsCost: any = 0;
   constructor(private _api: ApiService, private clientService: ClientService) {}
-
   ngOnInit(): void {
     this._api
       .get('https://app.mohandisy.com/api/Dashboard/getClientStatus')
