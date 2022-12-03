@@ -2,6 +2,7 @@
   <div class="row cairo">
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
+        grid="col-sm-3 col-6"
         type="pricequotes"
         [data]="data.overview?.pricequotes"
         circleColor="D9CCF2"
@@ -10,6 +11,7 @@
 
     <div class="col-lg-6 mb-3">
       <app-dashboard-card
+        grid="col-sm-3 col-6"
         type="projects"
         [data]="data.overview?.projects"
         circleColor="E9CCF2"
@@ -22,9 +24,9 @@
       <div class="row">
         <div class="col-12 mb-4">
           <div
-            class="bg-white rounded-0 cardShadow d-flex justify-content-around align-items-center mb-3 h-100 w-100"
+            class="bg-white rounded-3 shadow d-flex justify-content-around align-items-center p-3 h-100 w-100"
           >
-            <div class="chart" style="width: 300px">
+            <div class="chart" style="width: 250px">
               <canvas id="doughnut" class="col-12"></canvas>
             </div>
           </div>
@@ -46,37 +48,14 @@
               <!-- card -->
               <div class="d-flex flex-column scrolls col-12">
                 <div>
-                  <div
+                  <ng-container
                     *ngFor="let pro of this.currentProjects; let i = index"
-                    class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
                   >
-                    <div>
-                      <img
-                        class="cardImg"
-                        [src]="pro.offerSender?.profilePicturePath"
-                        alt=""
-                      />
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text mb-1 cardText">
-                        <strong>اسم المسؤل :</strong>
-                        {{
-                          pro.offerSender?.name || pro.offerSender?.companyName
-                        }}
-                        <!--   علاء عزت -->
-                      </p>
-                      <p class="card-text mb-1 cardText">
-                        <strong>بلد الاقامه :</strong>
-                        {{ pro.district.city.region.nameAr }}
-                        <!-- الرياض -->
-                      </p>
-                      <p class="card-text mb-0 cardText">
-                        <strong>إسم المشروع :</strong>
-                        {{ pro.name }}
-                        <!--      نطوير -->
-                      </p>
-                    </div>
-                  </div>
+                    <app-project-card
+                      userType="client"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -93,41 +72,14 @@
               <!-- card -->
               <div class="d-flex flex-column scrolls col-12">
                 <div>
-                  <div
+                  <ng-container
                     *ngFor="let pro of this.completedProjects; let i = index"
-                    class="card rounded-0 border-0 cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
                   >
-                    <div>
-                      <img
-                        class="cardImg"
-                        [src]="pro.offerSender?.profilePicturePath"
-                        alt=""
-                      />
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text mb-1 cardText">
-                        <strong>اسم المسؤل :</strong>
-                        {{
-                          pro.offerSender?.name || pro.offerSender?.companyName
-                        }}
-                        <!--   علاء عزت -->
-                      </p>
-                      <p class="card-text mb-1 cardText">
-                        <strong>بلد الاقامه :</strong>
-                        {{ pro.district.city.region.nameAr }}
-                        <!-- الرياض -->
-                      </p>
-                      <p class="card-text mb-0 cardText">
-                        <strong>إسم المشروع :</strong>
-                        {{ pro.name }}
-                        <!--      نطوير -->
-                      </p>
-                    </div>
-                    <!--  <div class="col-2 text-center">
-                    <mat-icon style="color: #f3d720">star</mat-icon>
-                    <p><small>5/5</small></p>
-                  </div> -->
-                  </div>
+                    <app-project-card
+                      userType="client"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
                 </div>
               </div>
             </div>
@@ -147,13 +99,7 @@
             </h3>
           </div>
           <div class="col-12 mb-2">
-            <div class="card calender">
-              <div class="row">
-                <div class="col-lg-12">
-                  <mat-calendar [(selected)]="selected"></mat-calendar>
-                </div>
-              </div>
-            </div>
+            <app-calender></app-calender>
           </div>
           <div class="col-12 bg-white py-3 mb-2">
             <h3 class="cairo fw-bold text-center m-0 p-0 cairo">

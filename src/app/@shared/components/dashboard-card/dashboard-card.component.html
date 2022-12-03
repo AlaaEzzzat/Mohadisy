@@ -1,8 +1,8 @@
-<div class="d-flex flex-column bg-white p-2 rounded-3 shadow">
-  <div class="row px-5 d-flex justify-content-evenly align-items-center">
-    <div class="col-8">
+<div class="d-flex flex-column bg-white h-100 p-2 rounded-3 shadow">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="">
       <img src="assets/dashboard/cost.png" alt="" class="card-img cardImg" />
-      <span class="me-4">
+      <span class="me-2">
         {{
           type == "projects"
             ? "المشاريع"
@@ -17,8 +17,8 @@
         }}</span
       >
     </div>
-    <div class="col-4 align-items-center justify-content-end d-flex">
-      <span [class]="'badge p-2 circle ' + circleColor">{{
+    <div class=" align-items-center justify-content-end d-flex">
+      <span [class]="'badge p-2  ' + circleColor" style="width: 50px;">{{
         type == "projects"
           ? data?.totalNumber
           : type == "pricequotes"
@@ -35,12 +35,14 @@
   </div>
   <div class="row mt-3">
     <div
-      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+      [class]="'d-flex align-items-center justify-content-center flex-column ' + grid"
     >
       <div
         [class]="'badge rounded-circle circle   p-2 text-center ' + circleColor"
       >
-        <p class="text-center mt-2">
+      <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+
+        <p class="text-center m-0">
           {{
             type == "projects"
               ? data?.currentProjectsNumber
@@ -54,33 +56,35 @@
               ? "جديد" : ""
           }}
         </p>
-        <hr class="m-0" />
-        <p class="text-center mt-2">
+        <hr class="my-2 w-100" />
+        <p class="text-center m-0 ">
           {{
             type == "projects"
               ? data?.currentProjectsCost
               : type == "pricequotes"
               ? data?.newPricequotesCost
               : type =="indSp"
-              ? data.newIndividualSPNumber 
+              ? data?.newIndividualSPNumber 
               : type =="comSp"
-              ?data.newOrganizationalSPNumber
+              ?data?.newOrganizationalSPNumber
               : type =="client"
-              ?data.newClientsNumber : ""
+              ?data?.newClientsNumber : ""
           }}
         </p>
+      </div>
       </div>
       <p class="text-center my-2">
         {{ type == "projects" ? "حالي" : type == "pricequotes" ? "جديدة" : "" }}
       </p>
     </div>
     <div
-      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
-    >
+    [class]="'d-flex align-items-center justify-content-center flex-column ' + grid"
+  >
       <div
         [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
       >
-        <p class="text-center mt-2">
+      <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.finishedProjectsNumber
@@ -94,22 +98,23 @@
               ? "مقبول" : ""
           }}
         </p>
-        <hr class="m-0" />
-        <p class="text-center mt-2">
+        <hr class="my-2 w-100" />
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.finishedProjectsCost
               : type == "pricequotes"
               ? data?.acceptedPricequotesCost
               : type =="indSp"
-              ? data.acceptedIndividualSPNumber
+              ? data?.acceptedIndividualSPNumber
               : type =="comSp"
-              ?data.acceptedOrganizationalSPNumber
+              ?data?.acceptedOrganizationalSPNumber
               : type =="client"
-              ? data.acceptedClientsNumber
+              ? data?.acceptedClientsNumber
                : ""
           }}
         </p>
+        </div>
       </div>
       <p class="text-center my-2">
         {{
@@ -122,12 +127,13 @@
     </div>
 
     <div
-      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
+      [class]="'d-flex align-items-center justify-content-center flex-column ' + grid"
     >
       <div
         [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
       >
-        <p class="text-center mt-2">
+      <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.pendingProjectsNumber
@@ -141,22 +147,23 @@
               ?  "غير مكتمل": ""
           }}
         </p>
-        <hr class="m-0" />
-        <p class="text-center mt-2">
+        <hr class="my-2 w-100" />
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.pendingProjectsCost
               : type == "pricequotes"
               ? data?.notCompletedPricequotesCost
               : type =="indSp"
-              ? data.notCompletedIndividualSPNumber
+              ? data?.notCompletedIndividualSPNumber
               : type =="comSp"
-              ?data.notCompletedOrganizationalSPNumber
+              ?data?.notCompletedOrganizationalSPNumber
               : type =="client"
-              ? data.notCompletedClientsNumber
+              ? data?.notCompletedClientsNumber
               : ""
           }}
         </p>
+        </div>
       </div>
       <p class="text-center my-2">
         {{
@@ -169,12 +176,13 @@
       </p>
     </div>
     <div
-      class="col-sm-3 col-6 d-flex align-items-center justify-content-center flex-column"
-    >
+    [class]="'d-flex align-items-center justify-content-center flex-column ' + grid"
+  >
       <div
         [class]="'badge rounded-circle circle p-2 text-center ' + circleColor"
       >
-        <p class="text-center mt-2">
+      <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.stoppedProjectsNumber
@@ -188,21 +196,22 @@
               ? "مرفوضة" : ""
           }}
         </p>
-        <hr class="m-0" />
-        <p class="text-center mt-2">
+        <hr class="my-2 w-100" />
+        <p class="text-center  m-0 ">
           {{
             type == "projects"
               ? data?.stoppedProjectsCost
               : type == "pricequotes"
               ? data?.rejectedPricequotesNumber
               : type =="indSp"
-              ? data.rejectedIndividualSPNumber
+              ? data?.rejectedIndividualSPNumber
               : type =="comSp"
-              ? data.rejectedOrganizationalSPNumber
+              ? data?.rejectedOrganizationalSPNumber
               : type =="client"
-              ? data.rejectedClientsNumber : ""
+              ? data?.rejectedClientsNumber : ""
           }}
         </p>
+        </div>
       </div>
       <p class="text-center my-2">
         {{

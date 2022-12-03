@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/@core/api.service';
   styleUrls: ['./sp-projects.component.scss']
 })
 export class SpProjectsComponent implements OnInit {
-
+  pagenation:any=[]
 
    Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
@@ -33,6 +33,7 @@ export class SpProjectsComponent implements OnInit {
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
+    
     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
 

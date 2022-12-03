@@ -42,11 +42,6 @@ export class AdminHomeComponent implements OnInit {
     image:"assets/images/chat.png"
   },
   {
-    title:"الاشتراكات  ",
-    routing:"/Admin/contributions",
-    image:"assets/images/id-card.png"
-  },
-  {
     title:"المدفوعات  ",
     routing:"/Admin/payments",
     image:"assets/images/hand.png"

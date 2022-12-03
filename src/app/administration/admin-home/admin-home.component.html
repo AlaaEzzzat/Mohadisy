@@ -1,9 +1,4 @@
 <div class="d-flex" id="wrapper">
-  <!-- Sidebar -->
-
-  <!-- /#sidebar-wrapper -->
-
-  <!-- Page Content -->
   <div id="page-content-wrapper">
     <app-navbar></app-navbar>
     <div
@@ -14,7 +9,7 @@
       <app-sidebar [data]="data"></app-sidebar>
         <div class="col-2 col-md-3 col-lg-2 " [hidden]="status"></div>
         <div
-        class="mb-3"
+        class="mb-3" 
           style="min-height: 100vh"
           [ngClass]="!status ? 'col-10 col-md-9 col-lg-10' : 'col-12'"
         >

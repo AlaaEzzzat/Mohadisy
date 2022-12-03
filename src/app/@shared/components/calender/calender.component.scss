@@ -1,0 +1,40 @@
+::ng-deep .mat-calendar
+{
+
+  background-color: #F1F5F9;}
+
+
+
+::ng-deep .mat-calendar-body-cell-content {
+  background-color: white ;
+  color: black;
+  width: 100%;
+  border-radius: 25% !important;
+  -webkit-border-radius: 25% !important;
+  -moz-border-radius: 25% !important;
+  -ms-border-radius: 25% !important;
+  -o-border-radius: 25% !important;
+}
+
+
+
+::ng-deep .mat-calendar-table-header , ::ng-deep .mat-calendar-body-label
+{
+  color: black;
+}
+
+::ng-deep .mat-focus-indicator
+{
+  background-color: white;
+
+
+}
+
+
+::ng-deep .mat-calendar-body-selected
+{
+  background-color: #18AF9A ;
+  color: white;
+
+
+}
