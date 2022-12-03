@@ -1,3 +1,5 @@
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ScrollToBottomDirective } from './directives/scroll-to-bottom';
 import { ChatComponent } from './components/chat/chat.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -24,10 +26,10 @@ import { CarouselRateComponent } from './components/carousel-rate/carousel-rate.
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ComplaintComponent } from './components/complaint/complaint.component';
+import { StartChatComponent } from './components/start-chat/start-chat.component';
+import { CalenderComponent } from './components/calender/calender.component';
 
-const routes: Routes = [
-
-];
+const routes: Routes = [];
 
 @NgModule({
   declarations: [
@@ -48,8 +50,12 @@ const routes: Routes = [
     ProjectCardComponent,
     PaginationComponent,
     ComplaintComponent,
+    StartChatComponent,
+    CalenderComponent,
   ],
   imports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatMenuModule,
     MatIconModule,
     ReactiveFormsModule,
@@ -77,7 +83,9 @@ const routes: Routes = [
     PaymentLayoutComponent,
     CarouselRateComponent,
     ProjectCardComponent,
-    PaginationComponent
+    CalenderComponent,
+    PaginationComponent,
+    StartChatComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

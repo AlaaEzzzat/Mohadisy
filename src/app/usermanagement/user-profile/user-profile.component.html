@@ -4,24 +4,32 @@
       <div class="card mb-3 border-0 rounded-0">
         <div class="row position-relative">
           <div
-          (click)="editOverview = true"
+            (click)="editOverview = true"
             class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
           >
-          <img
-          *ngIf="!userImgChanged"
-          [src]="user.profilePicturePath"
-          class="img-fluid rounded-start"
-          alt="..."
-          style="width: 150px;"
-        />
-        <img
-        *ngIf="userImgChanged"
+            <img
+              *ngIf="!userImgChanged"
+              [src]="user.profilePicturePath"
+              class="img-fluid rounded-start"
+              alt="..."
+              style="width: 150px"
+            />
+            <img
+              *ngIf="userImgChanged"
               [src]="userImg"
               class="img-fluid rounded-start"
               alt="..."
             />
             <div class="p-2 position-absolute bottom-0 changePic">
-              <input type="file" (change)="uplaodImg($event, proImg.name)"  #proImg name="profileImage" id="image" style="width: 20px;" class="image" />
+              <input
+                type="file"
+                (change)="uplaodImg($event, proImg.name)"
+                #proImg
+                name="profileImage"
+                id="image"
+                style="width: 20px"
+                class="image"
+              />
               <svg
                 id="photo-camera"
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,22 +88,49 @@
             </div>
           </div>
           <div class="col-lg-10 d-flex align-items-center">
-            <div class="card-body"> 
+            <div class="card-body">
               <div class="row">
                 <div class="col-lg-5">
                   <div class="cairo mb-3">
-                    <p class="card-title bold d-flex justify-content-around" (click)=" editName=true">
-                      <input  id="name" type="text" [autofocus]="editName" [(ngModel)]="name" class="bold editable">
+                    <p
+                      class="card-title bold d-flex justify-content-around"
+                      (click)="editName = true"
+                    >
+                      <input
+                        id="name"
+                        type="text"
+                        [autofocus]="editName"
+                        [(ngModel)]="name"
+                        class="bold editable"
+                      />
                       <!-- <span>{{user.firstName + " " + user.lastName}}</span> -->
-                      <i (click)="focusMyInput('#name')" class="fa fa-pencil"></i>
+                      <i
+                        (click)="focusMyInput('#name')"
+                        class="fa fa-pencil"
+                      ></i>
                     </p>
-                    <p class="card-text secondColor d-flex justify-content-around" (click)="editOverview = true">
-                      <input  id="phone" type="text" [(ngModel)]="phoneNumber" class=" bold editable">
+                    <p
+                      class="card-text secondColor d-flex justify-content-around"
+                      (click)="editOverview = true"
+                    >
+                      <input
+                        id="phone"
+                        type="text"
+                        [(ngModel)]="phoneNumber"
+                        class="bold editable"
+                      />
                       <!-- <span>{{user.applicationUser?.phoneNumber}}</span> -->
-                      <i (click)="focusMyInput('#phone')"  class="fa fa-pencil"></i>
+                      <i
+                        (click)="focusMyInput('#phone')"
+                        class="fa fa-pencil"
+                      ></i>
                     </p>
-                    <p class="card-text secondColor " (click)="editOverview = true">
-                      <span class="bold pe-4">{{email}}</span></p>
+                    <p
+                      class="card-text secondColor"
+                      (click)="editOverview = true"
+                    >
+                      <span class="bold pe-4">{{ email }}</span>
+                    </p>
                     <!--  <span> {{user.applicationUser?.email}}</span> -->
                   </div>
                 </div>
@@ -106,14 +141,21 @@
                     class="d-flex align-items-baseline justify-content-around"
                   >
                     <h3
-                    [ngClass]="user.applicationUser?.isActive?'secondColor':'text-danger'"
-                      class="card-title ">
-                      {{user.applicationUser?.isActive? '  حساب نشط': '  حساب معطل'}}
-                    
+                      [ngClass]="
+                        user.applicationUser?.isActive
+                          ? 'secondColor'
+                          : 'text-danger'
+                      "
+                      class="card-title"
+                    >
+                      {{
+                        user.applicationUser?.isActive
+                          ? "  حساب نشط"
+                          : "  حساب معطل"
+                      }}
                     </h3>
                     <span class="mx-1 gray"> | </span>
-                    <p class="card-text"> رقم التعريف : {{user.idNumber}}</p>
-                    
+                    <p class="card-text">رقم التعريف : {{ user.idNumber }}</p>
                   </div>
                   <div class="d-flex flex-row-reverse ms-4">
                     <div>
@@ -208,7 +250,12 @@
       <div class="row">
         <div class="col-md-6">
           <div class="map h-100">
-            <a class="direction p-3 cairo" [href]="map+location" target="_blank">أحصل على الاتجاهات</a>
+            <a
+              class="direction p-3 cairo"
+              [href]="map + location"
+              target="_blank"
+              >أحصل على الاتجاهات</a
+            >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7455039.655145476!2d40.580647886855935!3d24.16625830320905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2sSaudi%20Arabia!5e0!3m2!1sen!2seg!4v1668864519770!5m2!1sen!2seg"
               style="border: 0; width: 100%; height: 100%"
@@ -224,11 +271,14 @@
                 <span class="bold text-white">إثبات الهويه</span>
                 <div class="d-flex">
                   <div class="position-relative" (click)="editOverview = true">
-                    
-                    <i class="position-absolute fa fa-pen ms-2">
-                    </i>
-                    <input (change)="uplaodImg($event , idPic.name)" #idPic type="file" style="opacity: 0; width: 20px;" name="idPic">
-                   
+                    <i class="position-absolute fa fa-pen ms-2"> </i>
+                    <input
+                      (change)="uplaodImg($event, idPic.name)"
+                      #idPic
+                      type="file"
+                      style="opacity: 0; width: 20px"
+                      name="idPic"
+                    />
                   </div>
                   <svg
                     (click)="download(user.idPath, user.idFile)"
@@ -259,10 +309,14 @@
             </div>
           </div>
         </div>
-        <div class="col-12 mt-5 d-flex justify-content-center"
-        
-        >
-          <button [hidden]="!editOverview" (click)="saveChanges()" class="btn mainBk  text-white p-2 px-3" >حفظ التعديلات</button>
+        <div class="col-12 mt-5 d-flex justify-content-center">
+          <button
+            [hidden]="!editOverview"
+            (click)="saveChanges()"
+            class="btn mainBk text-white p-2 px-3"
+          >
+            حفظ التعديلات
+          </button>
         </div>
       </div>
     </div>
@@ -403,33 +457,31 @@
             </g>
           </g>
         </svg>
-        <b style="cursor: pointer;" class="cairo me-2 secondColor">أرسال عرض عمل </b>
+        <b style="cursor: pointer" class="cairo me-2 secondColor"
+          >أرسال عرض عمل
+        </b>
       </div>
-      
+
       <div class="my-2">
-    
         <div
-        class="rounded-0 d-flex flex-column justify-content-around mt-2  align-items-center mb-0  "
-      >
-        <div class="bg-white w-100  py-3 " >
-          <h3 class="cairo fw-bold text-center m-0 p-0 cairo">جدول الاعمال</h3>
-        </div>
-        <div class="col-12 bg-white px-4 py-1 mb-2">
-          <div class="card  calender">
-            <div class="row">
-              <div class="col-lg-12">
-                <mat-calendar [(selected)]="selected" ></mat-calendar>
-              </div>
-            </div>
+          class="rounded-0 d-flex flex-column justify-content-around mt-2 align-items-center mb-0"
+        >
+          <div class="bg-white w-100 py-3">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
+              جدول الاعمال
+            </h3>
           </div>
-          
+          <div class="col-12 mb-2">
+            <app-calender></app-calender>
+          </div>
+
+          <div class="w-100 bg-white py-3">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
+              <span>تاريخ : </span>
+              {{ selected | date }}
+            </h3>
+          </div>
         </div>
-        <div class="w-100 bg-white py-3 " >
-          <h3 class="cairo fw-bold  text-center m-0 p-0 cairo">
-            <span>تاريخ : </span>
-            {{selected | date}} </h3>
-        </div>
-      </div>
         <div class="bg-white mt-2 card-2-1">
           <div id="accordion" class="">
             <div class="p-3" id="item">
@@ -550,12 +602,9 @@
                   </svg>
                   <span class="mx-2 cairo">صورة الموقع </span></span
                 >
-                
               </div>
-              
             </div>
           </div>
-       
         </div>
       </div>
     </div>

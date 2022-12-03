@@ -14,45 +14,44 @@ Chart.register(...registerables);
   styleUrls: ['./user-dash-board.component.scss'],
 })
 export class UserDashBoardComponent implements OnInit {
-  data:any={};
+  data: any = {};
   completedProjects: any = [];
   selected: Date = new Date();
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   currentProjects: any = [];
   totalProjects: any;
-  completedProjectsCost:any=0;
-  currentProjectsCost:any=0;
-    constructor(private _api: ApiService, private clientService: ClientService) {}
+  completedProjectsCost: any = 0;
+  currentProjectsCost: any = 0;
+  constructor(private _api: ApiService, private clientService: ClientService) {}
 
   ngOnInit(): void {
     this._api
       .get('https://app.mohandisy.com/api/Dashboard/getClientStatus')
       .subscribe((data) => {
         this.data = data.data;
-        console.log(data.data)
+        console.log(data.data);
         this.currentProjects = this.data.currentProjects;
-        this.currentProjects.map((project:any)=>{
-          /* this.getClientProfileByID(project.id); */
-          this.currentProjectsCost += project.offers[0].totalCost; 
-          if(project.offers.length>0){
+        this.currentProjects.map((project: any) => {
+          this.currentProjectsCost += project.offers[0].totalCost;
+          if (project.offers.length > 0) {
             this.getOfferSender(project);
           }
-        })
+        });
         this.completedProjects = this.data.completedProjects;
-        this.completedProjects.map((project:any)=>{
-          if(project.offers.length>0){
-            this.completedProjectsCost += project.offers[0].totalCost; 
+        this.completedProjects.map((project: any) => {
+          if (project.offers.length > 0) {
+            this.completedProjectsCost += project.offers[0].totalCost;
             this.getOfferSender(project);
           }
-        })
-        console.log(this.currentProjects)
-        console.log(this.completedProjects)
+        });
+        console.log(this.currentProjects);
+        console.log(this.completedProjects);
         this.renderDouChart();
       });
   }
-  
-  getOfferSender(project:any){
+
+  getOfferSender(project: any) {
     if (project.offers[0]?.individualServiceProviderProfileId) {
       this.clientService
         .getOfferSenderProfile(
@@ -114,5 +113,4 @@ export class UserDashBoardComponent implements OnInit {
       },
     });
   }
- 
 }
