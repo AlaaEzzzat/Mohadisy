@@ -79,6 +79,8 @@ export class SpCprojectRequestComponent implements OnInit {
     if(this.Listprojects.length>0)
      this.result=1;
 
+     console.log( this.Listprojects);
+
     });
 
 
