@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-work-schedule',
@@ -21,7 +23,7 @@ export class WorkScheduleComponent implements OnInit {
 
    appointmentFiles:any[]=[]
 
-  constructor(private http: AdminDashService,private formbuilder: FormBuilder) { 
+  constructor(private http: AdminDashService,private formbuilder: FormBuilder, private _HttpClient: HttpClient,) { 
     this.newappointment=this.formbuilder.group({
       name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
      description: ['', [Validators.required]],
@@ -112,6 +114,19 @@ creatMeeting() {
     console.log(this.appointment);
    
   }
+  download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
 }
 interface appoint{
   "applicationUserId":string,

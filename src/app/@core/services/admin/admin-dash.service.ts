@@ -80,7 +80,7 @@ export class AdminDashService {
      // /api/Appointment/storeAppointmentFiles/{appointmentId}
      storeAppointmentFiles(appointmentId:any,date:any,):Observable<any>
      {
-       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,JSON.stringify(date), this.httpoptionsFile);
+       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,date)
      }
      // /api/Appointment/storeAppointment
      storeAppointment(object:any):Observable<any>

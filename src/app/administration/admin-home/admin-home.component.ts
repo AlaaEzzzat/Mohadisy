@@ -43,7 +43,7 @@ export class AdminHomeComponent implements OnInit {
   },
   {
     title:"المدفوعات  ",
-    routing:"/Admin/payments",
+    routing:"/Admin/payments/sp",
     image:"assets/images/hand.png"
   },
   {

@@ -26,25 +26,43 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
   </p>
   <p class="fw-normal">{{ dateOpt?.description }}</p>
 
-  <div *ngFor="let item of appointmentFiles">
-    <p class="">
-      <span
-        ><img
-          src="assets/dashboard/picture.png"
-          alt=""
-          *ngIf="
-            item.fileType === '.png' ||
-            item.fileType === '.jpg' ||
-            item.fileType === '.svg'
-          "
-        />
-        <img
-          src="assets/dashboard/pdf.png"
-          *ngIf="item.fileType === '.pdf'"
-        />
-      </span>
-      <span> {{ item.fileName }}</span>
+  <div *ngFor="let item of appointmentFiles" class="d-flex justify-content-between align-content-center">
+    <a
+    target="_blank"
+    class="informationDownload  d-flex  justify-content-between mb-2"
+    (click)="
+      download(
+        item.filePath,
+        item.fileName
+      )
+    "
+  >
+  <span
+  ><img
+    src="assets/dashboard/picture.png"
+    alt=""
+    *ngIf="
+      item.fileType == '.png' ||
+      item.fileType == '.jpg' ||
+      item.fileType == '.PNG'
+    "
+  />
+  <img
+    src="assets/dashboard/pdf.png"
+    *ngIf="item.fileType === '.pdf'"
+  />
+</span>
+    <p class=" nameDownload">
+      {{ item.fileName }}
     </p>
+    <i class="fa fa-download typeCom ms-3"></i>
+
+  </a>
+    <!-- <p class="">
+     
+      <span> {{ item.fileName }}</span>
+    </p> -->
+    <!-- <i class="fa fa-download typeCom ms-3"></i> -->
   </div>
 </div>
 <ng-template #notfound>
