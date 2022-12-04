@@ -52,9 +52,56 @@ userformMassage :FormGroup;
   resOffer:any[]=[]
   selectedOfferId: boolean = true;
   productCurrentOffers:any[]=[]
+
   constructor(private ServicesProvidor: AdminProjectsService,private _HttpClient:HttpClient ,private formbuilder:FormBuilder) {
     this.userformMassage=this.formbuilder.group({
       massage:['',[Validators.required]],
+    });
+  }
+  getNewbuildingContracting() {
+    this.iadminPriceQuotes = [];
+    this.ServicesProvidor.getNewProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
+        // consulting
+        if (value != null && value != undefined) {
+          console.log(value)
+          for (let data of value.data.projects) {
+            if (data.projectService.id === 2) {
+              this.iadminPriceQuotes.push(data);
+            
+            }
+            this.total = value.data.totalPages;
+            console.log(this.iadminPriceQuotes);
+          }
+          if (this.iadminPriceQuotes.length != 0) {
+            this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
+    });
+  }
+  getNewconsulting() {
+    this.iadminPriceQuotes = [];
+    this.ServicesProvidor.getNewProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
+        // consulting
+        if (value != null && value != undefined) {
+          console.log(value)
+          for (let data of value.data.projects) {
+            if (data.projectService.name === 'استشارات هندسية') {
+              this.iadminPriceQuotes.push(data);
+            
+            }
+            this.total = value.data.totalPages;
+            console.log(this.iadminPriceQuotes);
+          }
+          if (this.iadminPriceQuotes.length != 0) {
+            this.firstObject = this.iadminPriceQuotes[0];
+            this.objectProduct(this.firstObject, this.firstObject.id);
+          }
+        }
+      },
     });
   }
   counter(x: number) {

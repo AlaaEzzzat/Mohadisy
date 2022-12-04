@@ -89,10 +89,11 @@
           class="d-flex position-relative mb-3"
           *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 1;
             else nourmal
-          "
-        >
+          ">
+       
           <!-- Example single danger button -->
           <div class="btn-group bg-white ms-1 rounded-0">
+        
             <button
               type="button"
               class="btn btn-white dropdown-toggle"
@@ -102,17 +103,21 @@
               الطلبات
             </button>
             <ul class="dropdown-menu text-end">
-              <li>
-                <a class="dropdown-item" (click)="getAllPriceQuotesForAdmin()"
-                  >كل الطلبات</a
+              <li class="cursor">
+                <a class="dropdown-item" (click)="getNewProjectsForAdmin()"
+                  >كل العروض</a
                 >
               </li>
-              <li><a class="dropdown-item" (click)="getAcceptedProjectsForAdmin()">الطلبات المكتمله</a></li>
-              <li>
+              <li class="cursor">
+                <a class="dropdown-item" (click)="getNewconsulting()"
+                  >الاستشارات </a
+                >
+              </li>
+              <li class="cursor">
                 <a
                   class="dropdown-item"
-                  (click)="getNotCompletedProjectsForAdmin()"
-                  >الطلبات غير مكتمله</a
+                  (click)="getNewbuildingContracting()"
+                  > المقاولين </a
                 >
               </li>
             </ul>
@@ -246,8 +251,9 @@
 
         <div class="col-12">
           <div class="position-absolute top100" [hidden]="total<=1">
+            <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
 
-            <nav aria-label="..." class="w-100 d-flex justify-content-center">
+            <!-- <nav aria-label="..." class="w-100 d-flex justify-content-center">
               <ul class="pagination w-100">
                 <li class="page-item">
                   <button
@@ -281,7 +287,7 @@
                   </button>
                 </li>
               </ul>
-            </nav>
+            </nav> -->
             </div>
         </div>
       </form>
@@ -395,7 +401,7 @@
         </div>
 
         <div class="col-md-5 col-sm-5">
-        <p class=" text-center">طلبات ع عرض السعر {{productCurrent.offers.length}} طلب</p>
+        <p class=" text-center">طلبات ع عرض السعر {{productCurrent?.offers?.length}} طلب</p>
         <p (click)="resOffersOnProj()" class="typeCom text-center cursor">رؤية التفاصيل</p>
           
         </div>

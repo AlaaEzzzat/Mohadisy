@@ -190,19 +190,21 @@
               </div>
             </ng-container>
             <div class="col-12">
-              <div class="position-absolute top100" [hidden]="total <= 1">
-                <nav aria-label="..." class="w-100 d-flex justify-content-center">
+              <div class="position-absolute top100" [hidden]="total<=1">
+                <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
+    
+                <!-- <nav aria-label="..." class="w-100 d-flex justify-content-center">
                   <ul class="pagination w-100">
                     <li class="page-item">
                       <button
                         (click)="prev()"
-                        class="page-link rounded-0 btn-dark"
+                        class="page-link rounded-0  btn-dark"
                         [disabled]="page <= 1"
                       >
                         السابق
                       </button>
                     </li>
-
+    
                     <ng-container
                       class="page-item"
                       *ngFor="let mypage of pagenation; let i = index"
@@ -218,15 +220,15 @@
                     <li class="page-item">
                       <button
                         (click)="next()"
-                        class="page-link rounded-0 btn-dark"
+                        class="page-link rounded-0   btn-dark"
                         [disabled]="page == pagenation.length"
                       >
                         التالي
                       </button>
                     </li>
                   </ul>
-                </nav>
-              </div>
+                </nav> -->
+                </div>
             </div>
           </form>
         </div>
