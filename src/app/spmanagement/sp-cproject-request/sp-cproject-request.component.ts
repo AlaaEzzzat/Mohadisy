@@ -304,14 +304,14 @@ export class SpCprojectRequestComponent implements OnInit {
 
 
       this.addmaterial=this.addmaterial.filter(data=>data.id!=materialId);
-     
+
 
      }
 
      onSubmit()
      {
 
-       var Allprecentage=[],Allmilestones=[];
+       var Allprecentage=new Array(),Allmilestones=new Array();
 
        for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
        {
@@ -391,9 +391,7 @@ export class SpCprojectRequestComponent implements OnInit {
          {
            this.check=data.isError;
 
-         });
-
-         if(this.check==false)
+           if(this.check==false)
          {
          var AllData=
          {
@@ -426,6 +424,10 @@ export class SpCprojectRequestComponent implements OnInit {
          } );
 
           }
+
+
+
+         });
 
 
 

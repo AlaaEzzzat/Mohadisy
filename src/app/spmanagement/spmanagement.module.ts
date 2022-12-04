@@ -43,6 +43,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
+import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.compon
     SpCprojectRejectComponent,
     SpProjectFinishedComponent,
     SpRequestEditComponent,
+    SpCrequestEditComponent,
 
   ],
   imports: [
