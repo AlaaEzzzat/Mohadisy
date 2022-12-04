@@ -14,10 +14,20 @@ import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user
 export class AdminDashService {
 
   private httpoptions ={}
+  private httpoptionsFile ={}
+
   constructor(private _HttpClient:HttpClient) {
     this.httpoptions={
       headers:new HttpHeaders({
         'content-Type':'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+
+
+      })
+    }
+    this.httpoptionsFile={
+      headers:new HttpHeaders({
+        'content-Type':'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
 
 
@@ -70,7 +80,7 @@ export class AdminDashService {
      // /api/Appointment/storeAppointmentFiles/{appointmentId}
      storeAppointmentFiles(appointmentId:any,date:any,):Observable<any>
      {
-       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,JSON.stringify(date), this.httpoptions);
+       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,JSON.stringify(date), this.httpoptionsFile);
      }
      // /api/Appointment/storeAppointment
      storeAppointment(object:any):Observable<any>

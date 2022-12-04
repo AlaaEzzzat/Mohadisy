@@ -155,15 +155,14 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
             <label for="formFile" class="form-label">اضافه ملف</label>
             <input class="form-control" 
             type="file"
-            #image
             id="imageFile"
             (change)="uplaodFile($event)"
             name="imageFile"
-            
+            formControlName="imageFile"
            >
           </div>
          
-
+          <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
           <button
           data-bs-dismiss="modal"
           type="submit"

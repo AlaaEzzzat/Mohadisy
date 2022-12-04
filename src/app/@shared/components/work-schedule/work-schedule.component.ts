@@ -25,13 +25,25 @@ export class WorkScheduleComponent implements OnInit {
     this.newappointment=this.formbuilder.group({
       name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
      description: ['', [Validators.required]],
-     imageFile: [''],
+     imageFile: [null],
     });
   }
 
   ngOnInit() {
     this.getappointDate()
 
+  }
+  get name() {
+    return this.newappointment?.get('name');
+  }
+  get description() {
+    return this.newappointment?.get('description');
+  }
+  get appoins() {
+    return this.newappointment.controls;
+  }
+  get imageFile(){
+    return this.newappointment?.get('imageFile');
   }
   getappointDate() {
     let date=moment(this.selected).utc().format('YYYY-MM-DD h:mm A')
@@ -59,28 +71,19 @@ export class WorkScheduleComponent implements OnInit {
    }
   uplaodFile(e: any) {
 
+       
     if (e.target.files && e.target.files.length > 0) {
-      this.file = e.target.files[0];
-     
-      this.FileformData.append('file', this.file);
-      console.log(this.FileformData);
-    }      
+      let file = e.target.files[0];
+      console.log(file);
+      // let FileformData = new FormData();
+      this.FileformData.append('file', file);
+  }
+ 
   
   }
 
 
-  get name() {
-    return this.newappointment?.get('name');
-  }
-  get description() {
-    return this.newappointment?.get('description');
-  }
-  get appoins() {
-    return this.newappointment.controls;
-  }
-  get imageFile(){
-    return this.newappointment?.get('imageFile');
-  }
+
 creatMeeting() {
   this.iProfileAdmin=localStorage.getItem('id')
   console.log(this.iProfileAdmin)

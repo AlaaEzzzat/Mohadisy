@@ -60,6 +60,7 @@ const routes: Routes = [
     NgxSpinnerModule,
     RouterModule,
     MatDatepickerModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
