@@ -46,7 +46,7 @@ export class SpCprojectRequestComponent implements OnInit {
         period:new FormControl('',[Validators.required]),
         cost:new FormControl('',[Validators.required]),
         numberOfMilestones:new FormControl('',
-        [Validators.required,Validators.max(6),Validators.min(1)]),
+        [Validators.required,Validators.pattern('^[1-6]{1}$')]),
         message:new FormControl(''),
         projectId:new FormControl('',[Validators.required]),
          tcost:new FormControl(''),
@@ -107,6 +107,7 @@ export class SpCprojectRequestComponent implements OnInit {
       if(project.id==this.select)
       {
         this.selectProject=project;
+        console.log(this.selectProject);
 
         break;
       }

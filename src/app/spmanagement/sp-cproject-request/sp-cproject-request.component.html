@@ -184,8 +184,9 @@
                       <div
                       class="alert alert-danger"
                       [hidden]="OfferData.get('numberOfMilestones')?.valid ||OfferData.get('numberOfMilestones')?.untouched" >
-                      <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']
-                      " >يجب ادخال عددمراحل اقل من 7 </span>
+                      <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['pattern']" >يجب ادخال عددمراحل اقل من 7 </span>
+
+                      <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']" >عدد المراحل مطلوب</span>
 
                     </div>
                       </div>
@@ -520,10 +521,10 @@
                       <tbody>
                         <ng-container *ngFor="let m of addmaterial" >
                           <tr>
-                            <td>{{m.materialName}}</td>
-                            <td>{{m.name}}</td>
-                            <td>{{m.description}}</td>
-                            <td>{{m.cost}}</td>
+                            <td class="mt-1">{{m.materialName}}</td>
+                            <td  class="mt-1">{{m.name}}</td>
+                            <td  class="mt-1">{{m.description}}</td>
+                            <td  class="mt-1">{{m.cost}}</td>
                             <td><button type="button" class="btn" style="font-size:20px; color:#004057;"
                                (click)="deleteMaterial(m.id)">
                               <i class="fa fa-trash"></i>
@@ -536,7 +537,12 @@
 
                      </table>
 
-                      <button type="button" class="btn col-3 mt-4 mb-3 add" (click)="addMaterial()">اضافه</button>
+                      <button type="button" class="btn col-3 mt-4 mb-3 add" (click)="addMaterial()"
+                      [disabled]="this.OfferData.get('materialTypeId').value=='' ||
+                      this.OfferData.get('name').value=='' ||
+                      this.OfferData.get('costMaterial').value==''
+                      "
+                      >اضافه</button>
 
                   </div>
 
