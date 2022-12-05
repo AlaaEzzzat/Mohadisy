@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'clients', component: AdminClientsComponent },
       { path: 'chat', component: ChatComponent },
-      // { path: 'settings', component: AdminSettingsComponent },
+      { path: 'test', component: TestComponent },
       { path: 'project', component: AdminProjectComponent },
       { path: 'offers', component: AdminpricePriceOffersComponent },
       { path: 'payments',

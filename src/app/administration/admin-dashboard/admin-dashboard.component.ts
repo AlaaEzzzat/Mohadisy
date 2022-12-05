@@ -74,7 +74,9 @@ export class AdminDashboardComponent implements OnInit {
    file:any;
    dateOpt:any;
    erDateOp:any;
-
+   message:any;
+   showSuc:boolean=false
+   showErr:boolean=false
   constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder,private clientService: ClientService,
     ) {
     
@@ -486,10 +488,22 @@ renderDouChart() {
     console.log(this.iadminOfficialUserRegister);
     this.http.officialUserRegister(this.iadminOfficialUserRegister).subscribe({
       next: (va) => {
-        alert(va.message);
+        // alert(va.message);
+        this.message=va.message
+        this.showSuc=true
+  
+        setInterval(() => {
+          this.showSuc=false
+          }, 3000);
+
       },
       error: (er) => {
-        alert(er);
+        this.message=er
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 5000);
       },
     });
   }

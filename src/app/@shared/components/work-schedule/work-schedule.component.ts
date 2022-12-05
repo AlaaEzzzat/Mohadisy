@@ -19,7 +19,9 @@ export class WorkScheduleComponent implements OnInit {
    newappointment: FormGroup;
    dateOpt:any;
    erDateOp:any;
-
+   message:any;
+   showSuc:boolean=false
+   showErr:boolean=false
 
    appointmentFiles:any[]=[]
 
@@ -89,7 +91,7 @@ export class WorkScheduleComponent implements OnInit {
 creatMeeting() {
   this.iProfileAdmin=localStorage.getItem('id')
   console.log(this.iProfileAdmin)
-  let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
+  let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm ');
   
     this.appointment={
       "applicationUserId": this.iProfileAdmin,
@@ -98,18 +100,40 @@ creatMeeting() {
       "dateCreated": date
     }
     this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
-      console.log(data.message);
-      console.log(data.data.id);
+     
+      this.message=data.message
+      this.showSuc=true
+
+      setInterval(() => {
+        this.showSuc=false
+        }, 3000);
       this.getappointDate() 
       this.http.storeAppointmentFiles(data.data.id,this.FileformData).subscribe({next:(req)=>{
         console.log(req)
-
+        this.message=req.message
+        this.showSuc=true
+  
+        setInterval(() => {
+          this.showSuc=false
+          }, 4000);
       },error:(er)=>{
         console.log(er)
+        this.message=er.message
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 4000);
 
       }})
     }),error:(er)=>{
-      console.log(er)
+      console.log(er);
+      this.message=er.message
+      this.showErr=true
+
+      setInterval(() => {
+        this.showErr=false
+        }, 4000);
     }})
     console.log(this.appointment);
    
