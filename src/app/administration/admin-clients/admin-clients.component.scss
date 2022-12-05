@@ -71,10 +71,7 @@ color: #000 !important;
 
   background-color: #FFC10780 !important;
 }
-.top100 {
-  top: 99% !important;
-  right:-7% !important;
-}
+
 .modaltitle{
   background-color: $textColor !important;
   >h2,>button{
@@ -167,8 +164,8 @@ color: #000 !important;
   background-color: #FFC10780 !important;
 }
 .top100 {
-  top: 99% !important;
-  right:-7% !important;
+  bottom: 10px !important;
+
 }
 .modaltitle{
   background-color: $textColor !important;
@@ -244,6 +241,4 @@ border: none!important;
  
 }
 
-.top100 {
-  top: 99% !important;
-  right:-7% !important;}
+

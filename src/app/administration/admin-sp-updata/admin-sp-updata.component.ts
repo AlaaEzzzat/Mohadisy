@@ -15,7 +15,7 @@ export class AdminSpUpdataComponent implements OnInit {
   currentIndivdual: IND= {} as IND;
   currentIndivdual2: IND= {} as IND;
   iChangeStatus: IChangeStatus | undefined = undefined;
-
+  FileformData = new FormData();
   currentOrganiztionl: OSP= {} as OSP;
   currentOrganiztionl2: OSP= {} as OSP;
 
@@ -109,6 +109,19 @@ export class AdminSpUpdataComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  uplaodFile(e: any) {
+
+       
+    if (e.target.files && e.target.files.length > 0) {
+      let file = e.target.files[0];
+      console.log(file);
+      // let FileformData = new FormData();
+      this.FileformData.append('file', file);
+  }
+ 
+  
+  }
+
   get classificationCertificateNumber(){
     return this.formOrganiztionl?.get('classificationCertificateNumber');
   }
@@ -319,84 +332,84 @@ export class AdminSpUpdataComponent implements OnInit {
 
     }
 
-this.currentOrganiztionl2={
+    this.currentOrganiztionl2={
 
-  "id":this.productCurrent.id,
-  "applicationUserId": this.productCurrent.applicationUserId,
-  "companyName":this.companyName?.value,
-  "companyRegisterationNumber": this.companyRegisterationNumber?.value,
-  "companyRegisterationNumberFile": this.companyRegisterationNumberFile?.value,
-  "licenseNumber":this.productCurrent.licenseNumber,
-  "licenseFile": this.licenseFile?.value,
-  "bankId": this.productCurrent.bankId,
-  "bankAccountNumber": this.bankAccountNumberOrg?.value,
-  "iBanNumber": this.iBanNumber?.value,
-  "companyLogoFile": this.companyLogoFile?.value,
-  "officePhoneNumber": this.officePhoneNumber?.value,
-  "officeMobileNumber":this.officeMobileNumber?.value,
-  "websiteLink": this.websiteLink?.value,
-  "zakatCertificateNumber": this.productCurrent.zakatCertificateNumber,
-  "zakatCertificateFile": this.zakatCertificateFile?.value,
-  "saudizationCertificateFile":this.saudizationCertificateFile?.value,
-  "financialStatementFile":this.financialStatementFile?.value,
-  "coCMembershipNumber": this.productCurrent.coCMembershipNumber,
-  "coCMembershipFile": this.coCMembershipFile?.value,
-  "isoFile": this.isoFile?.value,
-  "companyClassificationId": this.companyClassificationId?.value,
-  "representativeId": this.productCurrent.representativeId,
-  "districtId": this.productCurrent.districtId,
-  "joinRequestStatusId": this.productCurrent.joinRequestStatusId,
-  "companyRegisterationNumberEndDate": this.productCurrent.companyRegisterationNumberEndDate,
-  "companyRegisterationNumberStartDate":this.productCurrent.companyRegisterationNumberStartDate,
-  "licenseEndDate": this.productCurrent.licenseEndDate,
-  "licenseStartDate":this.productCurrent.licenseStartDate,
-  "vatregistrationCertificateEndDate": this.productCurrent.vatregistrationCertificateEndDate,
-  "vatregistrationCertificateStartDate": this.productCurrent.vatregistrationCertificateStartDate,
-  "projectServiceId":this.productCurrent.projectServiceId,
-  "unitNumber": this.unitNumber?.value,
-  "shortAddress": this.shortAddressOrg?.value,
-  "cityName": this.cityNameOrg?.value,
-  "districtName": this.districtNameOrg?.value,
-  "streetName": this.streetNameOrg?.value,
-  "buildingNumber": this.buildingNumberOrg?.value,
-  "additionalNumber": this.productCurrent.additionalNumber,
-  "postalCode": this.postalCodeOrg?.value,
-  "iBanFile": this.iBanFile?.value,
-  "professionLicenseFile": this.professionLicenseFile?.value,
-  "professionLicenseNumber": this.professionLicenseNumber?.value,
-  "socialInsuranceCertificateFile": this.socialInsuranceCertificateFile?.value,
-  "socialInsuranceCertificateNumber": this.socialInsuranceCertificateNumber?.value,
-  "classificationCertificateFile": this.classificationCertificateFile?.value,
-  "classificationCertificateNumber": this.classificationCertificateNumber?.value,
-  "addedValueRegisterationCertificateFile": this.addedValueRegisterationCertificateFile?.value,
-  "addedValueRegisterationCertificateNumber": this.addedValueRegisterationCertificateNumber?.value,
-  "bankName": this.bankName?.value,
-  "professionLicenseStartDate": this.productCurrent.professionLicenseStartDate,
-  "professionLicenseEndDate": this.productCurrent.professionLicenseEndDate,
-  "socialInsuranceCertificateStartDate": this.productCurrent.socialInsuranceCertificateStartDate,
-  "socialInsuranceCertificateEndDate": this.productCurrent.socialInsuranceCertificateEndDate,
-  "classificationCertificateStartDate": this.productCurrent.classificationCertificateStartDate,
-  "classificationCertificateEndDate": this.productCurrent.classificationCertificateEndDate,
-  "addedValueRegisterationCertificateStartDate": this.productCurrent.addedValueRegisterationCertificateStartDate,
-  "addedValueRegisterationCertificateEndDate": this.productCurrent.addedValueRegisterationCertificateEndDate,
-  "zakatCertificateStartDate": this.productCurrent.zakatCertificateStartDate,
-  "zakatCertificateEndDate": this.productCurrent.zakatCertificateEndDate,
-  "isoNumber": this.isoNumber?.value,
-  "isoStartDate": this.productCurrent.isoStartDate,
-  "isoEndDate": this.productCurrent.isoEndDate,
-  "financialStatementNumber": this.financialStatementNumber?.value,
-  "financialStatementStartDate": this.productCurrent.financialStatementStartDate,
-  "financialStatementEndDate": this.productCurrent.financialStatementEndDate,
-  "saudizationCertificateStartDate": this.productCurrent.saudizationCertificateStartDate,
-  "saudizationCertificateEndDate": this.productCurrent.saudizationCertificateEndDate,
-  "saudizationCertificateNumber": this.saudizationCertificateNumber?.value,
-  "coCMembershipStartDate": this.productCurrent.coCMembershipStartDate,
-  "coCMembershipEndDate": this.productCurrent.coCMembershipEndDate,
-  "projectSubServiceId": this.productCurrent.projectSubServiceId,
-  "accountOverview": this.productCurrent.accountOverview,
-  "profilePictureFile": this.productCurrent.profilePictureFile,
+      "id":this.productCurrent.id,
+      "applicationUserId": this.productCurrent.applicationUserId,
+      "companyName":this.companyName?.value,
+      "companyRegisterationNumber": this.companyRegisterationNumber?.value,
+      "companyRegisterationNumberFile": this.companyRegisterationNumberFile?.value,
+      "licenseNumber":this.productCurrent.licenseNumber,
+      "licenseFile": this.licenseFile?.value,
+      "bankId": this.productCurrent.bankId,
+      "bankAccountNumber": this.bankAccountNumberOrg?.value,
+      "iBanNumber": this.iBanNumber?.value,
+      "companyLogoFile": this.companyLogoFile?.value,
+      "officePhoneNumber": this.officePhoneNumber?.value,
+      "officeMobileNumber":this.officeMobileNumber?.value,
+      "websiteLink": this.websiteLink?.value,
+      "zakatCertificateNumber": this.productCurrent.zakatCertificateNumber,
+      "zakatCertificateFile": this.zakatCertificateFile?.value,
+      "saudizationCertificateFile":this.saudizationCertificateFile?.value,
+      "financialStatementFile":this.financialStatementFile?.value,
+      "coCMembershipNumber": this.productCurrent.coCMembershipNumber,
+      "coCMembershipFile": this.coCMembershipFile?.value,
+      "isoFile": this.isoFile?.value,
+      "companyClassificationId": this.companyClassificationId?.value,
+      "representativeId": this.productCurrent.representativeId,
+      "districtId": this.productCurrent.districtId,
+      "joinRequestStatusId": this.productCurrent.joinRequestStatusId,
+      "companyRegisterationNumberEndDate": this.productCurrent.companyRegisterationNumberEndDate,
+      "companyRegisterationNumberStartDate":this.productCurrent.companyRegisterationNumberStartDate,
+      "licenseEndDate": this.productCurrent.licenseEndDate,
+      "licenseStartDate":this.productCurrent.licenseStartDate,
+      "vatregistrationCertificateEndDate": this.productCurrent.vatregistrationCertificateEndDate,
+      "vatregistrationCertificateStartDate": this.productCurrent.vatregistrationCertificateStartDate,
+      "projectServiceId":this.productCurrent.projectServiceId,
+      "unitNumber": this.unitNumber?.value,
+      "shortAddress": this.shortAddressOrg?.value,
+      "cityName": this.cityNameOrg?.value,
+      "districtName": this.districtNameOrg?.value,
+      "streetName": this.streetNameOrg?.value,
+      "buildingNumber": this.buildingNumberOrg?.value,
+      "additionalNumber": this.productCurrent.additionalNumber,
+      "postalCode": this.postalCodeOrg?.value,
+      "iBanFile": this.iBanFile?.value,
+      "professionLicenseFile": this.professionLicenseFile?.value,
+      "professionLicenseNumber": this.professionLicenseNumber?.value,
+      "socialInsuranceCertificateFile": this.socialInsuranceCertificateFile?.value,
+      "socialInsuranceCertificateNumber": this.socialInsuranceCertificateNumber?.value,
+      "classificationCertificateFile": this.classificationCertificateFile?.value,
+      "classificationCertificateNumber": this.classificationCertificateNumber?.value,
+      "addedValueRegisterationCertificateFile": this.addedValueRegisterationCertificateFile?.value,
+      "addedValueRegisterationCertificateNumber": this.addedValueRegisterationCertificateNumber?.value,
+      "bankName": this.bankName?.value,
+      "professionLicenseStartDate": this.productCurrent.professionLicenseStartDate,
+      "professionLicenseEndDate": this.productCurrent.professionLicenseEndDate,
+      "socialInsuranceCertificateStartDate": this.productCurrent.socialInsuranceCertificateStartDate,
+      "socialInsuranceCertificateEndDate": this.productCurrent.socialInsuranceCertificateEndDate,
+      "classificationCertificateStartDate": this.productCurrent.classificationCertificateStartDate,
+      "classificationCertificateEndDate": this.productCurrent.classificationCertificateEndDate,
+      "addedValueRegisterationCertificateStartDate": this.productCurrent.addedValueRegisterationCertificateStartDate,
+      "addedValueRegisterationCertificateEndDate": this.productCurrent.addedValueRegisterationCertificateEndDate,
+      "zakatCertificateStartDate": this.productCurrent.zakatCertificateStartDate,
+      "zakatCertificateEndDate": this.productCurrent.zakatCertificateEndDate,
+      "isoNumber": this.isoNumber?.value,
+      "isoStartDate": this.productCurrent.isoStartDate,
+      "isoEndDate": this.productCurrent.isoEndDate,
+      "financialStatementNumber": this.financialStatementNumber?.value,
+      "financialStatementStartDate": this.productCurrent.financialStatementStartDate,
+      "financialStatementEndDate": this.productCurrent.financialStatementEndDate,
+      "saudizationCertificateStartDate": this.productCurrent.saudizationCertificateStartDate,
+      "saudizationCertificateEndDate": this.productCurrent.saudizationCertificateEndDate,
+      "saudizationCertificateNumber": this.saudizationCertificateNumber?.value,
+      "coCMembershipStartDate": this.productCurrent.coCMembershipStartDate,
+      "coCMembershipEndDate": this.productCurrent.coCMembershipEndDate,
+      "projectSubServiceId": this.productCurrent.projectSubServiceId,
+      "accountOverview": this.productCurrent.accountOverview,
+      "profilePictureFile": this.productCurrent.profilePictureFile,
 
-}
+    }
 this.iChangeStatus = {
   profileId: this.productCurrent.id,
   description:"تم التعديل البيانات و تحويل طلبات المكتمله",
@@ -407,38 +420,42 @@ this.iChangeStatus = {
 
     if (this.productCurrent.applicationUser.accountType.key === 'CO'){
       // console.log(this.currentOrganiztionl2)
-      // this.currentOrganiztionl2=JSON.parse(this.idProductSessionStorage)
-      let test = JSON.stringify(this.currentOrganiztionl2);
-    sessionStorage.setItem('test', test);
-    this.ServicesProvidor.updateOrganizationalUpdateProfile(this.currentOrganiztionl2).subscribe({
-      next:(prd)=>{
+          // this.currentOrganiztionl2=JSON.parse(this.idProductSessionStorage)
+          let test = JSON.stringify(this.currentOrganiztionl2);
+        sessionStorage.setItem('test', test);
+        this.ServicesProvidor.updateOrganizationalUpdateProfile(this.currentOrganiztionl2).subscribe({
+          next:(prd)=>{
 
-        console.log(this.currentOrganiztionl2)
-        this.router.navigate(['/Admin/sp'])
-      },
-      error:(err)=>{
-        alert(err);
-        console.log(this.currentOrganiztionl2)
+            console.log(this.currentOrganiztionl2)
+            this.router.navigate(['/Admin/sp'])
+          },
+          error:(err)=>{
+            alert(err);
+            console.log(this.currentOrganiztionl2)
 
-      }
-    });
+          }
+        });
     this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
               });
 
-  }
-    else{
+  } else{
       console.log(this.currentIndivdual2)
       this.ServicesProvidor.updateIndividualUpdateProfile(this.currentIndivdual2).subscribe({
         next:(prd)=>{
+          console.log(prd.data.id)
           this.router.navigate(['/Admin/sp'])
+          this.ServicesProvidor.updateIndividualstoreProfileFiles(this.FileformData,prd.id).subscribe({next:(data)=>{
+            console.log(data)
+          },error:(er)=>{
+            console.log(er)
+          }})
         },
         error:(err)=>{
           alert(err)
         }
       }
        );
-       this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
-                });
+      
     }
   }
 
@@ -464,11 +481,11 @@ this.iChangeStatus = {
   // }
 
 onFileChange(event: any, name: any) {
-  if (event.target.files.length > 0) {
-    console.log(event.target.files);
-    const myImage = event.target.files[0];
-    this.userformMassage.get(name)?.setValue(myImage);
-  }
+  // if (event.target.files.length > 0) {
+  //   console.log(event.target.files);
+  //   const myImage = event.target.files[0];
+  //   this.userformMassage.get(name)?.setValue(myImage);
+  // }
 }
 
 }

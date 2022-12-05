@@ -20,7 +20,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TestComponent } from './test/test.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
@@ -40,7 +39,7 @@ import {MatSelectModule} from '@angular/material/select';
     AdminContributionsComponent,
     AdminMessagesComponent,
     AdminSPComponent,
-    TestComponent,
+    
     AdminSpUpdataComponent,
     FooterComponent,
   ],

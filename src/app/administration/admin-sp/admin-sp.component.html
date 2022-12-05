@@ -182,7 +182,8 @@
                     <mat-icon>more_vert</mat-icon>
                   </button>
                   <mat-menu #menu="matMenu" class="py-2">
-                    <button mat-menu-item (click)="updatapro(productCurrent)">
+                    
+                    <button mat-menu-item >
                       <mat-icon class="text-white">edit</mat-icon>
                       <span>تعديل</span>
                     </button>
@@ -237,8 +238,10 @@
           </div>
         </ng-container>
         <!-- pagenation -->
+        <div class="col-12 " style="height: 100px; ;"></div>
+
         <div class="col-12">
-          <div class="position-absolute top100" [hidden]="total<=1">
+          <div class="position-absolute top100" >
             <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
 
             <!-- <nav aria-label="..." class="w-100 d-flex justify-content-center">
@@ -323,18 +326,19 @@
                 </p>
               </ng-template>
 
-              <p class="card-text">
+              <p class="card-text"  *ngIf="productCurrent?.projectService; else mstql">
                 <small class="text-muted fs-6"> نوع الخدمه </small>
                 <!-- ?? -->
                 <span
                   class="typeCom fs-6"
-                  *ngIf="productCurrent?.projectService; else mstql"
+                 
                   >{{ productCurrent.projectService.name }}</span
                 >
-                <ng-template #mstql>
-                  <!-- <span class="typeCom">استشارات</span> -->
-                  </ng-template >
-              </p>
+              
+              </p> 
+               <ng-template #mstql>
+                <!-- <span class="typeCom">استشارات</span> -->
+               </ng-template >
             </div>
           </div>
           <div class="col-md-5">

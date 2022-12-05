@@ -335,8 +335,10 @@
           class="form-control py-2"
           name="profilePictureFile"
           id="profilePictureFile"
-          #profilePictureFile
-          (change)="onFileChange($event, profilePictureFile)"
+          
+          formControlName="profilePictureFile"
+          (change)="uplaodFile($event)"
+
         />
       </div>
       <div class="m-3 col-3">
@@ -426,9 +428,10 @@
           class="form-control py-2"
           id="membershipFile"
           name="membershipFile"
-          id="membershipFile"
-        #membershipFile
-          (change)="onFileChange($event, membershipFile)"
+      
+          formControlName="membershipFile"
+        (change)="uplaodFile($event)"
+
         />
       </div>
     </div>
@@ -453,6 +456,8 @@
           name="idFile"
           id="idFile"
           formControlName="idFile"
+          (change)="uplaodFile($event)"
+
         />
       </div>
     </div>
