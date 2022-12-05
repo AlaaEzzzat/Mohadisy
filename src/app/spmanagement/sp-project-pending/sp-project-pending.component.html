@@ -131,11 +131,50 @@
               </div>
 
               <div class="col-lg-3 mt-4">
-                <i class="fa fa-commenting-o"></i>
+                <p type="btn" (click)="toggleChat()" style="cursor:pointer;">
+                  <i class="fa fa-commenting-o"></i>
+                </p>
                 <p style=" padding-right: 52%;">
-                مراسله
-                 </p>
+                  مراسله
+                </p>
               </div>
+
+
+              <!----------------chat--------------->
+              <div class="overlay  p-5" *ngIf="startChat">
+                <div class="popup p-5">
+                  <a class="close" style="cursor: pointer" (click)="toggleChat()">&times;</a>
+                  <div class="content">
+                    <label class="form-label fw-bold cairo">
+                      الرساله
+                    </label>
+                    <div class="message-input d-flex flex-column justify-content-center">
+                      <div class="wrap">
+                        <input class="form-control" #textInput type="text" placeholder="اكتب شيئاً ..."
+                          class="cairo" />
+                        <i class="fa-solid fa-paperclip attachment" aria-hidden="true">
+
+                          <input (change)="onFileUpload($event)" #fileImage type="file" alt="" name="attatch"
+                            id="attatch" class="attatch" />
+                          <small *ngIf="fileMessage" style="font-size: 12px;">{{
+                            fileMessage.name.substr(0,12)}}...</small>
+
+                        </i>
+                      </div>
+                      <button (click)="sendMessage(textInput.value)" class="btn submit">
+                        <span>إرسال</span>
+                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!--------------end chat------------------->
+
+
+
             </div>
           </div>
         </div>

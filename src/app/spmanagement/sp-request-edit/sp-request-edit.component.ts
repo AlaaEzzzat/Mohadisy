@@ -87,10 +87,12 @@ export class SpRequestEditComponent implements OnInit {
       this.OfferData.get('cost').setValue(this.selectProject?.offers[0]?.cost);
       this.OfferData.get('message').setValue(this.selectProject?.offers[0]?.message);
 
-    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject. offers[0].id}`).subscribe(data=>
        {
 
         console.log(data.data);
+
+        this.Precentage=[],this.WorkId=[];
         var stages=data.data;
         for(let i=0;i<stages.length;i++){
         this.Precentage[i+1]=stages[i].percentage;
@@ -273,7 +275,6 @@ export class SpRequestEditComponent implements OnInit {
 
     var Allprecentage=new Array(),Allmilestones=new Array();
 
-    console.log(this.OfferData.get('numberOfMilestones').value);
     for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
     {
       Allprecentage.push((Number)(this.Precentage[i]));
@@ -309,7 +310,7 @@ export class SpRequestEditComponent implements OnInit {
 
       }else
       {
-      Allmilestones.push(
+       Allmilestones.push(
         {
           "cost":this.totalcostMilestone[i],
           "percentage":(Number)(this.Precentage[i]),
@@ -359,7 +360,7 @@ export class SpRequestEditComponent implements OnInit {
         }
 
         console.log("all data : ",AllData);
-        this.api.postJson("https://app.mohandisy.com/api/Offer/updateOffer",AllData).subscribe(
+          this.api.postJson("https://app.mohandisy.com/api/Offer/updateOffer",AllData).subscribe(
           {
             next:(data)=>{
             Swal.fire(

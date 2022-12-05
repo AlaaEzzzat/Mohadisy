@@ -452,3 +452,103 @@
    background-color: #004057;
    color: white;
  }
+
+
+ /***************Chat********************/
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+  display: flex;
+  z-index: 1000;
+  .popup {
+    width: 450px;
+    background: #fff;
+    margin: auto;
+    border-radius: 5px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    height: auto;
+  }
+  .close {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .close:hover {
+    color: #18af9a;
+  }
+
+    .wrap {
+      position: relative;
+      input {
+        font-family: 'cairo';
+        border-radius: 10px ;
+        width: 100% ;
+        padding: 12px;
+        border: 1px solid #004057;
+        color: #004057;
+        &:focus {
+          outline: none;
+        }
+      }
+      .attachment {
+        position: absolute;
+        left: 14px;
+        top: 4px;
+        z-index: 4;
+        margin-top: 10px;
+        font-size: 1.4em;
+        color: #004057;
+        opacity: 0.5;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 1;
+        }
+        .attatch {
+          opacity: 0;
+          left: 0;
+          position: absolute;
+          width: 35px;
+          padding: 0;
+        }
+      }
+    }
+
+    .submit {
+      border: none;
+      margin: auto;
+      margin-top: 20px;
+      padding:3px 20px;
+      cursor: pointer;
+      border: 1px solid #004057;
+
+      background: #004057;
+      color: #fff;
+
+      &:hover {
+        background: #18af9a;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+    i{
+      font-size: 20px;
+    }
+  }
+
+
+/*************************************/

@@ -1,7 +1,9 @@
+import { ChatService } from './../../@core/services/chat/chat.service';
 import { ApiService } from './../../@core/api.service';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import {  Router } from '@angular/router';
+import { IMessage } from 'src/app/@models/message';
 
 @Component({
   selector: 'app-sp-project-pending',
@@ -16,8 +18,6 @@ export class SpProjectPendingComponent implements OnInit {
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
-  descWork:Array<any>=[];
   documents:Array<any>=[];
   descDocument:Array<any>=[];
   page:number=1;
@@ -26,8 +26,12 @@ export class SpProjectPendingComponent implements OnInit {
   pages:Array<any>=[];
   selected: Date = new Date();
   Representative:any;
+  startChat:any=false;
+  receiverId:string='';
+  message: IMessage = {} as IMessage;
+  fileMessage: any = '';
 
- constructor(private api:ApiService,private router:Router) { }
+ constructor(private api:ApiService,private router:Router, private chatService: ChatService) { }
 
  ngOnInit(): void {
 
@@ -127,33 +131,7 @@ export class SpProjectPendingComponent implements OnInit {
 
 
     /*************************************/
-    toggoleComponent(componentId:any)
-    {
 
-     if(this.descComponent[componentId])
-     this.descComponent[componentId]=0;
-     else
-     this.descComponent[componentId]=1;
-
-
-    }
-
-    toggoleWork(workId:any)
-    {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
 
     current()
     {
@@ -173,7 +151,6 @@ export class SpProjectPendingComponent implements OnInit {
           ({
             next:(data)=>
            {
-          console.log(data);
 
             Swal.fire(
               'تم تفعيل المشروع بنجاح'
@@ -195,20 +172,7 @@ export class SpProjectPendingComponent implements OnInit {
       );
 
 
-      /*this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${projectId}`).subscribe(
-        {
-
-            next:(data)=>{
-
-              Swal.fire(
-                'تم تفعيل المشروع'
-              );
-              this.router.navigate(['/Spmanagement/projects/status/pending']);
-              }
-
-
-        }
-      );*/
+      
 
     }
 
@@ -218,6 +182,53 @@ export class SpProjectPendingComponent implements OnInit {
       FileSaver.saveAs(filepath, file);
 
     }
+
+
+    toggleChat =()=>
+    {
+      this.startChat=!this.startChat;
+    }
+
+
+     onFileUpload(event: any) {
+      if (event.target.files.length > 0) {
+        const myfile = event.target.files[0];
+        this.fileMessage = myfile;
+      }
+    }
+
+      sendMessage(message: string) {
+
+       if (this.receiverId == '') {
+          this.receiverId = this.selectProject.clientProfile.applicationUserId;
+        }
+        var type: number = 1;
+        this.message.content = message;
+        this.message.messageTypeId = type;
+        this.message.receiverId = this.receiverId;
+        this.sendMessageToEndPoint(this.message, this.receiverId);
+        if (this.fileMessage) {
+          type = 2;
+          this.message.content = this.fileMessage;
+          this.message.messageTypeId = type;
+          this.message.receiverId = this.receiverId;
+          this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
+        }
+
+      }
+
+      sendMessageToEndPoint(message: any, receiverId: any) {
+        this.chatService.sendMessage(message).subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.startChat = false;
+            this.router.navigate(['/Spmanagement/chat']);
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      }
 
     changepage(e:any)
     {

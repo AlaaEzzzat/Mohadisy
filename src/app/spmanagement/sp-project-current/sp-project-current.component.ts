@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
+import { IMessage } from 'src/app/@models/message';
+import { ChatService } from 'src/app/@core/services/chat/chat.service';
 
 
 @Component({
@@ -28,10 +30,8 @@ export class SpProjectCurrentComponent implements OnInit {
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
   descWork:Array<any>=[];
   documents:Array<any>=[];
-  descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
   totalpages: any = 0;
@@ -43,9 +43,14 @@ export class SpProjectCurrentComponent implements OnInit {
   statusStage:any="لم يتم الانتهاء من اى مرحله";
   Reason:any;
   Representative:any;
+  stagefinish:Array<any>=[];
+  startChat:any=false;
+  receiverId:string='';
+  message: IMessage = {} as IMessage;
+  fileMessage: any = '';
 
 
- constructor(private api:ApiService,private router:Router) {
+ constructor(private api:ApiService,private router:Router,  private chatService: ChatService) {
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
@@ -109,6 +114,7 @@ export class SpProjectCurrentComponent implements OnInit {
      {
       if(this.Allstages[i].milestoneStatusId==3)
       {
+        this.stagefinish[this.Allstages[i].id]=1;
         this.calcPrecentage+=(100.0/this.Allstages.length);
       }
      }
@@ -201,9 +207,6 @@ export class SpProjectCurrentComponent implements OnInit {
     pending(stageid:number)
     {
 
-      console.log(stageid);
-
-
       var pendingData=
       {
         "milestoneId":stageid,
@@ -213,17 +216,12 @@ export class SpProjectCurrentComponent implements OnInit {
       this.api.postJson("https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending",pendingData).subscribe({
         next:(data)=>
         {
-
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
-
         }
 
       });
-
-      this.router.navigate(['/Spmanagement/projects/status/pending']);
-
 
     }
 
@@ -234,13 +232,12 @@ export class SpProjectCurrentComponent implements OnInit {
       this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
         next:(data)=>
         {
+          this.stagefinish[stageid]=1;
           console.log(data);
-            Swal.fire(
+            /*Swal.fire(
               'تم انهاء المرحله بنجاح'
-            );
+            );*/
 
-            this.router.navigate(['/Spmanagement/projects/status/current'],{skipLocationChange: true});
-            return;
         }
 
 
@@ -254,6 +251,54 @@ export class SpProjectCurrentComponent implements OnInit {
       FileSaver.saveAs(filepath, file);
 
     }
+
+    toggleChat =()=>
+    {
+      this.startChat=!this.startChat;
+    }
+
+
+     onFileUpload(event: any) {
+      if (event.target.files.length > 0) {
+        const myfile = event.target.files[0];
+        this.fileMessage = myfile;
+      }
+    }
+
+      sendMessage(message: string) {
+
+       if (this.receiverId == '') {
+          this.receiverId = this.selectProject.clientProfile.applicationUserId;
+        }
+        var type: number = 1;
+        this.message.content = message;
+        this.message.messageTypeId = type;
+        this.message.receiverId = this.receiverId;
+        this.sendMessageToEndPoint(this.message, this.receiverId);
+        if (this.fileMessage) {
+          type = 2;
+          this.message.content = this.fileMessage;
+          this.message.messageTypeId = type;
+          this.message.receiverId = this.receiverId;
+          this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
+        }
+
+      }
+
+      sendMessageToEndPoint(message: any, receiverId: any) {
+        this.chatService.sendMessage(message).subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.startChat = false;
+            this.router.navigate(['/Spmanagement/chat']);
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      }
+
+
 
     changepage(e:any)
     {
