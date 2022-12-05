@@ -99,7 +99,7 @@
               <h2>
                 <button class="btn btn-accordion w-100 item" type="button"
                 data-target="#item1" data-toggle="collapse" (click)="setToggle(1)">
-                <div class="row">
+                <div class="row  w-100 mx-3">
                   <div class="col-lg-11 col-md-11 col-sm-11">
                     المده والتكلفه
                   </div>
@@ -270,7 +270,7 @@
               <h2>
                 <button class="btn btn-accordion w-100 item" type="button"
                 data-target="#item2" data-toggle="collapse" (click)="setToggle(2)">
-                <div class="row">
+                <div class="row  w-100 mx-3">
                   <div class="col-lg-11 col-md-11 col-sm-11 ">
                     التزامات المقاول
                   </div>
@@ -327,7 +327,7 @@
               <h2>
                 <button class="btn btn-accordion w-100 item" type="button"
                 data-target="#item3" data-toggle="collapse" (click)="setToggle(3)">
-                <div class="row">
+                <div class="row  w-100 mx-3">
                   <div class="col-lg-11 col-md-11 col-sm-11">
                     الشروط
                   </div>
@@ -389,7 +389,7 @@
               <h2>
                 <button class="btn btn-accordion w-100 item" type="button"
                 data-target="#item4" data-toggle="collapse" (click)="setToggle(4)">
-                <div class="row">
+                <div class="row  w-100 mx-3">
                   <div class="col-lg-11 col-md-11 col-sm-11">
                     طريقه التحجيم
                   </div>
@@ -435,7 +435,7 @@
 
 
 
-             <div class="col-lg-12 mt-3 col-md-12 col-sm-12">
+             <div class="col-lg-12 mt-3">
 
               <div class="card card-4">
               <div id="accordion">
@@ -443,16 +443,16 @@
                 <button class="btn btn-accordion w-100 item" type="button"
                 data-target="#item5" data-toggle="collapse"   (click)="setToggle(5)">
 
-                <div class="row">
+                <div class="row w-100 mx-3">
                   <div class="col-lg-11 col-md-11 col-sm-11">
                     مواصفات المواد المستخدمه
                   </div>
                   <div class="col-lg-1 col-md-1 col-sm-1">
-                    <ng-container *ngIf="setForm[1]!=1">
-                      <i class="fas fa-angle-down" ></i>
+                    <ng-container *ngIf="setForm[5]!=1">
+                      <i class="fas fa-angle-down " ></i>
                     </ng-container>
 
-                    <ng-container *ngIf="setForm[1]==1">
+                    <ng-container *ngIf="setForm[5]==1">
                       <i class="fas fa-angle-up"  ></i>
                     </ng-container>
                   </div>

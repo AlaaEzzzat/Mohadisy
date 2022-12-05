@@ -29,6 +29,7 @@ import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.
 import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
 import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
 import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
+import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,7 @@ const routes: Routes = [
               { path: 'all', component: SpProjectsComponent },
               { path: 'all/request', component: SpCprojectRequestComponent },
               { path: 'alloffer', component: SpCprojectOfferComponent },
+              { path: 'alloffer/edit', component:SpCrequestEditComponent},
               { path: 'allaccept', component: SpCprojectAcceptComponent },
               { path: 'allreject', component: SpCprojectRejectComponent },
             ],

@@ -115,7 +115,7 @@ export class SpCprojectOfferComponent implements OnInit {
 
 
     /*************************************/
-   
+
 
 
     downloadFile(filepath:any,file:any)
@@ -141,8 +141,8 @@ export class SpCprojectOfferComponent implements OnInit {
 
     addIdProject(idProject:any)
     {
-     console.log(idProject);
-
+      localStorage.setItem("idproject",idProject);
+      localStorage.setItem("page",`${this.page}`);
 
     }
 
