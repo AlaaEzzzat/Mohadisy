@@ -48,7 +48,7 @@ export class AdminHomeComponent implements OnInit {
   },
   {
     title:"الإعدادات  ",
-    routing:"/Admin/settings",
+    routing:"/Admin/settings/profile",
     image:"assets/images/settings.png"
   }
 ]

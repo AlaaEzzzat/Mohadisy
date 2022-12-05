@@ -20,6 +20,10 @@ export class AdminSettingUsersComponent implements OnInit {
   page:any=1
   checked :any;
   changeStuseAcount !:Ichecked;
+  message:any;
+  show:boolean=false
+  showErr:boolean=false
+
   constructor( private adminSettingsService: AdminSettingsService,) { }
 
   ngOnInit(): void {
@@ -53,10 +57,23 @@ export class AdminSettingUsersComponent implements OnInit {
         "userId": id
       }
       this.adminSettingsService.changeAccountActivation(this.changeStuseAcount).subscribe({error:(er)=>{
-        alert(er.message)
+        // alert(er.message)
+        this.message=er.message
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 5000);
+        
       },
       next:(correct)=>{
-        alert(correct.message)
+      
+        this.message=correct.message
+        this.show=true
+
+        setInterval(() => {
+          this.show=false
+          }, 1000);
         this.getActiveUsers();
         this.getNonActiveUsers();
 
@@ -69,11 +86,23 @@ export class AdminSettingUsersComponent implements OnInit {
       }
 
       this.adminSettingsService.changeAccountActivation(this.changeStuseAcount).subscribe({error:(er)=>{
-        alert(er.message)
+        
+        this.message=er.message
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 5000);
+      
       },
       next:(correct)=>{
-        alert(correct.message)
-        this.getActiveUsers();
+        this.message=correct.message
+        this.show=true
+
+        setInterval(() => {
+          this.show=false
+          }, 1000);        
+          this.getActiveUsers();
         this.getNonActiveUsers();
 
       }

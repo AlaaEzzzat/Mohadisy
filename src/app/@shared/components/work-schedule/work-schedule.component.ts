@@ -50,7 +50,7 @@ export class WorkScheduleComponent implements OnInit {
     return this.newappointment?.get('imageFile');
   }
   getappointDate() {
-    let date=moment(this.selected).utc().format('YYYY-MM-DD h:mm A')
+    let date=moment(this.selected).format('YYYY-MM-DD');
      let dateSelected={
        
          "startDate": date,
@@ -58,7 +58,7 @@ export class WorkScheduleComponent implements OnInit {
        } 
        console.log(dateSelected);
        this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
-         console.log(date.data);
+         console.log(this.selected);
         
          for(let dates of date.data){
            this.dateOpt=dates
@@ -91,8 +91,8 @@ export class WorkScheduleComponent implements OnInit {
 creatMeeting() {
   this.iProfileAdmin=localStorage.getItem('id')
   console.log(this.iProfileAdmin)
-  let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm ');
-  
+  let date=moment(this.selected).format('YYYY-MM-DD');
+
     this.appointment={
       "applicationUserId": this.iProfileAdmin,
       "name": this.name?.value,
@@ -116,6 +116,7 @@ creatMeeting() {
         setInterval(() => {
           this.showSuc=false
           }, 4000);
+          this.getappointDate() 
       },error:(er)=>{
         console.log(er)
         this.message=er.message
