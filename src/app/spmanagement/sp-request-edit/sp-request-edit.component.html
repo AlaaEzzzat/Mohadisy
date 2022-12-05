@@ -195,21 +195,24 @@
 
               <div class="col-lg-4 form-group mt-5">
                 <select class="form-select" (change)="workId($event,stone)"
-                value="{{WorkId[stone]}}"
                  required>
 
-                  <option disabled selected >اختر</option>
+                  <option disabled [selected]="WorkId[stone]==null" >اختر</option>
 
                   <ng-container *ngIf="stone==1">
-                    <option [value]="8">دفعه مقدمه</option>
+                    <option [value]="8"  [selected]="+WorkId[stone]==8">دفعه مقدمه</option>
                   </ng-container>
 
 
-                  <option [value]="9" *ngIf="stone== numberofMilestones.length">بعد الانتهاء</option>
+                  <option [value]="9" *ngIf="stone==numberofMilestones.length"
+                  [selected]="+WorkId[stone]==9"
+                  >بعد الانتهاء</option>
 
                   <ng-container *ngFor="let work of RequiredWorks">
 
-                      <option [value]="work.id">{{work.name}}</option>
+                      <option [value]="work.id"
+                      [selected]="+WorkId[stone]==+work.id"
+                      >{{work.name}}</option>
 
 
                   </ng-container>

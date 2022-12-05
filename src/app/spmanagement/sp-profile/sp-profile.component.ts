@@ -41,9 +41,6 @@ export class SpProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
-
-
-
       this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>
       {
         this.profile=data.data;
@@ -91,7 +88,7 @@ export class SpProfileComponent implements OnInit {
 
       this.api.get("https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorks").subscribe(data=>
       {
-       // console.log(data);
+        console.log(data);
         this.ServiceProviderWork=data.data;
 
       });
@@ -101,6 +98,13 @@ export class SpProfileComponent implements OnInit {
         this.representative=data.data;
 
       });
+
+
+        this.api.postJson("https://app.mohandisy.com/api/Appointment/getAppointments").subscribe(data=>
+          {
+            console.log(data);
+
+          });
 
 
        this.api.get("https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus").subscribe(data=>

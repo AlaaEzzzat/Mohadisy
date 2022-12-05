@@ -102,7 +102,8 @@
                     <div class="row">
                       <div class="col-lg-9">
                         الخدمه الرئيسيه :
-                        {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
+                        <input type="text" formControlName="projectServiceName"
+                        [value]="profile?.organizationalServiceProviderProfile?.projectService?.name"/>
                          </div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1">
@@ -667,16 +668,16 @@
             <div class="col-lg-8">
               <p>اسم المشروع : <span>{{project.projectName}}</span></p>
               <p>اسم العميل : <span>{{project.ownerName}}</span></p>
-              <p>مده التنفيذ : <span>عام ونصف</span></p>
+              <p>سنه التنفيذ: <span>{{project.completionYear }}</span></p>
 
-                <div class="row pt-2 date">
+                <!--<div class="row pt-2 date">
                   <div class="col-lg-5">
                     تاريخ البدء : 2 مايو 2019
                   </div>
                   <div class="col-lg-6">
                     تاريخ الانتهاء : 4 مايو 2019
                   </div>
-                </div>
+                </div>-->
             </div>
 
             <div class="col-lg-4 choose">

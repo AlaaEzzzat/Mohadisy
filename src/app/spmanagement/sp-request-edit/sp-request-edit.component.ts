@@ -113,6 +113,7 @@ export class SpRequestEditComponent implements OnInit {
 
   SelectIdProject()
   {
+    console.log(this.Listprojects);
 
     for(let project of this.Listprojects)
     {
@@ -265,7 +266,6 @@ export class SpRequestEditComponent implements OnInit {
 
     this.WorkId[stone]=e.target.value;
 
-
   }
 
 
@@ -278,6 +278,7 @@ export class SpRequestEditComponent implements OnInit {
     for(let i=1;i<=this.OfferData.get('numberOfMilestones').value;i++)
     {
       Allprecentage.push((Number)(this.Precentage[i]));
+      console.log(this.WorkId[i]);
       if(Number(this.WorkId[i])==8)
       {
 
@@ -366,7 +367,14 @@ export class SpRequestEditComponent implements OnInit {
             Swal.fire(
               'تم تعديل العرض بنجاح'
             );
-            this.router.navigate(['/Spmanagement/projects/price-offers/offer/edit']);
+
+            this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
+             this.Listprojects=data.data.projects;
+            this.showData(Number(this.select));
+            console.log(this.select);
+
+            });
+
             }
 
           } );
