@@ -460,7 +460,7 @@ export class SpCprojectRequestComponent implements OnInit {
            Swal.fire(
              'تم تقديم العرض بنجاح'
            );
-           this.router.navigate(['/Spmanagement/projects/all']);
+           this.router.navigate(['/Spmanagement/projects/price-offers/all']);
            }
 
          } );

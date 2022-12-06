@@ -38,7 +38,7 @@ export class SpCrequestEditComponent implements OnInit {
    id:number=0;
    AddMaterials:Array<any>=[];
    _RequiredWorks:Array<any>=[];
-  index1:any=0;
+  index:any=0;
 
 
   constructor(private api:ApiService ,private router:Router)

@@ -119,7 +119,7 @@ export class SpProjectRequestComponent implements OnInit {
   {
 
    this.page=e;
-  
+
    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
     this.Listprojects=data.data.priceQuotes;
@@ -318,7 +318,7 @@ export class SpProjectRequestComponent implements OnInit {
         Swal.fire(
           'تم تقديم العرض بنجاح'
         );
-        this.router.navigate(['/Spmanagement/projects/new']);
+        this.router.navigate(['/Spmanagement/projects/price-offers/new']);
         }
 
       } );
@@ -331,7 +331,7 @@ export class SpProjectRequestComponent implements OnInit {
 
 
 
-      
+
 }
 
 

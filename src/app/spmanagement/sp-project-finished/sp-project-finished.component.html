@@ -97,7 +97,7 @@
 
             </ul>
           </nav>
-      
+
 
 
       </div>
@@ -385,10 +385,18 @@
                  <div class="col-lg-12 mt-4">
                   <div class="row">
                     <div class="col-lg-6">
-                     <a href="{{selectProject.clientProjectDocuments[0]?.filePath}}"><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px; margin-left: 3%;"></i>اسم الملف</a>
+                     <a  href="{{
+                      selectProject.clientProjectDocuments[0]?.filePath
+                    }}"
+
+                    target="_blank"><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px; margin-left: 3%;"></i>اسم الملف</a>
                     </div>
                     <div class="col-lg-6">
-                      <a href=""><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</a>
+                      <a  href="{{
+                        selectProject.clientProjectDocuments[0]?.filePath
+                      }}"
+
+                      target="_blank"><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</a>
                     </div>
 
                    </div>

@@ -380,10 +380,10 @@
                           <div class="row mt-2 text-center">
                             <div class="col-lg-6 mt-2">
                               <a
-                                href="{{
-                                  selectProject.clientProjectDocuments[0]
+                                [href]="
+                                 selectProject.clientProjectDocuments[0]
                                     ?.filePath
-                                }}"
+                                "
                                 target="_blank"
                                 ><i
                                   class="fa fa-file-pdf-o"
@@ -393,7 +393,11 @@
                               >
                             </div>
                             <div class="col-lg-6 mt-2">
-                              <a href=""
+                              <a  [routerLink]="
+                              selectProject.clientProjectDocuments[0]
+                                 ?.filePath
+                             "
+                             target="_blank"
                                 ><i
                                   class="fa-solid fa-image"
                                   style="color: green"
@@ -711,6 +715,8 @@
                         href="{{
                           selectProject.clientProjectDocuments[0]?.filePath
                         }}"
+
+                        target="_blank"
                         ><i
                           class="fa fa-file-pdf-o"
                           style="color: red; font-size: 20px; margin-left: 3%"

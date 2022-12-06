@@ -22,7 +22,7 @@ export class SpCprojectOfferComponent implements OnInit {
   totalpages: any = 0;
   pages:Array<any>=[];
   _RequiredWorks:Array<any>=[];
-  index1:any=0;
+  index:any=0;
 
  constructor(private api:ApiService) { }
 
