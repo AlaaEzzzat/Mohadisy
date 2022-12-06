@@ -16,7 +16,13 @@
               style="background:#004958; color:white;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project.name}}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">()</a>
+                  </ng-container>
                 </span>
               </p>
               <p><i class="fa fa-location-dot "></i>
@@ -46,9 +52,13 @@
 
         <div class="col-12 " style="height: 100px; ;"></div>
 
-        <div class="col-lg-12 position-absolute top100">
-          <nav aria-label="Page navigation ng-container " class="mt-4 mb-3"  *ngIf="result==1">
-            <ul class="pagination bg-primary d-flex flex-wrap w-100">
+
+
+
+
+        <div class="col-lg-12">
+          <nav aria-label="Page navigation" class="mt-4 mb-3"  *ngIf="result==1">
+            <ul class="pagination  d-flex flex-wrep w-100">
               <ng-container *ngIf="page==1">
               <li class="page-item disabled">
                 <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>

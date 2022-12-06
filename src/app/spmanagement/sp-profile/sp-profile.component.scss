@@ -343,11 +343,11 @@ box-shadow: none;
 .card-1-2 .files
 {
   background-color: #F1F5F9;
-  padding: 3% 5%;
+  padding: 0% 5%;
 }
 .card-1-2 .files a
 {
-  padding: 6%;
+  padding: 3% 2%;
   text-decoration-line: none;
   -moz-text-decoration-line: none;
   color:#475569;
@@ -355,6 +355,7 @@ box-shadow: none;
   font-size: 13px;
 
 }
+
 
 
 
@@ -542,13 +543,13 @@ white-space:nowrap;
 
 }
 .nameDownload{
- 
+
   color: black !important;
 
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
- 
+
 }
 
 .typeCom
@@ -583,5 +584,16 @@ border: none!important;
 
 }
 .addAccount{
+  cursor: pointer;
+}
+
+
+.files
+{
+  cursor: pointer;
+}
+
+.modal .close
+{
   cursor: pointer;
 }

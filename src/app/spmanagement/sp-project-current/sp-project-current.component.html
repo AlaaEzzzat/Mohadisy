@@ -225,37 +225,46 @@
                                 </div>
 
                                 <div class="col-lg-3">
-                                  <button class="btn" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop"
+                                  <button class="btn" type="button"
+                                  data-bs-toggle="modal" data-bs-target="#open"
                                     [disabled]="stage.milestoneStatusId!=2">تعليق</button>
 
                                   <!------------Start Modal------------->
-                                  <div class="modal fade  mt-5" id="staticBackdrop">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <button type="button" class="btn" data-bs-dismiss="modal">
-                                            <i class="far fa-circle-xmark"></i>
-                                          </button>
-                                        </div>
+                                    <div class="fade modal  mt-5" aria-hidden="false" role="dialog" id="open">
+                                      <div class="modal-dialog " >
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="btn close "
+                                            data-bs-dismiss="modal"
+                                           >
+                                              <i class="far fa-circle-xmark"></i>
+                                            </button>
+                                          </div>
 
-                                        <form [formGroup]="Reason">
-                                          <div class="modal-body">
-                                            <h4>اكتب سبب التعليق</h4>
+                                          <form [formGroup]="Reason">
+                                            <div class="modal-body">
+                                              <h4>اكتب سبب التعليق</h4>
 
-                                            <div class="form-group">
-                                              <textarea class="form-control mt-3" formControlName="reason"></textarea>
+                                              <div class="form-group">
+                                                <textarea class="form-control mt-3" formControlName="reason"></textarea>
+                                              </div>
+
                                             </div>
+                                            <div class="modal-footer">
+                                              <button type="submit" class="btn"
+                                              data-bs-dismiss="modal"
+                                               (click)="pending(stage.id)">ارسال</button>
+                                            </div>
+                                          </form>
 
-                                          </div>
-                                          <div class="modal-footer">
-                                            <button type="submit" class="btn" (click)="pending(stage.id)">ارسال</button>
-                                          </div>
-                                        </form>
-
+                                        </div>
                                       </div>
-                                    </div>
+
+
                                   </div>
+
+
+
 
 
                                   <!-------------End Modal-------------------->
