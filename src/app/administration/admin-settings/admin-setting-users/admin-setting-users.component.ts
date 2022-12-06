@@ -73,7 +73,7 @@ export class AdminSettingUsersComponent implements OnInit {
 
         setInterval(() => {
           this.show=false
-          }, 1000);
+          }, 5000);
         this.getActiveUsers();
         this.getNonActiveUsers();
 
