@@ -7,7 +7,7 @@
 
 <div class="section-2 mt-2 container-fluid">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 position-relative">
       <div class="row">
 
         <ng-container *ngFor="let project of Listprojects">
@@ -44,10 +44,11 @@
 
         </ng-container>
 
+        <div class="col-12 " style="height: 100px; ;"></div>
 
-        <div class="col-lg-12">
+        <div class="col-lg-12 position-absolute top100">
           <nav aria-label="Page navigation ng-container " class="mt-4 mb-3"  *ngIf="result==1">
-            <ul class="pagination bg-primary">
+            <ul class="pagination bg-primary d-flex flex-wrap w-100">
               <ng-container *ngIf="page==1">
               <li class="page-item disabled">
                 <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
