@@ -571,7 +571,7 @@
 
                 <div class="col-lg-4 mt-1" *ngFor="let item of appointmentFiles">
                   <p class="files">
-                    <a     class="informationDownload  d-flex  justify-content-between mb-2"
+                    <a     class="informationDownload  d-flex  justify-content-between mb-2 "
                     (click)="
                       download(
                         item.filePath,
@@ -581,6 +581,7 @@
                   >
                   <span
                   ><img
+                  class="mt-1"
                     src="assets/dashboard/picture.png"
                     alt=""
                     *ngIf="
@@ -591,22 +592,23 @@
                     "
                   />
                   <img
+                  clas="mt-1"
                     src="assets/dashboard/pdf.png"
                     *ngIf="item.fileType === '.pdf'"
                   />
                 </span>
-                    <p class=" nameDownload">
+                    <p class="nameDownload mt-2">
                       {{ item.fileName }}
                     </p>
-                    <i class="fa fa-download typeCom ms-3"></i>
-                
+                    <i class="fa fa-download typeCom ms-3 mt-2"></i>
+
 
                       <!-- <i class="fa fa-file"></i> -->
                     </a>
                 </div>
 
 
-                
+
               </div>
 
 
@@ -622,8 +624,8 @@
                   dateOpt?.dateCreated | date: "d/M/yyyy"
                 }}</small>
               </p>
-          
-            
+
+
             </div>
           </ng-template>
         </div>
@@ -805,7 +807,7 @@
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
         <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
-          اضافة مهمه  
+          اضافة مهمه
         </h5>
 
         <button
@@ -870,7 +872,7 @@
           </div>
           <div class="mb-3">
             <label for="formFile" class="form-label">اضافه ملف</label>
-            <input class="form-control" 
+            <input class="form-control"
             type="file"
             id="imageFile"
             (change)="uplaodFile($event)"
@@ -878,7 +880,7 @@
             formControlName="imageFile"
            >
           </div>
-         
+
           <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
           <button
           data-bs-dismiss="modal"
