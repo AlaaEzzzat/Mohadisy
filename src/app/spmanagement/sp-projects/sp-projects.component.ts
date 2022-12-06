@@ -33,12 +33,12 @@ export class SpProjectsComponent implements OnInit {
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
-    this.counter(this.totalpages);
+    
     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
 
       if(this.Listprojects.length>0)
-     this.result=1;
+       this.result=1;
 
 
     });
@@ -118,62 +118,15 @@ export class SpProjectsComponent implements OnInit {
 
 
      /*************************************/
-     toggoleComponent(componentId:any)
+
+
+
+     downloadFile(filepath:any,file:any)
      {
-
-      if(this.descComponent[componentId])
-      this.descComponent[componentId]=0;
-      else
-      this.descComponent[componentId]=1;
-
+       var FileSaver = require('file-saver');
+       FileSaver.saveAs(filepath, file);
 
      }
-
-     toggoleWork(workId:any)
-     {
-      if(this.descWork[workId])
-      this.descWork[workId]=0;
-      else
-      this.descWork[workId]=1;
-
-     }
-
-     toggoleDocument(documentId:any)
-     {
-      if(this.descDocument[documentId])
-      this.descDocument[documentId]=0;
-      else
-      this.descDocument[documentId]=1;
-     }
-
-
-     downloadFile(id:any,file:any)
-     {
-
-     }
-     counter(x: number) {
-      this.pagenation = [...Array(x).keys()];
-    }
-     next=()=> {
-      if (this.page < this.totalpages) {
-        this.page = this.page + 1;
-        this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
-          this.Listprojects=data.data.priceQuotes;
-          this.totalpages=data.data.totalPages;
-    this.counter(this.totalpages);
-       });
-      }
-    }
-    prev= ()=> {
-      if (this.page > 1) {
-        this.page = this.page - 1;
-        this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
-          this.Listprojects=data.data.priceQuotes;
-          this.totalpages=data.data.totalPages;
-    this.counter(this.totalpages);
-       });
-      }
-    }
 
      changepage(e:any)
      {
@@ -191,6 +144,7 @@ export class SpProjectsComponent implements OnInit {
      addIdProject(idProject:any)
      {
       localStorage.setItem('idproject',idProject);
+      localStorage.setItem("page",`${this.page}`);
 
      }
 

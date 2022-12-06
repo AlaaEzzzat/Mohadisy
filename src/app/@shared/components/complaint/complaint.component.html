@@ -1,6 +1,6 @@
-<div class="container-fluid">
+<div class="container-fluid" style="min-height: 100vh">
   <div class="row">
-    <ng-container *ngFor="let compliant of complaints">
+    <ng-container *ngFor="let complaint of complaints">
       <div class="col-lg-4 col-md-6">
         <div class="image-flip">
           <div class="mainflip flip-0">
@@ -10,16 +10,33 @@
                   <p>
                     <img
                       class="img-fluid"
-                      src="assets/avatar.png"
+                      [src]="
+                        userRole == 'Service Provider'
+                          ? complaint.complaintSender?.clientProfile
+                              ?.profilePicturePath
+                          : complaint.complaintSender
+                              ?.organizationalServiceProviderProfile
+                              ?.profilePicturePath || ''
+                      "
                       alt="card image"
                     />
                   </p>
-                  <h4 class="card-title cairo">Alaa Ezzat</h4>
+                  <h4 class="card-title cairo">
+                    {{
+                      userRole == "Service Provider"
+                        ? complaint.complaintSender?.clientProfile?.firstName +
+                          " " +
+                          complaint.complaintSender?.clientProfile?.firstName
+                        : complaint.complaintSender
+                            ?.organizationalServiceProviderProfile
+                            ?.companyName || "xx"
+                    }}
+                  </h4>
                   <p class="card-text cairo">
-                    {{ compliant.content }}
+                    {{ complaint.content }}
                   </p>
                   <p class="card-text cairo">
-                    {{ compliant.dateCreated | date }}
+                    {{ complaint.dateCreated | date }}
                   </p>
                   <a
                     href="https://www.fiverr.com/share/qb8D02"
@@ -32,13 +49,28 @@
               </div>
             </div>
             <div class="backside">
-              <div class="card">
+              <div
+                class="card d-flex justify-content-center align-items-center"
+              >
                 <div
-                  class="card-body d-flex justify-content-center align-items-center text-center mt-4"
+                  class="card-body d-flex flex-column justify-content-center"
                 >
+                  <p>
+                    <b class="cairo"> رقم الهاتف : </b>
+                    <span class="cairo">{{
+                      complaint.complaintSender?.phoneNumber
+                    }}</span>
+                  </p>
+                  <p>
+                    <b class="cairo"> الريد الإلكتروني : </b>
+                    <span class="cairo">{{
+                      complaint.complaintSender?.email
+                    }}</span>
+                  </p>
                   <p
-                    (click)="sendMsg(compliant.complaintSenderId)"
+                    (click)="sendMsg(complaint.complaintSenderId)"
                     class="card-text d-flex align-items-center"
+                    style="cursor: pointer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

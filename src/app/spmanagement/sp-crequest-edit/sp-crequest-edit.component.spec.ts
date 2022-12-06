@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpMainProfileComponent } from './sp-main-profile.component';
+import { SpCrequestEditComponent } from './sp-crequest-edit.component';
 
-describe('SpMainProfileComponent', () => {
-  let component: SpMainProfileComponent;
-  let fixture: ComponentFixture<SpMainProfileComponent>;
+describe('SpCrequestEditComponent', () => {
+  let component: SpCrequestEditComponent;
+  let fixture: ComponentFixture<SpCrequestEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpMainProfileComponent ]
+      declarations: [ SpCrequestEditComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpMainProfileComponent);
+    fixture = TestBed.createComponent(SpCrequestEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

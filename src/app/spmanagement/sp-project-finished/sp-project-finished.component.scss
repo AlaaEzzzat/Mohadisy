@@ -1,4 +1,7 @@
+.top100 {
+  bottom: 10px !important;
 
+}
  .card
  {
     border: none;
@@ -12,10 +15,6 @@
     padding: 0;
  }
 
- .content-1 button
- {
-  color:#18af9a;
- }
  .card p
  {
    padding: 0;
@@ -437,29 +436,28 @@
 
 
 
-
  ::ng-deep .mat-calendar-body-cell-content
-{
-  background-color:rgb(247, 247, 247);
-  color:#004057;
-}
+ {
+   background-color:rgb(247, 247, 247);
+   color:#004057;
+ }
 
-::ng-deep .mat-button
-{
-  color:#004057;
-  font-weight: 500;
-  font-size: 20px;
+ ::ng-deep .mat-button
+ {
+   color:#004057;
+   font-weight: 500;
+   font-size: 20px;
 
-}
-
-
-::ng-deep .mat-calendar-body-selected {
-  background-color: #004057;
-  color: white;
-}
+ }
 
 
-/***************Chat********************/
+ ::ng-deep .mat-calendar-body-selected {
+   background-color: #004057;
+   color: white;
+ }
+
+
+ /***************Chat********************/
 
 .overlay {
   position: fixed;

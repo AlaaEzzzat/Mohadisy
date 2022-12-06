@@ -14,7 +14,6 @@ import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 
 import { SpHomeComponent } from './sp-home/sp-home.component';
-import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
@@ -42,6 +41,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
+import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
+import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
 
 
 @NgModule({
@@ -53,7 +55,6 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     SpProjectsComponent,
 
     SpHomeComponent,
-    SpMainProfileComponent,
     SpProfileComponent,
     SpCompleteProfileComponent,
     PrevWorksComponent,
@@ -80,6 +81,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     SpCprojectOfferComponent,
     SpCprojectAcceptComponent,
     SpCprojectRejectComponent,
+    SpProjectFinishedComponent,
+    SpRequestEditComponent,
+    SpCrequestEditComponent,
 
   ],
   imports: [

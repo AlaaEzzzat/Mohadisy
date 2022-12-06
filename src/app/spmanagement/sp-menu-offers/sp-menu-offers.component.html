@@ -6,24 +6,24 @@
 
       <ng-container *ngIf="type==1 && offers==1">
       <div class="col   text-center contnet">
-        <a [routerLink]='["/Spmanagement/projects/new"]'
+        <a [routerLink]='["/Spmanagement/projects/price-offers/new"]'
         [routerLinkActive]='["active"]'
         class="btn">{{projectstatues[0]?.nameAr}}</a>
       </div>
 
 
       <div class="col   text-center contnet">
-        <a [routerLink]='["/Spmanagement/projects/offer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
+        <a [routerLink]='["/Spmanagement/projects/price-offers/offer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
       </div>
 
       <div class="col   text-center contnet">
-        <a [routerLink]='["/Spmanagement/projects/accept"]'
+        <a [routerLink]='["/Spmanagement/projects/price-offers/accept"]'
         [routerLinkActive]='["active"]'
         class="btn" >{{projectstatues[2]?.nameAr}}</a>
       </div>
 
       <div class="col  text-center contnet">
-        <a [routerLink]="['/Spmanagement/projects/reject']" class="btn"
+        <a [routerLink]="['/Spmanagement/projects/price-offers/reject']" class="btn"
         [routerLinkActive]='["active"]' >{{projectstatues[1]?.nameAr}}</a>
       </div>
       </ng-container>
@@ -33,24 +33,24 @@
 
       <ng-container *ngIf="type==2 && offers==1">
         <div class="col   text-center contnet">
-          <a [routerLink]='["/Spmanagement/projects/all"]'
+          <a [routerLink]='["/Spmanagement/projects/price-offers/all"]'
           [routerLinkActive]='["active"]'
           class="btn">{{projectstatues[0]?.nameAr}}</a>
         </div>
 
 
         <div class="col   text-center contnet">
-          <a [routerLink]='["/Spmanagement/projects/alloffer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
+          <a [routerLink]='["/Spmanagement/projects/price-offers/alloffer"]' class="btn" [routerLinkActive]='["active"]'  >عروض مقدمه</a>
         </div>
 
         <div class="col   text-center contnet">
-          <a [routerLink]='["/Spmanagement/projects/allaccept"]'
+          <a [routerLink]='["/Spmanagement/projects/price-offers/allaccept"]'
           [routerLinkActive]='["active"]'
           class="btn" >{{projectstatues[2]?.nameAr}}</a>
         </div>
 
         <div class="col  text-center contnet">
-          <a [routerLink]="['/Spmanagement/projects/allreject']" class="btn"
+          <a [routerLink]="['/Spmanagement/projects/price-offers/allreject']" class="btn"
           [routerLinkActive]='["active"]' >{{projectstatues[1]?.nameAr}}</a>
         </div>
         </ng-container>

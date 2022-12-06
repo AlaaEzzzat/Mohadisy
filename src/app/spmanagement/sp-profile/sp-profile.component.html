@@ -5,14 +5,16 @@
         <div class="col-lg-12">
           <img src="{{profile?.organizationalServiceProviderProfile?.companyLogoPath}}" alt="" class="img-fluid profile">
           <h4 class="mt-3">{{profile?.organizationalServiceProviderProfile?.companyName}}</h4>
+
           <div class="row text-center info">
             <div class="col-lg-5 mt-3">
               <p>حساب نشط
                 <i class="fa fa-circle" style="color:#10B981; font-size:8px;"></i>
               </p>
+
             </div>
             <div class="col-lg-7 mt-3">
-              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.postalCode}}</p>
+              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumber}}</p>
             </div>
           </div>
 
@@ -29,7 +31,7 @@
           </p>
           <p class="info-sp mt-2">
             <i class="fa fa-envelope-open-o"></i>
-            sara12345@gmail.com
+            {{profile?.email}}
           </p>
 
           <div class="row">
@@ -89,7 +91,7 @@
                 <div class="row">
                   <div class="col-lg-12 card acc-card mt-1">
                     <div class="row">
-                      <div class="col-lg-9">saraghazy@gmail.com</div>
+                      <div class="col-lg-9">{{profile?.email}}</div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1"></i>
                       </div>
@@ -100,7 +102,8 @@
                     <div class="row">
                       <div class="col-lg-9">
                         الخدمه الرئيسيه :
-                        {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
+                        <input type="text" formControlName="projectServiceName"
+                        [value]="profile?.organizationalServiceProviderProfile?.projectService?.name"/>
                          </div>
                       <div class="col-lg-3">
                         <i class="fa fa-edit mx-3 mt-1">
@@ -144,7 +147,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                      الهويه
+                      خطاب بنكى برقم الايبان
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration1==1">
@@ -162,14 +165,15 @@
                     <ng-container *ngIf="registeration1==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn" >
+                          <a class="btn w-100" target="_blank"  style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.iBanFile}}">
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -185,7 +189,7 @@
                   <div class="row">
                     <div class="col-lg-9" style="position:absolute;">
                       <i class="far fa-image"></i>
-                    العضويه
+                       شهاده الزكاه والدخل
                     </div>
                     <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
                       <ng-container *ngIf="registeration2==1">
@@ -203,14 +207,16 @@
                     <ng-container *ngIf="registeration2==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
+                          >
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -244,15 +250,16 @@
                     <ng-container *ngIf="registeration3==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn" (click)="getPdf(profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath)
-                          ">
+                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
+                          >
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -286,15 +293,58 @@
                     <ng-container *ngIf="registeration4==1">
                       <ul class="card card-registeration">
                         <li>
-                          <button class="btn">
+                          <a class="btn w-100" target="_blank" style="padding-left:50% ;"
+                           href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
                             <i class="fa fa-eye"></i>
                             فتح
-                          </button>
+                          </a>
                         </li>
 
 
                         <li>
-                         <button class="btn">
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-10" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      شهاده التأمينات الاجتماعيه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration5==1">
+                        <button class="btn choose-toggle" (click)="register_5()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration5!=1">
+                      <button class="btn choose-toggle" (click)="register_5()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration5==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a class="btn w-100 " target="_blank" style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile}}">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
                           <i class="fa fa-edit"></i>
                           تعديل
                          </button>
@@ -378,9 +428,35 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
+
+        <ng-container *ngIf="copmpleteProfile!=100">
+        <a routerLink="" class="completeprofile">
+          <p style="color:#18AF9A;">استكمل بياناتك</p>
+        </a>
+        </ng-container>
+
+        <ng-container *ngIf="copmpleteProfile==100">
+        <p style="color:#64748B;">تم استكمال بياناتك</p>
+        </ng-container>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100"
+            [style.width]="copmpleteProfile+'%'">
+
+              {{copmpleteProfile}}%
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
         <h4>نظره عامه</h4>
       </div>
-      <div class="col-lg-4 mt-2">
+      <div class="col-lg-6 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -391,14 +467,14 @@
               </h5>
             </div>
             <div class="col-lg-4">
-              <div class="padge ">45</div>
+              <div class="padge ">{{ServiceProviderWork?.length}}</div>
             </div>
           </div>
         </div>
       </div>
 
 
-      <div class="col-lg-4 mt-2">
+      <!--<div class="col-lg-4 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -413,9 +489,9 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
 
-        <div class="col-lg-4 mt-2">
+        <div class="col-lg-6 mt-2">
         <div class="card card-1">
           <div class="row">
             <div class="col-lg-8">
@@ -425,7 +501,7 @@
               </h5>
             </div>
             <div class="col-lg-4">
-              <div class="padge">4/5</div>
+              <div class="padge">{{avgRate}}/5</div>
             </div>
           </div>
         </div>
@@ -437,13 +513,45 @@
 
     <div class="row">
       <div class="col-lg-12 mt-4">
-        <h4>جدول أعمالك</h4>
+        <div class="row">
+          <div class="col-lg-4">
+            <h4>جدول أعمالك</h4>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#addAppointment">
+                <a class="btn" style="color:#18AF9A;">
+                  اضافه حدث
+                  <i class="fa fa-calendar"></i>
+                </a>
+              </div>
+
+              <div class="col-lg-6 mt-2" >
+                <p style="font-size: 18px; color: #64748B; font-weight: 500;">{{selected | date}}</p>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <div class="col-lg-4" data-bs-toggle="modal" data-bs-target="#addAppointment">
+            <a class="btn" style="color:#18AF9A; margin-right:65%; font-family:'Cairo' ;">
+               تعديل
+              <i class="fa fa-edit"></i>
+            </a>
+          </div>
+
+        </div>
+
       </div>
 
       <div class="col-lg-5 mt-2">
         <div class="card  calender">
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" (click)="getappointDate()">
               <mat-calendar [(selected)]="selected" ></mat-calendar>
             </div>
           </div>
@@ -453,80 +561,73 @@
 
       <div class="col-lg-7 mt-2">
         <div class="card card-1-2">
-          <div class="row">
+          <div class="row" *ngIf="dateOpt!=null;else notfound">
             <div class="col-lg-12">
               <p>
-                .دریگ رارق هدافتسا دروم اساسا یحارط دوجوم یایند لها هتسویپ تالاوس یوگباوج و یلصا یاهدرواتسد ینیچفورح لماش زاین دروم نامزو دسر نایاپ هب پیات تخس طیارش و اهراکهار هئارا رد دوجوم یراوشد و مامت هک تشاد دیما ناوت یم تروص نیا رد. درک داجیا یسراف نابز رد ورشیپ گنهرف و یقالخ ناحارط صوصخلا یلع یا هنایار ناحارط یارب ار یرتشیب تخانش اهرازفا مرن اب ات دبلط یم ار ناصصختم و هعماج ناوارف تخانش هدنیآ و لاح ،هتشذگ دصرد هس و تصش رد یدایز یاهباتک. دشاب یم یدربراک یاهرازبا دوبهب فده اب عونتم یاهدربراک و زاین دروم یژولونکت یلعف طیارش یارب و تسا مزال هک نانچنآرطس و نوتس رد هلجم و همانزور هکلب نوتم و اهرگپاچ. تسا کیفارگ ناحارط زا هدافتسا اب و پاچ تعنص زا.
+                {{ dateOpt?.description }}
               </p>
 
               <div class="row">
 
-                <div class="col-lg-4 mt-1">
+                <div class="col-lg-4 mt-1" *ngFor="let item of appointmentFiles">
                   <p class="files">
-                    <a href="">
-                      <i class="fa fa-file"></i>
-                      اسم الملف
-                    </a>
-                </div>
+                    <a     class="informationDownload  d-flex  justify-content-between mb-2 "
+                    (click)="
+                      download(
+                        item.filePath,
+                        item.fileName
+                      )
+                    "
+                  >
+                  <span
+                  ><img
+                  class="mt-1"
+                    src="assets/dashboard/picture.png"
+                    alt=""
+                    *ngIf="
+                      item.fileType == '.png' ||
+                      item.fileType == '.jpg' ||
+                      item.fileType == '.svg' ||
+                      item.fileType == '.PNG'
+                    "
+                  />
+                  <img
+                  clas="mt-1"
+                    src="assets/dashboard/pdf.png"
+                    *ngIf="item.fileType === '.pdf'"
+                  />
+                </span>
+                    <p class="nameDownload mt-2">
+                      {{ item.fileName }}
+                    </p>
+                    <i class="fa fa-download typeCom ms-3 mt-2"></i>
 
 
-                <div class="col-lg-4 mt-1">
-                  <p class="files">
-                    <a href="">
-                      <i class="fa fa-file"></i>
-                      اسم الملف
-                    </a>
-                </div>
-
-
-
-                <div class="col-lg-4 mt-1">
-                  <p class="files">
-                    <a href="">
-                      <i class="fa fa-file"></i>
-                      اسم الملف
-                    </a>
-                </div>
-                </div>
-
-
-
-
-                <div class="row">
-                <div class="col-lg-4 mt-1">
-                  <p class="files">
-                    <a href="">
-                      <i class="fa fa-image"></i>
-                      اسم الملف
-                    </a>
-                  </p>
-
-                </div>
-
-
-
-
-                <div class="col-lg-4 mt-1">
-                  <p class="files">
-                    <a href="">
-                      <i class="fa fa-image"></i>
-                      اسم الملف
+                      <!-- <i class="fa fa-file"></i> -->
                     </a>
                 </div>
 
 
 
+              </div>
 
-                <div class="col-lg-4 mt-1">
-                  <p class="files">
-                    <a href="">
-                      <i class="fa fa-image"></i>
-                      اسم الملف
-                    </a>
-                </div>
-                </div>
+
+
+
             </div>
           </div>
+          <ng-template #notfound>
+            <div class="col-12 bg-white px-4 py-1 mb-2" >
+              <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
+                {{ erDateOp}}
+                <small class="fw-normal">{{
+                  dateOpt?.dateCreated | date: "d/M/yyyy"
+                }}</small>
+              </p>
+
+
+            </div>
+          </ng-template>
         </div>
       </div>
 
@@ -560,16 +661,16 @@
             <div class="col-lg-8">
               <p>اسم المشروع : <span>{{project.projectName}}</span></p>
               <p>اسم العميل : <span>{{project.ownerName}}</span></p>
-              <p>مده التنفيذ : <span>عام ونصف</span></p>
+              <p>سنه التنفيذ: <span>{{project.completionYear }}</span></p>
 
-                <div class="row pt-2 date">
+                <!--<div class="row pt-2 date">
                   <div class="col-lg-5">
                     تاريخ البدء : 2 مايو 2019
                   </div>
                   <div class="col-lg-6">
                     تاريخ الانتهاء : 4 مايو 2019
                   </div>
-                </div>
+                </div>-->
             </div>
 
             <div class="col-lg-4 choose">
@@ -623,13 +724,11 @@
 
       <div class="modal fade "  [id]="'project'+project.id" >
         <div class="modal-dialog  modal-xl " >
-
           <button type="button" class="close btn" data-bs-dismiss="modal"
-          style="font-size: 40px; color:gainsboro; "
+          style="font-size: 40px; color:gainsboro;"
           >
             <i>&times;</i>
           </button>
-
           <div class="modal-content w-100 border-0" style="background-color:transparent;">
             <div class="modal-body ">
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -685,4 +784,122 @@
 
 
 
+<div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="showSuc">
+  {{message}}
+</div>
 
+
+<div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
+  {{message}}
+</div>
+
+
+<div
+  class="modal fade"
+  id="addAppointment"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مهمه
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form  [formGroup]="newappointment"
+        (ngSubmit)="creatMeeting()" novalidate>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="name"
+                >اسم </label
+              >
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                  appoins['name'].errors && appoins['name'].touched
+                }"
+              />
+              <div
+                *ngIf="appoins['name'].errors && appoins['name'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['name'].errors['required']">
+                  من فضلك ادخل اسم للموعد                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="description"
+                >وصف </label
+              >
+
+              <textarea  id="" cols="30" rows="1" type="text"
+              id="description"
+              name="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': appoins['description'].errors && appoins['description'].touched
+              }"></textarea>
+              <div
+                *ngIf="appoins['description'].errors && appoins['description'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['description'].errors['required']">
+                  من فضلك ادخل   وصف للموعد
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">اضافه ملف</label>
+            <input class="form-control"
+            type="file"
+            id="imageFile"
+            (change)="uplaodFile($event)"
+            name="imageFile"
+            formControlName="imageFile"
+           >
+          </div>
+
+          <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
+          <button
+          data-bs-dismiss="modal"
+          type="submit"
+          [disabled]="!newappointment.valid"
+          class="btn btn-lg ms-2 text-white form-control  mb-3"
+          style="background: #18AF9A"
+        >
+          انشاء  مهمه
+        </button>
+        <button type="button"  data-bs-dismiss="modal"
+        class="btn btn-lg ms-2 text-white form-control btn-secondary"
+
+        >
+          الغاء
+        </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

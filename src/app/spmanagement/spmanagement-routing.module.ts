@@ -1,10 +1,9 @@
 import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
+import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
 import { SpContributionsComponent } from './sp-contributions/sp-contributions.component';
-
-import { SpMainProfileComponent } from './sp-main-profile/sp-main-profile.component';
 import { SpCompleteProfileComponent } from './sp-complete-profile/sp-complete-profile.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
@@ -30,6 +29,8 @@ import { SpProjectPendingComponent } from './sp-project-pending/sp-project-pendi
 import { SpCprojectOfferComponent } from './sp-cproject-offer/sp-cproject-offer.component';
 import { SpCprojectAcceptComponent } from './sp-cproject-accept/sp-cproject-accept.component';
 import { SpCprojectRejectComponent } from './sp-cproject-reject/sp-cproject-reject.component';
+import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
+import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
         component: LayoutProjectComponent,
         children: [
           {
-            path: '',
+            path: 'price-offers',
             component: SpMenuOffersComponent,
             children: [
               { path: 'new', component: SpProjectRequestAllComponent },
@@ -57,10 +58,12 @@ const routes: Routes = [
               { path: 'accept', component: SpRequestAcceptComponent },
               { path: 'reject', component: SpRequestRejectComponent },
               { path: 'offer', component: SpProjectOfferComponent },
+              { path: 'offer/edit', component: SpRequestEditComponent },
 
               { path: 'all', component: SpProjectsComponent },
               { path: 'all/request', component: SpCprojectRequestComponent },
               { path: 'alloffer', component: SpCprojectOfferComponent },
+              { path: 'alloffer/edit', component: SpCrequestEditComponent },
               { path: 'allaccept', component: SpCprojectAcceptComponent },
               { path: 'allreject', component: SpCprojectRejectComponent },
             ],
@@ -71,13 +74,11 @@ const routes: Routes = [
             children: [
               { path: 'current', component: SpProjectCurrentComponent },
               { path: 'pending', component: SpProjectPendingComponent },
+              { path: 'finished', component: SpProjectFinishedComponent },
             ],
           },
         ],
       },
-
-      { path: 'mainProfile', component: SpMainProfileComponent },
-
       { path: 'completeProfile', component: SpCompleteProfileComponent },
       { path: 'prevWorks', component: PrevWorksComponent },
       {

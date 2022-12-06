@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./complaint.component.scss'],
 })
 export class ComplaintComponent implements OnInit {
+  userRole: any = '';
   constructor(
     private complaintService: ComplaintService,
     private clientService: ClientService
   ) {}
   complaints: any = [];
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role');
     this.complaintService.getComplaints().subscribe((data: any) => {
       this.complaints = data.data;
       console.log(this.complaints);

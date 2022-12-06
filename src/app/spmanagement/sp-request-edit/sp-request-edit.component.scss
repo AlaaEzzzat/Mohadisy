@@ -132,7 +132,12 @@ input::placeholder
   background-position: left calc(0.375em + 0.1875rem) center;
  }
 
- 
+ .form-select
+{
+   background-position: right 11rem center;
+   padding-right: 7%;
+
+}
 .page-link
 {
   color:#004057;
@@ -156,11 +161,21 @@ input::placeholder
   }
 
 
-
-
-
-  .form-select
+  @media (max-width: 576px)
   {
-    background-position: left 0.99rem center
+    .form-select
+    {
+    background-position:right 30rem center;
+    padding-right: 10%;
+    }
 
   }
+
+   @media(max-width: 768px) {
+    .form-select
+    {
+    background-position:right 27rem center;
+    padding-right: 10%;
+    }
+
+   }

@@ -29,7 +29,7 @@ export class SpProjectOfferComponent implements OnInit {
 
    this.api.get("https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/1").subscribe(data=>{
    this.Listprojects=data.data.projects;
-   console.log(data);
+
    this.totalpages=data.data.totalPages;
    for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
@@ -60,6 +60,20 @@ export class SpProjectOfferComponent implements OnInit {
        break;
      }
     }
+
+
+    /*this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0]?.id}`).subscribe(data=>
+   {
+
+    console.log(data.data);
+    
+  
+   }
+
+
+   );*/
+
+
 
    this.projectComponent=[],this.RequiredWorks=[];
    this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
@@ -116,40 +130,18 @@ export class SpProjectOfferComponent implements OnInit {
 
 
     /*************************************/
-    toggoleComponent(componentId:any)
+
+
+
+
+
+    downloadFile(filepath:any,file:any)
     {
-
-     if(this.descComponent[componentId])
-     this.descComponent[componentId]=0;
-     else
-     this.descComponent[componentId]=1;
-
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(filepath, file);
 
     }
 
-    toggoleWork(workId:any)
-    {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
-    toggoleDocument(documentId:any)
-    {
-     if(this.descDocument[documentId])
-     this.descDocument[documentId]=0;
-     else
-     this.descDocument[documentId]=1;
-    }
-
-
-    downloadFile(id:any,file:any)
-    {
-
-    }
-    
     changepage(e:any)
     {
 
@@ -166,8 +158,8 @@ export class SpProjectOfferComponent implements OnInit {
 
     addIdProject(idProject:any)
     {
-     console.log(idProject);
-
+      localStorage.setItem("idproject",idProject);
+      localStorage.setItem("page",`${this.page}`);
 
     }
 

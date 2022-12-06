@@ -84,7 +84,15 @@ ul li i
 .rep
 {
   background-color: #004057;
-  padding:3% 4%  3% 9%;
+  padding:3% 3%  3% 9%;
+  margin-left: 2%;
+
+
+}
+
+.rep a i
+{
+
   font-size:35px !important;
   margin-left: 2%;
   color: white;
@@ -150,9 +158,15 @@ li
 }
 
 
-.btn:focus {
+  .btn:focus {
   outline: none;
   box-shadow: none;
   }
 
+  .rep:hover
+  {
+    cursor: pointer;
+    background-color: #18af9a;
+
+  }
 

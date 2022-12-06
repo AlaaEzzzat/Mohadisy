@@ -1,17 +1,17 @@
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/@core/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-sp-cproject-request',
-  templateUrl: './sp-cproject-request.component.html',
-  styleUrls: ['./sp-cproject-request.component.scss']
+  selector: 'app-sp-crequest-edit',
+  templateUrl: './sp-crequest-edit.component.html',
+  styleUrls: ['./sp-crequest-edit.component.scss']
 })
-export class SpCprojectRequestComponent implements OnInit {
+export class SpCrequestEditComponent implements OnInit {
 
-   OfferData:any;
+  OfferData:any;
    Listprojects:Array<any>=[];
    projectComponent:Array<any>=[];
    AllProjectComponent:Array<any>=[];
@@ -67,21 +67,25 @@ export class SpCprojectRequestComponent implements OnInit {
   ngOnInit(): void {
 
     this.select=localStorage.getItem('idproject');
+
     this.page=Number(localStorage.getItem("page"));
 
-    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+    this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
 
-    this.Listprojects=data.data.priceQuotes;
-    this.totalpages=data.data.totalPages;
-    for(let i=1;i<=this.totalpages;i++)
-    this.pages.push(i);
+      this.totalpages=data.data.totalPages;
+       this.Listprojects=data.data.projects;
+       for(let i=1;i<=this.totalpages;i++)
+       this.pages.push(i);
+      this.SelectIdProject();
 
-    if(this.Listprojects.length>0)
-     this.result=1;
-
-     console.log( this.Listprojects);
+      this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.selectProject?.offers[0]?.cost}`).subscribe(data=>{
+      this.totalcost=data.data;
+      this.checkDataStage();
+      this.Initial();
+    });
 
     });
+
 
 
 
@@ -96,53 +100,93 @@ export class SpCprojectRequestComponent implements OnInit {
   }
 
 
-  showData(idProject:number)
+
+  Initial()
   {
-    this.OfferData.reset();
 
-    this.select=idProject;
+    this.OfferData.get('numberOfMilestones').setValue(this.selectProject?.offers[0]?.numberOfMilestones);
+      this.OfferData.get('period').setValue(this.selectProject?.offers[0]?.period);
+      this.OfferData.get('cost').setValue(this.selectProject?.offers[0]?.cost);
+      this.OfferData.get('message').setValue(this.selectProject?.offers[0]?.message);
+      this.OfferData.get('contractorCommitments').setValue(this.selectProject?.offers[0]?.contractorCommitments);
+      this.OfferData.get('contractTerms').setValue(this.selectProject?.offers[0]?.contractTerms);
+      this.OfferData.get('sizingMethod').setValue(this.selectProject?.offers[0]?.sizingMethod);
+      this.OfferData.get('disputeResolution').setValue(this.selectProject?.offers[0]?.disputeResolution);
 
 
+
+    this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
+       {
+
+        console.log(data.data);
+        var stages=data.data;
+        for(let i=0;i<stages.length;i++){
+        this.Precentage[i+1]=stages[i].percentage;
+        this.totalcostMilestone[i+1]=stages[i].cost;
+        if(stages[i].isFirstMilestone==true)
+        this.WorkId[i+1]=8;
+        else if(stages[i].isLastMilestone==true)
+        this.WorkId[i+1]=9;
+        else
+        this.WorkId[i+1]=stages[i].requiredWorkId;
+
+       }
+
+       }
+
+       );
+  }
+
+
+   SelectIdProject()
+  {
 
     for(let project of this.Listprojects)
     {
       if(project.id==this.select)
       {
         this.selectProject=project;
-        console.log(this.selectProject);
 
         break;
       }
      }
 
+     console.log(this.selectProject);
 
-    this.RequiredWorks=[];
+
 
     this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
-   (data=>{
+    (data=>{
 
-     for(let work of data.data)
-     {
+      for(let work of data.data)
+      {
 
-          for(let w of this.selectProject.projectRequiredWorks)
-         {
-           if(w.requiredWorkId==work.id)
-           {
-             this.RequiredWorks.push({
-               "name":work.name,
-               "id":work.id,
-               "requiredDocuments":work.requiredDocuments
-           });
-           }
-         }
-     }
+           for(let w of this.selectProject.projectRequiredWorks)
+          {
+            if(w.requiredWorkId==work.id)
+            {
+              this.RequiredWorks.push({
+                "name":work.name,
+                "id":work.id,
+                "requiredDocuments":work.requiredDocuments
+            });
+            }
+          }
 
 
-     });
+      }
 
+
+      });
 
   }
 
+  showData(idProject:number)
+  {
+    this.select=idProject;
+    this.SelectIdProject();
+    this.Initial();
+  }
 
 
 
@@ -163,11 +207,11 @@ export class SpCprojectRequestComponent implements OnInit {
 
     });
      }
-
      milestones()
      {
        this.numberofMilestones=[];
        var milestones=this.OfferData.get('numberOfMilestones').value;
+
        if(milestones<=6){
        for(let i=1;i<=milestones;i++)
        {
@@ -183,7 +227,7 @@ export class SpCprojectRequestComponent implements OnInit {
        this.totalcost=0;
 
        if(this.OfferData.get('cost').value){
-       this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData.get('cost').value}`).subscribe(data=>{
+       this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData?.get('cost').value}`).subscribe(data=>{
 
 
          this.totalcost=data.data;
@@ -192,13 +236,13 @@ export class SpCprojectRequestComponent implements OnInit {
 
        });
         }else{
-         var milestones=(Number)(this.OfferData.get('numberOfMilestones').value);
-         console.log(milestones);
+         var milestones=(Number)(this.OfferData?.get('numberOfMilestones').value);
          if(milestones<=6){
          for(let i=1;i<=milestones;i++)
          {
          this.Precentage[i]=0,
          this.totalcostMilestone[i]=0;
+
 
          }
           }
@@ -228,7 +272,7 @@ export class SpCprojectRequestComponent implements OnInit {
        if(stage=="1"&&precentage)
        {
          this.api.get(`https://app.mohandisy.com/api/Offer/getFirstMilestoneCost?cost=
-         ${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+         ${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
          {
 
 
@@ -239,7 +283,7 @@ export class SpCprojectRequestComponent implements OnInit {
          });
        }else if(precentage)
        {
-         this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+         this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
          {
 
            this.totalcostMilestone[stage]=data.data;
@@ -413,18 +457,18 @@ export class SpCprojectRequestComponent implements OnInit {
          }
 
 
-         //console.log(AllData);
 
-         this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
-         {
-           next:(data)=>{
-           Swal.fire(
-             'تم تقديم العرض بنجاح'
-           );
-           this.router.navigate(['/Spmanagement/projects/all']);
-           }
+          console.log("all data : ",AllData);
+           this.api.postJson("https://app.mohandisy.com/api/Offer/updateOffer",AllData).subscribe(
+           {
+             next:(data)=>{
+             Swal.fire(
+               'تم تعديل العرض بنجاح'
+             );
+             this.router.navigate(['/Spmanagement/projects/price-offers/offer/edit']);
+             }
 
-         } );
+           } );
 
           }
 
@@ -435,13 +479,6 @@ export class SpCprojectRequestComponent implements OnInit {
 
 
 
-
-
-
-
-
-   }
-
-
+        }
 
   }

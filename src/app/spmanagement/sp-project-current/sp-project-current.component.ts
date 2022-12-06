@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
+import { IMessage } from 'src/app/@models/message';
+import { ChatService } from 'src/app/@core/services/chat/chat.service';
+
 
 @Component({
   selector: 'app-sp-project-current',
@@ -20,17 +23,15 @@ export class SpProjectCurrentComponent implements OnInit {
     "المرحله الخامسه",
     "المرحله السادسه"
   ];
-  selected:number=Date.now();
+  selected: Date = new Date();
   Listprojects:Array<any>=[];
   projectComponent:Array<any>=[];
   AllProjectComponent:Array<any>=[];
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
   descWork:Array<any>=[];
   documents:Array<any>=[];
-  descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
   totalpages: any = 0;
@@ -42,11 +43,18 @@ export class SpProjectCurrentComponent implements OnInit {
   statusStage:any="لم يتم الانتهاء من اى مرحله";
   Reason:any;
   Representative:any;
+  stagefinish:Array<any>=[];
+  startChat:any=false;
+  receiverId:string='';
+  message: IMessage = {} as IMessage;
+  fileMessage: any = '';
 
- constructor(private api:ApiService,private router:Router) {
+
+ constructor(private api:ApiService,private router:Router,  private chatService: ChatService) {
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
+
 
     });
  }
@@ -72,6 +80,7 @@ export class SpProjectCurrentComponent implements OnInit {
     {
       this.Representative=data.data;
 
+
     }
    );
 
@@ -92,7 +101,7 @@ export class SpProjectCurrentComponent implements OnInit {
        break;
      }
     }
-    console.log(this.selectProject);
+    //console.log(this.selectProject);
 
     this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
    {
@@ -100,8 +109,18 @@ export class SpProjectCurrentComponent implements OnInit {
      this.Allstages=data.data;
      console.log(this.Allstages);
      this.index=0;
+     this.calcPrecentage=0;
+     for(let i=0;i<this.Allstages.length;i++)
+     {
+      if(this.Allstages[i].milestoneStatusId==3)
+      {
+        this.stagefinish[this.Allstages[i].id]=1;
+        this.calcPrecentage+=(100.0/this.Allstages.length);
+      }
+     }
 
    }
+
    );
 
    this.projectComponent=[],this.RequiredWorks=[];
@@ -161,7 +180,7 @@ export class SpProjectCurrentComponent implements OnInit {
 
 
     /*************************************/
-    toggoleComponent(componentId:any)
+    /*toggoleComponent(componentId:any)
     {
 
      if(this.descComponent[componentId])
@@ -170,17 +189,7 @@ export class SpProjectCurrentComponent implements OnInit {
      this.descComponent[componentId]=1;
 
 
-    }
-
-    toggoleWork(workId:any)
-    {
-     if(this.descWork[workId])
-     this.descWork[workId]=0;
-     else
-     this.descWork[workId]=1;
-
-    }
-
+    }*/
 
 
     toggleStage(stageId:any)
@@ -195,58 +204,109 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
-    pending(stageid:any)
+    pending(stageid:number)
     {
-
 
       var pendingData=
       {
         "milestoneId":stageid,
         "reason":this.Reason.get('reason').value
       }
+      console.log(pendingData);
       this.api.postJson("https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending",pendingData).subscribe({
         next:(data)=>
         {
-          console.log(data);
-
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
+            this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
+              this.Listprojects=data.data.projects;
+              this.select=0;
+              this.showData(this.select);
 
-            this.router.navigate(['/Spmanagement/projects/status/pending']);
-
+            });
         }
-
 
       });
 
-
-
     }
+
+
 
     finished(stageid:any)
     {
       this.calcPrecentage+=(100.0/Number(this.Allstages.length));
-      this.api.get(`https://app.mohandisy.com/api/Milestone/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
+
+      this.api.get(`https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToFinished/${stageid}`).subscribe({
         next:(data)=>
         {
+          this.stagefinish[stageid]=1;
           console.log(data);
-
-            Swal.fire(
+            /*Swal.fire(
               'تم انهاء المرحله بنجاح'
-            );
-        }
+            );*/
 
+        }
 
 
       })
 
     }
 
-    downloadFile(id:any,file:any)
+    downloadFile(filepath:any,file:any)
     {
+      var FileSaver = require('file-saver');
+      FileSaver.saveAs(filepath, file);
 
     }
+
+    toggleChat =()=>
+    {
+      this.startChat=!this.startChat;
+    }
+
+
+     onFileUpload(event: any) {
+      if (event.target.files.length > 0) {
+        const myfile = event.target.files[0];
+        this.fileMessage = myfile;
+      }
+    }
+
+      sendMessage(message: string) {
+
+       if (this.receiverId == '') {
+          this.receiverId = this.selectProject.clientProfile.applicationUserId;
+        }
+        var type: number = 1;
+        this.message.content = message;
+        this.message.messageTypeId = type;
+        this.message.receiverId = this.receiverId;
+        this.sendMessageToEndPoint(this.message, this.receiverId);
+        if (this.fileMessage) {
+          type = 2;
+          this.message.content = this.fileMessage;
+          this.message.messageTypeId = type;
+          this.message.receiverId = this.receiverId;
+          this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
+        }
+
+      }
+
+      sendMessageToEndPoint(message: any, receiverId: any) {
+        this.chatService.sendMessage(message).subscribe({
+          next: (data: any) => {
+            console.log(data);
+            this.startChat = false;
+            this.router.navigate(['/Spmanagement/chat']);
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      }
+
+
 
     changepage(e:any)
     {
@@ -257,14 +317,10 @@ export class SpProjectCurrentComponent implements OnInit {
 
       this.Listprojects=data.data.projects;
 
-
    });
     }
 
-    onSubmit()
-    {
 
-    }
 
  }
 

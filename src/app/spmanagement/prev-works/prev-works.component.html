@@ -243,12 +243,16 @@
               <td>{{ work.ownerName }}</td>
               <td>{{ work.projectPrice }}</td>
               <td>{{ work.completionYear }} %</td>
-              <td>
-                <ul class="list-unstyled p-0 w-100">
+              <td  >
+                <ul class="list-unstyled p-0 w-100" 
+                >
                   <ng-container
                     *ngFor="let img of work.serviceProviderWorkFiles"
                   >
-                    <li (click)="showpopup=true" class="mb-1">
+                    <li  class="mb-1" 
+                    type="button"   (click)="projectImage(work.id)"
+                    data-bs-toggle="modal"  [attr.data-bs-target]="'#work'+work.id"
+                    >
                       <p>{{
                         img.file.split("\\").slice(-1)[0].length > 15
                           ? img.file.split("\\").slice(-1)[0].substr(0, 15) +
@@ -256,53 +260,57 @@
                           : img.file.split("\\").slice(-1)[0]
                       }}</p>
                     </li>
-                    <div *ngIf="showpopup" class="modal fade ">
-                      <div class="modal-dialog  modal-xl " >
-                    
-                        <button type="button" class="close btn" data-bs-dismiss="modal"
-                        style="font-size: 40px; color:gainsboro; "
-                        >
-                          <i>&times;</i>
-                        </button>
-                    
-                        <div class="modal-content w-100 border-0" style="background-color:transparent;">
-                          <div class="modal-body ">
-                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                              <div class="carousel-inner">
-                    
-                                <ng-container *ngFor="let file of work.serviceProviderWorkFiles ; let i=index;">
-                                  <div *ngIf="i==0" class="carousel-item active">
-                    
-                                    <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
-                                  </div>
-                                  <div *ngIf="i!=0" class="carousel-item">
-                                    <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
-                                  </div>
-                                </ng-container>
-                              </div>
-                    
-                            </div>
-                    
-                          </div>
-                    
-                    
-                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                      </button>
-                    
-                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                      </button>
-                    
-                        </div>
-                    
-                    
-                      </div>
-                    
-                    </div>
+
                   </ng-container>
+
+                      <!-------------Carousel------------------>
+                      <div class="modal fade "  [id]="'work'+work.id" >
+                        <div class="modal-dialog  modal-xl " >
+                          <button type="button" class="close btn " data-bs-dismiss="modal"
+                          >
+                            <i>&times;</i>
+                          </button>
+                          <div class="modal-content w-100 border-0" style="background-color:transparent;">
+                            <div class="modal-body ">
+                              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                
+                                  <ng-container *ngFor="let img of workFile; let i=index;">
+                                    <div *ngIf="i==0" class="carousel-item active">
+                
+                                      <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
+                                    </div>
+                                    <div *ngIf="i!=0" class="carousel-item">
+                                      <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
+                                    </div>
+                                  </ng-container>
+                                </div>
+                
+                              </div>
+                
+                            </div>
+                
+                
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                
+                          </div>
+                
+                
+                        </div>
+                
+                      </div>
+  
+                      <!----------------------------->
+
+
                 </ul>
               </td>
               <td>

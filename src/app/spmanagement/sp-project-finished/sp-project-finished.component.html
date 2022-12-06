@@ -5,9 +5,9 @@
 </ng-container>
 
 
-<div class="section-2 mt-2 container-fluid" *ngIf="result==1">
+<div class="section-2 mt-2 container-fluid">
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3 position-relative">
       <div class="row">
 
         <ng-container *ngFor="let project of Listprojects">
@@ -15,7 +15,7 @@
             <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
               <p><i class="far fa-building "></i>
-                <span> اسم المشروع :{{project?.name}}
+                <span> اسم المشروع :{{project.name}}
                   <ng-container *ngIf="type==1">
                     <a class="btn">(مشروع استشارى)</a>
                   </ng-container>
@@ -38,13 +38,7 @@
               style="background:white;  color:#004057;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project?.name}}
-                  <ng-container *ngIf="type==1">
-                    <a class="btn">(مشروع استشارى)</a>
-                  </ng-container>
-
-                  <ng-container *ngIf="type==2">
-                    <a class="btn">()</a>
-                  </ng-container>
+                  <a class="btn">(مشروع استشارى)</a>
                 </span>
               </p>
               <p><i class="fa fa-location-dot "></i>
@@ -55,49 +49,50 @@
           </ng-container>
 
         </ng-container>
+
         <div class="col-12 " style="height: 100px; ;"></div>
 
-
-        <nav aria-label="Page navigation" class="mt-4 mb-3 col-lg-12"  *ngIf="result==1">
+        <nav aria-label="Page navigation position-absolute top100" class="mt-4 mb-3" *ngIf="result==1">
           <ul class="pagination d-flex flex-wrap w-100">
-
-            <ng-container *ngIf="page==1">
-            <li class="page-item disabled">
-              <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
-            </li>
-            </ng-container>
-
-             <ng-container *ngIf="page!=1">
-              <li class="page-item">
-                <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+              <ng-container *ngIf="page==1">
+              <li class="page-item disabled">
+                <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
               </li>
               </ng-container>
 
-            <ng-container *ngFor="let p of pages">
-              <ng-container *ngIf="page==p">
-                <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+               <ng-container *ngIf="page!=1">
+                <li class="page-item">
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+                </li>
+                </ng-container>
+
+              <ng-container *ngFor="let p of pages">
+                <ng-container *ngIf="page==p">
+                  <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
+                <ng-container *ngIf="page!=p">
+                  <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
               </ng-container>
 
-              <ng-container *ngIf="page!=p">
-                <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
-              </ng-container>
+              <ng-container *ngIf="page==pages.length">
+                <li class="page-item disabled" >
+                  <button class="page-link btn p-1 px-3">التالى</button>
+                </li>
+               </ng-container>
 
-            </ng-container>
+               <ng-container *ngIf="page!=pages.length">
+                <li class="page-item" >
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+                </li>
+               </ng-container>
 
-            <ng-container *ngIf="page==pages.length">
-            <li class="page-item disabled">
-              <button class="page-link btn p-1 px-3">التالى</button>
-            </li>
-           </ng-container>
+            </ul>
+          </nav>
+      
 
-           <ng-container *ngIf="page!=pages.length">
-            <li class="page-item">
-              <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
-            </li>
-           </ng-container>
-
-          </ul>
-        </nav>
 
       </div>
 
@@ -108,28 +103,7 @@
 
     <ng-container *ngIf="select!=0">
     <div class="col-lg-6 mt-4 mb-3 section-3">
-
       <div class="row">
-        <div class="col-lg-12 ">
-          <div class="card card-2">
-            <div class="row">
-              <div class="col-lg-9 p-2 content-1">
-                <h6>سبب التعليق</h6>
-                <p>{{selectProject.projectRequestStatus?.notes}}
-                </p>
-              </div>
-              <div class="col-lg-3 p-2 content-1">
-                <button class="btn" (click)="current()">تفعيل المشروع</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <div class="row mt-2">
         <div class="col-lg-12 info">
           <div class="card card-infoP">
             <div class="row">
@@ -152,46 +126,44 @@
                 </p>
               </div>
 
+                <!----------------chat--------------->
+                <div class="overlay  p-5" *ngIf="startChat">
+                  <div class="popup p-5">
+                    <a class="close" style="cursor: pointer" (click)="toggleChat()">&times;</a>
+                    <div class="content">
+                      <label class="form-label fw-bold cairo">
+                        الرساله
+                      </label>
+                      <div class="message-input d-flex flex-column justify-content-center">
+                        <div class="wrap">
+                          <input class="form-control" #textInput type="text" placeholder="اكتب شيئاً ..."
+                            class="cairo" />
+                          <i class="fa-solid fa-paperclip attachment" aria-hidden="true">
 
-              <!----------------chat--------------->
-              <div class="overlay  p-5" *ngIf="startChat">
-                <div class="popup p-5">
-                  <a class="close" style="cursor: pointer" (click)="toggleChat()">&times;</a>
-                  <div class="content">
-                    <label class="form-label fw-bold cairo">
-                      الرساله
-                    </label>
-                    <div class="message-input d-flex flex-column justify-content-center">
-                      <div class="wrap">
-                        <input class="form-control" #textInput type="text" placeholder="اكتب شيئاً ..."
-                          class="cairo" />
-                        <i class="fa-solid fa-paperclip attachment" aria-hidden="true">
+                            <input (change)="onFileUpload($event)" #fileImage type="file" alt="" name="attatch"
+                              id="attatch" class="attatch" />
+                            <small *ngIf="fileMessage" style="font-size: 12px;">{{
+                              fileMessage.name.substr(0,12)}}...</small>
 
-                          <input (change)="onFileUpload($event)" #fileImage type="file" alt="" name="attatch"
-                            id="attatch" class="attatch" />
-                          <small *ngIf="fileMessage" style="font-size: 12px;">{{
-                            fileMessage.name.substr(0,12)}}...</small>
-
-                        </i>
+                          </i>
+                        </div>
+                        <button (click)="sendMessage(textInput.value)" class="btn submit">
+                          <span>إرسال</span>
+                          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        </button>
                       </div>
-                      <button (click)="sendMessage(textInput.value)" class="btn submit">
-                        <span>إرسال</span>
-                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                      </button>
                     </div>
                   </div>
                 </div>
-              </div>
 
 
-              <!--------------end chat------------------->
-
-
+                <!--------------end chat------------------->
 
             </div>
           </div>
         </div>
       </div>
+
 
       <div class="row ">
         <div class="col-lg-12 mt-2">
@@ -324,7 +296,7 @@
           <div class="card card-4">
             <div class="row">
               <div class="col-lg-2 mt-1">
-              <img src="{{Representative.organizationalServiceProviderProfile.profilePicturePath}}" alt="image" class="w-80">
+              <img src="{{Representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="image" class="w-80">
               </div>
               <div class="col-lg-5 mt-3">
                 <p>
