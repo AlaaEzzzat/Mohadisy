@@ -30,6 +30,7 @@ export class SpProjectPendingComponent implements OnInit {
   receiverId:string='';
   message: IMessage = {} as IMessage;
   fileMessage: any = '';
+  type:number=Number(localStorage.getItem('typeId'));
 
  constructor(private api:ApiService,private router:Router, private chatService: ChatService) { }
 
@@ -155,7 +156,15 @@ export class SpProjectPendingComponent implements OnInit {
             Swal.fire(
               'تم تفعيل المشروع بنجاح'
             );
-            this.router.navigate(['/Spmanagement/projects/status/current']);
+           // this.router.navigate(['/Spmanagement/projects/status/current']);
+
+           this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPPendingProjects/Page/1").subscribe(data=>{
+
+            this.Listprojects=data.data.projects;
+            this.select=0;
+            this.showData(this.select);
+           });
+
            }
 
         }
@@ -172,7 +181,7 @@ export class SpProjectPendingComponent implements OnInit {
       );
 
 
-      
+
 
     }
 

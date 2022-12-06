@@ -79,7 +79,7 @@ export class SpProjectCurrentComponent implements OnInit {
     data=>
     {
       this.Representative=data.data;
-      console.log( this.Representative);
+
 
     }
    );
@@ -219,11 +219,19 @@ export class SpProjectCurrentComponent implements OnInit {
             Swal.fire(
               'تم تعليق المرحله بنجاح'
             );
+            this.api.get("https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1").subscribe(data=>{
+              this.Listprojects=data.data.projects;
+              this.select=0;
+              this.showData(this.select);
+
+            });
         }
 
       });
 
     }
+
+
 
     finished(stageid:any)
     {

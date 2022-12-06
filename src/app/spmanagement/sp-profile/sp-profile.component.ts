@@ -100,12 +100,6 @@ export class SpProfileComponent implements OnInit {
       });
 
 
-        this.api.postJson("https://app.mohandisy.com/api/Appointment/getAppointments").subscribe(data=>
-          {
-            console.log(data);
-
-          });
-
 
        this.api.get("https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus").subscribe(data=>
         {

@@ -32,6 +32,7 @@ export class SpProjectFinishedComponent implements OnInit {
   receiverId:string='';
   message: IMessage = {} as IMessage;
   fileMessage: any = '';
+  type:number=Number(localStorage.getItem('typeId'));
 
  constructor(private api:ApiService,private router:Router, private chatService: ChatService) {
 
