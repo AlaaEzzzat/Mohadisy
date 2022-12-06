@@ -69,10 +69,7 @@ color: #000 !important;
 
   background-color: #FFC10780 !important;
 }
-.top100 {
-  top: 99% !important;
-  right:-5% !important;
-}
+
 .modaltitle{
   background-color: $textColor !important;
   >h2,>button{
@@ -141,9 +138,9 @@ border: none!important;
   // }
 }
 .top100{
-  top: 80%!important;
-  right: 10% !important;
+  bottom: 10px !important;
 }
 .changeCursor{
   cursor: pointer !important;
 }
+

@@ -3,17 +3,18 @@
   <div class="row mt-5 pe-3">
     <div class="col-md-6">
       <div class="row mb-3">
-        <div class="col">
+        <div class="col" (click)="complete()">
           <button
             disabled
             class="btn mb-2 cairo w-100 text-white p-2 fontStyle text-center"
-            style="background-color: #18af9a"
+            style="background-color: #18af9a" 
+            
           >
             مكتمل
           </button>
         </div>
 
-        <div class="col">
+        <div class="col" (click)="inComplete()">
           <button
             style="background-color: #ee9c0f"
             disabled
@@ -22,7 +23,7 @@
             غير مكتمل
           </button>
         </div>
-        <div class="col">
+        <div class="col" (click)="notComplete()">
           <button
             style="background-color: #cc2a2a"
             disabled

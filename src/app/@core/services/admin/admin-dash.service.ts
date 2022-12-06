@@ -14,10 +14,20 @@ import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user
 export class AdminDashService {
 
   private httpoptions ={}
+  private httpoptionsFile ={}
+
   constructor(private _HttpClient:HttpClient) {
     this.httpoptions={
       headers:new HttpHeaders({
         'content-Type':'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+
+
+      })
+    }
+    this.httpoptionsFile={
+      headers:new HttpHeaders({
+        'content-Type':'multipart/form-data',
           Authorization: `Bearer ${localStorage.getItem('token')}`,
 
 
@@ -62,6 +72,22 @@ export class AdminDashService {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/Dashboard/getUsers`)
 
   }
+     // /api/Appointment/getAppointments
+     appointmentsEndAndStartDte(date:any):Observable<any>
+     {
+       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/getAppointments`,JSON.stringify(date), this.httpoptions);
+     }
+     // /api/Appointment/storeAppointmentFiles/{appointmentId}
+     storeAppointmentFiles(appointmentId:any,date:any,):Observable<any>
+     {
+       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointmentFiles/${appointmentId}`,date)
+     }
+     // /api/Appointment/storeAppointment
+     storeAppointment(object:any):Observable<any>
+     {
+       return this._HttpClient.post<any>(`${environment.baseUrl}/api/Appointment/storeAppointment`,JSON.stringify(object), this.httpoptions);
+     }
+
   
 
 }

@@ -1,0 +1,213 @@
+<div
+class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
+>
+<!-- <div class="col-12 bg-white px-4 py-1 mb-2">
+  <h5 class="fw-bold pt-3">جدول الاعمال</h5>
+</div> -->
+<div class="col-12 bg-white py-3 mb-2">
+  <h5 class="cairo fw-bold text-center m-0 p-0 cairo">
+    جدول الاعمال
+  </h5>
+</div>
+<div class="col-12  mb-2" (click)="getappointDate()" >
+  <!-- <mat-card class="demo-inline-calendar-card"> -->
+  <mat-calendar [(selected)]="selected" class="col-12" ></mat-calendar>
+  <!-- </mat-card> -->
+</div>
+<div class="col-12 bg-white px-4 py-1 mb-2">
+  <p class="fw-semibold pt-3">{{ selected | date: "d/M/yyyy" }}</p>
+</div>
+<div class="col-12 bg-white px-4 py-1 mb-2" *ngIf="dateOpt!=null;else notfound">
+  <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
+    {{ dateOpt?.name }}
+    <small class="fw-normal">{{
+      dateOpt?.dateCreated | date: "d/M/yyyy"
+    }}</small>
+  </p>
+  <p class="fw-normal">{{ dateOpt?.description }}</p>
+
+  <div *ngFor="let item of appointmentFiles" class="d-flex justify-content-between align-content-center">
+    <a
+    target="_blank"
+    class="informationDownload  d-flex  justify-content-between mb-2"
+    (click)="
+      download(
+        item.filePath,
+        item.fileName
+      )
+    "
+  >
+  <span
+  ><img
+    src="assets/dashboard/picture.png"
+    alt=""
+    *ngIf="
+      item.fileType == '.png' ||
+      item.fileType == '.jpg' ||
+      item.fileType == '.PNG'
+    "
+  />
+  <img
+    src="assets/dashboard/pdf.png"
+    *ngIf="item.fileType === '.pdf'"
+  />
+</span>
+    <p class=" nameDownload">
+      {{ item.fileName }}
+    </p>
+    <i class="fa fa-download typeCom ms-3"></i>
+
+  </a>
+    <!-- <p class="">
+     
+      <span> {{ item.fileName }}</span>
+    </p> -->
+    <!-- <i class="fa fa-download typeCom ms-3"></i> -->
+  </div>
+</div>
+<ng-template #notfound>
+  <div class="col-12 bg-white px-4 py-1 mb-2" >
+    <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
+      {{ erDateOp}}
+      <small class="fw-normal">{{
+        dateOpt?.dateCreated | date: "d/M/yyyy"
+      }}</small>
+    </p>
+
+  
+  </div>
+</ng-template>
+<!-- <div class="col-12 bg-white px-4 py-1 mb-2">
+  <p class="fw-semibold pt-3" style="color: #4b4a4a">
+    تم دخول {{ usernames }} الى المنصه الساعه
+    <span class="main-color">11:20 am</span>
+  </p>
+</div> -->
+<!-- <div class="col-12 bg-white px-4 py-1 mb-2"> -->
+  <div class=" col-12 bg-white  px-4 py-1 mb-2 " data-bs-toggle="modal" data-bs-target="#addAppointment">
+
+  <p class="pt-3">
+    <img src="assets/dashboard/add.png" class="ms-2" />
+    <span style="color: #c7c7c7"> اضافه حدث الى هذا اليوم</span>
+  </p>
+</div>
+</div>
+
+<div
+  class="modal fade"
+  id="addAppointment"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مهمه  
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form  [formGroup]="newappointment"
+        (ngSubmit)="creatMeeting()" novalidate>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="name"
+                >اسم </label
+              >
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                  appoins['name'].errors && appoins['name'].touched
+                }"
+              />
+              <div
+                *ngIf="appoins['name'].errors && appoins['name'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['name'].errors['required']">
+                  من فضلك ادخل اسم للموعد                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="description"
+                >وصف </label
+              >
+
+              <textarea  id="" cols="30" rows="1" type="text"
+              id="description"
+              name="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': appoins['description'].errors && appoins['description'].touched
+              }"></textarea>
+              <div
+                *ngIf="appoins['description'].errors && appoins['description'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['description'].errors['required']">
+                  من فضلك ادخل   وصف للموعد
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">اضافه ملف</label>
+            <input class="form-control" 
+            type="file"
+            id="imageFile"
+            (change)="uplaodFile($event)"
+            name="imageFile"
+            formControlName="imageFile"
+           >
+          </div>
+         
+          <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
+          <button
+          data-bs-dismiss="modal"
+          type="submit"
+          [disabled]="!newappointment.valid"
+          class="btn btn-lg ms-2 text-white form-control  mb-3"
+          style="background: #18AF9A"
+        >
+          انشاء  مهمه
+        </button>
+        <button type="button"  data-bs-dismiss="modal"
+        class="btn btn-lg ms-2 text-white form-control btn-secondary"
+
+        >
+          الغاء
+        </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="showSuc">
+  {{message}}
+</div>
+
+
+<div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
+  {{message}}
+</div>

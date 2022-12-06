@@ -3,7 +3,7 @@
   .cairo {
     font-family: "cairo";
   }
- 
+
   .slideshow {
     background-color: #18af9a;
     position: relative;
@@ -150,7 +150,8 @@
     display: flex;
     justify-content: space-between;
     margin: 20px;
-    padding: 22px 50px;
+    padding: 20px;
+    align-items: center;
     font-style: normal;
     font-weight: 600;
     font-size: 32px;
@@ -187,8 +188,8 @@
     justify-content: space-between;
     margin-bottom: 20px;
     .btn {
-      margin: 0;
-      padding: 22px 20px;
+      margin: 0 10px;
+      padding: 20px;
       font-size: 18px;
     }
   }

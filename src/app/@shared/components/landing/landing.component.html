@@ -1,57 +1,3 @@
-<!-- <div class="container-fluid m-0 p-0">
-      <section class=" landing">
-            <div class="slideshow">
-                  <div class=" h-100">
-                        <div class="row overlay m-0">
-                              <div class="col-md-8 d-flex align-items-center justify-content-center">
-                                    <div class="w-75">
-                                          <img/>
-                                          <h5 class="cairo">انتظروا أكبر منصه للاستشارات الهندسيه في الوطن العربي قريبا</h5>
-                                          <h3 class="cairo">مهندسي من أوائل المنصات الوسيطه في المملكه لتسويق الخدمات الهندسيه عن بعد في المملكه العربيه السعودية.</h3>
-                                          <button class="btn cairo px-5 mainbk">سجل معنا الأن</button>
-                                    </div>
-                              </div>
-                          </div>
-                        <div class="row m-0 p-0 h-100 d-flex flex-row-reverse"> 
-                              <div class="col-md-4 h-100">
-                                    <div id="carouselExampleIndicators" class="carousel h-100 slide" data-bs-ride="true">
-                                          <div class="carousel-indicators">
-                                                <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active indicators" aria-current="true" aria-label="Slide 1"></button>
-                                                <button class="indicators" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                <button class="indicators" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                              </div>
-                                          <div class="carousel-inner h-100" >
-                                            <div class="carousel-item h-100 w-100 active">
-                                                <div  style="background-image:url('assets/images/c1.jpg')" class=" d-block h-100 w-100" ></div>
-                                            </div>
-                                            <div class="carousel-item h-100 w-100">
-                                                <div style="background-image:url('assets/images/c2.png')" class="d-block h-100 w-100" ></div>
-                                            </div>
-                                            <div class="carousel-item h-100 w-100">
-                                                <div style="background-image:url('assets/images/c3.png')" class=" d-block h-100 w-100" ></div>
-                                            </div>
-                                          </div>
-                                          
-                                        </div>
-                              </div>
-                        </div>
-          </div>
-            </div>
-      </section>
-      <section class="timer text-center">
-            <div>
-                  <div class="clock">
-                        <span class="cairo soon text-white mx-3">قريبا</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
-                              <path d="M20.4833 3.33331C11.2833 3.33331 3.83334 10.8 3.83334 20C3.83334 29.2 11.2833 36.6666 20.4833 36.6666C29.7 36.6666 37.1667 29.2 37.1667 20C37.1667 10.8 29.7 3.33331 20.4833 3.33331ZM20.5 33.3333C13.1333 33.3333 7.16668 27.3666 7.16668 20C7.16668 12.6333 13.1333 6.66665 20.5 6.66665C27.8667 6.66665 33.8333 12.6333 33.8333 20C33.8333 27.3666 27.8667 33.3333 20.5 33.3333Z" fill="white"/>
-                              <path d="M21.3333 11.6667H18.8333V21.6667L27.5833 26.9167L28.8333 24.8667L21.3333 20.4167V11.6667Z" fill="white"/>
-                              </svg>
-                  </div>
-                  <div></div>
-            </div>
-      </section>
-</div> -->
-<!--  -->
 <div class="container-fluid m-0 p-0">
   <section class="landing">
     <div class="slideshow">
@@ -99,7 +45,12 @@
                   مهندسي من أوائل المنصات الوسيطه في المملكه لتسويق الخدمات
                   الهندسيه عن بعد في المملكه العربيه السعودية.
                 </h3>
-                <button class="btn cairo px-5 mainbk" routerLink="account/signup">سجل معنا الأن</button>
+                <button
+                  class="btn cairo px-5 mainbk"
+                  routerLink="account/signup"
+                >
+                  سجل معنا الأن
+                </button>
               </div>
             </div>
           </div>
@@ -182,14 +133,14 @@
   <div class="row d-flex justify-content-around">
     <div class="col-md-4">
       <div class="buttons d-flex">
-        <button (click)="one = true; two = false; three = false" class="btn"  [ngClass]="
-        one == true && two == false && three == false ? 'activeBtn' : 'gray'
-      ">
-          <span
-            class="cairo ms-3"
-           
-            >الرؤية</span
-          >
+        <button
+          (click)="one = true; two = false; three = false"
+          class="btn w-100"
+          [ngClass]="
+            one == true && two == false && three == false ? 'activeBtn' : 'gray'
+          "
+        >
+          <span class="cairo ms-3">الرؤية</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
@@ -205,7 +156,7 @@
         </button>
         <button
           (click)="one = true; two = true; three = false"
-          class="btn"
+          class="btn w-100"
           [ngClass]="
             one == true && two == true && three == false ? 'activeBtn' : 'gray'
           "
@@ -226,7 +177,7 @@
         </button>
         <button
           (click)="one = false; two = false; three = true"
-          class="btn"
+          class="btn w-100"
           [ngClass]="
             one == false && two == false && three == true ? 'activeBtn' : 'gray'
           "

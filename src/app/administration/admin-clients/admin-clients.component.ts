@@ -64,21 +64,20 @@ export class AdminClientsComponent implements OnInit {
 
 
   }
-  next() {
+  next=()=> {
     if (this.page < this.total) {
       this.page = this.page + 1;
       this.choise()
-
     }
   }
-  prev() {
+  prev= ()=> {
     if (this.page > 1) {
       this.page = this.page - 1;
       this.choise()
     }
   }
 
-
+ 
   choise(){
     switch(this.newApi){
       case 1:

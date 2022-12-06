@@ -79,10 +79,10 @@ color: #000 !important;
 
   background-color: #FFC10780 !important;
 }
-.top100 {
-  top: 99% !important;
-  right:-7% !important;}
-.modaltitle{
+
+
+
+  .modaltitle{
   background-color: $textColor !important;
   >h2,>button{
     color: white !important;
@@ -140,8 +140,7 @@ border: none!important;
   color: #18AF9A;
 }
 .top100 {
-  top: 99% !important;
-  right:-5% !important;
+  bottom: 10px !important;
 }
 .nameDownload{
 
@@ -164,4 +163,42 @@ border: none!important;
  .icon{
   color: #FFF;
  }
+}
+.circleAlle{
+width: 300px;
+
+}.circle{
+  width: 70px;
+  border-radius: 50%;
+}
+.modaltitle{
+  background-color: #18AF9A !important;
+  >h2,>button{
+    color: white !important;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.addAccount{
+  cursor: pointer;
+}
+
+.earn
+{
+  padding: 5% 3%;
+}
+
+.img
+{
+  height: 93%;
+}
+.cursor{
+  cursor: pointer;
 }

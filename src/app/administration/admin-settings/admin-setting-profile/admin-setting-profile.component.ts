@@ -27,6 +27,8 @@ export class AdminSettingProfileComponent implements OnInit {
   state: any = 0;
   profileChange: admin = {} as admin;
   datas: any;
+  message:any;
+  show:boolean=false
   // usersActive: IuserAct[] = [];
   // usersNotActive: IusersNotAct[] = [];
   datasNotActive: any;
@@ -67,7 +69,13 @@ export class AdminSettingProfileComponent implements OnInit {
     this.adminSettingsService
       .updateAdminProfile(this.profileChange.adminProfile)
       .subscribe((data) => {
-        alert(`${data.message}`);
+       
+        this.message=data.message
+        this.show=true
+
+        setInterval(() => {
+          this.show=false
+          }, 1000);
       });
     this.getProfileAdmin();
   }

@@ -20,7 +20,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TestComponent } from './test/test.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
 import { FooterComponent } from './footer/footer.component';
@@ -28,6 +27,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [
     AdminHomeComponent,
@@ -38,13 +39,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     AdminContributionsComponent,
     AdminMessagesComponent,
     AdminSPComponent,
-    TestComponent,
+    
     AdminSpUpdataComponent,
     FooterComponent,
   ],
   imports: [
     SharedModule,
     CommonModule,
+    MatSelectModule,
     AdministrationRoutingModule,
     NgxPaginationModule,
     FormsModule,

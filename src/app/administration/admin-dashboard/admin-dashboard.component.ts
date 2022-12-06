@@ -1,5 +1,6 @@
+import { Component, OnInit,OnChanges, SimpleChanges } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ClientService } from './../../@core/services/client/client.service';
-import { Component, OnInit } from '@angular/core';
 import {
   startOfDay,
   endOfDay,
@@ -19,6 +20,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IadminOfficialUserRegister } from 'src/app/@models/iadmin-official-user-register';
+import moment from 'moment';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -39,70 +41,71 @@ export class AdminDashboardComponent implements OnInit {
   values = 50;
   selected: any = new Date();
   chart: any;
-  testimonials: any;
-  objectTestimonials: any[] = [];
-  star: any[] = [];
-  page: any = 1;
-  latestProjects: any;
-  objectLatest: any[] = [];
-  currentProjects: any;
-  objectCurrentProjects: any[] = [];
-  offersIdCurrentProjects: any;
-  complaints: any[] = [];
-  pricequotes: any;
-  projects: any;
-  overview: any;
-  percentage: any = new Set();
-  milestonesData: any[] = [];
-  test: any = 0;
-  iProfileAdmin: any | undefined = undefined;
-  arrays: any[] = [];
-  choseAcountType: AccountType[] = [];
-  newAccountform: FormGroup;
-  userdata: any;
-  iadminOfficialUserRegister!: IadminOfficialUserRegister;
-  admins: any[] = [];
-  appointments: any;
-  appointmentFiles: any[] = [];
-  usernames: string;
-  //  value = 0; //addition of .5
-  //  starList: string[] = [];
-  constructor(
-    private clientService: ClientService,
-    private http: AdminDashService,
-    private adminSettingsService: AdminSettingsService,
-    private formbuilder: FormBuilder
-  ) {
-    this.usernames = localStorage.getItem('name')?.replace(/"/g, '') || '';
-    this.newAccountform = this.formbuilder.group({
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
-        ],
-      ],
-      Password: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(10),
-          Validators.pattern(
-            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{10,}'
-          ),
-        ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', [Validators.required]],
-      officialRoleId: ['', [Validators.required]],
-    });
-    this.visitorsNumber = 0;
-  }
+  testimonials:any;
+  objectTestimonials:any[]=[]
+  star:any[]=[]
+  page:any=1
+  latestProjects:any
+   objectLatest: any[] =[]
+   currentProjects:any;
+   objectCurrentProjects:any[]=[]
+   offersIdCurrentProjects:any
+   complaints:any[]=[]
+   pricequotes:any;
+   projects:any;
+   overview:any;
+   percentage:any=new Set()
+   milestonesData:any[]=[];
+   test:any=0
+   iProfileAdmin: any | undefined = undefined;
+   arrays:any[]=[]
+   choseAcountType:AccountType[]=[];
+   newAccountform: FormGroup;
+   userdata:any
+   iadminOfficialUserRegister!:IadminOfficialUserRegister
+   admins:any[]=[]
+   appointments:any
+   appointmentFiles:any[]=[]
+   usernames: string ;
+   appointment!:appoint;
+   newappointment: FormGroup;
+   dateSelected!:dateSe
+   FileformData = new FormData();
+   file:any;
+   dateOpt:any;
+   erDateOp:any;
+   message:any;
+   showSuc:boolean=false
+   showErr:boolean=false
+  constructor(private http: AdminDashService,private adminSettingsService: AdminSettingsService,private formbuilder: FormBuilder,private clientService: ClientService,
+    ) {
+    
+      this.visitorsNumber = 0;
+      this.usernames= localStorage.getItem('name')?.replace(/"/g, '') || '';
+      this.newAccountform = this.formbuilder.group({
+        username: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(20),]],
+        Password: ['', [Validators.required,Validators.minLength(10),
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{10,}')]], 
+        email: ['',[Validators.required, Validators.email]],
+        phoneNumber: ['', [Validators.required]],
+        officialRoleId: ['', [Validators.required]]
+      });
+      this.newappointment=this.formbuilder.group({
+        name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
+       description: ['', [Validators.required]],
+       imageFile: [''],
+      });
+    }
+  // ngOnChanges() {
+  //   this.getappointDate()
+  // }
   ngOnInit() {
-    // this.reve()
-    // this.showUserDashboard()
-    this.getProfileAdmin();
+
+    // this.getappointDate(this.selected)
+    this.showUserDashboard()
+
+
+    // this.getProfileAdmin();
     this.currentProjectsForAdmin();
     this.http.adminDashboard().subscribe({
       next: (value) => {
@@ -116,12 +119,20 @@ export class AdminDashboardComponent implements OnInit {
         this.organizationalSP = this.overview.organizationalSP;
         this.costs = Math.ceil(this.projects.acceptedProjectsCost * 0.01);
         this.chart = value.data.adminChart;
+
+        this.admins=value.data.officialUsers
+        this.testimonials =value.data.testimonials
+        this.complaints=value.data.complaints;
+        // عاوزه تتعدل
+        // this.appointments=value.data.appointments.latestAppointment;
+      
+        // console.log(value.data.appointments.appointments);
         this.admins = value.data.officialUsers;
         this.testimonials = value.data.testimonials;
         this.complaints = value.data.complaints;
-        this.appointments = value.data.appointments.latestAppointment;
-        this.appointmentFiles = this.appointments.appointmentFiles;
-        console.log(this.appointmentFiles);
+        // this.appointments = value.data.appointments.latestAppointment;
+        // this.appointmentFiles = this.appointments.appointmentFiles;
+        // console.log(this.appointmentFiles);
 
         this.renderDouChart();
         this.renderBarChart();
@@ -132,6 +143,7 @@ export class AdminDashboardComponent implements OnInit {
       },
     });
   }
+    
   get username() {
     return this.newAccountform?.get('username');
   }
@@ -150,6 +162,20 @@ export class AdminDashboardComponent implements OnInit {
   get f() {
     return this.newAccountform.controls;
   }
+  get name() {
+    return this.newappointment?.get('name');
+  }
+  get description() {
+    return this.newappointment?.get('description');
+  }
+  get appoins() {
+    return this.newappointment.controls;
+  }
+  get imageFile(){
+    return this.newappointment?.get('imageFile');
+
+  }
+
   currentProjectsForAdmin() {
     let i = 0;
     this.http.getFinishedProjectsForAdmin(1).subscribe({
@@ -213,70 +239,164 @@ export class AdminDashboardComponent implements OnInit {
       },
     });
   }
-  getOfferSender(project: any) {
-    if (project.offers[0]?.individualServiceProviderProfileId) {
-      this.clientService
-        .getOfferSenderProfile(
-          project.offers[0]?.individualServiceProviderProfileId
-        )
-        .subscribe((data: any) => {
-          project.offerSender = data.data;
-        });
-    } else {
-      this.clientService
-        .getOfferSenderProfile(
-          project.offers[0]?.organizationalServiceProviderProfileId
-        )
-        .subscribe((data: any) => {
-          project.offerSender = data.data;
-        });
-    }
+
+//  showUserDashboard(){
+//   this.http.getUsersDashboard().subscribe({next:(data)=>{
+//     this.admins=data.data.activatedUsers
+//     console.log(this.admins)
+
+//   },error:(er)=>{
+//     alert(er.message)
+//   }})
+//  }
+
+
+getOfferSender(project: any) {
+  if (project.offers[0]?.individualServiceProviderProfileId) {
+    this.clientService
+      .getOfferSenderProfile(
+        project.offers[0]?.individualServiceProviderProfileId
+      )
+      .subscribe((data: any) => {
+        project.offerSender = data.data;
+      });
+  } else {
+    this.clientService
+      .getOfferSenderProfile(
+        project.offers[0]?.organizationalServiceProviderProfileId
+      )
+      .subscribe((data: any) => {
+        project.offerSender = data.data;
+      });
   }
-  renderDouChart() {
-    const myChart = new Chart('doughnut', {
-      type: 'doughnut',
-      data: {
-        labels: ['مشاريع', 'مشاريع معلقه', 'مشاريع تم تنفيده', 'مشاريع حاليه'],
-        datasets: [
-          {
-            label: `# مشروع`,
-            data: [
-              this.chart.totalProjectsNumber,
-              this.chart.pendingProjectsNumber,
-              this.chart.finishedProjectsNumber,
-              this.chart.currentProjectsNumber,
-            ],
-            backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#2696C8'],
-            borderColor: ['none'],
-            borderWidth: 0.01,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            position: 'top',
-          },
+}
+renderDouChart() {
+  const myChart = new Chart('doughnut', {
+    type: 'doughnut',
+    data: {
+      labels: ['مشاريع', 'مشاريع معلقه', 'مشاريع تم تنفيده', 'مشاريع حاليه'],
+      datasets: [
+        {
+          label: `# مشروع`,
+          data: [
+            this.chart.totalProjectsNumber,
+            this.chart.pendingProjectsNumber,
+            this.chart.finishedProjectsNumber,
+            this.chart.currentProjectsNumber,
+          ],
+          backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#2696C8'],
+          borderColor: ['none'],
+          borderWidth: 0.01,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
         },
       },
-    });
-  }
+    },
+  });
+}
 
-  fortest(totals: any) {
-    for (var i = 1; i <= totals; i++) {
-      this.arrays.push(i);
-      console.log(this.arrays);
-    }
-  }
-  getProfileAdmin() {
-    // this.state = 1;
-    this.adminSettingsService.getAdminProfile().subscribe((value) => {
-      this.iProfileAdmin = value.data;
-      // console.log(this.iProfileAdmin);
-    });
-  }
+// fortest(totals: any) {
+//   for (var i = 1; i <= totals; i++) {
+//     this.arrays.push(i);
+//     console.log(this.arrays);
+//   }
+// }
+// getappointDate(selected:any) {
+//  let date=moment(selected).utc().format('YYYY-MM-DD h:mm A')
+//   let dateSelected={
+    
+//       "startDate": date,
+//       "endDate": date
+//     } 
+//     console.log(dateSelected);
+//     this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
+//       console.log(date.data);
+     
+//       for(let dates of date.data){
+//         this.dateOpt=dates
+
+//       }
+//       console.log(this.dateOpt)
+//       this.appointmentFiles=this.dateOpt.appointmentFiles
+//     }),error:(er=>{
+//       console.log(er)
+//       this.dateOpt=null
+//       this.erDateOp=er
+//     })})
+  
+// }
+// uplaodFile(e: any) {
+
+//   if (e.target.files && e.target.files.length > 0) {
+//     this.file = e.target.files[0];
+   
+//     this.FileformData.append('file', this.file);
+//     console.log(this.FileformData);
+
+//   }      console.log(this.file);
+
+// }
+// creatMeeting() {
+    
+//   let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
+//     this.adminSettingsService.getAdminProfile().subscribe((value) => {
+//       this.iProfileAdmin = value.data.adminProfile.applicationUserId;
+//       console.log
+//     });
+//     this.appointment={
+//       "applicationUserId": this.iProfileAdmin,
+//       "name": this.name?.value,
+//       "description": this.description?.value,
+//       "dateCreated": date
+//     }
+//     this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+//       console.log(data)
+//       console.log(data.data.appointmentId)
+//       this.http.storeAppointmentFiles(data.data.appointmentId,this.file).subscribe({next:(req)=>{
+//         console.log(req.message)
+//       },error:(er)=>{
+//         console.log(er.message)
+
+//       }})
+//     }),error:(er)=>{
+//       console.log(er.message)
+//     }})
+//     console.log(this.appointment);
+//   }
+  
+// creatMeeting() {
+//   this.iProfileAdmin=localStorage.getItem('id')
+//   console.log(this.iProfileAdmin)
+//   let date=moment(this.selected).utc().format('YYYY-MMM-DD h:mm A');
+  
+//     this.appointment={
+//       "applicationUserId": this.iProfileAdmin,
+//       "name": this.name?.value,
+//       "description": this.description?.value,
+//       "dateCreated": date
+//     }
+//     this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+//       console.log(data)
+//       console.log(data.data.id)
+//       this.http.storeAppointmentFiles(data.data.id,this.FileformData).subscribe({next:(req)=>{
+//         console.log(req)
+//       },error:(er)=>{
+//         console.log(er)
+
+//       }})
+//     }),error:(er)=>{
+//       console.log(er)
+//     }})
+//     console.log(this.appointment);
+   
+//   }
   renderBarChart() {
     const myChart = new Chart('bar', {
       type: 'bar',
@@ -342,6 +462,21 @@ export class AdminDashboardComponent implements OnInit {
       },
     });
   }
+ showUserDashboard() {
+  this.http.getUsersDashboard().subscribe({
+    next: (data) => {
+      this.admins = data.data.activatedUsers;
+      console.log(this.admins);
+    },
+    error: (er) => {
+      alert(er.message);
+    },
+  });
+}
+
+ 
+
+
   addAccount() {
     this.iadminOfficialUserRegister = {
       userName: this.username?.value,
@@ -353,40 +488,31 @@ export class AdminDashboardComponent implements OnInit {
     console.log(this.iadminOfficialUserRegister);
     this.http.officialUserRegister(this.iadminOfficialUserRegister).subscribe({
       next: (va) => {
-        alert(va.message);
+        // alert(va.message);
+        this.message=va.message
+        this.showSuc=true
+  
+        setInterval(() => {
+          this.showSuc=false
+          }, 3000);
+
       },
       error: (er) => {
-        alert(er);
+        this.message=er
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 5000);
       },
     });
   }
-  showUserDashboard() {
-    this.http.getUsersDashboard().subscribe({
-      next: (data) => {
-        this.admins = data.data.activatedUsers;
-        console.log(this.admins);
-      },
-      error: (er) => {
-        alert(er.message);
-      },
-    });
-  }
-  //  reve(){
-  //   for(let item of this.objectTestimonials){
-  //     this.value=item.stars
-  //   }
-  //   let i=1;
-  //     for(i=1; i<=5; i++) {
-  //       if(i<= this.value) {
-  //         this.starList.push("fas fa-star text-warning");
-  //       } else if(i <= this.value+0.5) {
-  //         this.starList.push("fas fa-star-half text-warning");
-  //       } else {
-  //         this.starList.push("far fa-star");
-  //       }
-  //     }
-  //   }
+
+
+
 }
+
+
 
 interface offers {
   id: 2163;
@@ -408,6 +534,22 @@ interface offers {
   };
   offer: null;
 }
+// interface AccountType{
+//   "isActive": false,
+//   "arabicName": string,
+//   "key": string,
+//   "accountTypes": any,
+//   "isAvailableForServiceProviders": boolean,
+//   "id": string,
+//   "name": string,
+//   "normalizedName": string,
+//   "concurrencyStamp": string
+// }
+interface dateSe{
+      
+  "startDate": string,
+  "endDate": string
+}
 
 interface AccountType {
   isActive: false;
@@ -419,4 +561,14 @@ interface AccountType {
   name: string;
   normalizedName: string;
   concurrencyStamp: string;
+}
+interface appoint{
+  "applicationUserId": "1b146acc-ebff-4c65-9edf-64d5f046d8a3",
+  "name": "fffff",
+  "description": "dpdflkpdlf;",
+  "dateCreated": string
+}
+
+function getappointDate(selected: any) {
+  throw new Error('Function not implemented.');
 }

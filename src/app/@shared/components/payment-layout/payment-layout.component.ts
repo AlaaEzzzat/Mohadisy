@@ -14,6 +14,10 @@ import jsPDF from 'jspdf';
 export class PaymentLayoutComponent implements OnInit {
   @Input() data: any = [];
   @Input() userType: any = '';
+  @Input() complete:any= (args: any) => {};
+  @Input() notComplete:any= (args: any) => {};
+  @Input() inComplete:any= (args: any) => {};
+
   allPaidProjectArray: any = [];
   dataShow: any = [];
   showModal: boolean = false;

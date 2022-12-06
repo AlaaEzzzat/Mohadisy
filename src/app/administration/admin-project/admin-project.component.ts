@@ -74,16 +74,16 @@ export class AdminProjectComponent implements OnInit {
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
   }
-  next() {
+  next=()=> {
     if (this.page < this.total) {
       this.page = this.page + 1;
-      this.choise();
+      this.choise()
     }
   }
-  prev() {
+  prev= ()=> {
     if (this.page > 1) {
       this.page = this.page - 1;
-      this.choise();
+      this.choise()
     }
   }
   choise() {

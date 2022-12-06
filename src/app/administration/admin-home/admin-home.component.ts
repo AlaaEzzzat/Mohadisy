@@ -43,12 +43,12 @@ export class AdminHomeComponent implements OnInit {
   },
   {
     title:"المدفوعات  ",
-    routing:"/Admin/payments",
+    routing:"/Admin/payments/sp",
     image:"assets/images/hand.png"
   },
   {
     title:"الإعدادات  ",
-    routing:"/Admin/settings",
+    routing:"/Admin/settings/profile",
     image:"assets/images/settings.png"
   }
 ]

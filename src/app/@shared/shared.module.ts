@@ -28,7 +28,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { ComplaintComponent } from './components/complaint/complaint.component';
 import { StartChatComponent } from './components/start-chat/start-chat.component';
 import { CalenderComponent } from './components/calender/calender.component';
-
+import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -52,6 +52,7 @@ const routes: Routes = [];
     ComplaintComponent,
     StartChatComponent,
     CalenderComponent,
+    WorkScheduleComponent,
   ],
   imports: [
     MatDatepickerModule,
@@ -62,6 +63,8 @@ const routes: Routes = [];
     CommonModule,
     NgxSpinnerModule,
     RouterModule,
+    MatDatepickerModule,
+    FormsModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
@@ -84,8 +87,9 @@ const routes: Routes = [];
     CarouselRateComponent,
     ProjectCardComponent,
     CalenderComponent,
-    PaginationComponent,
     StartChatComponent,
+    PaginationComponent,
+    WorkScheduleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

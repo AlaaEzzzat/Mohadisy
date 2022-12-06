@@ -1,6 +1,7 @@
 import { ClientService } from './../../../@core/services/client/client.service';
 import { Component, OnInit } from '@angular/core';
 import { AdminPaymentsService } from 'src/app/@core/services/admin/admin-payments.service';
+import { IadminPaymentsSp } from 'src/app/@models/iadmin-payments';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { AdminPaymentsService } from 'src/app/@core/services/admin/admin-payment
   styleUrls: ['./admin-payments-sp.component.scss']
 })
 export class AdminPaymentsSpComponent implements OnInit {
+  spPayments:IadminPaymentsSp[]=[]
 
   dataShow:any=[]
 
@@ -46,4 +48,68 @@ export class AdminPaymentsSpComponent implements OnInit {
     }
    
   } 
+
+  notComplete=()=>{
+    this.spPayments=[]
+    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+      next:((data)=>{
+        for(let dddd of data.data){
+       
+        if( dddd.paid == 0){
+        
+          this.spPayments.push(dddd)
+          console.log(this.spPayments)
+        }
+      }
+      this.dataShow =this.spPayments
+       
+
+      })
+    })
+  }
+  inComplete=()=>{
+    this.spPayments=[]
+    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+      next:((data)=>{
+        // console.log(data.data)
+        for(let dddd of data.data){
+       
+        if(dddd.payments > dddd.paid && dddd.paid != 0){
+          // this.datas+=dddd
+          
+          this.spPayments.push(dddd)
+          console.log(this.spPayments)
+          // this.objectProduct(this.spPayments[0]) 
+        }
+      }
+      this.dataShow =this.spPayments
+
+       
+
+      })
+    })
+  }
+  complete=()=>{
+   
+    this.spPayments=[]
+    this.paymentsService.getServiceProvidersPaymentsForAdmin().subscribe({
+      next:((data)=>{
+        // console.log(data.data)
+        for(let dddd of data.data){
+       
+        if(dddd.payments === dddd.paid && dddd.paid != 0){
+          // this.datas+=dddd
+       
+          this.spPayments.push(dddd)
+          console.log(this.spPayments)
+          // this.objectProduct(this.spPayments[0]) 
+        }
+      }      this.dataShow =this.spPayments
+
+       
+
+      })
+    })
+  }
+
 }

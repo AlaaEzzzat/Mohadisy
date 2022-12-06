@@ -117,6 +117,16 @@ export class AdminServiceProvidorService {
       })
     }))
   }
+  // /api/OrganizationalServiceProvider/storeProfileFiles
+  updateOrganizationalstoreProfileFiles(file:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfileFiles`,file).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
   updateIndividualUpdateProfile(objectStatus:IND):Observable<any>
   {
     return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/updateIndividualServiceProviderProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
@@ -126,5 +136,16 @@ export class AdminServiceProvidorService {
       })
     }))
   }
+
+  // /api/IndividualServiceProvider/storeIndividualServiceProviderFiles
+      updateIndividualstoreProfileFiles(file:any,id:any):Observable<any>
+    {
+      return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/storeIndividualServiceProviderFiles`,file).pipe(catchError((err)=>{
+        return throwError(()=>{
+          return new Error('Error occured please try again.')
+  
+        })
+      }))
+    }
 
 }
