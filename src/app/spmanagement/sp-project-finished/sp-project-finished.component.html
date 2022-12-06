@@ -10,7 +10,7 @@
     <div class="col-lg-3">
       <div class="row">
 
-        <ng-container *ngFor="let project of Listprojects">
+        <ng-container *ngFor="let project of Listprojects let i=index;">
           <ng-container *ngIf="select==project.id">
             <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
@@ -21,7 +21,7 @@
                   </ng-container>
 
                   <ng-container *ngIf="type==2">
-                    <a class="btn">()</a>
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
                   </ng-container>
                 </span>
               </p>
@@ -38,7 +38,13 @@
               style="background:white;  color:#004057;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project?.name}}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
+                  </ng-container>
                 </span>
               </p>
               <p><i class="fa fa-location-dot "></i>

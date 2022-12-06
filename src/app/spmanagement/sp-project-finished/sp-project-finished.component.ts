@@ -25,7 +25,6 @@ export class SpProjectFinishedComponent implements OnInit {
   pages:Array<any>=[];
   Allstages:Array<any>=[];
   togglestage:any=[];
-  index:number=0;
   Reason:any;
   Representative:any;
   startChat:any=false;
@@ -33,6 +32,9 @@ export class SpProjectFinishedComponent implements OnInit {
   message: IMessage = {} as IMessage;
   fileMessage: any = '';
   type:number=Number(localStorage.getItem('typeId'));
+  _RequiredWorks:Array<any>=[];
+  index:any=0;
+
 
  constructor(private api:ApiService,private router:Router, private chatService: ChatService) {
 
@@ -48,6 +50,39 @@ export class SpProjectFinishedComponent implements OnInit {
     this.pages.push(i);
    if(this.Listprojects.length>0){
    this.result=1;
+   this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
+   (data=>{
+
+    console.log(data);
+     for(let project of this.Listprojects){
+     for(let work of data.data)
+     {
+       let f=0;
+
+         for(let w of project.projectRequiredWorks)
+         {
+
+           if(w.requiredWorkId==work.id)
+           {
+
+             this._RequiredWorks.push({
+               "name":work.name
+              });
+
+           f=1;
+           break;
+
+           }
+
+         }
+         if(f)
+         break;
+       }
+
+
+     }
+
+     });
 
    }
 

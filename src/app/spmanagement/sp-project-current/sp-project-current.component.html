@@ -9,13 +9,19 @@
   <div class="row">
     <div class="col-lg-3">
       <div class="row">
-        <ng-container *ngFor="let project of Listprojects">
+        <ng-container *ngFor="let project of Listprojects let i=index;">
           <ng-container *ngIf="select==project.id">
             <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
               style="background:#004958; color:white;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project.name}}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
+                  </ng-container>
                 </span>
               </p>
               <p><i class="fa fa-location-dot "></i>
@@ -31,7 +37,13 @@
               style="background:white;  color:#004057;">
               <p><i class="far fa-building "></i>
                 <span> اسم المشروع :{{project?.name}}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
+                  </ng-container>
                 </span>
               </p>
               <p><i class="fa fa-location-dot "></i>
@@ -106,28 +118,39 @@
                   <img src="{{selectProject?.clientProfile?.profilePicturePath}}" alt="image">
                 </div>
 
-                <div class="col-lg-5  mt-4">
-                  <p>{{selectProject?.clientProfile?.firstName}}
-                    {{selectProject?.clientProfile?.lastName}}
-                  </p>
+                <div class="col-lg-7 ">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <p>{{selectProject?.clientProfile?.firstName}}
+                        {{selectProject?.clientProfile?.lastName}}
+                      </p>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <p type="btn" style="cursor:pointer;" (click)="startChat=true">
+                        <i class="fa fa-commenting-o"></i>
+                        تواصل معى هنا
+                      </p>
+                    </div>
+                    <div class="col-lg-12">
+                      <p type="btn "  style="cursor:pointer;"
+                      (click)="startComplaint=true"
+                      >
+                        <i class="fa fa-commenting-o"></i>
+                        تقديم شكوى فى العميل
+                      </p>
+                    </div>
+                    </div>
                 </div>
 
-                <div class="col-lg-3 mt-4">
-                  <p type="btn" (click)="toggleChat()" style="cursor:pointer;">
-                    <i class="fa fa-commenting-o"></i>
-                  </p>
-                  <p style=" padding-right: 52%;">
-                    مراسله
-                  </p>
-                </div>
 
                 <!----------------chat--------------->
                 <div class="overlay  p-5" *ngIf="startChat">
                   <div class="popup p-5">
-                    <a class="close" style="cursor: pointer" (click)="toggleChat()">&times;</a>
+                    <a class="close" style="cursor: pointer" (click)="togglestatus()">&times;</a>
                     <div class="content">
                       <label class="form-label fw-bold cairo">
-                        الرساله
+                        {{ process == "chat" ? "الرسالة" : "تقديم شكوي" }}
                       </label>
                       <div class="message-input d-flex flex-column justify-content-center">
                         <div class="wrap">
@@ -143,7 +166,7 @@
                           </i>
                         </div>
                         <button (click)="sendMessage(textInput.value)" class="btn submit">
-                          <span>إرسال</span>
+                          <span class="mx-2">{{process == "chat" ? "إرسال" : "تقديم" }}</span>
                           <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
                       </div>

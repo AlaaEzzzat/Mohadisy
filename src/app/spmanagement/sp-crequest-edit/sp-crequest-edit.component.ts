@@ -37,6 +37,8 @@ export class SpCrequestEditComponent implements OnInit {
    addmaterial:Array<any>=[];
    id:number=0;
    AddMaterials:Array<any>=[];
+   _RequiredWorks:Array<any>=[];
+  index1:any=0;
 
 
   constructor(private api:ApiService ,private router:Router)
@@ -74,9 +76,45 @@ export class SpCrequestEditComponent implements OnInit {
 
       this.totalpages=data.data.totalPages;
        this.Listprojects=data.data.projects;
+       /************************* */
+       this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
+       (data=>{
+
+        console.log(data);
+         for(let project of this.Listprojects){
+         for(let work of data.data)
+         {
+           let f=0;
+
+             for(let w of project.projectRequiredWorks)
+             {
+
+               if(w.requiredWorkId==work.id)
+               {
+
+                 this._RequiredWorks.push({
+                   "name":work.name
+                  });
+
+               f=1;
+               break;
+
+               }
+
+             }
+             if(f)
+             break;
+           }
+
+
+         }
+
+         });
+
+       /****************************** */
        for(let i=1;i<=this.totalpages;i++)
-       this.pages.push(i);
-      this.SelectIdProject();
+        this.pages.push(i);
+       this.SelectIdProject();
 
       this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.selectProject?.offers[0]?.cost}`).subscribe(data=>{
       this.totalcost=data.data;

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -5,6 +6,7 @@ import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
 import { IMessage } from 'src/app/@models/message';
 import { ChatService } from 'src/app/@core/services/chat/chat.service';
+import { ComplaintService } from 'src/app/@core/services/complaint/complaint.service';
 
 
 @Component({
@@ -45,12 +47,21 @@ export class SpProjectCurrentComponent implements OnInit {
   Representative:any;
   stagefinish:Array<any>=[];
   startChat:any=false;
+  startComplaint:any=false;
   receiverId:string='';
   message: IMessage = {} as IMessage;
   fileMessage: any = '';
+  _RequiredWorks:Array<any>=[];
+   process: string = '';
+  type:number=Number(localStorage.getItem('typeId'));
 
 
- constructor(private api:ApiService,private router:Router,  private chatService: ChatService) {
+ constructor(private api:ApiService,
+  private router:Router,
+   private chatService: ChatService,
+   private complaintService: ComplaintService,
+   private _toastr: ToastrService
+   ) {
   this.Reason=new FormGroup(
     {
       reason:new FormControl('',[Validators.required]),
@@ -69,6 +80,45 @@ export class SpProjectCurrentComponent implements OnInit {
     this.pages.push(i);
    if(this.Listprojects.length>0){
    this.result=1;
+
+   /*********************** */
+   this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
+   (data=>{
+
+    console.log(data);
+     for(let project of this.Listprojects){
+     for(let work of data.data)
+     {
+       let f=0;
+
+         for(let w of project.projectRequiredWorks)
+         {
+
+           if(w.requiredWorkId==work.id)
+           {
+
+             this._RequiredWorks.push({
+               "name":work.name
+              });
+
+           f=1;
+           break;
+
+           }
+
+         }
+         if(f)
+         break;
+       }
+
+
+     }
+
+     });
+
+
+   /**************************** */
+
 
    }
 
@@ -260,9 +310,11 @@ export class SpProjectCurrentComponent implements OnInit {
 
     }
 
-    toggleChat =()=>
+    togglestatus =()=>
     {
-      this.startChat=!this.startChat;
+      this.startChat=false;
+      this.startComplaint=false;
+
     }
 
 
@@ -275,6 +327,8 @@ export class SpProjectCurrentComponent implements OnInit {
 
       sendMessage(message: string) {
 
+        if(this.process=='chat')
+        {
        if (this.receiverId == '') {
           this.receiverId = this.selectProject.clientProfile.applicationUserId;
         }
@@ -290,6 +344,22 @@ export class SpProjectCurrentComponent implements OnInit {
           this.message.receiverId = this.receiverId;
           this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
         }
+
+      }else if (this.process == 'complaint') {
+        this.message.content = message;
+        this.message.applicationUserId = this.receiverId;
+        this.complaintService.storeComplaint(this.message).subscribe({
+          next: (data: any) => {
+            this._toastr.info(data.message);
+            this.startChat = false;
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      }
+
+
 
       }
 
