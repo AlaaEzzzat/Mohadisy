@@ -1,6 +1,10 @@
+import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
+import { ChatComponent } from '../@shared/components/chat/chat.component';
+import { ProjectComponent } from './project/project.component';
+import { PaymentComponent } from './payment/payment.component';
 import { UserhomeComponent } from './userhome/userhome.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { UserProjectsComponent } from './user-projects/user-projects.component';
+
 import { UserDashBoardComponent } from './user-dash-board/user-dash-board.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,10 +19,14 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: UserDashBoardComponent },
       { path: 'messages', component: UserMessagesComponent },
-      { path: 'project', component: UserProjectsComponent },
+      { path: 'project', component: ProjectComponent },
+      { path: 'chat', component: ChatComponent },
+      { path: 'complaint', component: ComplaintComponent },
       { path: 'offers', component: UserPriceOffersComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'profilecomplate', component: ProfilecomplateComponent },
+      { path: 'payment', component: PaymentComponent },
+      { path: 'project/:id', component: ProjectComponent },
       {
         path: 'askprice',
         loadChildren: () =>

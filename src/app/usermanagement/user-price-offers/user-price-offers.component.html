@@ -1,31 +1,28 @@
 <section class="price-offer">
-  <div class="container mt-5 fontStyle">
+  <div class="container-fluid mt-5 fontStyle">
     <div class="row">
       <ng-container *ngFor="let service of projectServices; let i = index">
-        <div class="col-md-3 col-sm-12 mt-2">
+        <div class="col">
           <div
             [id]="service.id"
             class="btn p-2 px-3 w-100 d-flex justify-content-between"
             (click)="isActiveService(service.id)"
             [ngClass]="activeService == service.id ? 'active' : 'bg-white'"
           >
-            <span class="name tajawal">{{ service.name }}</span>
-            <!-- <span class="secondColor">{{
-              projectServicesCount(service.id)
-            }}</span> -->
+            <span class="name cairo">{{ service.name }}</span>
           </div>
         </div>
       </ng-container>
 
-      <div class="col-12">
-        <div class="row py-4">
+      <div class="col-12 m-0 p-0">
+        <div class="row py-5">
           <div class="col-md-4">
             <div *ngIf="projectServiesArrays.length > 0" class="cards">
               <ng-container
                 *ngFor="let project of projectServiesArrays; let i = index"
               >
                 <div
-                  class="card rounded-0 d-flex flex-row justify-content-between p-3 mb-2 border-0 d-flex"
+                  class="card rounded-1 position-relative d-flex flex-row justify-content-between p-3 ps-4 mb-2 border-0 d-flex"
                   (click)="showOffers(project)"
                   [ngClass]="
                     activeProject == project.id ? 'active' : 'bg-white'
@@ -48,70 +45,62 @@
                       <i class="icon fa-solid fa-calendar-days ms-2"></i>
                       <span class="textcard"> {{ project.dateCreated }}</span>
                     </div>
-                  </div>
 
-                  <div
-                    class="secondColor"
-                    style="min-width: 36px; font-weight: 600"
+                    <i class="fa-regular fa-circle-ellipsis-vertical"></i>
+                  </div>
+                  <span
+                    class="badge bg-white mt-1 mainColor"
+                    style="height: fit-content; padding: 10px"
+                    >{{ project.offers.length }} رد</span
                   >
-                    {{ project.offers.length }} رد
+
+                  <div class="position-absolute dotCon">
+                    <button
+                      class="dots"
+                      mat-icon-button
+                      [matMenuTriggerFor]="menu"
+                      aria-label="Example icon-button with a menu"
+                    >
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu
+                      #menu="matMenu"
+                      style="background-color: #18af9a"
+                      class="matBtnCon"
+                    >
+                      <button mat-menu-item>
+                        <span (click)="showProject()">عرض المشروع</span>
+                      </button>
+                      <button mat-menu-item>
+                        <span (click)="deleteProject(project.id)"
+                          >حذف المشروع</span
+                        >
+                      </button>
+                    </mat-menu>
                   </div>
                 </div>
               </ng-container>
 
-              <nav aria-label="..." class="w-100 d-flex justify-content-center">
-                <ul class="pagination w-100">
-                  <li class="page-item">
-                    <button
-                      (click)="prev()"
-                      class="page-link"
-                      [disabled]="page <= 1"
-                    >
-                      السابق
-                    </button>
-                  </li>
-
-                  <ng-container
-                    class="page-item"
-                    *ngFor="let mypage of pagenation; let i = index"
-                  >
-                    <li class="page-item">
-                      <a
-                        class="page-link"
-                        [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
-                        >{{ mypage + 1 }}</a
-                      >
-                    </li>
-                  </ng-container>
-                  <li class="page-item">
-                    <button
-                      (click)="next()"
-                      class="page-link"
-                      [disabled]="page == pagenation.length"
-                    >
-                      التالي
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div
-              *ngIf="projectServiesArrays.length == 0"
-              class="bg-white text-center projectInfo p-5 mb-3"
-            >
-              <h3>لا توجد مشاريع</h3>
+              <app-pagination
+                [pagenation]="pagenation"
+                [next]="next"
+                [prev]="prev"
+                [page]="page"
+              ></app-pagination>
             </div>
           </div>
           <div class="col-md-8">
-            <div *ngIf="offersOfSelectedProject.length > 0">
+            <div
+              *ngIf="offersOfSelectedProject.length > 0 && !showProjectProfile"
+            >
               <div
                 style="cursor: pointer"
                 class="person p-3 d-flex mb-3 active text-white w-100"
               >
                 <div>مقدم الطلب :</div>
                 <select
-                  class="active w-75"
-                  style="color: #fff; border: 0"
+                  class="active"
+                  style="width: 90%; color: #fff; border: 0"
                   name="offers"
                   id="offers"
                   [(ngModel)]="selectedOfferId"
@@ -161,6 +150,7 @@
                     <button
                       class="btn h-50 rounded-0 border-0 text-white"
                       style="background-color: #18af9a"
+                      (click)="acceptOffer(offer)"
                     >
                       قبول عرض السعر
                     </button>
@@ -440,8 +430,13 @@
                               />
                             </svg>
 
-                            <p class="p-0 m-0 me-3 mainColor">
-                              {{ offer.contractTerms }}
+                            <p
+                              class="p-0 m-0 me-3 mainColor"
+                              style="cursor: pointer"
+                              (click)="showImg('')"
+                            >
+                              يتم تسديد المبلغ علي
+                              {{ offer.numberOfMilestones }} دفعات
                             </p>
                           </div>
                         </div>
@@ -494,7 +489,13 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="offer.id == selectedOfferId && !seeProjectInfo">
+                <div
+                  *ngIf="
+                    offer.id == selectedOfferId &&
+                    !seeProjectInfo &&
+                    activeService == 2
+                  "
+                >
                   <div class="conditions my-3 cairo">
                     <div
                       class="p-3 d-flex justify-content-between"
@@ -577,16 +578,15 @@
                     </div>
                     <div class="cairo p-3 bg-white" *ngIf="usedMaterials">
                       <div
-                        *ngIf="!offer.materials.length"
+                        *ngIf="usedMaterialsArray.length == 0"
                         class="cairo bg-white"
                       >
                         المواد المستخدمة غير مذكورة
                       </div>
 
-                      <ng-container *ngIf="offer.materials.length">
-                        <div>gfdj</div>
-                        <ul *ngFor="let mat of offer.materials">
-                          <li>{{ mat }}</li>
+                      <ng-container *ngIf="usedMaterialsArray.length">
+                        <ul *ngFor="let mat of usedMaterialsArray">
+                          <li>{{ mat.name }}</li>
                         </ul>
                       </ng-container>
                     </div>
@@ -605,12 +605,12 @@
                     </p>
                     <p>
                       التصنيف الرئيسي للمشروع :{{
-                        selectedProject.projectCategory.name
+                        selectedProject.projectCategory?.name
                       }}
                     </p>
                     <p>
                       التصنيف الفرعى للمشروع :
-                      {{ selectedProject.projectSubCategory.name }}
+                      {{ selectedProject.projectSubCategory?.name }}
                     </p>
                   </div>
                   <div class="pe-3 py-3 info1 bg-white mb-3 projectInfo">
@@ -627,14 +627,12 @@
                         <h4 class="head">مكونات المشروع</h4>
                         <ul
                           class="m-0 p-0 list-unstyled"
-                          *ngFor="
-                            let component of selectedProject.projectComponents
-                          "
+                          *ngFor="let component of activeProjectsComponents"
                         >
                           <li class="mb-2">
                             <i class="fa fa-chevron-left ms-3"></i>
                             <span>
-                              {{ component.component }}
+                              {{ component.name }}
                             </span>
                           </li>
                         </ul>
@@ -645,14 +643,12 @@
                         <h4 class="head">الأعمال المطلوبة</h4>
                         <ul
                           class="m-0 p-0 list-unstyled"
-                          *ngFor="
-                            let requiredWork of selectedProject.projectRequiredWorks
-                          "
+                          *ngFor="let requiredWork of activeProjectReqWorks"
                         >
                           <li class="mb-2">
                             <i class="fa fa-chevron-left ms-3"></i>
                             <span>
-                              {{ requiredWork.requiredWork }}
+                              {{ requiredWork.name }}
                             </span>
                           </li>
                         </ul>
@@ -667,11 +663,29 @@
                             let document of selectedProject.clientProjectDocuments
                           "
                         >
-                          <li class="mb-2">
-                            <i class="fa fa-chevron-left ms-3"></i>
+                          <li class="mb-3 d-flex justify-content-between">
                             <span>
-                              {{ document.document }}
+                              <i class="fa fa-chevron-left ms-3"></i>
+                              {{
+                                document.file.length > 15
+                                  ? document.file.substr(0, 15) + "..."
+                                  : document.file
+                              }}
                             </span>
+                            <div>
+                              <span
+                                class="mx-3"
+                                target="_blank"
+                                (click)="showImg(document.filePath)"
+                                ><i class="fa fa-eye"></i
+                              ></span>
+                              <span
+                                (click)="
+                                  download(document.filePath, document.file)
+                                "
+                                ><i class="fa fa-download"></i
+                              ></span>
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -683,11 +697,141 @@
             <div
               *ngIf="
                 offersOfSelectedProject.length == 0 ||
-                projectServiesArrays.length == 0
+                (offersOfSelectedProject.length > 0 && showProjectProfile)
               "
-              class="bg-white text-center projectInfo p-5 mb-3"
+              class="projectInfo mb-3"
             >
-              <h3>لا توجد عروض</h3>
+              <ul class="list-unstyled p-3 bg-white">
+                <li class="mb-2">
+                  <p class="cairo">
+                    اسم المشروع :
+                    <span class="secondColor me-2 bold">{{
+                      selectedProject.name
+                    }}</span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p class="cairo">
+                    موضوع المشروع :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject?.subject }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    التصنيف الرئيسي للمشروع :
+                    <span class="secondColor me-2 bold">
+                      {{ selectedProject.projectCategory?.name }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    التصنيف الفرعى للمشروع :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject.projectSubCategory?.name }}
+                    </span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    رقم القطعه :
+                    <span class="secondColor me-2 bold">{{
+                      selectedProject?.area
+                    }}</span>
+                  </p>
+                </li>
+                <li class="mb-2">
+                  <p>
+                    رقم المخطط التنظيمي :
+                    <span class="secondColor me-2"
+                      >{{ selectedProject?.organizationalChartNumber }}
+                    </span>
+                  </p>
+                </li>
+              </ul>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 projectInfo projectContributes">
+                    <h4 class="head">مكونات المشروع</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="let component of activeProjectsComponents"
+                    >
+                      <li class="mb-2">
+                        <i class="fa fa-chevron-left ms-3"></i>
+                        <span>
+                          {{ component.name }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 rquiredWoks projectInfo">
+                    <h4 class="head">الأعمال المطلوبة</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="let requiredWork of activeProjectReqWorks"
+                    >
+                      <li class="mb-2">
+                        <i class="fa fa-chevron-left ms-3"></i>
+                        <span>
+                          {{ requiredWork.name }}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="bg-white p-3 projectFiles projectInfo">
+                    <h4 class="head">الملفات الخاصة المشروع</h4>
+                    <ul
+                      class="m-0 p-0 list-unstyled"
+                      *ngFor="
+                        let document of selectedProject.clientProjectDocuments
+                      "
+                    >
+                      <li class="mb-3 d-flex justify-content-between">
+                        <span>
+                          <i class="fa fa-chevron-left ms-3"></i>
+                          {{
+                            document.file.length > 15
+                              ? document.file.substr(0, 15) + "..."
+                              : document.file
+                          }}
+                        </span>
+                        <div>
+                          <span
+                            class="mx-3"
+                            target="_blank"
+                            (click)="showImg(document.filePath)"
+                            ><i class="fa fa-eye"></i
+                          ></span>
+                          <span
+                            (click)="download(document.filePath, document.file)"
+                            ><i class="fa fa-download"></i
+                          ></span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6">
+                  <button
+                    class="btn mainBk"
+                    [hidden]="offersOfSelectedProject.length == 0"
+                    (click)="showProjectProfile = false"
+                  >
+                    العوده للعروض
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -695,3 +839,97 @@
     </div>
   </div>
 </section>
+<div *ngIf="showModal" class="overlay p-5">
+  <div class="img-popup p-5">
+    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+      >&times;</a
+    >
+    <div *ngIf="modalSrc" id="mymModal" class="mmodal">
+      <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
+      <div id="caption"></div>
+    </div>
+    <div *ngIf="!modalSrc" id="mymModal" class="mmodal">
+      <div id="caption" class="p-3 bg-white">
+        <table class="table bg-white p-2">
+          <thead>
+            <tr>
+              <th class="" scope="col">الدفعة</th>
+              <th scope="col">المرحلة</th>
+              <th scope="col">التكلفه</th>
+              <th scope="col">التاريخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let milestone of projectMilestons; let i = index"
+            >
+              <tr>
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                    }"
+                    class="bold"
+                    >الدفعه ({{ i + 1 }}) :
+                  </span>
+                </td>
+
+                <td>
+                  <div class="mb-2" *ngIf="milestone.isFirstMilestone">
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة مقدمه
+                    </span>
+                  </div>
+                  <div class="mb-2 bold" *ngIf="milestone.isLastMilestone">
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة بعد الإنتهاء
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="
+                      !milestone.isLastMilestone && !milestone.isFirstMilestone
+                    "
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      {{ requiredWorksNames(milestone.requiredWorkId) }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                    }"
+                    >{{ milestone.cost }} ريال</span
+                  >
+                </td>
+                <td>
+                  <div class="text-dark bold" *ngIf="milestone.isPaid">
+                    {{ getDate(milestone.paidDate) }}
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

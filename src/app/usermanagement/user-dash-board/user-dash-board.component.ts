@@ -1,3 +1,6 @@
+import { ClientService } from './../../@core/services/client/client.service';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
 import { ApiService } from 'src/app/@core/api.service';
 import { Component, OnInit } from '@angular/core';
 import { ProfileData } from 'src/app/@models/profile-data';
@@ -11,24 +14,60 @@ Chart.register(...registerables);
   styleUrls: ['./user-dash-board.component.scss'],
 })
 export class UserDashBoardComponent implements OnInit {
-  data: ProfileData = {} as ProfileData;
+  data: any = {};
   completedProjects: any = [];
+  selected: Date = new Date();
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'determinate';
   currentProjects: any = [];
   totalProjects: any;
-
-  constructor(private _api: ApiService) {}
-
+  completedProjectsCost: any = 0;
+  currentProjectsCost: any = 0;
+  constructor(private _api: ApiService, private clientService: ClientService) {}
   ngOnInit(): void {
     this._api
       .get('https://app.mohandisy.com/api/Dashboard/getClientStatus')
       .subscribe((data) => {
         this.data = data.data;
-        console.log(this.data);
+        console.log(data.data);
         this.currentProjects = this.data.currentProjects;
+        this.currentProjects.map((project: any) => {
+          this.currentProjectsCost += project.offers[0].totalCost;
+          if (project.offers.length > 0) {
+            this.getOfferSender(project);
+          }
+        });
+        this.completedProjects = this.data.completedProjects;
+        this.completedProjects.map((project: any) => {
+          if (project.offers.length > 0) {
+            this.completedProjectsCost += project.offers[0].totalCost;
+            this.getOfferSender(project);
+          }
+        });
         console.log(this.currentProjects);
+        console.log(this.completedProjects);
         this.renderDouChart();
-        this.renderBarChart();
       });
+  }
+
+  getOfferSender(project: any) {
+    if (project.offers[0]?.individualServiceProviderProfileId) {
+      this.clientService
+        .getOfferSenderProfile(
+          project.offers[0]?.individualServiceProviderProfileId
+        )
+        .subscribe((data: any) => {
+          project.offerSender = data.data;
+        });
+    } else {
+      this.clientService
+        .getOfferSenderProfile(
+          project.offers[0]?.organizationalServiceProviderProfileId
+        )
+        .subscribe((data: any) => {
+          project.offerSender = data.data;
+        });
+    }
   }
   renderDouChart() {
     const myChart = new Chart('doughnut', {
@@ -44,65 +83,9 @@ export class UserDashBoardComponent implements OnInit {
               this.data?.projectsChart?.completedProjectsNumber,
               this.data?.projectsChart?.currentProjectsNumber,
             ],
-            backgroundColor: ['#568fc1', '#02203e', '#05cb42', '#17a785'],
+            backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#2696C8'],
             borderColor: ['rgba(255, 99, 132, 1)'],
             borderWidth: 1,
-          },
-        ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            grid: {
-              display: false,
-            },
-          },
-          x: {
-            grid: {
-              display: false,
-            },
-          },
-        },
-        plugins: {
-          legend: {
-            display: true,
-            position: 'bottom',
-          },
-        },
-      },
-    });
-  }
-  renderBarChart() {
-    const myChart = new Chart('bar', {
-      type: 'bar',
-      data: {
-        labels: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ],
-        datasets: [
-          {
-            label: ` مشاريع`,
-            borderColor: ['#48A497'],
-            backgroundColor: ['#dca239'],
-            data: [45, 47, 32, 56, 70, 60, 45, 47, 32, 56, 70, 60],
-          },
-          {
-            label: `صفقات`,
-            borderColor: ['rgba(73,188,170,0.4)'],
-            backgroundColor: ['#1d314a'],
-            data: [36, 50, 60, 40, 34, 32, 36, 50, 60, 40, 34, 32],
           },
         ],
       },

@@ -1,0 +1,240 @@
+<div class="container-fluid m-0 p-0">
+  <section class="landing">
+    <div class="slideshow">
+      <div
+        id="carouselExampleIndicators"
+        class="carousel h-100 slide"
+        data-bs-ride="true"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active indicators"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            class="indicators"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            class="indicators"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner h-100">
+          <div class="myoverlay"></div>
+          <div class="row overlay m-0">
+            <div
+              class="col-lg-8 col-md-10 d-flex align-items-center justify-content-center"
+            >
+              <div class="w-75">
+                <img />
+                <h5 class="cairo">
+                  انتظروا أكبر منصه للاستشارات الهندسيه في الوطن العربي قريبا
+                </h5>
+                <h3 class="cairo">
+                  مهندسي من أوائل المنصات الوسيطه في المملكه لتسويق الخدمات
+                  الهندسيه عن بعد في المملكه العربيه السعودية.
+                </h3>
+                <button
+                  class="btn cairo px-5 mainbk"
+                  routerLink="account/signup"
+                >
+                  سجل معنا الأن
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-inner h-100">
+            <div class="carousel-item h-100 w-100 active">
+              <div
+                style="background-image: url('assets/images/c11.jpg')"
+                class="d-block h-100 w-100 carouselItem"
+              ></div>
+            </div>
+            <div class="carousel-item h-100 w-100">
+              <div
+                style="background-image: url('assets/images/c22.jpg')"
+                class="d-block h-100 w-100 carouselItem"
+              ></div>
+            </div>
+            <div class="carousel-item h-100 w-100">
+              <div
+                style="background-image: url('assets/images/c33.jpg')"
+                class="d-block h-100 w-100 carouselItem"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="timer text-center">
+    <div>
+      <div class="clock">
+        <span class="cairo soon text-white mx-3">قريبا</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="41"
+          height="40"
+          viewBox="0 0 41 40"
+          fill="none"
+        >
+          <path
+            d="M20.4833 3.33331C11.2833 3.33331 3.83334 10.8 3.83334 20C3.83334 29.2 11.2833 36.6666 20.4833 36.6666C29.7 36.6666 37.1667 29.2 37.1667 20C37.1667 10.8 29.7 3.33331 20.4833 3.33331ZM20.5 33.3333C13.1333 33.3333 7.16668 27.3666 7.16668 20C7.16668 12.6333 13.1333 6.66665 20.5 6.66665C27.8667 6.66665 33.8333 12.6333 33.8333 20C33.8333 27.3666 27.8667 33.3333 20.5 33.3333Z"
+            fill="white"
+          />
+          <path
+            d="M21.3333 11.6667H18.8333V21.6667L27.5833 26.9167L28.8333 24.8667L21.3333 20.4167V11.6667Z"
+            fill="white"
+          />
+        </svg>
+      </div>
+      <div class="container">
+        <div class="d-flex justify-content-around">
+          <div class="time d-flex flex-column justify-content-center">
+            <p class="cairo second">{{ secends }}</p>
+            <p class="secondText p-0 m-0 cairo">ثانية</p>
+          </div>
+          <div class="separetor"></div>
+
+          <div class="time d-flex flex-column justify-content-center">
+            <p class="cairo second">{{ minutes }}</p>
+            <p class="secondText p-0 m-0 cairo">دقيقة</p>
+          </div>
+          <div class="separetor"></div>
+
+          <div class="time d-flex flex-column justify-content-center">
+            <p class="cairo second">{{ hours }}</p>
+            <p class="secondText p-0 m-0 cairo">ساعة</p>
+          </div>
+          <div class="separetor"></div>
+
+          <div class="time d-flex flex-column justify-content-center">
+            <p class="cairo second">{{ days }}</p>
+            <p class="secondText p-0 m-0 cairo">يوم</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!--  -->
+<section class="message container">
+  <div class="row d-flex justify-content-around">
+    <div class="col-md-4">
+      <div class="buttons d-flex">
+        <button
+          (click)="one = true; two = false; three = false"
+          class="btn w-100"
+          [ngClass]="
+            one == true && two == false && three == false ? 'activeBtn' : 'gray'
+          "
+        >
+          <span class="cairo ms-3">الرؤية</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="30"
+            height="20"
+            viewBox="0 0 30 20"
+            fill="none"
+          >
+            <path
+              d="M14.9999 6C13.9391 6 12.9216 6.42143 12.1715 7.17157C11.4213 7.92172 10.9999 8.93913 10.9999 10C10.9999 11.0609 11.4213 12.0783 12.1715 12.8284C12.9216 13.5786 13.9391 14 14.9999 14C16.0608 14 17.0782 13.5786 17.8283 12.8284C18.5785 12.0783 18.9999 11.0609 18.9999 10C18.9999 8.93913 18.5785 7.92172 17.8283 7.17157C17.0782 6.42143 16.0608 6 14.9999 6ZM14.9999 16.6667C13.2318 16.6667 11.5361 15.9643 10.2859 14.714C9.03563 13.4638 8.33325 11.7681 8.33325 10C8.33325 8.23189 9.03563 6.5362 10.2859 5.28595C11.5361 4.03571 13.2318 3.33333 14.9999 3.33333C16.768 3.33333 18.4637 4.03571 19.714 5.28595C20.9642 6.5362 21.6666 8.23189 21.6666 10C21.6666 11.7681 20.9642 13.4638 19.714 14.714C18.4637 15.9643 16.768 16.6667 14.9999 16.6667ZM14.9999 0C8.33325 0 2.63992 4.14667 0.333252 10C2.63992 15.8533 8.33325 20 14.9999 20C21.6666 20 27.3599 15.8533 29.6666 10C27.3599 4.14667 21.6666 0 14.9999 0Z"
+              fill="white"
+            />
+          </svg>
+        </button>
+        <button
+          (click)="one = true; two = true; three = false"
+          class="btn w-100"
+          [ngClass]="
+            one == true && two == true && three == false ? 'activeBtn' : 'gray'
+          "
+        >
+          <span class="cairo ms-3">الرسالة</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="24"
+            viewBox="0 0 28 24"
+            fill="none"
+          >
+            <path
+              d="M25.6132 0.872668C25.6132 0.872668 28.2032 -0.137332 27.9866 2.31533C27.9152 3.32533 27.2679 6.86067 26.7639 10.684L25.0372 22.0107C25.0372 22.0107 24.8932 23.67 23.5979 23.9587C22.3032 24.2467 20.3606 22.9487 20.0006 22.66C19.7126 22.4433 14.6046 19.1967 12.8059 17.61C12.3019 17.1767 11.7259 16.3113 12.8779 15.3013L20.4319 8.08667C21.2952 7.22133 22.1586 5.20134 18.5612 7.654L8.48789 14.5073C8.48789 14.5073 7.33655 15.2293 5.17855 14.58L0.50122 13.1367C0.50122 13.1367 -1.22545 12.0547 1.72455 10.9727C8.91989 7.582 17.7699 4.11933 25.6119 0.872668H25.6132Z"
+              fill="white"
+            />
+          </svg>
+        </button>
+        <button
+          (click)="one = false; two = false; three = true"
+          class="btn w-100"
+          [ngClass]="
+            one == false && two == false && three == true ? 'activeBtn' : 'gray'
+          "
+        >
+          <span class="cairo ms-3">مميزاتنا</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="27"
+            viewBox="0 0 28 27"
+            fill="none"
+          >
+            <path
+              d="M24.5 5.33333H0.5V0H24.5V5.33333ZM13.8333 21.3333C13.8333 22.2667 14.0067 23.16 14.3 24H1.83333V6.66667H23.1667V13.4533C22.7267 13.3867 22.2867 13.3333 21.8333 13.3333C17.42 13.3333 13.8333 16.92 13.8333 21.3333ZM16.5 13.3333V11.3333C16.5 10.96 16.2067 10.6667 15.8333 10.6667H9.16667C8.79333 10.6667 8.5 10.96 8.5 11.3333V13.3333H16.5ZM27.1667 19.8533L23.3133 19.52L21.8333 16L20.3267 19.52L16.5 19.8533L19.4067 22.36L18.5 26.1067L21.8333 24.12L25.1 26.1067L24.2333 22.36L27.1667 19.8533Z"
+              fill="white"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-8 d-flex align-items-center">
+      <p
+        *ngIf="one == true && two == false && three == false"
+        class="cairo textMessage"
+      >
+        ان نصبح من أوائل المنصات التي تهتم بتسويق جميع الاعمال الهندسية
+        (المعمارية والمدنية والميكانيكية والكهربائية والصيانه وتصميم الديكورات
+        الداخلية و الخارجية), والتسويق العقارى وتقديم الاستشارات الهندسية, عن
+        طريق الربط بين المستفيدين الافراد والشركات والمكاتب, ويكون شعارنا السرعة
+        و الدقة فى العمل ومنتجنا الأول هو الجودة وأدواته هي المهنية و الاحترافية
+        المتميزة لخدمه جميع المستفدين من المكاتب الهندسية بكافة أنواعها وأحجامها
+        .
+      </p>
+      <p
+        *ngIf="one == true && two == true && three == false"
+        class="cairo textMessage"
+      >
+        Allaaان نصبح من أوائل المنصات التي تهتم بتسويق جميع الاعمال الهندسية
+        (المعمارية والمدنية والميكانيكية والكهربائية والصيانه وتصميم الديكورات
+        الداخلية و الخارجية), والتسويق العقارى وتقديم الاستشارات الهندسية, عن
+        طريق الربط بين المستفيدين الافراد والشركات والمكاتب, ويكون شعارنا السرعة
+        و الدقة فى العمل ومنتجنا الأول هو الجودة وأدواته هي المهنية و الاحترافية
+        المتميزة لخدمه جميع المستفدين من المكاتب الهندسية بكافة أنواعها وأحجامها
+        .
+      </p>
+      <p
+        *ngIf="one == false && two == false && three == true"
+        class="cairo textMessage"
+      >
+        ezzatان نصبح من أوائل المنصات التي تهتم بتسويق جميع الاعمال الهندسية
+        (المعمارية والمدنية والميكانيكية والكهربائية والصيانه وتصميم الديكورات
+        الداخلية و الخارجية), والتسويق العقارى وتقديم الاستشارات الهندسية, عن
+        طريق الربط بين المستفيدين الافراد والشركات والمكاتب, ويكون شعارنا السرعة
+        و الدقة فى العمل ومنتجنا الأول هو الجودة وأدواته هي المهنية و الاحترافية
+        المتميزة لخدمه جميع المستفدين من المكاتب الهندسية بكافة أنواعها وأحجامها
+        .
+      </p>
+    </div>
+  </div>
+</section>

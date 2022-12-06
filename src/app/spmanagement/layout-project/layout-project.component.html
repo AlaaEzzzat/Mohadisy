@@ -1,0 +1,44 @@
+<section class="container-fluid">
+  <div class="section-1 mt-4">
+    <div class="row">
+
+      <ng-container *ngIf="type==2">
+        <div class="col-lg-12  content">
+          <a routerLink="/Spmanagement/projects/price-offers/new" class="btn request"
+         >
+         <div class="row">
+          <div class="col-lg-2 col-md-4 col-sm-4 mt-3 req ">
+            <p >{{service[1]?.projectService?.name}}</p>
+          </div>
+          <div class="col-lg-10 col-md-8 col-sm-8 mt-3 req ">
+            <p  style="
+            padding-right:80%;
+            color: #18af9a;
+            font-size: 20px;">{{service[1]?.count}}</p>
+          </div>
+         </div>
+        </a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="type==1">
+        <div class="col-lg-12  content">
+          <a routerLink="/Spmanagement/projects/price-offers/new" class="btn request"
+         >
+         <div class="row">
+          <div class="col-lg-2 col-md-4 col-sm-4 mt-3 req ">
+            <p >{{service[0]?.projectService?.name}}</p>
+          </div>
+          <div class="col-lg-10 col-md-8 col-sm-8 mt-3 req ">
+            <p  style="
+            padding-right:80%;
+            color: #18af9a;
+            font-size: 20px;">{{service[0]?.count}}</p>
+          </div>
+         </div>
+        </a>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  </section>

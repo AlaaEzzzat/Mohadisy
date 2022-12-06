@@ -1,0 +1,53 @@
+.nav a
+{
+  padding: 3% 7%;
+  background-color: white;
+  width: 96%;
+  margin-left: 3%;
+  color: #18af9a;
+
+}
+
+
+.section-1 .content a
+{
+  width: 100%;
+}
+
+
+.content .request p
+{
+padding:0;
+font-size: 18px;
+}
+
+.section-1 .content .request
+{
+  padding-bottom: 0%;
+  padding-top: 0%;
+  background-color: #004958;
+  color:white;
+}
+
+
+.active
+{
+  background-color: #18af9a !important;
+  color: white !important;
+}
+
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .request .req{
+
+      width: 47%;
+     display: flex;
+      
+    }
+   
+  }

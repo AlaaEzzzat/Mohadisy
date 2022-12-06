@@ -10,6 +10,13 @@ export class ClientService {
   reuestedProject: any = {};
   projectRequiredFiles: any = [];
   constructor(private _HttpClient: HttpClient) {}
+ 
+
+  getClientProfile(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Client/getClientProfile`
+    );
+  }
   getProjectServicesAndSubService(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/PriceQuotes/getProjectServicesAndSubService`
@@ -17,7 +24,11 @@ export class ClientService {
   }
   getProjectService(serviceId: any, page?: any): Observable<any> {
     return this._HttpClient.get<any>(
-      `${environment.baseUrl}/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${page}`
+      `${
+        environment.baseUrl
+      }/api/PriceQuotes/getClientPriceQuotes/serviceId/${serviceId}/Page/${
+        page || 1
+      }`
     );
   }
   acceptOffer(offerId: any): Observable<any> {
@@ -37,11 +48,7 @@ export class ClientService {
     );
   }
   /* ******************************* */
-  /* getAllServics(): Observable<any> {
-    return this._HttpClient.get<any>(
-      `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
-    );
-  } */
+  
   getAllProjectCategories(): Observable<any> {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/ProjectCategory/GetAllProjectCategories`
@@ -60,6 +67,12 @@ export class ClientService {
       data
     );
   }
+  deleteProject(projectId: any) {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Project/deleteProject/${projectId}`,""
+    );
+  }
+  
   //return project
 
   storeProjectFiles(idProject: any, files: any) {
@@ -90,6 +103,113 @@ export class ClientService {
     return this._HttpClient.post<any>(
       `${environment.baseUrl}/api/RequiredWorks/GetRequiredDocumentsByRequiredWorkIds`,
       arrOfWorksId
+    );
+  }
+
+  getAccountStatus(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Account/checkAccountStatus`
+    );
+  }
+ 
+
+  getProjectComponentById(componentId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getProjectComponentById/${componentId}`
+    );
+  }
+  
+  getMaterialsByOfferId(offerId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Offer/getMaterialsByOfferId/${offerId}`
+    );
+  }
+  getRequiredWorkByWorkId(requiredWorkId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`
+    );
+  }
+
+  getProjectsByService(serviceId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getProjectsByService/${serviceId}`
+    );
+  }
+  /* ****************************** */
+  getMilestonesByOfferId(offerId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Milestone/getMilestonesByOfferId/${offerId}`
+    );
+  }
+  getOfferSenderProfile(profileId: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Offer/getOfferSenderProfile/${profileId}`
+    );
+  }
+
+  getClientCurrentProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientCurrentProjects/Page/${page}`
+    );
+  }
+  getClientPendingProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientPendingProjects/Page/${page}`
+    );
+  }
+  getClientFinishedProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientFinishedProjects/Page/${page}`
+    );
+  }
+  getClientLateProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientLateProjects/Page/${page}`
+    );
+  }
+  getClientStoppedProjects(page: any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getClientStoppedProjects/Page/${page}`
+    );
+  }
+  /* ************************* */
+  
+  getPaymentsForClient(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Payment/getPaymentsForClient`
+    );
+  }
+  /* ******************EDIT PROFILE****** */
+  
+  updateClientProfile(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Client/updateClientProfile`,
+      data
+    );
+  }
+  storeClientIdFile(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Client/storeClientIdFile`,
+      data
+    );
+  }
+  changeProfilePicture(  data: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Profile/changeProfilePicture`,
+      data
+    );
+  }
+  /* ***************NOTIFICATION*********************** */
+  getUserNotifications(justUnSeen:boolean): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Notification/getUserNotifications/${justUnSeen}`
+    );
+  }
+
+  readNotification( notificationId: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Notification/readNotification/${notificationId}`,
+      ''
     );
   }
 }

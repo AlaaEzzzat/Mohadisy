@@ -1,0 +1,359 @@
+<section style="min-height: 100vh" class="prevWork">
+  <header class="form-control p-3 signFormIn border-0">
+    <label class="bd-title m-0 p-0 cairo" dir="rtl"
+      >إضافه عمل سابق خاص بكـ</label
+    >
+  </header>
+  <div class=" form-control py-5 px-4 border-0 signFormIn">
+    <form [formGroup]="prevWorksForm" (ngSubmit)="prevWorksFormSubmit()">
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <label for="projectCategoryId" class="control-label mb-2">
+            تصنيف المشروع</label
+          >
+
+          <select
+            name="projectCategoryId"
+            id="projectCategoryId"
+            class="mt-2 form-control form-control-lg"
+            formControlName="projectCategoryId"
+            [class.is-valid]="projectCategoryId?.valid"
+            [class.is-invalid]="
+              projectCategoryId?.invalid && projectCategoryId?.touched
+            "
+          >
+            <option>...اختر</option>
+            <ng-container *ngFor="let projectCategoryId of AllProjectCategory">
+              <option [value]="projectCategoryId.id">
+                {{ projectCategoryId.name }}
+              </option>
+            </ng-container>
+          </select>
+          <div
+            class="alert alert-warning"
+            [hidden]="projectCategoryId?.valid || projectCategoryId?.untouched"
+          >
+            <span *ngIf="projectCategoryId?.errors?.['required']">
+              تصنيف المشروع مطلوب</span
+            >
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="projectName">
+              إسم المشروع
+            </label>
+            <input
+              type="text"
+              formControlName="projectName"
+              name="projectName"
+              id="projectName"
+              class="form-control form-control-lg signup"
+              placeholder="   إسم المشروع"
+              required
+              [class.is-valid]="projectName?.valid"
+              [class.is-invalid]="projectName?.invalid && projectName?.touched"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="projectName?.valid || projectName?.untouched"
+            >
+              <span *ngIf="projectName?.errors?.['required']"
+                >إسم المشروع مطلوب
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label" for="ownerName"> مالك المشروع</label>
+            <input
+              type="text"
+              id="ownerName"
+              formControlName="ownerName"
+              class="form-control form-control-lg signup"
+              placeholder="   مالك المشروع "
+              [class.is-valid]="ownerName?.valid"
+              [class.is-invalid]="ownerName?.invalid && ownerName?.touched"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="ownerName?.valid || ownerName?.untouched"
+            >
+              <span *ngIf="ownerName?.errors?.['required']">
+                مالك المشروع مطللوب</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label" for="projectPrice"
+              >تكلفة المشروع (ريال)
+            </label>
+            <input
+              type="text"
+              id="projectPrice"
+              formControlName="projectPrice"
+              class="form-control form-control-lg signup"
+              placeholder="   تكلفة المشروع  "
+              [class.is-valid]="projectPrice?.valid"
+              [class.is-invalid]="
+                projectPrice?.invalid && projectPrice?.touched
+              "
+              (keypress)="numberOnly($event)"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="projectPrice?.valid || projectPrice?.untouched"
+            >
+              <span *ngIf="projectPrice?.errors?.['required']">
+                تكلفة المشروع مطلوب</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label" for="completionYear">
+              نسبة الإنجاز (%)
+            </label>
+            <input
+              type="text"
+              id="completionYear"
+              formControlName="completionYear"
+              class="form-control form-control-lg signup"
+              placeholder="   نسبة الإنجاز  "
+              [class.is-valid]="completionYear?.valid"
+              [class.is-invalid]="
+                completionYear?.invalid && completionYear?.touched
+              "
+              (keypress)="numberOnly($event)"
+            />
+            <div
+              class="alert alert-warning"
+              [hidden]="completionYear?.valid || completionYear?.untouched"
+            >
+              <span *ngIf="completionYear?.errors?.['required']">
+                نسبة الإإنجاز مطلوب</span
+              >
+              <span *ngIf="completionYear?.errors?.['pattern']">
+                تأكد من نسبة الإإنجاز
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="form-group">
+            <label class="form-label mb-2" for="images"> صورة الأعمال </label>
+            <div class="button-wrapper">
+              <div class="h-100">
+                <span class="label">{{
+                  imageId.value
+                    ? imageId.value.split("\\").slice(-1)[0].length > 15
+                      ? imageId.value.split("\\").slice(-1)[0].substr(0, 15) +
+                        "..."
+                      : imageId.value.split("\\").slice(-1)[0]
+                    : "إرفاق"
+                }}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-upload"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                  />
+                  <path
+                    d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                  />
+                </svg>
+              </div>
+              <input
+                multiple
+                type="file"
+                #imageId
+                formControlName="images"
+                id="images"
+                required
+                (change)="onImageUpload($event)"
+                [class.is-valid]="images?.valid"
+                [class.is-invalid]="images?.invalid && images?.touched"
+                class="file upload-box"
+              />
+            </div>
+
+            <div
+              class="alert alert-warning"
+              [hidden]="images?.valid || images?.untouched"
+            >
+              <span *ngIf="images?.errors?.['required']">
+                صورة الأعمال مطلوبة</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5">
+        <div class="text-center">
+          <button
+            type="submit"
+            style="width: 220px"
+            class="mainBk btn py-2 form-control text-white"
+          >
+            <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
+            حفظ
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <section class="bg-white p-4" *ngIf="allServiceProviderWorks.length > 0">
+    <header class="form-control p-3 signFormIn border-0">
+      <label class="bd-title m-0 p-0 mb-3 cairo">جميع أعمالك السابقة</label>
+    </header>
+    <div id="table-container">
+      <table
+        style="border: 1px solid #004057"
+        class="table text-center table-striped"
+      >
+        <thead style="background: #18af9a">
+          <tr>
+            <th class="p-2 py-3" scope="col">id</th>
+            <th scope="col" class="p-2 py-3">إسم المشروع</th>
+            <th scope="col" class="p-2 py-3">تصنيف المشروع</th>
+            <th scope="col" class="p-2 py-3">مالك المشروع</th>
+            <th scope="col" class="p-2 py-3">التكلفة</th>
+            <th scope="col" class="p-2 py-3">نسبة الإنجاز</th>
+            <th scope="col" class="p-2 py-3">صور الأعمال</th>
+            <th scope="col" class="p-2 py-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let work of allServiceProviderWorks">
+            <tr>
+              <th scope="row">{{ work.id }}</th>
+              <td>{{ work.projectName }}</td>
+              <td>{{ work.projectCategory.name }}</td>
+              <td>{{ work.ownerName }}</td>
+              <td>{{ work.projectPrice }}</td>
+              <td>{{ work.completionYear }} %</td>
+              <td  >
+                <ul class="list-unstyled p-0 w-100" 
+                >
+                  <ng-container
+                    *ngFor="let img of work.serviceProviderWorkFiles"
+                  >
+                    <li  class="mb-1" 
+                    type="button"   (click)="projectImage(work.id)"
+                    data-bs-toggle="modal"  [attr.data-bs-target]="'#work'+work.id"
+                    >
+                      <p>{{
+                        img.file.split("\\").slice(-1)[0].length > 15
+                          ? img.file.split("\\").slice(-1)[0].substr(0, 15) +
+                            "..."
+                          : img.file.split("\\").slice(-1)[0]
+                      }}</p>
+                    </li>
+
+                  </ng-container>
+
+                      <!-------------Carousel------------------>
+                      <div class="modal fade "  [id]="'work'+work.id" >
+                        <div class="modal-dialog  modal-xl " >
+                          <button type="button" class="close btn " data-bs-dismiss="modal"
+                          >
+                            <i>&times;</i>
+                          </button>
+                          <div class="modal-content w-100 border-0" style="background-color:transparent;">
+                            <div class="modal-body ">
+                              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                
+                                  <ng-container *ngFor="let img of workFile; let i=index;">
+                                    <div *ngIf="i==0" class="carousel-item active">
+                
+                                      <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
+                                    </div>
+                                    <div *ngIf="i!=0" class="carousel-item">
+                                      <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
+                                    </div>
+                                  </ng-container>
+                                </div>
+                
+                              </div>
+                
+                            </div>
+                
+                
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                
+                          </div>
+                
+                
+                        </div>
+                
+                      </div>
+  
+                      <!----------------------------->
+
+
+                </ul>
+              </td>
+              <td>
+                <button class="btn mainBk ms-2 my-2 text-white">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#FFF"
+                    class="bi bi-pencil-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                    />
+                  </svg>
+                </button>
+                <button
+                  class="btn secondBk text-white"
+                  (click)="deleteThisWork(work.id)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#FFF"
+                    class="bi bi-trash-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>

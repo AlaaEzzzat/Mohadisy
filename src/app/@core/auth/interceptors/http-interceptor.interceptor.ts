@@ -43,21 +43,17 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
         },
       });
     }
-
     return next.handle(request).pipe(
       retry(1),
       catchError((returnedError) => {
         let errorMessage = null;
-
         if (returnedError.error instanceof ErrorEvent) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message} `;
+          errorMessage = returnedError.error?.message;
         } else if (returnedError instanceof HttpErrorResponse) {
-          errorMessage = `هناك خطأ: ${returnedError.error.Message}`;
+          errorMessage = returnedError.error?.message;
           handled = this.handleServerSideError(returnedError);
         }
-
         this._toastr.error(errorMessage ? errorMessage : returnedError);
-
         if (!handled) {
           if (errorMessage) {
             return throwError(errorMessage);
@@ -73,16 +69,13 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
 
   private handleServerSideError(error: HttpErrorResponse): boolean {
     let handled: boolean = false;
-
     switch (error.status) {
       case 401:
         this._toastr.error('Please login again.');
-        localStorage.removeItem('token');
         handled = true;
         break;
       case 403:
         this._toastr.error('Please login again.');
-        localStorage.removeItem('token');
         handled = true;
         break;
     }

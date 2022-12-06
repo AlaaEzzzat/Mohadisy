@@ -1,808 +1,904 @@
-<!-- [formGroup]="myForm" -->
-<!-- [formGroup]="providerData"] -->
-<form
-  [formGroup]="providerData"
-  (ngSubmit)="onSubmit()"
-  class="form-control border-0"
-  novalidate
->
-  <div *ngIf="secandform == false">
-    <h5 class="mb-5 mt-5 bd-title" dir="rtl">المعلومات الشخصية</h5>
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label" for="username">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          اسم المستخدم
-        </label>
-        <input
-          type="text"
-          id="username"
-          class="form-control form-control-lg"
-          name="username"
-          formControlName="username"
-          placeholder="اسم المستخدم"
-          [class.is-valid]="
-            providerData.get('username')?.valid &&
-            (providerData.get('username')?.dirty ||
-              providerData.get('username')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('username')?.invalid &&
-            (providerData.get('username')?.dirty ||
-              providerData.get('username')?.touched)
-          "
-        />
+<div class="row container-fluid">
+  <div class="col-lg-3 mt-3 mb-3">
+    <div class="card section-1">
+      <div class="row">
+        <div class="col-lg-12">
+          <img src="{{profile?.organizationalServiceProviderProfile?.companyLogoPath}}" alt="" class="img-fluid profile">
+          <h4 class="mt-3">{{profile?.organizationalServiceProviderProfile?.companyName}}</h4>
 
-        <div
-          *ngIf="
-            providerData.get('username')?.invalid &&
-            (providerData.get('username').dirty ||
-              providerData.get('username').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('username').errors?.['required']">
-            Name is required.
-          </div>
-          <div *ngIf=" providerData.get('username').errors?.['minlength']">
-            Name must be at least 4 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label" for="companyName">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          اسم الشركة
-        </label>
-        <input
-          type="text"
-          id="companyName"
-          class="form-control form-control-lg"
-          name="companyName"
-          formControlName="companyName"
-          placeholder="اسم الشركة"
-          [class.is-valid]="
-            providerData.get('companyName')?.valid &&
-            (providerData.get('companyName')?.dirty ||
-              providerData.get('companyName')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('companyName')?.invalid &&
-            (providerData.get('companyName')?.dirty ||
-              providerData.get('companyName')?.touched)
-          "
-        />
+          <div class="row text-center info">
+            <div class="col-lg-5 mt-3">
+              <p>حساب نشط
+                <i class="fa fa-circle" style="color:#10B981; font-size:8px;"></i>
+              </p>
 
-        <div
-          *ngIf="
-            providerData.get('companyName')?.invalid &&
-            (providerData.get('companyName').dirty ||
-              providerData.get('companyName').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('companyName').errors?.['required']">
-            companyName is required.
+            </div>
+            <div class="col-lg-7 mt-3">
+              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumber}}</p>
+            </div>
           </div>
-          <div *ngIf=" providerData.get('companyName').errors?.['minlength']">
-            companyName must be at least 4 characters long.
-          </div>
-        </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label" for="email">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          البريد الالكتروني</label
-        >
 
-        <input
-          type="text"
-          id="email"
-          name="email"
-          formControlName="email"
-          class="form-control form-control-lg form-group"
-          placeholder="البريد الالكتروني"
-          [class.is-valid]="
-            providerData.get('email')?.valid &&
-            (providerData.get('email')?.dirty ||
-              providerData.get('email')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('email')?.invalid &&
-            (providerData.get('email')?.dirty ||
-              providerData.get('email')?.touched)
-          "
-        />
+          <p class="edit text-center mt-4">
+            <a href="#" >
+              <i class="fa fa-edit"></i>
+              تعديل الملف الشخصى
+          </a>
+          </p>
 
-        <div
-          *ngIf="
-            providerData.get('email')?.invalid &&
-            (providerData.get('email').dirty ||
-              providerData.get('email').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('email').errors?.['required']">
-            email is required.
+          <p class="info-sp mt-3">
+            <i class="fas fa-phone"></i>
+           {{profile?.phoneNumber}}
+          </p>
+          <p class="info-sp mt-2">
+            <i class="fa fa-envelope-open-o"></i>
+            {{profile?.email}}
+          </p>
+
+          <div class="row">
+
+            <div class="col-lg-1 link mx-1"></div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/global.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="">
+                <img src="/assets/icons/in.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="">
+                <img src="/assets/icons/fac.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/be.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+            <div class="col-lg-2 mt-3 link">
+              <a href="" >
+                <img src="/assets/icons/twitter.png" alt="" class="img-fluid">
+              </a>
+            </div>
+
+
+
+
+
+
+
           </div>
-          <div *ngIf=" providerData.get('email').errors?.['email']">
-            email must be example@example.com
+
+          <div class="row" id="accordion">
+            <div  class="col-lg-12 mt-3 mx-3">
+              <h2>
+                <button class="btn btn-accordion" type="button"
+                data-target="#item1" data-toggle="collapse">نظره عامه عن الشركه
+                  <i class="fas fa-angle-down" style=" margin-right: 36%;"></i>
+              </button>
+              </h2>
+
+
+              <div class="collapse hide" id="item1" data-parent="#accordian">
+                <div class="row">
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">{{profile?.email}}</div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        الخدمه الرئيسيه :
+                       {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
+                         </div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1">
+                        </i>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-12 card acc-card mt-1">
+                    <div class="row">
+                      <div class="col-lg-9">
+                        الخدمه الفرعيه :
+                        {{profile?.organizationalServiceProviderProfile?.ospprofileSubServices
+                          [0]?.projectSubService.name}}
+                        </div>
+                      <div class="col-lg-3">
+                        <i class="fa fa-edit mx-3 mt-1"></i>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
           </div>
+
+
+          <div class="col-lg-12 mx-3 mt-2">
+            <h2>
+              <button class="btn btn-accordion" type="button"
+              data-target="#item2" data-toggle="collapse">الاوراق والتراخيص
+                <i class="fas fa-angle-down" style=" margin-right: 46%;"></i>
+            </button>
+            </h2>
+
+
+            <div class="collapse hide" id="item2" data-parent="#accordian">
+              <div class="row">
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      خطاب بنكى برقم الايبان
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration1==1">
+                        <button class="btn choose-toggle" (click)="register_1()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration1!=1">
+                      <button class="btn choose-toggle" (click)="register_1()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration1==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a class="btn w-100" target="_blank"  style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.iBanFile}}">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                       شهاده الزكاه والدخل
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration2==1">
+                        <button class="btn choose-toggle" (click)="register_2()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration2!=1">
+                      <button class="btn choose-toggle" (click)="register_2()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration2==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
+                          >
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9 " style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      السجل التجارى
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration3==1">
+                        <button class="btn choose-toggle" (click)="register_3()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration3!=1">
+                      <button class="btn choose-toggle" (click)="register_3()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration3==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn w-100" target="_blank"
+                          style="padding-left:50% ;"
+                          >
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-9" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      الرخصه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration4==1">
+                        <button class="btn choose-toggle" (click)="register_4()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration4!=1">
+                      <button class="btn choose-toggle" (click)="register_4()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration4==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a class="btn w-100" target="_blank" style="padding-left:50% ;"
+                           href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+
+                <div class="col-lg-12 card acc-card mt-1">
+                  <div class="row">
+                    <div class="col-lg-10" style="position:absolute;">
+                      <i class="far fa-image"></i>
+                      شهاده التأمينات الاجتماعيه
+                    </div>
+                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
+                      <ng-container *ngIf="registeration5==1">
+                        <button class="btn choose-toggle" (click)="register_5()">
+                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
+                        </button>
+                      </ng-container>
+
+                      <ng-container *ngIf="registeration5!=1">
+                      <button class="btn choose-toggle" (click)="register_5()">
+                        <i class="fa fa-ellipsis-h"></i>
+                      </button>
+                    </ng-container>
+                    </div>
+                    <ng-container *ngIf="registeration5==1">
+                      <ul class="card card-registeration">
+                        <li>
+                          <a class="btn w-100 " target="_blank" style="padding-left:50% ;"
+                           href="{{this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile}}">
+                            <i class="fa fa-eye"></i>
+                            فتح
+                          </a>
+                        </li>
+
+                        <li>
+                         <button class="btn w-100" style="padding-left:40% ;">
+                          <i class="fa fa-edit"></i>
+                          تعديل
+                         </button>
+                        </li>
+                      </ul>
+
+                    </ng-container>
+                  </div>
+                </div>
+
+              </div>
+          </div>
+
         </div>
-      </div>
-      <div class="col-3">
-        <label class="form-label" for="phone_number">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          رقم التلفون</label
-        >
-        <div class="form-group d-inline-block form-control">
-          <span class="px-1 bg-primary text-light rounded-1">+966</span>
-          <input
-            type="number"
-            id="phone_number"
-            name="phone_number"
-            class="mx-1"
-            formControlName="phone_number"
-            placeholder="رقم التلفون"
-            [class.is-numbervalid]="
-              providerData.get('phone_number')?.valid &&
-              (providerData.get('phone_number')?.dirty ||
-                providerData.get('phone_number')?.touched)
-            "
-            [class.is-invalid]="
-              providerData.get('phone_number')?.invalid &&
-              (providerData.get('phone_number')?.dirty ||
-                providerData.get('phone_number')?.touched)
-            "
-          />
-        </div>
-        <div
-          *ngIf="
-            providerData.get('phone_number')?.invalid &&
-            (providerData.get('phone_number').dirty ||
-              providerData.get('phone_number').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('phone_number').errors?.['required']">
-            phone number is required.
+
           </div>
-          <div *ngIf=" providerData.get('phone_number').errors?.['pattern']">
-            phone number must be 11 number
+
+          <p class="dir mt-2">
+            <i class="fa fa-map-marker"></i>
+            العنوان
+          </p>
+
+          <p class="mx-2 mt-2">
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.region?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.city?.nameAr}},
+            {{profile?.organizationalServiceProviderProfile?.district?.nameAr}}
+          </p>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card map mt-2">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14934528.881396683!2d54.10216827104652!3d23.956011965265986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2z2KfZhNiz2LnZiNiv2YrYqQ!5e0!3m2!1sar!2seg!4v1669392006602!5m2!1sar!2seg"   loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                </iframe>
+                <div class="layout">
+                  <p>احصل على الاتجاهات</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="card represent">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <img src="{{representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="" class="img-fluid">
+                  </div>
+
+                  <div class="col-lg-8 mt-1">
+                    <h6>
+                      م/
+                      {{profile?.organizationalServiceProviderProfile?. representative?.firstName}}
+                      {{profile?.organizationalServiceProviderProfile?. representative?.lastName}}
+                    </h6>
+                    <p class="info-sp">ممثل الشركه على المنصه</p>
+                    <p class="info-rep mt-2 " style="margin-right:38%;">
+                     {{profile?.organizationalServiceProviderProfile?. representative?.phoneNumber}}
+                      <i class="fas fa-phone"></i>
+                    </p>
+                    <p class="info-rep" style="margin-right:10%;">
+                      {{profile?.organizationalServiceProviderProfile?. representative?.email}}
+                      <i class="fa fa-envelope-open-o" ></i>
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+
+
+
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-3">
-        <label class="form-label" for="companyPhoneNum">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          رقم تليفون الشركة</label
-        >
+  </div>
 
-        <div class="form-group d-inline-block form-control">
-          <span class="px-1 bg-primary text-light rounded-1">+966</span>
-          <input
-            type="number"
-            id="companyPhoneNum"
-            name="companyPhoneNum"
-            class="border-0 shadow-none mx-1"
-            formControlName="companyPhoneNum"
-            placeholder="رقم تليفون الشركة"
-            [class.is-valid]="
-              providerData.get('companyPhoneNum')?.valid &&
-              (providerData.get('companyPhoneNum')?.dirty ||
-                providerData.get('companyPhoneNum')?.touched)
-            "
-            [class.is-invalid]="
-              providerData.get('companyPhoneNum')?.invalid &&
-              (providerData.get('companyPhoneNum')?.dirty ||
-                providerData.get('companyPhoneNum')?.touched)
-            "
-          />
+  </div>
+
+
+  <!--------------Part 2---------------->
+  <div class="col-lg-9">
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+
+        <ng-container *ngIf="copmpleteProfile!=100">
+        <a routerLink="" class="completeprofile">
+          <p style="color:#18AF9A;">استكمل بياناتك</p>
+        </a>
+        </ng-container>
+
+        <ng-container *ngIf="copmpleteProfile==100">
+        <p style="color:#64748B;">تم استكمال بياناتك</p>
+        </ng-container>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100"
+            [style.width]="copmpleteProfile+'%'">
+
+              {{copmpleteProfile}}%
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <h4>نظره عامه</h4>
+      </div>
+      <div class="col-lg-6 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="far fa-building"></i>
+                المشاريع السابقه
+
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge ">{{ServiceProviderWork?.length}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--<div class="col-lg-4 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="fas fa-award"></i>
+                سنوات الخبره
+
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge ">45</div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+
+        <div class="col-lg-6 mt-2">
+        <div class="card card-1">
+          <div class="row">
+            <div class="col-lg-8">
+              <h5>
+                <i class="fas fa-star"></i>
+                التقييم
+              </h5>
+            </div>
+            <div class="col-lg-4">
+              <div class="padge">{{avgRate}}/5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <div class="row">
+          <div class="col-lg-4">
+            <h4>جدول أعمالك</h4>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="row">
+              <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#addAppointment">
+                <a class="btn" style="color:#18AF9A;">
+                  اضافه حدث
+                  <i class="fa fa-calendar"></i>
+                </a>
+              </div>
+
+              <div class="col-lg-6 mt-2" >
+                <p style="font-size: 18px; color: #64748B; font-weight: 500;">{{selected | date}}</p>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <div class="col-lg-4" data-bs-toggle="modal" data-bs-target="#addAppointment">
+            <a class="btn" style="color:#18AF9A; margin-right:65%; font-family:'Cairo' ;">
+               تعديل
+              <i class="fa fa-edit"></i>
+            </a>
+          </div>
+
         </div>
 
-        <div
-          *ngIf="
-            providerData.get('companyPhoneNum')?.invalid &&
-            (providerData.get('companyPhoneNum').dirty ||
-              providerData.get('companyPhoneNum').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf=" providerData.get('companyPhoneNum').errors?.['required']"
+      </div>
+
+      <div class="col-lg-5 mt-2">
+        <div class="card  calender">
+          <div class="row">
+            <div class="col-lg-12" (click)="getappointDate()">
+              <mat-calendar [(selected)]="selected" ></mat-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-7 mt-2">
+        <div class="card card-1-2">
+          <div class="row" *ngIf="dateOpt!=null;else notfound">
+            <div class="col-lg-12">
+              <p>
+                {{ dateOpt?.description }}
+              </p>
+
+              <div class="row">
+
+                <div class="col-lg-4 mt-1" *ngFor="let item of appointmentFiles">
+                  <p class="files">
+                    <a     class="informationDownload  d-flex  justify-content-between mb-2 "
+                    (click)="
+                      download(
+                        item.filePath,
+                        item.fileName
+                      )
+                    "
+                  >
+                  <span
+                  ><img
+                  class="mt-1"
+                    src="assets/dashboard/picture.png"
+                    alt=""
+                    *ngIf="
+                      item.fileType == '.png' ||
+                      item.fileType == '.jpg' ||
+                      item.fileType == '.svg' ||
+                      item.fileType == '.PNG'
+                    "
+                  />
+                  <img
+                  clas="mt-1"
+                    src="assets/dashboard/pdf.png"
+                    *ngIf="item.fileType === '.pdf'"
+                  />
+                </span>
+                    <p class="nameDownload mt-2">
+                      {{ item.fileName }}
+                    </p>
+                    <i class="fa fa-download typeCom ms-3 mt-2"></i>
+
+
+                      <!-- <i class="fa fa-file"></i> -->
+                    </a>
+                </div>
+
+
+
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <ng-template #notfound>
+            <div class="col-12 bg-white px-4 py-1 mb-2" >
+              <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
+                {{ erDateOp}}
+                <small class="fw-normal">{{
+                  dateOpt?.dateCreated | date: "d/M/yyyy"
+                }}</small>
+              </p>
+
+
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-lg-12 mt-4">
+        <div class="row">
+          <div class="col-lg-9">
+            <h4>المشاريع السابقه</h4>
+          </div>
+          <div class="col-lg-3">
+            <a href="/Spmanagement/prevWorks" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
+              اضافه مشروع
+              <i class="fa fa-plus-square"></i>
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+      <ng-container *ngFor="let project of ServiceProviderWork">
+      <div class="col-lg-6 mt-2">
+        <div class="card card-2">
+          <div class="row">
+            <div class="col-lg-8">
+              <p>اسم المشروع : <span>{{project.projectName}}</span></p>
+              <p>اسم العميل : <span>{{project.ownerName}}</span></p>
+              <p>سنه التنفيذ: <span>{{project.completionYear }}</span></p>
+
+                <!--<div class="row pt-2 date">
+                  <div class="col-lg-5">
+                    تاريخ البدء : 2 مايو 2019
+                  </div>
+                  <div class="col-lg-6">
+                    تاريخ الانتهاء : 4 مايو 2019
+                  </div>
+                </div>-->
+            </div>
+
+            <div class="col-lg-4 choose">
+
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <button class="btn choose-toggle" (click)="toggle(project.id)">
+                  <i class="fa fa-times-circle-o"></i>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="infoProject[project.id]!=1">
+              <button class="btn choose-toggle" (click)="toggle(project.id)">
+                <i class="fa fa-ellipsis-h"></i>
+              </button>
+            </ng-container>
+
+
+              <ng-container *ngIf="infoProject[project.id]==1">
+                <ul class="card">
+                  <li>
+                    <button class="btn w-100" type="button" (click)="projectImage(project.id)"
+                    data-bs-toggle="modal"  [attr.data-bs-target]="'#project'+project.id"
+                    >
+                     <p style="padding-left:50% ;">
+                      <i class="fa fa-eye"></i>
+                      فتح</p>
+
+                    </button>
+                  </li>
+
+                  <li>
+
+                   <a class="btn w-100" href="/Spmanagement/prevWorks">
+                    <p style="padding-left:50% ;">
+                    <i class="fa fa-edit"></i>
+                    تعديل
+                    </p>
+                   </a>
+
+                  </li>
+                </ul>
+              </ng-container>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade "  [id]="'project'+project.id" >
+        <div class="modal-dialog  modal-xl " >
+          <button type="button" class="close btn" data-bs-dismiss="modal"
+          style="font-size: 40px; color:gainsboro;"
           >
-            phone number is required.
-          </div>
-          <div *ngIf=" providerData.get('companyPhoneNum').errors?.['pattern']">
-            phone number must be 11 number
-          </div>
-        </div>
-      </div>
+            <i>&times;</i>
+          </button>
+          <div class="modal-content w-100 border-0" style="background-color:transparent;">
+            <div class="modal-body ">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
 
-      <div class="col-4">
-        <label class="form-label" for="site_url">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          الموقع الالكتروني(http://www.sample.com)</label
-        >
+                  <ng-container *ngFor="let file of workFile ; let i=index;">
+                    <div *ngIf="i==0" class="carousel-item active">
 
-        <input
-          type="text"
-          id="site_url"
-          name="site_url"
-          formControlName="site_url"
-          class="form-control form-control-lg form-group"
-          placeholder="http://www.sample.com"
-          [class.is-valid]="
-            providerData.get('site_url')?.valid &&
-            (providerData.get('site_url')?.dirty ||
-              providerData.get('site_url')?.touched)
-          "
-          [class.is-invalid]="
-            providerData.get('site_url')?.invalid &&
-            (providerData.get('site_url')?.dirty ||
-              providerData.get('site_url')?.touched)
-          "
-        />
-        <div
-          *ngIf="
-            providerData.get('site_url')?.invalid &&
-            (providerData.get('site_url').dirty ||
-              providerData.get('site_url').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('site_url').errors?.['required']">
-            site_url is required.
-          </div>
-          <div *ngIf=" providerData.get('site_url').errors?.['pattern']">
-            site_url must be http://www.sample.com
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-        <label for="servicetype" class="control-label">
-          <i class="fa fa-star" aria-hidden="true"></i>
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                    <div *ngIf="i!=0" class="carousel-item">
+                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
+                    </div>
+                  </ng-container>
+                </div>
 
-          خدمات
-        </label>
-        <select
-          name="servicetype"
-          id="servicetype"
-          class="form-control form-control-lg"
-          formControlName="servicetype"
-        >
-          <option value="values1">value one</option>
-          <option value="valu2">value tow</option>
-        </select>
-
-        <div
-          *ngIf="
-            providerData.get('servicetype')?.invalid &&
-            (providerData.get('servicetype').dirty ||
-              providerData.get('servicetype').touched)
-          "
-          class="alert alert-danger"
-        >
-          <div *ngIf=" providerData.get('servicetype').errors?.['required']">
-            servicetype is required.
-          </div>
-        </div>
-      </div>
-
-      <div class="col-3">
-        <label for="search_name_input" class="control-label">
-          <i class="fa fa-star" aria-hidden="true"></i>
-
-          خدمات
-        </label>
-        <select
-          filterEnabled="true"
-          name="search_name_input"
-          id="search_name_input"
-          class="form-control"
-        >
-          <option value="">value one</option>
-          <option value="">value tow</option>
-        </select>
-
-        <!-- [formControl]="formControl" -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">
-        <label class="form-label" for="yearly_budget">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          الدخل السنوي</label
-        >
-
-        <input
-          type="number"
-          id="yearly_budget"
-          name="yearly_budget"
-          formControlName="yearly_budget"
-          class="form-control form-control-lg form-group"
-          placeholder="$500"
-        />
-      </div>
-    </div>
-    <hr class="mt-3" />
-    <div class="row mt-5">
-      <div class="col-4">
-        <h5 class="mb-5 bd-title" dir="rtl">العنوان</h5>
-      </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col-4">
-            <label for="region" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
-              منطقه
-            </label>
-            <select
-              name="region"
-              id="region"
-              class="form-control form-control-lg"
-            >
-              <option value="">value one</option>
-              <option value="">value tow</option>
-            </select>
-          </div>
-          <div class="col-4">
-            <label for="city" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
-              المدينة
-            </label>
-            <select name="city" id="city" class="form-control form-control-lg">
-              <option value="">value one</option>
-              <option value="">value tow</option>
-            </select>
-          </div>
-          <div class="col-4">
-            <label for="district" class="control-label">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
-              الحى
-            </label>
-            <select
-              name="district"
-              id="district"
-              class="form-control form-control-lg"
-            >
-              <option value="">value one</option>
-              <option value="">value tow</option>
-            </select>
-          </div>
-        </div>
-        <div class="row my-4">
-          <div class="col-3">
-            <label class="form-label" for="buildNo">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              رقم المبنى
-            </label>
-
-            <input
-              type="number"
-              id="buildNo"
-              name="buildNo"
-              formControlName="buildNo"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-3">
-            <label class="form-label" for="postal_box">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              الرقم الاضافي
-            </label>
-
-            <input
-              type="number"
-              id="postal_box"
-              name="postal_box"
-              formControlName="postal_box"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-3">
-            <label class="form-label" for="postal_code">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              الرمز بريد
-            </label>
-
-            <input
-              type="number"
-              id="postal_code"
-              name="postal_code"
-              formControlName="postal_code"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-          <div class="col-3">
-            <label class="form-label" for="StreetName">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              اسم الشارع
-            </label>
-
-            <input
-              type="number"
-              id="StreetName"
-              name="StreetName"
-              formControlName="StreetName"
-              class="form-control form-control-lg form-group"
-              placeholder="$500"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr class="my-3" />
-    <div class="row">
-      <div class="col-4">
-        <h5 class="mb-5 bd-title" dir="rtl">ممثل الشركة</h5>
-      </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col-6">
-            <label class="form-label" for="representative_name">
-              <i class="fa fa-star" aria-hidden="true"></i>
-
-              الاسم الاول</label
-            >
-            <input
-              type="text"
-              id="representative_name"
-              class="form-control form-control-lg"
-              name="representative_name"
-              formControlName="representative_name"
-              placeholder="الاسم الاول"
-              [class.is-valid]="
-                providerData.get('representative_name')?.valid &&
-                (providerData.get('representative_name')?.dirty ||
-                  providerData.get('representative_name')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_name')?.invalid &&
-                (providerData.get('representative_name')?.dirty ||
-                  providerData.get('representative_name')?.touched)
-              "
-            />
-
-            <div
-              *ngIf="
-                providerData.get('representative_name')?.invalid &&
-                (providerData.get('representative_name').dirty ||
-                  providerData.get('representative_name').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_name').errors?.['required']"
-              >
-                first name is required.
               </div>
-              <div
-                *ngIf=" providerData.get('representative_name').errors?.['minlength']"
-              >
-                first name must be at least 4 characters long.
-              </div>
+
             </div>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="representative_lastName">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              اسم العائلة</label
-            >
-            <input
-              type="text"
-              id="representative_lastName"
-              class="form-control form-control-lg"
-              name="representative_lastName"
-              formControlName="representative_lastName"
-              placeholder="اسم العائلة"
-              [class.is-valid]="
-                providerData.get('representative_lastName')?.valid &&
-                (providerData.get('representative_lastName')?.dirty ||
-                  providerData.get('representative_lastName')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_lastName')?.invalid &&
-                (providerData.get('representative_lastName')?.dirty ||
-                  providerData.get('representative_lastName')?.touched)
-              "
-            />
 
-            <div
-              *ngIf="
-                providerData.get('representative_lastName')?.invalid &&
-                (providerData.get('representative_lastName').dirty ||
-                  providerData.get('representative_lastName').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_lastName').errors?.['required']"
-              >
-                lastName is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_lastName').errors?.['minlength']"
-              >
-                lastName must be at least 4 characters long.
-              </div>
-            </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+
           </div>
+
+
         </div>
-        <div class="row mt-3">
-          <div class="col-6">
-            <label class="form-label" for="representative_email">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              البريد الالكتروني</label
-            >
 
-            <input
-              type="text"
-              id="representative_email"
-              name="representative_email"
-              formControlName="representative_email"
-              class="form-control form-control-lg form-group"
-              placeholder="البريد الالكتروني"
-              [class.is-valid]="
-                providerData.get('representative_email')?.valid &&
-                (providerData.get('representative_email')?.dirty ||
-                  providerData.get('representative_email')?.touched)
-              "
-              [class.is-invalid]="
-                providerData.get('representative_email')?.invalid &&
-                (providerData.get('representative_email')?.dirty ||
-                  providerData.get('representative_email')?.touched)
-              "
-            />
-            <div
-              *ngIf="
-                providerData.get('representative_email')?.invalid &&
-                (providerData.get('representative_email').dirty ||
-                  providerData.get('representative_email').touched)
-              "
-              class="alert alert-danger"
-            >
-              <div
-                *ngIf=" providerData.get('representative_email').errors?.['required']"
+      </div>
+
+
+
+      </ng-container>
+
+
+
+
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="showSuc">
+  {{message}}
+</div>
+
+
+<div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
+  {{message}}
+</div>
+
+
+<div
+  class="modal fade"
+  id="addAppointment"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مهمه
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form  [formGroup]="newappointment"
+        (ngSubmit)="creatMeeting()" novalidate>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="name"
+                >اسم </label
               >
-                email is required.
-              </div>
-              <div
-                *ngIf=" providerData.get('representative_email').errors?.['minlength']"
-              >
-                email must be example@email.com
-              </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <label class="form-label" for="representative_phone">
-              <i class="fa fa-star" aria-hidden="true"></i>
-              رقم التلفون</label
-            >
-            <div class="form-group d-inline-block form-control">
-              <span class="px-3">+966</span>
               <input
                 type="text"
-                id="representative_phone"
-                name="representative_phone"
-                formControlName="representative_phone"
-                placeholder="رقم التلفون"
-                [class.is-valid]="
-                  providerData.get('representative_phone')?.valid &&
-                  (providerData.get('representative_phone')?.dirty ||
-                    providerData.get('representative_phone')?.touched)
-                "
-                [class.is-invalid]="
-                  providerData.get('representative_phone')?.invalid &&
-                  (providerData.get('representative_phone')?.dirty ||
-                    providerData.get('representative_phone')?.touched)
-                "
+                id="name"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                  appoins['name'].errors && appoins['name'].touched
+                }"
               />
-            </div>
-            <div
-              *ngIf="
-                providerData.get('representative_phone')?.invalid &&
-                (providerData.get('representative_phone').dirty ||
-                  providerData.get('representative_phone').touched)
-              "
-              class="alert alert-danger"
-            >
               <div
-                *ngIf=" providerData.get('representative_phone').errors?.['required']"
+                *ngIf="appoins['name'].errors && appoins['name'].touched"
+                class="alert alert-warning mt-2"
               >
-                phone is required.
+                <div *ngIf="appoins['name'].errors['required']">
+                  من فضلك ادخل اسم للموعد                </div>
               </div>
-              <div
-                *ngIf=" providerData.get('representative_phone').errors?.['pattern']"
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="description"
+                >وصف </label
               >
-                phone must be 11 characters
+
+              <textarea  id="" cols="30" rows="1" type="text"
+              id="description"
+              name="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': appoins['description'].errors && appoins['description'].touched
+              }"></textarea>
+              <div
+                *ngIf="appoins['description'].errors && appoins['description'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['description'].errors['required']">
+                  من فضلك ادخل   وصف للموعد
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="row my-5">
-      <div class="col-8"></div>
-      <div class="col-4">
-        <button
-          class="btn btn-success-style form-control"
+          <div class="mb-3">
+            <label for="formFile" class="form-label">اضافه ملف</label>
+            <input class="form-control"
+            type="file"
+            id="imageFile"
+            (change)="uplaodFile($event)"
+            name="imageFile"
+            formControlName="imageFile"
+           >
+          </div>
+
+          <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
+          <button
+          data-bs-dismiss="modal"
           type="submit"
-          (click)="secandform = true"
+          [disabled]="!newappointment.valid"
+          class="btn btn-lg ms-2 text-white form-control  mb-3"
+          style="background: #18AF9A"
+        >
+          انشاء  مهمه
+        </button>
+        <button type="button"  data-bs-dismiss="modal"
+        class="btn btn-lg ms-2 text-white form-control btn-secondary"
 
         >
-          <!-- (click)="secandform = true" -->
-          <i class="fa fa-floppy-disk" aria-hidden="true"></i>
-
-          حفظ استكمال البيانات
+          الغاء
         </button>
+        </form>
       </div>
+
     </div>
   </div>
-
-  <div *ngIf="secandform == true">
-    <h5 class="mb-5 mt-5 bd-title" dir="rtl">المستندات المرفقة</h5>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <label for="file" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          شعار الشركة
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="inputGroupFile"
-            placeholder="mohamed"
-            formControlName="logo"
-          />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="registration_number">
-            <i class="fa fa-star" aria-hidden="true"></i>
-
-            رقم تسجيل الشركة</label
-          >
-          <input
-            type="number"
-            id="registration_number"
-            name="registration_number"
-            formControlName="registration_number"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <label for="attach_register" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          ارفاق
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="attach_register"
-            placeholder="mohamed"
-            formControlName="attach_register"
-            name="attach_register"
-          />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="licences_number">
-            رقم رخصة هيئة المهندسين
-          </label>
-          <input
-            type="number"
-            id="licences_number"
-            name="licences_number"
-            formControlName="licences_number"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="CompNum">
-            <i class="fa fa-star" aria-hidden="true"></i>
-
-            تاريخ الرخصة
-          </label>
-          <input
-            type="date"
-            id="CompNum"
-            name="CompNum"
-            formControlName="CompNum"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <div class="form-outline">
-          <label class="form-label mb-2" for="CompNum">
-            <i class="fa fa-star" aria-hidden="true"></i>
-
-            تاريخ الانتهاء
-          </label>
-          <input
-            type="date"
-            id="CompNum"
-            name="CompNum"
-            formControlName="CompNum"
-            class="form-control form-control-lg"
-            style="height: 47px"
-          />
-        </div>
-      </div>
-      <div class="col-md-3 mb-4">
-        <label for="attach_licences" class="mb-2">
-          <i class="fa fa-star" aria-hidden="true"></i>
-          ارفاق
-        </label>
-        <div class="input-group custom-file-button form-control">
-          <input
-            type="file"
-            class="form-control border-0"
-            id="attach_licences"
-            placeholder="mohamed"
-            formControlName="attach_licences"
-            name="attach_licences"
-          />
-          <label class="btn btn-primary rounded-1" for="inputGroupFile"
-            >ارفاق</label
-          >
-        </div>
-      </div>
-    </div>
-    <div class="row my-5">
-      <div class="col-7"></div>
-      <div class="col-3">
-        <button class="btn btn-success-style form-control" type="submit">
-          <i class="fa fa-floppy-disk" aria-hidden="true"></i>
-          حفظ استكمال البيانات
-        </button>
-      </div>
-      <div class="col-2">
-        <button
-          class="btn btn-success-style form-control"
-          (click)="secandform = false"
-        >
-          <i class="fa fa-backward" aria-hidden="true"></i>
-          السابق
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
-
-{{ providerData.value | json }}
-<br />
-<br />
-<br />
-<br />
-{{ providerData.get("email").errors | json }}
+</div>

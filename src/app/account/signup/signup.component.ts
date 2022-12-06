@@ -42,10 +42,12 @@ export class SignupComponent implements OnInit {
       ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
+      phoneNumber: [
+        '',
+        [Validators.required],
+        /*    Validators.pattern('^(966)(5)[0-9]{8}$'), */
+      ],
       roleId: ['', [Validators.required]],
-      // accountId: new FormArray([]),
-      // accountId: [0, [Validators.required]],
     });
   }
 
@@ -74,9 +76,6 @@ export class SignupComponent implements OnInit {
       this.router.navigate(['/account/login']);
     });
   }
-  // () {
-
-  // }
   categoriySelector: string = '';
 
   get f() {

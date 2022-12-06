@@ -34,7 +34,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),
     NgxSpinnerModule,
-    FormsModule,
+    FormsModule, 
   ],
 })
 export class AccountModule {}

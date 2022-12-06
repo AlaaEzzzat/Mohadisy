@@ -3,22 +3,18 @@
   padding: 0;
 }
 
-.nav a
-{
-  padding: 3% 7%;
-  background-color: white;
-  width: 96%;
-  margin-left: 3%;
-
-}
-
-
-
  .card
 {
    border: none;
    padding: 4% ;
    color:#004057;
+   border: none;
+   border-radius: 0%;
+   -webkit-border-radius: 0%;
+   -moz-border-radius: 0%;
+   -ms-border-radius: 0%;
+   -o-border-radius: 0%;
+
 }
 
 .section-2  .card p
@@ -27,9 +23,10 @@
   margin-right: 4%;
 }
 
-.section-2 .card p span
+
+.section-2 .card-1 p span
 {
-  margin-left: 47%;
+  margin-left: 40%;
 }
 
 .card p i
@@ -85,32 +82,21 @@ ul li i
 
 }
 
-
-.section-1 .content a
-{
-  width: 98%;
-  padding: 2% 6% 2% 0% ;
-}
-
-.section-1 .content span
-{
-
-  margin-right: 70%;
-  padding-left: 3%;
-  color: #198754;
-  font-size: 18px;
-
-}
-
-
 .rep
 {
   background-color: #004057;
-  padding:3% 4%  3% 9%;
+  padding:3% 3%  3% 9%;
+  margin-left: 2%;
+
+
+}
+
+.rep a i
+{
+
   font-size:35px !important;
   margin-left: 2%;
   color: white;
-
 
 }
 
@@ -121,7 +107,64 @@ li
 
 
 
+.card-2
+{
+
+  font-weight: 500;
+  font-size: 14px;
+}
 
 
+.card-1 a
+{
+  color: #18af9a;
+
+}
 
 
+.card-3 i
+{
+  color:#18af9a;
+}
+
+
+.page-link
+{
+  color:#004057;
+  outline: none;
+  border-radius: 0%;
+  -webkit-border-radius: 0%;
+  -moz-border-radius: 0%;
+  -ms-border-radius: 0%;
+  -o-border-radius: 0%;
+
+}
+
+.active button
+{
+  background-color: #004057;
+  color:white;
+}
+
+
+.noresult
+{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #004057;
+
+}
+
+
+  .btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
+
+  .rep:hover
+  {
+    cursor: pointer;
+    background-color: #18af9a;
+
+  }

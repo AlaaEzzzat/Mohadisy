@@ -1,3 +1,46 @@
+@use '@angular/material' as mat;
+@import '../node_modules/@syncfusion/ej2-material-theme/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-calendars/styles/material.css';
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$AngularBaseStructure-primary: mat.define-palette(mat.$indigo-palette);
+$AngularBaseStructure-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$AngularBaseStructure-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$AngularBaseStructure-theme: mat.define-light-theme((
+  color: (
+    primary: $AngularBaseStructure-primary,
+    accent: $AngularBaseStructure-accent,
+    warn: $AngularBaseStructure-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($AngularBaseStructure-theme);
+
 /* You can add global styles to this file, and also import other style files */
 // @import "~bootstrap/dist/css/bootstrap.rtl.min.css";
 @import url("https://fonts.googleapis.com/css2?family=Cairo&display=swap");
@@ -22,6 +65,7 @@ $mediumMedia: 1000px;
 }
 body {
   font-family: "cairo";
+
 }
 html {
   scrollbar-color: #18af9a #2c5364;
@@ -31,6 +75,7 @@ html {
     border-radius: 50px;
   }
 }
+
 .fontStyle {
   letter-spacing: 0.5px;
   font-weight: lighter;

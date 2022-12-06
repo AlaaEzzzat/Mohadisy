@@ -1,5 +1,6 @@
 export interface IChangeStatus {
   profileId: number,
-      description ?: string,
+      description ?: any,
       accountStatusId: number,
+      joinRequestStatuses?:any[]
 }

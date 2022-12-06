@@ -1,29 +1,176 @@
-// i {
-//   color: #18af9a;
-// }
-// * {
-//   border: 0px;
-// }
+
+
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Tajawal', sans-serif;
+$fontTajawalFamily: 'Cairo', sans-serif;
 $textColor:#18AF9A;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
-$textColor:#18AF9A;
-$font25Size:1.25vw;
-$font18Size:0.8999999999999999vw;
-$font16Size:0.8vw;
+$bgButton:#F3FBFA;
 
-@mixin title{
-  font-size: $font25Size;
-  font-family:$fontTajawalFamily ;
+a:focus ,a:hover,button:focus ,button:hover {
+  background-color :$Alltext!important;
+  color: white !important;
+  box-shadow: none !important;
 }
-@mixin text18{
-  font-size: $font18Size;
-  font-family:$fontCairoFamily ;
+.cairo{
+  font-family: 'cairo';
 }
-@mixin text16{
-  font-size: $font16Size;
-  font-family:$fontCairoFamily ;
+button>i ,.typeCom
+{
+  color: #18AF9A !important;
+  // font-family:$fontCairoFamily;
+  font-family:$fontTajawalFamily;
+
+}
+.typeCom2{
+  color: #18AF9A !important;
+  font-family:$fontCairoFamily;
+
+}
+.textInformation,a{
+  color: $Alltext !important;
+  font-family:$fontCairoFamily;
+ }
+ .titleInformation{
+  color: $Alltext !important;
+  font-family:$fontTajawalFamily;
+  cursor: pointer;
+
+
+ }
+ .informationDownloadClient{
+  cursor: pointer;
+  text-decoration: none!important;
+    // color: $Alltext !important;
+  font-family:$fontCairoFamily;
+  >i{
+    color: $textColor !important;
+
+  }
+
+ }
+input[type="search"]{
+  &:hover,&:active ,&:focus{
+    border: 0px none transparent !important;
+    box-shadow: none !important;
+  }
+
+}
+@media only screen and (min-width: 768px) {
+  .sizew
+  {
+    flex: 0 0 auto;
+    width: 63.333333% ;
+  }
+
+}
+
+.informationDownload{
+  width: 45% !important;
+  text-decoration: none !important;
+  height: 35px  !important;
+  overflow: hidden;
+white-space:nowrap;
+
+
+}
+
+:is(.reject ,.notcomplete, .complete):hover{
+color: #000 !important;
+}
+.reject:hover{
+
+  background-color: #dc354680 !important;
+}
+.complete:hover{
+
+  background-color: #19875480 !important;
+}
+.notcomplete:hover{
+
+  background-color: #FFC10780 !important;
+}
+.top100 {
+  bottom:  10px !important;
+}
+.modaltitle{
+  background-color: $textColor !important;
+  >h2,>button{
+    color: white !important;
+    font-family: $fontTajawalFamily;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.modalbody{
+  form>h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  >h2{
+    color: $Alltext !important;
+    font-family: $fontCairoFamily;
+
+  }
+  textarea:active,textarea:focus{
+    box-shadow: none !important;
+    border: #004057 solid 1px;
+    font-family: $fontCairoFamily;
+  }
+  // textarea{
+  //   height: auto;
+  // }
+}
+.modalfooter{
+  >button:first-child{
+    background-color: #18AF9A;
+    color: white;
+    &:hover,&:focus{
+      background-color: white;
+      border: #18AF9A 1px solid;
+      color: #18AF9A;
+    }
+
+  }
+
+}
+.serviceProviderWorksBg{
+  background-color: $Alltext;
+  font-family: $fontCairoFamily;
+  p:first-child{
+    color: white;
+  }
+  color: #18AF9A;
+}
+
+// progress
+.example-margin {
+  margin: 0 10px;
+  color: #18AF9A;
+}
+
+#progress {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  color: #3f51b5;
+}
+.nameDownload{
+
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+ 
 }

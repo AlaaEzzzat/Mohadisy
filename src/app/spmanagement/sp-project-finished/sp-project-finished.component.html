@@ -1,0 +1,428 @@
+<ng-container *ngIf="result==0">
+  <div class="noresult mt-5">
+    لا توجد نتائج عرض
+  </div>
+</ng-container>
+
+
+<div class="section-2 mt-2 container-fluid">
+  <div class="row">
+    <div class="col-lg-3 position-relative">
+      <div class="row">
+
+        <ng-container *ngFor="let project of Listprojects let i=index;">
+          <ng-container *ngIf="select==project.id">
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:#004958; color:white;">
+              <p><i class="far fa-building "></i>
+                <span> اسم المشروع :{{project.name}}
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
+                  </ng-container>
+                </span>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                العنوان: {{project.district?.nameAr}},{{project.district.city?.nameAr}},
+                 {{project.district.city.region?.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
+            </div>
+          </ng-container>
+
+
+          <ng-container *ngIf="this.select!=project.id">
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:white;  color:#004057;">
+              <p><i class="far fa-building "></i>
+                <span> اسم المشروع :{{project?.name}}
+                  <ng-container *ngIf="type==1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type==2">
+                    <a class="btn">({{_RequiredWorks[i].name}})</a>
+                  </ng-container>
+                </span>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                العنوان: {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                 {{project.district?.city?.region?.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>تاريخ التسليم:{{project.offers[0]?.deliveryDate}}</p>
+            </div>
+          </ng-container>
+
+        </ng-container>
+
+        <div class="col-12 " style="height: 100px; ;"></div>
+
+        <nav aria-label="Page navigation position-absolute top100" class="mt-4 mb-3" *ngIf="result==1">
+          <ul class="pagination d-flex flex-wrap w-100">
+              <ng-container *ngIf="page==1">
+              <li class="page-item disabled">
+                <button class="page-link btn p-1 px-3" tabindex="-1">السابق</button>
+              </li>
+              </ng-container>
+
+               <ng-container *ngIf="page!=1">
+                <li class="page-item">
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+                </li>
+                </ng-container>
+
+              <ng-container *ngFor="let p of pages">
+                <ng-container *ngIf="page==p">
+                  <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
+                <ng-container *ngIf="page!=p">
+                  <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+                </ng-container>
+
+              </ng-container>
+
+              <ng-container *ngIf="page==pages.length">
+                <li class="page-item disabled" >
+                  <button class="page-link btn p-1 px-3">التالى</button>
+                </li>
+               </ng-container>
+
+               <ng-container *ngIf="page!=pages.length">
+                <li class="page-item" >
+                  <button class="page-link btn p-1 px-3" (click)="changepage(page+1)">التالى</button>
+                </li>
+               </ng-container>
+
+            </ul>
+          </nav>
+
+
+
+      </div>
+
+    </div>
+
+
+    <!------------------------------------>
+
+    <ng-container *ngIf="select!=0">
+    <div class="col-lg-6 mt-4 mb-3 section-3">
+      <div class="row">
+        <div class="col-lg-12 info">
+          <div class="card card-infoP">
+            <div class="row">
+              <div class="col-lg-3">
+              <img src="{{selectProject.clientProfile.profilePicturePath}}" alt="image" >
+              </div>
+
+              <div class="col-lg-5  mt-4">
+                <p>{{selectProject.clientProfile.firstName}}
+                  {{selectProject.clientProfile.lastName}}
+                </p>
+              </div>
+
+              <div class="col-lg-3 mt-4">
+                <p type="btn" (click)="toggleChat()" style="cursor:pointer;">
+                  <i class="fa fa-commenting-o"></i>
+                </p>
+                <p style=" padding-right: 52%;">
+                  مراسله
+                </p>
+              </div>
+
+                <!----------------chat--------------->
+                <div class="overlay  p-5" *ngIf="startChat">
+                  <div class="popup p-5">
+                    <a class="close" style="cursor: pointer" (click)="toggleChat()">&times;</a>
+                    <div class="content">
+                      <label class="form-label fw-bold cairo">
+                        الرساله
+                      </label>
+                      <div class="message-input d-flex flex-column justify-content-center">
+                        <div class="wrap">
+                          <input class="form-control" #textInput type="text" placeholder="اكتب شيئاً ..."
+                            class="cairo" />
+                          <i class="fa-solid fa-paperclip attachment" aria-hidden="true">
+
+                            <input (change)="onFileUpload($event)" #fileImage type="file" alt="" name="attatch"
+                              id="attatch" class="attatch" />
+                            <small *ngIf="fileMessage" style="font-size: 12px;">{{
+                              fileMessage.name.substr(0,12)}}...</small>
+
+                          </i>
+                        </div>
+                        <button (click)="sendMessage(textInput.value)" class="btn submit">
+                          <span>إرسال</span>
+                          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--------------end chat------------------->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row ">
+        <div class="col-lg-12 mt-2">
+          <div class="card card-2">
+            <div class="row">
+              <div class="col-lg-12 p-2 content-1">
+                <h6>نبذه عن المشروع</h6>
+                <p>{{selectProject?.subject}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-2">
+            <div class="row">
+              <div class="col-lg-12 p-2 content-2">
+                <p>صلاحيه عرض السعر: <span>{{selectProject.offers[0]?.period}}</span></p>
+                <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory?.name}}</span></p>
+                <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory?.name}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-2 ">
+            <div class="row">
+              <div class="col-lg-12 p-2 content-2">
+                <p>عنوان المشروع :
+                  <span>{{selectProject.district?.nameAr}},{{selectProject.district?.city?.nameAr}},
+                    {{selectProject.district?.city?.region?.nameAr}}</span>
+                </p>
+                <p>رقم القطعه : <span>{{selectProject?.plotNumber}}</span></p>
+                <p>رقم المخطط التنظيمى : <span>{{selectProject?.organizationalChartNumber}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 mt-3">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card card-3">
+                    <h6>مكونات المشروع</h6>
+                    <ul>
+                      <ng-container *ngFor="let component of projectComponent">
+                        <div>
+                          <li>
+                              <i class="fa fa-greater-than "></i>
+                               {{component.name}}
+                          </li>
+                        </div>
+                      </ng-container>
+
+                    </ul>
+                  </div>
+                </div>
+
+
+                  <div class="col-lg-12 mt-3">
+                    <div class="card card-3">
+                      <h6>الملفات الخاصه بالمشروع</h6>
+                      <ul>
+                        <ng-container *ngFor=" let document of selectProject.clientProjectDocuments">
+
+                          <li style="border:none; background-color:transparent;"
+                          (click)="downloadFile(document.filePath,document.file)"
+                          >
+                            <i class="fa fa-download  mt-2" aria-hidden="true"></i>
+                            {{document?.file.substring(0,25)}}..
+                          </li>
+
+                        </ng-container>
+                      </ul>
+
+                    </div>
+
+                  </div>
+
+
+              </div>
+            </div>
+
+            <div class="col-lg-6 mt-3">
+              <div class="card card-3">
+                <h6>الاعمال المطلوبه</h6>
+                <ul>
+                  <ng-container *ngFor="let work of this.RequiredWorks">
+                    <div>
+                      <li>
+                          <i class="fa fa-greater-than "></i>
+                           {{work.name}}
+                         </li>
+                      </div>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+
+        </div>
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-----------------Last Section ----------------------->
+    <div class="col-lg-3 mt-4 mb-3 section-4">
+      <div class="row ">
+        <div class="col-lg-12">
+          <div class="card card-4">
+            <div class="row">
+              <div class="col-lg-2 mt-1">
+              <img src="{{Representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="image" class="w-80">
+              </div>
+              <div class="col-lg-5 mt-3">
+                <p>
+                  م : {{Representative?.firstName}} {{Representative?.lastName}}
+                </p>
+              </div>
+              <div class="col-lg-5 ">
+                <p class="mt-3" style="color:#18af9a; font-size: 10px;">(مسئول عن المشروع)</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-4-1">
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h2>{{selectProject.area}} <span>متر مربع</span></h2>
+                <p>مساحه الارض المقام عليها المشروع</p>
+            </div>
+          </div>
+        </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-4-2">
+            <div class="row">
+              <div class="col-lg-9 text-center">
+                <h2>{{selectProject.offers[0]?.cost}}<span>ريال</span></h2>
+                <p>الميزانيه الخاصه بهذا المشروع</p>
+            </div>
+            <div class="col-lg-3">
+              <a href="">عرض</a>
+            </div>
+
+          </div>
+        </div>
+        </div>
+
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-date">
+            <div class="row">
+              <div class="col-lg-12 " class="calender">
+              <mat-calendar [(selected)]="selected" ></mat-calendar>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-4-4">
+            <div class="row">
+              <div class="col-lg-6 mt-2">
+                <h2>
+                  {{selected |date:'mediumDate'}}
+                </h2>
+              </div>
+              <div class="col-lg-6">
+                <a class="btn">تعديل المحتوى</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-4-5">
+            <div class="row">
+            <div class="col-lg-12">
+           <p>{{selectProject?.subject}}</p>
+                 </div>
+                 <div class="col-lg-12 mt-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                     <a  href="{{
+                      selectProject.clientProjectDocuments[0]?.filePath
+                    }}"
+
+                    target="_blank"><i class="fa fa-file-pdf-o" style="color:red; font-size: 20px; margin-left: 3%;"></i>اسم الملف</a>
+                    </div>
+                    <div class="col-lg-6">
+                      <a  href="{{
+                        selectProject.clientProjectDocuments[0]?.filePath
+                      }}"
+
+                      target="_blank"><i class="fa-solid fa-image" style="color:green; font-size: 20px;"></i> صوره للموقع</a>
+                    </div>
+
+                   </div>
+                 </div>
+                 </div>
+        </div>
+        </div>
+
+
+
+        <div class="col-lg-12 mt-2">
+          <div class="card card-4-6">
+            <a href="">رؤيه مسار العمل على المشروع</a>
+                 </div>
+        </div>
+        </div>
+
+
+
+
+    </div>
+
+    </ng-container>
+
+  </div>
+
+</div>
+
+

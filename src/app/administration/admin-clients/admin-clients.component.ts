@@ -5,19 +5,31 @@ import { IadminClients } from 'src/app/@models/iadmin-clients';
 import { Observable, Observer } from 'rxjs';
 import { IChangeStatus } from 'src/app/@models/ichange-status';
 
+import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 @Component({
   selector: 'app-admin-clients',
   templateUrl: './admin-clients.component.html',
   styleUrls: ['./admin-clients.component.scss'],
 })
 export class AdminClientsComponent implements OnInit {
+  // page: number = 1;
+  // newApi: number = 3;
+  // total: number = 0;
   page: number = 1;
-  newApi: number = 3;
-  total: number = 0;
 
+  newApi: number = 1;
+  total: any = 0;
+  pagenation: any = [];
   iChangeStatusCliend: IChangeStatus | undefined = undefined;
   iProfileData: IadminClients[] = [];
-
   datas: any;
   idProduct: any;
   idProductSessionStorage: any;
@@ -25,89 +37,50 @@ export class AdminClientsComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  base64Image: any;
-
   sortedData: IadminClients[] = [];
   firstObject: any;
-  constructor(private ServicesProvidor: AdminClientsService) {
-    //  this.iProfileData.slice();
-    this.getNewClientProfiles();
+  isProcessing: boolean = false;
+  userformMassage: FormGroup;
+  show: boolean = false;
+  showDanger: boolean = false;
+  messages: any;
+
+  constructor(
+    private formbuilder: FormBuilder,
+    private ServicesProvidor: AdminClientsService,
+    private _HttpClient: HttpClient
+  ) {
+    this.userformMassage = this.formbuilder.group({
+      massage: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
+    this.getNewClientProfiles();
+
     this.objectProductGet();
   }
+  get massage() {
+    return this.userformMassage?.get('massage');
+  }
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+    // console.log( this.pagenation)
+  }
+  next = () => {
+    if (this.page < this.total) {
+      this.page = this.page + 1;
+      this.choise();
+    }
+  };
+  prev = () => {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.choise();
+    }
+  };
 
-  getNewClientProfiles() {
-    this.newApi = 1;
-    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe(
-      (value) => {
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-    );
-  }
-
-  getActiveClientAcconting() {
-    this.newApi = 2;
-    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe(
-      (value) => {
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.iProfileData);
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-    );
-  }
-
-  getNonActiveClientAccount() {
-    this.newApi = 3;
-    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe(
-      (value) => {
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.iProfileData);
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-    );
-  }
-
-  getBlockedClientsProfiles() {
-    this.newApi = 4;
-    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe(
-      (value) => {
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.datas);
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-    );
-  }
-  getExpiredClientsProfiles() {
-    this.newApi = 5;
-    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe(
-      (value) => {
-        this.datas = value.data.profiles;
-        this.iProfileData = this.datas;
-        this.total = value.data.totalPages;
-        console.log(this.iProfileData);
-        this.firstObject = this.iProfileData[0];
-        this.objectProduct(this.firstObject, this.firstObject.id);
-      }
-    );
-  }
-  // bagenations
-  choiseFunCallApiPagin(event: number) {
-    this.page = event;
+  choise() {
     switch (this.newApi) {
       case 1:
         this.getNewClientProfiles();
@@ -123,186 +96,251 @@ export class AdminClientsComponent implements OnInit {
         break;
       case 5:
         this.getExpiredClientsProfiles();
+        break;
     }
+  }
+
+  getNewClientProfiles() {
+    this.newApi = 1;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getNewClientsProfiles(this.page).subscribe({
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          // console.log(value)
+
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          // console.log(this.total)
+          this.counter(this.total);
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+      },
+    });
+  }
+
+  getActiveClientAcconting() {
+    this.newApi = 2;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getActiveClientsProfiles(this.page).subscribe({
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          //  console.log(this.total)
+          this.counter(this.total);
+          // console.log(value)
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+      },
+    });
+  }
+
+  getNonActiveClientAccount() {
+    this.newApi = 3;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe({
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          //  console.log(this.total)
+          this.counter(this.total);
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+      },
+    });
+  }
+  getBlockedClientsProfiles() {
+    this.newApi = 4;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe({
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          //  console.log(this.total)
+          this.counter(this.total);
+          // console.log(this.datas)
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+      },
+    });
+  }
+  getExpiredClientsProfiles() {
+    this.newApi = 5;
+    this.isProcessing = true;
+
+    this.ServicesProvidor.getExpiredClientsProfiles(this.page).subscribe({
+      next: (value) => {
+        if (value != null && value != undefined && value.data.totalPages != 0) {
+          this.datas = value.data.profiles;
+          this.iProfileData = this.datas;
+          this.total = value.data.totalPages;
+          console.log(this.total);
+          this.counter(this.total);
+          // console.log(this.iProfileData)
+          this.firstObject = this.iProfileData[0];
+          this.objectProduct(this.firstObject, this.firstObject.id);
+        } else {
+          this.isProcessing = false;
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+      },
+    });
   }
   // details informatin
   objectProduct(object?: any, id?: any) {
     this.idProduct = object;
+
     let test = JSON.stringify(this.idProduct);
     sessionStorage.setItem('Product', test);
     sessionStorage.setItem('id', id);
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.productCurrent);
+    // console.log(this.productCurrent);
     this.id = sessionStorage.getItem('id');
   }
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('Product');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    console.log(this.idProductSessionStorage);
   }
   // change stutas client
   changeToAccepted() {
     this.iChangeStatusCliend = {
       profileId: this.idProduct.id,
-      description: '',
+      description: 'تم تاكيد المعلومات',
       accountStatusId: 5,
     };
-    if (
-      this.iChangeStatusCliend.accountStatusId ===
-      this.idProduct.joinRequestStatus.accountStatus.id
-    ) {
-      alert('العميل موجود بالفعل');
-    } else {
-      this.ServicesProvidor.changeProfileStatus(
-        this.iChangeStatusCliend
-      ).subscribe((data) => {
-        alert(`${data.message}`);
-        console.log(this.iChangeStatusCliend!.profileId);
-        this.getNewClientProfiles();
-      });
-    }
+
+    this.ServicesProvidor.changeProfileStatus(
+      this.iChangeStatusCliend
+    ).subscribe((data) => {
+      this.show = true;
+      this.messages = data.message;
+      setTimeout(() => {
+        this.show = false;
+      }, 1000);
+    });
   }
 
-  changeToReject() {
+  changeToBlock() {
     this.iChangeStatusCliend = {
       profileId: this.idProduct.id,
-      description: '',
-      accountStatusId: 6,
+      description: this.massage?.value,
+      accountStatusId: 1,
     };
-    if (
-      this.iChangeStatusCliend.accountStatusId ===
-      this.idProduct.joinRequestStatus.accountStatus.id
-    ) {
-      alert('العميل موجود بالفعل');
-    } else {
-      this.ServicesProvidor.changeProfileStatus(
-        this.iChangeStatusCliend
-      ).subscribe((data) => {
-        alert(`${data.message}`);
-        console.log(this.iChangeStatusCliend!.profileId);
-        this.getNewClientProfiles();
-      });
-    }
+
+    this.ServicesProvidor.changeProfileStatus(
+      this.iChangeStatusCliend
+    ).subscribe((data) => {
+      this.show = true;
+      this.messages = data.message;
+      setTimeout(() => {
+        this.show = false;
+      }, 1000);
+    });
   }
 
   changeToNotComplette() {
     this.iChangeStatusCliend = {
       profileId: this.idProduct.id,
-      description: '',
+      description: this.massage?.value,
       accountStatusId: 8,
     };
-    if (
-      this.iChangeStatusCliend.accountStatusId ===
-      this.idProduct.joinRequestStatus.accountStatus.id
-    ) {
-      alert('العميل موجود بالفعل');
-    } else {
-      this.ServicesProvidor.changeProfileStatus(
-        this.iChangeStatusCliend
-      ).subscribe((data) => {
-        alert(`${data.message}`);
-        console.log(this.iChangeStatusCliend!.profileId);
-        this.getNewClientProfiles();
-      });
-    }
+
+    this.ServicesProvidor.changeProfileStatus(
+      this.iChangeStatusCliend
+    ).subscribe((data) => {
+      this.show = true;
+      this.messages = data.message;
+      setTimeout(() => {
+        this.show = false;
+      }, 3000);
+    });
+  }
+  changeToNew() {
+    this.iChangeStatusCliend = {
+      profileId: this.idProduct.id,
+      description: '',
+      accountStatusId: 4,
+    };
+
+    this.ServicesProvidor.changeProfileStatus(
+      this.iChangeStatusCliend
+    ).subscribe((data) => {
+      this.show = true;
+      this.messages = data.message;
+      setTimeout(() => {
+        this.show = false;
+      }, 3000);
+    });
   }
 
   // downlod file
 
-  downloadImage(item: string) {
-    let imageUrl = item;
-    console.log(imageUrl);
-    this.getBase64ImageFromURL(imageUrl).subscribe((base64data: any) => {
-      console.log(base64data);
-      this.base64Image = 'data:image/jpg;base64,' + base64data;
-      // save image to disk
-      var link = document.createElement('a');
-
-      document.body.appendChild(link); // for Firefox
-
-      link.setAttribute('href', this.base64Image);
-      link.setAttribute('download', 'mrHankey.jpg');
-      link.click();
-    });
-  }
-
-  getBase64ImageFromURL(url: string) {
-    return Observable.create((observer: Observer<string>) => {
-      const img: HTMLImageElement = new Image();
-      img.crossOrigin = 'Anonymous';
-      img.src = url;
-      if (!img.complete) {
-        img.onload = () => {
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-        };
-        img.onerror = (err) => {
-          observer.error(err);
-        };
-      } else {
-        observer.next(this.getBase64Image(img));
-        observer.complete();
+  download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
       }
-    });
+    );
   }
 
-  getBase64Image(img: HTMLImageElement) {
-    const canvas: HTMLCanvasElement = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx: CanvasRenderingContext2D | any = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    const dataURL: string = canvas.toDataURL('image/png');
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+  calculateDiff(sentOn: any) {
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime = todayDate.getTime() - sentOnDate.getTime();
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
   }
 
-  // sortData(sort: Sort) {
-  //   const data = this.iProfileData.slice();
-  //   if (!sort.active || sort.direction === '') {
-  //     this.iProfileData = data;
-  //     return;
-  //   }
-
-  //   this.iProfileData = data.sort((a:any, b:any) => {
-  //     const isAsc = sort.direction === 'asc';
-  //     switch (sort.active) {
-  //       case 'fristName':
-  //         return this.compare(a.name, b.name, isAsc);
-  //         case 'dateCreated':
-  //           return this.compare(a.name, b.name, isAsc);
-
-  //       default:
-  //         return 0;
-  //     }
-  //   });
-  // }
-
-  // sortorder(){
-  //   // this.iProfileData.sort(
-  //   //   (n1,n2)=>{
-  //   //      if (n1.dateCreated>n2.dateCreated) return 1;
-  //   //      if (n1.dateCreated<n2.dateCreated) return -1;
-  //   //      else return 0;
-  //   //  })
-
-  //   this.iProfileData.sort(function(a, b) {
-  //     var nameA = a.firstName.toUpperCase(); // ignore upper and lowercase
-  //     var nameB = b.firstName.toUpperCase(); // ignore upper and lowercase
-  //     if (nameA < nameB) {
-  //       return -1;
-  //     }
-  //     if (nameA > nameB) {
-  //       return 1;
-  //     }
-
-  //     // names must be equal
-  //     return 0;
-  //   });
-  // }
-
-  //  compare(a: number | string, b: number | string, isAsc: boolean) {
-  //   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-  // }
+  calculateDiffEend(sentOn: any) {
+    let todayDate = new Date();
+    let sentOnDate = new Date(sentOn);
+    sentOnDate.setDate(sentOnDate.getDate());
+    let differenceInTime = sentOnDate.getTime() - todayDate.getTime();
+    // To calculate the no. of days between two dates
+    let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+    return differenceInDays;
+  }
 }

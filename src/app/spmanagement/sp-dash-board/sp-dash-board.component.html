@@ -1,1 +1,117 @@
-<p>sp-dash-board works!</p>
+<section class="clientDashBoard container-fluid my-4">
+  <!-- part 1 -->
+  <div class="row cairo mb-3">
+    <div class="col-lg-6">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="pricequotes"
+        [data]="data.overview?.pricequotes"
+        circleColor="D9CCF2"
+      ></app-dashboard-card>
+    </div>
+    <div class="col-lg-6">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="projects"
+        [data]="data.overview?.projects"
+        circleColor="E9CCF2"
+      ></app-dashboard-card>
+    </div>
+  </div>
+  <!-- part 2 -->
+
+  <div class="row my-4 cairo">
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-12 mb-4">
+          <div
+            class="bg-white rounded-3 shadow d-flex justify-content-around align-items-center p-3 h-100 w-100"
+          >
+            <div class="chart" style="width: 250px">
+              <canvas id="doughnut" class="col-12"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column mb-2 col-12">
+          <div
+            class="row m-0 p-0 gx-4 justify-content-between align-items-start"
+          >
+            <div
+              class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+            >
+              <div
+                class="premary-color cairo rounded-0 text-center py-3 m w-100 mb-2"
+                style="background-color: #aaddd6"
+              >
+                <h3 class="cairo m-0 p-0">المشاريع الحاليه</h3>
+              </div>
+              <!-- card -->
+              <div class="d-flex flex-column scrolls col-12">
+                <div *ngIf="currentProjects.length > 0">
+                  <ng-container
+                    *ngFor="let pro of currentProjects; let i = index"
+                  >
+                    <app-project-card
+                      userType="sp"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+            >
+              <div
+                class="premary-color cairo rounded-0 text-center py-3 col-12 mb-2"
+                style="background-color: #e5a8a8"
+              >
+                <h3 class="cairo p-0 m-0">المشاريع المكتملة</h3>
+              </div>
+              <!-- card -->
+              <div class="d-flex flex-column scrolls col-12">
+                <div *ngIf="completedProjects.length > 0">
+                  <ng-container
+                    *ngFor="let pro of completedProjects; let i = index"
+                  >
+                    <app-project-card
+                      userType="sp"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div class="row">
+        <!-- دا هيتحذف -->
+        <!-- part 1 -->
+        <div
+          class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
+        >
+          <app-work-schedule></app-work-schedule>
+          <div class="col-12 bg-white py-3 mb-2">
+            <h5 class="cairo fw-bold text-center m-0 p-0 cairo">
+              <span>تاريخ : </span>
+              {{ selected | date }}
+            </h5>
+          </div>
+          <div class="col-12 slideshow">
+            <div class="bg-white text-center py-3 mb-2">
+              <h5 class="fw-bold text-center m-0 p-0 cairo">تقيمات العملاء</h5>
+            </div>
+            <app-carousel-rate
+              [testimonials]="testimonials"
+            ></app-carousel-rate>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,106 @@
+.clientDashBoard {
+  * {
+    color: #004057;
+  }
+}
+.premary-color {
+  color: #004057 !important;
+}
+.bg-green {
+  background-color: #004057 !important;
+}
+.main-color {
+  color: #18af9a !important;
+}
+// i {
+//   color: #f3d720;
+// }
+text-gary {
+  color: #1d1c1c !important;
+}
+.cairo {
+  font-family: "cairo";
+}
+.cardImg {
+  width: 60px;
+  margin-bottom: 10px;
+}
+// #doughnut>legend{
+//   font-size: xx-large !important;
+// }
+// canvas [_ngcontent-jwk-c159] {
+//   aspect-ratio: auto 200 / 240 !important;
+// }
+#progress {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  color: #3f51b5;
+}
+.example-margin {
+  margin: 10px 10px;
+
+  mat-progress-spinner,
+  mat-spinner circle {
+    stroke: #9e26c8 !important;
+  }
+}
+.circle {
+  width: 75px;
+}
+.postionCard {
+  right: 27%;
+  bottom: 5%;
+}
+.E9CCF2 {
+  background-color: #c4e8c9;
+  color: rgb(22, 22, 22) !important;
+}
+.D9CCF2 {
+  background-color: #c9ede8;
+  color: rgb(22, 22, 22) !important;
+}
+.C4D3D8 {
+  background-color: #c4d3d8;
+  color: rgb(22, 22, 22) !important;
+}
+.D1F2FE {
+  background-color: #d1f2fe;
+  color: rgb(22, 22, 22) !important;
+}
+.E2FD {
+  background-color: #97e2fd;
+  color: rgb(22, 22, 22) !important;
+}
+@media (min-width: 1400px) {
+  .col2 {
+    flex: 0 0 auto;
+    width: 13.333333%;
+  }
+}
+
+.scrolls {
+  max-height: 475px !important;
+  overflow: hidden;
+  &:hover {
+    overflow-y: auto !important;
+  }
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #d3d3d3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d3d3d3;
+  border-radius: 10px;
+}

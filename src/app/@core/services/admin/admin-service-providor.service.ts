@@ -4,6 +4,7 @@ import { environment } from './../../../../environments/environment';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { saveAs } from 'file-saver';
+import { IND } from './../../../administration/admin-sp-updata/admin-sp-updata.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,7 +27,14 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNewProfiles/Page/${page}`);
   }
-
+  getNotCompletedProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getNotCompletedProfiles/Page/${page}`);
+  }
+  getCompletedProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getCompletedProfiles/Page/${page}`);
+  }
   getAcceptedProfiles(page:number):Observable<any>
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAcceptedProfiles/Page/${page}`);
@@ -51,7 +59,10 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getClosedProfiles/Page/${page}`);
   }
-
+  getAllProfiles(page:number):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`);
+  }
 
 
 
@@ -68,6 +79,12 @@ export class AdminServiceProvidorService {
   {
     return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProvider/getAllProfiles/Page/${page}`)
   }
+
+  getServiceProviderWorkFilesByWorkId(id:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${id}`)
+  }
+
 
   changeOrganizationalStatus(objectStatus:IChangeStatus):Observable<any>
   {
@@ -88,15 +105,47 @@ export class AdminServiceProvidorService {
     }))
   }
 
-  // download(url: string) {
-  //   return this._HttpClient.get(url, {responseType :'arraybuffer'}).subscribe(png=>{
-  //     const blob=new Blob([png],{type:'image/png'});
-  //     const fileName="hh.png";
-  //     saveAs(blob,fileName)
-  //   },err=>{
-  //     console.log(err)
-  //   }
-  //   )
 
-  // }
+
+
+  updateOrganizationalUpdateProfile(objectStatus:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/updateProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+  // /api/OrganizationalServiceProvider/storeProfileFiles
+  updateOrganizationalstoreProfileFiles(file:any):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/OrganizationalServiceProvider/storeProfileFiles`,file).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+  updateIndividualUpdateProfile(objectStatus:IND):Observable<any>
+  {
+    return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/updateIndividualServiceProviderProfile`,JSON.stringify(objectStatus), this.httpoptions).pipe(catchError((err)=>{
+      return throwError(()=>{
+        return new Error('Error occured please try again.')
+
+      })
+    }))
+  }
+
+  // /api/IndividualServiceProvider/storeIndividualServiceProviderFiles
+      updateIndividualstoreProfileFiles(file:any,id:any):Observable<any>
+    {
+      return this._HttpClient.post<any>(`${environment.baseUrl}/api/IndividualServiceProvider/storeIndividualServiceProviderFiles`,file).pipe(catchError((err)=>{
+        return throwError(()=>{
+          return new Error('Error occured please try again.')
+  
+        })
+      }))
+    }
+
 }

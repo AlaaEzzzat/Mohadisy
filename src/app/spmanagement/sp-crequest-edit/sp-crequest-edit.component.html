@@ -1,0 +1,584 @@
+<div class="section-2 mt-2 container-fluid">
+  <div class="row">
+    <div class="col-lg-4 position-relative">
+      <div class="row">
+
+        <ng-container *ngFor="let project of Listprojects; let i=index;">
+
+          <ng-container *ngIf="this.select==project.id">
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:#004958; color:white;">
+              <p><i class="far fa-user "></i>
+                <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                <a class="btn">{{_RequiredWorks[i].name}}</a>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                {{project.district.nameAr}},{{project.district.city.nameAr}},
+                {{project.district.city.region.nameAr}} </p>
+              <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
+            </div>
+          </ng-container>
+
+
+          <ng-container *ngIf="this.select!=project.id">
+            <div class="col-lg-12 card card-1 mt-4" (click)="showData(project.id)"
+              style="background:white;  color:#004057;">
+              <p><i class="far fa-user "></i>
+                <span>{{project.clientProfile.firstName}} {{project.clientProfile.lastName}}</span>
+                <a class="btn">{{_RequiredWorks[i].name}}</a>
+              </p>
+              <p><i class="fa fa-location-dot "></i>
+                {{project.district.nameAr}},{{project.district.city.nameAr}},
+                {{project.district.city.region.nameAr}} </p>
+              <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
+            </div>
+          </ng-container>
+
+        </ng-container>
+
+      </div>
+      <div class="col-12 " style="height: 100px; ;"></div>
+
+      <nav aria-label="Page navigation position-absolute top100" class="mt-4 mb-3" *ngIf="result==1">
+        <ul class="pagination d-flex flex-wrap w-100">
+          <ng-container *ngIf="page==1">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3 " tabindex="-1">السابق</button>
+          </li>
+          </ng-container>
+
+           <ng-container *ngIf="page!=1">
+            <li class="page-item ">
+              <button class="page-link btn p-1 px-3" (click)="changepage(page-1)" tabindex="-1">السابق</button>
+            </li>
+            </ng-container>
+
+          <ng-container *ngFor="let p of pages">
+            <ng-container *ngIf="page==p">
+              <li class="page-item active" ><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+            <ng-container *ngIf="page!=p">
+              <li class="page-item"><button class="page-link btn p-1 px-3" (click)="changepage(p)">{{p}}</button></li>
+            </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="page==pages.length">
+          <li class="page-item disabled">
+            <button class="page-link btn p-1 px-3 ">التالى</button>
+          </li>
+         </ng-container>
+
+         <ng-container *ngIf="page!=pages.length">
+          <li class="page-item ">
+            <button class="page-link btn p-1 px-3 " (click)="changepage(page+1)">التالى</button>
+          </li>
+         </ng-container>
+
+        </ul>
+      </nav>
+
+
+    </div>
+
+
+    <div class="col-lg-8  mt-4 mb-3">
+
+      <a href="/Spmanagement/projects/price-offers/all"
+      class=" mb-2 return" routerLinkActive="active">الرجوع</a>
+
+      <ng-container *ngIf="select!=0">
+        <div class="row ">
+
+          <form [formGroup]="OfferData" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+          <div class="col-lg-12 mt-3">
+            <div class="card">
+            <div id="accordion">
+            <h2>
+              <button class="btn btn-accordion w-100 item" type="button"
+              data-target="#item1" data-toggle="collapse" (click)="setToggle(1)">
+              <div class="row w-100 mx-3">
+                <div class="col-lg-11 col-md-11 col-sm-11" >
+                  المده والتكلفه
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1" >
+                  <ng-container *ngIf="setForm[1]!=1">
+                    <i class="fas fa-angle-down" ></i>
+                  </ng-container>
+
+                  <ng-container *ngIf="setForm[1]==1">
+                    <i class="fas fa-angle-up"  ></i>
+                  </ng-container>
+                </div>
+              </div>
+            </button>
+            </h2>
+
+            <div class="collapse hide" id="item1" data-parent="#accordian">
+                <div class="card card-3 mt-3">
+
+           <div class="row">
+
+            <input type="hidden" formControlName="projectId" name="projectId">
+
+            <div class="col-lg-12 form-group ">
+              <label for="period" class="label-control">مده المشروع</label>
+              <input type="text" class="form-control px-5" name="period" formControlName="period" placeholder="مده المشروع" required
+            [class.is-valid]="OfferData.get('period')?.valid"
+            [class.is-invalid]="OfferData.get('period')?.invalid && OfferData.get('period')?.touched">
+              <div
+              class="alert alert-danger"
+              [hidden]="OfferData.get('period')?.valid ||OfferData.get('period')?.untouched" >
+              <span *ngIf="OfferData.get('period')?.errors?.['required']
+              " >مده المشروع مطلوبه</span>
+            </div>
+            </div>
+
+
+            <div class="col-lg-6 form-group mt-3">
+              <label for="cost" class="label-control mb-2">السعر</label>
+              <input type="number" class="form-control cost px-5" name="cost"
+              formControlName="cost"
+               placeholder="السعر" (ngModelChange)="TotalCost()" required
+              [class.is-valid]="OfferData.get('cost')?.valid"
+             [class.is-invalid]="OfferData.get('cost')?.invalid &&
+              OfferData.get('cost')?.touched" >
+            <div
+            class="alert alert-danger"
+            [hidden]="OfferData.get('cost')?.valid ||OfferData.get('cost')?.untouched" >
+            <span *ngIf="OfferData.get('cost')?.errors?.['required']" >السعر مطلوب</span>
+          </div>
+
+            </div>
+
+            <div class="col-lg-6 form-group mt-4" >
+              <label for="cost" class="label-control mb-2"></label>
+              <input type="text" class="form-control cost" name="costAr"  [disabled]="true"
+               placeholder="السعر" >
+            </div>
+
+
+            <div class="col-lg-6 form-group mt-3">
+              <label for="cost" class="label-control mb-2">رسوم اداريه</label>
+              <input type="text" class="form-control"
+               [disabled]="true"  [disabled]="true"
+              value="%1" placeholder="%1" >
+            </div>
+
+
+            <div class="col-lg-6 form-group mt-3">
+              <label for="cost" class="label-control mb-2">اجمالى السعر</label>
+              <input type="number" class="form-control cost" name="tcost"
+              formControlName="tcost"
+               placeholder="السعر" [value]="totalcost">
+            </div>
+
+            <div class="col-lg-12 form-group mt-3">
+              <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
+              <input type="number" class="form-control px-5" name="numberOfMilestones" min="1" max="6"
+              formControlName="numberOfMilestones" (ngModelChange)="milestones()"
+               placeholder="عدد مراحل الدفع"
+               required
+
+             [class.is-valid]="OfferData.get('numberOfMilestones')?.valid"
+             [class.is-invalid]="OfferData.get('numberOfMilestones')?.invalid &&
+             OfferData.get('numberOfMilestones')?.touched" >
+
+            <div
+            class="alert alert-danger"
+            [hidden]="OfferData.get('numberOfMilestones')?.valid ||OfferData.get('numberOfMilestones')?.untouched" >
+            <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['pattern']" >يجب ادخال عددمراحل اقل من 7 </span>
+
+            <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']" >عدد المراحل مطلوب</span>
+
+          </div>
+            </div>
+
+
+            <ng-container *ngFor="let stone of  numberofMilestones">
+
+              <div class="col-lg-1 form-group  stage">
+                <label for="stage" class="label-control">#{{stone}}</label>
+              </div>
+
+
+              <div class="col-lg-3  form-group  mt-5">
+                <div class="input-group">
+                  <input type="text" class="form-control mx-0" name="percentage{{stone}}" placeholder="50%"  [value]="Precentage[stone]"
+                  formControlName="precentage"
+                  (ngModelChange)="MilestoneCost(stone,this.OfferData.get('precentage').value)">
+                  <span  class="input-group-text-right px-3 text-white pt-3" style="background-color:#004057;">%</span>
+                </div>
+
+
+              </div>
+
+              <div class="col-lg-4 form-group mt-5">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="percentage" placeholder="500 ريال" [value]="totalcostMilestone[stone]">
+                <span class="input-group-text-right px-3 text-white pt-2" style="background-color:#004057;">ريال</span>
+                </div>
+
+              </div>
+
+              <div class="col-lg-4 form-group mt-5">
+                <select class="form-select" (change)="workId($event,stone)"
+                value="{{WorkId[stone]}}"
+                 required>
+
+                  <option disabled selected >اختر</option>
+
+                  <ng-container *ngIf="stone==1">
+                    <option [value]="8">دفعه مقدمه</option>
+                  </ng-container>
+
+
+                  <option [value]="9" *ngIf="stone== numberofMilestones.length">بعد الانتهاء</option>
+
+                  <ng-container *ngFor="let work of RequiredWorks">
+
+                      <option [value]="work.id">{{work.name}}</option>
+
+
+                  </ng-container>
+
+                </select>
+              </div>
+
+            </ng-container >
+
+
+            <div class="col-lg-12 form-group mt-3">
+              <label for="message">تواصل مع المسؤل</label>
+              <textarea name="" id=""  name="message"
+              formControlName="message"
+              placeholder="الرساله">{{selectProject?.offers[0]?.message}}</textarea>
+            </div>
+
+          </div>
+
+
+
+              </div>
+
+
+
+            </div>
+            </div>
+
+          </div>
+           </div>
+
+
+
+           <div class="col-lg-12 mt-3">
+            <div class="card ">
+            <div id="accordion">
+            <h2>
+              <button class="btn btn-accordion w-100 item" type="button"
+              data-target="#item2" data-toggle="collapse" (click)="setToggle(2)">
+              <div class="row w-100 mx-3">
+                <div class="col-lg-11 col-md-11 col-sm-11 ">
+                  التزامات المقاول
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 ">
+                  <ng-container *ngIf="setForm[2]!=1">
+                    <i class="fas fa-angle-down" ></i>
+                  </ng-container>
+
+                  <ng-container *ngIf="setForm[2]==1">
+                    <i class="fas fa-angle-up"  ></i>
+                  </ng-container>
+                </div>
+              </div>
+            </button>
+            </h2>
+
+            <div class="collapse hide" id="item2" data-parent="#accordian">
+
+
+                <div class="card-3">
+                    <div class="row">
+
+                      <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                      <div class="col-12 form-group mt-3 mb-3">
+                        <textarea name="" id=""  name="contractorCommitments"
+                        formControlName="contractorCommitments"
+                         style="height: 100%;
+                        padding-bottom:10%;"></textarea>
+                      </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+            </div>
+
+          </div>
+           </div>
+
+
+
+
+
+
+           <div class="col-lg-12 mt-3">
+            <div class="card ">
+           <div id="accordion">
+            <h2>
+              <button class="btn btn-accordion w-100 item" type="button"
+              data-target="#item3" data-toggle="collapse" (click)="setToggle(3)">
+              <div class="row  w-100 mx-3">
+                <div class="col-lg-11 col-md-11 col-sm-11">
+                  الشروط
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                  <ng-container *ngIf="setForm[3]!=1">
+                    <i class="fas fa-angle-down" ></i>
+                  </ng-container>
+
+                  <ng-container *ngIf="setForm[3]==1">
+                    <i class="fas fa-angle-up"  ></i>
+                  </ng-container>
+                </div>
+              </div>
+            </button>
+            </h2>
+
+            <div class="collapse hide" id="item3" data-parent="#accordian">
+
+                <div class="card-3">
+                    <div class="row">
+
+                      <input type="hidden" formControlName="projectId" name="projectId" [value]="select">
+
+                      <div class="col-lg-12 form-group mt-3">
+                        <textarea name="" id=""  name="contractTerms"
+                        formControlName="contractTerms"
+                        style="height: 100%;
+                        padding-bottom:10%;"
+                        placeholder="شروط العقد"></textarea>
+                      </div>
+
+                      <div class="col-lg-12 form-group mt-3 mb-2">
+                        <textarea name="" id=""  name="disputeResolution"
+                        formControlName="disputeResolution"
+                        style="height: 100%;
+                        padding-bottom:10%;"
+                        placeholder="تسويه النزاعات"></textarea>
+                      </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+            </div>
+
+          </div>
+           </div>
+
+
+
+           <div class="col-lg-12 mt-3">
+            <div class="card card-4">
+           <div id="accordion">
+            <h2>
+              <button class="btn btn-accordion w-100 item" type="button"
+              data-target="#item4" data-toggle="collapse" (click)="setToggle(4)">
+              <div class="row w-100 mx-3">
+                <div class="col-lg-11 col-md-11 col-sm-11">
+                  طريقه التحجيم
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                  <ng-container *ngIf="setForm[4]!=1">
+                    <i class="fas fa-angle-down" ></i>
+                  </ng-container>
+
+                  <ng-container *ngIf="setForm[4]==1">
+                    <i class="fas fa-angle-up"  ></i>
+                  </ng-container>
+                </div>
+              </div>
+            </button>
+            </h2>
+
+            <div class="collapse hide" id="item4" data-parent="#accordian">
+
+                <div class="card-3">
+                    <div class="row">
+                      <div class="col-lg-12 form-group mt-3 mb-3">
+                        <textarea name="" id=""  name="sizingMethod"
+                        formControlName="sizingMethod"
+                        style="height: 100%;
+                        padding-bottom:10%;"
+                           ></textarea>
+                      </div>
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+            </div>
+
+          </div>
+           </div>
+
+
+
+
+           <div class="col-lg-12 mt-3 col-md-12 col-sm-12">
+
+            <div class="card card-4">
+            <div id="accordion">
+            <h2>
+              <button class="btn btn-accordion w-100 item" type="button"
+              data-target="#item5" data-toggle="collapse"   (click)="setToggle(5)">
+
+              <div class="row w-100 mx-3">
+                <div class="col-lg-11 col-md-11 col-sm-11">
+                  مواصفات المواد المستخدمه
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1">
+                  <ng-container *ngIf="setForm[5]!=1">
+                    <i class="fas fa-angle-down" ></i>
+                  </ng-container>
+
+                  <ng-container *ngIf="setForm[5]==1">
+                    <i class="fas fa-angle-up"  ></i>
+                  </ng-container>
+                </div>
+              </div>
+
+            </button>
+            </h2>
+
+            <div class="collapse hide" id="item5" data-parent="#accordian">
+                <div class="card-3">
+                    <div class="row">
+                      <div class="col-lg-12 mt-3 form-group">
+                        <select name="" id="" class="form-select pt-2 pb-2"
+                        formControlName="materialTypeId"
+                        >
+                          <option [value]="0"
+                          disabled selected>اختر نوع المواد المستخدمه</option>
+                          <ng-container *ngFor="let m of material">
+                            <option [value]="m.id">{{m.name}}</option>
+
+                          </ng-container>
+                        </select>
+
+                      </div>
+
+
+                      <ng-container>
+
+                      <div class="col-lg-6 form-group mt-4">
+                        <input type="text" class="form-control"
+                         placeholder="اسم الخامه"  formControlName="name">
+                      </div>
+
+
+                      <div class="col-lg-6 form-group mt-4" >
+                        <input type="text" class="form-control cost" name="costMaterial"
+                        formControlName="costMaterial"
+                         placeholder="السعر" >
+                      </div>
+
+                      <div class="col-lg-12 form-group mt-4">
+                        <textarea name="" id=""  name="description"
+                        formControlName="description"
+                        style="height: 100%;
+                        padding-bottom:10%;"
+                        placeholder="الوصف"
+                           ></textarea>
+                      </div>
+
+                     </ng-container>
+
+                  </div>
+
+                  <!---------------table--------------->
+                  <table class="table text-center mt-3 border" *ngIf="addmaterial.length>0">
+                    <thead>
+                      <tr>
+                        <th>الخامه</th>
+                        <th>الاسم</th>
+                        <th>الوصف</th>
+                        <th>السعر</th>
+                        <th>حذف</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <ng-container *ngFor="let m of addmaterial" >
+                        <tr>
+                          <td class="pt-3">{{m.materialName}}</td>
+                          <td  class="pt-3">{{m.name}}</td>
+                          <td  class="pt-3">{{m.description}}</td>
+                          <td  class="pt-3">{{m.cost}}</td>
+                          <td><button type="button" class="btn" style="font-size:20px; color:#004057;"
+                             (click)="deleteMaterial(m.id)">
+                            <i class="fa fa-trash"></i>
+                          </button></td>
+                        </tr>
+                      </ng-container>
+
+
+                    </tbody>
+
+                   </table>
+
+                    <button type="button" class="btn col-3 mt-4 mb-3 add" (click)="addMaterial()"
+                    [disabled]="this.OfferData.get('materialTypeId').value=='' ||
+                    this.OfferData.get('name').value=='' ||
+                    this.OfferData.get('costMaterial').value==''
+                    "
+                    >اضافه</button>
+
+                </div>
+
+
+
+            </div>
+
+            </div>
+
+          </div>
+           </div>
+
+           <input type="submit" class="btn send mt-4" value="تعديل"/>
+
+           </form>
+
+          </div>
+
+      </ng-container>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+

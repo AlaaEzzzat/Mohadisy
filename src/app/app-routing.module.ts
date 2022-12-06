@@ -1,3 +1,8 @@
+import { UserAuthGuard } from './@shared/Guards/user-auth.guard';
+import { SpAuthGuard } from './@shared/Guards/sp-auth.guard';
+import { ChatComponent } from './@shared/components/chat/chat.component';
+
+import { LandingComponent } from './@shared/components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizedGuard } from './@core/auth/guards/authorized.guard';
@@ -8,25 +13,21 @@ import { HomepageComponent } from './Layout_HomePage/homepage/homepage.component
 const routes: Routes = [
   {
     path: '',
-    component: HomepageComponent,
+    component: LandingComponent,
   },
   {
     path: 'account',
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),
+   
   },
 
   {
     path: 'Admin',
-
     loadChildren: () =>
       import('./administration/administration.module').then(
         (m) => m.AdministrationModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Admin',
-    // },
   },
   {
     path: 'Spmanagement',
@@ -34,10 +35,7 @@ const routes: Routes = [
       import('./spmanagement/spmanagement.module').then(
         (m) => m.SPmanagementModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Service provider',
-    // },
+      canActivate:[SpAuthGuard]
   },
   {
     path: 'usermanagement',
@@ -45,10 +43,8 @@ const routes: Routes = [
       import('./usermanagement/usermanagement.module').then(
         (m) => m.UsermanagementModule
       ),
-    // canActivate: [AuthorizedGuard],
-    // data: {
-    //   role: 'Client',
-    // },
+      canActivate:[UserAuthGuard]
+
   },
   { path: '**', component: NotFoundComponent },
 ];

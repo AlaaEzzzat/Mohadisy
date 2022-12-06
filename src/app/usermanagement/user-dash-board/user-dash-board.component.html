@@ -1,248 +1,122 @@
-<div class="mt-5 dashboard" style="min-height: 83vh">
-  <section class="">
-    <div class="row mb-5">
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/projects.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">المشاريع</h5>
-            <p class="card-text">{{ data!.overview.projectsNumber }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/endproject.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">المشاريع المنتهيه</h5>
-            <p class="card-text">
-              {{ data!.overview.completedProjectsNumber }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/delay.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">مشاريع متأخره</h5>
-            <p class="card-text">3</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/order.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">الطلبات</h5>
-            <p class="card-text">
-              {{ data!.overview.pricequotesNumber }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/rate.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">تقيم عملاء</h5>
-            <p class="card-text">8</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-2 col-sm-12">
-        <div
-          class="card cardShadow text-center align-items-center text-center p-1 py-3 card1 mb-3"
-        >
-          <img class="card-img cardImg" src="assets/user/prof.png" />
-
-          <div class="card-body p-0">
-            <h5 class="card-title">ربح</h5>
-            <p class="card-text">20000$</p>
-          </div>
-        </div>
-      </div>
+<section class="clientDashBoard my-4">
+  <div class="row cairo">
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="pricequotes"
+        [data]="data.overview?.pricequotes"
+        circleColor="D9CCF2"
+      ></app-dashboard-card>
     </div>
-  </section>
-  <section class="">
-    <div class="row">
-      <div class="col-md-6">
-        <div
-          class="bg-white rounded-2 cardShadow d-flex justify-content-around align-items-center p-3 mb-3 h-100 w-100"
-        >
-          <div class="chart" style="width: 250px">
-            <canvas style="width: 200px" id="doughnut"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div
-          class="row rounded-2 cardShadow bg-white d-flex justify-content-ceter align-items-center mb-3 w-100 h-100"
-        >
+
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="projects"
+        [data]="data.overview?.projects"
+        circleColor="E9CCF2"
+      ></app-dashboard-card>
+    </div>
+  </div>
+
+  <div class="row my-4 cairo">
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-12 mb-4">
           <div
-            class="col-4 d-flex justify-content-around align-items-center p-3"
+            class="bg-white rounded-3 shadow d-flex justify-content-around align-items-center p-3 h-100 w-100"
           >
-            <div class="info text-center">
-              <img
-                class="mb-2"
-                src="assets/user/earn.png"
-                alt=""
-                style="width: 100px; border-radius: 50%"
-              />
-              <h5>
-                <b style="color: #1a5f78"> أرباح سنويه: </b>
-                70 ألف
-              </h5>
-            </div>
-          </div>
-          <div class="col-8">
-            <div class="chart">
-              <canvas id="bar"></canvas>
+            <div class="chart" style="width: 250px">
+              <canvas id="doughnut" class="col-12"></canvas>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <section class="mt-5">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="row">
-          <div class="col-lg-6 col-xl-4 mb-3">
-            <div class="currentProject">
-              <h5 class="py-3 text-center bg-white">المشاريع الحاليه</h5>
 
-              <div>
-                <!-- *ngFor="let pro of this.currentProjects; let i = index" -->
-                <div
-                  *ngFor="let pro of this.currentProjects; let i = index"
-                  class="card cardShadow card2 mb-3 px-3 d-flex flex-row p-2 align-items-center"
-                >
-                  <div>
-                    <img class="cardImg" src="assets/user/earn.png" alt="" />
-                  </div>
-                  <div class="card-body">
-                    <p class="card-text mb-1 cardText">
-                      <strong>اسم العميل :</strong>
-                      {{ pro.id }}
-                      <!--   علاء عزت -->
-                    </p>
-                    <p class="card-text mb-1 cardText">
-                      <strong>بلد الاقامه :</strong>
-                      {{ pro.district.city.region.nameAr }}
-                      <!-- الرياض -->
-                    </p>
-                    <p class="card-text mb-0 cardText">
-                      <strong>إسم المشروع :</strong>
-                      {{ pro.name }}
-                      <!--      نطوير -->
-                    </p>
-                  </div>
-
-                  <div class="d-flex align-items-center">
-                    <div class="progress-circle">
-                      <figure class="chart-two animate">
-                        <svg role="img" xmlns="http://www.w3.org/2000/svg">
-                          <circle class="circle-background" />
-                          <circle class="circle-foreground" />
-                        </svg>
-                        <figcaption>50%</figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
+        <div class="d-flex flex-column mb-2 col-12">
+          <div
+            class="row m-0 p-0 gx-4 justify-content-between align-items-start"
+          >
+            <div
+              class="cairo mt-3 rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+            >
+              <div
+                class="premary-color cairo rounded-0 text-center py-3 m w-100 mb-2"
+                style="background-color: #aaddd6"
+              >
+                <h3 class="cairo m-0 p-0">المشاريع الحاليه</h3>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-xl-4 mb-3">
-            <div class="completedProject">
-              <h5 class="py-3 text-center alert-danger">المشاريع المنتهيه</h5>
-
-              <div>
-                <!-- *ngFor="let pro of this.currentProjects; let i = index" -->
-                <div
-                  class="card cardShadow card2 mb-3 p-2 px-3 d-flex flex-row align-items-center"
-                >
-                  <div>
-                    <img class="cardImg" src="assets/user/earn.png" alt="" />
-                  </div>
-                  <div
-                    class="card-body"
-                    style="padding: 0; padding-right: 15px"
+              <!-- card -->
+              <div class="d-flex flex-column scrolls col-12">
+                <div>
+                  <ng-container
+                    *ngFor="let pro of this.currentProjects; let i = index"
                   >
-                    <p class="card-text mb-1 cardText">
-                      <strong> اسم العميل : </strong>
-                      <!-- {{ pro.id }} -->
-                      علاء عزت
-                    </p>
-                    <p class="card-text mb-1 cardText">
-                      <strong> بلد الاقامه : </strong>
-                      <!--   {{ pro.district.city.region.nameAr }} -->
-                      الرياض
-                    </p>
-                    <p class="card-text mb-0 cardText">
-                      <strong> إسم المشروع : </strong>
-                      <!--  {{ pro.name }} -->
-                      تطوير
-                    </p>
-                  </div>
+                    <app-project-card
+                      userType="client"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
 
-                  <div class="text-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
-                      fill="#f3f331"
-                      class="bi bi-star-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                      />
-                    </svg>
-                    <p style="font-weight: 700">5/5</p>
-                  </div>
-                </div>
+            <div
+              class="cairo mt-3 rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+            >
+              <div
+                class="premary-color cairo rounded-0 text-center py-3 col-12 mb-2"
+                style="background-color: #e5a8a8"
+              >
+                <h3 class="cairo p-0 m-0">المشاريع المكتملة</h3>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-xl-4 mb-3">
-            <div class="issus">
-              <h5 class="py-3 text-center alert-warning">issus</h5>
-              <div>
-                <!-- *ngFor="let pro of this.currentProjects; let i = index" -->
-                <div class="card cardShadow mb-3 px-3">
-                  <div class="card-body">
-                    <p>تم الانتهاء من جميع الاقسام و باقي رفع المنتج</p>
-                  </div>
+              <!-- card -->
+              <div class="d-flex flex-column scrolls col-12">
+                <div>
+                  <ng-container
+                    *ngFor="let pro of this.completedProjects; let i = index"
+                  >
+                    <app-project-card
+                      userType="client"
+                      [pro]="pro"
+                    ></app-project-card>
+                  </ng-container>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="date bg-white">
-          <h5 class="py-3 text-center">جدول أعمالك</h5>
-        </div>
-        <div class="calender bg-white" style="height: 200px"></div>
-        <div class="calender bg-white"></div>
       </div>
     </div>
-  </section>
-</div>
+    <div class="col-lg-3">
+      <div class="row">
+        <!-- part 1 -->
+        <div
+          class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
+        >
+          <!-- <div class="col-12 bg-white py-3 mb-2">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
+              جدول الاعمال
+            </h3>
+          </div> -->
+          <app-work-schedule></app-work-schedule>
+
+          <!-- <div class="col-12 mb-2">
+            <div class="card calender">
+              <div class="row">
+                <div class="col-lg-12">
+                  <mat-calendar [(selected)]="selected"></mat-calendar>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="col-12 bg-white py-3 mb-2">
+            <h3 class="cairo fw-bold text-center m-0 p-0 cairo">
+              <span>تاريخ : </span>
+              {{ selected | date }}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

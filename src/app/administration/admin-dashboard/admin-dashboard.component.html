@@ -1,287 +1,517 @@
-<section class="container-fluid my-4 ">
+<section class="container-fluid my-4">
+  <!-- part 1 -->
+  <div class="row cairo mb-2">
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="pricequotes"
+        [data]="pricequotes"
+        circleColor="D9CCF2"
+      ></app-dashboard-card>
+    </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-              <img src="assets/dashboard/visitor.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle">زوار</div>
-              <div class="fw-bold text-center">0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-            <img src="assets/dashboard/partener.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center  fontStyle" style="font-size:0.7rem;">مشترك</div>
-              <div class="fw-bold text-center">75</div>
-            </div>
-          </div>
+    <div class="col-lg-6 mb-3">
+      <app-dashboard-card
+        grid="col-sm-3 col-6"
+        type="projects"
+        [data]="projects"
+        circleColor="C4D3D8"
+      ></app-dashboard-card>
+    </div>
+  </div>
+  <!-- part 2 -->
+  <div class="row cairo mb-2">
+    <div class="col-lg-4 mb-3">
+      <app-dashboard-card
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
+        type="indSp"
+        [data]="individualSP"
+        circleColor="D1F2FE"
+      ></app-dashboard-card>
+    </div>
+
+    <div class="col-lg-4 mb-3">
+      <app-dashboard-card
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
+        type="comSp"
+        [data]="organizationalSP"
+        circleColor="E2FD"
+      ></app-dashboard-card>
+    </div>
+    <div class="col-lg-4 mb-3">
+      <app-dashboard-card
+        grid="col-xxl-3 col-lg-6 col-sm-3 col-6"
+        type="client"
+        [data]="clients"
+        circleColor="E9CCF2"
+      ></app-dashboard-card>
+    </div>
+  </div>
+  <!-- part3 -->
+  <div class="row mb-3 cairo">
+    <div class="col-lg-6 mb-3">
+      <div
+        class="bg-white rounded-3 shadow d-flex justify-content-around align-items-center p-3 h-100 w-100"
+      >
+        <div class="chart" style="width: 250px">
+          <canvas id="doughnut" class="col-12 "></canvas>
         </div>
       </div>
     </div>
+    <div class="col-lg-6 mb-3">
+      <div
+        class="m-0 bg-white rounded-3 shadow row h-100 w-100"
+      >
+        <div class="col-md-5 d-flex justify-content-around align-items-center p-3">
+          <div class="d-flex justify-content-around align-items-center">
+            <img
+              class="ms-2"
+              src="assets/user/earn.png"
+              alt=""
+              style="width: 100px; border-radius: 50%"
+            />
+            <div style="color: #1a5f78">
+              <h3>20000</h3>
 
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-             <img src="assets/dashboard/closedprojects.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle" style="font-size:0.7rem;"> مشروع</div>
-              <div class="fw-bold text-center">5</div>
+              <b> أرباح سنويه </b>
             </div>
           </div>
         </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-             <img src="assets/dashboard/handShakePuple.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle" style="font-size: 14px;">عروض الأسعار</div>
-              <div class="fw-bold text-center">13</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="row">
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-              <img src="assets/dashboard/profit_02.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle" style="font-size:0.7rem;">ارباح </div>
-              <div class="fw-bold text-center">0</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 mb-4">
-          <div class="bg-white d-flex align-items-center p-3">
-            <div class="w-100 text-center">
-                 <img src="assets/dashboard/cost.png" alt="" class="img-fluid">
-            </div>
-            <div class="w-100">
-              <div class="text-center fontStyle">مصاريف</div>
-              <div class="fw-bold text-center">10</div>
-            </div>
+        <div class="col-md-7 d-flex justify-content-around align-items-center h-100">
+          <div class="chart w-100">
+            <canvas id="bar"></canvas>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="row my-2">
-    <div class="col-12 col-md-6 col-lg-4">
-      <div class="bg-white p-3 ">
-        <div class="row">
-          <div class="col-6">
-            <div class=" ">
-             <img src="assets/dashboard/providers.png" alt="" class="img-fluid">
-            </div>
-
+  <!-- part4 -->
+  <div class="row mb-3 cairo">
+    <div class="col-lg-9">
+      <div
+        class="cairo bg-white rounded-0 d-flex justify-content-between align-items-start mb-2 col-12 px-4 py-3"
+      >
+        <h5 class="premary-color col-10">اخر شكاوي المرسله</h5>
+        <p class="main-color col-2 text-start">{{ complaints.length }} شكوي</p>
+      </div>
+      <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
+        <!-- card -->
+        <div
+          class="bg-white rounded-0 d-flex flex-column justify-content-between align-items-start mb-2 col-12 px-4 py-3"
+          *ngFor="let item of complaints"
+        >
+          <div class="w-100 d-flex justify-content-between">
+            <p class="h6 text-gary col-10">
+              <img class="h6" src="assets/user/user (2).png" /> اسم المرسل /
+              {{ item.applicationUser.userName }}
+            </p>
+            <p class="h6 text-gary col-2 text-start">
+              <img class="h6" src="assets/user/calendar.png" />
+              {{ item.dateCreated | date: "d/M/yyyy" }}
+            </p>
           </div>
-          <div class="col-6">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">18</div>
-              <h5 class="text-center fontStyle">مزود خدمة شركة</h5>
+          <p class="text-gary text-end">{{ item.content }}</p>
+        </div>
+      </div>
+      <div
+        class="cairo bg-white rounded-0 d-flex justify-content-between align-items-start mb-2 col-12 py-3 px-4"
+      >
+        <h5 class="premary-color">مسؤلي المنصه</h5>
+        <p
+          class="main-color addAccount"
+          (click)="chiseOfficialRoles()"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModalReject"
+        >
+          اضافة مسؤل
+        </p>
+      </div>
+      <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
+        <div
+          *ngFor="let item of admins"
+          class="bg-white rounded-0 d-flex flex-lg-row flex-column justify-content-between align-items-start mb-2 col-12 px-4 py-3"
+        >
+          <div
+            class="col-12 d-flex flex-column justify-content-evenly align-items-start"
+          >
+            <div
+              class="w-100 d-flex flex-row justify-content-between align-items-center"
+            >
+              <p class="h6 text-gary col-10">{{ item?.userName }}</p>
+              <p class="h6 main-color col-2 text-start">
+                {{ item?.applicationRole?.arabicName }}
+              </p>
             </div>
+            <p>{{ item?.email }}</p>
+            <p>{{ item?.phoneNumber }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex flex-column mb-2 col-12">
+        <div
+          class="row col-12 m-0 p-0 gx-4 justify-content-between align-items-start"
+        >
+          <div
+            class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+          >
+            <div
+              class="premary-color cairo rounded-0 text-center py-3 px-5 col-12 mb-2"
+              style="background-color: #aaddd6"
+            >
+              <h5>المشاريع الحاليه</h5>
+            </div>
+            <div class="d-flex flex-column scrolls col-12">
+              <ng-container *ngFor="let item of objectCurrentProjects">
+                <app-project-card
+                  userType="Admin"
+                  [pro]="item"
+                ></app-project-card>
+              </ng-container>
+            </div>
+          </div>
 
+          <div
+            class="cairo rounded-0 d-flex flex-column justify-content-between align-items-center col-md-6 col-12"
+          >
+            <div
+              class="premary-color cairo rounded-0 text-center py-3 px-5 col-12 mb-2"
+              style="background-color: #e5a8a8"
+            >
+              <h5>المشاريع المنتهيه</h5>
+            </div>
+            <!-- card -->
+            <div class="d-flex flex-column scrolls col-12">
+              <ng-container *ngFor="let item of objectLatest">
+                <app-project-card
+                  userType="Admin"
+                  [pro]="item"
+                ></app-project-card>
+              </ng-container>
+
+       <div [hidden]="error === null">
+
+         <div
+           class="d-flex flex-column col-12 alert alert-danger"
+           role="alert"
+         >
+           {{ error }}
+         </div>
+       </div>
+      
+            </div>
           </div>
         </div>
       </div>
     </div>
-     <div class="col-12 col-md-6 col-lg-4 mt-2 mt-lg-0">
-      <div class="bg-white p-3 ">
-        <div class="row">
-          <div class="col-6">
-            <div class=" ">
-              <img src="assets/dashboard/providers.png" alt="" class="img-fluid">
-            </div>
 
-          </div>
-          <div class="col-6">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">15</div>
-              <h5 class="text-center fontStyle" >  مزود خدمة مستقل</h5>
-            </div>
+    <div class="col-lg-3">
+      <!-- part 1 جدول الاعمال-->
+     <app-work-schedule></app-work-schedule>
+      <!-- part 2 -->
 
+      <div
+        class="rounded-0 d-flex flex-column justify-content-around align-items-center mb-3 col-12"
+      >
+        <div class="col-md-12 col-12 mb-1 me-1">
+          <div
+            class="bg-white d-flex justify-content-between bg-white px-4 py-1 mb-2 align-items-center"
+          >
+            <h5 class="fw-bold pt-3 pb-2">تقيمات مستخدمي المنصه</h5>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-4 mt-2 mt-lg-0">
-      <div class="bg-white p-3 ">
-        <div class="row">
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class=" ">
-             <img src="assets/dashboard/users.png" alt="">
-            </div>
-
-          </div>
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="w-100 text-center h3">
-              <div class="fw-bold">18</div>
-              <h5 class="text-center fontStyle">مزود خدمة شركة</h5>
-            </div>
-
-          </div>
+          <app-carousel-rate [testimonials]="testimonials"></app-carousel-rate>
         </div>
       </div>
     </div>
   </div>
+</section>
+<div
+  class="modal fade"
+  id="exampleModalReject"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مسؤل جديد
+        </h5>
 
-
-  <div class="row my-5">
-    <div class="col-lg-8 col-12 col-md-12 ">
-      <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-        <p class="fontStyle">مسئولي المنصة</p>
-        <p>اضافة مسئول</p>
-
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
-      <div class="mt-4 bg-white p-2 shadow-sm">
-        <div class="row">
-          <div class="col-4">
-            <img src="assets/avatar.png" alt="" class="rounded-circle" width="100" height="100">
-          </div>
-          <div class="col-4">
-            <p>mohandisy</p>
-            <p>mohandisy@gmail.com</p>
-          </div>
-          <div class="col-4 text-center">
-            <p class="mt-4">Admin</p>
-          </div>
-        </div>
-
-      </div>
-      <div class="mt-4 bg-white p-2 shadow-sm">
-        <div class="row">
-          <div class="col-4">
-            <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" width="100" height="100">
-          </div>
-          <div class="col-4">
-            <p>mohandisy</p>
-            <p>mohandisy@gmail.com</p>
-          </div>
-          <div class="col-4 text-center">
-            <p class="mt-4">Admin</p>
-          </div>
-        </div>
-
-      </div>
-      <div class="row mt-3">
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-            <h5 class=" fontStyle"> المشاريع الحالية</h5>
-            <p class=" fontStyle">5/5 </p>
-          </div>
-          <div class="mt-4 bg-white p-2">
-            <div class="row">
-              <div class="col-4">
-                <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" width="100" height="100">
-              </div>
-              <div class="col-6">
-                <p class=" fontStyle">اسم العميل: Tamer</p>
-                <p class=" fontStyle">بلد الأقامة: حي العمل</p>
-                <p class=" fontStyle">اسم المشروع: تطوير</p>
-              </div>
-
+      <div class="modal-body my-3 modalbody">
+        <form [formGroup]="newAccountform" (ngSubmit)="addAccount()" novalidate>
+          <label class="form-label">نوع الحساب</label>
+          <select
+            class="form-control"
+            formControlName="officialRoleId"
+            [ngClass]="{
+              'is-invalid':
+                f['officialRoleId'].errors && f['officialRoleId'].touched
+            }"
+          >
+            <option *ngFor="let user of userdata" [value]="user.id">
+              {{ user.arabicName }}
+            </option>
+          </select>
+          <div
+            *ngIf="f['officialRoleId'].errors && f['officialRoleId'].touched"
+            class="alert alert-warning mt-2"
+          >
+            <div *ngIf="f['officialRoleId'].errors['required']">
+              من فضلك ادخل نوع الحساب
             </div>
-
           </div>
 
-
-
-
-
-        </div>
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-            <h5 class="fontStyle"> عروض الأسعار</h5>
-            <p  class="fontStyle">0/13 </p>
-          </div>
-
-
-          <div class="mt-4 bg-white p-3 shadow-sm">
-            <div class="row">
-              <div class="col-4">
-                <img src="assets/avatar.png" alt="" class="rounded-circle img-fluid" >
-              </div>
-              <div class="col-6">
-                <p  class="fontStyle">اسم العميل: Tamer</p>
-                <p  class="fontStyle">بلد الأقامة: حي العمل</p>
-                <p  class="fontStyle">اسم المشروع: تطوير</p>
-              </div>
-              <div class="col-2">
-                <div class="mt-3">
-
-                  <i class="fa fa-star " aria-hidden="true"></i>
-                  <p  class="fontStyle">5/5</p>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="username">اسم المستخدم</label>
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                name="username"
+                formControlName="username"
+                [ngClass]="{
+                  'is-invalid': f['username'].errors && f['username'].touched
+                }"
+              />
+              <div
+                *ngIf="f['username'].errors && f['username'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['username'].errors['required']">
+                  من فضلك ادخل اسم المستخدم
                 </div>
               </div>
-
             </div>
-
+            <div class="col-md-6">
+              <label class="form-label" for="email">البريد الالكتروني</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f['email'].errors && f['email'].touched
+                }"
+              />
+              <div
+                *ngIf="f['email'].errors && f['email'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['email'].errors['required']">
+                  من فضلك ادخل البريد الالكتروني
+                </div>
+              </div>
+            </div>
           </div>
 
-
-
-
-
-
-        </div>
-
+          <div class="row mt-3">
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="phoneNumber">رقم الهاتف </label>
+              <input
+                type="phoneNumber"
+                id="phoneNumber"
+                name="phoneNumber"
+                formControlName="phoneNumber"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    f['phoneNumber'].errors && f['phoneNumber'].touched
+                }"
+              />
+              <div
+                *ngIf="f['phoneNumber'].errors && f['phoneNumber'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['phoneNumber'].errors['required']">
+                  من فضلك ادخل رقم الهاتف
+                </div>
+                <div *ngIf="f['phoneNumber'].errors['pattern']">
+                  من فضلك ادخل رقم هاتف صحيح
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label" for="Password">كلمة المرور</label>
+              <input
+                type="password"
+                id="Password"
+                name="Password"
+                formControlName="Password"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f['Password'].errors && f['Password'].touched
+                }"
+              />
+              <div
+                *ngIf="f['Password'].errors && f['Password'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="f['Password'].errors['required']">
+                  من فضلك ادخل كلمة المرور
+                </div>
+                <div *ngIf="f['Password'].errors['minlength']">
+                  من فضلك ادخل كلمة المرور اكبر من 10
+                </div>
+                <div *ngIf="f['Password'].errors['pattern']">
+                  من فضلك ادخل كلمة المرور بها A-z و [$ @ $ ! % * ? &]
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            data-bs-dismiss="modal"
+            type="submit"
+            [disabled]="!newAccountform.valid"
+            class="btn btn-lg ms-2 text-white form-control mb-3"
+            style="background: #18af9a"
+          >
+            انشاء مسؤل جديد
+          </button>
+          <button
+            type="button"
+            data-bs-dismiss="modal"
+            class="btn btn-lg ms-2 text-white form-control btn-secondary"
+          >
+            الغاء
+          </button>
+        </form>
       </div>
-
     </div>
-    <div class="col-lg-4 col-12 col-md-12 mt-2 mt-lg-0">
-      <div class="d-flex justify-content-between bg-white p-2 shadow-sm">
-        <p class="fontStyle">جدول أعمالك</p>
-
-
-
-      </div>
-      <div class="mt-4 bg-white shadow-sm">
-        <div class="d-flex justify-content-between bg-white p-4">
-          <p class="fontStyle"> تقيمات مستخدمي المنصة</p>
-          <p>
-            5/5
-            <i class="fa fa-star" aria-hidden="true"></i>
-          </p>
-        </div>
-
-
-
-      </div>
-      <div class="mt-4 bg-white shadow-sm">
-        <div class="text-center bg-white p-4">
-         <img src="assets/avatar.png" alt="" width="100" height="100">
-
-          <p class="mt-3">
-            ACME 123456
-          </p>
-          <p class="fontStyle">تقييم 3</p>
-        </div>
-      </div>
-    </div>
-
   </div>
+</div>
+<!-- 
+<div
+  class="modal fade"
+  id="addAppointment"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة مهمه  
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form  [formGroup]="newappointment"
+        (ngSubmit)="creatMeeting()" novalidate>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label class="form-label" for="name"
+                >اسم </label
+              >
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                name="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid':
+                  appoins['name'].errors && appoins['name'].touched
+                }"
+              />
+              <div
+                *ngIf="appoins['name'].errors && appoins['name'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['name'].errors['required']">
+                  من فضلك ادخل اسم للموعد                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="description"
+                >وصف </label
+              >
+
+              <textarea  id="" cols="30" rows="2" type="text"
+              id="description"
+              name="description"
+              formControlName="description"
+              class="form-control"
+              [ngClass]="{
+                'is-invalid': appoins['description'].errors && appoins['description'].touched
+              }"></textarea>
+              <div
+                *ngIf="appoins['description'].errors && appoins['description'].touched"
+                class="alert alert-warning mt-2"
+              >
+                <div *ngIf="appoins['description'].errors['required']">
+                  من فضلك ادخل   وصف للموعد
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label">اضافه ملف</label>
+            <input class="form-control" 
+            type="file"
+            #image
+            id="imageFile"
+            (change)="uplaodFile($event)"
+            name="imageFile"
+            
+           >
+          </div>
+         
+
+          <button
+          data-bs-dismiss="modal"
+          type="submit"
+          [disabled]="!newappointment.valid"
+          class="btn btn-lg ms-2 text-white form-control  mb-3"
+          style="background: #18AF9A"
+        >
+          انشاء  مهمه
+        </button>
+        <button type="button"  data-bs-dismiss="modal"
+        class="btn btn-lg ms-2 text-white form-control btn-secondary"
+
+        >
+          الغاء
+        </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+ -->
+ <div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="showSuc">
+  {{message}}
+</div>
 
 
+<div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
+  {{message}}
+</div>
 
-
-
-
-</section>
+<div id="toast-container" class="toast-bottom-right toast-container"></div>

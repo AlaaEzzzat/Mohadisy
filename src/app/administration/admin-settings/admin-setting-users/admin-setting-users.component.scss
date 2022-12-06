@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+
+$textColor:#18AF9A;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$bgButton:#F3FBFA;
+
+
+
+
+
+
+.sizeAc{
+  background-color: $Alltext!important;
+  color: white;
+  &.sizeAc{
+    background-color: $Alltext!important;
+    color: white;
+
+  }
+}
+.buttonChose{
+ font-family: $fontCairoFamily;
+
+}
+.btndark{
+  background-color: $Alltext;
+  color: #fff;
+  &:hover{
+    background-color: #fff  ;
+  color:$Alltext;
+  border: 1px solid $Alltext;
+  }
+}
+input[type="text"]:focus{
+  border: 1px solid $Alltext;
+  box-shadow: none;
+}
+.buttonAdd{
+  background-color: #F3FBFA!important;
+}
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  // width: 120px;
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.demo-section + .demo-section {
+  margin-top: 16px;
+}
+.nameProfile{
+
+  color:$Alltext
+}
+.emANumProfile{
+ 
+  color:$textColor
+
+}
+.stutsProfile ,.edit{
+ 
+  color: #4B4A4A;
+  span {
+    color: $textColor!important;
+  }
+
+}
+.edit{
+  color: $textColor!important;
+
+}
+// .titles
+// {
+//   @include titleTotal($font25Size,$fontTajawalFamily);
+
+// }
+// .reson{
+//   @include titleTotal($font20Size,$fontTajawalFamily )
+
+// }
+.reson>.col-3.me-4.pe-1{
+  color: $Alltext;
+}
+.reson>p{
+  color: #7D7E82;
+}
+button.active{
+  background-color: #004057  !important;
+  color:#fff !important;
+}
+
+// 
+.scrolls
+{
+  height: 60vh !important;
+  overflow: hidden;
+  &:hover{
+    overflow-y: auto !important;
+
+  }
+
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #d3d3d3;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#d3d3d3;
+  border-radius: 10px;
+
+}
+.toastinfo {
+  background-color: #2F96B3 !important;
+
+}
+.end10{
+right: 20px !important;
+width: 270px;
+}
+
+.toastErr{
+  background-color: #bd362f !important;
+}

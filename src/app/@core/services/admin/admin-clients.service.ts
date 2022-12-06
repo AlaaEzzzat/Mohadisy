@@ -75,5 +75,14 @@ export class AdminClientsService {
       })
     }))
   }
+  //
+  getRequiredWorkByWorkId(requiredWorkId:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/RequiredWorks/GetRequiredWorkByWorkId/${requiredWorkId}`);
+  }
+  getProjectComponentById(componentId:any):Observable<any>
+  {
+    return this._HttpClient.get<any>(`${environment.baseUrl}/api/Project/getProjectComponentById/${componentId}`);
+  }
 
 }

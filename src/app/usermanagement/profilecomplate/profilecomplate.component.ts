@@ -81,7 +81,6 @@ export class ProfilecomplateComponent implements OnInit {
       ],
     });
     this.registerForm?.get('region')?.valueChanges.subscribe(() => {
-      console.log(this.registerForm?.get('region')?.value);
       this?._getCities();
     });
   }
@@ -89,15 +88,11 @@ export class ProfilecomplateComponent implements OnInit {
   ngOnInit(): void {
     this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
-      console.log(this.regionsList);
     });
     /* check complete profie or not */
     this.clientService.checkStatus().subscribe((data: any) => {
-      console.log(data.data);
       this.isComplete = data.data.profileCompleted;
-      console.log(data.data.profileCompleted);
       this.isCreated = data.data.profileCreated;
-      console.log(data.data.profileCreated);
     });
   }
 
@@ -167,7 +162,6 @@ export class ProfilecomplateComponent implements OnInit {
   }
   onImageUpload(event: any) {
     if (event.target.files.length > 0) {
-      console.log(event.target.files);
       const myImage = event.target.files[0];
       this.registerForm.get('imageFile')?.setValue(myImage);
     }
@@ -221,13 +215,15 @@ export class ProfilecomplateComponent implements OnInit {
     this.citiesList = [];
     this.selectRegion = this.registerForm?.get('region')?.value;
     if (this.selectRegion != 0 && this.selectRegion != null)
-      this.provider.getCities(this.selectRegion).subscribe(
-        (data) => {
+      this.provider.getCities(this.selectRegion).subscribe({
+        next:(data) => {
           this.citiesList = data.data;
         },
-        (error) => {
+        error: (error) => {
           console.log('error');
         }
+      }
+        
       );
   }
 
@@ -235,19 +231,20 @@ export class ProfilecomplateComponent implements OnInit {
     this.selectCity = this.registerForm?.get('city')?.value;
     console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
-      this.provider.getDistricts(this.selectCity).subscribe(
-        (data) => {
-          if (data.data == '') {
-            this.addingDistrict = true;
-          } else {
-            console.log(data.data);
-            this.districtsList = data.data;
-            this.addingDistrict = false;
-          }
-        },
-        (error) => {
-          this.addingDistrict = true;
-        }
+      this.provider.getDistricts(this.selectCity).subscribe({
+next:(data) => {
+  if (data.data == '') {
+    this.addingDistrict = true;
+  } else {
+    this.districtsList = data.data;
+    this.addingDistrict = false;
+  }
+},
+error:(error) => {
+  this.addingDistrict = true;
+}
+      }
+        
       );
   }
   addAdress(district: any) {

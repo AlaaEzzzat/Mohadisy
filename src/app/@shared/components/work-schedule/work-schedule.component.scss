@@ -1,0 +1,94 @@
+.modaltitle{
+      background-color: #18AF9A !important;
+      >h2,>button{
+        color: white !important;
+      }
+      >button:focus,>button:active{
+    box-shadow: none !important;
+    border: none!important;
+      }
+      >button:hover{
+        background-color:transparent !important;
+        color: white !important;
+      }
+    
+    }
+    .addAccount{
+      cursor: pointer;
+    }
+
+
+
+
+::ng-deep .mat-calendar-body-cell-content {
+      background-color: white ;
+      color: black;
+      width: 100%;
+      border-radius: 25% !important;
+      -webkit-border-radius: 25% !important;
+      -moz-border-radius: 25% !important;
+      -ms-border-radius: 25% !important;
+      -o-border-radius: 25% !important;
+    }
+    ::ng-deep .mat-calendar
+{
+
+  background-color:white;
+}
+    
+    
+    ::ng-deep .mat-calendar-table-header , ::ng-deep .mat-calendar-body-label
+    {
+      color: black;
+    }
+    
+    ::ng-deep .mat-focus-indicator
+    {
+      background-color: #F1F5F9;
+    
+    
+    }
+    
+    
+    ::ng-deep .mat-calendar-body-selected
+    {
+      background-color: #18AF9A ;
+      color:white;
+    
+    
+    }
+    
+    .informationDownload{
+      width: 95% !important;
+      text-decoration: none !important;
+      color: black !important;
+      overflow: hidden;
+    white-space:nowrap;
+    
+    
+    }
+    .nameDownload{
+     
+      color: black !important;
+
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+     
+    }
+
+.typeCom
+{
+  color: #18AF9A !important;
+}
+.toastErr{
+  background-color: #bd362f;
+}
+.toastinfo {
+  background-color: #2F96B3 !important;
+
+}
+.end10{
+right: 20px !important;
+width: 270px;
+}

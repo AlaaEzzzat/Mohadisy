@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpProjectsComponent } from './sp-projects.component';
 
+
 describe('SpProjectsComponent', () => {
   let component: SpProjectsComponent;
   let fixture: ComponentFixture<SpProjectsComponent>;

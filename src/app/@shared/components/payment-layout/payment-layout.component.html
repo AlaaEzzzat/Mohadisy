@@ -1,0 +1,313 @@
+<section class="payment-section"
+[ngClass]="userType=='sp' || userType=='client' ?' pt-5':''">
+  <div class="row mt-5 pe-3">
+    <div class="col-md-6">
+      <div class="row mb-3">
+        <div class="col" (click)="complete()">
+          <button
+            disabled
+            class="btn mb-2 cairo w-100 text-white p-2 fontStyle text-center"
+            style="background-color: #18af9a" 
+            
+          >
+            مكتمل
+          </button>
+        </div>
+
+        <div class="col" (click)="inComplete()">
+          <button
+            style="background-color: #ee9c0f"
+            disabled
+            class="btn mb-2 cairo w-100 text-white p-2 fontStyle text-center"
+          >
+            غير مكتمل
+          </button>
+        </div>
+        <div class="col" (click)="notComplete()">
+          <button
+            style="background-color: #cc2a2a"
+            disabled
+            class="btn mb-2 cairo text-white w-100 p-2 fontStyle text-center"
+          >
+            لم يتم السداد
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-lg-2 col-3">
+          <div (click)="sortByName()" class="p-2 bg-white text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 27.643 27.042"
+            >
+              <path
+                id="Path_2787"
+                data-name="Path 2787"
+                d="M13.831,10l-.263.789-2.329,6.422H11.2v.075L10.075,20.4,10,20.591v1.427h2.4V21l.488-1.39h3.831L17.211,21v1.014h2.4V20.591L19.54,20.4l-1.127-3.117v-.075h-.038l-2.329-6.422L15.784,10Zm16.6,0V32.46l-3.117-3.117-1.69,1.69,5.145,5.183.864.826.864-.826,5.145-5.183-1.69-1.69L32.835,32.46V10ZM14.807,14.394l1.014,2.817H13.793ZM10,24.422v2.4h6.685l-6.347,6.347L10,33.549v2.892h9.615v-2.4H12.93l6.347-6.347.338-.376V24.422Z"
+                transform="translate(-10 -10)"
+                fill="#a6a7aa"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="col-lg-2 col-3">
+          <div (click)="sortByDate()" class="p-2 bg-white text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 25.926 25.926"
+            >
+              <path
+                id="Path_2786"
+                data-name="Path 2786"
+                d="M14.963,2A12.963,12.963,0,1,0,27.926,14.963,12.977,12.977,0,0,0,14.963,2Zm0,2.16a10.845,10.845,0,1,1-9.452,5.6l1.553.878h.068l6.245,4.49a1.6,1.6,0,0,0,3.072.473l5.334-1.789-.675-2.025-5.3,1.789a1.637,1.637,0,0,0-.844-.236,1.76,1.76,0,0,0-.338.034l-.81-.574h1.148v-1.08H12.33l-1.519-1.08h4.152V9.562H9.325l-1.08-.776-.54.776H5.612a10.818,10.818,0,0,1,.709-1.08h8.642V7.4h-7.7a10.952,10.952,0,0,1,1.215-1.08h6.481V5.241H10.271A10.8,10.8,0,0,1,14.963,4.16Z"
+                transform="translate(-2 -2)"
+                fill="#18af9a"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <div class="input-group-append">
+              <button
+                class="btn rounded-0"
+                style="background-color: white"
+                type="button"
+                (click)="search(text.value)"
+              >
+                <i class="fa fa-search" style="color: #18af9a"></i>
+              </button>
+            </div>
+            <input
+              #text
+              (change)="search(text.value)"
+              type="text"
+              class="form-control rounded-0 border border-0 border-end"
+              placeholder="بحث"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5 pe-3">
+  
+    <ng-container *ngFor="let project of dataShow.length >0?
+       dataShow : data">
+      <div class="col-xxl-4 col-lg-6 col-md-12">
+        <div class="pb-4 w-100 h-100">
+          <app-payment-card
+            [type]="userType"
+            [project]="project"
+            [showDetails]="showDetails"
+          >
+          </app-payment-card>
+        </div>
+      </div>
+    </ng-container>
+    <div *ngIf="showModal" class="overlay p-5">
+      <div class="img-popup p-5">
+        <a
+          class="close"
+          style="cursor: pointer"
+          (click)="showModal = !showModal"
+          >&times;</a
+        >
+        <div id="mymModal" class="mmodal">
+          <div class="mb-2">
+            <button
+              class="btn gray d-flex justify-content-between align-items-center btn-accordion w-100 text-end d-flex justify-content-between rounded-0 px-3"
+              type="button"
+              [attr.data-target]="'#item'"
+              data-toggle="collapse"
+            >
+              <span class="cairo"
+                >{{
+                  userType == "client" || userType == "sp"
+                    ? activeProject.project?.name
+                    : userType == "spForAdmin"
+                    ? activeProject.profile?.offers[0]?.project?.name
+                    : userType == "clientForAdmin"
+                    ? activeProject.profile?.projects[0]?.name
+                    : ""
+                }}
+              </span>
+              <div>
+                <span class="cairo">
+                  ربح :
+                  {{
+                    userType == "client" || userType == "sp"
+                      ? (
+                          activeProject.project?.offers[0]?.totalCost -
+                          activeProject.project?.offers[0]?.cost
+                        ).toFixed(2)
+                      : userType == "spForAdmin"
+                      ? (
+                          activeProject.profile?.offers[0]?.totalCost -
+                          activeProject.profile?.offers[0]?.cost
+                        ).toFixed(2)
+                      : userType == "clientForAdmin"
+                      ? (
+                          activeProject.profile?.projects[0]?.offers[0]
+                            ?.totalCost -
+                          activeProject.profile?.projects[0]?.offers[0]?.cost
+                        ).toFixed(2)
+                      : ""
+                  }}
+                </span>
+                <i class="fas fa-angle-down me-5"></i>
+              </div>
+            </button>
+
+            <div class="card rounded-0 border-0 mt-2 card-2-1">
+              <div id="accordion">
+                <div
+                  class="gray collapse hide py-3 px-1"
+                  [id]="'item'"
+                  data-parent="#accordian"
+                >
+                  <div class="cairo p-2 mb-2" #pdfTable id="pdfTable">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class="" scope="col">الدفعة</th>
+                          <th scope="col">المرحلة</th>
+                          <th scope="col">التكلفه</th>
+                          <th scope="col">التاريخ</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container
+                          *ngFor="
+                            let milestone of activeMiliestones;
+                            let i = index
+                          "
+                        >
+                          <tr>
+                            <td>
+                              <span
+                                [ngStyle]="{
+                                  color: milestone.isPaid
+                                    ? '#18AF9A'
+                                    : '#EE9C0F'
+                                }"
+                                class="bold"
+                                >الدفعه ({{ i + 1 }}) :
+                              </span>
+                            </td>
+
+                            <td>
+                              <div
+                                class="mb-2"
+                                *ngIf="milestone.isFirstMilestone"
+                              >
+                                <span
+                                  [ngStyle]="{
+                                    color: milestone.isPaid
+                                      ? '#18AF9A'
+                                      : '#EE9C0F'
+                                  }"
+                                  class="me-2 bold"
+                                >
+                                  دفعة مقدمه
+                                </span>
+                              </div>
+                              <div
+                                class="mb-2 bold"
+                                *ngIf="milestone.isLastMilestone"
+                              >
+                                <span
+                                  [ngStyle]="{
+                                    color: milestone.isPaid
+                                      ? '#18AF9A'
+                                      : '#EE9C0F'
+                                  }"
+                                  class="me-2 bold"
+                                >
+                                  دفعة بعد الإنتهاء
+                                </span>
+                              </div>
+                              <div
+                                class="mb-2 bold"
+                                *ngIf="
+                                  !milestone.isLastMilestone &&
+                                  !milestone.isFirstMilestone
+                                "
+                              >
+                                <span
+                                  [ngStyle]="{
+                                    color: milestone.isPaid
+                                      ? '#18AF9A'
+                                      : '#EE9C0F'
+                                  }"
+                                  class="me-2 bold"
+                                >
+                                  {{
+                                    requiredWorks[milestone.requiredWorkId]
+                                      ?.name
+                                  }}
+                                </span>
+                              </div>
+                            </td>
+
+                            <td>
+                              <span
+                                [ngStyle]="{
+                                  color: milestone.isPaid
+                                    ? '#18AF9A'
+                                    : '#EE9C0F'
+                                }"
+                                >{{ milestone.cost }} ريال</span
+                              >
+                            </td>
+                            <td>
+                              <div
+                                class="text-dark bold"
+                                *ngIf="milestone.isPaid"
+                              >
+                                {{ getDate(milestone.paidDate) }}
+                              </div>
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+                        <div class="d-flex align-items-center">
+                          <button
+                            class="btn paidbk text-white m-0"
+                            disabled
+                          ></button>
+                          <span class="me-2"> تم التسديد </span>
+                        </div>
+                        <div class="d-flex align-items-center me-4">
+                          <button
+                            class="btn text-white notPaidbk m-0"
+                            disabled
+                          ></button>
+                          <span class="me-2"> لم يتم التسديد بعد </span>
+                        </div>
+                      </div>
+
+                      <button [hidden]="userType=='spForAdmin' ||userType=='clientForAdmin'"  class="btn mainBk ms-4" (click)="downloadPDF()">
+                        تنزيل الفاتورة
+                        <i class="fa fa-download mx-2"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

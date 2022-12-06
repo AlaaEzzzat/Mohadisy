@@ -1,7 +1,15 @@
-import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 
+import { CoreModule } from './../../@core/@core.module';
+import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ApiService } from 'src/app/@core/api.service';
+import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
+import { HttpClient } from '@angular/common/http';
+import { saveAs } from 'file-saver';
+import moment from 'moment';
+import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
+
 
 @Component({
   selector: 'app-sp-profile',
@@ -9,267 +17,303 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sp-profile.component.scss'],
 })
 export class SpProfileComponent implements OnInit {
-  cars = [
-    { id: 1, name: 'BMW Hyundai' },
-    { id: 2, name: 'Kia Tata' },
-    { id: 3, name: 'Volkswagen Ford' },
-    { id: 4, name: 'Renault Audi' },
-    { id: 5, name: 'Mercedes Benz Skoda' },
-  ];
 
-  imageSrc?: string;
-  secandform: boolean = false;
-  providerData: any;
-  selectRegion: any = 0;
-  selectCity: any = 0;
-  citiesList: any;
-  regionsList: any;
-  districtsList: any;
-  servicesType: Array<any> = [];
-  subService: Array<any> = [];
-  Files: Array<any> = [];
-  FilterSearch: Array<any> = [];
-  checkedSubServices: Array<any> = [];
+  FileformData = new FormData();
+  file:any;
+  iProfileAdmin: any | undefined = undefined;
+  appointment!:appoint;
+  newappointment: FormGroup;
+  dateOpt:any;
+  erDateOp:any;
+  message:any;
+  showSuc:boolean=false
+  showErr:boolean=false
 
-  constructor(private provider: ProviderServiceService) {
-    this.providerData = new FormGroup({
-      TypeService: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      userName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      companyName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      CompNum: new FormControl('', [Validators.required]),
-      licencesNumber: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      phoneNumber: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[789][0-9]{9}'),
-      ]),
-      companyPhoneNum: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[789][0-9]{9}'),
-      ]),
-      site_url: new FormControl('', [Validators.required]),
-      servicetype: new FormControl('', [Validators.required]),
-      search_name_input: new FormControl('', [Validators.required]),
-      yearly_budget: new FormControl('', [
-        Validators.required,
-        Validators.min(500),
-      ]),
-      region: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[a-zA-Z]+ '),
-      ]),
-      city: new FormControl('', [Validators.required]),
-      district: new FormControl('', [Validators.required]),
-      buildNo: new FormControl('', [Validators.required]),
-      postal_box: new FormControl('', [
-        Validators.required,
-        Validators.pattern('d{5}'),
-      ]),
-      postal_code: new FormControl('', [
-        Validators.required,
-        Validators.pattern('d{5}'),
-      ]),
-      StreetName: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[a-zA-Z]+ '),
-      ]),
-      representative_name: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      representative_lastName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(4),
-      ]),
-      representative_email: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      representative_phone: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[789][0-9]{9}'),
-      ]),
+  appointmentFiles:any[]=[]
+  selected: Date = new Date();
+  profile:any;
+  infoProject:Array<any>=[];
+  ServiceProviderWork:any;
+  representative:any;
+  registeration:any=0;
+  registeration1:any=0;
+  registeration2:any=0;
+  registeration3:any=0;
+  registeration4:any=0;
+  registeration5:any=0;
+  workFile:any;
+  index:number=0;
+  avgRate:number=0;
+  copmpleteProfile:number=0;
 
-      search: new FormControl('', Validators.required),
-      CompanyLogo: new FormControl('', [Validators.required]),
-      logoSource: new FormControl('', [Validators.required]),
-      CompanyRegisteration: new FormControl('', [Validators.required]),
-      License: new FormControl('', [Validators.required]),
-      attach_registerSource: new FormControl('', [Validators.required]),
-      companyRegisterationNumber: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[789][0-9]{9}'),
-      ]),
+
+  constructor(
+    private provider: ProviderServiceService,
+    private api: ApiService,
+    private _HttpClient: HttpClient,
+    private formbuilder: FormBuilder,
+    private http: AdminDashService
+  ) {
+    this.newappointment=this.formbuilder.group({
+      name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
+     description: ['', [Validators.required]],
+     imageFile: [null],
     });
+  }
+  get name() {
+    return this.newappointment?.get('name');
+  }
+  get description() {
+    return this.newappointment?.get('description');
+  }
+  get appoins() {
+    return this.newappointment.controls;
+  }
+  get imageFile(){
+    return this.newappointment?.get('imageFile');
   }
 
   ngOnInit(): void {
-    this.provider.getRegions().subscribe((data) => {
-      this.regionsList = data.data;
-    });
+    this.getappointDate()
+      this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>
+      {
+        this.profile=data.data;
+        console.log(this.profile);
+        if(this.profile?.organizationalServiceProviderProfile?.licenseFile!=null)
+        {
+          this.copmpleteProfile+=(100/5.0);
 
-    this.provider.projectServices().subscribe((data) => {
-      this.servicesType = data.data;
-    });
-  }
-
-  get f() {
-    return this.providerData.controls;
-  }
-
-  _getCities() {
-    //console.log(this.providerData.get("region").value);
-
-    this.selectRegion = this.providerData.get('region').value;
-
-    this.provider.getCities(this.selectRegion).subscribe((data) => {
-      this.citiesList = data.data;
-    });
-
-    this._getDistricts();
-  }
-
-  _getDistricts() {
-    this.selectCity = this.providerData.get('city').value;
-    console.log(this.selectCity);
-    if (this.selectCity != 0 && this.selectCity != null)
-      this.provider.getDistricts(this.selectCity).subscribe(
-        (data) => {
-          this.districtsList = data.data;
-        },
-        (error) => {
-          console.log('error');
         }
-      );
+
+        if(this.profile?.organizationalServiceProviderProfile?.zakatCertificateFile!=null)
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+
+        if(this.profile?.organizationalServiceProviderProfile?.companyRegisterationNumberFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+
+
+        if(this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+
+
+
+        if(this.profile?.organizationalServiceProviderProfile?.iBanFile!=null
+          )
+        {
+          this.copmpleteProfile+=(100/5.0);
+
+        }
+
+      });
+
+      this.api.get("https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorks").subscribe(data=>
+      {
+        console.log(data);
+        this.ServiceProviderWork=data.data;
+
+      });
+
+      this.api.get("https://app.mohandisy.com/api/Representative/getRepresentative").subscribe(data=>
+      {
+        this.representative=data.data;
+
+      });
+
+
+
+       this.api.get("https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus").subscribe(data=>
+        {
+          var rate=data.data.testimonials;
+
+         // console.log(rate);
+          for(let i=0;i<rate.length;i++)
+          {
+           this.avgRate+=Number(rate[i].stars);
+
+          }
+
+          this.avgRate/=(rate.length);
+        }
+        );
+
   }
 
-  /******************start services and subservices***************/
 
-  _subServices() {
-    this.checkedSubServices = [];
-    this.subService = [];
-    var serviceId = this.providerData.get('servicetype').value;
-    this.provider.subServicesByServiceId(serviceId).subscribe((data) => {
-      this.FilterSearch = data.data;
-      this.subService = data.data;
+
+
+  projectImage(workId:any)
+  {
+    this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
+    {
+      this.workFile=data.data;
+
     });
   }
 
-  _search() {
-    var x = this.providerData.get('search').value;
-    this.FilterSearch = this.subService.filter((e) => e.name.includes(x));
-    //console.log( this.FilterSearch);
-  }
-  addSubService(subServiceId: number) {
-    this.checkedSubServices[subServiceId] = 1;
-  }
 
-  deleteSubService(subServiceId: number) {
-    this.checkedSubServices[subServiceId] = 0;
-  }
 
-  /***********************end services and subservices****************************/
+  toggle(projectId:number)
+  {
 
-  SelectFile_1(event: any) {
-    this.Files[0] = <File>event.target.files[0];
+    if(this.infoProject[projectId]!=1)
+    this.infoProject[projectId]=1;
+    else
+    this.infoProject[projectId]=0;
+
   }
 
-  SelectFile_2(event: any) {
-    /*this.Files[1]={
-      "idFile":<File>event.target.files[0].name,
-      "membershipFile":<File>event.target.files[0].name
-     };*/
 
-    this.Files[1] = <File>event.target.files[0];
+
+  register_1()
+  {
+    this.registeration1=!this.registeration1;
   }
 
-  SelectFile_3(event: any) {
-    this.Files[2] = <File>event.target.files[0];
+  register_2()
+  {
+    this.registeration2=!this.registeration2;
   }
 
-  // onFileChange(event: any) {
-  //   const reader = new FileReader();
+  register_3()
+  {
+    this.registeration3=!this.registeration3;
 
-  //   if (event.target.files && event.target.files.length) {
-  //     const [file] = event.target.files;
-
-  //     reader.readAsDataURL(file);
-
-  //     reader.onload = () => {
-  //       this.imageSrc = reader.result as string;
-
-  //       this.providerData.patchValue({
-  //         fileSource: reader.result,
-  //       });
-  //     };
-  //   }
-  // }
-
-  onSubmit() {
-    this.providerData.value['servicetype'] = [];
-
-    this.subService.forEach((e) => {
-      if (this.checkedSubServices[e.id])
-        this.providerData.value['servicetype'].push(e.id);
-    });
-    console.log(this.providerData.value);
-
-    //console.log(this.providerData.value['servicetype']);
-
-    var formFiles: any = new FormData();
-
-    formFiles.append('CompanyLogo', this.Files[0]);
-    formFiles.append('CompanyRegisteration', this.Files[1]);
-    formFiles.append('License', this.Files[2]);
-
-    //console.log(formFiles);
-
-    /*var formFiles=
-     {
-      'CompanyLogo':this.Files[0],
-      'CompanyRegisteration':this.Files[1],
-      'License':this.Files[3]
-     }*/
-
-    this.provider.Files(formFiles).subscribe((data) => {
-      console.log(data);
-    });
-
-    /*var formRdata:any=new FormData();
-      formRdata.append('firstName',this.providerData.value['representative_name']);
-      formRdata.append('lastName',this.providerData.value['representative_lastName']);
-      formRdata.append('email',this.providerData.value['representative_email']);
-      formRdata.append('phoneNumber',this.providerData.value['representative_phone']);*/
-
-    var formRdata = {
-      firstName: this.providerData.value['representative_name'],
-      lastName: this.providerData.value['representative_lastName'],
-      email: this.providerData.value['representative_email'],
-      phoneNumber: this.providerData.value['representative_phone'],
-    };
-
-    this.provider.representative(formRdata).subscribe((data) => {
-      console.log(data);
-    });
-
-    this.provider.getR().subscribe((data) => {
-      console.log(data);
-    });
-
-    /*this.provider.storeProfile(this.providerData.value).subscribe((data) => {
-      console.log(data);
-
-    });*/
-
-    //    })
   }
+
+  register_4()
+  {
+    this.registeration4=!this.registeration4;
+
+  }
+
+  register_5()
+  {
+    this.registeration5=!this.registeration5;
+
+  }
+  // جدول الاعمال
+
+  getappointDate() {
+    let date=moment(this.selected).format('YYYY-MM-DD');
+     let dateSelected={
+       
+         "startDate": date,
+         "endDate": date
+       } 
+       console.log(dateSelected);
+       this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
+         console.log(this.selected);
+        
+         for(let dates of date.data){
+           this.dateOpt=dates
+   
+         }
+         console.log(this.dateOpt)
+         this.appointmentFiles=this.dateOpt.appointmentFiles
+       }),error:(er=>{
+         console.log(er)
+         this.dateOpt=null
+         this.erDateOp=er
+       })})
+     
+   }
+  uplaodFile(e: any) {
+
+       
+    if (e.target.files && e.target.files.length > 0) {
+      let file = e.target.files[0];
+      console.log(file);
+      // let FileformData = new FormData();
+      this.FileformData.append('file', file);
+  }
+ 
+  
+  }
+
+
+
+creatMeeting() {
+  this.iProfileAdmin=localStorage.getItem('id')
+  console.log(this.iProfileAdmin)
+  let date=moment(this.selected).format('YYYY-MM-DD');
+
+    this.appointment={
+      "applicationUserId": this.iProfileAdmin,
+      "name": this.name?.value,
+      "description": this.description?.value,
+      "dateCreated": date
+    }
+    this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
+     
+      this.message=data.message
+      this.showSuc=true
+
+      setInterval(() => {
+        this.showSuc=false
+        }, 3000);
+      this.getappointDate() 
+      this.http.storeAppointmentFiles(data.data.id,this.FileformData).subscribe({next:(req)=>{
+        console.log(req)
+        this.message=req.message
+        this.showSuc=true
+  
+        setInterval(() => {
+          this.showSuc=false
+          }, 4000);
+          this.getappointDate() 
+      },error:(er)=>{
+        console.log(er)
+        this.message=er.message
+        this.showErr=true
+  
+        setInterval(() => {
+          this.showErr=false
+          }, 4000);
+
+      }})
+    }),error:(er)=>{
+      console.log(er);
+      this.message=er.message
+      this.showErr=true
+
+      setInterval(() => {
+        this.showErr=false
+        }, 4000);
+    }})
+    console.log(this.appointment);
+   
+  }
+  download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+}
+interface appoint{
+  "applicationUserId":string,
+  "name": string,
+  "description": string,
+  "dateCreated": string
 }
