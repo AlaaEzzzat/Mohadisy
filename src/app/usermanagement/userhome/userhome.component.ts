@@ -41,7 +41,7 @@ export class UserhomeComponent implements OnInit {
     },
     {
       title: ' الشكاوي   ',
-      routing: '/usermanagement/messages',
+      routing: '/usermanagement/complaint',
       image: 'assets/images/chat.png',
     },
   ];
@@ -49,8 +49,8 @@ export class UserhomeComponent implements OnInit {
   username: string = localStorage.getItem('name')?.replace(/"/g, '') || '';
   showpopup: boolean = false;
   allServices: any = [];
-  startChatwithAdmin: boolean = false;
   constructor(private router: Router, private clientService: ClientService) {}
+  startChatwithAdmin: boolean = false;
   toggleStatus = () => {
     this.startChatwithAdmin = false;
   };

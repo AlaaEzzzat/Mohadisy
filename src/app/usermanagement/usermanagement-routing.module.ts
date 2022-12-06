@@ -1,3 +1,4 @@
+import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
 import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { ProjectComponent } from './project/project.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -20,8 +21,7 @@ const routes: Routes = [
       { path: 'messages', component: UserMessagesComponent },
       { path: 'project', component: ProjectComponent },
       { path: 'chat', component: ChatComponent },
-      
-
+      { path: 'complaint', component: ComplaintComponent },
       { path: 'offers', component: UserPriceOffersComponent },
       { path: 'profile', component: UserProfileComponent },
       { path: 'profilecomplate', component: ProfilecomplateComponent },

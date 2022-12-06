@@ -19,4 +19,24 @@ export class ComplaintService {
       `${environment.baseUrl}/api/Complaint/getComplaints`
     );
   }
+
+  getAllOrganizationalServiceProviderProfiles(page?: number): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${
+        environment.baseUrl
+      }/api/OrganizationalServiceProvider/getAllProfiles/Page/${page || 1}`
+    );
+  }
+  getAllIndividualServiceProviderProfiles(page?: number): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${
+        environment.baseUrl
+      }/api/IndividualServiceProvider/getAllProfiles/Page/${page || 1}`
+    );
+  }
+  getAllClientProfiles(page?: number): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Client/getAllProfiles/Page/${page || 1}`
+    );
+  }
 }

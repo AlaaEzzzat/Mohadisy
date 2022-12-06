@@ -1,3 +1,4 @@
+import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
 import { ChatComponent } from '../@shared/components/chat/chat.component';
 import { CompanyCompleteProfileComponent } from './company-complete-profile/company-complete-profile.component';
 import { PrevWorksComponent } from './prev-works/prev-works.component';
@@ -38,8 +39,9 @@ const routes: Routes = [
       { path: 'spmanagementHome', component: SpHomeComponent },
       { path: 'dashboard', component: SpDashBoardComponent },
       { path: 'messages', component: SpMessagesComponent },
-      { path: 'chat', component: ChatComponent },
       { path: 'payments', component: SpPaymentsComponent },
+      { path: 'chat', component: ChatComponent },
+      { path: 'compliant', component: ComplaintComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },
       {
@@ -62,21 +64,17 @@ const routes: Routes = [
               { path: 'allaccept', component: SpCprojectAcceptComponent },
               { path: 'allreject', component: SpCprojectRejectComponent },
             ],
-
           },
           {
             path: 'status',
             component: SpProjectStatusComponent,
             children: [
               { path: 'current', component: SpProjectCurrentComponent },
-              { path: 'pending', component: SpProjectPendingComponent},
+              { path: 'pending', component: SpProjectPendingComponent },
             ],
           },
-
-
         ],
       },
-
 
       { path: 'mainProfile', component: SpMainProfileComponent },
 

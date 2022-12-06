@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private clientService: ClientService,
     private router: Router,
     private _toastr: ToastrService,
-    private api:ApiService
+    private api: ApiService
   ) {
     this.LoginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -38,28 +38,41 @@ export class LoginComponent implements OnInit {
         this.LoginForm.value
       )
       .subscribe((data) => {
-        console.log(data);
         if (data.data.emailConfirmed) {
+          console.log(data);
           this._toastr.info(data.message);
-          this.clientService.getAccountStatus().subscribe((data: any) => {
-            this.accountStatus = data.data.joinRequestStatus;
-          });
           this.serviceProviderService.personalData = data.data;
           localStorage.setItem('token', JSON.stringify(data.data.token));
           localStorage.setItem('role', JSON.stringify(data.data.roles[0]));
           localStorage.setItem('name', JSON.stringify(data.data.username));
           localStorage.setItem('email', JSON.stringify(data.data.email));
-
           localStorage.setItem(
             'phoneNumber',
             JSON.stringify(data.data.phoneNumber)
           );
           localStorage.setItem('id', JSON.stringify(data.data.id));
+          this.clientService.getAccountStatus().subscribe((data: any) => {
+            this.accountStatus = data.data.joinRequestStatus;
+          });
           let roles = this.auth.getRole();
-          if (roles == 'Admin' || roles =="Editor" || roles == "Financial Manager") {
+          if (
+            roles == 'Admin' ||
+            roles == 'Editor' ||
+            roles == 'Financial Manager'
+          ) {
             this.router.navigate(['/Admin/dashboard']);
           }
           if (roles == 'Service provider') {
+            this.api
+              .get(
+                'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
+              )
+              .subscribe((data) => {
+                var type =
+                  data.data.organizationalServiceProviderProfile.projectService
+                    .id;
+                localStorage.setItem('typeId', type);
+              });
             localStorage.setItem(
               'type',
               JSON.stringify(data.data.accountType.key)
@@ -112,14 +125,6 @@ export class LoginComponent implements OnInit {
         } else {
           this._toastr.error(data.data.message);
         }
-
-
-        //get id type of user
-        this.api.get("https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile").subscribe(data=>{
-          var type=data.data.organizationalServiceProviderProfile.projectService.id;
-          localStorage.setItem('typeId',type);
-         }
-          );
       });
   }
   ngOnInit(): void {}

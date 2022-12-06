@@ -37,7 +37,7 @@ export class UserPriceOffersComponent implements OnInit {
   rules: boolean = false;
   seeProjectInfo: boolean = false;
   usedMaterials: boolean = false;
-  usedMaterialsArray:any=[]
+  usedMaterialsArray: any = [];
   showProjectProfile: boolean = false;
   paymethods: boolean = false;
   invoiceValue: any = 0;
@@ -49,8 +49,8 @@ export class UserPriceOffersComponent implements OnInit {
   modalSrc: any = '';
   showModal: boolean = false;
   fristMilestoneId: any = 0;
-  showMilestones:boolean= false;
-  projectMilestons:any =[];
+  showMilestones: boolean = false;
+  projectMilestons: any = [];
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -60,18 +60,18 @@ export class UserPriceOffersComponent implements OnInit {
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
   }
-  next=()=> {
+  next = () => {
     if (this.page < this.totalpages) {
       this.page = this.page + 1;
       this.getAllProjectServices();
     }
-  }
-  prev= ()=> {
+  };
+  prev = () => {
     if (this.page > 1) {
       this.page = this.page - 1;
       this.getAllProjectServices();
     }
-  }
+  };
   ngOnInit(): void {
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
@@ -94,20 +94,20 @@ export class UserPriceOffersComponent implements OnInit {
       this.showOffers(this.projectServiesArrays[0]);
     });
   }
-  
-  getMilestonse(selectedOfferId:any) {
-    this.projectMilestons=[];
+
+  getMilestonse(selectedOfferId: any) {
+    this.projectMilestons = [];
     this.clientService
-            .getMilestonesByOfferId(selectedOfferId)
-            .subscribe((data: any) => {
-              this.projectMilestons = data.data;
-              console.log(this.projectMilestons)
-              this.projectMilestons.map((mile: any) => {
-                if (mile.requiredWorkId) {
-                  this.getrequireWork(mile.requiredWorkId);
-                }
-              });
-            });
+      .getMilestonesByOfferId(selectedOfferId)
+      .subscribe((data: any) => {
+        this.projectMilestons = data.data;
+        console.log(this.projectMilestons);
+        this.projectMilestons.map((mile: any) => {
+          if (mile.requiredWorkId) {
+            this.getrequireWork(mile.requiredWorkId);
+          }
+        });
+      });
   }
   getAllProjectServices() {
     this.clientService
@@ -149,14 +149,16 @@ export class UserPriceOffersComponent implements OnInit {
         }
       });
   }
-  requiredWorks:any=[];
+  requiredWorks: any = [];
   getrequireWork(reqId: any) {
     this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {
-      const index = this.requiredWorks.findIndex((e:any) => e.id == data.data[0].id);
+      const index = this.requiredWorks.findIndex(
+        (e: any) => e.id == data.data[0].id
+      );
       if (index == -1) {
         this.requiredWorks.push(...data.data);
       }
-      console.log(this.requiredWorks)
+      console.log(this.requiredWorks);
     });
   }
   getDate(date: any) {
@@ -193,8 +195,8 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
   showOffers(project: any) {
-    console.log(project)
-   
+    console.log(project);
+
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
     console.log(this.activeProjectReqWorks);
@@ -210,11 +212,13 @@ export class UserPriceOffersComponent implements OnInit {
       this.selectedOffer = this.offersOfSelectedProject[0];
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
       this.getMilestonse(this.selectedOfferId);
-      if(this.selectedProject.projectService.id == 2){
-        this.clientService.getMaterialsByOfferId(this.selectedOfferId).subscribe((data:any)=>{
-          this.usedMaterialsArray = data.data
-          console.log(data.data)
-        })
+      if (this.selectedProject.projectService.id == 2) {
+        this.clientService
+          .getMaterialsByOfferId(this.selectedOfferId)
+          .subscribe((data: any) => {
+            this.usedMaterialsArray = data.data;
+            console.log(data.data);
+          });
       }
       if (this.selectedOffer.organizationalServiceProviderProfileId) {
         this.clientService
@@ -304,27 +308,25 @@ export class UserPriceOffersComponent implements OnInit {
       }
     );
   }
-  deleteProject(id:any){
-    this.clientService.deleteProject(id).subscribe(data=>{
+  deleteProject(id: any) {
+    this.clientService.deleteProject(id).subscribe((data) => {
       this._toastr.info(data.message);
       this.getAllProjectServices();
     });
   }
   showImg(src: any) {
-    console.log(this.requiredWorks)
-    console.log(this.projectMilestons)
+    console.log(this.requiredWorks);
+    console.log(this.projectMilestons);
     this.showModal = true;
     this.modalSrc = src;
   }
-  requiredWorksNames(reqId:any){
-    var name
-    this.requiredWorks.map((work:any)=>{
-if(work.id==reqId){
-  name = work.name;
-}
-    })
+  requiredWorksNames(reqId: any) {
+    var name;
+    this.requiredWorks.map((work: any) => {
+      if (work.id == reqId) {
+        name = work.name;
+      }
+    });
     return name;
-
   }
 }
- 

@@ -30,7 +30,7 @@
                 >
                   <div class="me-1">
                     <div class="mb-1">
-                      <i class="icon fa-regular fa-user ms-2"></i> 
+                      <i class="icon fa-regular fa-user ms-2"></i>
                       <span class="textcard"> {{ project.name }} </span>
                     </div>
                     <div class="mb-1">
@@ -48,9 +48,12 @@
 
                     <i class="fa-regular fa-circle-ellipsis-vertical"></i>
                   </div>
-                  <span class="badge bg-white mt-1 mainColor" style="height: fit-content;
-                  padding: 10px;">{{ project.offers.length }} رد</span>
-                  
+                  <span
+                    class="badge bg-white mt-1 mainColor"
+                    style="height: fit-content; padding: 10px"
+                    >{{ project.offers.length }} رد</span
+                  >
+
                   <div class="position-absolute dotCon">
                     <button
                       class="dots"
@@ -69,16 +72,22 @@
                         <span (click)="showProject()">عرض المشروع</span>
                       </button>
                       <button mat-menu-item>
-                        <span (click)="deleteProject(project.id)">حذف المشروع</span>
+                        <span (click)="deleteProject(project.id)"
+                          >حذف المشروع</span
+                        >
                       </button>
                     </mat-menu>
                   </div>
                 </div>
               </ng-container>
 
-             <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
+              <app-pagination
+                [pagenation]="pagenation"
+                [next]="next"
+                [prev]="prev"
+                [page]="page"
+              ></app-pagination>
             </div>
-           
           </div>
           <div class="col-md-8">
             <div
@@ -421,7 +430,11 @@
                               />
                             </svg>
 
-                            <p class="p-0 m-0 me-3 mainColor " style="cursor: pointer;" (click)="showImg('')">
+                            <p
+                              class="p-0 m-0 me-3 mainColor"
+                              style="cursor: pointer"
+                              (click)="showImg('')"
+                            >
                               يتم تسديد المبلغ علي
                               {{ offer.numberOfMilestones }} دفعات
                             </p>
@@ -837,7 +850,7 @@
     </div>
     <div *ngIf="!modalSrc" id="mymModal" class="mmodal">
       <div id="caption" class="p-3 bg-white">
-        <table class="table bg-white p-2" >
+        <table class="table bg-white p-2">
           <thead>
             <tr>
               <th class="" scope="col">الدفعة</th>
@@ -848,18 +861,13 @@
           </thead>
           <tbody>
             <ng-container
-              *ngFor="
-                let milestone of projectMilestons;
-                let i = index
-              "
+              *ngFor="let milestone of projectMilestons; let i = index"
             >
               <tr>
                 <td>
                   <span
                     [ngStyle]="{
-                      color: milestone.isPaid
-                        ? '#18AF9A'
-                        : '#EE9C0F'
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
                     }"
                     class="bold"
                     >الدفعه ({{ i + 1 }}) :
@@ -867,30 +875,20 @@
                 </td>
 
                 <td>
-                  <div
-                    class="mb-2"
-                    *ngIf="milestone.isFirstMilestone"
-                  >
+                  <div class="mb-2" *ngIf="milestone.isFirstMilestone">
                     <span
                       [ngStyle]="{
-                        color: milestone.isPaid
-                          ? '#18AF9A'
-                          : '#EE9C0F'
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
                       }"
                       class="me-2 bold"
                     >
                       دفعة مقدمه
                     </span>
                   </div>
-                  <div
-                    class="mb-2 bold"
-                    *ngIf="milestone.isLastMilestone"
-                  >
+                  <div class="mb-2 bold" *ngIf="milestone.isLastMilestone">
                     <span
                       [ngStyle]="{
-                        color: milestone.isPaid
-                          ? '#18AF9A'
-                          : '#EE9C0F'
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
                       }"
                       class="me-2 bold"
                     >
@@ -900,21 +898,16 @@
                   <div
                     class="mb-2 bold"
                     *ngIf="
-                      !milestone.isLastMilestone &&
-                      !milestone.isFirstMilestone
+                      !milestone.isLastMilestone && !milestone.isFirstMilestone
                     "
                   >
                     <span
                       [ngStyle]="{
-                        color: milestone.isPaid
-                          ? '#18AF9A'
-                          : '#EE9C0F'
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
                       }"
                       class="me-2 bold"
                     >
-                      {{
-                        requiredWorksNames(milestone.requiredWorkId)
-                      }}
+                      {{ requiredWorksNames(milestone.requiredWorkId) }}
                     </span>
                   </div>
                 </td>
@@ -922,19 +915,14 @@
                 <td>
                   <span
                     [ngStyle]="{
-                      color: milestone.isPaid
-                        ? '#18AF9A'
-                        : '#EE9C0F'
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
                     }"
                     >{{ milestone.cost }} ريال</span
                   >
                 </td>
                 <td>
-                  <div
-                    class="text-dark bold"
-                    *ngIf="milestone.isPaid"
-                  >
-                     {{ getDate(milestone.paidDate) }}
+                  <div class="text-dark bold" *ngIf="milestone.isPaid">
+                    {{ getDate(milestone.paidDate) }}
                   </div>
                 </td>
               </tr>

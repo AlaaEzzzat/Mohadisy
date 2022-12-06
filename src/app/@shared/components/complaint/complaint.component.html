@@ -1,1 +1,121 @@
-<p>complaint works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <ng-container *ngFor="let compliant of complaints">
+      <div class="col-lg-4 col-md-6">
+        <div class="image-flip">
+          <div class="mainflip flip-0">
+            <div class="frontside">
+              <div class="card">
+                <div class="card-body text-center">
+                  <p>
+                    <img
+                      class="img-fluid"
+                      src="assets/avatar.png"
+                      alt="card image"
+                    />
+                  </p>
+                  <h4 class="card-title cairo">Alaa Ezzat</h4>
+                  <p class="card-text cairo">
+                    {{ compliant.content }}
+                  </p>
+                  <p class="card-text cairo">
+                    {{ compliant.dateCreated | date }}
+                  </p>
+                  <a
+                    href="https://www.fiverr.com/share/qb8D02"
+                    class="btn btn-mainBk btn-sm"
+                  >
+                    <span class="cairo"> المزيد </span>
+                    <i class="fa fa-chevron-circle-left me-2"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="backside">
+              <div class="card">
+                <div
+                  class="card-body d-flex justify-content-center align-items-center text-center mt-4"
+                >
+                  <p
+                    (click)="sendMsg(compliant.complaintSenderId)"
+                    class="card-text d-flex align-items-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 35.802 36.459"
+                    >
+                      <g
+                        id="Group_485"
+                        data-name="Group 485"
+                        transform="translate(-196 -194)"
+                      >
+                        <g id="chat" transform="translate(196 194)">
+                          <g
+                            id="Group_480"
+                            data-name="Group 480"
+                            transform="translate(0)"
+                          >
+                            <g id="Group_479" data-name="Group 479">
+                              <path
+                                id="Path_2622"
+                                data-name="Path 2622"
+                                d="M21.35,0c-.01.01-.029.01-.059.01A17.886,17.886,0,0,0,7.264,29.042L4.655,35.1a.972.972,0,0,0,.508,1.28.993.993,0,0,0,.557.068l9.563-1.68A17.234,17.234,0,0,0,21.242,35.8,17.9,17.9,0,0,0,21.35,0Zm-.1,33.858a15.68,15.68,0,0,1-5.519-1.006.937.937,0,0,0-.518-.049L7.166,34.209,9.3,29.257a.982.982,0,0,0-.156-1.026,15.617,15.617,0,0,1-2.716-4.513,15.949,15.949,0,1,1,30.8-5.9v.059A15.992,15.992,0,0,1,21.252,33.858Z"
+                                transform="translate(-3.366)"
+                                fill="#029a16"
+                              />
+                            </g>
+                          </g>
+                          <g
+                            id="Group_482"
+                            data-name="Group 482"
+                            transform="translate(10.872 14.33)"
+                          >
+                            <g id="Group_481" data-name="Group 481">
+                              <path
+                                id="Path_2623"
+                                data-name="Path 2623"
+                                d="M120.918,146.7h-5.275a.977.977,0,1,0,0,1.954h5.275a.977.977,0,0,0,0-1.954Z"
+                                transform="translate(-114.666 -146.7)"
+                                fill="#029a16"
+                              />
+                            </g>
+                          </g>
+                          <g
+                            id="Group_484"
+                            data-name="Group 484"
+                            transform="translate(10.872 19.215)"
+                          >
+                            <g id="Group_483" data-name="Group 483">
+                              <path
+                                id="Path_2624"
+                                data-name="Path 2624"
+                                d="M127.756,196.7H115.643a.977.977,0,1,0,0,1.954h12.113a.977.977,0,1,0,0-1.954Z"
+                                transform="translate(-114.666 -196.7)"
+                                fill="#029a16"
+                              />
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                    <span class="me-3 cairo">تواصل معي من هنا </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="startChat">
+  <app-start-chat
+    userType="sp"
+    process="chat"
+    [receiverId]="recieverId"
+    [toggleStatus]="toggleStatus"
+  ></app-start-chat>
+</div>

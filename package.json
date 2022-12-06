@@ -44,6 +44,7 @@
     "ngx-pagination": "^6.0.2",
     "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.3.0",
+    "ngx-wow": "^2.0.1",
     "open-iconic": "^1.1.1",
     "pdfmake": "^0.2.6",
     "rxjs": "~7.5.0",
