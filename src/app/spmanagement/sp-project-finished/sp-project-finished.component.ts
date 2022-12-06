@@ -46,7 +46,7 @@ export class SpProjectFinishedComponent implements OnInit {
    console.log(data);
    this.Listprojects=data.data.projects;
    this.totalpages=data.data.totalPages;
-   for(let i=1;i<=10;i++)
+   for(let i=1;i<=this.totalpages;i++)
     this.pages.push(i);
    if(this.Listprojects.length>0){
    this.result=1;

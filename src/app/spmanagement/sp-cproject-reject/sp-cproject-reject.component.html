@@ -7,7 +7,7 @@
 
 <div class="section-2 mt-2">
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-4 position-relative">
       <div class="row">
         <ng-container *ngFor="let project of Listprojects; let i=index;" >
           <ng-container *ngIf="this.select==project.id">
@@ -42,9 +42,10 @@
         </ng-container>
 
       </div>
+      <div class="col-12 " style="height: 100px; ;"></div>
 
-      <nav aria-label="Page navigation" class="mt-4 mb-3" *ngIf="result==1">
-        <ul class="pagination">
+      <nav aria-label="Page navigation position-absolute top100" class="mt-4 mb-3" *ngIf="result==1">
+        <ul class="pagination d-flex flex-wrap w-100">
 
           <ng-container *ngIf="page==1">
           <li class="page-item disabled">
