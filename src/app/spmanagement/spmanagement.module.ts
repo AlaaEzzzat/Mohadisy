@@ -20,7 +20,6 @@ import { CompanyCompleteProfileComponent } from './company-complete-profile/comp
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
-import { SpPinnedProjectComponent } from './sp-pinned-project/sp-pinned-project.component';
 import { LayoutProjectComponent } from './layout-project/layout-project.component';
 import { SpProjectRequestAllComponent } from './sp-project-request-all/sp-project-request-all.component';
 import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-request.component';
@@ -67,7 +66,6 @@ import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.com
     SpHomeComponent,
     SpProfileComponent,
     SpProjectRequestComponent,
-    SpPinnedProjectComponent,
     LayoutProjectComponent,
     SpProjectRequestAllComponent,
     SpCprojectRequestComponent,

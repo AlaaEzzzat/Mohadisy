@@ -6,7 +6,7 @@
   <div class="row">
     <div class="col-lg-3 position-relative">
       <div class="row">
-        <ng-container *ngFor="let project of Listprojects">
+        <ng-container *ngFor="let project of Listprojects; let i = index">
           <ng-container *ngIf="select == project.id">
             <div
               class="col-lg-12 card card-1 mt-4"
@@ -17,7 +17,13 @@
                 <i class="far fa-building"></i>
                 <span>
                   اسم المشروع :{{ project.name }}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type == 1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type == 2">
+                    <a class="btn">({{ _RequiredWorks[i].name }})</a>
+                  </ng-container>
                 </span>
               </p>
               <p>
@@ -33,7 +39,6 @@
               </p>
             </div>
           </ng-container>
-
           <ng-container *ngIf="this.select != project.id">
             <div
               class="col-lg-12 card card-1 mt-4"
@@ -44,7 +49,13 @@
                 <i class="far fa-building"></i>
                 <span>
                   اسم المشروع :{{ project?.name }}
-                  <a class="btn">(مشروع استشارى)</a>
+                  <ng-container *ngIf="type == 1">
+                    <a class="btn">(مشروع استشارى)</a>
+                  </ng-container>
+
+                  <ng-container *ngIf="type == 2">
+                    <a class="btn">({{ _RequiredWorks[i].name }})</a>
+                  </ng-container>
                 </span>
               </p>
               <p>
@@ -61,7 +72,7 @@
             </div>
           </ng-container>
         </ng-container>
-        <div class="col-12" style="height: 100px ;"></div>
+        <div class="col-12" style="height: 100px"></div>
 
         <div class="col-lg-12">
           <nav
@@ -147,75 +158,172 @@
                     src="{{ selectProject?.clientProfile?.profilePicturePath }}"
                     alt="image"
                   />
-                </div>
 
-                <div class="col-lg-5 mt-4">
-                  <p>
-                    {{ selectProject?.clientProfile?.firstName }}
-                    {{ selectProject?.clientProfile?.lastName }}
-                  </p>
-                </div>
+                  <div *ngIf="startChat">
+                    <app-start-chat
+                      userType="sp"
+                      process="chat"
+                      [receiverId]="
+                        selectProject?.clientProfile?.applicationUserId
+                      "
+                      [toggleStatus]="toggleStatus"
+                    ></app-start-chat>
+                  </div>
 
-                <div class="col-lg-3 mt-4">
-                  <p type="btn" (click)="toggleChat()" style="cursor: pointer">
-                    <i class="fa fa-commenting-o"></i>
-                  </p>
-                  <p style="padding-right: 52%">مراسله</p>
-                </div>
-
-                <!----------------chat--------------->
-                <div class="overlay p-5" *ngIf="startChat">
-                  <div class="popup p-5">
-                    <a
-                      class="close"
-                      style="cursor: pointer"
-                      (click)="toggleChat()"
-                      >&times;</a
-                    >
-                    <div class="content">
-                      <label class="form-label fw-bold cairo"> الرساله </label>
-                      <div
-                        class="message-input d-flex flex-column justify-content-center"
-                      >
-                        <div class="wrap">
-                          <input
-                            class="form-control"
-                            #textInput
-                            type="text"
-                            placeholder="اكتب شيئاً ..."
-                            class="cairo"
-                          />
-                          <i
-                            class="fa-solid fa-paperclip attachment"
-                            aria-hidden="true"
-                          >
-                            <input
-                              (change)="onFileUpload($event)"
-                              #fileImage
-                              type="file"
-                              alt=""
-                              name="attatch"
-                              id="attatch"
-                              class="attatch"
-                            />
-                            <small *ngIf="fileMessage" style="font-size: 12px"
-                              >{{ fileMessage.name.substr(0, 12) }}...</small
-                            >
-                          </i>
-                        </div>
-                        <button
-                          (click)="sendMessage(textInput.value)"
-                          class="btn submit"
-                        >
-                          <span>إرسال</span>
-                          <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                        </button>
-                      </div>
-                    </div>
+                  <div *ngIf="startComplaint">
+                    <app-start-chat
+                      userType="sp"
+                      process="complaint"
+                      [receiverId]="
+                        selectProject?.clientProfile?.applicationUserId
+                      "
+                      [toggleStatus]="toggleStatus"
+                    ></app-start-chat>
                   </div>
                 </div>
-
-                <!--------------end chat------------------->
+                <div class="col-lg-9">
+                  <div class="card-body py-0 ps-0">
+                    <p class="card-text cairo">
+                      {{
+                        selectProject?.clientProfile?.firstName +
+                          " " +
+                          selectProject?.clientProfile?.lastName
+                      }}
+                    </p>
+                    <p
+                      (click)="startChat = true"
+                      class="card-text d-flex align-items-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 35.802 36.459"
+                      >
+                        <g
+                          id="Group_485"
+                          data-name="Group 485"
+                          transform="translate(-196 -194)"
+                        >
+                          <g id="chat" transform="translate(196 194)">
+                            <g
+                              id="Group_480"
+                              data-name="Group 480"
+                              transform="translate(0)"
+                            >
+                              <g id="Group_479" data-name="Group 479">
+                                <path
+                                  id="Path_2622"
+                                  data-name="Path 2622"
+                                  d="M21.35,0c-.01.01-.029.01-.059.01A17.886,17.886,0,0,0,7.264,29.042L4.655,35.1a.972.972,0,0,0,.508,1.28.993.993,0,0,0,.557.068l9.563-1.68A17.234,17.234,0,0,0,21.242,35.8,17.9,17.9,0,0,0,21.35,0Zm-.1,33.858a15.68,15.68,0,0,1-5.519-1.006.937.937,0,0,0-.518-.049L7.166,34.209,9.3,29.257a.982.982,0,0,0-.156-1.026,15.617,15.617,0,0,1-2.716-4.513,15.949,15.949,0,1,1,30.8-5.9v.059A15.992,15.992,0,0,1,21.252,33.858Z"
+                                  transform="translate(-3.366)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                            <g
+                              id="Group_482"
+                              data-name="Group 482"
+                              transform="translate(10.872 14.33)"
+                            >
+                              <g id="Group_481" data-name="Group 481">
+                                <path
+                                  id="Path_2623"
+                                  data-name="Path 2623"
+                                  d="M120.918,146.7h-5.275a.977.977,0,1,0,0,1.954h5.275a.977.977,0,0,0,0-1.954Z"
+                                  transform="translate(-114.666 -146.7)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                            <g
+                              id="Group_484"
+                              data-name="Group 484"
+                              transform="translate(10.872 19.215)"
+                            >
+                              <g id="Group_483" data-name="Group 483">
+                                <path
+                                  id="Path_2624"
+                                  data-name="Path 2624"
+                                  d="M127.756,196.7H115.643a.977.977,0,1,0,0,1.954h12.113a.977.977,0,1,0,0-1.954Z"
+                                  transform="translate(-114.666 -196.7)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                      <span class="me-3 cairo">تواصل معي من هنا </span>
+                    </p>
+                    <p
+                      (click)="startComplaint = true"
+                      class="card-text d-flex align-items-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        viewBox="0 0 35.802 36.459"
+                      >
+                        <g
+                          id="Group_485"
+                          data-name="Group 485"
+                          transform="translate(-196 -194)"
+                        >
+                          <g id="chat" transform="translate(196 194)">
+                            <g
+                              id="Group_480"
+                              data-name="Group 480"
+                              transform="translate(0)"
+                            >
+                              <g id="Group_479" data-name="Group 479">
+                                <path
+                                  id="Path_2622"
+                                  data-name="Path 2622"
+                                  d="M21.35,0c-.01.01-.029.01-.059.01A17.886,17.886,0,0,0,7.264,29.042L4.655,35.1a.972.972,0,0,0,.508,1.28.993.993,0,0,0,.557.068l9.563-1.68A17.234,17.234,0,0,0,21.242,35.8,17.9,17.9,0,0,0,21.35,0Zm-.1,33.858a15.68,15.68,0,0,1-5.519-1.006.937.937,0,0,0-.518-.049L7.166,34.209,9.3,29.257a.982.982,0,0,0-.156-1.026,15.617,15.617,0,0,1-2.716-4.513,15.949,15.949,0,1,1,30.8-5.9v.059A15.992,15.992,0,0,1,21.252,33.858Z"
+                                  transform="translate(-3.366)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                            <g
+                              id="Group_482"
+                              data-name="Group 482"
+                              transform="translate(10.872 14.33)"
+                            >
+                              <g id="Group_481" data-name="Group 481">
+                                <path
+                                  id="Path_2623"
+                                  data-name="Path 2623"
+                                  d="M120.918,146.7h-5.275a.977.977,0,1,0,0,1.954h5.275a.977.977,0,0,0,0-1.954Z"
+                                  transform="translate(-114.666 -146.7)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                            <g
+                              id="Group_484"
+                              data-name="Group 484"
+                              transform="translate(10.872 19.215)"
+                            >
+                              <g id="Group_483" data-name="Group 483">
+                                <path
+                                  id="Path_2624"
+                                  data-name="Path 2624"
+                                  d="M127.756,196.7H115.643a.977.977,0,1,0,0,1.954h12.113a.977.977,0,1,0,0-1.954Z"
+                                  transform="translate(-114.666 -196.7)"
+                                  fill="#029a16"
+                                />
+                              </g>
+                            </g>
+                          </g>
+                        </g>
+                      </svg>
+                      <span class="me-3 cairo"> تقديم شكوي في المسؤول </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -249,7 +357,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-8 mt-2">
             <div class="row">
               <ng-container *ngFor="let stage of Allstages; let i = index">
@@ -567,7 +674,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-12 mt-2">
             <div class="card card-date">
               <div class="row">
@@ -577,7 +683,6 @@
               </div>
             </div>
           </div>
-
           <div class="col-lg-12 mt-2">
             <div class="card card-4-4">
               <div class="row">

@@ -1,4 +1,4 @@
-<div class="container-fluid" style="min-height: 100vh">
+<div class="container-fluid pt-2" style="min-height: 100vh">
   <div class="row">
     <ng-container *ngFor="let complaint of complaints">
       <div class="col-lg-4 col-md-6">
@@ -16,7 +16,10 @@
                               ?.profilePicturePath
                           : complaint.complaintSender
                               ?.organizationalServiceProviderProfile
-                              ?.profilePicturePath || ''
+                              ?.profilePicturePath ||
+                            complaint.complaintSender
+                              ?.individualServiceProviderProfile
+                              ?.profilePicturePath
                       "
                       alt="card image"
                     />
@@ -29,7 +32,12 @@
                           complaint.complaintSender?.clientProfile?.firstName
                         : complaint.complaintSender
                             ?.organizationalServiceProviderProfile
-                            ?.companyName || "xx"
+                            ?.companyName ||
+                          complaint.complaintSender
+                            ?.individualServiceProviderProfile?.firstName +
+                            " " +
+                            complaint.complaintSender
+                              ?.individualServiceProviderProfile?.lastName
                     }}
                   </h4>
                   <p class="card-text cairo">

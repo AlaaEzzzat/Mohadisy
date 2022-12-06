@@ -24,6 +24,8 @@ export class SpProjectsComponent implements OnInit {
    totalpages: any = 0;
     pages:Array<any>=[];
     result:any=0;
+    _RequiredWorks:Array<any>=[];
+     index:any=0;
 
   constructor(private api:ApiService) { }
 
@@ -33,15 +35,56 @@ export class SpProjectsComponent implements OnInit {
 
     this.Listprojects=data.data.priceQuotes;
     this.totalpages=data.data.totalPages;
-    
-    for(let i=1;i<=this.totalpages;i++)
+
+     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
 
-      if(this.Listprojects.length>0)
+      if(this.Listprojects.length>0){
        this.result=1;
+     //  console.log(this.Listprojects);
+
+       this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
+       (data=>{
+
+        console.log(data);
+         for(let project of this.Listprojects){
+         for(let work of data.data)
+         {
+           let f=0;
+
+             for(let w of project.projectRequiredWorks)
+             {
+
+               if(w.requiredWorkId==work.id)
+               {
+
+                 this._RequiredWorks.push({
+                   "name":work.name
+                  });
+
+               f=1;
+               break;
+
+               }
+
+             }
+             if(f)
+             break;
+           }
+
+
+         }
+
+         });
+
+
+
+      }
 
 
     });
+
+
 
   }
 
@@ -59,13 +102,13 @@ export class SpProjectsComponent implements OnInit {
         break;
       }
      }
-     console.log(this.selectProject);
+     //console.log(this.selectProject);
 
 
     this.projectComponent=[],this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/Project/getAllProjectComponents").
      subscribe(data=>{
-      console.log(data);
+
       this.AllProjectComponent=data.data;
 
        for(let component of this.AllProjectComponent)  {
