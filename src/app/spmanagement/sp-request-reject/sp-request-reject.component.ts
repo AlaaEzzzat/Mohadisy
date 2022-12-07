@@ -14,10 +14,7 @@ export class SpRequestRejectComponent implements OnInit {
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
-  descWork:Array<any>=[];
   documents:Array<any>=[];
-  descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
   totalpages: any = 0;
@@ -126,11 +123,9 @@ export class SpRequestRejectComponent implements OnInit {
     {
 
      this.page=e;
-     console.log(this.page);
      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPRejectedOffers/Page/${this.page}`).subscribe(data=>{
 
       this.Listprojects=data.data.priceQuotes;
-
 
    });
     }

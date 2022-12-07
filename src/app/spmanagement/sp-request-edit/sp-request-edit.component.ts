@@ -128,6 +128,7 @@ export class SpRequestEditComponent implements OnInit {
      console.log(this.selectProject);
 
 
+     this.RequiredWorks=[];
 
     this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
     (data=>{
@@ -157,6 +158,7 @@ export class SpRequestEditComponent implements OnInit {
 
   showData(idProject:number)
   {
+    this.totalcostMilestone=[],this.Precentage=[],this.numberofMilestones=[];
     this.select=idProject;
     this.SelectIdProject();
     this.Initial();
@@ -174,11 +176,12 @@ export class SpRequestEditComponent implements OnInit {
  });
   }
 
+ 
+
   milestones()
   {
     this.numberofMilestones=[];
     var milestones=this.OfferData.get('numberOfMilestones').value;
-
     if(milestones<=6){
     for(let i=1;i<=milestones;i++)
     {
@@ -194,22 +197,19 @@ export class SpRequestEditComponent implements OnInit {
     this.totalcost=0;
 
     if(this.OfferData.get('cost').value){
-    this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData?.get('cost').value}`).subscribe(data=>{
-
+    this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData.get('cost').value}`).subscribe(data=>{
 
       this.totalcost=data.data;
       this.checkDataStage();
 
-
     });
      }else{
-      var milestones=(Number)(this.OfferData?.get('numberOfMilestones').value);
+      var milestones=(Number)(this.OfferData.get('numberOfMilestones').value);
       if(milestones<=6){
       for(let i=1;i<=milestones;i++)
       {
       this.Precentage[i]=0,
       this.totalcostMilestone[i]=0;
-
 
       }
        }
@@ -220,6 +220,7 @@ export class SpRequestEditComponent implements OnInit {
 
   checkDataStage()
   {
+    
     var milestones=this.OfferData.get('numberOfMilestones').value;
     if(milestones<=6){
     for(let i=1;i<=milestones;i++)
@@ -239,18 +240,15 @@ export class SpRequestEditComponent implements OnInit {
     if(stage=="1"&&precentage)
     {
       this.api.get(`https://app.mohandisy.com/api/Offer/getFirstMilestoneCost?cost=
-      ${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+      ${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
       {
 
-
-
         this.totalcostMilestone[stage]=data.data;
-
 
       });
     }else if(precentage)
     {
-      this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData?.get('cost').value}&percentage=${precentage}`).subscribe(data=>
+      this.api.get(`https://app.mohandisy.com/api/Offer/getCostByPercentage?cost=${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
       {
 
         this.totalcostMilestone[stage]=data.data;
@@ -263,11 +261,8 @@ export class SpRequestEditComponent implements OnInit {
 
   workId(e:any,stone:number)
   {
-
     this.WorkId[stone]=e.target.value;
-
   }
-
 
 
   onSubmit()
@@ -281,7 +276,6 @@ export class SpRequestEditComponent implements OnInit {
       console.log(this.WorkId[i]);
       if(Number(this.WorkId[i])==8)
       {
-
 
         Allmilestones.push(
           {

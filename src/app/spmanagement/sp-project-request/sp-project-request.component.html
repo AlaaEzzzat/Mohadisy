@@ -13,8 +13,8 @@
                   <a class="btn">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
+                  {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                  {{project.district?.city?.region?.nameAr}} </p>
                 <p><i class="	far fa-calendar-alt "></i>{{project.dateCreated}}</p>
               </div>
             </ng-container>
@@ -27,8 +27,8 @@
                   <a class="btn">استشارات</a>
                 </p>
                 <p><i class="fa fa-location-dot "></i>
-                  {{project.district.nameAr}},{{project.district.city.nameAr}},
-                  {{project.district.city.region.nameAr}} </p>
+                  {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                  {{project.district?.city?.region?.nameAr}} </p>
                 <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
               </div>
             </ng-container>
@@ -202,8 +202,8 @@
                       <option [value]="8">دفعه مقدمه</option>
                     </ng-container>
 
-
-                    <option [value]="9" *ngIf="stone== numberofMilestones.length">بعد الانتهاء</option>
+                    <option [value]="9" 
+                    *ngIf="stone==this.OfferData.get('numberOfMilestones').value">بعد الانتهاء</option>
 
                     <ng-container *ngFor="let work of RequiredWorks">
 
@@ -228,8 +228,7 @@
             </div>
 
             <input type="submit" class="btn col-3 mt-4 mb-2" value="ارسال"
-
-            [disabled]="OfferData.get('cost')?.errors?.['required'] ||
+              [disabled]="OfferData.get('cost')?.errors?.['required'] ||
                OfferData.get('period')?.errors?.['required']||
                OfferData.get('numberOfMilestones')?.errors?.['required']
                "

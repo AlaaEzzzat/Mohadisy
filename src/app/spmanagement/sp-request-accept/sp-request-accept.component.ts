@@ -14,10 +14,7 @@ export class SpRequestAcceptComponent implements OnInit {
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
-  descWork:Array<any>=[];
   documents:Array<any>=[];
-  descDocument:Array<any>=[];
   page:number=1;
   result:number=0;
   totalpages: any = 0;
@@ -29,7 +26,6 @@ export class SpRequestAcceptComponent implements OnInit {
 
    this.api.get("https://app.mohandisy.com/api/PriceQuotes/getSPAcceptedOffers/Page/1").subscribe(data=>{
 
-   console.log(data);
    this.Listprojects=data.data.priceQuotes;
    this.totalpages=data.data.totalPages;
    for(let i=1;i<=this.totalpages;i++)
@@ -110,22 +106,7 @@ export class SpRequestAcceptComponent implements OnInit {
 
 
 
-
-    /*************************************/
-    toggoleComponent(componentId:any)
-    {
-
-     if(this.descComponent[componentId])
-     this.descComponent[componentId]=0;
-     else
-     this.descComponent[componentId]=1;
-
-
-    }
-
-   
-
-
+  
     downloadFile(filepath:any,file:any)
     {
       var FileSaver = require('file-saver');
@@ -137,7 +118,6 @@ export class SpRequestAcceptComponent implements OnInit {
     {
 
      this.page=e;
-     console.log(this.page);
      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
 
       this.Listprojects=data.data.priceQuotes;

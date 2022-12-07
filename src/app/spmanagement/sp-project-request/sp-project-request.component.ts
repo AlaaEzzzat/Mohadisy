@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/@core/api.service';
 import Swal from 'sweetalert2';
+import { ARIA_LIVE_DELAY } from '@ng-bootstrap/ng-bootstrap/util/accessibility/live';
 
 
 
@@ -49,7 +50,6 @@ export class SpProjectRequestComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     this.select=localStorage.getItem('idproject');
     this.page=Number(localStorage.getItem("page"));
 
@@ -59,6 +59,7 @@ export class SpProjectRequestComponent implements OnInit {
     this.totalpages=data.data.totalPages;
     for(let i=1;i<=this.totalpages;i++)
       this.pages.push(i);
+
       this.SelectIdProject();
 
     });
@@ -76,13 +77,11 @@ export class SpProjectRequestComponent implements OnInit {
       {
         this.selectProject=project;
 
-        console.log(this.selectProject);
-
         break;
       }
      }
 
-
+     this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
    (data=>{
 
@@ -110,23 +109,12 @@ export class SpProjectRequestComponent implements OnInit {
 
   showData(idProject:number)
   {
+    this.totalcostMilestone=[],this.Precentage=[],this.numberofMilestones=[];
     this.select=idProject;
     this.OfferData.reset();
     this.SelectIdProject();
   }
 
-  changepage(e:any)
-  {
-
-   this.page=e;
-
-   this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
-
-    this.Listprojects=data.data.priceQuotes;
-
-
- });
-  }
 
   milestones()
   {
@@ -149,15 +137,12 @@ export class SpProjectRequestComponent implements OnInit {
     if(this.OfferData.get('cost').value){
     this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.OfferData.get('cost').value}`).subscribe(data=>{
 
-
       this.totalcost=data.data;
       this.checkDataStage();
-
 
     });
      }else{
       var milestones=(Number)(this.OfferData.get('numberOfMilestones').value);
-      console.log(milestones);
       if(milestones<=6){
       for(let i=1;i<=milestones;i++)
       {
@@ -173,6 +158,7 @@ export class SpProjectRequestComponent implements OnInit {
 
   checkDataStage()
   {
+    
     var milestones=this.OfferData.get('numberOfMilestones').value;
     if(milestones<=6){
     for(let i=1;i<=milestones;i++)
@@ -195,10 +181,7 @@ export class SpProjectRequestComponent implements OnInit {
       ${this.OfferData.get('cost').value}&percentage=${precentage}`).subscribe(data=>
       {
 
-
-
         this.totalcostMilestone[stage]=data.data;
-
 
       });
     }else if(precentage)
@@ -216,10 +199,18 @@ export class SpProjectRequestComponent implements OnInit {
 
   workId(e:any,stone:number)
   {
-
     this.WorkId[stone]=e.target.value;
+  }
 
 
+  changepage(e:any)
+  {
+   this.page=e;
+   this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+
+    this.Listprojects=data.data.priceQuotes;
+
+ });
   }
 
 
@@ -234,8 +225,6 @@ export class SpProjectRequestComponent implements OnInit {
       Allprecentage.push((Number)(this.Precentage[i]));
       if(Number(this.WorkId[i])==8)
       {
-
-
         Allmilestones.push(
           {
             "cost":this.totalcostMilestone[i],
@@ -311,8 +300,9 @@ export class SpProjectRequestComponent implements OnInit {
 
       }
 
+      console.log(AllData);
 
-      this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
+     /* this.api.postJson("https://app.mohandisy.com/api/Offer/storeOffer",AllData).subscribe(
       {
         next:(data)=>{
         Swal.fire(
@@ -321,7 +311,7 @@ export class SpProjectRequestComponent implements OnInit {
         this.router.navigate(['/Spmanagement/projects/price-offers/new']);
         }
 
-      } );
+      } );*/
 
 
 
