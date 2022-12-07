@@ -14,8 +14,6 @@ export class SpCprojectAcceptComponent implements OnInit {
   RequiredWorks:Array<any>=[];
   selectProject:any=[];
   select:any=0;
-  descComponent:Array<any>=[];
-  descWork:Array<any>=[];
   documents:Array<any>=[];
   descDocument:Array<any>=[];
   page:number=1;
