@@ -18,7 +18,6 @@ export class SpProjectPendingComponent implements OnInit {
   selectProject: any = [];
   select: any = 0;
   documents: Array<any> = [];
-  descDocument: Array<any> = [];
   page: number = 1;
   result: number = 0;
   totalpages: any = 0;

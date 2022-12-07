@@ -107,8 +107,8 @@
                   <p>التصنيف الرئيسى للمشروع: <span>{{selectProject.projectCategory.name}}</span></p>
                   <p>التصنيف الفرعى للمشروع: <span>{{selectProject.projectSubCategory.name}}</span></p>
                   <p>عنوان المشروع :
-                    <span>{{selectProject.district.nameAr}},{{selectProject.district.city.nameAr}} ,
-                      {{selectProject.district.city.region.nameAr}} </span>
+                    <span>{{selectProject.district?.nameAr}},{{selectProject.district?.city?.nameAr}} ,
+                      {{selectProject.district?.city?.region?.nameAr}} </span>
                   </p>
                   <p>رقم القطعه : <span>{{selectProject.plotNumber}} </span></p>
                   <p>رقم المخطط التنظيمى : <span>{{selectProject.organizationalChartNumber}}</span></p>

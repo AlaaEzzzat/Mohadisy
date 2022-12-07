@@ -18,10 +18,7 @@ export class SpCrequestEditComponent implements OnInit {
    RequiredWorks:Array<any>=[];
    selectProject:any=[];
    select:any=0;
-   descComponent:Array<any>=[];
-   descWork:Array<any>=[];
    documents:Array<any>=[];
-   descDocument:Array<any>=[];
    page:number=1;
    numberofMilestones:any=[];
    setForm:any=[];
@@ -124,10 +121,6 @@ export class SpCrequestEditComponent implements OnInit {
 
     });
 
-
-
-
-
     this.api.get("https://app.mohandisy.com/api/Offer/getMaterialtypes").subscribe(
       data=>{
         this.material=data.data;
@@ -173,6 +166,12 @@ export class SpCrequestEditComponent implements OnInit {
        }
 
        );
+
+       /////get material by id
+       this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`).subscribe(data=>
+       {
+
+       });
   }
 
 
@@ -193,6 +192,7 @@ export class SpCrequestEditComponent implements OnInit {
 
 
 
+     this.RequiredWorks=[];
     this.api.get("https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks").subscribe
     (data=>{
 
@@ -221,6 +221,7 @@ export class SpCrequestEditComponent implements OnInit {
 
   showData(idProject:number)
   {
+    this.totalcostMilestone=[],this.Precentage=[],this.numberofMilestones=[];
     this.select=idProject;
     this.SelectIdProject();
     this.Initial();
@@ -229,22 +230,6 @@ export class SpCrequestEditComponent implements OnInit {
 
 
 
-
-
-
-
-
-     changepage(e:any)
-     {
-
-      this.page=e;
-      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
-
-       this.Listprojects=data.data.priceQuotes;
-
-
-    });
-     }
 
      
      milestones()
@@ -344,6 +329,17 @@ export class SpCrequestEditComponent implements OnInit {
 
 
 
+     changepage(e:any)
+     {
+
+      this.page=e;
+      this.api.get(`https://app.mohandisy.com/api/PriceQuotes/getSPNewProjects/Page/${this.page}`).subscribe(data=>{
+
+       this.Listprojects=data.data.priceQuotes;
+
+
+    });
+     }
 
 
 
@@ -388,10 +384,7 @@ export class SpCrequestEditComponent implements OnInit {
 
      deleteMaterial(materialId:any)
      {
-
-
       this.addmaterial=this.addmaterial.filter(data=>data.id!=materialId);
-
 
      }
 
@@ -505,7 +498,13 @@ export class SpCrequestEditComponent implements OnInit {
              Swal.fire(
                'تم تعديل العرض بنجاح'
              );
-             this.router.navigate(['/Spmanagement/projects/price-offers/offer/edit']);
+             this.api.get(`https://app.mohandisy.com/api/PriceQuotes/GetSPPriceQuotesIAppliedFor/Page/${this.page}`).subscribe(data=>{
+              this.Listprojects=data.data.projects;
+             this.showData(Number(this.select));
+             console.log(this.select);
+ 
+             });
+ 
              }
 
            } );

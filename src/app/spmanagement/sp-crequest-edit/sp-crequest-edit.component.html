@@ -13,8 +13,8 @@
                 <a class="btn">{{_RequiredWorks[i].name}}</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
-                {{project.district.nameAr}},{{project.district.city.nameAr}},
-                {{project.district.city.region.nameAr}} </p>
+                {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                {{project.district?.city?.region?.nameAr}} </p>
               <p><i class="far fa-calendar-alt "></i>{{project.dateCreated}}</p>
             </div>
           </ng-container>
@@ -28,8 +28,8 @@
                 <a class="btn">{{_RequiredWorks[i].name}}</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
-                {{project.district.nameAr}},{{project.district.city.nameAr}},
-                {{project.district.city.region.nameAr}} </p>
+                {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                {{project.district?.city?.region?.nameAr}} </p>
               <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
             </div>
           </ng-container>
@@ -120,145 +120,148 @@
             <div class="collapse hide" id="item1" data-parent="#accordian">
                 <div class="card card-3 mt-3">
 
-           <div class="row">
+                  <div class="row">
 
-            <input type="hidden" formControlName="projectId" name="projectId">
-
-            <div class="col-lg-12 form-group ">
-              <label for="period" class="label-control">مده المشروع</label>
-              <input type="text" class="form-control px-5" name="period" formControlName="period" placeholder="مده المشروع" required
-            [class.is-valid]="OfferData.get('period')?.valid"
-            [class.is-invalid]="OfferData.get('period')?.invalid && OfferData.get('period')?.touched">
-              <div
-              class="alert alert-danger"
-              [hidden]="OfferData.get('period')?.valid ||OfferData.get('period')?.untouched" >
-              <span *ngIf="OfferData.get('period')?.errors?.['required']
-              " >مده المشروع مطلوبه</span>
-            </div>
-            </div>
-
-
-            <div class="col-lg-6 form-group mt-3">
-              <label for="cost" class="label-control mb-2">السعر</label>
-              <input type="number" class="form-control cost px-5" name="cost"
-              formControlName="cost"
-               placeholder="السعر" (ngModelChange)="TotalCost()" required
-              [class.is-valid]="OfferData.get('cost')?.valid"
-             [class.is-invalid]="OfferData.get('cost')?.invalid &&
-              OfferData.get('cost')?.touched" >
-            <div
-            class="alert alert-danger"
-            [hidden]="OfferData.get('cost')?.valid ||OfferData.get('cost')?.untouched" >
-            <span *ngIf="OfferData.get('cost')?.errors?.['required']" >السعر مطلوب</span>
-          </div>
-
-            </div>
-
-            <div class="col-lg-6 form-group mt-4" >
-              <label for="cost" class="label-control mb-2"></label>
-              <input type="text" class="form-control cost" name="costAr"  [disabled]="true"
-               placeholder="السعر" >
-            </div>
-
-
-            <div class="col-lg-6 form-group mt-3">
-              <label for="cost" class="label-control mb-2">رسوم اداريه</label>
-              <input type="text" class="form-control"
-               [disabled]="true"  [disabled]="true"
-              value="%1" placeholder="%1" >
-            </div>
-
-
-            <div class="col-lg-6 form-group mt-3">
-              <label for="cost" class="label-control mb-2">اجمالى السعر</label>
-              <input type="number" class="form-control cost" name="tcost"
-              formControlName="tcost"
-               placeholder="السعر" [value]="totalcost">
-            </div>
-
-            <div class="col-lg-12 form-group mt-3">
-              <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
-              <input type="number" class="form-control px-5" name="numberOfMilestones" min="1" max="6"
-              formControlName="numberOfMilestones" (ngModelChange)="milestones()"
-               placeholder="عدد مراحل الدفع"
-               required
-
-             [class.is-valid]="OfferData.get('numberOfMilestones')?.valid"
-             [class.is-invalid]="OfferData.get('numberOfMilestones')?.invalid &&
-             OfferData.get('numberOfMilestones')?.touched" >
-
-            <div
-            class="alert alert-danger"
-            [hidden]="OfferData.get('numberOfMilestones')?.valid ||OfferData.get('numberOfMilestones')?.untouched" >
-            <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['pattern']" >يجب ادخال عددمراحل اقل من 7 </span>
-
-            <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']" >عدد المراحل مطلوب</span>
-
-          </div>
-            </div>
-
-
-            <ng-container *ngFor="let stone of  numberofMilestones">
-
-              <div class="col-lg-1 form-group  stage">
-                <label for="stage" class="label-control">#{{stone}}</label>
-              </div>
-
-
-              <div class="col-lg-3  form-group  mt-5">
-                <div class="input-group">
-                  <input type="text" class="form-control mx-0" name="percentage{{stone}}" placeholder="50%"  [value]="Precentage[stone]"
-                  formControlName="precentage"
-                  (ngModelChange)="MilestoneCost(stone,this.OfferData.get('precentage').value)">
-                  <span  class="input-group-text-right px-3 text-white pt-3" style="background-color:#004057;">%</span>
-                </div>
-
-
-              </div>
-
-              <div class="col-lg-4 form-group mt-5">
-                <div class="input-group">
-                  <input type="text" class="form-control" name="percentage" placeholder="500 ريال" [value]="totalcostMilestone[stone]">
-                <span class="input-group-text-right px-3 text-white pt-2" style="background-color:#004057;">ريال</span>
-                </div>
-
-              </div>
-
-              <div class="col-lg-4 form-group mt-5">
-                <select class="form-select" (change)="workId($event,stone)"
-                value="{{WorkId[stone]}}"
-                 required>
-
-                  <option disabled selected >اختر</option>
-
-                  <ng-container *ngIf="stone==1">
-                    <option [value]="8">دفعه مقدمه</option>
-                  </ng-container>
-
-
-                  <option [value]="9" *ngIf="stone== numberofMilestones.length">بعد الانتهاء</option>
-
-                  <ng-container *ngFor="let work of RequiredWorks">
-
-                      <option [value]="work.id">{{work.name}}</option>
-
-
-                  </ng-container>
-
-                </select>
-              </div>
-
-            </ng-container >
-
-
-            <div class="col-lg-12 form-group mt-3">
-              <label for="message">تواصل مع المسؤل</label>
-              <textarea name="" id=""  name="message"
-              formControlName="message"
-              placeholder="الرساله">{{selectProject?.offers[0]?.message}}</textarea>
-            </div>
-
-          </div>
+                    <input type="hidden" formControlName="projectId" name="projectId">
+        
+                    <div class="col-lg-12 form-group ">
+                      <label for="period" class="label-control">مده المشروع</label>
+                      <input type="text" class="form-control px-5" name="period" formControlName="period" placeholder="مده المشروع" required
+                    [class.is-valid]="OfferData.get('period')?.valid"
+                    [class.is-invalid]="OfferData.get('period')?.invalid && OfferData.get('period')?.touched">
+                      <div
+                      class="alert alert-danger"
+                      [hidden]="OfferData.get('period')?.valid ||OfferData.get('period')?.untouched" >
+                      <span *ngIf="OfferData.get('period')?.errors?.['required']
+                      " >مده المشروع مطلوبه</span>
+                    </div>
+                    </div>
+        
+        
+                    <div class="col-lg-6 form-group mt-3">
+                      <label for="cost" class="label-control mb-2">السعر</label>
+                      <input type="number" class="form-control cost px-5" name="cost"
+                      formControlName="cost"
+                       placeholder="السعر" (ngModelChange)="TotalCost()" required
+                      [class.is-valid]="OfferData.get('cost')?.valid"
+                     [class.is-invalid]="OfferData.get('cost')?.invalid &&
+                      OfferData.get('cost')?.touched" >
+                    <div
+                    class="alert alert-danger"
+                    [hidden]="OfferData.get('cost')?.valid ||OfferData.get('cost')?.untouched" >
+                    <span *ngIf="OfferData.get('cost')?.errors?.['required']" >السعر مطلوب</span>
+                  </div>
+        
+                    </div>
+        
+                    <div class="col-lg-6 form-group mt-4" >
+                      <label for="cost" class="label-control mb-2"></label>
+                      <input type="text" class="form-control cost" name="costAr"  [disabled]="true"
+                       placeholder="السعر" >
+                    </div>
+        
+        
+                    <div class="col-lg-6 form-group mt-3">
+                      <label for="cost" class="label-control mb-2">رسوم اداريه</label>
+                      <input type="text" class="form-control"
+                       [disabled]="true"  [disabled]="true"
+                      value="%1" placeholder="%1" >
+                    </div>
+        
+        
+                    <div class="col-lg-6 form-group mt-3">
+                      <label for="cost" class="label-control mb-2">اجمالى السعر</label>
+                      <input type="number" class="form-control cost" name="tcost"
+                      formControlName="tcost"
+                       placeholder="السعر" [value]="totalcost">
+                    </div>
+        
+                    <div class="col-lg-12 form-group mt-3">
+                      <label for="numberOfMilestones" class="label-control">عدد مراحل الدفع</label>
+                      <input type="number" class="form-control px-5" name="numberOfMilestones" min="1" max="6"
+                      formControlName="numberOfMilestones" (ngModelChange)="milestones()"
+                       placeholder="عدد مراحل الدفع"
+                       required
+        
+                     [class.is-valid]="OfferData.get('numberOfMilestones')?.valid"
+                     [class.is-invalid]="OfferData.get('numberOfMilestones')?.invalid &&
+                     OfferData.get('numberOfMilestones')?.touched" >
+        
+                    <div
+                    class="alert alert-danger"
+                    [hidden]="OfferData.get('numberOfMilestones')?.valid ||OfferData.get('numberOfMilestones')?.untouched" >
+                    <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['pattern']" >يجب ادخال عددمراحل اقل من 7 </span>
+        
+                    <span *ngIf="OfferData.get('numberOfMilestones')?.errors?.['required']" >عدد المراحل مطلوب</span>
+        
+                  </div>
+                    </div>
+        
+        
+                    <ng-container *ngFor="let stone of  numberofMilestones">
+        
+                      <div class="col-lg-1 form-group  stage">
+                        <label for="stage" class="label-control">#{{stone}}</label>
+                      </div>
+        
+        
+                      <div class="col-lg-3  form-group  mt-5">
+                        <div class="input-group">
+                          <input type="text" class="form-control mx-0" name="percentage{{stone}}" placeholder="50%"  [value]="Precentage[stone]"
+                          formControlName="precentage"
+                          (ngModelChange)="MilestoneCost(stone,this.OfferData.get('precentage').value)">
+                          <span  class="input-group-text-right px-3 text-white pt-3" style="background-color:#004057;">%</span>
+                        </div>
+        
+        
+                      </div>
+        
+                      <div class="col-lg-4 form-group mt-5">
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="percentage" placeholder="500 ريال" [value]="totalcostMilestone[stone]">
+                        <span class="input-group-text-right px-3 text-white pt-2" style="background-color:#004057;">ريال</span>
+                        </div>
+        
+                      </div>
+        
+                      <div class="col-lg-4 form-group mt-5">
+                        <select class="form-select" (change)="workId($event,stone)"
+                         required>
+        
+                          <option disabled [selected]="WorkId[stone]==null" >اختر</option>
+        
+                          <ng-container *ngIf="stone==1">
+                            <option [value]="8"  [selected]="+WorkId[stone]==8">دفعه مقدمه</option>
+                          </ng-container>
+        
+        
+                          <option [value]="9" *ngIf="stone==numberofMilestones.length"
+                          [selected]="+WorkId[stone]==9"
+                          >بعد الانتهاء</option>
+        
+                          <ng-container *ngFor="let work of RequiredWorks">
+        
+                              <option [value]="work.id"
+                              [selected]="+WorkId[stone]==+work.id"
+                              >{{work.name}}</option>
+        
+        
+                          </ng-container>
+        
+                        </select>
+                      </div>
+        
+                    </ng-container >
+        
+        
+                    <div class="col-lg-12 form-group mt-3">
+                      <label for="message">تواصل مع المسؤل</label>
+                      <textarea name="" id=""  name="message"
+                      formControlName="message"
+                      placeholder="الرساله">{{selectProject?.offers[0]?.message}}</textarea>
+                    </div>
+        
+                  </div>
 
 
 

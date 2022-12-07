@@ -13,8 +13,8 @@
                 <a class="btn">استشارات</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
-                {{project.district.nameAr}},{{project.district.city.nameAr}},
-                {{project.district.city.region.nameAr}} </p>
+                {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                {{project.district?.city?.region?.nameAr}} </p>
               <p><i class="	far fa-calendar-alt "></i>{{project.dateCreated}}</p>
             </div>
           </ng-container>
@@ -27,8 +27,8 @@
                 <a class="btn">استشارات</a>
               </p>
               <p><i class="fa fa-location-dot "></i>
-                {{project.district.nameAr}},{{project.district.city.nameAr}},
-                {{project.district.city.region.nameAr}} </p>
+                {{project.district?.nameAr}},{{project.district?.city?.nameAr}},
+                {{project.district?.city?.region?.nameAr}} </p>
               <p><i class="far fa-calendar-alt  "></i>{{project.dateCreated}}</p>
             </div>
           </ng-container>
