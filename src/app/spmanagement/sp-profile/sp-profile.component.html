@@ -1,904 +1,552 @@
 <div class="row container-fluid">
-  <div class="col-lg-3 mt-3 mb-3">
-    <div class="card section-1">
-      <div class="row">
-        <div class="col-lg-12">
-          <img src="{{profile?.organizationalServiceProviderProfile?.companyLogoPath}}" alt="" class="img-fluid profile">
-          <h4 class="mt-3">{{profile?.organizationalServiceProviderProfile?.companyName}}</h4>
-
-          <div class="row text-center info">
-            <div class="col-lg-5 mt-3">
-              <p>حساب نشط
-                <i class="fa fa-circle" style="color:#10B981; font-size:8px;"></i>
-              </p>
-
-            </div>
-            <div class="col-lg-7 mt-3">
-              <p>رقم التعريف : #{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumber}}</p>
-            </div>
-          </div>
-
-          <p class="edit text-center mt-4">
-            <a href="#" >
-              <i class="fa fa-edit"></i>
-              تعديل الملف الشخصى
+  <div class="col-xl-8 col-lg-12 mb-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <ng-container *ngIf="copmpleteProfile != 100">
+          <a routerLink="" class="completeprofile">
+            <h4 class="cairo fw-bold" style="color: #18af9a">استكمل بياناتك</h4>
           </a>
-          </p>
+        </ng-container>
 
-          <p class="info-sp mt-3">
-            <i class="fas fa-phone"></i>
-           {{profile?.phoneNumber}}
-          </p>
-          <p class="info-sp mt-2">
-            <i class="fa fa-envelope-open-o"></i>
-            {{profile?.email}}
-          </p>
+        <ng-container *ngIf="copmpleteProfile == 100">
+          <h4 class="cairo fw-bold" style="color: #64748b">
+            تم استكمال بياناتك
+          </h4>
+        </ng-container>
 
-          <div class="row">
-
-            <div class="col-lg-1 link mx-1"></div>
-
-            <div class="col-lg-2 mt-3 link">
-              <a href="" >
-                <img src="/assets/icons/global.png" alt="" class="img-fluid">
-              </a>
-            </div>
-
-
-            <div class="col-lg-2 mt-3 link">
-              <a href="">
-                <img src="/assets/icons/in.png" alt="" class="img-fluid">
-              </a>
-            </div>
-
-            <div class="col-lg-2 mt-3 link">
-              <a href="">
-                <img src="/assets/icons/fac.png" alt="" class="img-fluid">
-              </a>
-            </div>
-
-            <div class="col-lg-2 mt-3 link">
-              <a href="" >
-                <img src="/assets/icons/be.png" alt="" class="img-fluid">
-              </a>
-            </div>
-
-            <div class="col-lg-2 mt-3 link">
-              <a href="" >
-                <img src="/assets/icons/twitter.png" alt="" class="img-fluid">
-              </a>
-            </div>
-
-
-
-
-
-
-
+        <div class="progress">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            [attr.aria-valuenow]="copmpleteProfile"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [style.width]="copmpleteProfile + '%'"
+          >
+            {{ copmpleteProfile }}%
           </div>
-
-          <div class="row" id="accordion">
-            <div  class="col-lg-12 mt-3 mx-3">
-              <h2>
-                <button class="btn btn-accordion" type="button"
-                data-target="#item1" data-toggle="collapse">نظره عامه عن الشركه
-                  <i class="fas fa-angle-down" style=" margin-right: 36%;"></i>
-              </button>
-              </h2>
-
-
-              <div class="collapse hide" id="item1" data-parent="#accordian">
-                <div class="row">
-                  <div class="col-lg-12 card acc-card mt-1">
-                    <div class="row">
-                      <div class="col-lg-9">{{profile?.email}}</div>
-                      <div class="col-lg-3">
-                        <i class="fa fa-edit mx-3 mt-1"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-12 card acc-card mt-1">
-                    <div class="row">
-                      <div class="col-lg-9">
-                        الخدمه الرئيسيه :
-                       {{profile?.organizationalServiceProviderProfile?.projectService?.name}}
-                         </div>
-                      <div class="col-lg-3">
-                        <i class="fa fa-edit mx-3 mt-1">
-                        </i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-12 card acc-card mt-1">
-                    <div class="row">
-                      <div class="col-lg-9">
-                        الخدمه الفرعيه :
-                        {{profile?.organizationalServiceProviderProfile?.ospprofileSubServices
-                          [0]?.projectSubService.name}}
-                        </div>
-                      <div class="col-lg-3">
-                        <i class="fa fa-edit mx-3 mt-1"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-            </div>
-
-          </div>
-
-
-          <div class="col-lg-12 mx-3 mt-2">
-            <h2>
-              <button class="btn btn-accordion" type="button"
-              data-target="#item2" data-toggle="collapse">الاوراق والتراخيص
-                <i class="fas fa-angle-down" style=" margin-right: 46%;"></i>
-            </button>
-            </h2>
-
-
-            <div class="collapse hide" id="item2" data-parent="#accordian">
-              <div class="row">
-
-                <div class="col-lg-12 card acc-card mt-1">
-                  <div class="row">
-                    <div class="col-lg-9" style="position:absolute;">
-                      <i class="far fa-image"></i>
-                      خطاب بنكى برقم الايبان
-                    </div>
-                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
-                      <ng-container *ngIf="registeration1==1">
-                        <button class="btn choose-toggle" (click)="register_1()">
-                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
-                        </button>
-                      </ng-container>
-
-                      <ng-container *ngIf="registeration1!=1">
-                      <button class="btn choose-toggle" (click)="register_1()">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                    </ng-container>
-                    </div>
-                    <ng-container *ngIf="registeration1==1">
-                      <ul class="card card-registeration">
-                        <li>
-                          <a class="btn w-100" target="_blank"  style="padding-left:50% ;"
-                           href="{{this.profile?.organizationalServiceProviderProfile?.iBanFile}}">
-                            <i class="fa fa-eye"></i>
-                            فتح
-                          </a>
-                        </li>
-
-                        <li>
-                         <button class="btn w-100" style="padding-left:40% ;">
-                          <i class="fa fa-edit"></i>
-                          تعديل
-                         </button>
-                        </li>
-                      </ul>
-
-                    </ng-container>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-12 card acc-card mt-1">
-                  <div class="row">
-                    <div class="col-lg-9" style="position:absolute;">
-                      <i class="far fa-image"></i>
-                       شهاده الزكاه والدخل
-                    </div>
-                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
-                      <ng-container *ngIf="registeration2==1">
-                        <button class="btn choose-toggle" (click)="register_2()">
-                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
-                        </button>
-                      </ng-container>
-
-                      <ng-container *ngIf="registeration2!=1">
-                      <button class="btn choose-toggle" (click)="register_2()">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                    </ng-container>
-                    </div>
-                    <ng-container *ngIf="registeration2==1">
-                      <ul class="card card-registeration">
-                        <li>
-                          <a href="{{profile?.organizationalServiceProviderProfile?.zakatCertificatePath}}" class="btn w-100" target="_blank"
-                          style="padding-left:50% ;"
-                          >
-                            <i class="fa fa-eye"></i>
-                            فتح
-                          </a>
-                        </li>
-
-                        <li>
-                         <button class="btn w-100" style="padding-left:40% ;">
-                          <i class="fa fa-edit"></i>
-                          تعديل
-                         </button>
-                        </li>
-                      </ul>
-
-                    </ng-container>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-12 card acc-card mt-1">
-                  <div class="row">
-                    <div class="col-lg-9 " style="position:absolute;">
-                      <i class="far fa-image"></i>
-                      السجل التجارى
-                    </div>
-                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
-                      <ng-container *ngIf="registeration3==1">
-                        <button class="btn choose-toggle" (click)="register_3()">
-                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
-                        </button>
-                      </ng-container>
-
-                      <ng-container *ngIf="registeration3!=1">
-                      <button class="btn choose-toggle" (click)="register_3()">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                    </ng-container>
-                    </div>
-                    <ng-container *ngIf="registeration3==1">
-                      <ul class="card card-registeration">
-                        <li>
-                          <a href="{{profile?.organizationalServiceProviderProfile?.companyRegisterationNumberPath}}" class="btn w-100" target="_blank"
-                          style="padding-left:50% ;"
-                          >
-                            <i class="fa fa-eye"></i>
-                            فتح
-                          </a>
-                        </li>
-
-                        <li>
-                         <button class="btn w-100" style="padding-left:40% ;">
-                          <i class="fa fa-edit"></i>
-                          تعديل
-                         </button>
-                        </li>
-                      </ul>
-
-                    </ng-container>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-12 card acc-card mt-1">
-                  <div class="row">
-                    <div class="col-lg-9" style="position:absolute;">
-                      <i class="far fa-image"></i>
-                      الرخصه
-                    </div>
-                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
-                      <ng-container *ngIf="registeration4==1">
-                        <button class="btn choose-toggle" (click)="register_4()">
-                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
-                        </button>
-                      </ng-container>
-
-                      <ng-container *ngIf="registeration4!=1">
-                      <button class="btn choose-toggle" (click)="register_4()">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                    </ng-container>
-                    </div>
-                    <ng-container *ngIf="registeration4==1">
-                      <ul class="card card-registeration">
-                        <li>
-                          <a class="btn w-100" target="_blank" style="padding-left:50% ;"
-                           href="{{profile?.organizationalServiceProviderProfile?.licensePath}}">
-                            <i class="fa fa-eye"></i>
-                            فتح
-                          </a>
-                        </li>
-
-
-                        <li>
-                         <button class="btn w-100" style="padding-left:40% ;">
-                          <i class="fa fa-edit"></i>
-                          تعديل
-                         </button>
-                        </li>
-                      </ul>
-
-                    </ng-container>
-                  </div>
-                </div>
-
-
-                <div class="col-lg-12 card acc-card mt-1">
-                  <div class="row">
-                    <div class="col-lg-10" style="position:absolute;">
-                      <i class="far fa-image"></i>
-                      شهاده التأمينات الاجتماعيه
-                    </div>
-                    <div class="col-lg-3 acc-toggle" style="margin-right: 74%; ">
-                      <ng-container *ngIf="registeration5==1">
-                        <button class="btn choose-toggle" (click)="register_5()">
-                          <i class="fa fa-times-circle-o" style="font-size: 18px;"></i>
-                        </button>
-                      </ng-container>
-
-                      <ng-container *ngIf="registeration5!=1">
-                      <button class="btn choose-toggle" (click)="register_5()">
-                        <i class="fa fa-ellipsis-h"></i>
-                      </button>
-                    </ng-container>
-                    </div>
-                    <ng-container *ngIf="registeration5==1">
-                      <ul class="card card-registeration">
-                        <li>
-                          <a class="btn w-100 " target="_blank" style="padding-left:50% ;"
-                           href="{{this.profile?.organizationalServiceProviderProfile?.socialInsuranceCertificateFile}}">
-                            <i class="fa fa-eye"></i>
-                            فتح
-                          </a>
-                        </li>
-
-                        <li>
-                         <button class="btn w-100" style="padding-left:40% ;">
-                          <i class="fa fa-edit"></i>
-                          تعديل
-                         </button>
-                        </li>
-                      </ul>
-
-                    </ng-container>
-                  </div>
-                </div>
-
-              </div>
-          </div>
-
         </div>
-
-          </div>
-
-          <p class="dir mt-2">
-            <i class="fa fa-map-marker"></i>
-            العنوان
-          </p>
-
-          <p class="mx-2 mt-2">
-            {{profile?.organizationalServiceProviderProfile?.district?.city?.region?.nameAr}},
-            {{profile?.organizationalServiceProviderProfile?.district?.city?.nameAr}},
-            {{profile?.organizationalServiceProviderProfile?.district?.nameAr}}
-          </p>
-
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="card map mt-2">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14934528.881396683!2d54.10216827104652!3d23.956011965265986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2z2KfZhNiz2LnZiNiv2YrYqQ!5e0!3m2!1sar!2seg!4v1669392006602!5m2!1sar!2seg"   loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-
-                </iframe>
-                <div class="layout">
-                  <p>احصل على الاتجاهات</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-12">
-              <div class="card represent">
-                <div class="row">
-                  <div class="col-lg-4">
-                    <img src="{{representative?.organizationalServiceProviderProfile?.profilePicturePath}}" alt="" class="img-fluid">
-                  </div>
-
-                  <div class="col-lg-8 mt-1">
-                    <h6>
-                      م/
-                      {{profile?.organizationalServiceProviderProfile?. representative?.firstName}}
-                      {{profile?.organizationalServiceProviderProfile?. representative?.lastName}}
-                    </h6>
-                    <p class="info-sp">ممثل الشركه على المنصه</p>
-                    <p class="info-rep mt-2 " style="margin-right:38%;">
-                     {{profile?.organizationalServiceProviderProfile?. representative?.phoneNumber}}
-                      <i class="fas fa-phone"></i>
-                    </p>
-                    <p class="info-rep" style="margin-right:10%;">
-                      {{profile?.organizationalServiceProviderProfile?. representative?.email}}
-                      <i class="fa fa-envelope-open-o" ></i>
-                    </p>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
       </div>
     </div>
-  </div>
 
-  </div>
+    <div>
+      <div class="row bg-white">
+        <div class="col-lg-12">
+          <div class="card mb-3 border-0 rounded-0">
+            <div class="row position-relative">
+              <div
+                (click)="editOverview = true"
+                class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
+              >
+                <img
+                  *ngIf="!userImgChanged"
+                  [src]="
+                    profile?.organizationalServiceProviderProfile
+                      ?.profilePicturePath
+                  "
+                  class="img-fluid rounded-start"
+                  alt="..."
+                  style="width: 150px"
+                />
+                <img
+                  *ngIf="userImgChanged"
+                  [src]="userImg"
+                  class="img-fluid rounded-start"
+                  alt="..."
+                />
+                <div class="p-2 position-absolute bottom-0 changePic">
+                  <input
+                    type="file"
+                    (change)="uplaodImg($event, proImg.name)"
+                    #proImg
+                    name="profileImage"
+                    id="image"
+                    style="width: 20px"
+                    class="image"
+                  />
+                  <svg
+                    id="photo-camera"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="21.368"
+                    height="17.658"
+                    viewBox="0 0 21.368 17.658"
+                  >
+                    <g id="Group_374" data-name="Group 374">
+                      <g id="Group_330" data-name="Group 330">
+                        <g id="Group_329" data-name="Group 329">
+                          <path
+                            id="Path_77"
+                            data-name="Path 77"
+                            d="M18.252,56.121H15.581a.446.446,0,0,1-.422-.318l-.281-.881a2.234,2.234,0,0,0-2.112-1.589H8.6a2.232,2.232,0,0,0-2.111,1.588L6.21,55.8a.448.448,0,0,1-.423.318H3.116A3.19,3.19,0,0,0,0,59.374v8.364a3.19,3.19,0,0,0,3.116,3.253H18.252a3.19,3.19,0,0,0,3.116-3.253V59.374A3.19,3.19,0,0,0,18.252,56.121Zm2.226,11.617a2.279,2.279,0,0,1-2.226,2.323H3.116A2.279,2.279,0,0,1,.89,67.738V59.374a2.279,2.279,0,0,1,2.226-2.323H5.787A1.341,1.341,0,0,0,7.054,56.1l.282-.883A1.339,1.339,0,0,1,8.6,54.262h4.163a1.341,1.341,0,0,1,1.267.954l.281.882a1.341,1.341,0,0,0,1.267.953h2.671a2.279,2.279,0,0,1,2.226,2.323v8.364Z"
+                            transform="translate(0 -53.333)"
+                            fill="#fff"
+                          />
+                        </g>
+                      </g>
+                      <g
+                        id="Group_373"
+                        data-name="Group 373"
+                        transform="translate(6 4.647)"
+                      >
+                        <g id="Group_332" data-name="Group 332">
+                          <g id="Group_331" data-name="Group 331">
+                            <path
+                              id="Path_78"
+                              data-name="Path 78"
+                              d="M132.222,160c-2.329,0-4.222,2.5-4.222,5.576s1.894,5.576,4.222,5.576,4.222-2.5,4.222-5.576S134.551,160,132.222,160Zm0,10.223c-1.94,0-3.519-2.085-3.519-4.647s1.578-4.647,3.519-4.647,3.518,2.085,3.518,4.647S134.162,170.223,132.222,170.223Z"
+                              transform="translate(-128 -160)"
+                              fill="#fff"
+                            />
+                          </g>
+                        </g>
+                        <g
+                          id="Group_334"
+                          data-name="Group 334"
+                          transform="translate(1.407 1.859)"
+                        >
+                          <g id="Group_333" data-name="Group 333">
+                            <path
+                              id="Path_79"
+                              data-name="Path 79"
+                              d="M173.482,202.667c-1.552,0-2.815,1.667-2.815,3.718a.366.366,0,1,0,.7,0c0-1.537.947-2.788,2.111-2.788a.483.483,0,0,0,0-.929Z"
+                              transform="translate(-170.667 -202.667)"
+                              fill="#fff"
+                            />
+                          </g>
+                        </g>
+                      </g>
+                    </g>
+                  </svg>
 
+                  <span class="me-2 text-white">تغيير الصوره</span>
+                </div>
+              </div>
+              <div class="col-lg-10 d-flex align-items-center">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-5">
+                      <div class="cairo mb-3">
+                        <p
+                          class="card-title bold d-flex justify-content-between"
+                          (click)="editName = true"
+                        >
+                          <input
+                            id="name"
+                            type="text"
+                            [autofocus]="editName"
+                            [(ngModel)]="name"
+                            class="bold editable"
+                          />
+                          <i
+                            (click)="focusMyInput('#name')"
+                            class="fa fa-pencil"
+                          ></i>
+                        </p>
+                        <p class="card-title bold"> {{phoneNumber}}</p>
+                       <!--  <p
+                          class="card-text secondColor d-flex justify-content-around"
+                          (click)="editOverview = true"
+                        >
+                          <input
+                            id="phone"
+                            type="text"
+                            [(ngModel)]="phoneNumber"
+                            class="bold editable"
+                          />
+                          <i
+                            (click)="focusMyInput('#phone')"
+                            class="fa fa-pencil"
+                          ></i>
+                        </p> -->
+                        <p
+                          class="card-text bold"
+                        >
+                          {{ profile?.email }}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="col-lg-7 d-flex flex-column justify-content-between"
+                    >
+                      <div
+                        class="d-flex align-items-baseline justify-content-around"
+                      >
+                        <p
+                          [ngClass]="
+                            profile?.isActive ? 'secondColor' : 'text-danger'
+                          "
+                          class="card-title"
+                        >
+                          {{ profile?.isActive ? "  حساب نشط" : "  حساب معطل" }}
+                        </p>
+                        <span class="mx-1 gray"> | </span>
+                        <p class="card-text">
+                          رقم التعريف :
+                          {{
+                            profile?.organizationalServiceProviderProfile
+                              ?.companyRegisterationNumber
+                          }}
+                        </p>
+                      </div>
+                      <div class="d-flex flex-row-reverse ms-4">
+                        <div>
+                          <a class="me-2">
+                            <img
+                              src="/assets/icons/global.png"
+                              alt=""
+                              class="img-fluid imgIcon"
+                            />
+                          </a>
+                          <a class="me-2">
+                            <img
+                              src="/assets/icons/in.png"
+                              alt=""
+                              class="img-fluid imgIcon"
+                            />
+                          </a>
+                          <a class="me-2">
+                            <img
+                              src="/assets/icons/fac.png"
+                              alt=""
+                              class="img-fluid imgIcon"
+                            />
+                          </a>
+                          <a class="me-2">
+                            <img
+                              src="/assets/icons/be.png"
+                              alt=""
+                              class="img-fluid imgIcon"
+                            />
+                          </a>
+                          <a class="me-2">
+                            <img
+                              src="/assets/icons/twitter.png"
+                              alt=""
+                              class="img-fluid imgIcon"
+                            />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-6">
+        <div class="bg-white p-3">
+          <div>
+            <h5 class="cairo mt-2">
+              <i class="fa fa-map-marker"></i>
+              العنوان
+            </h5>
+            <p class="mx-2 mt-2">
+              {{
+                profile?.organizationalServiceProviderProfile?.district?.city
+                  ?.region?.nameAr
+              }},
+              {{
+                profile?.organizationalServiceProviderProfile?.district?.city
+                  ?.nameAr
+              }},
+              {{
+                profile?.organizationalServiceProviderProfile?.district?.nameAr
+              }}
+            </p>
+          </div>
+          <div class="card map mt-2">
+            <div class="map h-100">
+              <a
+                class="direction p-3 cairo"
+                [href]="map + location"
+                target="_blank"
+                >أحصل على الاتجاهات</a
+              >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7455039.655145476!2d40.580647886855935!3d24.16625830320905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e7b33fe7952a41%3A0x5960504bc21ab69b!2sSaudi%20Arabia!5e0!3m2!1sen!2seg!4v1668864519770!5m2!1sen!2seg"
+                style="border: 0; width: 100%; height: 100%"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 border-1">
+        <div class="bg-white p-3">
+          <div>
+            <h5 class="cairo mt-2">نظره عامه</h5>
+          </div>
+          <div class="mt-2">
+            <div class="card border-0 p-3 card-1">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <a class=" list-group-item" routerLink="/Spmanagement/prevWorks">
+                  <h5 class="cairo">
+                    <i class="far ms-2 fa-building"></i>
+                    المشاريع السابقه
+                  </h5>
+                </a>
+                <div
+                  class="padge d-flex justify-content-center align-items-center"
+                >
+                  <span>{{ ServiceProviderWork?.length }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="card border-0 p-3 card-1">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h5 class="cairo">
+                  <i class="fas ms-2 fa-star"></i>
+                  التقييم
+                </h5>
+                <div
+                  class="padge d-flex justify-content-center align-items-center"
+                >
+                  <span>{{ avgRate + "/ 5" }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-6">
+        <div class="bg-white p-3 py-4">
+          <h2>
+            <button
+              class="btn btn-accordion d-flex justify-content-between p-4 px-3 align-items-baseline"
+              type="button"
+              data-target="#item1"
+              data-toggle="collapse"
+            >
+              نظره عامه عن الشركه
+              <i class="fas fa-angle-down"></i>
+            </button>
+          </h2>
+          <div class="collapse hide" id="item1" data-parent="#accordian">
+            <div class="row w-100">
+              <ng-container *ngFor="let item of overview">
+                <div class="card border-0 acc-card my-1">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <p
+                        *ngIf="item.id == 1"
+                        class="card-title bold d-flex justify-content-around align-items-center"
+                      >
+                        <span>{{ email }}</span>
+                      </p>
+                      <p
+                        *ngIf="item.id == 2"
+                        class="card-title bold d-flex justify-content-around align-items-center"
+                        (click)="editOverview = true"
+                      >
+                        <span>{{ item.title + " : " }}</span>
+                        <input
+                          id="projectService"
+                          type="text"
+                          [autofocus]="projectServiceEdit"
+                          [(ngModel)]="projectService"
+                          class="bold editable"
+                        />
+                        <i
+                          (click)="focusMyInput('#projectService')"
+                          class="fa fa-pencil"
+                        ></i>
+                      </p>
+                      <p
+                        *ngIf="item.id == 3"
+                        (click)="editOverview = true"
+                        class="card-title bold d-flex justify-content-around align-items-center"
+                      >
+                        <span>{{ item.title + " : " }}</span>
+                        <input
+                          id="projectSubService"
+                          type="text"
+                          [autofocus]="projectSubServiceEdit"
+                          [(ngModel)]="projectSubService"
+                          class="bold editable"
+                        />
+                        <i
+                          (click)="focusMyInput('#projectSubService')"
+                          class="fa fa-pencil"
+                        ></i>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="col-lg-6">
+        <div class="bg-white p-3 py-4">
+          <h2>
+            <button
+              class="btn btn-accordion d-flex justify-content-between p-4 px-3 align-items-baseline"
+              type="button"
+              data-target="#item2"
+              data-toggle="collapse"
+            >
+              الاوراق والتراخيص
+              <i class="fas fa-angle-down"></i>
+            </button>
+          </h2>
+          <div class="collapse hide" id="item2" data-parent="#accordian">
+            <div class="row w-100">
+              <ng-container *ngFor="let paper of papers">
+                <div class="card border-0 acc-card my-1">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <div>
+                        <i class="far fa-image"></i>
+                        {{ paper.title }}
+                      </div>
+                      
+                        <small class="mt-2">{{
+                          paper.name == "IBan"
+                            ? IBanName
+                            : paper.name == "ZakatCertificate"
+                            ? ZakatCertificateName
+                            : paper.name == "ProfessionLicense"
+                            ? ProfessionLicenseName
+                            : paper.name == "SocialInsuranceCertificate"
+                            ? SocialInsuranceCertificateName
+                            : paper.name == "SaudizationCertificate"
+                            ? SaudizationCertificateName
+                            : ""
+                        }}</small>
+                     
+                     
+                    </div>
+                    <div class="d-flex">
+                      <i
+                        *ngIf="paper.name == 'IBan'"
+                        class="fa fa-eye"
+                        (click)="openModal(IBan)"
+                      ></i>
+                      <i
+                        *ngIf="paper.name == 'ZakatCertificate'"
+                        class="fa fa-eye"
+                        (click)="openModal(ZakatCertificate)"
+                      ></i>
+                      <i
+                        *ngIf="paper.name == 'ProfessionLicense'"
+                        class="fa fa-eye"
+                        (click)="openModal(ProfessionLicense)"
+                      ></i>
+                      <i
+                        *ngIf="paper.name == 'SocialInsuranceCertificate'"
+                        class="fa fa-eye"
+                        (click)="openModal(SocialInsuranceCertificate)"
+                      ></i>
+                      <i
+                        *ngIf="paper.name == 'SaudizationCertificate'"
+                        class="fa fa-eye"
+                        (click)="openModal(SaudizationCertificate)"
+                      ></i>
+
+                      <i
+                        class="fa fa-edit attachment me-2"
+                        aria-hidden="true"
+                        (click)="editOverview = true"
+                      >
+                        <input
+                          (change)="onFileUpload($event, paper.name)"
+                          #fileImage
+                          type="file"
+                          alt=""
+                          name="attatch"
+                          id="attatch"
+                          class="attatch"
+                        />
+                      </i>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mt-5 d-flex justify-content-center">
+      <button
+        [hidden]="!editOverview"
+        (click)="saveChanges()"
+        class="btn mainBk text-white p-2 px-3"
+      >
+        حفظ التعديلات
+      </button>
+    </div>
+  </div>
 
   <!--------------Part 2---------------->
-  <div class="col-lg-9">
 
+  <div class="col-xl-4 col-lg-12">
     <div class="row">
-      <div class="col-lg-12 mt-4">
+      <div class="col-xl-12 col-sm-6">
+        <div class="card border-0 p-2 bg-white mb-2">
+              <div class="p-2">
+                <p class="">ممثل الشركه على المنصه</p>
+                <p>
+                  <i class="fas fa-user ms-2"></i>
 
-        <ng-container *ngIf="copmpleteProfile!=100">
-        <a routerLink="" class="completeprofile">
-          <p style="color:#18AF9A;">استكمل بياناتك</p>
-        </a>
-        </ng-container>
-
-        <ng-container *ngIf="copmpleteProfile==100">
-        <p style="color:#64748B;">تم استكمال بياناتك</p>
-        </ng-container>
-
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-            [attr.aria-valuenow]="copmpleteProfile" aria-valuemin="0" aria-valuemax="100"
-            [style.width]="copmpleteProfile+'%'">
-
-              {{copmpleteProfile}}%
-            </div>
-          </div>
-
-
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-12 mt-4">
-        <h4>نظره عامه</h4>
-      </div>
-      <div class="col-lg-6 mt-2">
-        <div class="card card-1">
-          <div class="row">
-            <div class="col-lg-8">
-              <h5>
-                <i class="far fa-building"></i>
-                المشاريع السابقه
-
-              </h5>
-            </div>
-            <div class="col-lg-4">
-              <div class="padge ">{{ServiceProviderWork?.length}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--<div class="col-lg-4 mt-2">
-        <div class="card card-1">
-          <div class="row">
-            <div class="col-lg-8">
-              <h5>
-                <i class="fas fa-award"></i>
-                سنوات الخبره
-
-              </h5>
-            </div>
-            <div class="col-lg-4">
-              <div class="padge ">45</div>
-            </div>
-          </div>
-        </div>
-      </div>-->
-
-        <div class="col-lg-6 mt-2">
-        <div class="card card-1">
-          <div class="row">
-            <div class="col-lg-8">
-              <h5>
-                <i class="fas fa-star"></i>
-                التقييم
-              </h5>
-            </div>
-            <div class="col-lg-4">
-              <div class="padge">{{avgRate}}/5</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-
-    <div class="row">
-      <div class="col-lg-12 mt-4">
-        <div class="row">
-          <div class="col-lg-4">
-            <h4>جدول أعمالك</h4>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-lg-6" data-bs-toggle="modal" data-bs-target="#addAppointment">
-                <a class="btn" style="color:#18AF9A;">
-                  اضافه حدث
-                  <i class="fa fa-calendar"></i>
-                </a>
+                  {{
+                    profile?.organizationalServiceProviderProfile
+                      ?.representative?.firstName
+                  }}
+                  {{
+                    profile?.organizationalServiceProviderProfile
+                      ?.representative?.lastName
+                  }}
+                </p>
+                <p class="">
+                  <i class="fas fa-phone ms-2"></i>
+                  {{
+                    profile?.organizationalServiceProviderProfile
+                      ?.representative?.phoneNumber
+                  }}
+                </p>
+                <p class="">
+                  <i class="fa fa-envelope-open-o ms-2"></i>
+                  {{
+                    profile?.organizationalServiceProviderProfile
+                      ?.representative?.email
+                  }}
+                </p>
               </div>
-
-              <div class="col-lg-6 mt-2" >
-                <p style="font-size: 18px; color: #64748B; font-weight: 500;">{{selected | date}}</p>
-              </div>
-
-            </div>
-
-
-
-          </div>
-
-          <div class="col-lg-4" data-bs-toggle="modal" data-bs-target="#addAppointment">
-            <a class="btn" style="color:#18AF9A; margin-right:65%; font-family:'Cairo' ;">
-               تعديل
-              <i class="fa fa-edit"></i>
-            </a>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="col-lg-5 mt-2">
-        <div class="card  calender">
-          <div class="row">
-            <div class="col-lg-12" (click)="getappointDate()">
-              <mat-calendar [(selected)]="selected" ></mat-calendar>
-            </div>
-          </div>
         </div>
       </div>
-
-
-      <div class="col-lg-7 mt-2">
-        <div class="card card-1-2">
-          <div class="row" *ngIf="dateOpt!=null;else notfound">
-            <div class="col-lg-12">
-              <p>
-                {{ dateOpt?.description }}
-              </p>
-
-              <div class="row">
-
-                <div class="col-lg-4 mt-1" *ngFor="let item of appointmentFiles">
-                  <p class="files">
-                    <a     class="informationDownload  d-flex  justify-content-between mb-2 "
-                    (click)="
-                      download(
-                        item.filePath,
-                        item.fileName
-                      )
-                    "
-                  >
-                  <span
-                  ><img
-                  class="mt-1"
-                    src="assets/dashboard/picture.png"
-                    alt=""
-                    *ngIf="
-                      item.fileType == '.png' ||
-                      item.fileType == '.jpg' ||
-                      item.fileType == '.svg' ||
-                      item.fileType == '.PNG'
-                    "
-                  />
-                  <img
-                  clas="mt-1"
-                    src="assets/dashboard/pdf.png"
-                    *ngIf="item.fileType === '.pdf'"
-                  />
-                </span>
-                    <p class="nameDownload mt-2">
-                      {{ item.fileName }}
-                    </p>
-                    <i class="fa fa-download typeCom ms-3 mt-2"></i>
-
-
-                      <!-- <i class="fa fa-file"></i> -->
-                    </a>
-                </div>
-
-
-
-              </div>
-
-
-
-
-            </div>
-          </div>
-          <ng-template #notfound>
-            <div class="col-12 bg-white px-4 py-1 mb-2" >
-              <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
-                {{ erDateOp}}
-                <small class="fw-normal">{{
-                  dateOpt?.dateCreated | date: "d/M/yyyy"
-                }}</small>
-              </p>
-
-
-            </div>
-          </ng-template>
-        </div>
+      <div class="col-xl-12 col-sm-6">
+        <app-work-schedule></app-work-schedule>
       </div>
-
-
-
-    </div>
-
-
-
-    <div class="row">
-      <div class="col-lg-12 mt-4">
-        <div class="row">
-          <div class="col-lg-9">
-            <h4>المشاريع السابقه</h4>
-          </div>
-          <div class="col-lg-3">
-            <a href="/Spmanagement/prevWorks" class="btn" style=" margin-right: 34%; color:#18AF9A ; font-family:'Cairo' ;">
-              اضافه مشروع
-              <i class="fa fa-plus-square"></i>
-            </a>
-
-          </div>
-        </div>
-
-      </div>
-
-      <ng-container *ngFor="let project of ServiceProviderWork">
-      <div class="col-lg-6 mt-2">
-        <div class="card card-2">
-          <div class="row">
-            <div class="col-lg-8">
-              <p>اسم المشروع : <span>{{project.projectName}}</span></p>
-              <p>اسم العميل : <span>{{project.ownerName}}</span></p>
-              <p>سنه التنفيذ: <span>{{project.completionYear }}</span></p>
-
-                <!--<div class="row pt-2 date">
-                  <div class="col-lg-5">
-                    تاريخ البدء : 2 مايو 2019
-                  </div>
-                  <div class="col-lg-6">
-                    تاريخ الانتهاء : 4 مايو 2019
-                  </div>
-                </div>-->
-            </div>
-
-            <div class="col-lg-4 choose">
-
-              <ng-container *ngIf="infoProject[project.id]==1">
-                <button class="btn choose-toggle" (click)="toggle(project.id)">
-                  <i class="fa fa-times-circle-o"></i>
-                </button>
-              </ng-container>
-
-              <ng-container *ngIf="infoProject[project.id]!=1">
-              <button class="btn choose-toggle" (click)="toggle(project.id)">
-                <i class="fa fa-ellipsis-h"></i>
-              </button>
-            </ng-container>
-
-
-              <ng-container *ngIf="infoProject[project.id]==1">
-                <ul class="card">
-                  <li>
-                    <button class="btn w-100" type="button" (click)="projectImage(project.id)"
-                    data-bs-toggle="modal"  [attr.data-bs-target]="'#project'+project.id"
-                    >
-                     <p style="padding-left:50% ;">
-                      <i class="fa fa-eye"></i>
-                      فتح</p>
-
-                    </button>
-                  </li>
-
-                  <li>
-
-                   <a class="btn w-100" href="/Spmanagement/prevWorks">
-                    <p style="padding-left:50% ;">
-                    <i class="fa fa-edit"></i>
-                    تعديل
-                    </p>
-                   </a>
-
-                  </li>
-                </ul>
-              </ng-container>
-
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="modal fade "  [id]="'project'+project.id" >
-        <div class="modal-dialog  modal-xl " >
-          <button type="button" class="close btn" data-bs-dismiss="modal"
-          style="font-size: 40px; color:gainsboro;"
-          >
-            <i>&times;</i>
-          </button>
-          <div class="modal-content w-100 border-0" style="background-color:transparent;">
-            <div class="modal-body ">
-              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-
-                  <ng-container *ngFor="let file of workFile ; let i=index;">
-                    <div *ngIf="i==0" class="carousel-item active">
-
-                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
-                    </div>
-                    <div *ngIf="i!=0" class="carousel-item">
-                      <img src="{{file?.filePath}}" class="d-block w-100" alt="img" >
-                    </div>
-                  </ng-container>
-                </div>
-
-              </div>
-
-            </div>
-
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-
-      </ng-container>
-
-
-
-
-
     </div>
   </div>
-
-
 </div>
-
-
-
-
-<div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="showSuc">
-  {{message}}
-</div>
-
-
-<div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
-  {{message}}
-</div>
-
 
 <div
-  class="modal fade"
-  id="addAppointment"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
+  class="alert position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white"
+  role="alert"
+  *ngIf="showSuc"
 >
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div
-        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
-      >
-        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
-          اضافة مهمه
-        </h5>
+  {{ message }}
+</div>
 
-        <button
-          type="button"
-          class="btn text-white col-1"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
-      </div>
-      <div class="modal-body my-3 modalbody">
-        <form  [formGroup]="newappointment"
-        (ngSubmit)="creatMeeting()" novalidate>
-
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <label class="form-label" for="name"
-                >اسم </label
-              >
-              <input
-                type="text"
-                id="name"
-                class="form-control"
-                name="name"
-                formControlName="name"
-                [ngClass]="{
-                  'is-invalid':
-                  appoins['name'].errors && appoins['name'].touched
-                }"
-              />
-              <div
-                *ngIf="appoins['name'].errors && appoins['name'].touched"
-                class="alert alert-warning mt-2"
-              >
-                <div *ngIf="appoins['name'].errors['required']">
-                  من فضلك ادخل اسم للموعد                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label" for="description"
-                >وصف </label
-              >
-
-              <textarea  id="" cols="30" rows="1" type="text"
-              id="description"
-              name="description"
-              formControlName="description"
-              class="form-control"
-              [ngClass]="{
-                'is-invalid': appoins['description'].errors && appoins['description'].touched
-              }"></textarea>
-              <div
-                *ngIf="appoins['description'].errors && appoins['description'].touched"
-                class="alert alert-warning mt-2"
-              >
-                <div *ngIf="appoins['description'].errors['required']">
-                  من فضلك ادخل   وصف للموعد
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="formFile" class="form-label">اضافه ملف</label>
-            <input class="form-control"
-            type="file"
-            id="imageFile"
-            (change)="uplaodFile($event)"
-            name="imageFile"
-            formControlName="imageFile"
-           >
-          </div>
-
-          <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
-          <button
-          data-bs-dismiss="modal"
-          type="submit"
-          [disabled]="!newappointment.valid"
-          class="btn btn-lg ms-2 text-white form-control  mb-3"
-          style="background: #18AF9A"
-        >
-          انشاء  مهمه
-        </button>
-        <button type="button"  data-bs-dismiss="modal"
-        class="btn btn-lg ms-2 text-white form-control btn-secondary"
-
-        >
-          الغاء
-        </button>
-        </form>
-      </div>
-
-    </div>
-  </div>
+<div
+  class="alert position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0"
+  role="alert"
+  *ngIf="showErr"
+>
+  {{ message }}
+</div>
+<div *ngIf="showModal">
+  <app-img-modal [modalSrc]="modalSrc" [toggle]="toggleModal"></app-img-modal>
 </div>

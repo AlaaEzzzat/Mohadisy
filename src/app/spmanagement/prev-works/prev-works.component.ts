@@ -42,6 +42,7 @@ export class PrevWorksComponent implements OnInit {
       images: ['', [Validators.required]],
     });
   }
+
   prevWorksFormSubmit() {
     let filesFormDta = new FormData();
     this.workImages.map((file: any) => {

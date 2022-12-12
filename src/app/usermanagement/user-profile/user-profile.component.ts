@@ -8,22 +8,22 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./user-profile.component.scss'],
 })
 export class UserProfileComponent implements OnInit {
-  editOverview: boolean = false;
   map: string = 'https://www.google.com/maps/place/';
+  location: any = '';
   selected: Date = new Date();
   user: any = {};
-  location: any = '';
   showpopup: boolean = false;
+  model:any ="";
+  editOverview: boolean = false;
+  userImgChanged: boolean = false;
+  userImg: any = '';
+  editName:boolean =false;
+  name:any='';
+  email:any =""
+  phoneNumber:any = '';
   idPicChanged: boolean = false;
   idImgeUrl: any = '';
-  userImg: any = '';
-  userImgChanged: boolean = false;
-  model:any ="";
-  name:any='';
-  phoneNumber:any = '';
-  email:any =""
   imagesArray: any = [];
-  editName:boolean =false;
   onBoldClick(){
     console.log(this.name);
     console.log(this.phoneNumber);

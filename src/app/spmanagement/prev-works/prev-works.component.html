@@ -262,7 +262,6 @@
                     </li>
 
                   </ng-container>
-
                       <!-------------Carousel------------------>
                       <div class="modal fade "  [id]="'work'+work.id" >
                         <div class="modal-dialog  modal-xl " >
@@ -277,7 +276,6 @@
                 
                                   <ng-container *ngFor="let img of workFile; let i=index;">
                                     <div *ngIf="i==0" class="carousel-item active">
-                
                                       <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
                                     </div>
                                     <div *ngIf="i!=0" class="carousel-item">

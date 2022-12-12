@@ -137,4 +137,12 @@ export class ServiceProviderService {
       `${environment.baseUrl}/api/Payment/getPaymentsForServiceProvider`
     );
   }
+  /* ***************************** */
+  
+  updateOrganizationalServiceProviderProfile(profile: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/updateProfile`,
+      profile
+    );
+  }
 }

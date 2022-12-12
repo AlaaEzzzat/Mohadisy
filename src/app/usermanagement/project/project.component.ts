@@ -262,8 +262,12 @@ export class ProjectComponent implements OnInit {
     );
   }
   showImg(src: any) {
+    console.log(src)
     this.showModal = true;
     this.modalSrc = src;
+  }
+  toggle = ()=> {
+    this.showModal = !this.showModal;
   }
   fileMessage: any = '';
   onFileUpload(event: any) {

@@ -29,6 +29,7 @@ import { ComplaintComponent } from './components/complaint/complaint.component';
 import { StartChatComponent } from './components/start-chat/start-chat.component';
 import { CalenderComponent } from './components/calender/calender.component';
 import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
+import { ImgModalComponent } from './img-modal/img-modal.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -53,6 +54,7 @@ const routes: Routes = [];
     StartChatComponent,
     CalenderComponent,
     WorkScheduleComponent,
+    ImgModalComponent,
   ],
   imports: [
     MatDatepickerModule,
@@ -90,6 +92,7 @@ const routes: Routes = [];
     StartChatComponent,
     PaginationComponent,
     WorkScheduleComponent,
+    ImgModalComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

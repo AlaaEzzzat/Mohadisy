@@ -58,7 +58,6 @@ const routes: Routes = [
               { path: 'reject', component: SpRequestRejectComponent },
               { path: 'offer', component: SpProjectOfferComponent },
               { path: 'offer/edit', component: SpRequestEditComponent },
-
               { path: 'all', component: SpProjectsComponent },
               { path: 'all/request', component: SpCprojectRequestComponent },
               { path: 'alloffer', component: SpCprojectOfferComponent },
