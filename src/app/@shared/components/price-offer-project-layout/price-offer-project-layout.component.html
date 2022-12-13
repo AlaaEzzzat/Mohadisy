@@ -1,0 +1,123 @@
+<div *ngIf="isActive" class="projectInfo mb-3">
+  <ul class="list-unstyled p-3 bg-white">
+    <li>
+      <p *ngIf="userType == 'client'">
+        صلاحيه عرض السعر :
+        {{
+          getTime(
+            selectedProject.pricequoteEndDate,
+            selectedProject.dateCreated
+          )
+        }}
+      </p>
+    </li>
+    <li class="mb-2">
+      <p class="cairo">
+        اسم المشروع :
+        <span class="secondColor me-2 bold">{{ selectedProject.name }}</span>
+      </p>
+    </li>
+    <li class="mb-2">
+      <p class="cairo">
+        موضوع المشروع :
+        <span class="secondColor me-2">{{ selectedProject?.subject }} </span>
+      </p>
+    </li>
+    <li class="mb-2">
+      <p>
+        التصنيف الرئيسي للمشروع :
+        <span class="secondColor me-2 bold">
+          {{ selectedProject.projectCategory?.name }}
+        </span>
+      </p>
+    </li>
+    <li class="mb-2">
+      <p>
+        التصنيف الفرعى للمشروع :
+        <span class="secondColor me-2"
+          >{{ selectedProject.projectSubCategory?.name }}
+        </span>
+      </p>
+    </li>
+    <li class="mb-2">
+      <p>
+        رقم القطعه :
+        <span class="secondColor me-2 bold">{{ selectedProject?.area }}</span>
+      </p>
+    </li>
+    <li class="mb-2">
+      <p>
+        رقم المخطط التنظيمي :
+        <span class="secondColor me-2"
+          >{{ selectedProject?.organizationalChartNumber }}
+        </span>
+      </p>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="bg-white p-3 projectInfo projectContributes">
+        <h4 class="head">مكونات المشروع</h4>
+        <ul
+          class="m-0 p-0 list-unstyled"
+          *ngFor="let component of activeProjectsComponents"
+        >
+          <li class="mb-2">
+            <i class="fa fa-chevron-left ms-3"></i>
+            <span>
+              {{ component.name }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="bg-white p-3 rquiredWoks projectInfo">
+        <h4 class="head">الأعمال المطلوبة</h4>
+        <ul
+          class="m-0 p-0 list-unstyled"
+          *ngFor="let requiredWork of activeProjectReqWorks"
+        >
+          <li class="mb-2">
+            <i class="fa fa-chevron-left ms-3"></i>
+            <span>
+              {{ requiredWork.name }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="bg-white p-3 projectFiles projectInfo">
+        <h4 class="head">الملفات الخاصة المشروع</h4>
+        <ul
+          class="m-0 p-0 list-unstyled"
+          *ngFor="let document of selectedProject.clientProjectDocuments"
+        >
+          <li class="mb-3 d-flex justify-content-between">
+            <span>
+              <i class="fa fa-chevron-left ms-3"></i>
+              {{
+                document.file.length > 15
+                  ? document.file.substr(0, 15) + "..."
+                  : document.file
+              }}
+            </span>
+            <div>
+              <span
+                class="mx-3"
+                target="_blank"
+                (click)="showImg(document.filePath)"
+                ><i class="fa fa-eye"></i
+              ></span>
+              <span (click)="download(document.filePath, document.file)"
+                ><i class="fa fa-download"></i
+              ></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { ChatComponent } from '../@shared/components/chat/chat.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
       { path: 'messages', component: SpMessagesComponent },
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'chat', component: ChatComponent },
+      { path: 'priceOffers', component: SpPriceOffersComponent },
       { path: 'compliant', component: ComplaintComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },

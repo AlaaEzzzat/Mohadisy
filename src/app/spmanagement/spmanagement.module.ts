@@ -43,6 +43,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
 import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
 import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
+import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.com
     SpProjectFinishedComponent,
     SpRequestEditComponent,
     SpCrequestEditComponent,
+    SpPriceOffersComponent,
 
   ],
   imports: [

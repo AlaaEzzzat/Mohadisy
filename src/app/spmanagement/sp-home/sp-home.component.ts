@@ -28,6 +28,11 @@ export class SpHomeComponent implements OnInit {
       routing: '/Spmanagement/projects/price-offers',
     },
     {
+      title: '2عروض الاسعار',
+      image: 'assets/images/blueprint.png',
+      routing: '/Spmanagement/priceOffers',
+    },
+    {
       title: 'مشاريعي  ',
       image: 'assets/images/blueprint.png',
       routing: '/Spmanagement/projects/status',

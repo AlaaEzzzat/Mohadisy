@@ -15,7 +15,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-
 import { LandingComponent } from './components/landing/landing.component';
 import { MsgToAdminComponent } from './components/msg-to-admin/msg-to-admin.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -30,6 +29,10 @@ import { StartChatComponent } from './components/start-chat/start-chat.component
 import { CalenderComponent } from './components/calender/calender.component';
 import { WorkScheduleComponent } from './components/work-schedule/work-schedule.component';
 import { ImgModalComponent } from './img-modal/img-modal.component';
+import { PriceOfferCardComponent } from './components/price-offer-card/price-offer-card.component';
+import { PriceOfferProjectLayoutComponent } from './components/price-offer-project-layout/price-offer-project-layout.component';
+import { PriceOfferProjectMainLayoutComponent } from './components/price-offer-project-main-layout/price-offer-project-main-layout.component';
+import { MilestoneCardComponent } from './components/milestone-card/milestone-card.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -55,6 +58,10 @@ const routes: Routes = [];
     CalenderComponent,
     WorkScheduleComponent,
     ImgModalComponent,
+    PriceOfferCardComponent,
+    PriceOfferProjectLayoutComponent,
+    PriceOfferProjectMainLayoutComponent,
+    MilestoneCardComponent,
   ],
   imports: [
     MatDatepickerModule,
@@ -92,7 +99,11 @@ const routes: Routes = [];
     StartChatComponent,
     PaginationComponent,
     WorkScheduleComponent,
-    ImgModalComponent
+    ImgModalComponent,
+    PriceOfferCardComponent,
+    PriceOfferProjectLayoutComponent,
+    PriceOfferProjectMainLayoutComponent,
+    MilestoneCardComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

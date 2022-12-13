@@ -23,8 +23,6 @@ export class SpMenuOffersComponent implements OnInit {
         this.offers=1;
       this.projectstatues=data.data.projectStatues;
       }
-      
-
     })
   }
 

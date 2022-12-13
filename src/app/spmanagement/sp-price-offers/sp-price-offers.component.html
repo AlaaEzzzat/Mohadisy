@@ -1,0 +1,177 @@
+<section class="price-offer">
+  <div class="container-fluid mt-5 fontStyle">
+    <div class="row">
+      <ng-container *ngFor="let service of projectServices; let i = index">
+        <div class="col-12" *ngIf="type==service.id">
+          <div
+            [id]="service.id"
+            class="btn p-2 px-3 w-100 active d-flex justify-content-between"
+          >
+            <span class="name cairo">{{ service.name }}</span>
+            <span class="name cairo">{{service.count}}</span>
+          </div>
+        </div>
+      </ng-container>
+      <div class="row mt-3">
+        <ng-container *ngFor="let cat of projectCategory; let i = index">
+          <div class="col">
+            <div
+              [id]="cat.id"
+              class="btn text-center p-2 px-3 w-100"
+              (click)="isActiveCategory(cat.id)"
+              [ngClass]="activeCategory == cat.id ? 'secondBk' : 'bg-white'"
+            >
+              <span class="text-center name cairo">{{ cat.name }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div> 
+     
+      <div class="col-12 m-0 p-0">
+        <div class="row py-5">
+          <div class="col-md-4">
+            <div *ngIf="activeCategory == 2 ? 
+            projectServiesArrays.projects?.length > 0
+            : projectServiesArrays.priceQuotes?.length >0
+            " class="cards">
+              <ng-container
+                *ngFor="let project of activeCategory == 2 ?  projectServiesArrays.projects: projectServiesArrays.priceQuotes; let i = index"
+              >
+                <app-price-offer-card
+                  (click)="showOffers(project)"
+                  [isActive]="activeProject == project.id"
+                  [userType]="userType"
+                  [project]="project"
+                ></app-price-offer-card>
+              </ng-container>
+
+              <app-pagination
+                [pagenation]="pagenation"
+                [next]="next"
+                [prev]="prev"
+                [page]="page"
+              ></app-pagination> 
+            </div>
+          </div>
+          <div class="col-md-8">
+            <app-price-offer-project-layout
+              userType="client"
+              [showImg]="showImg"
+              [selectedProject]="selectedProject"
+              [activeProjectReqWorks]="activeProjectReqWorks"
+              [activeProjectsComponents]="activeProjectsComponents"
+              [isActive]="activeCategory == 2 ? 
+              projectServiesArrays.projects?.length > 0
+              : projectServiesArrays.priceQuotes?.length >0"
+            ></app-price-offer-project-layout>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div *ngIf="showModal">
+  <app-milestone-card
+      [activeProject]="selectedProject"
+      [activeMiliestones]="projectMilestons"
+      [requiredWorks]="activeProjectReqWorks"
+      [userType]="userType"
+      [toggleShow]="toggleShow"
+      >
+    </app-milestone-card>
+</div>
+<!--  <div *ngIf="showModal" class="overlay p-5">
+  <div class="img-popup p-5">
+    <a class="close" style="cursor: pointer" (click)="showModal = !showModal"
+      >&times;</a
+    >
+    <div *ngIf="modalSrc" id="mymModal" class="mmodal">
+      <img class="mmodal-content my-img" id="img01" [src]="modalSrc" />
+      <div id="caption"></div>
+    </div>
+    <div *ngIf="!modalSrc" id="mymModal" class="mmodal">
+      <div id="caption" class="p-3 bg-white">
+        <table class="table bg-white p-2">
+          <thead>
+            <tr>
+              <th class="" scope="col">الدفعة</th>
+              <th scope="col">المرحلة</th>
+              <th scope="col">التكلفه</th>
+              <th scope="col">التاريخ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let milestone of projectMilestons; let i = index"
+            >
+              <tr>
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                    }"
+                    class="bold"
+                    >الدفعه ({{ i + 1 }}) :
+                  </span>
+                </td>
+
+                <td>
+                  <div class="mb-2" *ngIf="milestone.isFirstMilestone">
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة مقدمه
+                    </span>
+                  </div>
+                  <div class="mb-2 bold" *ngIf="milestone.isLastMilestone">
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      دفعة بعد الإنتهاء
+                    </span>
+                  </div>
+                  <div
+                    class="mb-2 bold"
+                    *ngIf="
+                      !milestone.isLastMilestone && !milestone.isFirstMilestone
+                    "
+                  >
+                    <span
+                      [ngStyle]="{
+                        color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                      }"
+                      class="me-2 bold"
+                    >
+                      {{ requiredWorksNames(milestone.requiredWorkId) }}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+                  <span
+                    [ngStyle]="{
+                      color: milestone.isPaid ? '#18AF9A' : '#EE9C0F'
+                    }"
+                    >{{ milestone.cost }} ريال</span
+                  >
+                </td>
+                <td>
+                  <div class="text-dark bold" *ngIf="milestone.isPaid">
+                    {{ getDate(milestone.paidDate) }}
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+ -->

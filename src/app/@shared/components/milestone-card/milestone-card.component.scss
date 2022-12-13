@@ -1,0 +1,68 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 500ms;
+  display: flex;
+  z-index: 1000;
+  .popup {
+    width: 450px;
+    background: #fff;
+  }
+  .img-popup {
+    max-width: 90%;
+
+    background-color: rgba($color: #fff, $alpha: 1);
+  }
+  .popup,
+  .img-popup {
+    margin: auto;
+    border-radius: 5px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    width: 80%;
+
+    .my-img {
+      max-width: 98%;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+  }
+}
+.close {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.close:hover {
+  color: #18af9a;
+}
+.paid {
+  color: #18af9a;
+}
+.bold {
+  font-weight: 600;
+}
+.notPaid {
+  color: #ee9c0f;
+}
+.paidbk {
+  background-color: #18af9a;
+}
+.notPaidbk {
+  background-color: #ee9c0f;
+}
+.mainBk {
+  background-color: #004057;
+  color: #fff;
+}

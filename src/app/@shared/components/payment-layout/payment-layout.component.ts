@@ -28,7 +28,10 @@ export class PaymentLayoutComponent implements OnInit {
   activeMiliestones: any = [];
   constructor(private clientService: ClientService) {}
   @ViewChild('pdfTable', { static: false }) pdfTable!: ElementRef;
-  downloadPDF() {
+  toggleShow = ()=>{
+    this.showModal = !this.showModal
+  }
+  /* downloadPDF() {
     var AmiriRegular = 'AAEAAAASAQ...';
     var doc = new jsPDF('p', 'pt', 'a4');
 
@@ -43,7 +46,7 @@ export class PaymentLayoutComponent implements OnInit {
     doc.text(testText, 50, 50);
 
     doc.save('test.pdf');
-  }
+  } */
   ngOnInit(): void {
     console.log(this.dataShow);
   }

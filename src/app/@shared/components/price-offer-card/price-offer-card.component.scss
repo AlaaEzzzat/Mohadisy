@@ -1,0 +1,57 @@
+.card{
+      position: relative;
+      span{
+        font-family: 'cairo';
+      }
+    }
+     .active::after{
+      position: absolute;
+      content: "";
+    width: 0;
+	height: 0;
+	border-top: 15px solid transparent;
+    border-right: 15px solid #004057;
+    border-bottom: 15px solid transparent;
+    bottom: 34%;
+    left: -15px;
+    }
+    .textcard{
+      font-weight: 400;
+      font-family: 'cairo';
+
+    }
+    .mainColor{
+      color: #004057;
+    }
+    .mainBk{
+      background-color: #004057;
+      color: #FFF;
+     }
+     .dotCon{
+      background-color: transparent;
+      border: 0;
+      left: -3px;
+      top: 13px;
+      color: #18AF9A;
+      height: 50px;
+      .dots{
+      background-color: transparent;
+      border: 0;
+      color: #18AF9A;
+      height: 50px;
+      }
+    }
+    .matBtnCon{
+  
+  background-color: #18AF9A;
+    }
+    .active{
+      background-color: #004057;
+      color:#FFF;
+     .name{
+      color: #FFF;
+     }
+     .icon{
+      color: #FFF;
+     }
+    }

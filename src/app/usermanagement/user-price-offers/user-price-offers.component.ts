@@ -51,6 +51,7 @@ export class UserPriceOffersComponent implements OnInit {
   fristMilestoneId: any = 0;
   showMilestones: boolean = false;
   projectMilestons: any = [];
+  userType: string =''
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
@@ -73,6 +74,7 @@ export class UserPriceOffersComponent implements OnInit {
     }
   };
   ngOnInit(): void {
+    this.userType='client'
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
       this.activeService = this.projectServices[0].id;
@@ -171,7 +173,8 @@ export class UserPriceOffersComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     return Days;
   }
-  showProject() {
+  showProject=()=> {
+    console.log("work")
     this.showProjectProfile = true;
   }
   mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
@@ -207,7 +210,8 @@ export class UserPriceOffersComponent implements OnInit {
     console.log(this.selectedProject);
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
-
+this.isActive=  this.offersOfSelectedProject.length == 0 ||
+(this.offersOfSelectedProject.length > 0 && this.showProjectProfile)
     if (this.offersOfSelectedProject.length > 0) {
       this.selectedOffer = this.offersOfSelectedProject[0];
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
@@ -296,7 +300,7 @@ export class UserPriceOffersComponent implements OnInit {
       },
     });
   }
-  download(url: string, name: any) {
+  download = (url: string, name: any) =>{
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });
@@ -314,7 +318,7 @@ export class UserPriceOffersComponent implements OnInit {
       this.getAllProjectServices();
     });
   }
-  showImg(src: any) {
+  showImg = (src: any)=> {
     console.log(this.requiredWorks);
     console.log(this.projectMilestons);
     this.showModal = true;
@@ -328,5 +332,9 @@ export class UserPriceOffersComponent implements OnInit {
       }
     });
     return name;
+  }
+  isActive:boolean = false;
+  toggleShow = ()=>{
+    this.showModal = !this.showModal;
   }
 }
