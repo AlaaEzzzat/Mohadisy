@@ -1,0 +1,205 @@
+.projects{
+      
+      .cairo{
+        font-family: 'Cairo';
+      }
+      .tajawal{
+        font-family: 'Tajawal';
+        font-weight: 500;
+      }
+      .mainColor{
+        color: #004057;
+      }
+        .secondColor{
+          color:#18AF9A;
+        }
+        .mainBk{
+          background-color: #004057;
+          color: #FFF;
+         }
+           .secondBk{
+             background-color:#18AF9A;
+          color: #FFF;
+           }
+      .card
+      {
+         border: none;
+         color:#004057;
+         border-radius: 0;
+         -webkit-border-radius: 0;
+         -moz-border-radius: 0;
+         -ms-border-radius: 0;
+         -o-border-radius: 0;
+         margin: 0;
+         padding: 0;
+      }
+      .btn-accordion:focus{
+       border: 0;
+       outline: none;
+      }
+a{
+      text-decoration: none;
+      color: #004057;
+}
+.circleCon{
+      height: 100%;
+}
+      
+}
+/* ******************* */
+
+@keyframes growProgressBar {
+      0%, 33% { --pgPercentage: 0; }
+      100% { --pgPercentage: var(--value); }
+    }
+    
+    @property --pgPercentage {
+      syntax: '<number>';
+      inherits: false;
+      initial-value: 0;
+    }
+    
+    div[role="progressbar"] {
+      
+      margin: auto;
+      --fg: #004057;
+      --bg: #def;
+      --pgPercentage: var(--value);
+      animation: growProgressBar 3s 1 forwards;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: 
+        radial-gradient(closest-side, white 80%, transparent 0 99.9%, white 0),
+        conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0)
+        ;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: calc(var(6rem) / 5);
+      color: var(--fg);
+    }
+    
+    div[role="progressbar"]::before {
+      counter-reset: percentage var(--value);
+      content: counter(percentage) '%';
+    }
+    /* ********************* */
+    .overlay {
+     
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      transition: opacity 500ms;
+    display: flex;
+      z-index: 1000;
+      .popup{
+    
+        width:450px;
+        background: #fff;
+    
+      }
+      .img-popup {
+    max-width: 90%;
+    
+    background-color: rgba($color: #e8e8e8, $alpha: 0.4);
+    
+      }
+      .popup, .img-popup {
+        margin: auto;
+        border-radius: 5px;
+        position: relative;
+        transition: all 5s ease-in-out;
+        height:auto ;
+       
+          .my-img{
+            max-width: 98%;
+          }
+        
+    
+    .btn{
+      margin-top: 20px;
+      background-color: #18AF9A;
+      color: #FFF;
+    }
+    
+      }
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+    
+    }
+     .close:hover {
+      color: #18AF9A;
+    }
+    .message-input {
+		
+			
+			.wrap {
+				position: relative;
+			
+				input {
+					font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+					float: right;
+					border-radius: 0px 10px 10px 0 ;
+					width: calc(100% - 50px);
+					padding: 12px ;
+          border: 1px solid #004057;
+					color: #004057;
+
+					&:focus {
+						outline: none;
+					}
+				}
+				
+				.attachment {
+					position: absolute;
+					left: 60px;
+					z-index: 4;
+					margin-top: 10px;
+					font-size: 1.4em;
+					color: #004057;
+					opacity: .5;
+					cursor: pointer;
+					
+					&:hover {
+						opacity: 1;
+					}
+					.attatch{
+						opacity: 0;
+						position: relative;
+						width: 31px;
+						padding: 0;
+						left: -19px;
+					  }
+					}
+				}
+
+				button {
+					float: right;
+					border: none;
+					width: 50px;
+					padding: 12px 0;
+					cursor: pointer;
+          border: 1px solid #004057;
+					background: #004057;
+					color: #FFF;
+					&:hover {
+						background: #18AF9A;
+					}
+					
+					&:focus {
+						outline: none;
+					}
+				}
+			}

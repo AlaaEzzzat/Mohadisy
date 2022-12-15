@@ -13,7 +13,6 @@ export class DealWithOfferComponent implements OnInit {
   @Input() typeOfDeal: any;
   @Input() makeOfferToggle: any = (args: any) => {};
   RequiredWorks: Array<any> = [];
-
   OfferData: FormGroup;
   Listprojects: Array<any> = [];
   projectComponent: Array<any> = [];
@@ -53,6 +52,7 @@ export class DealWithOfferComponent implements OnInit {
       projectId: new FormControl('', [Validators.required]),
       tcost: new FormControl(''),
       precentage: new FormControl('', [Validators.required]),
+
       contractorCommitments: new FormControl('', [Validators.required]),
       sizingMethod: new FormControl('', [Validators.required]),
       contractTerms: new FormControl('', [Validators.required]),
@@ -89,53 +89,68 @@ export class DealWithOfferComponent implements OnInit {
           }
         }
       });
-      if(this.typeOfDeal =='edit'){
-        this.api.get(`https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.selectProject?.offers[0]?.cost}`).subscribe(data=>{
-      this.totalcost=data.data;
-      this.checkDataStage();
-      this.Initial();
-    });
+    if (this.typeOfDeal == 'edit') {
+      this.api
+        .get(
+          `https://app.mohandisy.com/api/Offer/getTotalCost?cost=${this.selectProject?.offers[0]?.cost}`
+        )
+        .subscribe((data) => {
+          this.totalcost = data.data;
+          this.checkDataStage();
+          this.Initial();
+        });
     }
-
   }
 
-  Initial()
-  {
-    this.OfferData?.get('numberOfMilestones')?.setValue(this.selectProject?.offers[0]?.numberOfMilestones);
-      this.OfferData?.get('period')?.setValue(this.selectProject?.offers[0]?.period);
-      this.OfferData?.get('cost')?.setValue(this.selectProject?.offers[0]?.cost);
-      this.OfferData?.get('message')?.setValue(this.selectProject?.offers[0]?.message);
-      this.OfferData?.get('contractorCommitments')?.setValue(this.selectProject?.offers[0]?.contractorCommitments);
-      this.OfferData?.get('contractTerms')?.setValue(this.selectProject?.offers[0]?.contractTerms);
-      this.OfferData?.get('sizingMethod')?.setValue(this.selectProject?.offers[0]?.sizingMethod);
-      this.OfferData?.get('disputeResolution')?.setValue(this.selectProject?.offers[0]?.disputeResolution);
-      this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${ this.selectProject.offers[0].id}`).subscribe(data=>
-       {
+  Initial() {
+    this.OfferData?.get('numberOfMilestones')?.setValue(
+      this.selectProject?.offers[0]?.numberOfMilestones
+    );
+    this.OfferData?.get('period')?.setValue(
+      this.selectProject?.offers[0]?.period
+    );
+    this.OfferData?.get('cost')?.setValue(this.selectProject?.offers[0]?.cost);
+    this.OfferData?.get('message')?.setValue(
+      this.selectProject?.offers[0]?.message
+    );
+    this.OfferData?.get('contractorCommitments')?.setValue(
+      this.selectProject?.offers[0]?.contractorCommitments
+    );
+    this.OfferData?.get('contractTerms')?.setValue(
+      this.selectProject?.offers[0]?.contractTerms
+    );
+    this.OfferData?.get('sizingMethod')?.setValue(
+      this.selectProject?.offers[0]?.sizingMethod
+    );
+    this.OfferData?.get('disputeResolution')?.setValue(
+      this.selectProject?.offers[0]?.disputeResolution
+    );
+    this.api
+      .get(
+        `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`
+      )
+      .subscribe((data) => {
         console.log(data.data);
-        var stages=data.data;
-        console.log(stages)
-        
-        for(let i=0;i<stages.length;i++){
-        this.Precentage[i]=stages[i].percentage;
-        this.totalcostMilestone[i]=stages[i].cost;
-        if(stages[i].isFirstMilestone==true)
-        this.WorkId[i] = 8
-        else if(stages[i].isLastMilestone==true)
-        this.WorkId[i] =9
-        else
-        this.WorkId[i] = stages[i].requiredWorkId
-      }
-      console.log('percentage '+this.Precentage)
-      console.log('totalCost '+this.totalcostMilestone)
-       console.log(this.WorkId)
-       console.log(this.RequiredWorks)
-       }
+        var stages = data.data;
+        console.log(stages);
 
-       );
-       this.api.get(`https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`).subscribe(data=>
-       {
-
-       });
+        for (let i = 0; i < stages.length; i++) {
+          this.Precentage[i] = stages[i].percentage;
+          this.totalcostMilestone[i] = stages[i].cost;
+          if (stages[i].isFirstMilestone == true) this.WorkId[i] = 8;
+          else if (stages[i].isLastMilestone == true) this.WorkId[i] = 9;
+          else this.WorkId[i] = stages[i].requiredWorkId;
+        }
+        console.log('percentage ' + this.Precentage);
+        console.log('totalCost ' + this.totalcostMilestone);
+        console.log(this.WorkId);
+        console.log(this.RequiredWorks);
+      });
+    this.api
+      .get(
+        `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`
+      )
+      .subscribe((data) => {});
   }
 
   milestones() {
@@ -208,14 +223,11 @@ export class DealWithOfferComponent implements OnInit {
   }
 
   workId(e: any, stone: number) {
-    console.log(e.target.value)
-    console.log(stone)
-    this.WorkId.push({
-      'milestone': stone,
-      "workId": e.target.value
-    })
-    console.log(this.WorkId)
-   
+    console.log(e.target.value);
+    console.log(stone);
+    this.WorkId[stone-1] = e.target.value;
+    console.log("ghdghdrshrd")
+    console.log(this.WorkId);
   }
 
   setToggle(formNumber: any) {
@@ -250,14 +262,16 @@ export class DealWithOfferComponent implements OnInit {
     this.addmaterial = this.addmaterial.filter((data) => data.id != materialId);
   }
 
- 
-
   onSubmit() {
     var Allprecentage = new Array(),
       Allmilestones = new Array();
-    for (let i = 1; i <= this.OfferData?.get('numberOfMilestones')?.value; i++) {
+    for (
+      let i = 1;
+      i <= this.OfferData?.get('numberOfMilestones')?.value;
+      i++
+    ) {
       Allprecentage.push(Number(this.Precentage[i]));
-      if (this.WorkId[i-1]  == 8) {
+      if (this.WorkId[i - 1] == 8) {
         Allmilestones.push({
           cost: this.totalcostMilestone[i],
           percentage: Number(this.Precentage[i]),
@@ -266,7 +280,7 @@ export class DealWithOfferComponent implements OnInit {
           isLastMilestone: false,
           message: this.OfferData?.get('message')?.value,
         });
-      } else if (this.WorkId[i-1]== 9) {
+      } else if (this.WorkId[i - 1] == 9) {
         Allmilestones.push({
           cost: this.totalcostMilestone[i],
           percentage: Number(this.Precentage[i]),
@@ -279,7 +293,7 @@ export class DealWithOfferComponent implements OnInit {
         Allmilestones.push({
           cost: this.totalcostMilestone[i],
           percentage: Number(this.Precentage[i]),
-          requiredWorkId: Number(this.WorkId[i-1]),
+          requiredWorkId: Number(this.WorkId[i - 1]),
           isFirstMilestone: false,
           isLastMilestone: false,
           message: this.OfferData?.get('message')?.value,
@@ -292,53 +306,101 @@ export class DealWithOfferComponent implements OnInit {
       numberOfMilestones: this.OfferData?.get('numberOfMilestones')?.value,
       milestonesPercentages: Allprecentage,
     };
+    if (this.typeOfDeal == 'send') {
 
-    this.AddMaterials = [];
-    for (let i = 0; i < this.addmaterial.length; i++) {
-      this.AddMaterials.push({
-        materialTypeId: this.addmaterial[i].materialTypeId,
-        name: this.addmaterial[i].name,
-        cost: this.addmaterial[i].cost,
-        description: this.addmaterial[i].description,
-      });
+      this.AddMaterials = [];
+      for (let i = 0; i < this.addmaterial.length; i++) {
+        this.AddMaterials.push({
+          materialTypeId: this.addmaterial[i].materialTypeId,
+          name: this.addmaterial[i].name,
+          cost: this.addmaterial[i].cost,
+          description: this.addmaterial[i].description,
+        });
+      }
+
+      this.api
+        .postJson(
+          'https://app.mohandisy.com/api/Offer/validateCostAndPeriod',
+          checkData
+        )
+        .subscribe((data) => {
+          this.check = data.isError;
+          if (this.check == false) {
+            var AllData = {
+              id: Number(this.selectProject.offers[0]?.id),
+              projectId: this.selectProject.id,
+              period: Number(this.OfferData?.get('period')?.value),
+              cost: this.OfferData?.get('cost')?.value,
+              message: this.OfferData?.get('message')?.value,
+              numberOfMilestones: Number(
+                this.OfferData?.get('numberOfMilestones')?.value
+              ),
+              milestones: Allmilestones,
+              sizingMethod: this.OfferData?.get('sizingMethod')?.value,
+              contractTerms: this.OfferData?.get('contractTerms')?.value,
+              disputeResolution:
+                this.OfferData?.get('disputeResolution')?.value,
+              contractorCommitments: this.OfferData?.get(
+                'contractorCommitments'
+              )?.value,
+              materials: this.AddMaterials,
+            };
+            console.log(AllData);
+            console.log(this.selectProject);
+            this.api
+              .postJson(
+                'https://app.mohandisy.com/api/Offer/storeOffer',
+                AllData
+              )
+              .subscribe({
+                next: (data) => {
+                  Swal.fire('تم تقديم العرض بنجاح');
+                  this.router.navigate(['/Spmanagement/priceOffers']);
+                },
+              });
+          }
+        });
+    } else {
+      console.log('check data : ', checkData);
+
+      this.api
+        .postJson(
+          'https://app.mohandisy.com/api/Offer/validateCostAndPeriod',
+          checkData
+        )
+        .subscribe((data) => {
+          this.check = data.isError;
+
+          if (this.check == false) {
+            var AllData = {
+              id: Number(this.selectProject.offers[0]?.id),
+              projectId: this.selectProject.id,
+              period: this.OfferData.get('period')?.value,
+              cost: this.OfferData.get('cost')?.value,
+              message: this.OfferData.get('message')?.value,
+              numberOfMilestones: Number(
+                this.OfferData.get('numberOfMilestones')?.value
+              ),
+              milestones: Allmilestones,
+              SizingMethod: null,
+              ContractTerms: null,
+              DisputeResolution: null,
+              ContractorCommitments: null,
+            };
+
+            console.log('all data : ', AllData);
+            this.api
+              .postJson(
+                'https://app.mohandisy.com/api/Offer/updateOffer',
+                AllData
+              )
+              .subscribe({
+                next: (data) => {
+                  Swal.fire('تم تعديل العرض بنجاح');
+                },
+              });
+          }
+        });
     }
-
-    this.api
-      .postJson(
-        'https://app.mohandisy.com/api/Offer/validateCostAndPeriod',
-        checkData
-      )
-      .subscribe((data) => {
-        this.check = data.isError;
-        if (this.check == false) {
-          var AllData = {
-            projectId: this.selectProject.id,
-            period: Number(this.OfferData?.get('period')?.value),
-            cost: this.OfferData?.get('cost')?.value,
-            message: this.OfferData?.get('message')?.value,
-            numberOfMilestones: Number(
-              this.OfferData?.get('numberOfMilestones')?.value
-            ),
-            milestones: Allmilestones,
-            sizingMethod: this.OfferData?.get('sizingMethod')?.value,
-            contractTerms: this.OfferData?.get('contractTerms')?.value,
-            disputeResolution: this.OfferData?.get('disputeResolution')?.value,
-            contractorCommitments: this.OfferData?.get('contractorCommitments')
-              ?.value,
-            materials: this.AddMaterials,
-          };
-console.log(AllData)
-           this.api
-            .postJson('https://app.mohandisy.com/api/Offer/storeOffer', AllData)
-            .subscribe({
-              next: (data) => {
-                Swal.fire('تم تقديم العرض بنجاح');
-                this.router.navigate([
-                  '/Spmanagement/priceOffers',
-                ]);
-              },
-            }); 
-        }
-      });
   }
 }

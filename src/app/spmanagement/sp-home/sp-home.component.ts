@@ -38,6 +38,11 @@ export class SpHomeComponent implements OnInit {
       routing: '/Spmanagement/projects/status',
     },
     {
+      title: 'مشاريعي 2 ',
+      image: 'assets/images/blueprint.png',
+      routing: '/Spmanagement/allProjects',
+    },
+    {
       title: 'اعمالي السابقة   ',
       image: 'assets/images/blueprint.png',
       routing: '/Spmanagement/prevWorks',

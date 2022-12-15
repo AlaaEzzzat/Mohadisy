@@ -1,3 +1,4 @@
+import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.component';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { ComplaintComponent } from './../@shared/components/complaint/complaint.component';
 import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-finished.component';
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: 'compliant', component: ComplaintComponent },
       { path: 'profile', component: SpProfileComponent },
       { path: 'contributions', component: SpContributionsComponent },
+      { path: 'allProjects', component: SpAllProjectsComponent },
       {
         path: 'projects',
         component: LayoutProjectComponent,

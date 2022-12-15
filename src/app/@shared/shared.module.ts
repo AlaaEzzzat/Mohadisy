@@ -33,6 +33,7 @@ import { PriceOfferCardComponent } from './components/price-offer-card/price-off
 import { PriceOfferProjectLayoutComponent } from './components/price-offer-project-layout/price-offer-project-layout.component';
 import { PriceOfferProjectMainLayoutComponent } from './components/price-offer-project-main-layout/price-offer-project-main-layout.component';
 import { MilestoneCardComponent } from './components/milestone-card/milestone-card.component';
+import { ProjectLayoutComponent } from './components/project-layout/project-layout.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -62,6 +63,7 @@ const routes: Routes = [];
     PriceOfferProjectLayoutComponent,
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
+    ProjectLayoutComponent,
   ],
   imports: [
     MatDatepickerModule,
@@ -103,7 +105,8 @@ const routes: Routes = [];
     PriceOfferCardComponent,
     PriceOfferProjectLayoutComponent,
     PriceOfferProjectMainLayoutComponent,
-    MilestoneCardComponent
+    MilestoneCardComponent,
+    ProjectLayoutComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

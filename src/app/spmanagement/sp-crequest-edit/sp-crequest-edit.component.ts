@@ -61,7 +61,6 @@ export class SpCrequestEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.select = localStorage.getItem('idproject');
-
     this.page = Number(localStorage.getItem('page'));
 
     this.api
@@ -118,7 +117,7 @@ export class SpCrequestEditComponent implements OnInit {
         this.material = data.data;
       });
   }
-
+  /* ***************************************************** */
   Initial() {
     this.OfferData.get('numberOfMilestones').setValue(
       this.selectProject?.offers[0]?.numberOfMilestones
@@ -150,7 +149,7 @@ export class SpCrequestEditComponent implements OnInit {
       .subscribe((data) => {
         console.log(data.data);
         var stages = data.data;
-        console.log(stages)
+        console.log(stages);
         for (let i = 0; i < stages.length; i++) {
           this.Precentage[i + 1] = stages[i].percentage;
           this.totalcostMilestone[i + 1] = stages[i].cost;
@@ -158,7 +157,7 @@ export class SpCrequestEditComponent implements OnInit {
           else if (stages[i].isLastMilestone == true) this.WorkId[i + 1] = 9;
           else this.WorkId[i + 1] = stages[i].requiredWorkId;
         }
-        console.log(this.WorkId)
+        console.log(this.WorkId);
       });
 
     /////get material by id
@@ -403,8 +402,8 @@ export class SpCrequestEditComponent implements OnInit {
             materials: this.AddMaterials,
           };
 
-          console.log('all data : ', AllData);
-          this.api
+          console.log('all  gggg data : ', AllData);
+          /*  this.api
             .postJson(
               'https://app.mohandisy.com/api/Offer/updateOffer',
               AllData
@@ -422,7 +421,7 @@ export class SpCrequestEditComponent implements OnInit {
                     console.log(this.select);
                   });
               },
-            });
+            }); */
         }
       });
   }

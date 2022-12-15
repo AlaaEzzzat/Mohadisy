@@ -138,8 +138,8 @@ export class SpPriceOffersComponent implements OnInit {
             console.log(this.projectServiesArrays);
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
-            this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
-            this.selectedProject = this.projectServiesArrays.priceQuotes[0];
+            this.activeProject = this.projectServiesArrays?.priceQuotes[0]?.id;
+            this.selectedProject = this.projectServiesArrays?.priceQuotes[0];
             this.showDetails(this.selectedProject);
           });
         break;

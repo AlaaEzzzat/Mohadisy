@@ -1,18 +1,22 @@
-import { ComplaintService } from './../../@core/services/complaint/complaint.service';
-import { ChatService } from './../../@core/services/chat/chat.service';
-import { IMessage } from './../../@models/message';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/@core/api.service';
+import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
+import { ComplaintService } from 'src/app/@core/services/complaint/complaint.service';
+import { ChatService } from 'src/app/@core/services/chat/chat.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IMessage } from 'src/app/@models/message';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
+import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-project',
-  templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss'],
+  selector: 'app-sp-all-projects',
+  templateUrl: './sp-all-projects.component.html',
+  styleUrls: ['./sp-all-projects.component.scss']
 })
-export class ProjectComponent implements OnInit {
+export class SpAllProjectsComponent implements OnInit {
   params: any = '';
+  spType: any =localStorage.getItem('type')?.replace(/"/g, '');
   activeService: any = 1;
   activeProject: any = 1;
   projectServices: any = [];
@@ -20,14 +24,13 @@ export class ProjectComponent implements OnInit {
   numOfCompltedMilesones: any = 0;
   startChat: boolean = false;
   startComplaint: boolean = false;
-  
   projectCategory: any = [
     { id: 1, name: 'مشاريع حالية' },
     { id: 2, name: 'مشاريع معلقه' },
     { id: 3, name: 'مشاريع منتهية' },
     { id: 4, name: 'مشاريع متأخرة' },
+    { id: 5, name: 'مشاريع متوقفه' },
   ];
-
   activeCategory: any = 1;
   projectId: any = '';
   serviceId: any = '';
@@ -45,12 +48,21 @@ export class ProjectComponent implements OnInit {
   offerSender: any = {};
   constructor(
     private _HttpClient: HttpClient,
-    private activatedRoute: ActivatedRoute,
     private clientService: ClientService,
+    private provider:ServiceProviderService,
     private chatService: ChatService,
     private router: Router,
-    private complaintService: ComplaintService
+    private api: ApiService,
   ) {}
+  ngOnInit(): void {
+    this.clientService.getProjectServicesAndSubService().subscribe((data:any) => {
+      this.projectServices = data.data.projectServices;
+      console.log(this.projectServices);
+      this.activeService = this.projectServices[0].id;
+      console.log(this.activeService);
+      this.isActiveService(this.activeService);
+    });
+  }
   isActiveService(id: any) {
     this.activeService = id;
     this.isActiveCategory(this.activeCategory);
@@ -60,9 +72,10 @@ export class ProjectComponent implements OnInit {
     this.projectServiesArray = [];
     switch (id) {
       case 1:
-        this.clientService
-          .getClientCurrentProjects(this.page)
-          .subscribe((data) => {
+        if(this.spType =='CO'){
+          this.provider
+          .getOrganizationalSPCurrentProjects(this.page)
+          .subscribe((data:any) => {
             console.log(data);
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
@@ -77,12 +90,32 @@ export class ProjectComponent implements OnInit {
               ? this.showDetails(this.projectServiesArray[0])
               : '';
           });
+        }else{
+          this.provider
+            .getIndividualSPCurrentProjects(this.page)
+            .subscribe((data:any) => {
+              console.log(data);
+              data.data.projects.map((pro: any) => {
+                if (pro.projectServiceId == this.activeService) {
+                  this.projectServiesArray.push(pro);
+                }
+              });
+              console.log(this.projectServiesArray);
+              this.totalpages = data.data.totalPages;
+              this.counter(this.totalpages);
+              console.log(this.projectServiesArray);
+              this.projectServiesArray.length > 0
+                ? this.showDetails(this.projectServiesArray[0])
+                : '';
+            });
+        }
 
         break;
       case 2:
-        this.clientService
-          .getClientPendingProjects(this.page)
-          .subscribe((data) => {
+        if(this.spType =='CO'){
+          this.provider
+          .getOrganizationalSPPendingProjects(this.page)
+          .subscribe((data:any) => {
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
@@ -95,12 +128,31 @@ export class ProjectComponent implements OnInit {
               ? this.showDetails(this.projectServiesArray[0])
               : '';
           });
+        }else{
+          this.provider
+          .getIndividualSPPendingProjects(this.page)
+          .subscribe((data:any) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
+          });
+        }
+       
 
         break;
       case 3:
-        this.clientService
-          .getClientFinishedProjects(this.page)
-          .subscribe((data) => {
+        if(this.spType =='CO'){
+          this.provider
+          .getOrganizationalSPFinishedProjects(this.page)
+          .subscribe((data:any) => {
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
@@ -113,12 +165,31 @@ export class ProjectComponent implements OnInit {
               ? this.showDetails(this.projectServiesArray[0])
               : '';
           });
+        }else{
+          this.provider
+          .getIndividualSPFinishedProjects(this.page)
+          .subscribe((data:any) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
+          });
+        }
+       
 
         break;
       case 4:
-        this.clientService
-          .getClientLateProjects(this.page)
-          .subscribe((data) => {
+        if(this.spType =='CO'){
+          this.provider
+          .getOrganizationalSPLateProjects(this.page)
+          .subscribe((data:any) => {
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
@@ -131,12 +202,31 @@ export class ProjectComponent implements OnInit {
               ? this.showDetails(this.projectServiesArray[0])
               : '';
           });
+        }else{
+          this.provider
+          .getIndividualSPLateProjects(this.page)
+          .subscribe((data:any) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
+          });
+        }
+        
 
         break;
       case 5:
-        this.clientService
-          .getClientStoppedProjects(this.page)
-          .subscribe((data) => {
+        if(this.spType =='CO'){
+          this.provider
+          .getOrganizationalSPStoppedProjects(this.page)
+          .subscribe((data:any) => {
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
@@ -149,11 +239,60 @@ export class ProjectComponent implements OnInit {
               ? this.showDetails(this.projectServiesArray[0])
               : '';
           });
+        }else{
+          this.provider
+          .getIndividualSPStoppedProjects(this.page)
+          .subscribe((data:any) => {
+            data.data.projects.map((pro: any) => {
+              if (pro.projectServiceId == this.activeService) {
+                this.projectServiesArray.push(pro);
+              }
+            });
+            this.totalpages = data.data.totalPages;
+            this.counter(this.totalpages);
+            console.log(this.projectServiesArray);
+            this.projectServiesArray.length > 0
+              ? this.showDetails(this.projectServiesArray[0])
+              : '';
+          });
+        }
+       
 
         break;
       default:
         console.log('nothing');
     }
+  }
+  
+  current() {
+    this.api
+      .get(
+        `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.project.offers[0].id}`
+      )
+      .subscribe((data:any) => {
+        var stones = data.data;
+        console.log(stones);
+        for (let i = 0; i < stones.length; i++) {
+          if (Number(stones[i].milestoneStatusId) == 4) {
+            console.log(stones[i].id);
+
+            this.api
+              .get(
+                `https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToCurrentWork/${Number(
+                  stones[i].id
+                )}`
+              )
+              .subscribe({
+                next: (data:any) => {
+                  Swal.fire('تم تفعيل المشروع بنجاح');
+          
+                },
+              });
+
+            return;
+          }
+        }
+      });
   }
   showDetails(project: any) {
     console.log(project);
@@ -214,21 +353,13 @@ export class ProjectComponent implements OnInit {
       this.isActiveCategory(this.activeCategory);
     }
   }
-  ngOnInit(): void {
-    this.clientService.getProjectServicesAndSubService().subscribe((data) => {
-      this.projectServices = data.data.projectServices;
-      console.log(this.projectServices);
-      this.activeService = this.projectServices[0].id;
-      console.log(this.activeService);
-      this.isActiveService(this.activeService);
-    });
-  }
+ 
   mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
     this.projectReqWorks = [];
     ProjectsReuiredWorks.map((ProjectsReuiredWork: any) => {
       this.clientService
         .getRequiredWorkByWorkId(ProjectsReuiredWork.requiredWorkId)
-        .subscribe((data) => {
+        .subscribe((data:any) => {
           this.projectReqWorks.push(...data.data);
         });
     });
@@ -238,7 +369,7 @@ export class ProjectComponent implements OnInit {
     projectComponents.map((projectComponent: any) => {
       this.clientService
         .getProjectComponentById(projectComponent.componentId)
-        .subscribe((data) => {
+        .subscribe((data:any) => {
           this.projectsComponents.push(data.data);
         });
     });
@@ -314,4 +445,5 @@ export class ProjectComponent implements OnInit {
   startComplaintF =()=>{
     this.startComplaint = true;
   }
+
 }

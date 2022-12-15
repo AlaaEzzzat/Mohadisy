@@ -145,4 +145,57 @@ export class ServiceProviderService {
       profile
     );
   }
+  /* ************************************************** */
+  
+  getOrganizationalSPCurrentProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getOrganizationalSPCurrentProjects/Page/${page}`
+    );
+  }
+  getOrganizationalSPFinishedProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getOrganizationalSPFinishedProjects/Page/${page}`
+    );
+  }
+  getOrganizationalSPPendingProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getOrganizationalSPPendingProjects/Page/${page}`
+    );
+  }
+  getOrganizationalSPStoppedProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getOrganizationalSPStoppedProjects/Page/${page}`
+    );
+  }
+  getOrganizationalSPLateProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getOrganizationalSPLateProjects//Page/${page}`
+    );
+  }
+  /* *************************************************** */
+  getIndividualSPCurrentProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getIndividualSPCurrentProjects/Page/${page}`
+    );
+  }
+  getIndividualSPFinishedProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getIndividualSPFinishedProjects/Page/${page}`
+    );
+  }
+  getIndividualSPPendingProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getIndividualSPPendingProjects/Page/${page}`
+    );
+  }
+  getIndividualSPStoppedProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getIndividualSPStoppedProjects/Page/${page}`
+    );
+  }
+  getIndividualSPLateProjects(page:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Project/getIndividualSPLateProjects//Page/${page}`
+    );
+  }
 }
