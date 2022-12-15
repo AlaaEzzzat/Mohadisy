@@ -246,7 +246,7 @@ export class ProjectComponent implements OnInit {
     var startDate = new Date(start);
     var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
-    var Days = Time / (1000 * 3600 * 24); //Diference in Days
+    var Days = Time / (1000 * 3600 * 24); 
     return Days;
   }
   download(url: string, name: any) {

@@ -38,7 +38,7 @@
                 *ngFor="let project of activeCategory == 2 ?  projectServiesArrays.projects: projectServiesArrays.priceQuotes; let i = index"
               >
                 <app-price-offer-card
-                  (click)="showOffers(project)"
+                  (click)="showDetails(project)"
                   [isActive]="activeProject == project.id"
                   [userType]="userType"
                   [project]="project"
@@ -54,16 +54,51 @@
             </div>
           </div>
           <div class="col-md-8">
-            <app-price-offer-project-layout
-              userType="client"
-              [showImg]="showImg"
-              [selectedProject]="selectedProject"
-              [activeProjectReqWorks]="activeProjectReqWorks"
-              [activeProjectsComponents]="activeProjectsComponents"
-              [isActive]="activeCategory == 2 ? 
-              projectServiesArrays.projects?.length > 0
-              : projectServiesArrays.priceQuotes?.length >0"
-            ></app-price-offer-project-layout>
+            <div *ngIf="makeOfferForm == false ">
+              <div
+              class="d-flex bg-white justify-content-between mb-3"
+            >
+              <div class="pe-3 py-3 info1">
+                <p class="cairo">كود الطلب : {{ selectedProject?.code }}</p>
+                <p class="cairo">
+                  اسم المشروع : {{ selectedProject?.name }}
+                </p>
+                <p class="cairo">
+                  موضوع المشروع : {{ selectedProject?.subject }}
+                </p>
+              </div>
+              <div class="d-flex flex-column">
+                <button
+                  class="btn h-100 px-4 rounded-0 border-0 text-white active"
+                 *ngIf="activeCategory == 1 || activeCategory == 2"
+                  (click)="makeOfferForm =true"
+                >
+                <i class="fa-solid fa-handshake pb-2 fs-5" >
+                </i>
+                  <div class="cairo">{{activeCategory== 1?'الرد' : "تعديل"}}</div>
+                </button>
+                <div class="badge cairo active p-3 m-3 ">{{activeCategory== 3?'حالي':activeCategory== 3?'مرفوض':''}}</div>
+              </div>
+            </div>
+              <app-price-offer-project-layout
+                userType="sp"
+                [showImg]="showImg"
+                [selectedProject]="selectedProject"
+                [activeProjectReqWorks]="activeProjectReqWorks"
+                [activeProjectsComponents]="activeProjectsComponents"
+                [isActive]="activeCategory == 2 ? 
+                projectServiesArrays.projects?.length > 0
+                : projectServiesArrays.priceQuotes?.length > 0"
+              ></app-price-offer-project-layout>
+            </div>
+            <div *ngIf="makeOfferForm  && selectedProject.id ">
+              <app-deal-with-offer 
+              [typeOfDeal]="activeCategory== 1?'send' :'edit'"
+              [makeOfferToggle]="makeOfferToggle"
+              [selectProject]="selectedProject">
+              [RequiredWorks]='requiredWorks'
+              </app-deal-with-offer>
+            </div>
           </div>
         </div>
       </div>
@@ -71,6 +106,9 @@
   </div>
 </section>
 <div *ngIf="showModal">
+  <app-img-modal [toggle]="toggle" [modalSrc]="modalSrc"></app-img-modal>
+</div>
+<!-- <div *ngIf="showModal">
   <app-milestone-card
       [activeProject]="selectedProject"
       [activeMiliestones]="projectMilestons"
@@ -79,7 +117,7 @@
       [toggleShow]="toggleShow"
       >
     </app-milestone-card>
-</div>
+</div> -->
 <!--  <div *ngIf="showModal" class="overlay p-5">
   <div class="img-popup p-5">
     <a class="close" style="cursor: pointer" (click)="showModal = !showModal"

@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit,Input } from '@angular/core';
-
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-price-offer-project-layout',
   templateUrl: './price-offer-project-layout.component.html',
@@ -12,10 +13,9 @@ export class PriceOfferProjectLayoutComponent implements OnInit {
   @Input() activeProjectReqWorks: any;
   @Input() offersOfSelectedProject: any;
   @Input() showImg:any= (args: any) => {};
-  @Input() download:any= (args: any) => {};
 
   @Input() userType:any=''
-  constructor() { }
+  constructor(    private _HttpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -26,4 +26,17 @@ export class PriceOfferProjectLayoutComponent implements OnInit {
     var Days = Time / (1000 * 3600 * 24); //Diference in Days
     return Days;
   }
+  download = (url: string, name: any) => {
+    console.log('hjvhgvhg')
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
 }

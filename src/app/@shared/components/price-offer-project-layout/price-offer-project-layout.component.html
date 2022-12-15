@@ -1,7 +1,7 @@
 <div *ngIf="isActive" class="projectInfo mb-3">
   <ul class="list-unstyled p-3 bg-white">
-    <li>
-      <p *ngIf="userType == 'client'">
+    <li *ngIf="userType == 'client'">
+      <p >
         صلاحيه عرض السعر :
         {{
           getTime(
@@ -11,13 +11,13 @@
         }}
       </p>
     </li>
-    <li class="mb-2">
-      <p class="cairo">
+    <li class="mb-2" *ngIf="userType == 'client'">
+      <p class="cairo" >
         اسم المشروع :
         <span class="secondColor me-2 bold">{{ selectedProject.name }}</span>
       </p>
     </li>
-    <li class="mb-2">
+    <li class="mb-2" *ngIf="userType == 'client'">
       <p class="cairo">
         موضوع المشروع :
         <span class="secondColor me-2">{{ selectedProject?.subject }} </span>

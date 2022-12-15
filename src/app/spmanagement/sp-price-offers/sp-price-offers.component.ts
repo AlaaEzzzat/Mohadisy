@@ -54,48 +54,21 @@ export class SpPriceOffersComponent implements OnInit {
   projectMilestons: any = [];
   userType: string = '';
   type: number = Number(localStorage.getItem('typeId'));
+  makeOfferForm: boolean = true;
   projectCategory: any = [
     { id: 1, name: 'طلبات عرض سعر ' },
     { id: 2, name: 'عروض مقدمة' },
     { id: 3, name: 'عروض مقبولة' },
     { id: 4, name: 'عروض مرفوضة' },
   ];
-  activeCategory: any = '';
-  isActiveCategory(catId: any) {
-    this.activeCategory = catId;
-    this.getCategoryContent(catId,this.page);
-  }
-
-  constructor(
-    private clientService: ClientService,
-    private _toastr: ToastrService,
-    private _HttpClient: HttpClient,
-    private spPriceOfferService: SpPriceOfferService
-  ) {}
-  counter(x: number) {
-    this.pagenation = [...Array(x).keys()];
-  }
-  next = () => {
-    if (this.page < this.totalpages) {
-      this.page = this.page + 1;
-      this.getCategoryContent(this.activeCategory,this.page)
-    }
-  };
-  prev = () => {
-    if (this.page > 1) {
-      this.page = this.page - 1;
-      this.getCategoryContent(this.activeCategory,this.page)
-    }
-  };
-  projectServicesWithCount: any;
   ngOnInit(): void {
     this.userType = 'sp';
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       console.log(data.data);
       this.projectServices = data.data.projectServices;
       this.activeCategory = this.projectCategory[0]?.id;
-      
-      this.getCategoryContent(this.activeCategory,this.page)
+
+      this.getCategoryContent(this.activeCategory, this.page);
       this.spPriceOfferService
         .GetProjectServicesWithCountForSP()
         .subscribe((data) => {
@@ -111,6 +84,35 @@ export class SpPriceOffersComponent implements OnInit {
         });
     });
   }
+  activeCategory: any = '';
+  isActiveCategory(catId: any) {
+    this.activeCategory = catId;
+    this.getCategoryContent(catId, this.page);
+  }
+
+  constructor(
+    private clientService: ClientService,
+    private _toastr: ToastrService,
+    private _HttpClient: HttpClient,
+    private spPriceOfferService: SpPriceOfferService
+  ) {}
+  counter(x: number) {
+    this.pagenation = [...Array(x).keys()];
+  }
+  next = () => {
+    if (this.page < this.totalpages) {
+      this.page = this.page + 1;
+      this.getCategoryContent(this.activeCategory, this.page);
+    }
+  };
+  prev = () => {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+      this.getCategoryContent(this.activeCategory, this.page);
+    }
+  };
+  projectServicesWithCount: any;
+ 
   getMilestonse(selectedOfferId: any) {
     this.projectMilestons = [];
     this.clientService
@@ -125,22 +127,25 @@ export class SpPriceOffersComponent implements OnInit {
         });
       });
   }
-  getCategoryContent(catId: any,page:any) {
+  getCategoryContent(catId: any, page: any) {
+    console.log("يصىصىي")
     switch (catId) {
       case 1:
-        this.spPriceOfferService.getSPNewProjects(page).subscribe((data: any) => {
-          this.projectServiesArrays = data.data;
-          console.log(this.projectServiesArrays);
-          this.totalpages = this.projectServiesArrays.totalPages;
-          this.counter(this.totalpages);
-          this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
-          this.selectedProject = this.projectServiesArrays.priceQuotes[0];
-          this.showOffers(this.selectedProject);
-        });
+        this.spPriceOfferService
+          .getSPNewProjects(page)
+          .subscribe((data: any) => {
+            this.projectServiesArrays = data.data;
+            console.log(this.projectServiesArrays);
+            this.totalpages = this.projectServiesArrays.totalPages;
+            this.counter(this.totalpages);
+            this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
+            this.selectedProject = this.projectServiesArrays.priceQuotes[0];
+            this.showDetails(this.selectedProject);
+          });
         break;
       case 2:
         this.spPriceOfferService
-          .GetSPPriceQuotesIAppliedFor()
+          .GetSPPriceQuotesIAppliedFor(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
             console.log(this.projectServiesArrays);
@@ -149,12 +154,12 @@ export class SpPriceOffersComponent implements OnInit {
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.projects[0].id;
             this.selectedProject = this.projectServiesArrays.projects[0];
-            this.showOffers(this.selectedProject);
+            this.showDetails(this.selectedProject);
           });
         break;
       case 3:
         this.spPriceOfferService
-          .getSPAcceptedOffers()
+          .getSPAcceptedOffers(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
             console.log(this.projectServiesArrays);
@@ -162,12 +167,12 @@ export class SpPriceOffersComponent implements OnInit {
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
             this.selectedProject = this.projectServiesArrays.priceQuotes[0];
-            this.showOffers(this.selectedProject);
+            this.showDetails(this.selectedProject);
           });
         break;
       case 4:
         this.spPriceOfferService
-          .getSPRejectedOffers()
+          .getSPRejectedOffers(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
             console.log(this.projectServiesArrays);
@@ -175,7 +180,7 @@ export class SpPriceOffersComponent implements OnInit {
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.priceQuotes[0]?.id;
             this.selectedProject = this.projectServiesArrays.priceQuotes[0];
-            this.showOffers(this.selectedProject);
+            this.showDetails(this.selectedProject);
           });
         break;
     }
@@ -224,18 +229,22 @@ export class SpPriceOffersComponent implements OnInit {
         });
     });
   }
-  showOffers(project: any) {
+  showDetails(project: any) {
     console.log(project);
-
-    project?.projectRequiredWorks?.length > 0 ?this.mapOnProjectsReuiredWorks(project.projectRequiredWorks): null;;
-    project?.projectComponents?.length?this.mapOnProjectsComponets(project.projectComponents):null;
+    this.makeOfferForm=false
+    project?.projectRequiredWorks?.length > 0
+      ? this.mapOnProjectsReuiredWorks(project.projectRequiredWorks)
+      : null;
+    project?.projectComponents?.length
+      ? this.mapOnProjectsComponets(project.projectComponents)
+      : null;
     console.log(this.activeProjectReqWorks);
     console.log(this.activeProjectsComponents);
     this.selectedProject = project;
+
     console.log(this.selectedProject);
     this.activeProject = project?.id;
-  
-     }
+  }
 
   download = (url: string, name: any) => {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
@@ -266,7 +275,11 @@ export class SpPriceOffersComponent implements OnInit {
     return name;
   }
   isActive: boolean = false;
-  toggleShow = ()=>{
+  toggle = () => {
     this.showModal = !this.showModal;
-  }
+  };
+  makeOfferToggle = () => {
+    this.makeOfferForm = !this.makeOfferForm;
+  };
+  
 }

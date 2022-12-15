@@ -44,6 +44,7 @@ import { SpProjectFinishedComponent } from './sp-project-finished/sp-project-fin
 import { SpRequestEditComponent } from './sp-request-edit/sp-request-edit.component';
 import { SpCrequestEditComponent } from './sp-crequest-edit/sp-crequest-edit.component';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
+import { DealWithOfferComponent } from './deal-with-offer/deal-with-offer.component';
 
 
 @NgModule({
@@ -84,6 +85,7 @@ import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.compon
     SpRequestEditComponent,
     SpCrequestEditComponent,
     SpPriceOffersComponent,
+    DealWithOfferComponent,
 
   ],
   imports: [
