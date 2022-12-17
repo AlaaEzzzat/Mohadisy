@@ -20,7 +20,6 @@ export class ProjectLayoutComponent implements OnInit {
   constructor(private _HttpClient : HttpClient) { }
 
   ngOnInit(): void {
-    console.log(this.project)
   }
   getTime(end: any, start: any) {
     var startDate = new Date(start);
@@ -30,7 +29,6 @@ export class ProjectLayoutComponent implements OnInit {
     return Days;
   }
   download = (url: string, name: any) => {
-    console.log('hjvhgvhg')
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });

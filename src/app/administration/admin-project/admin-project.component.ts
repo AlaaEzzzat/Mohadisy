@@ -6,10 +6,16 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeStatusProject } from './../../@models/change-status-project';
 import { Messages } from './../../@core/utils/Messages';
 import { IadminProjects } from 'src/app/@models/iadmin-projects';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { IrequiredWorks } from 'src/app/@models/irequired-works';
-import {ThemePalette} from '@angular/material/core';
-import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
 
 @Component({
@@ -34,58 +40,58 @@ export class AdminProjectComponent implements OnInit {
   productCurrent: any;
   id: any;
   // down
-  userformMassage :FormGroup;
-  messages:any;
-  show:boolean=false;
-  showDanger:boolean=false;
-  isProcessing:boolean=true;
-  requiredWorkId:IrequiredWorks[]=[];
-  requiredWorkIdObject:any[]=[]
-   set:any
+  userformMassage: FormGroup;
+  messages: any;
+  show: boolean = false;
+  showDanger: boolean = false;
+  isProcessing: boolean = true;
+  requiredWorkId: IrequiredWorks[] = [];
+  requiredWorkIdObject: any[] = [];
+  set: any;
   //  progress
-  componentId:any[]=[];
-  offer:any[]=[];
-  period:any;
-  cost:any;
-  deliveryDate:any
+  componentId: any[] = [];
+  offer: any[] = [];
+  period: any;
+  cost: any;
+  deliveryDate: any;
   color: ThemePalette = 'primary';
   mode: ProgressSpinnerMode = 'determinate';
   values = 50;
-  percentage:any=0
-  milestonesData:any[]=[];
-  test:any=0
-  organizationalServiceProviderProfileId:any;
-  individualServiceProviderProfileId:any;
-  projectResponsible:any
+  percentage: any = 0;
+  milestonesData: any[] = [];
+  test: any = 0;
+  organizationalServiceProviderProfileId: any;
+  individualServiceProviderProfileId: any;
+  projectResponsible: any;
   constructor(
     private ServicesProvidor: AdminProjectsService,
-    private _HttpClient: HttpClient ,private formbuilder:FormBuilder,
+    private _HttpClient: HttpClient,
+    private formbuilder: FormBuilder,
     private http: AdminDashService
   ) {
-    this.userformMassage=this.formbuilder.group({
-      massage:['',[Validators.required]],
+    this.userformMassage = this.formbuilder.group({
+      massage: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
     this.getCurrentProjects();
-
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
   }
-  next=()=> {
+  next = () => {
     if (this.page < this.total) {
       this.page = this.page + 1;
-      this.choise()
+      this.choise();
     }
-  }
-  prev= ()=> {
+  };
+  prev = () => {
     if (this.page > 1) {
       this.page = this.page - 1;
-      this.choise()
+      this.choise();
     }
-  }
+  };
   choise() {
     switch (this.newApi) {
       case 7:
@@ -105,88 +111,71 @@ export class AdminProjectComponent implements OnInit {
         break;
     }
   }
-  //3
   getCurrentProjects() {
     this.isProcessing = true;
     this.newApi = 3;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
     this.ServicesProvidor.getCurrentProjectsForAdmin(this.page).subscribe({
-
-      next:(value) => {
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          // console.log(this.total);
-          console.log(this.iadminPriceQuotes);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
-          // this.projectRequiredWorks()
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
+      },
     });
-
-
   }
-  // 4
   getPendingProject() {
     sessionStorage.clear();
     this.isProcessing = true;
     this.newApi = 4;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe(
-    {
-      next:  (value) => {
+    this.ServicesProvidor.getPendingProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          console.log(this.iadminPriceQuotes);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
-    }
-    );
+      },
+    });
   }
-  //5
   getFinishedProjects() {
     sessionStorage.clear();
     this.isProcessing = true;
     this.newApi = 5;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe(
-
-     {
-      next:(value) => {
+    this.ServicesProvidor.getFinishedProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
         }
-      },error: (error) => {
+      },
+      error: (error) => {
         this.isProcessing = false;
-
-      }
-     }
-    );
+      },
+    });
   }
-  //6
   getLateProjects() {
     sessionStorage.clear();
     this.newApi = 6;
@@ -198,7 +187,6 @@ export class AdminProjectComponent implements OnInit {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -210,20 +198,18 @@ export class AdminProjectComponent implements OnInit {
     });
   }
 
-  //7
   getStoppedProjects() {
     sessionStorage.clear();
     this.newApi = 7;
     this.isProcessing = true;
     sessionStorage.removeItem('idProjects');
     sessionStorage.removeItem('projects');
-    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe(
-     {next: (value) => {
+    this.ServicesProvidor.getStoppedProjectsForAdmin(this.page).subscribe({
+      next: (value) => {
         if (value != null || value != undefined) {
           this.datas = value.data.projects;
           this.iadminPriceQuotes = this.datas;
           this.total = value.data.totalPages;
-          // console.log(this.total);
           this.counter(this.total);
           this.firstObject = this.iadminPriceQuotes[0];
           this.objectProduct(this.firstObject, this.firstObject.id);
@@ -231,8 +217,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
-      }
-  });
+      },
+    });
   }
 
   objectProduct(object?: any, id?: any) {
@@ -245,162 +231,49 @@ export class AdminProjectComponent implements OnInit {
     this.id = sessionStorage.getItem('idProjects');
     this.projectRequiredWorks();
     this.projectComponents();
-    this.offers()
-    // console.log(this.productCurrent.offers);
-  let  objectCurrentProjects:any[]=this.productCurrent
-  // console.log(objectCurrentProjects);
-    
-      if(this.productCurrent.offers.length>0){
-        for(let id of this.productCurrent.offers){
-          if(id.organizationalServiceProviderProfileId !=null){
-            this.organizationalServiceProviderProfileId=id.organizationalServiceProviderProfileId;
-            console.log(this.organizationalServiceProviderProfileId)
-            this.getProjectResponsible(this.organizationalServiceProviderProfileId)
-
-          }else if(id.individualServiceProviderProfileId != null){
-            this.individualServiceProviderProfileId=id.individualServiceProviderProfileId
-            this.getProjectResponsible(this.individualServiceProviderProfileId)
-          }
-          this.http.getMilestonesByOfferId(id.id).subscribe(((data:any)=>{
-            this.milestonesData=data.data
-            // console.log(this.milestonesData)
-            this.percentage =0
-            for(let miles of this.milestonesData){
-              //           console.log(miles)
-
-              // console.log(miles.isPaid)
-              if(miles.isPaid){
-                this.percentage += miles.percentage
-                // this.percentage.push(this.test)
-                this.test =miles.milestoneStatus.nameAr
-
-              }
-              console.log(this.percentage)
-
-            }
-
-          }))
-
+    this.offers();
+    let objectCurrentProjects: any[] = this.productCurrent;
+    if (this.productCurrent.offers.length > 0) {
+      for (let id of this.productCurrent.offers) {
+        if (id.organizationalServiceProviderProfileId != null) {
+          this.organizationalServiceProviderProfileId =
+            id.organizationalServiceProviderProfileId;
+          this.getProjectResponsible(
+            this.organizationalServiceProviderProfileId
+          );
+        } else if (id.individualServiceProviderProfileId != null) {
+          this.individualServiceProviderProfileId =
+            id.individualServiceProviderProfileId;
+          this.getProjectResponsible(this.individualServiceProviderProfileId);
         }
-      }else{
-        let notOffer ="لايوجد عرض سعر"
-        // console.log(notOffer)
-        this.percentage =0
-        this.test =''
-
+        this.http.getMilestonesByOfferId(id.id).subscribe((data: any) => {
+          this.milestonesData = data.data;
+          this.percentage = 0;
+          for (let miles of this.milestonesData) {
+            if (miles.isPaid) {
+              this.percentage += miles.percentage;
+              this.test = miles.milestoneStatus.nameAr;
+            }
+          }
+        });
       }
-     
-     
-
+    } else {
+      this.percentage = 0;
+      this.test = '';
+    }
   }
 
   objectProductGet() {
     this.idProductSessionStorage = sessionStorage.getItem('projects');
     this.productCurrent = JSON.parse(this.idProductSessionStorage);
-    // console.log(this.idProductSessionStorage);
   }
-  getProjectResponsible( id:any){
-    this.ServicesProvidor.getOfferSenderProfile(id).subscribe({next:((data)=>{
-      // console.log(data.data)
-      this.projectResponsible=data.data
-    })})
-
+  getProjectResponsible(id: any) {
+    this.ServicesProvidor.getOfferSenderProfile(id).subscribe({
+      next: (data) => {
+        this.projectResponsible = data.data;
+      },
+    });
   }
-  //   // change stutas client
-  //   //2
-  //   changeToAccepted() {
-  //     this.iChangeStatusCliend = {
-
-  //       projectId: this.idProduct.id,
-  //       projectStatusId:2,
-  //       notes: "string",
-  //       rejectionReasonId: null
-  //     };
-  //     if (
-  //       this.iChangeStatusCliend.projectStatusId ===
-  //       this.idProduct.projectRequestStatus.projectStatusId
-  //     ) {
-  //       this.showDanger=true;
-  //       setTimeout(()=>{
-  //         this.showDanger=false
-  //       }, 3000);
-  //     } else {
-  //       this.ServicesProvidor.changeProfileStatus(
-  //         this.iChangeStatusCliend
-  //       ).subscribe((data) => {
-  //         this.show=true;
-  //      this.getNewProjectsForAdmin()
-  //     this.messages=data.message
-  //     setTimeout(()=>{
-  //       this.show=false
-  //     }, 3000);
-  //       });
-  //       // this.getNewProjectsForAdmin()
-
-  //     }
-  //   }
-  // //9
-  //   changeToReject() {
-  //     this.iChangeStatusCliend = {
-
-  //       projectId: this.idProduct.id,
-  //       projectStatusId:2,
-  //       notes: "string",
-  //       rejectionReasonId: null
-  //     };
-  //     if (
-  //       this.iChangeStatusCliend.projectStatusId ===
-  //       this.idProduct.projectRequestStatus.projectStatusId
-  //     ) {
-  //       this.showDanger=true;
-  //       setTimeout(()=>{
-  //         this.showDanger=false
-  //       }, 3000);
-  //     } else {
-  //       this.ServicesProvidor.changeProfileStatus(
-  //         this.iChangeStatusCliend
-  //       ).subscribe((data) => {
-  //         this.show=true;
-  //      this.getNewProjectsForAdmin()
-  //     this.messages=data.message
-  //     setTimeout(()=>{
-  //       this.show=false
-  //     }, 3000);
-  //       });
-
-  //   }
-  // }
-  // //6
-  //   changeToNotComplette() {
-  //       this.iChangeStatusCliend = {
-
-  //       projectId: this.idProduct.id,
-  //       projectStatusId:6,
-  //       notes: "string",
-  //       rejectionReasonId: null
-  //     };
-  //     if (
-  //       this.iChangeStatusCliend.projectStatusId ===
-  //       this.idProduct.projectRequestStatus.projectStatusId
-  //     ) {
-  //       this.showDanger=true;
-  //       setTimeout(()=>{
-  //         this.showDanger=false
-  //       }, 3000);
-  //     } else {
-  //       this.ServicesProvidor.changeProfileStatus(
-  //         this.iChangeStatusCliend
-  //       ).subscribe((data) => {
-  //         this.show=true;
-  //      this.getNewProjectsForAdmin()
-  //     this.messages=data.message
-  //     setTimeout(()=>{
-  //       this.show=false
-  //     }, 3000);
-  //       });
-  //     }
-  //   }
-
   calculateDiff(sentOn: any) {
     let todayDate = new Date();
     let sentOnDate = new Date(sentOn);
@@ -410,99 +283,80 @@ export class AdminProjectComponent implements OnInit {
     return differenceInDays;
   }
 
-  calculateDiffEend(sentOn:any){
-
+  calculateDiffEend(sentOn: any) {
     let todayDate = new Date();
     let sentOnDate = new Date(sentOn);
     sentOnDate.setDate(sentOnDate.getDate());
-    let differenceInTime =  sentOnDate.getTime()-todayDate.getTime()
-    // To calculate the no. of days between two dates
+    let differenceInTime = sentOnDate.getTime() - todayDate.getTime();
     let differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
     return differenceInDays;
   }
 
   download(url: string, name: any) {
-    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
-      {
-        next:(pptx) => {
-          const blob = new Blob([pptx], { type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' });
+    return this._HttpClient
+      .get(url, { responseType: 'arraybuffer' })
+      .subscribe({
+        next: (pptx) => {
+          const blob = new Blob([pptx], {
+            type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+          });
           const fileName = name;
           saveAs(blob, fileName);
         },
-    error:(err) => {
-          console.log(err);
-        }
-      }
-    );
+        error: (err) => {},
+      });
   }
 
-  projectRequiredWorks(){
-    this.requiredWorkId=[]
-    this.requiredWorkIdObject=[]
-    let requiredWorkIdObjects:any;
-  
-    for(let projectRe of this.productCurrent.projectRequiredWorks){
-      // console.log(projectRe.requiredWorkId)
-      this.ServicesProvidor.getRequiredWorkByWorkId(projectRe.requiredWorkId).subscribe({
-        next:((data)=>{
-          this.requiredWorkId.push(data.data)
-          // console.log(this.requiredWorkId)
+  projectRequiredWorks() {
+    this.requiredWorkId = [];
+    this.requiredWorkIdObject = [];
+    let requiredWorkIdObjects: any;
 
-          for(let requiredWork of this.requiredWorkId){
-            requiredWorkIdObjects=requiredWork
-            for(let requiredWorkObject of requiredWorkIdObjects){
-             
+    for (let projectRe of this.productCurrent.projectRequiredWorks) {
+      this.ServicesProvidor.getRequiredWorkByWorkId(
+        projectRe.requiredWorkId
+      ).subscribe({
+        next: (data) => {
+          this.requiredWorkId.push(data.data);
+          for (let requiredWork of this.requiredWorkId) {
+            requiredWorkIdObjects = requiredWork;
+            for (let requiredWorkObject of requiredWorkIdObjects) {
               this.requiredWorkIdObject.push(requiredWorkObject);
+            }
 
-
-            } 
-            // console.log(this.requiredWorkIdObject)   ;
-             this.set = new Set(this.requiredWorkIdObject)
-            // console.log(this.set)
-            
-
+            this.set = new Set(this.requiredWorkIdObject);
           }
-
-        })
-      })
+        },
+      });
     }
-
   }
-  projectComponents(){
-    this.componentId=[]
-    for(let projectCom of this.productCurrent.projectComponents){
-      this.ServicesProvidor.getProjectComponentById(projectCom.componentId).subscribe({
-        next:((data=>{
-              this.componentId.push(data.data.name)
-              // console.log(this.componentId)
-              // console.log(data)
-
-        }))
-      })
-
+  projectComponents() {
+    this.componentId = [];
+    for (let projectCom of this.productCurrent.projectComponents) {
+      this.ServicesProvidor.getProjectComponentById(
+        projectCom.componentId
+      ).subscribe({
+        next: (data) => {
+          this.componentId.push(data.data.name);
+        },
+      });
     }
-
   }
-  offers(){
-    this.offer=[]
-    for(let projectOffer of this.productCurrent.offers){
-      this.offer.push(projectOffer)
-      
-      // this.period=projectOffer.period
-      this.deliveryDate=projectOffer.period
-      
-      this.cost=projectOffer.cost
+  offers() {
+    this.offer = [];
+    for (let projectOffer of this.productCurrent.offers) {
+      this.offer.push(projectOffer);
+      this.deliveryDate = projectOffer.period;
 
-    } 
-    console.log()
-    switch(this.offer.length){
+      this.cost = projectOffer.cost;
+    }
+    switch (this.offer.length) {
       case 1:
-        this.period=0;
+        this.period = 0;
         break;
       case 2:
-          this.period=25;
-          break;
-
+        this.period = 25;
+        break;
     }
   }
 }

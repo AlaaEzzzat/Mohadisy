@@ -12,7 +12,6 @@ import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SpDashBoardComponent } from './sp-dash-board/sp-dash-board.component';
-import { SpMessagesComponent } from './sp-messages/sp-messages.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
 import { SpHomeComponent } from './sp-home/sp-home.component';
 import { SpProjectRequestComponent } from './sp-project-request/sp-project-request.component';
@@ -22,7 +21,6 @@ import { SpCprojectRequestComponent } from './sp-cproject-request/sp-cproject-re
 import { SpRequestAcceptComponent } from './sp-request-accept/sp-request-accept.component';
 import { SpRequestRejectComponent } from './sp-request-reject/sp-request-reject.component';
 import { SpProjectOfferComponent } from './sp-project-offer/sp-project-offer.component';
-
 import { SpProjectStatusComponent } from './sp-project-status/sp-project-status.component';
 import { SpMenuOffersComponent } from './sp-menu-offers/sp-menu-offers.component';
 import { SpProjectCurrentComponent } from './sp-project-current/sp-project-current.component';
@@ -40,7 +38,6 @@ const routes: Routes = [
     children: [
       { path: 'spmanagementHome', component: SpHomeComponent },
       { path: 'dashboard', component: SpDashBoardComponent },
-      { path: 'messages', component: SpMessagesComponent },
       { path: 'payments', component: SpPaymentsComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'priceOffers', component: SpPriceOffersComponent },

@@ -1,6 +1,5 @@
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { ClientService } from './../../@core/services/client/client.service';
-import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 
 import { ApiService } from 'src/app/@core/api.service';
@@ -192,8 +191,6 @@ export class SpProfileComponent implements OnInit {
       .get('https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus')
       .subscribe((data) => {
         var rate = data.data.testimonials;
-
-        // console.log(rate);
         for (let i = 0; i < rate.length; i++) {
           this.avgRate += Number(rate[i].stars);
         }
@@ -245,7 +242,6 @@ export class SpProfileComponent implements OnInit {
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
       console.log(file);
-      // let FileformData = new FormData();
       this.FileformData.append('file', file);
     }
   }

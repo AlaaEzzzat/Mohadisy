@@ -16,7 +16,6 @@ export class CalenderComponent implements OnInit {
   @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
 
   pickDate(date: any): void {
-    console.log(date);
     this.onDatePicked.emit(date);
   }
   constructor() {}

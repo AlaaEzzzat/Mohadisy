@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
-/* ************************************************************************** */
-import { FormBuilder, FormArray, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ClientService } from './../../../@core/services/client/client.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -42,7 +41,6 @@ export class RequiredFilesComponent implements OnInit {
     this.uploadedFiles.map((uploadedFile: any) => {
       filesFormData.append(uploadedFile.id, uploadedFile.file);
     });
-    console.log(filesFormData);
     this.clientService
       .storeProjectFiles(this.clientService.reuestedProject.id, filesFormData)
       .subscribe({
@@ -56,7 +54,6 @@ export class RequiredFilesComponent implements OnInit {
       });
   }
   onFileUpload(event: any, id: any) {
-    console.log('uplaod');
     if (this.uploadedFiles.length > 0) {
       this.uploadedFiles.map((oldfile: any) => {
         if (oldfile.id === id) {
@@ -83,10 +80,8 @@ export class RequiredFilesComponent implements OnInit {
     fileObj.id = id;
     fileObj.file = file;
     this.uploadedFiles?.push(fileObj);
-    console.log('push');
   }
   updateField(oldFile: any, file: any) {
     oldFile.file = file;
-    console.log('update');
   }
 }

@@ -213,8 +213,6 @@ export class SpCompleteProfileComponent implements OnInit {
       'Membership',
       this.completeProfileForm.get('Membership')?.value
     );
-
-    //send image to end point
     this.serviceProviderService.storeImages(filesFormDta).subscribe({
       next: (response: any) => {
         console.log('Image Posted');
@@ -227,7 +225,6 @@ export class SpCompleteProfileComponent implements OnInit {
 
     delete this.user.Id;
     delete this.user.Membership;
-    //send data to profile
     this.serviceProviderService
       .storeIndividualServiceProviderProfile(this.user)
       .subscribe({
@@ -312,5 +309,3 @@ export class SpCompleteProfileComponent implements OnInit {
     });
   }
 }
-
-/* ************************** */

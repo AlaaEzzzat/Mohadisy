@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
 import { AdminSettingsService } from 'src/app/@core/services/admin/admin-settings.service';
 interface Ichecked{
   "isActive": boolean,
@@ -11,7 +10,6 @@ interface Ichecked{
   styleUrls: ['./admin-setting-users.component.scss']
 })
 export class AdminSettingUsersComponent implements OnInit {
-  // iProfileAdmin: any | undefined = undefined;
   state: any = 1;
   datas: any;
   usersActive: IuserAct[] = [];
@@ -31,12 +29,10 @@ export class AdminSettingUsersComponent implements OnInit {
     this.getNonActiveUsers();
   }
   getActiveUsers() {
-    // this.state=event
     this.adminSettingsService.getActiveUsers().subscribe({
       next: (data) => {
         this.datas = data.data.activeUsers;
         this.usersActive = this.datas;
-        console.log(this.usersActive);
       },
     });
   }
@@ -46,7 +42,6 @@ export class AdminSettingUsersComponent implements OnInit {
       next: (data) => {
         this.datasNotActive = data.data.nonActiveUsers;
         this.usersNotActive = this.datasNotActive;
-        console.log(this.datasNotActive);
       },
     });
   }
@@ -57,14 +52,12 @@ export class AdminSettingUsersComponent implements OnInit {
         "userId": id
       }
       this.adminSettingsService.changeAccountActivation(this.changeStuseAcount).subscribe({error:(er)=>{
-        // alert(er.message)
         this.message=er.message
         this.showErr=true
   
         setInterval(() => {
           this.showErr=false
           }, 5000);
-        
       },
       next:(correct)=>{
       
@@ -108,8 +101,6 @@ export class AdminSettingUsersComponent implements OnInit {
       }
     })
     }
-   
-    console.log(this.changeStuseAcount)
   }
 }
 interface IuserAct {

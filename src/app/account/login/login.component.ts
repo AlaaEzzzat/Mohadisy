@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.LoginForm.value);
     this.auth
       .login(
         'https://app.mohandisy.com/api/Authenticate/userLogin',
@@ -39,7 +38,6 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((data) => {
         if (data.data.emailConfirmed) {
-          console.log(data);
           this._toastr.info(data.message);
           this.serviceProviderService.personalData = data.data;
           localStorage.setItem('token', JSON.stringify(data.data.token));

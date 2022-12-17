@@ -3,8 +3,6 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ThemePalette } from '@angular/material/core';
 import { ApiService } from 'src/app/@core/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ProfileData } from 'src/app/@models/profile-data';
-
 import { Chart, registerables } from 'node_modules/chart.js';
 Chart.register(...registerables);
 
@@ -29,7 +27,6 @@ export class UserDashBoardComponent implements OnInit {
       .get('https://app.mohandisy.com/api/Dashboard/getClientStatus')
       .subscribe((data) => {
         this.data = data.data;
-        console.log(data.data);
         this.currentProjects = this.data.currentProjects;
         this.currentProjects.map((project: any) => {
           this.currentProjectsCost += project.offers[0].totalCost;
@@ -44,8 +41,6 @@ export class UserDashBoardComponent implements OnInit {
             this.getOfferSender(project);
           }
         });
-        console.log(this.currentProjects);
-        console.log(this.completedProjects);
         this.renderDouChart();
       });
   }

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
 import {
-  FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -29,8 +26,6 @@ export class AdminSettingProfileComponent implements OnInit {
   datas: any;
   message:any;
   show:boolean=false
-  // usersActive: IuserAct[] = [];
-  // usersNotActive: IusersNotAct[] = [];
   datasNotActive: any;
   constructor(private adminSettingsService: AdminSettingsService, private formbuilder: FormBuilder) {
     this.getProfileAdmin() 
@@ -48,7 +43,6 @@ export class AdminSettingProfileComponent implements OnInit {
     this.adminSettingsService.getAdminProfile().subscribe((value) => {
       this.iProfileAdmin = value.data;
       this.profileChange=value.data;
-      console.log(this.profileChange);
     });
   }
   get lastName() {
@@ -81,9 +75,6 @@ export class AdminSettingProfileComponent implements OnInit {
   }
   changeFirstOrLastName() {
     this.state = 2;
-
-    //  id:this.state.id,
-    //  applicationUserId:this.state.applicationUserId,
   }
 
 

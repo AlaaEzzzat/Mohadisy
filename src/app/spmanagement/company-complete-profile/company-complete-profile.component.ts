@@ -12,7 +12,6 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  ValidatorFn,
 } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 @Component({
@@ -36,7 +35,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
   citiesList: any = [];
   districtsList: any = [];
   allProjectSubService = [];
-  /*   selectedSubServices: any = []; */
   uplaodedImages: any = [];
   addingDistrict: boolean = false;
   selectedServices: any = 0;
@@ -333,17 +331,14 @@ export class CompanyCompleteProfileComponent implements OnInit {
         .storeOrganizationalProfile(this.companyUser)
         .subscribe({
           next: (response: any) => {
-            console.log('companyUser');
             this.serviceProviderService
               .storeReprasintative(this.companyPresenter)
               .subscribe({
                 next: (response: any) => {
-                  console.log('companyPresenter');
                   this.serviceProviderService
                     .storeCompanyProfileFiles(this.filesFormData)
                     .subscribe({
                       next: (response: any) => {
-                        console.log('files Sent');
                         this.prevWorksFormSubmit();
                       },
                       error: (err: any) => {
@@ -441,7 +436,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
     this.work.identifier = '1';
     delete this.work.images;
     if (localStorage.getItem('type') == '"CO"') {
-      /* send work */
       this.serviceProviderService
         .storeOrganizationalServiceProviderWork(this.work)
         .subscribe({
@@ -449,8 +443,6 @@ export class CompanyCompleteProfileComponent implements OnInit {
             console.log('work Posted');
             this._toastr.info(response.message);
             this.workId = response.data.id;
-
-            /* send files */
             this.serviceProviderService
               .storeOrganizationalServiceProviderWorkFilesByWorkId(
                 filesFormDta,
@@ -471,14 +463,12 @@ export class CompanyCompleteProfileComponent implements OnInit {
           },
         });
     } else {
-      /* send work */
       this.serviceProviderService
         .storeIndividualServiceProviderWork(this.work)
         .subscribe({
           next: (response: any) => {
             console.log('work Posted');
             this.workId = response.data.id;
-            /* send files */
             this.serviceProviderService
               .storeIndividualServiceProviderWorkFilesByWorkId(
                 filesFormDta,
@@ -499,6 +489,4 @@ export class CompanyCompleteProfileComponent implements OnInit {
         });
     }
   }
-
-  /* ********************** */
 }

@@ -29,8 +29,6 @@ export class StartChatComponent implements OnInit {
     if (event.target.files.length > 0) {
       const myfile = event.target.files[0];
       this.fileMessage = myfile;
-      console.log(this.fileMessage);
-      console.log(this.fileMessage.name);
     }
   }
   sendMessage(message: string) {
@@ -67,7 +65,6 @@ export class StartChatComponent implements OnInit {
   sendMessageToEndPoint(message: any, receiverId: any) {
     this.chatService.sendMessage(message).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.startingChat = false;
         if (this.userType == 'sp') {
           this.router.navigate(['/Spmanagement/chat']);

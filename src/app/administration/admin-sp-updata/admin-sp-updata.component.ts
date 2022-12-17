@@ -33,12 +33,8 @@ export class AdminSpUpdataComponent implements OnInit {
     this.productCurrent=JSON.parse(this.idProductSessionStorage)
     if(this.productCurrent.applicationUser.accountType.key=== 'CO'){
       this.currentOrganiztionl=this.productCurrent
-      console.log(this.currentOrganiztionl.zakatCertificateNumber)
-
     }else{
       this.currentIndivdual=this.productCurrent
-      // console.log(this.currentIndivdual)
-
     }
     this.userformMassage=this.formbuilder.group({
       membershipFile:[`${this.currentIndivdual.membershipFile}`,[Validators.required]],
@@ -64,7 +60,6 @@ export class AdminSpUpdataComponent implements OnInit {
       companyRegisterationNumber:[`${this.currentOrganiztionl.companyRegisterationNumber}`,[Validators.required]],
       shortAddressOrg:[`${this.currentOrganiztionl.shortAddress}`,[Validators.required]],
       companyRegisterationNumberFile:[`${this.currentOrganiztionl.companyRegisterationNumberFile}`,[Validators.required]],
-      // licenseNumber:[`${this.currentOrganiztionl.licenseNumber}`,[Validators.required]],
       licenseFile:[`${this.currentOrganiztionl.licenseFile}`,[Validators.required]],
       bankAccountNumberOrg:[`${this.currentOrganiztionl.bankAccountNumber}`,[Validators.required]],
       iBanNumber:[`${this.currentOrganiztionl.iBanNumber}`,[Validators.required]],
@@ -72,11 +67,9 @@ export class AdminSpUpdataComponent implements OnInit {
       officePhoneNumber:[`${this.currentOrganiztionl.officePhoneNumber}`,[Validators.required]]
       ,officeMobileNumber:[`${this.currentOrganiztionl.officeMobileNumber}`,[Validators.required]],
       websiteLink:[`${this.currentOrganiztionl.websiteLink}`,[Validators.required]],
-      // zakatCertificateNumber:[`${this.currentOrganiztionl.zakatCertificateNumber}`,[Validators.required]],
       zakatCertificateFile:[`${this.currentOrganiztionl.zakatCertificateFile}`,[Validators.required]],
       saudizationCertificateFile:[`${this.currentOrganiztionl.saudizationCertificateFile}`,[Validators.required]],
       financialStatementFile:[`${this.currentOrganiztionl.financialStatementFile}`,[Validators.required]],
-      // coCMembershipNumber:[`${this.currentOrganiztionl.coCMembershipNumber}`,[Validators.required]],
       coCMembershipFile:[`${this.currentOrganiztionl.coCMembershipFile}`,[Validators.required]],
       isoFile:[`${this.currentOrganiztionl.isoFile}`,[Validators.required]],
       companyClassificationId:[`${this.currentOrganiztionl.companyClassificationId}`,[Validators.required]],
@@ -85,7 +78,6 @@ export class AdminSpUpdataComponent implements OnInit {
       districtNameOrg:[`${this.currentOrganiztionl.districtName}`,[Validators.required]],
       streetNameOrg:[`${this.currentOrganiztionl.streetName}`,[Validators.required]],
       buildingNumberOrg:[`${this.currentOrganiztionl.buildingNumber}`,[Validators.required]]
-      // ,additionalNumberOrg:[`${this.currentOrganiztionl.additionalNumber}`,[Validators.required]]
       ,
       postalCodeOrg:[`${this.currentOrganiztionl.postalCode}`,[Validators.required]],
       iBanFile:[`${this.currentOrganiztionl.iBanFile}`,[Validators.required]],
@@ -100,7 +92,6 @@ export class AdminSpUpdataComponent implements OnInit {
       isoNumber:[`${this.currentOrganiztionl.isoNumber}`,[Validators.required]],
       financialStatementNumber:[`${this.currentOrganiztionl.financialStatementNumber}`,[Validators.required]],
       saudizationCertificateNumber:[`${this.currentOrganiztionl.saudizationCertificateNumber}`,[Validators.required]],
-      // profilePictureFileOrg:[`${this.currentOrganiztionl.profilePictureFile}`,[Validators.required]],
       classificationCertificateNumber:[`${this.currentOrganiztionl.classificationCertificateNumber}`,[Validators.required]]
 
     });
@@ -114,8 +105,6 @@ export class AdminSpUpdataComponent implements OnInit {
        
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
-      console.log(file);
-      // let FileformData = new FormData();
       this.FileformData.append('file', file);
   }
  
@@ -125,9 +114,6 @@ export class AdminSpUpdataComponent implements OnInit {
   get classificationCertificateNumber(){
     return this.formOrganiztionl?.get('classificationCertificateNumber');
   }
-  // get profilePictureFileOrg(){
-  //   return this.formOrganiztionl?.get('profilePictureFile');
-  // }
   get companyName(){
     return this.formOrganiztionl?.get('companyName');
   }
@@ -417,35 +403,26 @@ this.iChangeStatus = {
   joinRequestStatuses:[""]
 
 };
-
     if (this.productCurrent.applicationUser.accountType.key === 'CO'){
-      // console.log(this.currentOrganiztionl2)
-          // this.currentOrganiztionl2=JSON.parse(this.idProductSessionStorage)
           let test = JSON.stringify(this.currentOrganiztionl2);
         sessionStorage.setItem('test', test);
         this.ServicesProvidor.updateOrganizationalUpdateProfile(this.currentOrganiztionl2).subscribe({
           next:(prd)=>{
-
-            console.log(this.currentOrganiztionl2)
             this.router.navigate(['/Admin/sp'])
           },
           error:(err)=>{
             alert(err);
-            console.log(this.currentOrganiztionl2)
-
           }
         });
     this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
               });
 
   } else{
-      console.log(this.currentIndivdual2)
       this.ServicesProvidor.updateIndividualUpdateProfile(this.currentIndivdual2).subscribe({
         next:(prd)=>{
-          console.log(prd.data.id)
+  
           this.router.navigate(['/Admin/sp'])
           this.ServicesProvidor.updateIndividualstoreProfileFiles(this.FileformData,prd.id).subscribe({next:(data)=>{
-            console.log(data)
           },error:(er)=>{
             console.log(er)
           }})
@@ -458,36 +435,6 @@ this.iChangeStatus = {
       
     }
   }
-
-  // changeToComplette(){
-  //   this.iChangeStatus = {
-  //     profileId: this.productCurrent.id,
-  //     description:"تم التعديل البيانات و تحويل طلبات المكتمله",
-  //     accountStatusId: 7,
-  //     joinRequestStatuses:[""]
-
-  //   };
-  //   if (this.idProduct.applicationUser.accountType.key === 'CO') {
-  //     this.ServicesProvidor.changeOrganizationalStatus(this.iChangeStatus).subscribe((data) => {
-  //         });
-  //   }
-  //   else{
-  //     this.ServicesProvidor.changeIndividualStatus(
-  //       this.iChangeStatus
-  //     ).subscribe((data) => {
-  //     });
-  //   }
-
-  // }
-
-onFileChange(event: any, name: any) {
-  // if (event.target.files.length > 0) {
-  //   console.log(event.target.files);
-  //   const myImage = event.target.files[0];
-  //   this.userformMassage.get(name)?.setValue(myImage);
-  // }
-}
-
 }
 
 export interface IND{
@@ -516,12 +463,10 @@ export interface IND{
   "accountOverview": "string",
   "profilePictureFile": "string",
   "bankId": 0,
-
   "bankAccountNumber": "string"
 
 }
 export interface OSP{
-
   "id": 0,
   "applicationUserId": "string",
   "companyName": "string",

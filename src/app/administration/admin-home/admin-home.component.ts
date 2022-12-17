@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminServiceProvidorService } from './../../@core/services/admin/admin-service-providor.service';
 import { AdminSettingsService } from './../../@core/services/admin/admin-settings.service';
-
 @Component({
   selector: 'app-admin-home',
   templateUrl: './admin-home.component.html',

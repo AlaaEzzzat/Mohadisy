@@ -38,14 +38,12 @@ export class NavbarComponent implements OnInit {
   }
   getUserNotifications(status: boolean) {
     this.clientService.getUserNotifications(status).subscribe((data) => {
-      console.log(data.data);
       this.notifications = data.data;
     });
   }
   markAsRead(id: any) {
     this.clientService.readNotification(id).subscribe({
       next: (response: any) => {
-        console.log(response);
         this.getUserNotifications(true);
       },
       error: (err: any) => {

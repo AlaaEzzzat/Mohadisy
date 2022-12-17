@@ -181,12 +181,9 @@ export class ProfilecomplateComponent implements OnInit {
       }
     });
     this.user.neighborhood = neighborhood;
-
-    console.log(this.user);
     let imageformData = new FormData();
     imageformData.append('idImage', this.registerForm.get('imageFile')?.value);
-    console.log(imageformData.get('idImage'));
-    //send image to end point
+
     this.provider.storeClientIdFile(imageformData).subscribe({
       next: (response: any) => {
         console.log('Image Posted');
@@ -198,8 +195,6 @@ export class ProfilecomplateComponent implements OnInit {
     });
 
     delete this.user.imageFile;
-    console.log(this.user);
-    //send data to profile
     this.provider.storeClientProfile(this.user).subscribe({
       next: (response: any) => {
         console.log('user Posted');
@@ -220,7 +215,7 @@ export class ProfilecomplateComponent implements OnInit {
           this.citiesList = data.data;
         },
         error: (error) => {
-          console.log('error');
+          console.log(error);
         }
       }
         

@@ -103,7 +103,6 @@ export class UserPriceOffersComponent implements OnInit {
       .getMilestonesByOfferId(selectedOfferId)
       .subscribe((data: any) => {
         this.projectMilestons = data.data;
-        console.log(this.projectMilestons);
         this.projectMilestons.map((mile: any) => {
           if (mile.requiredWorkId) {
             this.getrequireWork(mile.requiredWorkId);
@@ -116,7 +115,6 @@ export class UserPriceOffersComponent implements OnInit {
       .getProjectService(this.activeService, this.page)
       .subscribe((data: any) => {
         this.projectServicesFullData = data.data;
-        console.log('projectOfServices : ');
         this.projectServiesArrays = this.projectServicesFullData.projects;
         this.totalpages = this.projectServicesFullData.totalPages;
         this.counter(this.totalpages);
@@ -160,7 +158,6 @@ export class UserPriceOffersComponent implements OnInit {
       if (index == -1) {
         this.requiredWorks.push(...data.data);
       }
-      console.log(this.requiredWorks);
     });
   }
   getDate(date: any) {
@@ -170,11 +167,10 @@ export class UserPriceOffersComponent implements OnInit {
     var startDate = new Date(start);
     var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
-    var Days = Time / (1000 * 3600 * 24); //Diference in Days
+    var Days = Time / (1000 * 3600 * 24);
     return Days;
   }
   showProject=()=> {
-    console.log("work")
     this.showProjectProfile = true;
   }
   mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
@@ -198,16 +194,10 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
   showOffers(project: any) {
-    console.log(project);
-
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
-    console.log(this.activeProjectReqWorks);
-    console.log(this.activeProjectsComponents);
-
     this.showProjectProfile = false;
     this.selectedProject = project;
-    console.log(this.selectedProject);
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
 this.isActive=  this.offersOfSelectedProject.length == 0 ||
@@ -221,7 +211,6 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
           .getMaterialsByOfferId(this.selectedOfferId)
           .subscribe((data: any) => {
             this.usedMaterialsArray = data.data;
-            console.log(data.data);
           });
       }
       if (this.selectedOffer.organizationalServiceProviderProfileId) {
@@ -244,15 +233,11 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
   acceptOffer(offer: any) {
     this.invoiceValue =
       offer.totalCost - offer.cost + offer.cost / offer.numberOfMilestones;
-    console.log(this.invoiceValue);
-    //GET milestones
     this.paymentService.getMilestones(offer.id).subscribe((data: any) => {
-      console.log(data.data);
       const milestones = data.data;
       milestones.map((milestone: any) => {
         if (milestone.isFirstMilestone) {
           this.fristMilestoneId = milestone.id;
-          console.log(this.fristMilestoneId);
         }
       });
     });
@@ -264,7 +249,6 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
       next: (response: any) => {
         this._toastr.info(response.Message);
         this.PaymentMethodsList = response.Data.PaymentMethods;
-        console.log(this.PaymentMethodsList);
         this.PaymentMethodsList.map((method: any) => {
           if (method.PaymentMethodId == 2) {
             this.goToPay(method.PaymentMethodId);
@@ -319,8 +303,6 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
     });
   }
   showImg = (src: any)=> {
-    console.log(this.requiredWorks);
-    console.log(this.projectMilestons);
     this.showModal = true;
     this.modalSrc = src;
   }

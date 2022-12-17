@@ -66,7 +66,6 @@ export class UserhomeComponent implements OnInit {
   showNotification() {}
   showSubMenu() {}
   goToForm(formType: any) {
-    console.log(formType.value.type);
     if (formType.value.type) {
       this.showpopup = false;
       this.clientService.requestedServiceId = formType.value.type;

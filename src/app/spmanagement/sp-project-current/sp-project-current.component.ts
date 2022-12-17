@@ -74,20 +74,16 @@ export class SpProjectCurrentComponent implements OnInit {
         'https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/1'
       )
       .subscribe((data) => {
-        console.log(data);
         this.Listprojects = data.data.projects;
         this.totalpages = data.data.totalPages;
         for (let i = 1; i <= this.totalpages; i++) this.pages.push(i);
         if (this.Listprojects.length > 0) {
           this.result = 1;
-
-          /*********************** */
           this.api
             .get(
               'https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks'
             )
             .subscribe((data) => {
-              console.log(data);
               for (let project of this.Listprojects) {
                 for (let work of data.data) {
                   let f = 0;
@@ -106,8 +102,6 @@ export class SpProjectCurrentComponent implements OnInit {
                 }
               }
             });
-
-          /**************************** */
         }
       });
 
@@ -117,20 +111,14 @@ export class SpProjectCurrentComponent implements OnInit {
         this.Representative = data.data;
       });
   }
-
   showData(idProject: number) {
     this.select = idProject;
-
     for (let project of this.Listprojects) {
       if (project.id == this.select) {
         this.selectProject = project;
-        console.log(this.selectProject);
-
         break;
       }
     }
-    //console.log(this.selectProject);
-
     this.api
       .get(
         `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`
@@ -138,7 +126,6 @@ export class SpProjectCurrentComponent implements OnInit {
       .subscribe((data) => {
         this.togglestage = [];
         this.Allstages = data.data;
-        console.log(this.Allstages);
         this.index = 0;
         this.calcPrecentage = 0;
         for (let i = 0; i < this.Allstages.length; i++) {
@@ -167,9 +154,6 @@ export class SpProjectCurrentComponent implements OnInit {
           }
         }
       });
-
-    /**************Requied work******************* */
-
     this.api
       .get('https://app.mohandisy.com/api/RequiredWorks/GetAllRequiredWorks')
       .subscribe((data) => {
@@ -186,19 +170,6 @@ export class SpProjectCurrentComponent implements OnInit {
         }
       });
   }
-
-  /*************************************/
-  /*toggoleComponent(componentId:any)
-    {
-
-     if(this.descComponent[componentId])
-     this.descComponent[componentId]=0;
-     else
-     this.descComponent[componentId]=1;
-
-
-    }*/
-
   toggleStage(stageId: any) {
     if (this.togglestage[stageId] == 1) {
       this.togglestage[stageId] = 0;
@@ -212,7 +183,6 @@ export class SpProjectCurrentComponent implements OnInit {
       milestoneId: stageid,
       reason: this.Reason.get('reason').value,
     };
-    console.log(pendingData);
     this.api
       .postJson(
         'https://app.mohandisy.com/api/Milestone/changeMilestoneStatusToPending',
@@ -244,10 +214,6 @@ export class SpProjectCurrentComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.stagefinish[stageid] = 1;
-          console.log(data);
-          /*Swal.fire(
-              'تم انهاء المرحله بنجاح'
-            );*/
         },
       });
   }
@@ -304,7 +270,6 @@ export class SpProjectCurrentComponent implements OnInit {
   sendMessageToEndPoint(message: any, receiverId: any) {
     this.chatService.sendMessage(message).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.startChat = false;
         this.router.navigate(['/Spmanagement/chat']);
       },
@@ -316,7 +281,6 @@ export class SpProjectCurrentComponent implements OnInit {
 
   changepage(e: any) {
     this.page = e;
-    console.log(this.page);
     this.api
       .get(
         `https://app.mohandisy.com/api/Project/getOrganizationalSPCurrentProjects/Page/${this.page}`

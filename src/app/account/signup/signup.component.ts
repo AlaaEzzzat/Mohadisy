@@ -30,7 +30,6 @@ export class SignupComponent implements OnInit {
     this._user.getusers(this.apiLinkuser).subscribe((res) => {
       this.userdata = res.data;
     });
-
     this.SignupForm = this.formBuilder.group({
       username: [
         '',
@@ -42,11 +41,7 @@ export class SignupComponent implements OnInit {
       ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      phoneNumber: [
-        '',
-        [Validators.required],
-        /*    Validators.pattern('^(966)(5)[0-9]{8}$'), */
-      ],
+      phoneNumber: ['', [Validators.required]],
       roleId: ['', [Validators.required]],
     });
   }
@@ -69,9 +64,7 @@ export class SignupComponent implements OnInit {
 
   apiLink = 'https://app.mohandisy.com/api/Authenticate/userRegister';
   onSubmit() {
-    console.log(this.SignupForm.value);
     this.auth.signup(this.apiLink, this.SignupForm.value).subscribe((data) => {
-      console.log(data);
       this._toastr.success(data.message);
       this.router.navigate(['/account/login']);
     });

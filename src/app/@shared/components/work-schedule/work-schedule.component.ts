@@ -8,34 +8,44 @@ import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-work-schedule',
   templateUrl: './work-schedule.component.html',
-  styleUrls: ['./work-schedule.component.scss']
+  styleUrls: ['./work-schedule.component.scss'],
 })
 export class WorkScheduleComponent implements OnInit {
   FileformData = new FormData();
-   file:any;
-   iProfileAdmin: any | undefined = undefined;
-   selected: any = new Date();
-   appointment!:appoint;
-   newappointment: FormGroup;
-   dateOpt:any;
-   erDateOp:any;
-   message:any;
-   showSuc:boolean=false
-   showErr:boolean=false
+  file: any;
+  iProfileAdmin: any | undefined = undefined;
+  selected: any = new Date();
+  appointment!: appoint;
+  newappointment: FormGroup;
+  dateOpt: any;
+  erDateOp: any;
+  message: any;
+  showSuc: boolean = false;
+  showErr: boolean = false;
 
-   appointmentFiles:any[]=[]
+  appointmentFiles: any[] = [];
 
-  constructor(private http: AdminDashService,private formbuilder: FormBuilder, private _HttpClient: HttpClient,) { 
-    this.newappointment=this.formbuilder.group({
-      name: ['', [Validators.required,Validators.minLength(3),Validators.maxLength(15),]],
-     description: ['', [Validators.required]],
-     imageFile: [null],
+  constructor(
+    private http: AdminDashService,
+    private formbuilder: FormBuilder,
+    private _HttpClient: HttpClient
+  ) {
+    this.newappointment = this.formbuilder.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(15),
+        ],
+      ],
+      description: ['', [Validators.required]],
+      imageFile: [null],
     });
   }
 
   ngOnInit() {
-    this.getappointDate()
-
+    this.getappointDate();
   }
   get name() {
     return this.newappointment?.get('name');
@@ -46,98 +56,87 @@ export class WorkScheduleComponent implements OnInit {
   get appoins() {
     return this.newappointment.controls;
   }
-  get imageFile(){
+  get imageFile() {
     return this.newappointment?.get('imageFile');
   }
   getappointDate() {
-    let date=moment(this.selected).format('YYYY-MM-DD');
-     let dateSelected={
-       
-         "startDate": date,
-         "endDate": date
-       } 
-       console.log(dateSelected);
-       this.http.appointmentsEndAndStartDte(dateSelected).subscribe({next:(date=>{
-         console.log(this.selected);
-        
-         for(let dates of date.data){
-           this.dateOpt=dates
-   
-         }
-         console.log(this.dateOpt)
-         this.appointmentFiles=this.dateOpt.appointmentFiles
-       }),error:(er=>{
-         console.log(er)
-         this.dateOpt=null
-         this.erDateOp=er
-       })})
-     
-   }
-  uplaodFile(e: any) {
+    let date = moment(this.selected).format('YYYY-MM-DD');
+    let dateSelected = {
+      startDate: date,
+      endDate: date,
+    };
+    this.http.appointmentsEndAndStartDte(dateSelected).subscribe({
+      next: (date) => {
+        for (let dates of date.data) {
+          this.dateOpt = dates;
+        }
 
-       
+        this.appointmentFiles = this.dateOpt.appointmentFiles;
+      },
+      error: (er) => {
+        console.log(er);
+        this.dateOpt = null;
+        this.erDateOp = er;
+      },
+    });
+  }
+  uplaodFile(e: any) {
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
-      console.log(file);
-      // let FileformData = new FormData();
       this.FileformData.append('file', file);
-  }
- 
-  
-  }
-
-
-
-creatMeeting() {
-  this.iProfileAdmin=localStorage.getItem('id')
-  console.log(this.iProfileAdmin)
-  let date=moment(this.selected).format('YYYY-MM-DD');
-
-    this.appointment={
-      "applicationUserId": this.iProfileAdmin,
-      "name": this.name?.value,
-      "description": this.description?.value,
-      "dateCreated": date
     }
-    this.http.storeAppointment(this.appointment).subscribe({next:((data)=>{
-     
-      this.message=data.message
-      this.showSuc=true
+  }
 
-      setInterval(() => {
-        this.showSuc=false
+  creatMeeting() {
+    this.iProfileAdmin = localStorage.getItem('id');
+    let date = moment(this.selected).format('YYYY-MM-DD');
+    this.appointment = {
+      applicationUserId: this.iProfileAdmin,
+      name: this.name?.value,
+      description: this.description?.value,
+      dateCreated: date,
+    };
+    this.http.storeAppointment(this.appointment).subscribe({
+      next: (data) => {
+        this.message = data.message;
+        this.showSuc = true;
+        setInterval(() => {
+          this.showSuc = false;
         }, 3000);
-      this.getappointDate() 
-      this.http.storeAppointmentFiles(data.data.id,this.FileformData).subscribe({next:(req)=>{
-        console.log(req)
-        this.message=req.message
-        this.showSuc=true
-  
-        setInterval(() => {
-          this.showSuc=false
-          }, 4000);
-          this.getappointDate() 
-      },error:(er)=>{
-        console.log(er)
-        this.message=er.message
-        this.showErr=true
-  
-        setInterval(() => {
-          this.showErr=false
-          }, 4000);
+        this.getappointDate();
+        this.http
+          .storeAppointmentFiles(data.data.id, this.FileformData)
+          .subscribe({
+            next: (req) => {
+              this.message = req.message;
+              this.showSuc = true;
 
-      }})
-    }),error:(er)=>{
-      console.log(er);
-      this.message=er.message
-      this.showErr=true
+              setInterval(() => {
+                this.showSuc = false;
+              }, 4000);
+              this.getappointDate();
+            },
+            error: (er) => {
+              console.log(er);
+              this.message = er.message;
+              this.showErr = true;
 
-      setInterval(() => {
-        this.showErr=false
+              setInterval(() => {
+                this.showErr = false;
+              }, 4000);
+            },
+          });
+      },
+      error: (er) => {
+        console.log(er);
+        this.message = er.message;
+        this.showErr = true;
+
+        setInterval(() => {
+          this.showErr = false;
         }, 4000);
-    }})
-    console.log(this.appointment);
-   
+      },
+    });
   }
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
@@ -151,11 +150,10 @@ creatMeeting() {
       }
     );
   }
-
 }
-interface appoint{
-  "applicationUserId":string,
-  "name": string,
-  "description": string,
-  "dateCreated": string
+interface appoint {
+  applicationUserId: string;
+  name: string;
+  description: string;
+  dateCreated: string;
 }

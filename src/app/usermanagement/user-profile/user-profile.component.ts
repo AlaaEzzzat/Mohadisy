@@ -24,12 +24,6 @@ export class UserProfileComponent implements OnInit {
   idPicChanged: boolean = false;
   idImgeUrl: any = '';
   imagesArray: any = [];
-  onBoldClick(){
-    console.log(this.name);
-    console.log(this.phoneNumber);
-    console.log(this.email);
-
-    }
     
   constructor(
     private renderer: Renderer2,
@@ -41,7 +35,6 @@ export class UserProfileComponent implements OnInit {
   }
   ngOnInit(): void {
     this.clientService.getClientProfile().subscribe((data: any) => {
-      console.log(data.data);
       this.user = data.data;
       this.name =this.user.firstName + " " + this.user.lastName;
       this.phoneNumber = this.user.applicationUser?.phoneNumber;
@@ -49,7 +42,6 @@ export class UserProfileComponent implements OnInit {
       this.location =
         this.user.district?.nameAr +
         '+' +
-        /* this.user.district?.city?.nameAr  + "+" */
         this.user.district?.city?.region?.nameAr;
     });
   }
@@ -58,20 +50,17 @@ export class UserProfileComponent implements OnInit {
     let reader = new FileReader();
     if (e.target.files && e.target.files.length > 0) {
       let file = e.target.files[0];
-      console.log(file);
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (name == 'idPic') {
           this.idPicChanged = true;
           this.idImgeUrl = reader.result;
-          //push {name : file} in array of images
           this.imagesArray.push({
             name: "idPic",
             file: file,
           })
         } else if (name == 'profileImage') {
           this.userImg = reader.result;
-          //push {name : file} in array of images
           this.imagesArray.push({
             name: "profileImage",
             file: file,
@@ -127,11 +116,6 @@ export class UserProfileComponent implements OnInit {
       })
 
     }
-    
-    //send image to end point
-    
-    
-//edited fields
 this.user.applicationUser.phoneNumber = this.phoneNumber;
 this.user.applicationUser.email = this.email;
 var nameArr= this.name.split(" ");

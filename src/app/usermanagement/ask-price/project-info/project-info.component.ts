@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ClientService } from './../../../@core/services/client/client.service';
 import { ApiService } from './../../../@core/api.service';
@@ -36,7 +37,8 @@ export class ProjectInfoComponent implements OnInit {
     private provider: ProviderServiceService,
     private apiService: ApiService,
     private clientService: ClientService,
-    private router: Router
+    private router: Router,
+    private toaster: ToastrService
   ) {
     this.serviceId = this.clientService.requestedServiceId;
 
@@ -111,7 +113,6 @@ export class ProjectInfoComponent implements OnInit {
     }
     return true;
   }
-  /* ********************************************************************************************************* */
   priceofferSubmit() {
     this.project = this.priceoffer.value;
     let date = new Date();
@@ -119,19 +120,17 @@ export class ProjectInfoComponent implements OnInit {
     date.setDate(
       date.getDate() + Number(this.priceoffer?.get('pricequoteEndDate')?.value)
     );
-    this.project.pricequoteEndDate = date;
-    console.log(date);
-
+    this.project.pricequoteEndDate = date
     this.project.projectServiceId = this.serviceId;
     if (this.addedComponents.length == 0) {
-      alert('مكونات المشروع مطلوبه');
+      this.toaster.error('مكونات المشروع مطلوبه');
     } else {
       this.addedComponents.map((component: any) => {
         this.project.componentIds.push(component.id);
       });
     }
     if (this.addedWorks.length == 0) {
-      alert('رجاءاَ إدخال الأعمال المطلوبة ');
+      this.toaster.error('رجاءاَ إدخال الأعمال المطلوبة ');
     } else {
       this.addedWorks.map((work: any) => {
         this.project.requiredWorkIds.push(work.id);
@@ -154,7 +153,6 @@ export class ProjectInfoComponent implements OnInit {
                 ]);
               },
               error: (err: any) => {
-                console.log('no files requested');
                 this.router.navigate(['usermanagement/offers']);
               },
             });
@@ -174,7 +172,7 @@ export class ProjectInfoComponent implements OnInit {
           this.projectAllSubCategory = data.data;
         },
         (error) => {
-          console.log('error');
+          console.log(error);
         }
       );
   }
@@ -187,14 +185,13 @@ export class ProjectInfoComponent implements OnInit {
           this.citiesList = data.data;
         },
         (error) => {
-          console.log('error');
+          console.log(error);
         }
       );
   }
 
   _getDistricts(ev: any) {
     this.selectCity = ev.target.value;
-    console.log(this.selectCity);
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
         (data) => {
@@ -280,5 +277,4 @@ export class ProjectInfoComponent implements OnInit {
     const index = this.addedComponents.indexOf(component);
     this.addedComponents.splice(index, 1);
   }
-  addReuiredWork(requiredWork: any) {}
 }

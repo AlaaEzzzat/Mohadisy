@@ -53,7 +53,6 @@ export class PrevWorksComponent implements OnInit {
     this.work.identifier = '1';
     delete this.work.images;
     if (localStorage.getItem('type') == '"CO"') {
-      /* send work */
       this.serviceProviderService
         .storeOrganizationalServiceProviderWork(this.work)
         .subscribe({
@@ -61,7 +60,6 @@ export class PrevWorksComponent implements OnInit {
             console.log('work Posted');
             this._toastr.info(response.message);
             this.workId = response.data.id;
-            /* send files */
             this.serviceProviderService
               .storeOrganizationalServiceProviderWorkFilesByWorkId(
                 filesFormDta,
@@ -83,14 +81,12 @@ export class PrevWorksComponent implements OnInit {
           },
         });
     } else {
-      /* send work */
       this.serviceProviderService
         .storeIndividualServiceProviderWork(this.work)
         .subscribe({
           next: (response: any) => {
             console.log('work Posted');
             this.workId = response.data.id;
-            /* send files */
             this.serviceProviderService
               .storeIndividualServiceProviderWorkFilesByWorkId(
                 filesFormDta,
@@ -179,9 +175,6 @@ export class PrevWorksComponent implements OnInit {
 
     });
   }
-
-
-
   get f() {
     return this.prevWorksForm.controls;
   }

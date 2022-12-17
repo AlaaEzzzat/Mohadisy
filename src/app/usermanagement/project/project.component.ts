@@ -63,16 +63,13 @@ export class ProjectComponent implements OnInit {
         this.clientService
           .getClientCurrentProjects(this.page)
           .subscribe((data) => {
-            console.log(data);
             data.data.projects.map((pro: any) => {
               if (pro.projectServiceId == this.activeService) {
                 this.projectServiesArray.push(pro);
               }
             });
-            console.log(this.projectServiesArray);
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
-            console.log(this.projectServiesArray);
             this.projectServiesArray.length > 0
               ? this.showDetails(this.projectServiesArray[0])
               : '';
@@ -90,7 +87,6 @@ export class ProjectComponent implements OnInit {
             });
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
-            console.log(this.projectServiesArray);
             this.projectServiesArray.length > 0
               ? this.showDetails(this.projectServiesArray[0])
               : '';
@@ -108,7 +104,6 @@ export class ProjectComponent implements OnInit {
             });
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
-            console.log(this.projectServiesArray);
             this.projectServiesArray.length > 0
               ? this.showDetails(this.projectServiesArray[0])
               : '';
@@ -126,7 +121,6 @@ export class ProjectComponent implements OnInit {
             });
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
-            console.log(this.projectServiesArray);
             this.projectServiesArray.length > 0
               ? this.showDetails(this.projectServiesArray[0])
               : '';
@@ -144,7 +138,6 @@ export class ProjectComponent implements OnInit {
             });
             this.totalpages = data.data.totalPages;
             this.counter(this.totalpages);
-            console.log(this.projectServiesArray);
             this.projectServiesArray.length > 0
               ? this.showDetails(this.projectServiesArray[0])
               : '';

@@ -132,10 +132,10 @@
 <section class="message container">
   <div class="row d-flex justify-content-around">
     <div class="col-md-4">
-      <div class="buttons d-flex">
+      <div class="buttons d-flex flex-wrap justify-content-center align-items-center">
         <button
           (click)="one = true; two = false; three = false"
-          class="btn w-100"
+          class="btn w-100 mb-2"
           [ngClass]="
             one == true && two == false && three == false ? 'activeBtn' : 'gray'
           "
@@ -156,7 +156,7 @@
         </button>
         <button
           (click)="one = true; two = true; three = false"
-          class="btn w-100"
+          class="btn w-100 mb-2"
           [ngClass]="
             one == true && two == true && three == false ? 'activeBtn' : 'gray'
           "
@@ -177,7 +177,7 @@
         </button>
         <button
           (click)="one = false; two = false; three = true"
-          class="btn w-100"
+          class="btn w-100 mb-2"
           [ngClass]="
             one == false && two == false && three == true ? 'activeBtn' : 'gray'
           "

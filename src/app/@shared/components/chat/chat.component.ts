@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('fileImage') fileImage!: ElementRef;
   @ViewChild(ScrollToBottomDirective) scroll!: ScrollToBottomDirective;
-
+ 
   constructor(
     private clientService: ClientService,
     private providerService: ProviderServiceService,
@@ -66,12 +66,10 @@ export class ChatComponent implements OnInit {
       this.userCahts = data.data;
     });
   }
-
   activeUser: any = 0;
   activeChatUserChat: any = [];
   activeUserId: any = '';
   showMessage(user: any) {
-    console.log(user);
     this.activeUser = user;
     this.activeUserId = user.id;
     this.getChatWithUser(user.id);
@@ -79,7 +77,6 @@ export class ChatComponent implements OnInit {
   getChatWithUser(userId: any) {
     this.chatService.getChatWithUser(userId).subscribe((data: any) => {
       this.activeChatUserChat = data.data;
-      console.log(this.activeChatUserChat);
 
       this.activeChatUserChat = this.activeChatUserChat.sort(function (
         a: any,
@@ -87,13 +84,12 @@ export class ChatComponent implements OnInit {
       ) {
         return a.id - b.id;
       });
-      console.log(this.activeChatUserChat);
     });
   }
   sendMessageToEndPoint(message: any, receiverId: any) {
     this.chatService.sendMessage(message).subscribe({
       next: (data: any) => {
-        console.log(data);
+    
         this.ClearInputs();
         this.getChatWithUser(receiverId);
         this.getUserChatsF();
@@ -111,7 +107,7 @@ export class ChatComponent implements OnInit {
     return file && file['type'].split('/')[0] === 'image';
   }
   sendMessage(message: string, receiverId: string) {
-    console.log(this.isFileImage(this.fileMessage));
+   
     var type: number = 1;
     if (message) {
       this.message.content = message;
@@ -120,22 +116,21 @@ export class ChatComponent implements OnInit {
       this.sendMessageToEndPoint(this.message, receiverId);
     }
     if (this.fileMessage) {
-      console.log(receiverId);
       this.isFileImage(this.fileMessage) ? (type = 2) : (type = 3);
       this.message.content = '';
       this.message.messageTypeId = type;
       this.message.receiverId = receiverId;
       this.chatService.sendMessage(this.message).subscribe({
         next: (data: any) => {
-          console.log(data);
+     
           var msgID = data.data.id;
           var fileFormData = new FormData();
-          console.log(this.fileMessage);
+        
           fileFormData.append('file', this.fileMessage);
           fileFormData.append('msgId', msgID);
           this.chatService.sendMessageFile(msgID, fileFormData).subscribe({
             next: (data: any) => {
-              console.log(data);
+           
               this.fileMessage = {};
               this.getUserChatsF();
               this.getChatWithUser(receiverId);
@@ -157,8 +152,6 @@ export class ChatComponent implements OnInit {
     if (event.target.files.length > 0) {
       const myfile = event.target.files[0];
       this.fileMessage = myfile;
-      console.log(this.fileMessage);
-      console.log(this.fileMessage.name);
     }
   }
   download(url: string, name: any) {
@@ -175,7 +168,6 @@ export class ChatComponent implements OnInit {
   }
   dataShow:any=[]
   search(word: any) {
-    console.log(word)
     this.dataShow = [];
     this.userCahts.map((project: any) => {
       if (project.fullName.search(new RegExp(word, 'i')) != -1) {

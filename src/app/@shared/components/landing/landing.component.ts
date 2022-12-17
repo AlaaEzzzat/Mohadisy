@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  countDownDate = new Date('dec 15, 2022 15:37:25').getTime();
+  countDownDate = new Date('dec 30, 2022 15:37:25').getTime();
   days: number = 0;
   hours: number = 0;
   minutes: number = 0;

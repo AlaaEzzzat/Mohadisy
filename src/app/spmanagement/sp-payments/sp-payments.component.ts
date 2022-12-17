@@ -13,7 +13,6 @@ export class SpPaymentsComponent implements OnInit {
   ngOnInit(): void {
     this.serviceProviderService.getPaymentsForServiceProvider().subscribe((data) => {
       this.dataShow = data.data;
- console.log(this.dataShow)
     });
   }
 }

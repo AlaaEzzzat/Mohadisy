@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 import { SPmanagementRoutingModule } from './spmanagement-routing.module';
 import { SpDashBoardComponent } from './sp-dash-board/sp-dash-board.component';
 import { SpContributionsComponent } from './sp-contributions/sp-contributions.component';
-import { SpMessagesComponent } from './sp-messages/sp-messages.component';
 import { SpPaymentsComponent } from './sp-payments/sp-payments.component';
 import { SpProfileComponent } from './sp-profile/sp-profile.component';
 import { SpProjectsComponent } from './sp-projects/sp-projects.component';
@@ -52,7 +51,6 @@ import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.compon
   declarations: [
     SpDashBoardComponent,
     SpContributionsComponent,
-    SpMessagesComponent,
     SpPaymentsComponent,
     SpProjectsComponent,
 
@@ -63,7 +61,6 @@ import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.compon
     CompanyCompleteProfileComponent,
     SpDashBoardComponent,
     SpContributionsComponent,
-    SpMessagesComponent,
     SpPaymentsComponent,
     SpProjectsComponent,
     SpHomeComponent,

@@ -27,7 +27,6 @@ export class PriceOfferProjectLayoutComponent implements OnInit {
     return Days;
   }
   download = (url: string, name: any) => {
-    console.log('hjvhgvhg')
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });

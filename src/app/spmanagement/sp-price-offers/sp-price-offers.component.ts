@@ -64,7 +64,6 @@ export class SpPriceOffersComponent implements OnInit {
   ngOnInit(): void {
     this.userType = 'sp';
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
-      console.log(data.data);
       this.projectServices = data.data.projectServices;
       this.activeCategory = this.projectCategory[0]?.id;
 
@@ -72,7 +71,6 @@ export class SpPriceOffersComponent implements OnInit {
       this.spPriceOfferService
         .GetProjectServicesWithCountForSP()
         .subscribe((data) => {
-          console.log(data.data);
           this.projectServicesWithCount = data.data;
           this.projectServicesWithCount.map((serv: any) => {
             this.projectServices.map((pro: any) => {
@@ -119,7 +117,6 @@ export class SpPriceOffersComponent implements OnInit {
       .getMilestonesByOfferId(selectedOfferId)
       .subscribe((data: any) => {
         this.projectMilestons = data.data;
-        console.log(this.projectMilestons);
         this.projectMilestons.map((mile: any) => {
           if (mile.requiredWorkId) {
             this.getrequireWork(mile.requiredWorkId);
@@ -128,14 +125,12 @@ export class SpPriceOffersComponent implements OnInit {
       });
   }
   getCategoryContent(catId: any, page: any) {
-    console.log("يصىصىي")
     switch (catId) {
       case 1:
         this.spPriceOfferService
           .getSPNewProjects(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
-            console.log(this.projectServiesArrays);
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays?.priceQuotes[0]?.id;
@@ -148,8 +143,6 @@ export class SpPriceOffersComponent implements OnInit {
           .GetSPPriceQuotesIAppliedFor(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
-            console.log(this.projectServiesArrays);
-            console.log(this.projectServiesArrays);
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.projects[0].id;
@@ -162,7 +155,6 @@ export class SpPriceOffersComponent implements OnInit {
           .getSPAcceptedOffers(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
-            console.log(this.projectServiesArrays);
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
@@ -175,7 +167,6 @@ export class SpPriceOffersComponent implements OnInit {
           .getSPRejectedOffers(page)
           .subscribe((data: any) => {
             this.projectServiesArrays = data.data;
-            console.log(this.projectServiesArrays);
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
             this.activeProject = this.projectServiesArrays.priceQuotes[0]?.id;
@@ -195,7 +186,6 @@ export class SpPriceOffersComponent implements OnInit {
       if (index == -1) {
         this.requiredWorks.push(...data.data);
       }
-      console.log(this.requiredWorks);
     });
   }
   getDate(date: any) {
@@ -205,7 +195,7 @@ export class SpPriceOffersComponent implements OnInit {
     var startDate = new Date(start);
     var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
-    var Days = Time / (1000 * 3600 * 24); //Diference in Days
+    var Days = Time / (1000 * 3600 * 24);
     return Days;
   }
 

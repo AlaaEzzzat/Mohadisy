@@ -10,8 +10,6 @@ import { catchError, Observable, of, retry, throwError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth.service';
-import { environment } from 'src/environments/environment';
-
 @Injectable()
 export class HttpInterceptorInterceptor implements HttpInterceptor {
   constructor(
@@ -26,16 +24,11 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     let handled: boolean = false;
     this.spinner.show();
-
     setTimeout(() => {
-      /** spinner ends after 2 seconds */
       this.spinner.hide();
     }, 1000);
 
     const isLoggedIn = this.identityService.authenticate();
-
-    const isApiUrl = request.url.startsWith(environment.baseUrl);
-
     if (isLoggedIn) {
       request = request.clone({
         setHeaders: {
@@ -53,7 +46,9 @@ export class HttpInterceptorInterceptor implements HttpInterceptor {
           errorMessage = returnedError.error?.message;
           handled = this.handleServerSideError(returnedError);
         }
-        this._toastr.error(errorMessage ? errorMessage : returnedError);
+        if(errorMessage != 'لا يوجد مواعيد'){
+          this._toastr.error(errorMessage ? errorMessage : returnedError);
+        }
         if (!handled) {
           if (errorMessage) {
             return throwError(errorMessage);

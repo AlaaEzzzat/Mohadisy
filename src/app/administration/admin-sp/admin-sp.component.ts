@@ -7,14 +7,10 @@ import { IChangeStatus } from 'src/app/@models/ichange-status';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
 import {
-  FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Indivdual } from './../../@models/indivdual';
-import { Organiztionl } from './../../@models/organiztionl';
 import { IND, OSP } from './../admin-sp-updata/admin-sp-updata.component';
 
 @Component({
@@ -38,8 +34,6 @@ export class AdminSPComponent implements OnInit {
   idProductSessionStorage: any;
   iChangeStatus: IChangeStatus | undefined = undefined;
   myTimeout: any;
-  // objectpeo: any;
-  // productCurrent: any;
   showInformation: boolean = false;
   showprojectDetails:boolean=false;
   projectDetails:any;
@@ -117,7 +111,6 @@ export class AdminSPComponent implements OnInit {
   get massage() {
     return this.userformMassage?.get('massage');
   }
-  //6
   getExpiredProfiles(page: any) {
     this.newApi = 6;
     sessionStorage.removeItem('ids');
@@ -194,7 +187,6 @@ export class AdminSPComponent implements OnInit {
       },
     });
   }
-  //5
   getBlockedProfiles(page: any) {
     this.isProcessing = true;
     this.newApi = 5;
@@ -221,7 +213,6 @@ export class AdminSPComponent implements OnInit {
       },
     });
   }
-  // 1
   getNewProfiles(page: any) {
     this.isProcessing = true;
     this.newApi = 1;
@@ -249,7 +240,6 @@ export class AdminSPComponent implements OnInit {
       },
     });
   }
-  //2
   getRejectedProfiles(page: any) {
     this.isProcessing = true;
     this.newApi = 2;
@@ -276,7 +266,6 @@ export class AdminSPComponent implements OnInit {
       },
     });
   }
-  //3
   activeAllAcconting(page: any) {
     this.isProcessing = true;
     this.newApi = 3;
@@ -303,7 +292,6 @@ export class AdminSPComponent implements OnInit {
       },
     });
   }
-  //4
   getNonActiveAccount(page: any) {
     this.isProcessing = true;
     this.newApi = 4;
@@ -331,12 +319,10 @@ export class AdminSPComponent implements OnInit {
     });
   }
 
-  // test
   getNewProfilesCompany(page: any) {
     this.iProfileData = [];
     this.ServicesProvidor.getNewProfiles(page).subscribe({
       next: (value) => {
-        // iProfileData
         if (value != null && value != undefined && value.data.totalPages != 0) {
           for (let data of value.data.profiles) {
             if (data.applicationUser.accountType.key === 'CO') {
@@ -344,7 +330,6 @@ export class AdminSPComponent implements OnInit {
               
             }
             this.total = value.data.totalPages;
-            console.log(this.iProfileData);
           }
           if (this.iProfileData.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -358,15 +343,12 @@ export class AdminSPComponent implements OnInit {
     this.iProfileData = [];
     this.ServicesProvidor.getNewProfiles(page).subscribe({
       next: (value) => {
-        // iProfileData
         if (value != null && value != undefined && value.data.totalPages != 0) {
           for (let data of value.data.profiles) {
             if (data.applicationUser.accountType.key === 'IND') {
               this.iProfileData.push(data);
-            
             }
             this.total = value.data.totalPages;
-            // console.log(this.iProfileData);
           }
           if (this.iProfileData.length != 0) {
             this.firstObject = this.iProfileData[0];
@@ -399,7 +381,6 @@ export class AdminSPComponent implements OnInit {
     this.showInformation=false;
     this.showprojectDetails=false
     for(let item of this.productCurrent?.serviceProviderWorks){
-      // console.log(item.id)
       this.getServiceProviderWorkFiles(item.id)
     }
 
@@ -408,23 +389,12 @@ export class AdminSPComponent implements OnInit {
    
     this.showprojectDetails=true
     this.projectDetails=obj
-    console.log(this.projectDetails)
-    // let set =new Set( this.projectDetails)
-    // console.log(set)
 
   }
   getServiceProviderWorkFiles(id:any){
     this.objFilePath=[]
-    this.ServicesProvidor.getServiceProviderWorkFilesByWorkId(id).subscribe({next:(data)=>{
-      
+    this.ServicesProvidor.getServiceProviderWorkFilesByWorkId(id).subscribe({next:(data)=>{   
       this.objFilePath.push(data.data)
-      console.log(this.objFilePath)
-    //    let set =new Set( this.objFilePath)
-    // console.log(set)
-      // for(let file of data.data){
-      //   console.log()
-      //   this.filePath=file.filePath
-      // }
     }})
   }
   back(){
@@ -434,7 +404,6 @@ export class AdminSPComponent implements OnInit {
   backTwo(){
     this.showprojectDetails=false
   }
-  // change stutas client
   changeToAccepted() {
     this.iChangeStatus = {
       profileId: this.idProduct.id,
@@ -464,8 +433,6 @@ export class AdminSPComponent implements OnInit {
       });
     }
   }
-  // changeToNotComplette
-
   changeToNotComplette() {
     this.iChangeStatus = {
       profileId: this.idProduct.id,
@@ -570,12 +537,6 @@ export class AdminSPComponent implements OnInit {
       }
     );
   }
-
-  // fortest(totals: any, arrays: any[]) {
-  //   for (var i = 1; i <= totals; i++) {
-  //     arrays.push(i);
-  //   }
-  // }
 
   calculateDiff(sentOn: any) {
     let todayDate = new Date();

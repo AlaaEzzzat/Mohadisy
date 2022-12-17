@@ -64,9 +64,6 @@ export class DealWithOfferComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    console.log(this.selectProject);
-    console.log(this.typeOfDeal);
-    console.log(this.RequiredWorks);
     this.api
       .get('https://app.mohandisy.com/api/Offer/getMaterialtypes')
       .subscribe((data) => {
@@ -130,9 +127,7 @@ export class DealWithOfferComponent implements OnInit {
         `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`
       )
       .subscribe((data) => {
-        console.log(data.data);
         var stages = data.data;
-        console.log(stages);
 
         for (let i = 0; i < stages.length; i++) {
           this.Precentage[i] = stages[i].percentage;
@@ -141,10 +136,6 @@ export class DealWithOfferComponent implements OnInit {
           else if (stages[i].isLastMilestone == true) this.WorkId[i] = 9;
           else this.WorkId[i] = stages[i].requiredWorkId;
         }
-        console.log('percentage ' + this.Precentage);
-        console.log('totalCost ' + this.totalcostMilestone);
-        console.log(this.WorkId);
-        console.log(this.RequiredWorks);
       });
     this.api
       .get(
@@ -223,11 +214,7 @@ export class DealWithOfferComponent implements OnInit {
   }
 
   workId(e: any, stone: number) {
-    console.log(e.target.value);
-    console.log(stone);
     this.WorkId[stone-1] = e.target.value;
-    console.log("ghdghdrshrd")
-    console.log(this.WorkId);
   }
 
   setToggle(formNumber: any) {
@@ -345,8 +332,6 @@ export class DealWithOfferComponent implements OnInit {
               )?.value,
               materials: this.AddMaterials,
             };
-            console.log(AllData);
-            console.log(this.selectProject);
             this.api
               .postJson(
                 'https://app.mohandisy.com/api/Offer/storeOffer',
@@ -355,14 +340,12 @@ export class DealWithOfferComponent implements OnInit {
               .subscribe({
                 next: (data) => {
                   Swal.fire('تم تقديم العرض بنجاح');
-                  this.router.navigate(['/Spmanagement/priceOffers']);
+                  this.makeOfferToggle()
                 },
               });
           }
         });
     } else {
-      console.log('check data : ', checkData);
-
       this.api
         .postJson(
           'https://app.mohandisy.com/api/Offer/validateCostAndPeriod',
@@ -387,8 +370,6 @@ export class DealWithOfferComponent implements OnInit {
               DisputeResolution: null,
               ContractorCommitments: null,
             };
-
-            console.log('all data : ', AllData);
             this.api
               .postJson(
                 'https://app.mohandisy.com/api/Offer/updateOffer',
@@ -397,6 +378,7 @@ export class DealWithOfferComponent implements OnInit {
               .subscribe({
                 next: (data) => {
                   Swal.fire('تم تعديل العرض بنجاح');
+                  this.makeOfferToggle()
                 },
               });
           }

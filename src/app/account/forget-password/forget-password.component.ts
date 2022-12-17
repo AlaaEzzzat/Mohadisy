@@ -22,15 +22,12 @@ export class ForgetPasswordComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.restForm.value.email);
     this.auth
       .restpassword(
         `https://app.mohandisy.com/api/Authenticate/getResetPasswordToken?email=${this.restForm.value.email}`
       )
       .subscribe((data) => {
-        console.log(data);
         this._toastr.success(data.message);
-        // localStorage.setItem('token', JSON.stringify(data.data.token));
         this.router.navigate(['/account/confirmation']);
       });
   }

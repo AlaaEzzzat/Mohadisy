@@ -24,7 +24,6 @@ export class RestPasswordComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log(this.restForm.value);
     this.auth
       .setnewPassword(
         `https://app.mohandisy.com/api/Account/resetPassword`,
