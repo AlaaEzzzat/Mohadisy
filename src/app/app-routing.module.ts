@@ -1,15 +1,9 @@
 import { UserAuthGuard } from './@shared/Guards/user-auth.guard';
 import { SpAuthGuard } from './@shared/Guards/sp-auth.guard';
-import { ChatComponent } from './@shared/components/chat/chat.component';
-
 import { LandingComponent } from './@shared/components/landing/landing.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthorizedGuard } from './@core/auth/guards/authorized.guard';
 import { NotFoundComponent } from './@shared/components/not-found/not-found.component';
-import { AppComponent } from './app.component';
-import { HomepageComponent } from './Layout_HomePage/homepage/homepage.component';
-
 const routes: Routes = [
   {
     path: '',

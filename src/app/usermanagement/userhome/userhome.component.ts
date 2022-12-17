@@ -1,7 +1,6 @@
 import { ClientService } from './../../@core/services/client/client.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-/* import { SignalrService } from './../../@core/services/signalR/signalr.service'; */
 @Component({
   selector: 'app-userhome',
   templateUrl: './userhome.component.html',
@@ -72,7 +71,6 @@ export class UserhomeComponent implements OnInit {
       this.router.navigate(['usermanagement/askprice/projectInfo']);
     }
   }
-
   openPriceRequest() {
     this.clientService
       .getProjectServicesAndSubService()

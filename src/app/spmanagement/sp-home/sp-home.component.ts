@@ -22,23 +22,15 @@ export class SpHomeComponent implements OnInit {
       routing: '/Spmanagement/dashboard',
       image: 'assets/images/Group.png',
     },
+ 
     {
       title: 'عروض الاسعار',
       image: 'assets/images/blueprint.png',
-      routing: '/Spmanagement/projects/price-offers',
-    },
-    {
-      title: '2عروض الاسعار',
-      image: 'assets/images/blueprint.png',
       routing: '/Spmanagement/priceOffers',
     },
+
     {
       title: 'مشاريعي  ',
-      image: 'assets/images/blueprint.png',
-      routing: '/Spmanagement/projects/status',
-    },
-    {
-      title: 'مشاريعي 2 ',
       image: 'assets/images/blueprint.png',
       routing: '/Spmanagement/allProjects',
     },
