@@ -314,7 +314,6 @@ export class DealWithOfferComponent implements OnInit {
           this.check = data.isError;
           if (this.check == false) {
             var AllData = {
-              id: Number(this.selectProject.offers[0]?.id),
               projectId: this.selectProject.id,
               period: Number(this.OfferData?.get('period')?.value),
               cost: this.OfferData?.get('cost')?.value,

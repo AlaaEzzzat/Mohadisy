@@ -4,6 +4,12 @@
 p,label,h3, div{
   font-family: 'cairo';
 }
+.is-invalid{
+  border-left: 4px solid #f2564b;
+}
+.is-valid{
+  border-left: 4px solid #18af9a;}
+
 form-group {
   border: 1px solid #ced4da;
   padding: 5px;

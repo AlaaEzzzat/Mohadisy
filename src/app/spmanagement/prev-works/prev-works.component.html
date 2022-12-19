@@ -246,22 +246,16 @@
               <td  >
                 <ul class="list-unstyled p-0 w-100" 
                 >
-                  <ng-container
-                    *ngFor="let img of work.serviceProviderWorkFiles"
-                  >
-                    <li  class="mb-1" 
+                    <li  class="my-2" 
                     type="button"   (click)="projectImage(work.id)"
                     data-bs-toggle="modal"  [attr.data-bs-target]="'#work'+work.id"
                     >
-                      <p>{{
-                        img.file.split("\\").slice(-1)[0].length > 15
-                          ? img.file.split("\\").slice(-1)[0].substr(0, 15) +
-                            "..."
-                          : img.file.split("\\").slice(-1)[0]
-                      }}</p>
+                    <img
+                    src="assets/dashboard/picture.png"
+                    alt=""
+                    style="width: 35px"
+                  />
                     </li>
-
-                  </ng-container>
                       <!-------------Carousel------------------>
                       <div class="modal fade "  [id]="'work'+work.id" >
                         <div class="modal-dialog  modal-xl " >
@@ -312,7 +306,8 @@
                 </ul>
               </td>
               <td>
-                <button class="btn mainBk ms-2 my-2 text-white">
+                <button class="btn mainBk ms-2 my-2 text-white" (click)="updateWork(work)">
+                  
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

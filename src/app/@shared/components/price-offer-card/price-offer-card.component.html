@@ -4,7 +4,7 @@ isActive ? 'active' : 'bg-white'
 "
   class="card rounded-1 position-relative d-flex flex-row justify-content-between p-3 ps-4 mb-2 border-0 d-flex"
 >
-  <div class="me-1">
+  <div class="me-1" style="flex:1" (click)="showOffers(project)">
     <div class="mb-1">
       <i class="icon fa-regular fa-user ms-2"></i>
       <span class="textcard"> {{ project.name }} </span>
@@ -48,7 +48,7 @@ isActive ? 'active' : 'bg-white'
         <span (click)="showProject()">عرض المشروع</span>
       </button>
       <button mat-menu-item>
-        <span (click)="deleteProject(project.id)">حذف المشروع</span>
+        <span (click)="deleteProject(project)">حذف المشروع</span>
       </button>
     </mat-menu>
   </div>

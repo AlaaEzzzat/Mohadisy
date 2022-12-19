@@ -51,14 +51,14 @@ export class UserPriceOffersComponent implements OnInit {
   fristMilestoneId: any = 0;
   showMilestones: boolean = false;
   projectMilestons: any = [];
-  userType: string =''
+  userType: string = '';
   constructor(
     private clientService: ClientService,
     private paymentService: PaymentService,
     private _toastr: ToastrService,
     private _HttpClient: HttpClient
   ) {}
-  counter(x: number) {
+  counter=(x: number)=> {
     this.pagenation = [...Array(x).keys()];
   }
   next = () => {
@@ -74,7 +74,7 @@ export class UserPriceOffersComponent implements OnInit {
     }
   };
   ngOnInit(): void {
-    this.userType='client'
+    this.userType = 'client';
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
       this.activeService = this.projectServices[0].id;
@@ -86,7 +86,7 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
 
-  isActiveService(id: any) {
+  isActiveService=(id: any)=> {
     this.activeService = id;
     this.offersOfSelectedProject = 0;
     this.projectServicesFullData = [];
@@ -97,7 +97,7 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
 
-  getMilestonse(selectedOfferId: any) {
+  getMilestonse=(selectedOfferId: any)=> {
     this.projectMilestons = [];
     this.clientService
       .getMilestonesByOfferId(selectedOfferId)
@@ -110,7 +110,7 @@ export class UserPriceOffersComponent implements OnInit {
         });
       });
   }
-  getAllProjectServices() {
+  getAllProjectServices=()=> {
     this.clientService
       .getProjectService(this.activeService, this.page)
       .subscribe((data: any) => {
@@ -124,10 +124,12 @@ export class UserPriceOffersComponent implements OnInit {
         this.projectServiesArrays.map((project: any) => {
           if (project.id == this.activeProject) {
             this.offersOfSelectedProject = project.offers;
+            console.log(this.offersOfSelectedProject);
           }
         });
         if (this.offersOfSelectedProject.length > 0) {
           this.selectedOffer = this.offersOfSelectedProject[0];
+          console.log(this.selectedOffer);
           this.selectedOfferId = this.offersOfSelectedProject[0]?.id;
           if (this.selectedOffer.organizationalServiceProviderProfileId) {
             this.clientService
@@ -136,6 +138,7 @@ export class UserPriceOffersComponent implements OnInit {
               )
               .subscribe((offerSender: any) => {
                 this.selectedOffer.offerSender = offerSender.data;
+                console.log(this.selectedOffer.offerSender);
               });
           } else if (this.selectedOffer.individualServiceProviderProfileId) {
             this.clientService
@@ -144,13 +147,14 @@ export class UserPriceOffersComponent implements OnInit {
               )
               .subscribe((offerSender: any) => {
                 this.selectedOffer.offerSender = offerSender.data;
+                console.log(this.selectedOffer.offerSender);
               });
           }
         }
       });
   }
   requiredWorks: any = [];
-  getrequireWork(reqId: any) {
+  getrequireWork=(reqId: any)=> {
     this.clientService.getRequiredWorkByWorkId(reqId).subscribe((data: any) => {
       const index = this.requiredWorks.findIndex(
         (e: any) => e.id == data.data[0].id
@@ -160,20 +164,20 @@ export class UserPriceOffersComponent implements OnInit {
       }
     });
   }
-  getDate(date: any) {
+  getDate=(date: any)=> {
     return moment(date).utc().format('YYYY-MM-DD');
   }
-  getTime(end: any, start: any) {
+  getTime=(end: any, start: any)=> {
     var startDate = new Date(start);
     var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
     var Days = Time / (1000 * 3600 * 24);
     return Days;
   }
-  showProject=()=> {
+  showProject = () => {
     this.showProjectProfile = true;
-  }
-  mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
+  };
+  mapOnProjectsReuiredWorks=(ProjectsReuiredWorks: any)=> {
     this.activeProjectReqWorks = [];
     ProjectsReuiredWorks.map((ProjectsReuiredWork: any) => {
       this.clientService
@@ -183,7 +187,7 @@ export class UserPriceOffersComponent implements OnInit {
         });
     });
   }
-  mapOnProjectsComponets(projectComponents: any) {
+  mapOnProjectsComponets=(projectComponents: any)=> {
     this.activeProjectsComponents = [];
     projectComponents.map((projectComponent: any) => {
       this.clientService
@@ -193,17 +197,19 @@ export class UserPriceOffersComponent implements OnInit {
         });
     });
   }
-  showOffers(project: any) {
+  showOffers = (project: any)=> {
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
     this.showProjectProfile = false;
     this.selectedProject = project;
     this.activeProject = project.id;
     this.offersOfSelectedProject = project.offers;
-this.isActive=  this.offersOfSelectedProject.length == 0 ||
-(this.offersOfSelectedProject.length > 0 && this.showProjectProfile)
+    this.isActive =
+      this.offersOfSelectedProject.length == 0 ||
+      (this.offersOfSelectedProject.length > 0 && this.showProjectProfile);
     if (this.offersOfSelectedProject.length > 0) {
       this.selectedOffer = this.offersOfSelectedProject[0];
+      console.log(this.selectedOffer);
       this.selectedOfferId = this.offersOfSelectedProject[0].id;
       this.getMilestonse(this.selectedOfferId);
       if (this.selectedProject.projectService.id == 2) {
@@ -220,17 +226,19 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
           )
           .subscribe((offerSender: any) => {
             this.selectedOffer.offerSender = offerSender.data;
+            console.log(this.selectedOffer.offerSender);
           });
       } else if (this.selectedOffer.individualServiceProviderProfileId) {
         this.clientService
           .getOfferSender(this.selectedOffer.individualServiceProviderProfileId)
           .subscribe((offerSender: any) => {
             this.selectedOffer.offerSender = offerSender.data;
+            console.log(this.selectedOffer.offerSender);
           });
       }
     }
   }
-  acceptOffer(offer: any) {
+  acceptOffer=(offer: any)=> {
     this.invoiceValue =
       offer.totalCost - offer.cost + offer.cost / offer.numberOfMilestones;
     this.paymentService.getMilestones(offer.id).subscribe((data: any) => {
@@ -261,7 +269,7 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
       },
     });
   }
-  goToPay(payMethodId: any) {
+  goToPay=(payMethodId: any)=> {
     this.clientPaymentData.invoiceValue = this.invoiceValue;
     this.clientPaymentData.paymentMethodId = payMethodId;
     this.clientPaymentData.displayCurrencyIso = 'SAR';
@@ -284,7 +292,7 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
       },
     });
   }
-  download = (url: string, name: any) =>{
+  download = (url: string, name: any) => {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });
@@ -295,18 +303,21 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
         console.log(err);
       }
     );
-  }
-  deleteProject(id: any) {
-    this.clientService.deleteProject(id).subscribe((data) => {
+  };
+  deleteProject=(project: any)=> {
+console.log(project)
+    this.clientService?.deleteProject(project.id).subscribe((data) => {
+      console.log(data)
+console.log("deleted")
       this._toastr.info(data.message);
       this.getAllProjectServices();
     });
   }
-  showImg = (src: any)=> {
+  showImg = (src: any) => {
     this.showModal = true;
     this.modalSrc = src;
-  }
-  requiredWorksNames(reqId: any) {
+  };
+  requiredWorksNames=(reqId: any)=> {
     var name;
     this.requiredWorks.map((work: any) => {
       if (work.id == reqId) {
@@ -315,8 +326,8 @@ this.isActive=  this.offersOfSelectedProject.length == 0 ||
     });
     return name;
   }
-  isActive:boolean = false;
-  toggleShow = ()=>{
+  isActive: boolean = false;
+  toggleShow = () => {
     this.showModal = !this.showModal;
-  }
+  };
 }

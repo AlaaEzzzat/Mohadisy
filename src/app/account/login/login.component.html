@@ -43,7 +43,20 @@
                         name="email"
                         formControlName="email"
                         placeholder="البريد الالكترونى"
+                        [class.is-valid]="f['email'].valid"
+                        [class.is-invalid]="f['email'].invalid && f['email'].touched"
                       />
+                      <div
+                        *ngIf="f['email'].errors && f['email'].touched"
+                        class="alert alert-warning mt-2"
+                      >
+                      <div class="cairo" *ngIf="f['email'].errors['required']">
+                        من فضلك ادخل البريد الألكتروني 
+                      </div>
+                      <div class="cairo" *ngIf="f['email'].errors['email']">
+                       من فضلك ادخل بريد ألكتروني صحيح
+                      </div>
+                    </div>
                     </div>
                   </div>
 
@@ -59,7 +72,17 @@
                         formControlName="password"
                         class="form-control"
                         placeholder="كلمه المرور"
+                        [class.is-valid]="f['password'].valid"
+                        [class.is-invalid]="f['password'].invalid && f['password'].touched"
                       />
+                      <div
+                        *ngIf="f['password'].errors && f['password'].touched"
+                        class="alert alert-warning mt-2"
+                      >
+                      <div class="cairo" *ngIf="f['password'].errors['required']">
+                        من فضلك ادخل كلمة المرور
+                      </div>
+                    </div>
                     </div>
                   </div>
 

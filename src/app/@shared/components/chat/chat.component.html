@@ -104,7 +104,7 @@
               <p>{{ activeUser.fullName }}</p>
             </div>
 
-            <div class="messages">
+            <div class="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
               <ul>
                 <ng-container *ngFor="let msg of activeChatUserChat">
                   <li

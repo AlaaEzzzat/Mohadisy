@@ -87,10 +87,9 @@
                         class="form-control"
                         name="username"
                         formControlName="username"
-                        [ngClass]="{
-                          'is-invalid':
-                            f['username'].errors && f['username'].touched
-                        }"
+                       
+                        [class.is-valid]="f['username'].valid"
+                        [class.is-invalid]="f['username'].invalid && f['username'].touched"
                       />
                       <div
                         *ngIf="f['username'].errors && f['username'].touched"
@@ -111,9 +110,9 @@
                         name="email"
                         formControlName="email"
                         class="form-control"
-                        [ngClass]="{
-                          'is-invalid': f['email'].errors && f['email'].touched
-                        }"
+                      
+                        [class.is-valid]="f['email'].valid"
+                        [class.is-invalid]="f['email'].invalid && f['email'].touched"
                       />
                       <div
                         *ngIf="f['email'].errors && f['email'].touched"
@@ -137,10 +136,9 @@
                         name="phoneNumber"
                         formControlName="phoneNumber"
                         class="form-control"
-                        [ngClass]="{
-                          'is-invalid':
-                            f['phoneNumber'].errors && f['phoneNumber'].touched
-                        }"
+                        
+                        [class.is-valid]="f['phoneNumber'].valid"
+                        [class.is-invalid]="f['phoneNumber'].invalid && f['phoneNumber'].touched"
                       />
                       <div
                         *ngIf="
@@ -148,12 +146,13 @@
                         "
                         class="alert alert-warning mt-2"
                       >
-                        <div *ngIf="f['phoneNumber'].errors['required']">
-                          من فضلك ادخل رقم الهاتف
-                        </div>
-                        <!-- <div *ngIf="f['phoneNumber'].errors['pattern']">
-                          من فضلك ادخل رقم هاتف صحيح
-                        </div> -->
+                      <div *ngIf="f['phoneNumber'].errors['required']">
+                        من فضلك ادخل رقم الهاتف
+                      </div>
+                      <div *ngIf="f['phoneNumber'].errors['pattern']">
+                        من فضلك ادخل رقم هاتف سعودي
+                      </div>
+                      
                       </div>
                     </div>
                     <div class="col-md-12 mb-4">
@@ -166,10 +165,9 @@
                         name="password"
                         formControlName="password"
                         class="form-control"
-                        [ngClass]="{
-                          'is-invalid':
-                            f['password'].errors && f['password'].touched
-                        }"
+                     
+                        [class.is-valid]="f['password'].valid"
+                        [class.is-invalid]="f['password'].invalid && f['password'].touched"
                       />
                       <div
                         *ngIf="f['password'].errors && f['password'].touched"
@@ -177,6 +175,9 @@
                       >
                         <div *ngIf="f['password'].errors['required']">
                           من فضلك ادخل كلمة المرور
+                        </div>
+                        <div *ngIf="f['password'].errors['pattern']">
+                          من فضلك ادخل كلمة مرور لا تقل عن 10 و تحتوي علي حروف و ارقام ولا  و أحد الرموز (._!@#$%&)
                         </div>
                       </div>
                     </div>

@@ -52,61 +52,65 @@ export class PrevWorksComponent implements OnInit {
     this.work = this.prevWorksForm.value;
     this.work.identifier = '1';
     delete this.work.images;
-    if (localStorage.getItem('type') == '"CO"') {
-      this.serviceProviderService
-        .storeOrganizationalServiceProviderWork(this.work)
-        .subscribe({
-          next: (response: any) => {
-            console.log('work Posted');
-            this._toastr.info(response.message);
-            this.workId = response.data.id;
-            this.serviceProviderService
-              .storeOrganizationalServiceProviderWorkFilesByWorkId(
-                filesFormDta,
-                this.workId
-              )
-              .subscribe({
-                next: (response: any) => {
-                  console.log('Image Posted');
-                  this.getServiceProviderWorks();
-                  this.prevWorksForm.reset();
-                },
-                error: (err: any) => {
-                  console.log(err);
-                },
-              });
-          },
-          error: (err: any) => {
-            console.log(err);
-          },
-        });
-    } else {
-      this.serviceProviderService
-        .storeIndividualServiceProviderWork(this.work)
-        .subscribe({
-          next: (response: any) => {
-            console.log('work Posted');
-            this.workId = response.data.id;
-            this.serviceProviderService
-              .storeIndividualServiceProviderWorkFilesByWorkId(
-                filesFormDta,
-                this.workId
-              )
-              .subscribe({
-                next: (response: any) => {
-                  console.log('Image Posted');
-                  this.getServiceProviderWorks();
-                  this.prevWorksForm.reset();
-                },
-                error: (err: any) => {
-                  console.log(err);
-                },
-              });
-          },
-          error: (err: any) => {
-            console.log(err);
-          },
-        });
+    if(this.method=='store'){
+      if (localStorage.getItem('type') == '"CO"') {
+        this.serviceProviderService
+          .storeOrganizationalServiceProviderWork(this.work)
+          .subscribe({
+            next: (response: any) => {
+              console.log('work Posted');
+              this._toastr.info(response.message);
+              this.workId = response.data.id;
+              this.serviceProviderService
+                .storeOrganizationalServiceProviderWorkFilesByWorkId(
+                  filesFormDta,
+                  this.workId
+                )
+                .subscribe({
+                  next: (response: any) => {
+                    console.log('Image Posted');
+                    this.getServiceProviderWorks();
+                    this.prevWorksForm.reset();
+                  },
+                  error: (err: any) => {
+                    console.log(err);
+                  },
+                });
+            },
+            error: (err: any) => {
+              console.log(err);
+            },
+          });
+      } else {
+        this.serviceProviderService
+          .storeIndividualServiceProviderWork(this.work)
+          .subscribe({
+            next: (response: any) => {
+              console.log('work Posted');
+              this.workId = response.data.id;
+              this.serviceProviderService
+                .storeIndividualServiceProviderWorkFilesByWorkId(
+                  filesFormDta,
+                  this.workId
+                )
+                .subscribe({
+                  next: (response: any) => {
+                    console.log('Image Posted');
+                    this.getServiceProviderWorks();
+                    this.prevWorksForm.reset();
+                  },
+                  error: (err: any) => {
+                    console.log(err);
+                  },
+                });
+            },
+            error: (err: any) => {
+              console.log(err);
+            },
+          });
+      }
+    }else{
+
     }
   }
   ngOnInit(): void {
@@ -196,5 +200,12 @@ export class PrevWorksComponent implements OnInit {
   }
   get images() {
     return this.prevWorksForm.get('images');
+  }
+  method:any;
+  updateWork(work:any){
+    console.log(work)
+    this.method ='update'
+    this.prevWorksForm.patchValue(work)
+
   }
 }

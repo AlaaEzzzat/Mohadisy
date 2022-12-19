@@ -115,12 +115,12 @@ export class ProjectInfoComponent implements OnInit {
   }
   priceofferSubmit() {
     this.project = this.priceoffer.value;
-    let date = new Date();
+     let date = new Date();
     date.toISOString().split('T')[0];
     date.setDate(
       date.getDate() + Number(this.priceoffer?.get('pricequoteEndDate')?.value)
-    );
-    this.project.pricequoteEndDate = date
+    ); 
+    this.project.pricequoteEndDate =  date
     this.project.projectServiceId = this.serviceId;
     if (this.addedComponents.length == 0) {
       this.toaster.error('مكونات المشروع مطلوبه');

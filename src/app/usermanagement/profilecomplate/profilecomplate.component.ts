@@ -169,7 +169,6 @@ export class ProfilecomplateComponent implements OnInit {
 
   registerFormSubmit() {
     this.user = this.registerForm.value;
-
     let fullNameArr = this.registerForm.get('firstName')?.value.split(' ');
     this.user.firstName = fullNameArr.splice(0, 1)[0];
     this.user.lastName = fullNameArr.join(' ');

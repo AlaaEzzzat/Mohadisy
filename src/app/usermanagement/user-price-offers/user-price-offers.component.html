@@ -22,7 +22,7 @@
                 *ngFor="let project of projectServiesArrays; let i = index"
               >
                 <app-price-offer-card
-                  (click)="showOffers(project)"
+                  [showOffers]="showOffers"
                   [isActive]="activeProject == project.id"
                   [userType]="userType"
                   [project]="project"
@@ -64,7 +64,7 @@
                           ? offer.offerSender?.companyName
                           : offer.offerSender?.firstName +
                             " " +
-                            offer.offerSender?.lastName
+                            offer.offerSender?.lastName  || offer.offerSender.name
                       }}
                     </option>
                   </ng-container>

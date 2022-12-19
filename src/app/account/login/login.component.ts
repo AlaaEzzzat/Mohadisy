@@ -29,8 +29,12 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
+  get f() {
+    return this.LoginForm.controls;
+  }
 
   onSubmit() {
+    console.log(this.LoginForm.value)
     this.auth
       .login(
         'https://app.mohandisy.com/api/Authenticate/userLogin',

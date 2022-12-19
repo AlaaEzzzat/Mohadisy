@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
   apiLinkuser = 'https://app.mohandisy.com/api/Role/getRoles';
   SignupForm;
   userdata: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
@@ -40,8 +41,9 @@ export class SignupComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
+       password: ['', [Validators.required,Validators.pattern("^(?=.{10,20}$)(?![_.!@#$%&])(?!.*[_.!@#$%&]{2})[A-Za-z0-9._!@#$%&]+(?<![_.])$")]],
+   /*    password: ['', [Validators.required,Validators.pattern("^(?!=.[a-z])(?!=.[0-9])(?!=.[A-Z])(?!=.[@$!%?&])[A-Za-z0-9@$!%?&]{10,}")]], */
+      phoneNumber: ['', [Validators.required,Validators.pattern('^(966)(5)[0-9]{8}$'),]],
       roleId: ['', [Validators.required]],
     });
   }
@@ -64,6 +66,7 @@ export class SignupComponent implements OnInit {
 
   apiLink = 'https://app.mohandisy.com/api/Authenticate/userRegister';
   onSubmit() {
+    console.log(this.SignupForm.value)
     this.auth.signup(this.apiLink, this.SignupForm.value).subscribe((data) => {
       this._toastr.success(data.message);
       this.router.navigate(['/account/login']);

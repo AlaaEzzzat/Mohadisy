@@ -5,32 +5,37 @@ import { ProviderServiceService } from './../../../@core/services/Provider/provi
 import { IMessage } from '../../../@models/message';
 import { ChatService } from '../../../@core/services/chat/chat.service';
 import { ClientService } from '../../../@core/services/client/client.service';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit,AfterContentChecked {
   activeChat: boolean = false;
   message: IMessage = {} as IMessage;
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('fileImage') fileImage!: ElementRef;
   @ViewChild(ScrollToBottomDirective) scroll!: ScrollToBottomDirective;
- 
   constructor(
     private clientService: ClientService,
     private providerService: ProviderServiceService,
     private chatService: ChatService,
     private _HttpClient: HttpClient,
-    private adminSettingsService: AdminSettingsService
+    private adminSettingsService: AdminSettingsService,
+    private cd:ChangeDetectorRef
   ) {}
   senderProfile: any = {};
   userCahts: any = [];
+  activeDiv:boolean = false;
   messageTypes: any = [];
   userType: any = '';
+  ngAfterContentChecked(): void {
+    this.cd.detectChanges();
+  }
   ngOnInit(): void {
+    
     if (localStorage.getItem('role') == '"Client"') {
       this.clientService.getClientProfile().subscribe((data: any) => {
         this.senderProfile = data.data;
@@ -70,6 +75,9 @@ export class ChatComponent implements OnInit {
   activeChatUserChat: any = [];
   activeUserId: any = '';
   showMessage(user: any) {
+
+  
+    /* element.scrollIntoView(false); */
     this.activeUser = user;
     this.activeUserId = user.id;
     this.getChatWithUser(user.id);

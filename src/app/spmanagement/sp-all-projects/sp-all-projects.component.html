@@ -1,7 +1,7 @@
 <div class="projects pt-5">
-  <div class="row">
+  <div class="w-100">
     <ng-container *ngFor="let service of projectServices; let i = index">
-      <div class="col" *ngIf="activeService == service.id">
+      <div  *ngIf="activeService == service.id">
         <div
           [id]="service.id"
           class="btn mainBk p-2 px-3 w-100 d-flex justify-content-between"
@@ -13,12 +13,12 @@
       </div>
     </ng-container>
   </div>
-  <div class="row mt-3">
+  <div class="row w-100 mt-3">
     <ng-container *ngFor="let cat of projectCategory; let i = index">
       <div class="col">
         <div
           [id]="cat.id"
-          class="btn text-center p-2 px-3 w-100"
+          class="btn text-center p-2 px-3 mb-2 w-100"
           (click)="isActiveCategory(cat.id)"
           [ngClass]="activeCategory == cat.id ? 'secondBk' : 'bg-white'"
         >
@@ -27,8 +27,8 @@
       </div>
     </ng-container>
   </div>
-  <div class="row mt-5" style="min-height: 100vh">
-    <div class="col-md-3">
+  <div class="row mt-5 w-100" style="min-height: 100vh">
+    <div class="col-lg-3 col-sm-4">
       <div class="cards">
         <ng-container
           *ngFor="let project of projectServiesArray; let i = index"
@@ -48,7 +48,7 @@
         ></app-pagination>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-lg-9 col-sm-8">
       <div *ngIf="projectServiesArray.length > 0">
         <div *ngIf="activeCategory == 2">
           <div class="bg-white p-3 mb-3 mx-2 d-flex justify-content-between">
@@ -66,6 +66,7 @@
         <app-project-layout
           userType="sp"
           [project]="project"
+          [activeCategory]="activeCategory"
           [projectMilestnes]="projectMilestnes"
           [projectsComponents]="projectsComponents"
           [projectReqWorks]="projectReqWorks"
