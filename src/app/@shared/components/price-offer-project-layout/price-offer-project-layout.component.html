@@ -1,14 +1,14 @@
 <div *ngIf="isActive" class="projectInfo mb-3">
   <ul class="list-unstyled p-3 bg-white">
     <li *ngIf="userType == 'client'">
-      <p >
+      <p class="cairo">
         صلاحيه عرض السعر :
         {{
           getTime(
             selectedProject.pricequoteEndDate,
             selectedProject.dateCreated
           )
-        }}
+        }} يوم
       </p>
     </li>
     <li class="mb-2" *ngIf="userType == 'client'">

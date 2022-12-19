@@ -29,7 +29,7 @@ isActive ? 'active' : 'bg-white'
     style="height: fit-content; padding: 10px"
     >{{ project.offers.length }} رد</span
   >
-
+<!-- 
   <div *ngIf="userType == 'client'" class="position-absolute dotCon">
     <button
       class="dots"
@@ -47,9 +47,9 @@ isActive ? 'active' : 'bg-white'
       <button mat-menu-item>
         <span (click)="showProject()">عرض المشروع</span>
       </button>
-      <button mat-menu-item>
+      <button hidden mat-menu-item>
         <span (click)="deleteProject(project)">حذف المشروع</span>
       </button>
     </mat-menu>
-  </div>
+  </div> -->
 </div>

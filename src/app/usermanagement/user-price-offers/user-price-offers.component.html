@@ -427,12 +427,13 @@
                         class="p-2 cairo form-control"
                         placeholder="المحتوي"
                         name="msg"
+                        #msg
                         id="msg"
                         rows="3"
                       ></textarea>
                     </div>
                     <div class="d-flex flex-row-reverse">
-                      <button class="p-2 px-4 mt-3 btn active text-white cairo">
+                      <button (click)="sendMsg(msg.value,offer.offerSender?.applicationUserId)" class="p-2 px-4 mt-3 btn active text-white cairo">
                         إرسال
                       </button>
                     </div>

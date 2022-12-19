@@ -9,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class UserhomeComponent implements OnInit {
   data: any = [
     {
+      title: 'معلوماتي  ',
+      image: 'assets/images/profile.svg',
+      routing: '/usermanagement/profile',
+    },
+    {
       title: 'لوحة التحكم ',
       routing: '/usermanagement/dashboard',
       image: 'assets/images/Group.png',
@@ -16,22 +21,18 @@ export class UserhomeComponent implements OnInit {
     {
       title: ' عروض الأسعار  ',
       routing: '/usermanagement/offers',
-      image: 'assets/images/Group.png',
+      image: 'assets/images/blueprint.png',
     },
     {
       title: 'مشاريعي  ',
       image: 'assets/images/blueprint.png',
       routing: '/usermanagement/project',
     },
-    {
-      title: 'معلوماتي  ',
-      image: 'assets/images/profile.svg',
-      routing: '/usermanagement/profile',
-    },
+  
     {
       title: 'المدفوعات  ',
       routing: '/usermanagement/payment',
-      image: 'assets/images/Group.png',
+      image: 'assets/images/hand.png',
     },
     {
       title: 'رسائلي  ',

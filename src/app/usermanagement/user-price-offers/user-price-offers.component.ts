@@ -1,3 +1,5 @@
+import { IMessage } from 'src/app/@models/message';
+import { ChatService } from 'src/app/@core/services/chat/chat.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { IClientPayment } from './../../@models/IClientPayment';
@@ -56,7 +58,8 @@ export class UserPriceOffersComponent implements OnInit {
     private clientService: ClientService,
     private paymentService: PaymentService,
     private _toastr: ToastrService,
-    private _HttpClient: HttpClient
+    private _HttpClient: HttpClient,
+    private chatService:ChatService
   ) {}
   counter=(x: number)=> {
     this.pagenation = [...Array(x).keys()];
@@ -198,6 +201,7 @@ export class UserPriceOffersComponent implements OnInit {
     });
   }
   showOffers = (project: any)=> {
+    this.seeProjectInfo =false
     this.mapOnProjectsReuiredWorks(project.projectRequiredWorks);
     this.mapOnProjectsComponets(project.projectComponents);
     this.showProjectProfile = false;
@@ -330,4 +334,26 @@ console.log("deleted")
   toggleShow = () => {
     this.showModal = !this.showModal;
   };
+  message:IMessage= {} as IMessage;
+  sendMsg =(message:any, receiverId:any) => {
+console.log(message)
+    var type: number = 1;
+    if (message) {
+      this.message.content = message;
+      this.message.messageTypeId = type;
+      this.message.receiverId = receiverId;
+      this.sendMessageToEndPoint(this.message, receiverId);
+    }
+  }
+  sendMessageToEndPoint(message: any, receiverId: any) {
+    console.log(receiverId)
+    this.chatService.sendMessage(message).subscribe({
+      next: (data: any) => {
+        this._toastr.info(' تم ارسال الرساله بنجاح ')
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
 }

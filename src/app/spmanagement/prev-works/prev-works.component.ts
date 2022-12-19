@@ -170,13 +170,13 @@ export class PrevWorksComponent implements OnInit {
   }
 
 
-
+  activeSlider:any;
   projectImage(workId:any)
   {
+    this.activeSlider =true;
     this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
     {
       this.workFile=data.data;
-
     });
   }
   get f() {

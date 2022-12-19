@@ -43,7 +43,6 @@
             </span>
             <input
               type="text"
-              
               class="form-control searchBox bg-light border-0 rounded-5"
               placeholder="إبحث عن"
             />
@@ -90,8 +89,8 @@
             </span>
           </div>
         </li>
-        <li class=" d-flex nav-item me-auto p-1">
-         <div class=" position-relative bg-light " style="border-radius: 50%">
+        <li class="d-flex nav-item me-auto p-1">
+          <div class="position-relative bg-light" style="border-radius: 50%">
             <button
               type="button"
               class="btn notificationBtn rounded-5 position-relative"
@@ -123,21 +122,39 @@
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
               >
-               {{notifications.length}}
+                {{ notifications.length }}
               </span>
             </button>
             <div class="notificationDiv" *ngIf="showNotificationDiv">
-            
-            <ul class="list-unstyled p-2 ">
-            <ng-container *ngFor="let noti of notifications">
-              <li class="cairo text-white py-2 d-flex justify-content-between">
-                <span>{{noti.content}}</span>
-                <i [hidden]="noti.notificationData[0].isReaded" class="fa fa-eye-slash mainColor" (click)="markAsRead(noti.id)"></i>
-                <i [hidden]="!noti.notificationData[0].isReaded" class="fa fa-eye  text-white "></i>
-              </li>
-            </ng-container>
-            </ul>
-            <button (click)="getUserNotifications(false)" class="btn rounded-0 w-100 position-sticky bottom-0 cairo" style="font-family:'cairo';background-color: #004057; color: #FFF">كل الاشعارات</button>
+              <ul class="list-unstyled p-2">
+                <ng-container *ngFor="let noti of notifications">
+                  <li
+                    class="cairo text-white py-2 d-flex justify-content-between"
+                  >
+                    <span>{{ noti.content }}</span>
+                    <i
+                      [hidden]="noti.notificationData[0].isReaded"
+                      class="fa eye fa-eye-slash mainColor"
+                      (click)="markAsRead(noti.id)"
+                    ></i>
+                    <i
+                      [hidden]="!noti.notificationData[0].isReaded"
+                      class="fa  fa-eye text-white"
+                    ></i>
+                  </li>
+                </ng-container>
+              </ul>
+              <button
+                (click)="getUserNotifications(false)"
+                class="btn rounded-0 w-100 position-sticky bottom-0 cairo"
+                style="
+                  font-family: 'cairo';
+                  background-color: #004057;
+                  color: #fff;
+                "
+              >
+                كل الاشعارات
+              </button>
             </div>
           </div>
           <div class="me-4">
@@ -177,7 +194,15 @@
           </div>
           <div class="me-4 pt-1 d-flex position-relative">
             <img
-              src="assets/profile.png"
+              [src]="
+                userType == 'Client'
+                  ? userprofile?.profilePicturePath
+                  :  userType == 'Admin' 
+                  ?userprofile?.adminProfile?.profilePicturePath
+                  : userType == 'CO'
+                  ? userprofile?.organizationalServiceProviderProfile?.companyLogoPath
+                  : userprofile?.individualServiceProviderProfile?.profilePicturePath
+              "
               alt=""
               class="rounded-circle position-absolute top-0"
               width="40px"
@@ -200,14 +225,19 @@
                 </button>
                 <mat-menu
                   #menu="matMenu"
-                  style="background-color: #18af9a" 
+                  style="background-color: #18af9a"
                   class="matBtnCon"
                 >
                   <button (click)="signOut()" mat-menu-item>
                     <span class="cairo"> تسجيل خروج</span>
                   </button>
-                  <button mat-menu-item (click)="profile()">
-                    <a routerLink="/usermanagement/profile" class="cairo text-decoration-none text-dark"> المعلومات</a>
+                  <button [hidden]=" userType == 'Admin'" mat-menu-item (click)="profile()">
+                    <a
+                      routerLink="/usermanagement/profile"
+                      class="cairo text-decoration-none text-dark"
+                    >
+                      المعلومات</a
+                    >
                   </button>
                 </mat-menu>
               </span>

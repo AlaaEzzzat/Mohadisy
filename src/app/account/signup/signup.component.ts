@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     private _user: UserserviceService,
     private _toastr: ToastrService
   ) {
-    this._user.getusers(this.apiLinkuser).subscribe((res) => {
+    this._user.getusers(this.apiLinkuser).subscribe((res:any) => {
       this.userdata = res.data;
     });
     this.SignupForm = this.formBuilder.group({
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
         ],
       ],
       email: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.required,Validators.pattern("^(?=.{10,20}$)(?![_.!@#$%&])(?!.*[_.!@#$%&]{2})[A-Za-z0-9._!@#$%&]+(?<![_.])$")]],
+       password: ['', [Validators.required,Validators.pattern("^(?=.{10,}$)(?![_.!@#$%&])(?!.*[_.!@#$%&]{2})[A-Za-z0-9._!@#$%&]+(?<![_.])$")]],
    /*    password: ['', [Validators.required,Validators.pattern("^(?!=.[a-z])(?!=.[0-9])(?!=.[A-Z])(?!=.[@$!%?&])[A-Za-z0-9@$!%?&]{10,}")]], */
       phoneNumber: ['', [Validators.required,Validators.pattern('^(966)(5)[0-9]{8}$'),]],
       roleId: ['', [Validators.required]],

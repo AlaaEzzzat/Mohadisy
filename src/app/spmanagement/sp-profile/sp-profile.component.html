@@ -1,8 +1,8 @@
 <div class="row container-fluid">
   <div class="col-xl-8 col-lg-12 mb-3">
-    <div class="row">
+    <div *ngIf=" userType=='CO'" class="row">
       <div class="col-lg-12">
-        <ng-container *ngIf="copmpleteProfile != 100">
+        <ng-container *ngIf="copmpleteProfile != 100 ">
           <a routerLink="" class="completeprofile">
             <h4 class="cairo fw-bold" style="color: #18af9a">استكمل بياناتك</h4>
           </a>
@@ -41,7 +41,9 @@
                 <img
                   *ngIf="!userImgChanged"
                   [src]="
+                   userType=='CO'?
                     profile?.organizationalServiceProviderProfile
+                      ?.profilePicturePath : profile?.individualServiceProviderProfile
                       ?.profilePicturePath
                   "
                   class="img-fluid rounded-start"
@@ -165,11 +167,11 @@
                           {{ profile?.isActive ? "  حساب نشط" : "  حساب معطل" }}
                         </p>
                         <span class="mx-1 gray"> | </span>
-                        <p class="card-text">
+                        <p class="card-text" >
                           رقم التعريف :
-                          {{
+                          {{userType=='Co'?
                             profile?.organizationalServiceProviderProfile
-                              ?.companyRegisterationNumber
+                              ?.companyRegisterationNumber: profile?.individualServiceProviderProfile?.idNumber
                           }}
                         </p>
                       </div>
@@ -229,7 +231,7 @@
               <i class="fa fa-map-marker"></i>
               العنوان
             </h5>
-            <p class="mx-2 mt-2">
+            <p *ngIf="userType=='Co'" class="mx-2 mt-2">
               {{
                 profile?.organizationalServiceProviderProfile?.district?.city
                   ?.region?.nameAr
@@ -240,6 +242,19 @@
               }},
               {{
                 profile?.organizationalServiceProviderProfile?.district?.nameAr
+              }}
+            </p>
+            <p *ngIf="userType=='IND'" class="mx-2 mt-2">
+              {{
+                profile?.individualServiceProviderProfile?.district?.city
+                  ?.region?.nameAr
+              }},
+              {{
+                profile?.individualServiceProviderProfile?.district?.city
+                  ?.nameAr
+              }},
+              {{
+                profile?.individualServiceProviderProfile?.district?.nameAr
               }}
             </p>
           </div>
@@ -260,7 +275,7 @@
         </div>
       </div>
 
-      <div class="col-lg-6 border-1">
+      <div  class="col-lg-6 border-1">
         <div class="bg-white p-3">
           <div>
             <h5 class="cairo mt-2">نظره عامه</h5>
@@ -292,7 +307,7 @@
                 <div
                   class="padge d-flex justify-content-center align-items-center"
                 >
-                  <span>{{ avgRate + "/ 5" }}</span>
+                  <span>{{ avgRate !=0 ? avgRate + "/ 5" : 'لا يوجد' }}</span>
                 </div>
               </div>
             </div>
@@ -300,7 +315,7 @@
         </div>
       </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3" *ngIf="userType=='Co'" >
       <div class="col-lg-6">
         <div class="bg-white p-3 py-4">
           <h2>
@@ -310,7 +325,7 @@
               data-target="#item1"
               data-toggle="collapse"
             >
-              نظره عامه عن الشركه
+              نظره عامه  
               <i class="fas fa-angle-down"></i>
             </button>
           </h2>
@@ -477,7 +492,7 @@
 
   <div class="col-xl-4 col-lg-12">
     <div class="row">
-      <div class="col-xl-12 col-sm-6">
+      <div *ngIf="userType=='Co'" class="col-xl-12 col-sm-6">
         <div class="card border-0 p-2 bg-white mb-2">
               <div class="p-2">
                 <p class="">ممثل الشركه على المنصه</p>

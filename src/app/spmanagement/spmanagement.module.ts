@@ -25,7 +25,6 @@ import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.compon
 import { DealWithOfferComponent } from './deal-with-offer/deal-with-offer.component';
 import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.component';
 
-
 @NgModule({
   declarations: [
     SpDashBoardComponent,

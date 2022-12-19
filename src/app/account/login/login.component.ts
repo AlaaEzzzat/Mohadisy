@@ -52,6 +52,10 @@ export class LoginComponent implements OnInit {
             'phoneNumber',
             JSON.stringify(data.data.phoneNumber)
           );
+          localStorage.setItem(
+            'type',
+            JSON.stringify(data.data.accountType.key)
+          );
           localStorage.setItem('id', JSON.stringify(data.data.id));
           this.clientService.getAccountStatus().subscribe((data: any) => {
             this.accountStatus = data.data.joinRequestStatus;
@@ -65,25 +69,35 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/Admin/dashboard']);
           }
           if (roles == 'Service provider') {
-            this.api
-              .get(
-                'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
-              )
-              .subscribe((data) => {
-                var type =
-                  data.data.organizationalServiceProviderProfile.projectService
-                    .id;
-                localStorage.setItem('typeId', type);
-              });
-            localStorage.setItem(
-              'type',
-              JSON.stringify(data.data.accountType.key)
-            );
+            if(localStorage.getItem(
+              'type') =='"IND"'){
+                this.api
+                  .get(
+                    'https://app.mohandisy.com/api/IndividualServiceProvider/getProfile'
+                  )
+                  .subscribe((data) => {
+                    var type =
+                      data.data?.individualServiceProviderProfile?.projectService?.id;
+                    localStorage.setItem('typeId', type);
+                  });
+
+              }else{
+                this.api
+                  .get(
+                    'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
+                  )
+                  .subscribe((data) => {
+                    var type =
+                      data.data?.organizationalServiceProviderProfile?.projectService?.id;
+                    localStorage.setItem('typeId', type);
+                  });
+              }
+            
             if (data.data.profileAccepted) {
               this.router.navigate(['/Spmanagement']);
             } else {
-              if (data.data.profileCreated) {
-                if (this.accountStatus.accountStatusId == 8) {
+              if (data.data?.profileCreated) {
+                if (this.accountStatus?.accountStatusId == 8) {
                   if (data.data.accountType.key == 'CO') {
                     this._toastr.info('نأمل ملئ البانات مره اخري');
                     this.router.navigate([

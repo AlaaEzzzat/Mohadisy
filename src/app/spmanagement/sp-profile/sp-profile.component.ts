@@ -1,3 +1,4 @@
+import { UserserviceService } from 'src/app/@core/http/userservice.service';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { Component, OnInit, Renderer2 } from '@angular/core';
@@ -85,92 +86,121 @@ export class SpProfileComponent implements OnInit {
   projectService: any = null;
   projectSubServiceEdit: boolean = false;
   projectSubService: any = null;
+  userType:any='';
   constructor(
     private renderer: Renderer2,
     private api: ApiService,
     private _HttpClient: HttpClient,
     private http: AdminDashService,
     private clientService: ClientService,
-    private provider: ServiceProviderService
+    private provider: ServiceProviderService,
+    private UserserviceService: UserserviceService
   ) {}
 
   ngOnInit(): void {
     this.getappointDate();
-    this.api
-      .get(
-        'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
-      )
-      .subscribe((data) => {
-        this.profile = data.data;
-        console.log(this.profile);
-        this.name =
-          this.profile?.organizationalServiceProviderProfile?.companyName;
-        this.phoneNumber = this.profile.phoneNumber;
-        this.email = this.profile.email;
-        this.location =
-          this.profile.organizationalServiceProviderProfile?.district?.nameAr +
-          '+' +
-          this.profile.organizationalServiceProviderProfile?.district?.city
-            ?.region?.nameAr;
-        this.projectService =
-          this.profile?.organizationalServiceProviderProfile?.projectService?.name;
-        this.projectSubService =
-          this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
-
-        this.IBan = this.profile.organizationalServiceProviderProfile?.iBanPath;
-        this.IBanName =
-          this.profile.organizationalServiceProviderProfile?.iBanFile;
-        this.ZakatCertificate =
-          this.profile.organizationalServiceProviderProfile?.zakatCertificatePath;
-        this.ZakatCertificateName =
-          this.profile.organizationalServiceProviderProfile?.zakatCertificateFile;
-        this.ProfessionLicense =
-          this.profile.organizationalServiceProviderProfile?.professionLicensePath;
-        this.ProfessionLicenseName =
-          this.profile.organizationalServiceProviderProfile?.professionLicenseFile;
-        this.SaudizationCertificate =
-          this.profile.organizationalServiceProviderProfile?.saudizationCertificatePath;
-        this.SaudizationCertificateName =
-          this.profile.organizationalServiceProviderProfile?.saudizationCertificateFile;
-        this.SocialInsuranceCertificate =
-          this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificatePath;
-        this.SocialInsuranceCertificateName =
-          this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificateFile;
-
-        if (
-          this.profile?.organizationalServiceProviderProfile?.licenseFile !=
-          null
-        ) {
-          this.copmpleteProfile += 100 / 5.0;
+    if (localStorage.getItem('type') == '"IND"') {
+      this.userType='IND'
+      this.UserserviceService.getIndividualServiceProviderProfile().subscribe(
+        (data: any) => {
+          this.profile = data.data;
+          console.log(this.profile);
+          this.name = this.profile.individualServiceProviderProfile?.firstName + ' ' + this.profile.individualServiceProviderProfile?.lastName;
+          this.email = this.profile.email;
+          this.phoneNumber = this.profile.individualServiceProviderProfile?.phoneNumber;
+          this.location =
+            this.profile?.individualServiceProviderProfile?.district?.nameAr +
+            '+' +
+            this.profile?.individualServiceProviderProfile?.district?.city?.region?.nameAr;
+            this.projectService =  this.profile?.individualServiceProviderProfile?.projectService?.name;
+            this.projectSubService = ''; 
+  
         }
+      );
+    } else if (localStorage.getItem('type') == '"Co"') {
+      this.userType='CO'
+      this.api
+        .get(
+          'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
+        )
+        .subscribe((data) => {
+          this.profile = data.data;
+          this.name =
+            this.profile?.organizationalServiceProviderProfile?.companyName;
+          this.phoneNumber = this.profile.phoneNumber;
+          this.email = this.profile.email;
+          this.location =
+            this.profile.organizationalServiceProviderProfile?.district
+              ?.nameAr +
+            '+' +
+            this.profile.organizationalServiceProviderProfile?.district?.city
+              ?.region?.nameAr;
+          this.projectService =
+            this.profile?.organizationalServiceProviderProfile?.projectService?.name;
+          this.projectSubService =
+            this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
 
-        if (
-          this.profile?.organizationalServiceProviderProfile
-            ?.zakatCertificateFile != null
-        ) {
-          this.copmpleteProfile += 100 / 5.0;
-        }
+          this.IBan =
+            this.profile.organizationalServiceProviderProfile?.iBanPath;
+          this.IBanName =
+            this.profile.organizationalServiceProviderProfile?.iBanFile;
+          this.ZakatCertificate =
+            this.profile.organizationalServiceProviderProfile?.zakatCertificatePath;
+          this.ZakatCertificateName =
+            this.profile.organizationalServiceProviderProfile?.zakatCertificateFile;
+          this.ProfessionLicense =
+            this.profile.organizationalServiceProviderProfile?.professionLicensePath;
+          this.ProfessionLicenseName =
+            this.profile.organizationalServiceProviderProfile?.professionLicenseFile;
+          this.SaudizationCertificate =
+            this.profile.organizationalServiceProviderProfile?.saudizationCertificatePath;
+          this.SaudizationCertificateName =
+            this.profile.organizationalServiceProviderProfile?.saudizationCertificateFile;
+          this.SocialInsuranceCertificate =
+            this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificatePath;
+          this.SocialInsuranceCertificateName =
+            this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificateFile;
 
-        if (
-          this.profile?.organizationalServiceProviderProfile
-            ?.companyRegisterationNumberFile != null
-        ) {
-          this.copmpleteProfile += 100 / 5.0;
-        }
+          if (
+            this.profile?.organizationalServiceProviderProfile?.licenseFile !=
+            null
+          ) {
+            this.copmpleteProfile += 100 / 5.0;
+          }
 
-        if (
-          this.profile?.organizationalServiceProviderProfile
-            ?.socialInsuranceCertificateFile != null
-        ) {
-          this.copmpleteProfile += 100 / 5.0;
-        }
+          if (
+            this.profile?.organizationalServiceProviderProfile
+              ?.zakatCertificateFile != null
+          ) {
+            this.copmpleteProfile += 100 / 5.0;
+          }
 
-        if (
-          this.profile?.organizationalServiceProviderProfile?.iBanFile != null
-        ) {
-          this.copmpleteProfile += 100 / 5.0;
-        }
-      });
+          if (
+            this.profile?.organizationalServiceProviderProfile
+              ?.companyRegisterationNumberFile != null
+          ) {
+            this.copmpleteProfile += 100 / 5.0;
+          }
+
+          if (
+            this.profile?.organizationalServiceProviderProfile
+              ?.socialInsuranceCertificateFile != null
+          ) {
+            this.copmpleteProfile += 100 / 5.0;
+          }
+
+          if (
+            this.profile?.organizationalServiceProviderProfile?.iBanFile != null
+          ) {
+            this.copmpleteProfile += 100 / 5.0;
+          }
+        });
+      this.api
+        .get('https://app.mohandisy.com/api/Representative/getRepresentative')
+        .subscribe((data) => {
+          this.representative = data.data;
+        });
+    }
 
     this.api
       .get(
@@ -182,20 +212,18 @@ export class SpProfileComponent implements OnInit {
       });
 
     this.api
-      .get('https://app.mohandisy.com/api/Representative/getRepresentative')
-      .subscribe((data) => {
-        this.representative = data.data;
-      });
-
-    this.api
       .get('https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus')
       .subscribe((data) => {
         var rate = data.data.testimonials;
-        for (let i = 0; i < rate.length; i++) {
-          this.avgRate += Number(rate[i].stars);
+        console.log(rate)
+        if(rate != null){
+          for (let i = 0; i < rate?.length; i++) {
+            this.avgRate += Number(rate[i].stars);
+          }
+          this.avgRate /= rate?.length;
+        }else{
+          this.avgRate = 0;
         }
-
-        this.avgRate /= rate.length;
       });
   }
 
@@ -353,9 +381,11 @@ export class SpProfileComponent implements OnInit {
       : '';
 
     delete this.profile.id;
-    console.log(this.profile.organizationalServiceProviderProfile)
+    console.log(this.profile.organizationalServiceProviderProfile);
     this.provider
-      .updateOrganizationalServiceProviderProfile(this.profile.organizationalServiceProviderProfile)
+      .updateOrganizationalServiceProviderProfile(
+        this.profile.organizationalServiceProviderProfile
+      )
       .subscribe({
         next: (response: any) => {
           console.log('profile edited');
