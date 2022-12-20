@@ -3,7 +3,14 @@
   .cairo {
     font-family: "cairo";
   }
-
+.textLand{
+  width: 75%;
+}
+@media (max-width:568px) {
+  .textLand{
+    width: 100%;
+  }
+}
   .slideshow {
     background-color: #18af9a;
     position: relative;
@@ -15,11 +22,6 @@
       right: 0;
       padding: 0 70px;
       z-index: 2;
-      /*      background: linear-gradient(
-        270deg,
-        #18af9a 34.55%,
-        rgb(0 76 66 / 40%) 62.63%
-      ); */
     }
     .indicators {
       width: 26px;

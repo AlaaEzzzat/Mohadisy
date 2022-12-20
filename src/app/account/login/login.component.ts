@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           );
           localStorage.setItem(
             'type',
-            JSON.stringify(data.data.accountType.key)
+            JSON.stringify(data.data?.accountType?.key)
           );
           localStorage.setItem('id', JSON.stringify(data.data.id));
           this.clientService.getAccountStatus().subscribe((data: any) => {
