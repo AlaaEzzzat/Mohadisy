@@ -34,37 +34,37 @@
         <ng-container
           *ngFor="let project of projectServiesArray; let i = index"
         >
-        <app-price-offer-card
-        (click)="showDetails(project)"
-        [isActive]="activeProject == project.id"
-        userType="client"
-        category="project"
-        [project]="project"
-      ></app-price-offer-card>
-
+          <app-price-offer-card
+            (click)="showDetails(project)"
+            [isActive]="activeProject == project.id"
+            userType="client"
+            category="project"
+            [project]="project"
+          ></app-price-offer-card>
         </ng-container>
         <app-pagination
-        [pagenation]="pagenation"
-        [next]="next"
-        [prev]="prev"
-        [page]="page"
-      ></app-pagination> 
- 
+          [pagenation]="pagenation"
+          [next]="next"
+          [prev]="prev"
+          [page]="page"
+        ></app-pagination>
       </div>
     </div>
     <div class="col-md-9">
       <div *ngIf="projectServiesArray.length > 0">
         <app-project-layout
-      [project]="project"
-      [offerSender]="offerSender"
-      [projectMilestnes]="projectMilestnes"
-      [projectsComponents]="projectsComponents"
-      [projectReqWorks]="projectReqWorks"
-      [startChat]="startChatF"
-      [startComplaint]="startComplaintF"
-      [showImg]="showImg"
-      [numOfCompltedMilesones]="numOfCompltedMilesones"
-      ></app-project-layout>
+          [project]="project"
+          [offerSender]="offerSender"
+          [projectMilestnes]="projectMilestnes"
+          [projectsComponents]="projectsComponents"
+          [projectReqWorks]="projectReqWorks"
+          [startChat]="startChatF"
+          [startComplaint]="startComplaintF"
+          [goToCurrent]="goToCurrent"
+          [goToPandding]="goToPandding"
+          [showImg]="showImg"
+          [numOfCompltedMilesones]="numOfCompltedMilesones"
+        ></app-project-layout>
       </div>
     </div>
   </div>

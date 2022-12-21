@@ -1,8 +1,9 @@
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { FunctionsService } from './../../../@core/services/functions/functions.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/@core/api.service';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit ,OnChanges} from '@angular/core';
 import { saveAs } from 'file-saver';
 import Swal from 'sweetalert2';
 @Component({
@@ -19,10 +20,12 @@ export class ProjectLayoutComponent implements OnInit {
   @Input() projectsComponents: any;
   @Input() numOfCompltedMilesones: any;
   @Input() userType: any;
-  @Input() projectReqWorks: any;
+  @Input() projectReqWorks: any=[];
   @Input() startChat: any = (args: any) => {};
   @Input() startComplaint: any = (args: any) => {};
   @Input() showImg: any = (args: any) => {};
+  @Input() goToPandding: any = (args: any) => {};
+  @Input() goToCurrent: any = (args: any) => {};
   Reason: any;
   toggleItem: any = [];
 
@@ -46,6 +49,7 @@ export class ProjectLayoutComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
+          this.goToPandding()
           Swal.fire('تم تعليق المرحله بنجاح');
         },
       });
@@ -61,31 +65,31 @@ export class ProjectLayoutComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
+          this.goToCurrent()
           this.stagefinish[stageid] = 1;
-          console.log(data);
         },
       });
   }  
   constructor(
-    private _HttpClient: HttpClient,
-    private toester: ToastrService,
+    private formBuilder: FormBuilder,
     private api: ApiService,
     private FunctionsService:FunctionsService
   ) {
-    
+    this.Reason=this.formBuilder.group(
+      {
+        reason:['', [Validators.required]],
+      });
   }
 
   ngOnInit(): void {
-    console.log(this.project);
-    console.log(this.projectMilestnes);
-    console.log(this.projectReqWorks);
-    console.log(this.numOfCompltedMilesones)
+    
   }
   getReqWorkName(requiredWorkId: any) {
     var requiredWork = this.projectReqWorks.find((rq: any) => {
       rq.id == requiredWorkId;
     });
     console.log(requiredWork);
+    return requiredWork?.name
   }
 
   getTime(end: any, start: any) {

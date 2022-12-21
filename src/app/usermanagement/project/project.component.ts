@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../@core/services/functions/functions.service';
 import { ComplaintService } from './../../@core/services/complaint/complaint.service';
 import { ChatService } from './../../@core/services/chat/chat.service';
 import { IMessage } from './../../@models/message';
@@ -44,18 +45,17 @@ export class ProjectComponent implements OnInit {
   pagenation: any = [];
   offerSender: any = {};
   constructor(
-    private _HttpClient: HttpClient,
-    private activatedRoute: ActivatedRoute,
     private clientService: ClientService,
     private chatService: ChatService,
+    private FunctionsService:FunctionsService,
     private router: Router,
-    private complaintService: ComplaintService
   ) {}
   isActiveService(id: any) {
     this.activeService = id;
     this.isActiveCategory(this.activeCategory);
   }
   isActiveCategory(id: any) {
+    this.numOfCompltedMilesones=0;
     this.activeCategory = id;
     this.projectServiesArray = [];
     switch (id) {
@@ -149,6 +149,7 @@ export class ProjectComponent implements OnInit {
     }
   }
   showDetails(project: any) {
+    this.numOfCompltedMilesones=0;
     console.log(project);
     this.project = project;
     this.activeProject = project.id;
@@ -163,7 +164,6 @@ export class ProjectComponent implements OnInit {
               this.numOfCompltedMilesones++;
             }
           });
-          console.log(this.numOfCompltedMilesones);
         });
       if (project.offers[0]?.individualServiceProviderProfileId) {
         this.clientService
@@ -171,8 +171,7 @@ export class ProjectComponent implements OnInit {
             project.offers[0]?.individualServiceProviderProfileId
           )
           .subscribe((data: any) => {
-            this.offerSender = data.data;
-            console.log(this.offerSender);
+            this.offerSender = data.data
           });
       } else {
         this.clientService
@@ -181,7 +180,7 @@ export class ProjectComponent implements OnInit {
           )
           .subscribe((data: any) => {
             this.offerSender = data.data;
-            console.log(this.offerSender);
+   
           });
       }
     }
@@ -210,11 +209,15 @@ export class ProjectComponent implements OnInit {
   ngOnInit(): void {
     this.clientService.getProjectServicesAndSubService().subscribe((data) => {
       this.projectServices = data.data.projectServices;
-      console.log(this.projectServices);
       this.activeService = this.projectServices[0].id;
-      console.log(this.activeService);
       this.isActiveService(this.activeService);
     });
+  }
+  goToCurrent = () =>{
+    this.isActiveCategory(1);
+  }
+  goToPandding =()=>{
+    this.isActiveCategory(2);
   }
   mapOnProjectsReuiredWorks(ProjectsReuiredWorks: any) {
     this.projectReqWorks = [];
@@ -237,24 +240,13 @@ export class ProjectComponent implements OnInit {
     });
   }
   getTime(end: any, start: any) {
-    var startDate = new Date(start);
-    var endDate = new Date(end);
-    var Time = endDate.getTime() - startDate.getTime();
-    var Days = Time / (1000 * 3600 * 24); 
-    return Days;
+    this.FunctionsService.getTime(end,start);
+
   }
-  download(url: string, name: any) {
-    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
-      (png) => {
-        const blob = new Blob([png], { type: 'application/pdf' });
-        const fileName = name;
-        saveAs(blob, fileName);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  download = (url: string, name: any) => {
+    this.FunctionsService.download(url,name);
+  
+  };
   showImg=(src: any)=> {
     console.log(src)
     this.showModal = true;

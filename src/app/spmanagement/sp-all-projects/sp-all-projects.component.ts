@@ -66,6 +66,7 @@ export class SpAllProjectsComponent implements OnInit {
     this.isActiveCategory(this.activeCategory);
   }
   isActiveCategory(id: any) {
+    this.numOfCompltedMilesones=0;
     this.activeCategory = id;
     this.projectServiesArray = [];
     switch (id) {
@@ -276,6 +277,7 @@ export class SpAllProjectsComponent implements OnInit {
       });
   }
   showDetails(project: any) {
+    this.numOfMilestonesCompleted=0
     this.project = project;
     this.activeProject = project.id;
     if (project.offers.length > 0) {

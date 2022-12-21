@@ -203,5 +203,50 @@ a{
 			}
 
 
+.files{
+  width: fit-content;
+  .input{
+    width: 30px;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+  }
+}
 
-  
+
+/*******************modal***********************/
+.modal-content
+{
+  background-color: #fcfcfd;
+  padding: 2% 4%;
+
+}
+.modal h4
+{
+  color:#18af9a;
+  padding:1% 4%;
+}
+.modal textarea
+{
+  padding:4% 2%;
+}
+
+.modal-footer button
+{
+  background-color: #004057;
+  color: white;
+  padding:3% 6%;
+}
+
+
+.modal-footer
+{
+  border: none;
+  font-size: 17px;
+}
+
+.modal-header
+{
+  border: none;
+}
+

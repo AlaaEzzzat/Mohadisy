@@ -138,11 +138,6 @@ export class DealWithOfferComponent implements OnInit {
           else this.WorkId[i] = stages[i].requiredWorkId;
         }
       });
-    this.api
-      .get(
-        `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.selectProject.offers[0].id}`
-      )
-      .subscribe((data) => {});
   }
 
   milestones() {
@@ -190,6 +185,8 @@ export class DealWithOfferComponent implements OnInit {
   }
 
   MilestoneCost(stage: any, precentage: any) {
+    console.log(this.Precentage)
+    console.log(stage)
     this.totalcostMilestone[stage] = 0;
     this.Precentage[stage] = precentage;
     if (stage == '1' && precentage) {

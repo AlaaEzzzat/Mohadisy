@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { UserserviceService } from 'src/app/@core/http/userservice.service';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { ClientService } from './../../@core/services/client/client.service';
@@ -24,7 +25,7 @@ export class SpProfileComponent implements OnInit {
       title: ' شهاده الزكاه والدخل',
       value: '',
     },
-    { id: 3, name: 'registeration3', title: '  السجل التجارى', value: '' },
+    { id: 3, name: 'companyRegisterationNumberPath', title: '  السجل التجارى', value: '' },
     { id: 4, name: 'ProfessionLicense', title: ' الرخصه', value: '' },
     {
       id: 5,
@@ -54,8 +55,9 @@ export class SpProfileComponent implements OnInit {
   ProfessionLicenseName: any = '';
   SocialInsuranceCertificateName: any = '';
   SaudizationCertificateName: any = '';
-
-  FileformData = new FormData();
+  companyRegisterationNumberPath:any='';
+  companyRegisterationNumberName:any=''
+  FileformData = new FormData()
   file: any;
   iProfileAdmin: any | undefined = undefined;
   dateOpt: any;
@@ -94,7 +96,8 @@ export class SpProfileComponent implements OnInit {
     private http: AdminDashService,
     private clientService: ClientService,
     private provider: ServiceProviderService,
-    private UserserviceService: UserserviceService
+    private UserserviceService: UserserviceService,
+    private toester :ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -150,9 +153,9 @@ export class SpProfileComponent implements OnInit {
           this.ZakatCertificateName =
             this.profile.organizationalServiceProviderProfile?.zakatCertificateFile;
           this.ProfessionLicense =
-            this.profile.organizationalServiceProviderProfile?.professionLicensePath;
+            this.profile.organizationalServiceProviderProfile?.licensePath;
           this.ProfessionLicenseName =
-            this.profile.organizationalServiceProviderProfile?.professionLicenseFile;
+            this.profile.organizationalServiceProviderProfile?.licenseFile;
           this.SaudizationCertificate =
             this.profile.organizationalServiceProviderProfile?.saudizationCertificatePath;
           this.SaudizationCertificateName =
@@ -161,6 +164,8 @@ export class SpProfileComponent implements OnInit {
             this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificatePath;
           this.SocialInsuranceCertificateName =
             this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificateFile;
+            this.companyRegisterationNumberPath = this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberPath;
+            this.companyRegisterationNumberName = this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberFile;
 
           if (
             this.profile?.organizationalServiceProviderProfile?.licenseFile !=
@@ -390,6 +395,7 @@ export class SpProfileComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           console.log('profile edited');
+          this.toester.info('تم تعديل البيانات ')
         },
         error: (err: any) => {
           console.log(err);
