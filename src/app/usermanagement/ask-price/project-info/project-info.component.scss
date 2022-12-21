@@ -1,3 +1,5 @@
+@import 'src/styles/shared.scss';
+
 .is-invalid{
   border-left: 4px solid #f2564b;
 }
@@ -25,8 +27,4 @@
     background-color: #F5F5F5;
     font-weight: 700;
   }
-}
-.activeWork{
-  background-color: #18af9a;
-  color: #FFF;
 }

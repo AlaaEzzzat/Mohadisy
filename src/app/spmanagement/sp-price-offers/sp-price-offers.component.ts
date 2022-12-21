@@ -1,3 +1,4 @@
+import { UserserviceService } from './../../@core/http/userservice.service';
 import { SpPriceOfferService } from './../../@core/services/Provider/sp-price-offer.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
@@ -55,6 +56,9 @@ export class SpPriceOffersComponent implements OnInit {
   userType: string = '';
   type: number = Number(localStorage.getItem('typeId'));
   makeOfferForm: boolean = true;
+  userProfile: any = {};
+  userService: any = 0;
+  serviceTypeId:any;
   projectCategory: any = [
     { id: 1, name: 'طلبات عرض سعر ' },
     { id: 2, name: 'عروض مقدمة' },
@@ -62,33 +66,59 @@ export class SpPriceOffersComponent implements OnInit {
     { id: 4, name: 'عروض مرفوضة' },
   ];
   ngOnInit(): void {
-    this.userType = 'sp';
-    this.clientService.getProjectServicesAndSubService().subscribe((data) => {
-      this.projectServices = data.data.projectServices;
-      this.activeCategory = this.projectCategory[0]?.id;
-
-      this.getCategoryContent(this.activeCategory, this.page);
-      this.spPriceOfferService
-        .GetProjectServicesWithCountForSP()
-        .subscribe((data) => {
-          this.projectServicesWithCount = data.data;
-          this.projectServicesWithCount.map((serv: any) => {
-            this.projectServices.map((pro: any) => {
-              if (serv.projectService.id == pro.id) {
-                pro.count = serv.count;
-              }
-            });
-          });
+    if (localStorage.getItem('type') == '"CO"') {
+      this.userserviceService
+        .getOrganizationalServiceProviderProfile()
+        .subscribe((profile: any) => {
+          this.userProfile = profile.data?.organizationalServiceProviderProfile;
+          this.userService = this.userProfile?.projectService;
+          console.log(this.userProfile);
         });
-    });
+    } else if (localStorage.getItem('type') == '"IND"') {
+      this.userserviceService
+        .getIndividualServiceProviderProfile()
+        .subscribe((profile: any) => {
+          this.userProfile = profile.data;
+          this.userProfile = profile.data?.individualServiceProviderProfile;
+          this.userService = this.userProfile?.projectService;
+          this.serviceTypeId = this.userService?.id
+          console.log(this.userProfile);
+        });
+    }
+    this.userType = 'sp';
+    this.clientService
+      .getProjectServicesAndSubService()
+      .subscribe((data: any) => {
+        this.projectServices = data.data.projectServices;
+        console.log(this.projectServices);
+        this.activeCategory = this.projectCategory[0]?.id;
+
+        this.getCategoryContent(this.activeCategory, this.page);
+         this.spPriceOfferService
+          .GetProjectServicesWithCountForSP()
+          .subscribe((data: any) => {
+            console.log(data)
+            this.projectServicesWithCount = data.data;
+            console.log(this.projectServicesWithCount);
+            this.projectServicesWithCount.map((serv: any) => {
+              this.projectServices.map((pro: any) => {
+                if (serv.projectService.id == pro.id) {
+                  pro.count = serv.count;
+                }
+              });
+            });
+          }); 
+      });
   }
   activeCategory: any = '';
   isActiveCategory(catId: any) {
+    this.projectServiesArrays =[]
     this.activeCategory = catId;
     this.getCategoryContent(catId, this.page);
   }
 
   constructor(
+    private userserviceService: UserserviceService,
     private clientService: ClientService,
     private _toastr: ToastrService,
     private _HttpClient: HttpClient,
@@ -110,7 +140,7 @@ export class SpPriceOffersComponent implements OnInit {
     }
   };
   projectServicesWithCount: any;
- 
+
   getMilestonse(selectedOfferId: any) {
     this.projectMilestons = [];
     this.clientService
@@ -130,6 +160,7 @@ export class SpPriceOffersComponent implements OnInit {
         this.spPriceOfferService
           .getSPNewProjects(page)
           .subscribe((data: any) => {
+            console.log(data.data)
             this.projectServiesArrays = data.data;
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
@@ -142,11 +173,12 @@ export class SpPriceOffersComponent implements OnInit {
         this.spPriceOfferService
           .GetSPPriceQuotesIAppliedFor(page)
           .subscribe((data: any) => {
+            console.log(data.data)
             this.projectServiesArrays = data.data;
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
-            this.activeProject = this.projectServiesArrays.projects[0].id;
-            this.selectedProject = this.projectServiesArrays.projects[0];
+            this.activeProject = this.projectServiesArrays?.projects[0]?.id;
+            this.selectedProject = this.projectServiesArrays?.projects[0];
             this.showDetails(this.selectedProject);
           });
         break;
@@ -154,11 +186,12 @@ export class SpPriceOffersComponent implements OnInit {
         this.spPriceOfferService
           .getSPAcceptedOffers(page)
           .subscribe((data: any) => {
+            console.log(data.data)
             this.projectServiesArrays = data.data;
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
-            this.activeProject = this.projectServiesArrays.priceQuotes[0].id;
-            this.selectedProject = this.projectServiesArrays.priceQuotes[0];
+            this.activeProject = this.projectServiesArrays.priceQuotes[0]?.id;
+            this.selectedProject = this.projectServiesArrays?.priceQuotes[0];
             this.showDetails(this.selectedProject);
           });
         break;
@@ -166,6 +199,7 @@ export class SpPriceOffersComponent implements OnInit {
         this.spPriceOfferService
           .getSPRejectedOffers(page)
           .subscribe((data: any) => {
+            console.log(data.data)
             this.projectServiesArrays = data.data;
             this.totalpages = this.projectServiesArrays.totalPages;
             this.counter(this.totalpages);
@@ -221,7 +255,7 @@ export class SpPriceOffersComponent implements OnInit {
   }
   showDetails(project: any) {
     console.log(project);
-    this.makeOfferForm=false
+    this.makeOfferForm = false;
     project?.projectRequiredWorks?.length > 0
       ? this.mapOnProjectsReuiredWorks(project.projectRequiredWorks)
       : null;
@@ -271,5 +305,4 @@ export class SpPriceOffersComponent implements OnInit {
   makeOfferToggle = () => {
     this.makeOfferForm = !this.makeOfferForm;
   };
-  
 }

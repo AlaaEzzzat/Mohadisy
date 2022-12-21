@@ -103,6 +103,7 @@ export class SpProfileComponent implements OnInit {
       this.userType='IND'
       this.UserserviceService.getIndividualServiceProviderProfile().subscribe(
         (data: any) => {
+          console.log(this.profile)
           this.profile = data.data;
           console.log(this.profile);
           this.name = this.profile.individualServiceProviderProfile?.firstName + ' ' + this.profile.individualServiceProviderProfile?.lastName;
@@ -114,16 +115,16 @@ export class SpProfileComponent implements OnInit {
             this.profile?.individualServiceProviderProfile?.district?.city?.region?.nameAr;
             this.projectService =  this.profile?.individualServiceProviderProfile?.projectService?.name;
             this.projectSubService = ''; 
-  
         }
       );
-    } else if (localStorage.getItem('type') == '"Co"') {
+    } else if (localStorage.getItem('type') == '"CO"') {
       this.userType='CO'
       this.api
         .get(
           'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
         )
         .subscribe((data) => {
+          console.log(data.data)
           this.profile = data.data;
           this.name =
             this.profile?.organizationalServiceProviderProfile?.companyName;

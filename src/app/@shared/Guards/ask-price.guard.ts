@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ClientService } from './../../@core/services/client/client.service';
 import { Injectable } from '@angular/core';
 import {
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AskPriceGuard implements CanActivate {
-  constructor(private router: Router, private clientService: ClientService) {}
+  constructor(private router: Router,private toester:ToastrService, private clientService: ClientService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,7 +26,7 @@ export class AskPriceGuard implements CanActivate {
     if (this.clientService.requestedServiceId) {
       return true;
     } else {
-      alert('يجب إختيار نوع الطلب أولا');
+      this.toester.error('يجب إختيار نوع الطلب أولا');
       this.router.navigate(['usermanagement/dashboard']);
       return false;
     }

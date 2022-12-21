@@ -272,7 +272,7 @@
                 </svg>
                 <p class="m-0 mx-3 cairo p-0">
                   تاريخ التسليم :
-                  <span>{{ project.pricequoteEndDate }}</span>
+                  <span>{{ project.pricequoteEndDate | date }}</span>
                 </p>
               </div>
             </div>
@@ -468,10 +468,24 @@
                 aria-valuemax="100"
                 [style]="'--value:'+  Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)"
               ></div>
-              <div (click)="show()" class="pt-3 cairo text-center w-100">
+             <!--  <circle-progress
+              [percent]="Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)"
+              [radius]="100"
+              [outerStrokeWidth]="16"
+              [innerStrokeWidth]="8"
+              [outerStrokeColor]="'#78C000'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress> -->
+            <!--   <div id="progress" >
+                <div [attr.data-num]="Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)" class="progress-item"></div> 
+              </div> -->
+              <div class="pt-3 cairo text-center w-100">
                  جاري العمل 
               </div>
             </div>
+
           </div>
           <div class="mb-2 col-lg-8 col-md-12">
             <ng-container *ngFor="let item of projectMilestnes; let i = index">

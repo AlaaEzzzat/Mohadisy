@@ -26,6 +26,7 @@
                   [isActive]="activeProject == project.id"
                   [userType]="userType"
                   [project]="project"
+                  category="priceOffer"
                   [showProject]="showProject"
                   [deleteProject]="deleteProject"
                 ></app-price-offer-card>
@@ -50,7 +51,7 @@
                 <div>مقدم الطلب :</div>
                 <select
                   class="active"
-                  style="width: 90%; color: #fff; border: 0"
+                  style="flex:1; color: #fff; border: 0"
                   name="offers"
                   id="offers"
                   [(ngModel)]="selectedOfferId"

@@ -10,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class DealWithOfferComponent implements OnInit {
   @Input() selectProject: any;
+  @Input() serviceTypeId: any;
   @Input() typeOfDeal: any;
   @Input() makeOfferToggle: any = (args: any) => {};
   RequiredWorks: Array<any> = [];

@@ -15,7 +15,7 @@ import { ApiService } from 'src/app/@core/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgCircleProgressModule } from 'ng-circle-progress';
 @NgModule({
   declarations: [AppComponent ],
   
@@ -31,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeModule,
     FormsModule,
     NgbModule,
+   
   ],
   providers: [
     {

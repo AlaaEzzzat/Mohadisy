@@ -16,7 +16,7 @@
             <input
               type="text"
               formControlName="firstName"
-              name="firstName"
+              name="firstName" 
               id="firstName"
               class="form-control form-control-lg signup"
               placeholder="   الإسم بالكامل"
@@ -37,31 +37,7 @@
             </div>
           </div>
         </div>
-        <!--  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-          <div class="form-group">
-            <label class="form-label mb-2" for="lastName">إسم العائلة</label>
-            <input
-              type="text"
-              formControlName="lastName"
-              id="lastName"
-              name="lastName"
-              class="form-control form-control-lg signup"
-              placeholder="   إسم العائلة"
-              required
-              [class.is-valid]="lastName?.valid"
-              [class.is-invalid]="lastName?.invalid && lastName?.touched"
-            />
-            <div
-              class="alert alert-warning"
-              [hidden]="lastName?.valid || lastName?.untouched"
-            >
-              <span *ngIf="lastName?.errors?.['required']"
-                >إسم العائلة مطلوب
-              </span>
-            </div>
-          </div>
-        </div>
-        -->
+        
         <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="form-group" formGroupName="applicationUser">
             <label class="form-label mb-2" for="email">

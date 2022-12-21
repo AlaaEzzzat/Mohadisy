@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../@core/services/functions/functions.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { Component, OnInit } from '@angular/core';
@@ -28,7 +29,8 @@ export class PrevWorksComponent implements OnInit {
     private fb: FormBuilder,
     private _toastr: ToastrService,
     private serviceProviderService: ServiceProviderService,
-    private api:ApiService
+    private api:ApiService,
+    private functionsService:FunctionsService
   ) {
     this.prevWorksForm = this.fb.group({
       projectCategoryId: ['', [Validators.required]],
@@ -129,26 +131,13 @@ export class PrevWorksComponent implements OnInit {
       });
   }
   numberOnly(event: any): boolean {
-    const charCode = event.which ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
+    return this.functionsService.numberOnly(event);
   }
 
-  englishOnly(event: any): boolean {
-    if (event.altKey == false && event.ctrlKey == false)
-      if (
-        (event.keyCode >= 48 &&
-          event.keyCode <= 57 &&
-          event.shiftKey == false) ||
-        (event.keyCode >= 65 && event.keyCode <= 90) ||
-        (event.keyCode >= 97 && event.keyCode <= 122)
-      ) {
-        return true;
-      }
-    return false;
+  chareacterOnly(event: any): boolean {
+    return this.functionsService.chareacterOnly(event);
   }
+
   onImageUpload(event: any) {
     if (event.target.files.length > 0) {
       Array.from(event.target.files).forEach((file) => {

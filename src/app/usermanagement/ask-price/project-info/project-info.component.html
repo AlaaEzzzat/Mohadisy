@@ -6,7 +6,7 @@
         width="80"
         height="80"
         viewBox="0 0 94 94"
-      >
+      > 
         <g
           id="Group_626"
           data-name="Group 626"
@@ -139,7 +139,7 @@
         </g>
       </svg>
 
-      <h5 class="bd-title m-0 me-3 p-0" style="color: #18af9a">
+      <h5 class="bd-title cairo m-0 me-3 p-0" style="color: #18af9a">
         إرسال عرض سعر
       </h5>
     </div>
@@ -157,6 +157,7 @@
               type="text"
               formControlName="name"
               name="name"
+           
               id="name"
               class="form-control form-control-lg signup"
               placeholder="إسم المشروع "
@@ -165,7 +166,7 @@
               [class.is-invalid]="name?.invalid && name?.touched"
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="name?.valid || name?.untouched"
             >
               <span *ngIf="name?.errors?.['required']">الإسم مطلوب </span>
@@ -178,6 +179,7 @@
             <input
               type="text"
               formControlName="subject"
+          
               id="subject"
               name="subject"
               class="form-control form-control-lg signup"
@@ -187,7 +189,7 @@
               [class.is-invalid]="subject?.invalid && subject?.touched"
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="subject?.valid || subject?.untouched"
             >
               <span *ngIf="subject?.errors?.['required']"
@@ -209,13 +211,14 @@
               class="form-control form-control-lg signup"
               placeholder="  صلاحية عرض السعر مثال (15) يوم "
               required
+              (keypress)="numberOnly($event)"
               [class.is-valid]="pricequoteEndDate?.valid"
               [class.is-invalid]="
                 pricequoteEndDate?.invalid && pricequoteEndDate?.touched
               "
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="
                 pricequoteEndDate?.valid || pricequoteEndDate?.untouched
               "
@@ -252,7 +255,7 @@
             </ng-container>
           </select>
           <div
-            class="alert alert-warning"
+            class="alert cairo alert-warning"
             [hidden]="projectCategoryId?.valid || projectCategoryId?.untouched"
           >
             <span *ngIf="projectCategoryId?.errors?.['required']">
@@ -269,6 +272,7 @@
             id="projectSubCategoryId"
             class="mt-2 form-control form-control-lg"
             formControlName="projectSubCategoryId"
+
             [class.is-valid]="projectSubCategoryId?.valid"
             [class.is-invalid]="
               projectSubCategoryId?.invalid && projectSubCategoryId?.touched
@@ -284,7 +288,7 @@
             </ng-container>
           </select>
           <div
-            class="alert alert-warning"
+            class="alert cairo alert-warning"
             [hidden]="
               projectSubCategoryId?.valid || projectSubCategoryId?.untouched
             "
@@ -303,8 +307,11 @@
               <select
                 name="region"
                 id="region"
+                formControlName="regionId"
                 class="mt-2 form-control form-control-lg"
                 (change)="_getCities($event)"
+                [class.is-valid]="regionId?.valid"
+                [class.is-invalid]="regionId?.invalid && regionId?.touched"
               >
                 <option></option>
                 <ng-container *ngFor="let region of regionsList">
@@ -313,21 +320,40 @@
                   </option>
                 </ng-container>
               </select>
+              <div
+                class="alert cairo alert-warning"
+                [hidden]="regionId?.valid || regionId?.untouched"
+              >
+                <span *ngIf="regionId?.errors?.['required']">
+                  إسم المنطقه مطلوب</span
+                >
+              </div>
             </div>
             <div class="col-12 col-md-4">
               <select
                 name="city"
+                formControlName="cityId"
                 id="city"
                 class="mt-2 form-control form-control-lg"
                 required
                 placeholder="المدينه"
                 (change)="_getDistricts($event)"
+                [class.is-valid]="cityId?.valid"
+                [class.is-invalid]="cityId?.invalid && cityId?.touched"
               >
                 <option disabled>المدينة</option>
                 <ng-container *ngFor="let city of citiesList">
                   <option [value]="city.id">{{ city.nameAr }}</option>
                 </ng-container>
               </select>
+              <div
+                class="alert cairo alert-warning"
+                [hidden]="cityId?.valid || cityId?.untouched"
+              >
+                <span *ngIf="cityId?.errors?.['required']">
+                  إسم المدينه مطلوب</span
+                >
+              </div>
             </div>
             <div class="col-12 col-md-4">
               <select
@@ -363,7 +389,7 @@
                 ></i>
               </div>
               <div
-                class="alert alert-warning"
+                class="alert cairo alert-warning"
                 [hidden]="districtId?.valid || districtId?.untouched"
               >
                 <span *ngIf="districtId?.errors?.['required']">
@@ -387,7 +413,7 @@
               (keypress)="numberOnly($event)"
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="plotNumber?.valid || plotNumber?.untouched"
             >
               <span *ngIf="plotNumber?.errors?.['required']">
@@ -418,7 +444,7 @@
               (keypress)="numberOnly($event)"
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="
                 organizationalChartNumber?.valid ||
                 organizationalChartNumber?.untouched
@@ -444,7 +470,7 @@
               (keypress)="numberOnly($event)"
             />
             <div
-              class="alert alert-warning"
+              class="alert cairo alert-warning"
               [hidden]="area?.valid || area?.untouched"
             >
               <span *ngIf="area?.errors?.['required']">
@@ -515,7 +541,7 @@
                     class="cairo p-3"
                     [ngClass]="
                       activeWork.id == requiredWork.id
-                        ? ' activeWork'
+                        ? ' secondBk'
                         : 'bg-white'
                     "
                   >
@@ -550,7 +576,7 @@
                     class="cairo p-3"
                     style="cursor: pointer"
                     [ngClass]="
-                      activeWork.id == work.id ? ' activeWork' : 'bg-white'
+                      activeWork.id == work.id ? ' secondBk' : 'bg-white'
                     "
                   >
                     {{ work.name }}
@@ -570,9 +596,9 @@
           <div class="form-group">
             <button
               type="submit"
-              class="btn btn-success py-2 form-control text-white"
+              class="btn cairo btn-success py-2 form-control text-white"
             >
-              <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
+              <i class="fa fa-floppy-disk mx-2 " aria-hidden="true"></i>
               تقديم الطلب
             </button>
           </div>
