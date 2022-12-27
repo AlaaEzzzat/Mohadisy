@@ -416,7 +416,7 @@
     <div *ngIf="showInformation "> 
               <!-- سبب عدم الاكتمال -->
       <div  class="col-12 card mb-3 border-0 rounded-0 p-3"
-        *ngIf="productCurrent?.joinRequestStatus?.accountStatusId != 4" >
+        *ngIf="productCurrent?.joinRequestStatus?.accountStatus.id !== 4" >
         <p class="titleInformation fs-6">سبب عدم تاكيد الحساب</p>
         <p class="fs-6">{{ productCurrent.joinRequestStatus.description }}</p>
       </div>
