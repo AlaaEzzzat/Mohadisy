@@ -11,20 +11,20 @@
           <div class="col-md-10">
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <h5 class="card-title nameProfile">
+                <h5 class="card-title nameProfile cairo h6 fw-normal">
                   {{ iProfileAdmin.adminProfile.firstName }}
                   {{ iProfileAdmin.adminProfile.lastName }}
                 </h5>
-                <span class="edit" (click)="changeFirstOrLastName()"
+                <span class="edit cairo  fw-normal" (click)="changeFirstOrLastName()"
                   >تعديل
                 </span>
               </div>
               <!-- <h5 class="card-title nameProfile">Admin ADMIN ADMIN admin</h5> -->
 
-              <p class="card-text emANumProfile">
+              <p class="card-text emANumProfile cairo h6 fw-normal">
                 {{ iProfileAdmin.phoneNumber }}
               </p>
-              <p class="card-text emANumProfile">{{ iProfileAdmin.email }}</p>
+              <p class="card-text emANumProfile cairo h6 fw-normal">{{ iProfileAdmin.email }}</p>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
                                 value="text"
                                 formControlName="firstName"
                               />
-                              <label for="firstName">اسم الاول </label>
+                              <label for="firstName cairo h6 fw-normal">اسم الاول </label>
                             </div>
                           </div>
                           <div class="col-md">
@@ -72,17 +72,23 @@
                                 value="text"
                                 formControlName="lastName"
                               />
-                              <label for="lastName">اسم عائله</label>
+                              <label for="lastName cairo h6 fw-normal">اسم عائله</label>
                             </div>
                           </div>
                         </div>
     
                         <button
                           (click)="updateAdminProfile()"
-                          class="btn btndark my-3 rounded-0 px-3"
+                          class="btn btndark my-3 rounded-0 px-3 ms-4 cairo h6 fw-normal"
                         >
                           حفظ
                         </button>
+                        <button
+                      (click)="getProfileAdmin()"
+                        class="btn btndark my-3 rounded-0 px-3 cairo h6 fw-normal"
+                      >
+                        الغاء
+                      </button>
                       </form>
                       <!-- <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5> -->
     
@@ -102,13 +108,13 @@
         </ng-container>
 
       <div class="bg-white py-2 px-4 d-flex justify-content-between align-items-center col-12">
-        <p class="stutsProfile">تم اضافته <span></span></p>
-        <p class="stutsProfile">
+        <p class="stutsProfile cairo h6 fw-normal">تم اضافته <span></span></p>
+        <p class="stutsProfile cairo h6 fw-normal">
           منذ {{ iProfileAdmin.adminProfile.dateCreated | date }}
         </p>
       </div>
 
-      <div class="alert  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="show">
+      <div class="alert cairo h6 fw-normal  position-fixed bottom-0 end-50 border-0 rounded-0 toastinfo end10 text-white" role="alert" *ngIf="show">
         {{message}}
       </div>
       

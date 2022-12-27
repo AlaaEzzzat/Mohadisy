@@ -10,6 +10,9 @@ $colorbg:#030303;
 
 
 
+.cairo{
+  font-family: $fontCairoFamily;
+}
 
 .sizeAc{
   background-color: $Alltext!important;
@@ -75,15 +78,7 @@ input[type="text"]:focus{
   color: $textColor!important;
 
 }
-// .titles
-// {
-//   @include titleTotal($font25Size,$fontTajawalFamily);
 
-// }
-// .reson{
-//   @include titleTotal($font20Size,$fontTajawalFamily )
-
-// }
 .reson>.col-3.me-4.pe-1{
   color: $Alltext;
 }

@@ -129,7 +129,7 @@
                       [hidden]="productCurrent?.id != pro.id"
                     />
                     <div
-                      class="me-3 fs-6"
+                      class="me-3 cairo h6 fw-normal"
                       *ngIf="
                         pro.district?.city?.region?.code &&
                           pro.district.city.region.nameAr;
@@ -247,7 +247,7 @@
                   </div>
                   <div class="col-lg-7 col-sm-7 ">
                     <div class="card-body ">
-                      <p class=" fs-6 textInformation ">
+                      <p class=" cairo h6 fw-normal textInformation ">
                         {{ productCurrent?.clientProfile.firstName }}
                         {{ productCurrent?.clientProfile.lastName }}
                       </p>
@@ -263,19 +263,19 @@
                     class=""
                     style="width: 35px"
                   />
-                  <span class="fs-6 typeCom2 pe-1">معاد التسليم
+                  <span class="cairo h6 fw-normal typeCom2 pe-1">معاد التسليم
                     {{ productCurrent?.pricequoteEndDate | date: "shortDate" }}</span>
                 </div>
               </div>
               
                 <div class="col-xl-6 col-12 card border-0 rounded-0  p-3 cairo">
-                  <h5 class="card-title mb-2 titleInformation">معلومات المسؤل عن المشروع</h5>
+                  <h5 class="card-title mb-5 cairo  titleInformation">معلومات المسؤل عن المشروع</h5>
                   <div class="d-flex align-items-start mb-1">
                     <div class="col-2"  *ngIf="projectResponsible?.companyName ">
                       <img src="assets/icons/XMLID_1_.svg" />
                     </div>
         
-                    <p class="fs-6  pt-1">
+                    <p class="cairo h6 fw-normal  pt-1">
                       {{projectResponsible?.companyName}} 
                     </p>
                   
@@ -283,13 +283,13 @@
                   <div class="d-flex align-items-start mb-1">
                     <img src="{{projectResponsible?.profilePicturePath}}" class="rounded-circle  h-75 col-2 ms-3"/>
         
-                    <p class="fs-6 pt-1" *ngIf="projectResponsible?.representative ;else inva">
+                    <p class="cairo h6 fw-normal pt-1" *ngIf="projectResponsible?.representative ;else inva">
                         ممثل الشركه<br/>م.{{projectResponsible?.representative?.firstName}}{{projectResponsible?.representative?.lastName}} 
         
                     </p>
                     <ng-template #inva>
                       
-                      <p class="fs-6 pt-1">
+                      <p class="cairo h6 fw-normal pt-1">
                         ممثل الشركه<br/>م.{{projectResponsible?.firstName}}  {{projectResponsible?.lastName}} 
         
                     </p>
@@ -300,7 +300,7 @@
                       <img src="assets/icons/Group 801.svg " />
                     </div>
                     
-                    <p class="fs-6">
+                    <p class="cairo h6 fw-normal">
                       {{projectResponsible?.district?.city?.nameAr}} -السعوديه
                     </p>
                   </div>
@@ -310,11 +310,11 @@
             <!-- <div class="col-4 d-flex flex-column">
               <div class="bg-white col-12 py-2 px-2 mb-2">
                 <img src="assets/icons/calendar.svg " alt="" srcset=""  class=" "  style="width:30px">
-              <span class="fs-6 typeCom2 pe-1" style="color: #EE9C0F;">تحويل المشروع لمزود خدمه اخر </span>
+              <span class="cairo h6 fw-normal typeCom2 pe-1" style="color: #EE9C0F;">تحويل المشروع لمزود خدمه اخر </span>
               </div>
               <div class="bg-white col-12 py-2 px-2 ">
                 <img src="assets/icons/calendar.svg" alt="" srcset="" class=" " style="width:35px">
-              <span class="fs-6 typeCom2 pe-1 ">معاد التسليم {{productCurrent?.pricequoteEndDate|date:'shortDate'}}</span>
+              <span class="cairo h6 fw-normal typeCom2 pe-1 ">معاد التسليم {{productCurrent?.pricequoteEndDate|date:'shortDate'}}</span>
               </div>
             </div> -->
           
@@ -323,18 +323,18 @@
           <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
           *ngIf="productCurrent?.projectRequestStatus.projectStatus.id === 3"
         >
-          <p class="typeCom  cairo fs-6">سبب تعليق المشروع  </p>
-          <p class="fs-6 cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
+          <p class="typeCom  cairo cairo h5 fw-normal">سبب تعليق المشروع  </p>
+          <p class="cairo h6 fw-normal cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
         </div>
         <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
         *ngIf="productCurrent?.projectRequestStatus.projectStatus.id === 7">
-        <p class="typeCom cairo  fs-6">سبب   التاخر  </p>
-        <p class="fs-6 cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
+        <p class="typeCom cairo  cairo h5 fw-normal">سبب   التاخر  </p>
+        <p class="cairo h6 fw-normal cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
       </div>
       <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
       *ngIf="productCurrent?.projectRequestStatus.projectStatus.id === 8">
-      <p class="typeCom cairo  fs-6">سبب   التوقف  </p>
-      <p class="fs-6 cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
+      <p class="typeCom cairo  cairo h5 fw-normal">سبب   التوقف  </p>
+      <p class="cairo h6 fw-normal cairo">{{ productCurrent?.projectRequestStatus.notes }}</p>
     </div>
           <!-- ممثل/ معلومات عن العميل -->
           <!-- <div class="col-12 d-flex justify-content-between flex-xl-nowrap flex-wrap" >
@@ -343,9 +343,9 @@
               <div class="d-flex col-12 mb-4 flex-wrap">
                 <div class="col-12 mb-4">
                   <div class="d-flex flex-row  flex-wrap justify-content-between">
-                    <p class="card-subtitle text-muted fs-6">رقم الهوية</p>
+                    <p class="card-subtitle text-muted cairo h6 fw-normal">رقم الهوية</p>
       
-                    <p class="fs-6 textInformation">
+                    <p class="cairo h6 fw-normal textInformation">
                       {{ productCurrent?.clientProfile.idNumber }}
                     </p>
                     <a
@@ -367,23 +367,23 @@
                 </div>
       
                 <div class="col-lg-5 col-sm-6 col-12 mb-4 ">
-                  <p class="card-subtitle text-muted fs-6 mb-2">الدوله</p>
-                  <small class="fs-6 textInformation">المملكه العربيه السعوديه</small>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">الدوله</p>
+                  <small class="cairo h6 fw-normal textInformation">المملكه العربيه السعوديه</small>
                 </div>
       
                 <div class="col-lg-3 col-sm-6 col-12 mb-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">المدينه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المدينه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.district.city.nameAr; else city"
                     >{{ productCurrent?.district.city.nameAr }}</small
                   >
                   <ng-template #city> _ </ng-template>
                 </div>
                 <div class="col-lg-4 col-sm-6 col-12 mb-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.district.city.region.nameAr;
                       else regionName
@@ -393,9 +393,9 @@
                   <ng-template #regionName> _ </ng-template>
                 </div>
                 <div class="col-lg-5 col-sm-6 col-12 mb-4  ">
-                  <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.clientProfile.streetName; else shortAddress"
                   >
                     {{ productCurrent?.clientProfile.streetName }} -
@@ -405,9 +405,9 @@
                 </div>
       
                 <div class="col-lg-3 col-sm-6 col-12 mb-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم الهاتف</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.clientProfile.applicationUser"
                     >{{
                       productCurrent?.clientProfile.applicationUser.phoneNumber
@@ -415,11 +415,11 @@
                   >
                 </div>
                 <div class="col-lg-4 col-sm-6 col-12 mb-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
                     عنوان البريد الالكتروني
                   </p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.clientProfile.applicationUser;
                       else emailName
@@ -427,7 +427,7 @@
                     >{{ productCurrent?.clientProfile.applicationUser.email }}</small
                   >
                   <ng-template #emailName>
-                    <small class="fs-6 textInformation">_</small>
+                    <small class="cairo h6 fw-normal textInformation">_</small>
                   </ng-template>
                 </div>
               </div>
@@ -439,7 +439,7 @@
                   <img src="assets/icons/XMLID_1_.svg" />
                 </div>
 
-                <p class="fs-6  pt-2">
+                <p class="cairo h6 fw-normal  pt-2">
                   {{projectResponsible?.companyName}} 
                 </p>
               
@@ -447,13 +447,13 @@
               <div class="d-flex align-items-start mb-2">
                 <img src="{{projectResponsible?.profilePicturePath}}" class="rounded-circle  h-75 col-2 ms-3"/>
 
-                <p class="fs-6 pt-2" *ngIf="projectResponsible?.representative ;else inva">
+                <p class="cairo h6 fw-normal pt-2" *ngIf="projectResponsible?.representative ;else inva">
                     ممثل الشركه<br/>م.{{projectResponsible?.representative?.firstName}}{{projectResponsible?.representative?.lastName}} 
 
                 </p>
                 <ng-template #inva>
                   
-                  <p class="fs-6 pt-2">
+                  <p class="cairo h6 fw-normal pt-2">
                     ممثل الشركه<br/>م.{{projectResponsible?.firstName}}  {{projectResponsible?.lastName}} 
 
                 </p>
@@ -464,7 +464,7 @@
                   <img src="assets/icons/Group 801.svg " />
                 </div>
                 
-                <p class="fs-6">
+                <p class="cairo h6 fw-normal">
                   {{projectResponsible?.district?.city?.nameAr}} -السعوديه
                 </p>
               </div>
@@ -475,13 +475,13 @@
               <div class="col-12 d-flex justify-content-between flex-xl-nowrap flex-wrap" >
               
                   <div class="col-xl-12 col-12 card mb-3 border-0 rounded-0  p-3 cairo">
-                    <h5 class="card-title mb-4 titleInformation">معلومات عن العميل</h5>
+                    <h5 class="card-title mb-5 cairo  titleInformation">معلومات عن العميل</h5>
                     <div class="d-flex col-12 mb-4 flex-wrap">
                       <div class="col-12 mb-4">
                         <div class="d-flex flex-row  flex-wrap justify-content-between">
-                          <p class="card-subtitle text-muted fs-6">رقم الهوية</p>
+                          <p class="card-subtitle text-muted cairo h6 fw-normal">رقم الهوية</p>
             
-                          <p class="fs-6 textInformation">
+                          <p class="cairo h6 fw-normal textInformation">
                             {{ productCurrent?.clientProfile.idNumber }}
                           </p>
                           <a
@@ -504,23 +504,23 @@
                       </div>
             
                       <div class="col-lg-5 col-sm-6 col-12 mb-4 ">
-                        <p class="card-subtitle text-muted fs-6 mb-2">الدوله</p>
-                        <small class="fs-6 textInformation">المملكه العربيه السعوديه</small>
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">الدوله</p>
+                        <small class="cairo h6 fw-normal textInformation">المملكه العربيه السعوديه</small>
                       </div>
             
                       <div class="col-lg-3 col-sm-6 col-12 mb-4">
-                        <p class="card-subtitle text-muted fs-6 mb-2">المدينه</p>
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المدينه</p>
                         <small
-                          class="fs-6 textInformation"
+                          class="cairo h6 fw-normal textInformation"
                           *ngIf="productCurrent?.district.city.nameAr; else city"
                           >{{ productCurrent?.district.city.nameAr }}</small
                         >
                         <ng-template #city> _ </ng-template>
                       </div>
                       <div class="col-lg-4 col-sm-6 col-12 mb-4">
-                        <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
                         <small
-                          class="fs-6 textInformation"
+                          class="cairo h6 fw-normal textInformation"
                           *ngIf="
                             productCurrent?.district.city.region.nameAr;
                             else regionName
@@ -530,9 +530,9 @@
                         <ng-template #regionName> _ </ng-template>
                       </div>
                       <div class="col-lg-5 col-sm-6 col-12 mb-4  ">
-                        <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
                         <small
-                          class="fs-6 textInformation"
+                          class="cairo h6 fw-normal textInformation"
                           *ngIf="productCurrent?.clientProfile.streetName; else shortAddress"
                         >
                           {{ productCurrent?.clientProfile.streetName }} -
@@ -542,9 +542,9 @@
                       </div>
             
                       <div class="col-lg-3 col-sm-6 col-12 mb-4">
-                        <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم الهاتف</p>
                         <small
-                          class="fs-6 textInformation"
+                          class="cairo h6 fw-normal textInformation"
                           *ngIf="productCurrent?.clientProfile.applicationUser"
                           >{{
                             productCurrent?.clientProfile.applicationUser.phoneNumber
@@ -552,11 +552,11 @@
                         >
                       </div>
                       <div class="col-lg-4 col-sm-6 col-12 mb-4">
-                        <p class="card-subtitle text-muted fs-6 mb-2">
+                        <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
                           عنوان البريد الالكتروني
                         </p>
                         <small
-                          class="fs-6 textInformation"
+                          class="cairo h6 fw-normal textInformation"
                           *ngIf="
                             productCurrent?.clientProfile.applicationUser;
                             else emailName
@@ -564,7 +564,7 @@
                           >{{ productCurrent?.clientProfile.applicationUser.email }}</small
                         >
                         <ng-template #emailName>
-                          <small class="fs-6 textInformation">_</small>
+                          <small class="cairo h6 fw-normal textInformation">_</small>
                         </ng-template>
                       </div>
                     </div>
@@ -599,18 +599,18 @@
             <div class="col-lg-10 col-12 bg-white me-1 p-3">
               <div class="d-flex flex-row col-12 mb-5">
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">اسم المشروع</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المشروع</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.name; else namecode"
                     >{{ productCurrent?.name }}
                   </small>
                   <ng-template #namecode> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الرئيسي</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">التصنيف الرئيسي</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.projectCategory.name;
                       else projectCategoryname
@@ -620,9 +620,9 @@
                   <ng-template #projectCategoryname> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الفرعي</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">التصنيف الفرعي</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.projectSubCategory.name;
                       else projectSubCategoryname
@@ -634,18 +634,18 @@
               </div>
               <div class="d-flex flex-row col-12 mt-5">
                 <div class="col-3">
-                  <p class="card-subtitle text-muted fs-6 mb-2">اسم المدينه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المدينه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.district.city.nameAr; else city"
                     >{{ productCurrent?.district.city.nameAr }}</small
                   >
                   <ng-template #city> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.district.city.region.nameAr;
                       else regionName
@@ -655,9 +655,9 @@
                   <ng-template #regionName> _ </ng-template>
                 </div>
                 <div class="col-5">
-                  <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.clientProfile.streetName;
                       else shortAddress
@@ -671,14 +671,14 @@
               </div>
               <div class="d-flex flex-row col-12 mt-5">
                 <div class="col-2" *ngIf="productCurrent?.plotNumber">
-                  <p class="card-subtitle text-muted fs-6 mb-2">رقم القطعه</p>
-                  <small class="fs-6 textInformation">
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم القطعه</p>
+                  <small class="cairo h6 fw-normal textInformation">
                     {{ productCurrent?.plotNumber }}</small
                   >
                 </div>
                 <div class="col-2" *ngIf="productCurrent?.rganizationalChartNumber">
-                  <p class="card-subtitle text-muted fs-6 mb-2">رقم المخطط</p>
-                  <small class="fs-6 textInformation">
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم المخطط</p>
+                  <small class="cairo h6 fw-normal textInformation">
                     {{ productCurrent?.organizationalChartNumber }}</small
                   >
                 </div>
@@ -691,18 +691,18 @@
             <div class="col-lg-12 col-12 bg-white me-1 p-3">
               <div class="d-flex flex-row col-12 mb-5">
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">اسم المشروع</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المشروع</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.name; else namecode"
                     >{{ productCurrent?.name }}
                   </small>
                   <ng-template #namecode> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الرئيسي</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">التصنيف الرئيسي</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.projectCategory.name;
                       else projectCategoryname
@@ -712,9 +712,9 @@
                   <ng-template #projectCategoryname> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">التصنيف الفرعي</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">التصنيف الفرعي</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.projectSubCategory.name;
                       else projectSubCategoryname
@@ -726,18 +726,18 @@
               </div>
               <div class="d-flex flex-row col-12 mt-5">
                 <div class="col-3">
-                  <p class="card-subtitle text-muted fs-6 mb-2">اسم المدينه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المدينه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="productCurrent?.district.city.nameAr; else city"
                     >{{ productCurrent?.district.city.nameAr }}</small
                   >
                   <ng-template #city> _ </ng-template>
                 </div>
                 <div class="col-4">
-                  <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.district.city.region.nameAr;
                       else regionName
@@ -747,9 +747,9 @@
                   <ng-template #regionName> _ </ng-template>
                 </div>
                 <div class="col-5">
-                  <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
                   <small
-                    class="fs-6 textInformation"
+                    class="cairo h6 fw-normal textInformation"
                     *ngIf="
                       productCurrent?.clientProfile.streetName;
                       else shortAddress
@@ -763,14 +763,14 @@
               </div>
               <div class="d-flex flex-row col-12 mt-5">
                 <div class="col-2" *ngIf="productCurrent?.plotNumber">
-                  <p class="card-subtitle text-muted fs-6 mb-2">رقم القطعه</p>
-                  <small class="fs-6 textInformation">
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم القطعه</p>
+                  <small class="cairo h6 fw-normal textInformation">
                     {{ productCurrent?.plotNumber }}</small
                   >
                 </div>
                 <div class="col-2" *ngIf="productCurrent?.rganizationalChartNumber">
-                  <p class="card-subtitle text-muted fs-6 mb-2">رقم المخطط</p>
-                  <small class="fs-6 textInformation">
+                  <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم المخطط</p>
+                  <small class="cairo h6 fw-normal textInformation">
                     {{ productCurrent?.organizationalChartNumber }}</small
                   >
                 </div>
@@ -782,31 +782,31 @@
           <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 "  *ngIf="productCurrent?.projectRequestStatus.projectStatus.id != 3">
             <div class="card col-lg-4 border-0 rounded-0 " >
               <div class="card-body">
-                <p class="card-title text-center"><span class="h2">{{productCurrent?.area}}</span><sub>متر مكعب</sub></p>
-                <p class="card-text text-center">مساحة الأرض المقام عليها المشروع</p>
+                <p class="card-title text-center cairo h6 fw-normal"><span class="h2">{{productCurrent?.area}}</span><sub>متر مكعب</sub></p>
+                <p class="card-text text-center cairo h6 fw-normal">مساحة الأرض المقام عليها المشروع</p>
               
               </div>
             </div>
             <div class="card col-lg-4 border-0 rounded-0 mx-1" *ngIf="deliveryDate!=null ;else notdATE" >
               <div class="card-body">
-                <p class="card-title text-center"><span class="h2">{{deliveryDate}}</span><sub> يوم عمل</sub></p>
-                <p class="card-text text-center">المده التي سيتم تنفيذ فيها المشروع</p>
+                <p class="card-title text-center cairo h6 fw-normal"><span class="h2">{{deliveryDate}}</span><sub> يوم عمل</sub></p>
+                <p class="card-text text-center cairo h6 fw-normal">المده التي سيتم تنفيذ فيها المشروع</p>
               
               </div>
             </div>
             <ng-template #notdATE>
               <div class="card col-lg-4 border-0 rounded-0 mx-1"  >
                 <div class="card-body">
-                  <p class="card-title text-center"><span class="h2">30   </span><sub> يوم عمل</sub></p>
-                  <p class="card-text text-center">المده التي سيتم تنفيذ فيها المشروع</p>
+                  <p class="card-title text-center cairo h6 fw-normal"><span class="h2">30   </span><sub> يوم عمل</sub></p>
+                  <p class="card-text text-center cairo h6 fw-normal">المده التي سيتم تنفيذ فيها المشروع</p>
                 
                 </div>
               </div>
             </ng-template>
             <div class="card col-lg-4 border-0 rounded-0 " >
               <div class="card-body">
-                <p class="card-title text-center"><span class="h2">{{cost}}</span><sub>ريال </sub></p>
-                <p class="card-text text-center">  الميزانبه الخاصه بهذا المشروع</p>
+                <p class="card-title text-center cairo h6 fw-normal"><span class="h2">{{cost}}</span><sub>ريال </sub></p>
+                <p class="card-text text-center cairo h6 fw-normal">  الميزانبه الخاصه بهذا المشروع</p>
             
               </div>
             </div>
@@ -815,7 +815,7 @@
           <ng-container *ngIf="productCurrent?.projectRequestStatus.projectStatus.id != 4">
           <div  class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-md-2 ps-0 mb-3" >
             <div class="col-lg-6 col-12 d-flex  p-3 bg-white ms-lg-1 ms-0 align-content-end flex-column mb-lg-0 mb-3">
-            <h5 class="card-title mb-4 titleInformation">مكونات  المشروع</h5>
+              <h5 class="card-title mb-5 cairo  titleInformation">مكونات  المشروع</h5>
 
               <ng-container *ngFor="let comp of componentId">
                 <div class="d-flex align-items-start mb-2">
@@ -825,7 +825,7 @@
                     src="assets/icons/arrow-left.png"
                   />
                   <div class="card-title me-3">
-                    <p class="fs-6">
+                    <p class="cairo h6 fw-normal">
                     {{ comp }}
                     </p>
                   </div>
@@ -834,7 +834,7 @@
             </div>
             <div class="col-lg-6 col-12 p-3 bg-white me-lg-1 me-0 align-content-start flex-column" >
 
-              <h5 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h5>
+              <h5 class="card-title mb-5 cairo  titleInformation">الاعمال  المطلوبه</h5>
 
               <div>
                 <ng-container *ngFor="let reqW of set">
@@ -845,7 +845,7 @@
                       src="assets/icons/arrow-left.png"
                     />
                     <div class="card-title me-3">
-                      <p class="fs-6">
+                      <p class="cairo h6 fw-normal">
                       {{ reqW.name }}
                       </p>
                     </div>
@@ -858,15 +858,15 @@
         </ng-container>
           <!--  -->
           <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-            <h5 class="titleInformation">نبذه عن المشروع</h5>
-            <p class="fs-6">{{ productCurrent?.subject }}</p>
+            <h5 class="card-title mb-5 cairo  titleInformation">نبذه عن المشروع</h5>
+            <p class="cairo h6 fw-normal">{{ productCurrent?.subject }}</p>
           </div>
           <!--  -->
           <div class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 "  >
             <div
               class="col-lg-12 col-12 d-flex bg-white ms-1 align-content-end flex-column p-3"
             >
-              <h5 class="titleInformation">المستندات الخاصه بالعميل</h5>
+            <h5 class="card-title mb-5 cairo  titleInformation">المستندات الخاصه بالعميل</h5>
               <ng-container
                 *ngIf="
                   productCurrent?.clientProjectDocuments.length != 0 &&
@@ -888,7 +888,7 @@
                 </ng-container>
               </ng-container>
               <ng-template #undefindFile>
-                <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
+                <h6 class="card-title mb-5 cairo">لايوجد مستندات خاصه بالعميل</h6>
               </ng-template>
             </div>
           </div>

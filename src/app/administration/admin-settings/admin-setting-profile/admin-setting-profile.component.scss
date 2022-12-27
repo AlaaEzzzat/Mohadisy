@@ -8,8 +8,9 @@ $colorbg:#030303;
 
 
 
-
-
+.cairo{
+  font-family: $fontCairoFamily;
+}
 
 .sizeAc{
   background-color: $Alltext!important;
@@ -57,6 +58,7 @@ input[type="text"]:focus{
 .nameProfile{
 
   color:$Alltext
+
 }
 .emANumProfile{
  

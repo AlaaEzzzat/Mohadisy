@@ -2,7 +2,7 @@
         <!-- بروفيل -->
         <div class="col-12  mb-5">
           <div class="bg-white p-3 mb-3 d-flex justify-content-between align-items-center">
-            <p class="titles fw-bold h5" style="color: #004057">المستخدمين</p>
+            <h5 class="card-title  cairo " style="color: #004057">المستخدمين</h5>
           </div>
 
           <div class="d-flex justify-content-between flex-column scrolls">
@@ -17,22 +17,16 @@
                     <div class="card mb-3 border-0 col-sm-5 col-12 justify-content-center align-items-center">
                       <div class="row g-0 justify-content-center align-items-center">
                         
-                        <!-- <div class="col-md-2 text-lg-end text-center">
-                          <img
-                            src="https://picsum.photos/200"
-                            class="img-fluid rounded-circle me-1"
-                            alt="..."
-                          />
-                        </div> -->
+                    
                         <div class="col-md-12 ">
                           <div class="card-body">
-                            <p class="card-text titles" style="color: #18af9a">
+                            <p class="card-text  cairo h6 fw-normal " style="color: #18af9a">
                               {{ user.userName }}
                             </p>
-                            <p class="card-text titles" style="color: #1d1c1c">
+                            <p class="card-text  cairo h6 fw-normal " style="color: #1d1c1c">
                               {{ user.email }}
                             </p>
-                            <!-- <p class="card-text titles" style="color: #1d1c1c">
+                            <!-- <p class="card-text  cairo h6 fw-normal " style="color: #1d1c1c">
                               {{ user.phoneNumber }}
                             </p> -->
                           </div>
@@ -41,7 +35,7 @@
                     </div>
   
                     <div class="d-flex justify-content-evenly align-items-center border-0 col-sm-3 col-12 flex-md-row flex-column">
-                      <button type="button" class="btn btn-primary position-relative badge px-4 py-2 mb-lg-0 mb-2 border-0 rounded-pill fs-6 mx-1"
+                      <button type="button" class="btn btn-primary position-relative badge px-4 py-2 mb-lg-0 mb-2 border-0 rounded-pill fs-6 mx-1 cairo h6 fw-normal"
                         [ngStyle]="{
                           'background-color':
                             user.applicationRole.key === 'SP'
@@ -54,7 +48,7 @@
                         }"
                       >
                         {{ user.applicationRole.arabicName }}
-                        <span
+                        <!-- <span
                           class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
                         >
                           <img
@@ -64,7 +58,7 @@
                             srcset=""
                           />
                           <span class="visually-hidden">New</span>
-                        </span>
+                        </span> -->
                       </button>
                     </div>
   
@@ -93,13 +87,7 @@
                
             </ng-container>
            
-            <!-- <div class="col-12 mt-2  text-center">
-              <pagination-controls  
-              previousLabel="السابق"
-             nextLabel="التالي"
-            (pageChange)="handlePageChange($event)"></pagination-controls>
- 
-            </div> -->
+          
           </div>
 
         
@@ -107,9 +95,9 @@
     
         <div class="col-12  mb-5">
                 <div class="p-3 my-3 d-flex justify-content-between align-items-center" style="background-color: #dfdfdf">
-                <p class="titles fw-bold h5" style="color: #004057">
+                  <h5 class="card-title  cairo " style="color: #004057">
                   المستخدمين المعطلين
-                </p>
+                  </h5>
               </div>
               <div class="d-flex justify-content-between flex-column scrolls">
                 <ng-container *ngFor=" let user of usersNotActive ;let i=index">
@@ -132,13 +120,13 @@
                             </div> -->
                             <div class="col-md-12 ">
                               <div class="card-body">
-                                <p class="card-text titles" style="color: #18af9a">
+                                <p class="card-text  cairo h6 fw-normal " style="color: #18af9a">
                                   {{ user.userName }}
                                 </p>
-                                <p class="card-text titles" style="color: #1d1c1c">
+                                <p class="card-text  cairo h6 fw-normal " style="color: #1d1c1c">
                                   {{ user.email }}
                                 </p>
-                                <!-- <p class="card-text titles" style="color: #1d1c1c">
+                                <!-- <p class="card-text  cairo h6 fw-normal " style="color: #1d1c1c">
                                   {{ user.phoneNumber }}
                                 </p> -->
                               </div>
@@ -147,7 +135,7 @@
                         </div>
 
                         <div class="d-flex justify-content-evenly align-items-center border-0 col-sm-3 col-12 flex-md-row flex-column">
-                          <button type="button" class="btn btn-primary position-relative badge px-4 py-2 mb-lg-0 mb-2 border-0 rounded-pill fs-6 mx-1"
+                          <button type="button" class="btn btn-primary position-relative badge px-4 py-2 mb-lg-0 mb-2 border-0 rounded-pill  mx-1 cairo h6 fw-normal" 
                             [ngStyle]="{
                               'background-color':
                                 user.applicationRole.key === 'SP'
@@ -160,7 +148,7 @@
                             }"
                           >
                             {{ user.applicationRole.arabicName }}
-                            <span
+                            <!-- <span
                               class="position-absolute top-0 start-100 translate-middle p-2 bg-transparent border-0 rounded-0"
                             >
                               <img
@@ -170,7 +158,7 @@
                                 srcset=""
                               />
                               <span class="visually-hidden">New</span>
-                            </span>
+                            </span> -->
                           </button>
                         </div>
 
