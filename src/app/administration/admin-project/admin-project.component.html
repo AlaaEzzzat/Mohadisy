@@ -2,10 +2,10 @@
     <div class="d-flex flex-row mb-3 col-12 flex-xl-nowrap flex-wrap justify-content-around cairo" >
       <button
         [ngStyle]="{
-          'background-color': newApi === 3 ? '#004958' : '#ffffff',
-          color: newApi === 3 ? '#ffffff' : '#000000'
+          'background-color': newApi === 3 ? '#004057' : '#ffffff',
+          color: newApi === 3 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
         role="button"
         (click)="getCurrentProjects()"
       >
@@ -13,10 +13,10 @@
       </button>
       <button
         [ngStyle]="{
-          'background-color': newApi === 4 ? '#004958' : '#ffffff',
-          color: newApi === 4 ? '#ffffff' : '#000000'
+          'background-color': newApi === 4 ? '#004057' : '#ffffff',
+          color: newApi === 4 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
         role="button"
         (click)="getPendingProject()"
       >
@@ -24,10 +24,10 @@
       </button>
       <button
         [ngStyle]="{
-          'background-color': newApi === 5 ? '#004958' : '#ffffff',
-          color: newApi === 5 ? '#ffffff' : '#000000'
+          'background-color': newApi === 5 ? '#004057' : '#ffffff',
+          color: newApi === 5 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
         role="button"
         (click)="getFinishedProjects()"
       >
@@ -36,10 +36,10 @@
 
       <button
         [ngStyle]="{
-          'background-color': newApi === 6 ? '#004958' : '#ffffff',
-          color: newApi === 6 ? '#ffffff' : '#000000'
+          'background-color': newApi === 6 ? '#004057' : '#ffffff',
+          color: newApi === 6 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
         role="button"
         (click)="getLateProjects()"
       >
@@ -47,10 +47,10 @@
       </button>
       <button
         [ngStyle]="{
-          'background-color': newApi === 7 ? '#004958' : '#ffffff',
-          color: newApi === 7 ? '#ffffff' : '#000000'
+          'background-color': newApi === 7 ? '#004057' : '#ffffff',
+          color: newApi === 7 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
         role="button"
         (click)="getStoppedProjects()"
       >
@@ -93,8 +93,8 @@
                   (click)="objectProduct(pro, pro.id)"
                   [ngStyle]="{
                     'background-color':
-                      productCurrent?.id === pro.id ? '#004958' : '#ffffff',
-                    color: productCurrent?.id === pro.id ? '#ffffff' : '#000000'
+                      productCurrent?.id === pro.id ? '#004057' : '#ffffff',
+                    color: productCurrent?.id === pro.id ? '#ffffff' : '#004057'
                   }"
                 >
                   <div class="d-flex align-items-start mb-2">
@@ -107,13 +107,13 @@
                       ><img src="assets/icons/userWh.svg" class=""
                     /></ng-template>
                     <div class="card-title me-3">
-                      <p
-                        class="fs-6"
+                      <span
+                        class="cairo h6 fw-normal"
                         *ngIf="pro.clientProfile.firstName; else templateName"
                       >
                         {{ pro.clientProfile.firstName }}
                         {{ pro.clientProfile.lastName }}
-                      </p>
+                      </span>
                       <ng-template #templateName> Null firstName </ng-template>
                     </div>
                   </div>
@@ -128,7 +128,7 @@
                       class=""
                       [hidden]="productCurrent?.id != pro.id"
                     />
-                    <p
+                    <div
                       class="me-3 fs-6"
                       *ngIf="
                         pro.district?.city?.region?.code &&
@@ -137,26 +137,26 @@
                       "
                     >
                       <span
-                        class="fs-6"
+                        class="cairo h6 fw-normal"
                         *ngIf="pro.district.nameAr; else regioncode"
                         >{{ pro.district.nameAr }} ,
                       </span>
                       <ng-template #regioncode> </ng-template>
                       <span
-                        class="fs-6"
+                        class="cairo h6 fw-normal"
                         *ngIf="pro.district.city.nameAr; else regioncode"
                       >
                         {{ pro.district.city.nameAr }} ,
                       </span>
                       <ng-template #regionnameAr> </ng-template>
                       <span
-                        class="fs-6"
+                        class="cairo h6 fw-normal"
                         *ngIf="pro.district.city.region.nameAr; else regioncode"
                       >
                         {{ pro.district.city.region.nameAr }}
                       </span>
                       <ng-template #regionnameAr> </ng-template>
-                    </p>
+                    </div>
                     <ng-template #region></ng-template>
                   </div>
                   <div class="d-flex align-items-start">
@@ -171,12 +171,11 @@
                       [hidden]="productCurrent?.id != pro.id"
                     />
                     <div class="me-3 d-flex flex-row justify-content-between w-100">
-                      <small
-                        class="fs-6"
+                      <span
+                        class="cairo h6 fw-normal"
                         *ngIf="productCurrent?.clientProfile.applicationUser"
                       >
-                        {{ pro.clientProfile.applicationUser.phoneNumber }}</small
-                      >
+                        {{ pro.clientProfile.applicationUser.phoneNumber }}</span>
 
                       <small
                         class="opacity-75 align-content-end"

@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$textColor:#18af9a;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$bgButton:#F3FBFA;
+
 .has-search .form-control {
   padding-left: 2.375rem;
 }
@@ -11,5 +18,5 @@
   line-height: 2.375rem;
   text-align: center;
   pointer-events: none;
-  color: #18af9a;
+  color: $textColor;
 }

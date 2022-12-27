@@ -3,8 +3,8 @@
 
     <button
       [ngStyle]="{
-        'background-color': newApi === 1 ? '#004958' : '#ffffff',
-        color: newApi === 1 ? '#ffffff' : '#000000'
+        'background-color': newApi === 1 ? '#004057' : '#ffffff',
+        color: newApi === 1 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
@@ -14,7 +14,7 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 3 ? '#004958' : '#ffffff',
+        'background-color': newApi === 3 ? '#004057' : '#ffffff',
         color: newApi === 3 ? '#ffffff' : '#000000'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
@@ -25,7 +25,7 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 4 ? '#004958' : '#ffffff',
+        'background-color': newApi === 4 ? '#004057' : '#ffffff',
         color: newApi === 4 ? '#ffffff' : '#000000'
       }"
       (click)="getRejectedProjectsForAdmin()"
@@ -36,7 +36,7 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 10 ? '#004958' : '#ffffff',
+        'background-color': newApi === 10 ? '#004057' : '#ffffff',
         'color': newApi === 10 ? '#ffffff' : '#000000'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
@@ -47,7 +47,7 @@
 
     <button
       [ngStyle]="{
-        'background-color': newApi === 6 ? '#004958' : '#ffffff',
+        'background-color': newApi === 6 ? '#004057' : '#ffffff',
         color: newApi === 6 ? '#ffffff' : '#000000'
       }"
       (click)="getAcceptedProjectsForAdmin()"
@@ -55,17 +55,7 @@
       role="button"
     >
 عروض مكتمله    </button>
-    <!-- <button
-      [ngStyle]="{
-        'background-color': newApi === 7 ? '#004958' : '#ffffff',
-        'color': newApi === 7 ? '#ffffff' : '#000000'
-      }"
-      class="btn rounded-0 col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
-            role="button"
-      (click)="getStoppedProjects()"
-    >
-    عروض المتوقفه
-    </button> -->
+  
   </div>
   <!-- alert fun  -->
 
@@ -159,7 +149,7 @@
               (click)="objectProduct(pro, pro.id)"
               [ngStyle]="{
                 'background-color':
-                  productCurrent.id === pro.id ? '#004958' : '#ffffff',
+                  productCurrent.id === pro.id ? '#004057' : '#ffffff',
                 color: productCurrent.id === pro.id ? '#ffffff' : '#000000'
               }"
             >
@@ -172,7 +162,7 @@
                 ><img src="assets/icons/userWh.svg" class=""
               /></ng-template>
                   <div class="card-title me-3">
-                  <p class="fs-6" *ngIf="pro.clientProfile.firstName; else templateName">
+                  <p class="cairo h6 fw-normal" *ngIf="pro.clientProfile.firstName; else templateName">
                     {{ pro.clientProfile.firstName }}
                     {{ pro.clientProfile.lastName }}
                   </p>
@@ -188,7 +178,7 @@
                   ><img src="assets/icons/XMLID_1_WH.svg" class=""
                 /></ng-template>
                 <div class="card-title me-3" >
-                  <p class="fs-6" >
+                  <p class="cairo h6 fw-normal" >
                     {{ pro.name }}
                   </p>
                  
@@ -196,7 +186,7 @@
                
               </div>
               <ng-template #ind>
-                <p class="fs-6">{{ pro.name }} {{ pro.name }}</p>
+                <p class="cairo h6 fw-normal">{{ pro.name }} {{ pro.name }}</p>
               </ng-template>
               <!-- address -->
               <div class="d-flex mb-2  align-items-start">
@@ -218,7 +208,7 @@
                 <div class="me-3 d-flex flex-row justify-content-between w-100">
                    
                 <p
-                class="me-3 fs-6"
+                class="me-3 cairo h6 fw-normal"
                 *ngIf="
                   pro.district.city.region.code &&
                     pro.district.city.region.nameAr;
@@ -227,11 +217,11 @@
               >
               
                 <ng-template #regioncode>  </ng-template>
-                <span  class=" fs-6" *ngIf="pro.district.city.nameAr; else regioncode">
+                <span  class=" cairo h6 fw-normal" *ngIf="pro.district.city.nameAr; else regioncode">
                   {{ pro.district.city.nameAr }} ,
                 </span>
                 <ng-template #regionnameAr>  </ng-template>
-                <span  class=" fs-6" *ngIf="pro.district.city.region.nameAr; else regioncode">
+                <span  class=" cairo h6 fw-normal" *ngIf="pro.district.city.region.nameAr; else regioncode">
                   {{ pro.district.city.region.nameAr }}
                 </span>
                 <ng-template #regionnameAr></ng-template>
@@ -254,42 +244,7 @@
           <div class="position-absolute top100" [hidden]="total<=1">
             <app-pagination [pagenation]="pagenation" [next]="next" [prev]="prev" [page]="page"></app-pagination>
 
-            <!-- <nav aria-label="..." class="w-100 d-flex justify-content-center">
-              <ul class="pagination w-100">
-                <li class="page-item">
-                  <button
-                    (click)="prev()"
-                    class="page-link rounded-0  btn-dark"
-                    [disabled]="page <= 1"
-                  >
-                    السابق
-                  </button>
-                </li>
-
-                <ng-container
-                  class="page-item"
-                  *ngFor="let mypage of pagenation; let i = index"
-                >
-                  <li class="page-item">
-                    <a
-                      class="page-link"
-                      [ngClass]="mypage + 1 == page ? 'mainBk' : ''"
-                      >{{ mypage + 1 }}</a
-                    >
-                  </li>
-                </ng-container>
-                <li class="page-item">
-                  <button
-                    (click)="next()"
-                    class="page-link rounded-0   btn-dark"
-                    [disabled]="page == pagenation.length"
-                  >
-                    التالي
-                  </button>
-                </li>
-              </ul>
-            </nav> -->
-            </div>
+          </div>
         </div>
       </form>
     </div>
@@ -342,7 +297,7 @@
 
         <div class="col-md-5 col-sm-4">
           <div class="card-body">
-            <p class="me-2 fs-6">
+            <p class="me-2 cairo h6 fw-normal">
               {{ productCurrent.clientProfile?.firstName }}
               {{ productCurrent.clientProfile?.lastName }}
             </p>
@@ -394,7 +349,7 @@
 
         <div class="col-md-5 col-sm-4">
           <div class="card-body">
-            <p class="me-2 fs-6">
+            <p class="me-2 cairo h6 fw-normal">
               {{ productCurrent.clientProfile?.firstName }}
               {{ productCurrent.clientProfile?.lastName }}
             </p>
@@ -402,8 +357,8 @@
         </div>
 
         <div class="col-md-5 col-sm-5">
-        <p class=" text-center">طلبات ع عرض السعر {{productCurrent?.offers?.length}} طلب</p>
-        <p (click)="resOffersOnProj()" class="typeCom text-center cursor">رؤية التفاصيل</p>
+        <p class=" text-center cairo h6 fw-normal">طلبات ع عرض السعر {{productCurrent?.offers?.length}} طلب</p>
+        <p (click)="resOffersOnProj()" class="typeCom text-center cursor cairo h6 fw-normal">رؤية التفاصيل</p>
           
         </div>
       </div>
@@ -412,24 +367,24 @@
     <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
       *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 9"
     >
-      <p class="typeCom   fs-6">سبب رفض العرض  </p>
-      <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
+      <p class="typeCom   cairo h6 fw-normal">سبب رفض العرض  </p>
+      <p class="cairo h6 fw-normal">{{ productCurrent.projectRequestStatus.notes }}</p>
     </div>
     <div   class="col-12 card mb-3 border-0 rounded-0 p-3"
     *ngIf="productCurrent.projectRequestStatus?.projectStatus.id === 6"
   >
-    <p class="typeCom   fs-6">سبب عدم اكتمال العرض  </p>
-    <p class="fs-6">{{ productCurrent.projectRequestStatus.notes }}</p>
+    <p class="typeCom   cairo h6 fw-normal">سبب عدم اكتمال العرض  </p>
+    <p class="cairo h6 fw-normal">{{ productCurrent.projectRequestStatus.notes }}</p>
   </div>
     <!-- معلومات عن العميل -->
     <div class="col-12 card mb-3 border-0 rounded-0 p-3">
-      <h5 class="card-title mb-4 titleInformation">معلومات عن العميل</h5>
+      <h5 class="card-title mb-5 cairo  titleInformation">معلومات عن العميل</h5>
       <div class="d-flex col-12 mb-4 flex-wrap">
         <div class="col-12 mb-4">
           <div class="d-flex flex-row justify-content-between">
-            <p class="card-subtitle text-muted fs-6">رقم الهوية</p>
+            <p class="card-subtitle text-muted cairo h6 fw-normal">رقم الهوية</p>
 
-            <p class="fs-6 textInformation">{{ productCurrent.clientProfile?.idNumber }}</p>
+            <p class="cairo h6 fw-normal textInformation">{{ productCurrent.clientProfile?.idNumber }}</p>
 
             <a
               *ngIf="productCurrent.clientProfile?.idPath; else idFile"
@@ -451,23 +406,23 @@
         </div>
 
         <div class="col-lg-5 col-6 mb-4">
-          <p class="card-subtitle text-muted  fs-6 mb-2">الدوله</p>
-          <small class="fs-6 textInformation">المملكه العربيه السعوديه</small>
+          <p class="card-subtitle text-muted  cairo h6 fw-normal mb-2">الدوله</p>
+          <small class="cairo h6 fw-normal textInformation">المملكه العربيه السعوديه</small>
         </div>
 
         <div class="col-lg-3 col-6 mb-4">
-          <p class="card-subtitle text-muted  fs-6 mb-2">المدينه</p>
+          <p class="card-subtitle text-muted  cairo h6 fw-normal mb-2">المدينه</p>
           <small
-            class="fs-6 textInformation"
+            class="cairo h6 fw-normal textInformation"
             *ngIf="productCurrent.district?.city?.nameAr; else city"
             >{{ productCurrent.district.city.nameAr }}</small
           >
           <ng-template #city> _ </ng-template>
         </div>
         <div class="col-lg-4 col-6 mb-4">
-          <p class="card-subtitle text-muted  fs-6 mb-2">المنطقه</p>
+          <p class="card-subtitle text-muted  cairo h6 fw-normal mb-2">المنطقه</p>
           <small
-            class="fs-6 textInformation"
+            class="cairo h6 fw-normal textInformation"
             *ngIf="
               productCurrent.district?.city?.region?.nameAr;
               else regionName
@@ -477,9 +432,9 @@
           <ng-template #regionName> _ </ng-template>
         </div>
         <div class="col-lg-5 col-6 mb-4">
-          <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+          <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
           <small
-            class="fs-6 textInformation"
+            class="cairo h6 fw-normal textInformation"
             *ngIf="productCurrent?.clientProfile?.streetName; else shortAddress"
           >
             {{ productCurrent.clientProfile.streetName }} -
@@ -489,17 +444,17 @@
         </div>
 
         <div class="col-lg-3 col-6 mb-4">
-          <p class="card-subtitle text-muted fs-6 mb-2">رقم الهاتف</p>
-          <small class="fs-6 textInformation" *ngIf="productCurrent?.clientProfile?.applicationUser">{{
+          <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم الهاتف</p>
+          <small class="cairo h6 fw-normal textInformation" *ngIf="productCurrent?.clientProfile?.applicationUser">{{
             productCurrent.clientProfile.applicationUser.phoneNumber
           }}</small>
         </div>
         <div class="col-lg-4 col-6 mb-4">
-          <p class="card-subtitle text-muted fs-6 mb-2">
+          <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
             عنوان البريد الالكتروني
           </p>
           <small
-            class="fs-6 textInformation"
+            class="cairo h6 fw-normal textInformation"
             *ngIf="
               productCurrent.clientProfile?.applicationUser ;
               else emailName
@@ -509,7 +464,7 @@
             }}</small
           >
           <ng-template #emailName>
-            <small class="fs-6 textInformation"  >_</small>
+            <small class="cairo h6 fw-normal textInformation"  >_</small>
           </ng-template>
         </div>
 
@@ -520,18 +475,18 @@
       <div class="col-lg-10 col-12 bg-white ms-1 p-3 justify-content-between">
         <div class="d-flex flex-row col-12 mb-5">
           <div class="col-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">اسم المشروع</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent?.name; else namecode"
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المشروع</p>
+            <small class="cairo h6 fw-normal textInformation" *ngIf="productCurrent?.name; else namecode"
               >{{ productCurrent.name }}
             </small>
             <ng-template #namecode> _ </ng-template>
           </div>
           <div class="col-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
               التصنيف الرئيسي
             </p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="
                 productCurrent?.projectCategory?.name;
                 else projectCategoryname
@@ -542,11 +497,11 @@
           </div>
           <div class="col-4"  *ngIf="
           productCurrent?.projectSubCategory">
-            <p class="card-subtitle text-muted fs-6 mb-2">
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
               التصنيف الفرعي
             </p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="
                 productCurrent?.projectSubCategory;
                 else projectSubCategoryname
@@ -558,18 +513,18 @@
         </div>
         <div class="d-flex flex-row col-12 mt-5">
           <div class="col-3">
-            <p class="card-subtitle text-muted fs-6 mb-2">اسم المدينه</p>
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المدينه</p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="productCurrent?.district?.city?.nameAr; else city"
               >{{ productCurrent.district.city.nameAr }}</small
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-3">
-            <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="
                 productCurrent?.district?.city?.region?.nameAr;
                 else regionName
@@ -579,9 +534,9 @@
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="
                 productCurrent?.clientProfile?.streetName;
                 else shortAddress
@@ -593,9 +548,9 @@
             <ng-template #shortAddress> _ </ng-template>
           </div>
           <div class="col-1">
-            <p class="card-subtitle text-muted fs-6 mb-2">رقم القطعه</p>
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رقم القطعه</p>
             <small
-              class="fs-6 textInformation"
+              class="cairo h6 fw-normal textInformation"
               *ngIf="productCurrent?.plotNumber; else plotNumber"
             >
               {{ productCurrent.plotNumber }}</small
@@ -603,9 +558,9 @@
             <ng-template #plotNumber> _ </ng-template>
           </div>
           <div class="col-1">
-            <!-- <p class="card-subtitle text-secondary fs-6 mb-2"> رقم المخطط</p>
+            <!-- <p class="card-subtitle text-secondary cairo h6 fw-normal mb-2"> رقم المخطط</p>
             <small
-            class="fs-6"
+            class="cairo h6 fw-normal"
             *ngIf="productCurrent.rganizationalChartNumber; else organizationalChartNumber"
             >
             {{ productCurrent.rganizationalChartNumber }}</small
@@ -630,7 +585,7 @@
     <!--  -->
     <div  class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 ps-md-2 ps-0 mb-3" >
       <div class="col-lg-6 col-12 d-flex  p-3 bg-white ms-lg-1 ms-0 align-content-end flex-column mb-lg-0 mb-3">
-      <h5 class="card-title mb-4 titleInformation">مكونات  المشروع</h5>
+        <h5 class="card-title mb-5 cairo  titleInformation">مكونات  المشروع</h5>
 
         <ng-container *ngFor="let comp of componentId">
           <div class="d-flex align-items-start mb-2">
@@ -640,7 +595,7 @@
               src="assets/icons/arrow-left.png"
             />
             <div class="card-title me-3">
-              <p class="fs-6">
+              <p class="cairo h6 fw-normal">
               {{ comp }}
               </p>
             </div>
@@ -649,7 +604,7 @@
       </div>
       <div class="col-lg-6 col-12 p-3 bg-white me-lg-1 me-0 align-content-start flex-column" >
 
-        <h5 class="card-title mb-4 titleInformation">الاعمال  المطلوبه</h5>
+        <h5 class="card-title mb-5 cairo  titleInformation">الاعمال  المطلوبه</h5>
 
         <div>
           <ng-container *ngFor="let reqW of set">
@@ -660,7 +615,7 @@
                 src="assets/icons/arrow-left.png"
               />
               <div class="card-title me-3">
-                <p class="fs-6">
+                <p class="cairo h6 fw-normal">
                 {{ reqW.name }}
                 </p>
               </div>
@@ -672,15 +627,15 @@
     </div>
     
     <!--  -->
-    <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-      <p class="fs-6 textInformation">نبذه عن المشروع</p>
-      <p class="fs-6 ">{{ productCurrent.subject }}</p>
+    <div class="col-12 card mb-3 border-0 rounded-0 p-3">
+      <h5 class="card-title mb-5 cairo  titleInformation">نبذه عن المشروع</h5>
+      <p class="cairo h6 fw-normal ">{{ productCurrent.subject }}</p>
     </div>
     <div class="col-12 d-flex flex-lg-row flex-column border-0 rounded-0 "  >
       <div
         class="col-lg-12 col-12 d-flex bg-white ms-1 align-content-end flex-column p-3"
       >
-        <h5 class="titleInformation">المستندات الخاصه بالعميل</h5>
+      <h5 class="card-title mb-5 cairo  titleInformation">المستندات الخاصه بالعميل</h5>
         <ng-container
           *ngIf="
             
@@ -697,12 +652,12 @@
               (click)="download(comp.filePath, comp.file)"
             >
               <i class="fa fa-download ms-3"></i>
-              <p class="pt-3 nameDownload">{{ comp.file }}</p>
+              <p class="pt-3  cairo h6 fw-normal nameDownload">{{ comp.file }}</p>
             </a>
           </ng-container>
         </ng-container>
         <ng-template #undefindFile>
-          <p class="fs-5">لايوجد مستندات خاصه بالعميل</p>
+          <p class="cairo h6 fw-normal">لايوجد مستندات خاصه بالعميل</p>
         </ng-template>
       </div>
     </div>
@@ -721,7 +676,7 @@
 
         <div class="col-md-5 col-sm-4">
           <div class="card-body">
-            <p class="me-2 fs-6">
+            <p class="me-2 cairo h6 fw-normal">
               {{ productCurrent.clientProfile?.firstName }}
               {{ productCurrent.clientProfile?.lastName }}
             </p>
@@ -744,8 +699,8 @@
         <div class="col-12 d-flex  justify-content-between " (click)="getProjectResponsible(item)" data-bs-toggle="modal" data-bs-target="#companyExample">
           <div class="card  border-0 rounded-0 col-sm-6 " *ngIf="item.period!=null ">
             <div class="card-body">
-              <p class="card-title text-center"><span class="h2">{{item.period}}</span><sub> يوم عمل</sub></p>
-              <p class="card-text text-center">المده التي سيتم تنفيذ فيها المشروع</p>
+              <p class="card-title text-center cairo h6 fw-normal "><span class="h2">{{item.period}}</span><sub> يوم عمل</sub></p>
+              <p class="card-text text-center cairo h6 fw-normal">المده التي سيتم تنفيذ فيها المشروع</p>
             
             </div>
           </div>
@@ -970,7 +925,7 @@
               <img src="assets/icons/XMLID_1_.svg" />
             </div>
 
-            <p class="fs-6  pt-1">
+            <p class="cairo h6 fw-normal  pt-1">
               {{projectResponsible?.companyName}} 
             </p>
           
@@ -978,13 +933,13 @@
           <div class="d-flex align-items-start mb-1">
             <img src="{{projectResponsible?.profilePicturePath}}" class="rounded-circle  h-75 col-2 ms-3"/>
 
-            <p class="fs-6 pt-1" *ngIf="projectResponsible?.representative ;else inva">
+            <p class="cairo h6 fw-normal pt-1" *ngIf="projectResponsible?.representative ;else inva">
                 ممثل الشركه<br/>م.{{projectResponsible?.representative?.firstName}}{{projectResponsible?.representative?.lastName}} 
 
             </p>
             <ng-template #inva>
               
-              <p class="fs-6 pt-1">
+              <p class="cairo h6 fw-normal pt-1">
                 ممثل الشركه<br/>م.{{projectResponsible?.firstName}}  {{projectResponsible?.lastName}} 
 
             </p>
@@ -995,7 +950,7 @@
               <img src="assets/icons/Group 801.svg " />
             </div>
             
-            <p class="fs-6">
+            <p class="cairo h6 fw-normal">
               {{projectResponsible?.district?.city?.nameAr}} -السعوديه
             </p>
           </div>

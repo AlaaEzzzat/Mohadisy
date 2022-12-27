@@ -2,8 +2,8 @@
   <div class="d-flex flex-row mb-3 col-12 flex-xl-nowrap flex-wrap justify-content-around cairo" >
     <button
       [ngStyle]="{
-        'background-color': newApi === 1 ? '#004958' : '#ffffff',
-        color: newApi === 1 ? '#ffffff' : '#000000'
+        'background-color': newApi === 1 ? '#004057' : '#ffffff',
+        color: newApi === 1 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
@@ -13,8 +13,8 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 2 ? '#004958' : '#ffffff',
-        color: newApi === 2 ? '#ffffff' : '#000000'
+        'background-color': newApi === 2 ? '#004057' : '#ffffff',
+        color: newApi === 2 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
@@ -24,8 +24,8 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 3 ? '#004958' : '#ffffff',
-        color: newApi === 3 ? '#ffffff' : '#000000'
+        'background-color': newApi === 3 ? '#004057' : '#ffffff',
+        color: newApi === 3 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-1 mb-3 fs-5"
       role="button"
@@ -36,8 +36,8 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 4 ? '#004958' : '#ffffff',
-        color: newApi === 4 ? '#ffffff' : '#000000'
+        'background-color': newApi === 4 ? '#004057' : '#ffffff',
+        color: newApi === 4 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
@@ -47,8 +47,8 @@
     </button>
     <button
       [ngStyle]="{
-        'background-color': newApi === 5 ? '#004958' : '#ffffff',
-        color: newApi === 5 ? '#ffffff' : '#000000'
+        'background-color': newApi === 5 ? '#004057' : '#ffffff',
+        color: newApi === 5 ? '#ffffff' : '#004057'
       }"
       class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
       role="button"
@@ -59,7 +59,7 @@
     
   </div>
 
-  <div class="alert alert-success" role="alert" *ngIf="show">
+  <div class="alert alert-success cairo" role="alert" *ngIf="show">
     {{ messages }}
   </div>
   
@@ -94,8 +94,8 @@
               (click)="objectProduct(pro, pro.id)"
               [ngStyle]="{
                 'background-color':
-                  productCurrent.id === pro.id ? '#004958' : '#ffffff',
-                color: productCurrent.id === pro.id ? '#ffffff' : '#004958'
+                  productCurrent.id === pro.id ? '#004057' : '#ffffff',
+                color: productCurrent.id === pro.id ? '#ffffff' : '#004057'
               }"
             >
               <div class="d-flex align-items-start mb-2">
@@ -108,9 +108,9 @@
                 ><img src="assets/icons/userWh.svg" class=""
               /></ng-template>
                   <div class="card-title me-3 ">
-                  <p *ngIf="pro.firstName; else templateName" class="fs-6 " >
+                  <span *ngIf="pro.firstName; else templateName" class="cairo h6 fw-normal" >
                     {{ pro.firstName }} {{ pro.lastName }}
-                  </p>
+                  </span>
                   <ng-template #templateName> Null firstName </ng-template>
                 </div>
               </div>
@@ -125,28 +125,28 @@
                 class=""
                 [hidden]="productCurrent.id != pro.id"
               />
-              <p class="me-3 fs-6" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region" >
+              <div class="me-3 cairo h6 fw-normal" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region" >
                 <span
-                  class="fs-6"
+                  class="cairo h6 fw-normal"
                   *ngIf="pro.district.nameAr; else regioncode"
                   >{{ pro.district.nameAr }} ,
                 </span>
                 <ng-template #regioncode> </ng-template>
                 <span
-                  class="fs-6"
+                  class=" cairo h6 fw-normal"
                   *ngIf="pro.district.city.nameAr; else regioncode"
                 >
                   {{ pro.district.city.nameAr }} ,
                 </span>
                 <ng-template #regionnameAr> </ng-template>
                 <span
-                  class="fs-6"
+                  class="cairo h6 fw-normal"
                   *ngIf="pro.district.city.region.nameAr; else regioncode"
                 >
                   {{ pro.district.city.region.nameAr }}
                 </span>
                 <ng-template #regionnameAr> </ng-template>
-              </p>
+              </div>
                 <ng-template #region></ng-template>
               </div>
               <div class="d-flex align-items-start">
@@ -161,9 +161,9 @@
                   [hidden]="productCurrent.id != pro.id"
                 />
                 <div class="card-title me-3 ">
-                  <p *ngIf="pro.firstName; else templateName" class="fs-6" >
+                  <span *ngIf="pro.firstName; else templateName" class="cairo h6 fw-normal" >
                     {{ pro.dateCreated|date:'d/M/yyyy' }}
-                  </p>
+                  </span>
                   <ng-template #templateName> Null firstName </ng-template>
                 </div>
               </div>
@@ -193,9 +193,9 @@
           </div>
           <div class="col-md-3 col-sm-4">
             <div class="card-body">
-              <p class="me-2 fs-6 textInformation">
+              <span  class="me-2 cairo h6 fw-normal textInformation">
                 {{ productCurrent.firstName }} {{ productCurrent.lastName }}
-              </p>
+              </span>
             </div>
           </div>
           <div class="col-md-7 col-sm-5">
@@ -208,7 +208,7 @@
               data-bs-target="#changeToAccepted"
             >
               <i class="fa-solid fa-check text-secondary"></i>
-              <p>مكتمل</p></a
+              <p class="cairo h6 fw-normal">مكتمل</p></a
             >
             <a
               type="button"
@@ -217,7 +217,7 @@
               data-bs-target="#exampleModal"
             >
               <i class="fa-solid fa-exclamation"></i>
-              <p>غير مكتمل</p></a
+              <p class="cairo h6 fw-normal">غير مكتمل</p></a
             >
             <a
               type="button"
@@ -226,10 +226,10 @@
               data-bs-target="#exampleModalReject"
             >
               <i class="fa-solid fa-xmark"></i>
-              <p>رفض</p></a
+              <p class="cairo h6 fw-normal">رفض</p></a
             >
             </div>
-            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1">
+            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1">
 
               <a
               type="button"
@@ -238,11 +238,11 @@
               data-bs-target="#exampleModalchangeToNew"
             >
               <i class="fa-solid fa-check text-secondary"></i>
-              <p>تفعيل</p></a
+              <p class="cairo h6 fw-normal">تفعيل</p></a
             >
             
             </div>
-            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatus.id != 1 && productCurrent.joinRequestStatus.accountStatus.id != 4">
+            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent.joinRequestStatus.accountStatus.id != 1 && productCurrent.joinRequestStatus.accountStatus.id != 4">
 
               <a
               type="button"
@@ -251,7 +251,7 @@
               data-bs-target="#exampleModalReject"
             >
               <i class="fa-solid fa-check text-secondary"></i>
-              <p>تعطيل</p></a
+              <p class="cairo h6 fw-normal">تعطيل</p></a
             >
             
             </div>
@@ -261,13 +261,13 @@
       </div>
 
       <div class="col-12 card mb-3 border-0 rounded-0 py-4 px-5">
-        <h5 class="card-title mb-4">معلومات عن العميل</h5>
+        <h5 class="card-title mb-5 cairo  titleInformation">معلومات عن العميل</h5>
         <div class="d-flex col-12 mb-4 flex-wrap">
           <div class="col-12 mb-4">
             <div class="d-flex flex-row justify-content-between ">
-              <p class="card-subtitle text-muted ms-2 fs-6">رقم الهوية</p>
+              <h6 class="card-subtitle text-muted ms-2 cairo  fw-normal">رقم الهوية</h6>
 
-              <p class="fs-6 textInformation">{{ productCurrent.idNumber }}</p>
+              <p class="cairo h6 fw-normal textInformation">{{ productCurrent.idNumber }}</p>
 
               <!-- <div   [hidden]="!productCurrent.idFile"> -->
               <a
@@ -277,7 +277,7 @@
                 *ngIf="productCurrent.idFile && productCurrent.idPath; else idFile"
               >
 
-                <i class="fa fa-download typeCom ms-3"></i>
+                <i class="fa fa-download typeCom ms-3 cairo h6 fw-normal"></i>
                 <p class="pt-3">{{ productCurrent.idFile }}</p>
               </a>
               <ng-template #idFile>___</ng-template>
@@ -289,90 +289,90 @@
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">الدوله</p>
-            <small
-              class="fs-6"
+            <h6 class="card-subtitle text-muted cairo  fw-normal mb-2">الدوله</h6>
+            <samp
+              class="cairo h6 fw-normal"
               *ngIf="productCurrent.district.city.region.code; else cityName"
               >{{ productCurrent.district.city.region.code
-               }}</small
+               }}</samp
             >
             <ng-template #cityName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">المدينه</p>
-            <small
-            class="fs-6 textInformation"
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المدينه</p>
+            <samp
+            class="cairo h6 fw-normal textInformation"
               *ngIf="productCurrent.district.city.nameAr; else city"
-              >{{ productCurrent.district.city.nameAr }}</small
+              >{{ productCurrent.district.city.nameAr }}</samp
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">المنطقه</p>
-            <small
-            class="fs-6 textInformation" *ngIf=" productCurrent.district.city.region.nameAr;
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
+            <samp
+            class="cairo h6 fw-normal textInformation" *ngIf=" productCurrent.district.city.region.nameAr;
                 else regionName
               "
-              >{{ productCurrent.district.city.region.nameAr }}</small
+              >{{ productCurrent.district.city.region.nameAr }}</samp
             >
             <ng-template #regionName> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">العنوان</p>
-            <small
-            class="fs-6 textInformation"
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
+            <samp
+            class="cairo h6 fw-normal textInformation"
               *ngIf="productCurrent.streetName; else shortAddress"
               >{{ productCurrent.buildingNumber }},
               {{ productCurrent.streetName }} -
-              {{ productCurrent.neighborhood }}</small
+              {{ productCurrent.neighborhood }}</samp
             >
             <ng-template #shortAddress> _ </ng-template>
           </div>
 
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
               رقم هاتف المكتب
             </p>
-            <small
-            class="fs-6 textInformation"
+            <samp
+            class="cairo h6 fw-normal textInformation"
               *ngIf="
                 productCurrent.district.officePhoneNumber;
                 else officePhoneNumber
               "
-              >{{ productCurrent.district.officePhoneNumber }}</small
+              >{{ productCurrent.district.officePhoneNumber }}</samp
             >
             <ng-template #officePhoneNumber> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
               عنوان البريد الالكتروني
             </p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.email; else emailName">{{
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.email; else emailName">{{
               productCurrent.email
-            }}</small>
+            }}</samp>
             <ng-template #emailName> _ </ng-template>
           </div>
           <div class="d-flex col-4 flex-column">
-            <p class="card-subtitle text-muted fs-6 mb-2">رابط الموقع</p>
-            <small
-            class="fs-6 textInformation"
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رابط الموقع</p>
+            <samp
+            class="cairo h6 fw-normal textInformation"
               *ngIf="productCurrent.websiteLink; else websiteLink"
-              >{{ productCurrent.websiteLink }}</small
+              >{{ productCurrent.websiteLink }}</samp
             >
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">صندوق البريد</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.postalBox; else box">{{
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">صندوق البريد</p>
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.postalBox; else box">{{
               productCurrent.postalBox
-            }}</small>
+            }}</samp>
             <ng-template #box> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
-            <p class="card-subtitle text-muted fs-6 mb-2">رمز البريد</p>
-            <small class="fs-6 textInformation" *ngIf="productCurrent.postalCode; else postcode"
+            <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رمز البريد</p>
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.postalCode; else postcode"
               >{{ productCurrent.postalCode }}
-            </small>
+            </samp>
             <ng-template #postcode> _ </ng-template>
           </div>
         </div>
@@ -381,10 +381,11 @@
   </div>
 
   <ng-template #undefind>
-    <div class="alert alert-danger d-flex align-items-center fs-6" role="alert" *ngIf="!isProcessing">
-      <div class="">
-        حاليا لايوجد عملاء
-      </div>
+    <div class="textInformation d-flex align-items-center d-flex align-items-center cairo h6 fw-normal" role="alert" *ngIf="!isProcessing">
+    
+      <div class=""> <h5 class="textInformation">                حاليا لايوجد عملاء
+      </h5>      </div>
+
       </div>
   </ng-template>
 
@@ -401,7 +402,7 @@
       <div
         class="modal-header modaltitle d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11" id="exampleModalLabel">تفعيل الحساب</h5>
+        <h5 class="modal-title col-11 cairo" id="exampleModalLabel">تفعيل الحساب</h5>
 
         <button
           type="button"
@@ -413,7 +414,7 @@
         </button>
       </div>
       <div class="modal-body my-3 modalbody">
-        <h5 class="fs-5 text-white">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
+        <h5 class=" text-white cairo">هل انت متاكد من تفعيل هذاالحساب ؟</h5>
       </div>
       <div class="modal-footer modalfooter">
         <button
@@ -445,7 +446,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white cairo" id="exampleModalLabel">
           هل انت متاكد من الموافقه علي هذا الطلب ؟
         </h5>
 
@@ -488,7 +489,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white cairo  " id="exampleModalLabel">
           سبب تعطيل الحساب
         </h5>
 
@@ -546,7 +547,7 @@
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
       >
-        <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+        <h5 class="modal-title col-11 text-white cairo" id="exampleModalLabel">
           سبب عدم اكتمال الحساب
         </h5>
 
