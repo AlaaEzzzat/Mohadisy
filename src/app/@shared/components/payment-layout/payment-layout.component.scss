@@ -1,3 +1,4 @@
+@import 'src/styles/shared.scss';
 .payment-section {
       min-height: 100vh;
       .gray {
@@ -18,17 +19,9 @@
       .notPaidbk {
         background-color: #ee9c0f;
       }
-      .mainBk {
-        background-color: #004057;
-        color: #fff;
-      }
       .showBtn {
         background-color: rgba($color: #18af9a, $alpha: 0.23);
         color: #18af9a;
       }
-      .cairo {
-        font-family: "cairo";
-      }
-
     }
     

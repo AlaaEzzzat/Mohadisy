@@ -51,6 +51,7 @@
               class="form-control form-control-lg signup"
               placeholder="   إسم المشروع"
               required
+              (keypress)="chareacterOnly($event)"
               [class.is-valid]="projectName?.valid"
               [class.is-invalid]="projectName?.invalid && projectName?.touched"
             />
@@ -73,6 +74,7 @@
               formControlName="ownerName"
               class="form-control form-control-lg signup"
               placeholder="   مالك المشروع "
+              (keypress)="chareacterOnly($event)"
               [class.is-valid]="ownerName?.valid"
               [class.is-invalid]="ownerName?.invalid && ownerName?.touched"
             />
@@ -204,9 +206,9 @@
           <button
             type="submit"
             style="width: 220px"
-            class="mainBk btn py-2 form-control text-white"
+            class="mainBk btn cairo py-2 form-control text-white"
           >
-            <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
+            <i class="fa fa-floppy-disk mx-2 " aria-hidden="true"></i>
             حفظ
           </button>
         </div>
@@ -237,12 +239,12 @@
         <tbody>
           <ng-container *ngFor="let work of allServiceProviderWorks">
             <tr>
-              <th scope="row">{{ work.id }}</th>
-              <td>{{ work.projectName }}</td>
-              <td>{{ work.projectCategory.name }}</td>
-              <td>{{ work.ownerName }}</td>
-              <td>{{ work.projectPrice }}</td>
-              <td>{{ work.completionYear }} %</td>
+              <td class="table-text"><span >{{ work.id }}</span></td>
+              <td class="table-text"><span >{{ work.projectName }}</span></td>
+              <td class="table-text"><span >{{ work.projectCategory.name }}</span></td>
+              <td class="table-text"><span >{{ work.ownerName }}</span></td>
+              <td class="table-text"><span >{{ work.projectPrice }}</span></td>
+              <td class="table-text"><span >{{ work.completionYear }} %</span></td>
               <td  >
                 <ul class="list-unstyled p-0 w-100" 
                 >
@@ -318,7 +320,7 @@
                   </svg>
                 </button>
                 <button
-                  class="btn secondBk text-white"
+                  class="btn secondBk text-white mt-2"
                   (click)="deleteThisWork(work.id)"
                 >
                   <svg

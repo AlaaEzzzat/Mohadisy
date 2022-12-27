@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../@core/services/functions/functions.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ApiService } from 'src/app/@core/api.service';
 import { ProviderServiceService } from './../../@core/services/Provider/provider-service.service';
@@ -31,7 +32,8 @@ export class ProfilecomplateComponent implements OnInit {
     private fb: FormBuilder,
     private provider: ProviderServiceService,
     private apiService: ApiService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private functionsService:FunctionsService
   ) {
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/\s/g)]],
@@ -42,7 +44,7 @@ export class ProfilecomplateComponent implements OnInit {
           [
             Validators.required,
             Validators.pattern(
-              '^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$'
+              '^(?=.{4,}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$'
             ),
           ],
         ],
@@ -97,11 +99,12 @@ export class ProfilecomplateComponent implements OnInit {
   }
 
   numberOnly(event: any): boolean {
-    const charCode = event.which ? event.which : event.keyCode;
+   return this.functionsService.numberOnly(event);
+   /*  const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
-    return true;
+    return true; */
   }
 
   englishOnly(event: any): boolean {

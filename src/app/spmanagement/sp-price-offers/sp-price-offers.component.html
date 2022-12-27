@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div *ngIf="makeOfferForm == false ">
+            <div *ngIf="makeOfferForm == false && activeProject ">
               <div
               class="d-flex bg-white justify-content-between mb-3"
             >
@@ -95,7 +95,8 @@
               <app-deal-with-offer 
               [typeOfDeal]="activeCategory== 1?'send' :'edit'"
               [makeOfferToggle]="makeOfferToggle"
-              [selectProject]="selectedProject">
+              [selectProject]="selectedProject"> 
+              [serviceTypeId]='serviceTypeId'
               [RequiredWorks]='requiredWorks'
               </app-deal-with-offer>
             </div>

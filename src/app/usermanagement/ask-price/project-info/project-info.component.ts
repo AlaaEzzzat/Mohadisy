@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../../@core/services/functions/functions.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ClientService } from './../../../@core/services/client/client.service';
@@ -38,6 +39,7 @@ export class ProjectInfoComponent implements OnInit {
     private apiService: ApiService,
     private clientService: ClientService,
     private router: Router,
+    private functionsService:FunctionsService,
     private toaster: ToastrService
   ) {
     this.serviceId = this.clientService.requestedServiceId;
@@ -47,8 +49,10 @@ export class ProjectInfoComponent implements OnInit {
       subject: ['', [Validators.required]],
       pricequoteEndDate: ['', [Validators.required]],
       projectCategoryId: ['', [Validators.required]],
-      projectSubCategoryId: [''],
+      projectSubCategoryId: ['',[Validators.required]],
       requiredWorksNotes: [''],
+      cityId: ['', [Validators.required]],
+      regionId: ['', [Validators.required]],
       districtId: ['', [Validators.required]],
       plotNumber: ['', [Validators.required]],
       organizationalChartNumber: ['', [Validators.required]],
@@ -78,6 +82,12 @@ export class ProjectInfoComponent implements OnInit {
   get districtId() {
     return this.priceoffer.get('districtId');
   }
+  get cityId() {
+    return this.priceoffer.get('cityId');
+  }
+  get regionId() {
+    return this.priceoffer.get('regionId');
+  }
   get plotNumber() {
     return this.priceoffer.get('plotNumber');
   }
@@ -106,15 +116,19 @@ export class ProjectInfoComponent implements OnInit {
       this.ProjectRequiredWorks = data.data;
     });
   }
+  
   numberOnly(event: any): boolean {
-    const charCode = event.which ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
+    return this.functionsService.numberOnly(event);
+  }
+
+  chareacterOnly(event: any): boolean {
+    return this.functionsService.chareacterOnly(event);
   }
   priceofferSubmit() {
     this.project = this.priceoffer.value;
+    delete this.project.regionId
+    delete this.project.cityId
+
      let date = new Date();
     date.toISOString().split('T')[0];
     date.setDate(
@@ -166,6 +180,7 @@ export class ProjectInfoComponent implements OnInit {
   _getSubCategories() {
     this.projectAllSubCategory = [];
     this.selectedCategory = this.priceoffer?.get('projectCategoryId')?.value;
+
     if (this.selectedCategory != 0 && this.selectedCategory != null)
       this.clientService.getSubCategories(this.selectedCategory).subscribe(
         (data) => {
@@ -181,11 +196,8 @@ export class ProjectInfoComponent implements OnInit {
     this.selectRegion = ev.target.value;
     if (this.selectRegion != 0 && this.selectRegion != null)
       this.provider.getCities(this.selectRegion).subscribe(
-        (data) => {
+        (data:any) => {
           this.citiesList = data.data;
-        },
-        (error) => {
-          console.log(error);
         }
       );
   }
@@ -194,16 +206,13 @@ export class ProjectInfoComponent implements OnInit {
     this.selectCity = ev.target.value;
     if (this.selectCity != 0 && this.selectCity != null)
       this.provider.getDistricts(this.selectCity).subscribe(
-        (data) => {
+        (data:any) => {
           if (data.data == '') {
             this.addingDistrict = true;
           } else {
             this.districtsList = data.data;
             this.addingDistrict = false;
           }
-        },
-        (error) => {
-          this.addingDistrict = true;
         }
       );
   }

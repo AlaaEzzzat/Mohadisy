@@ -58,18 +58,18 @@ export class NavbarComponent implements OnInit {
     this.userprofile = profile.data;
     console.log(this.userprofile)
    })
-    }else if(localStorage.getItem('type') =='"CO"'){
-      this.userserviceService.getOrganizationalServiceProviderProfile().subscribe((profile: any) => {
-        this.userprofile = profile.data;
-        console.log(this.userprofile)
-       })
-      }else if(localStorage.getItem('role') == '"Admin"'){
+    }else if(localStorage.getItem('role') == '"Admin"'){
       this.userserviceService.getAdminProfile().subscribe((profile: any) => {
         this.userprofile = profile.data;
         console.log(this.userprofile)
        })
 
-    }
+    }else if(localStorage.getItem('type') =='"CO"'){
+      this.userserviceService.getOrganizationalServiceProviderProfile().subscribe((profile: any) => {
+        this.userprofile = profile.data;
+        console.log(this.userprofile)
+       })
+      }
     else if(localStorage.getItem('type') =='"IND"') {
       this.userserviceService.getIndividualServiceProviderProfile().subscribe((profile: any) => {
         this.userprofile = profile.data;

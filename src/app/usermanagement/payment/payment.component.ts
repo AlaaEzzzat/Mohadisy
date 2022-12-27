@@ -18,6 +18,38 @@ export class PaymentComponent implements OnInit {
    
     });
   }
- 
+  notComplete=()=>{
+    this.dataShow=[]
+    this.clientService.getPaymentsForClient().subscribe((data) => {
+      var result = data.data;
+        result.map((project:any) => {
+          if(project.paid ==0){
+            this.dataShow.push(project);
+          }
+        })
+    });
+  }
+ inComplete=()=>{
+    this.dataShow=[]
+    this.clientService.getPaymentsForClient().subscribe((data) => {
+      var result = data.data;
+        result.map((project:any) => {
+          if(project.paid > 0 && project.paid < project.payments){
+            this.dataShow.push(project);
+          }
+        })
+    });
+  }
+  complete=()=>{
+    this.dataShow=[]
+    this.clientService.getPaymentsForClient().subscribe((data) => {
+      var result = data.data;
+        result.map((project:any) => {
+          if(project.paid == project.payments){
+            this.dataShow.push(project);
+          }
+        })
+    });
+  } 
   
 }

@@ -272,7 +272,7 @@
                 </svg>
                 <p class="m-0 mx-3 cairo p-0">
                   تاريخ التسليم :
-                  <span>{{ project.pricequoteEndDate }}</span>
+                  <span>{{ project.pricequoteEndDate | date }}</span>
                 </p>
               </div>
             </div>
@@ -468,10 +468,24 @@
                 aria-valuemax="100"
                 [style]="'--value:'+  Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)"
               ></div>
-              <div (click)="show()" class="pt-3 cairo text-center w-100">
+             <!--  <circle-progress
+              [percent]="Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)"
+              [radius]="100"
+              [outerStrokeWidth]="16"
+              [innerStrokeWidth]="8"
+              [outerStrokeColor]="'#78C000'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress> -->
+            <!--   <div id="progress" >
+                <div [attr.data-num]="Math.ceil((numOfCompltedMilesones / projectMilestnes.length) * 100)" class="progress-item"></div> 
+              </div> -->
+              <div class="pt-3 cairo text-center w-100">
                  جاري العمل 
               </div>
             </div>
+
           </div>
           <div class="mb-2 col-lg-8 col-md-12">
             <ng-container *ngFor="let item of projectMilestnes; let i = index">
@@ -665,132 +679,9 @@
           <div class="card">
             <app-work-schedule></app-work-schedule>
           </div>
-          <div class="card mt-2 card-2-1">
-            <div id="accordion" class="">
-              <div class="p-3" id="item">
-                <p class="cairo mb-2">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-                  deserunt dicta obcaecati ipsa quasi a sit fugit fuga excepturi
-                  hic aliquid cupiditate corporis quam dolorem soluta,
-                  laboriosam quisquam culpa id./p>
-                </p>
-
-                <div class="d-flex pt-3 justify-content-between">
-                  <span class="ms-2"
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 29.476 33.686"
-                    >
-                      <g id="pdf" transform="translate(-32)">
-                        <path
-                          id="Path_2758"
-                          data-name="Path 2758"
-                          d="M98.105,0A2.112,2.112,0,0,0,96,2.105V31.581a2.112,2.112,0,0,0,2.105,2.105h21.054a2.112,2.112,0,0,0,2.105-2.105V8.422L112.843,0Z"
-                          transform="translate(-59.789)"
-                          fill="#e2e5e7"
-                        />
-                        <path
-                          id="Path_2759"
-                          data-name="Path 2759"
-                          d="M354.105,8.422h6.316L352,0V6.316A2.112,2.112,0,0,0,354.105,8.422Z"
-                          transform="translate(-298.946)"
-                          fill="#b0b7bd"
-                        />
-                        <path
-                          id="Path_2760"
-                          data-name="Path 2760"
-                          d="M390.316,134.316,384,128h6.316Z"
-                          transform="translate(-328.841 -119.578)"
-                          fill="#cad1d8"
-                        />
-                        <path
-                          id="Path_2761"
-                          data-name="Path 2761"
-                          d="M57.265,251.58a1.056,1.056,0,0,1-1.053,1.053H33.053A1.056,1.056,0,0,1,32,251.58V241.053A1.056,1.056,0,0,1,33.053,240H56.212a1.056,1.056,0,0,1,1.053,1.053Z"
-                          transform="translate(0 -224.209)"
-                          fill="#f15642"
-                        />
-                        <g
-                          id="Group_788"
-                          data-name="Group 788"
-                          transform="translate(36.589 19.364)"
-                        >
-                          <path
-                            id="Path_2762"
-                            data-name="Path 2762"
-                            d="M101.744,294.9a.579.579,0,0,1,.572-.581h1.944a2.1,2.1,0,0,1,0,4.209h-1.405v1.112a.528.528,0,0,1-.539.58.567.567,0,0,1-.572-.58Zm1.111.479v2.1h1.405a1.049,1.049,0,0,0,0-2.1Z"
-                            transform="translate(-101.744 -294.32)"
-                            fill="#fff"
-                          />
-                          <path
-                            id="Path_2763"
-                            data-name="Path 2763"
-                            d="M188.405,301.3a.527.527,0,0,1-.581-.521v-4.781a.573.573,0,0,1,.581-.522h1.927c3.847,0,3.762,5.825.076,5.825Zm.531-4.8v3.771h1.4c2.273,0,2.374-3.771,0-3.771Z"
-                            transform="translate(-182.16 -295.396)"
-                            fill="#fff"
-                          />
-                          <path
-                            id="Path_2764"
-                            data-name="Path 2764"
-                            d="M288.237,296.552v1.338h2.146a.651.651,0,0,1,.606.6.585.585,0,0,1-.606.505h-2.146v1.768a.5.5,0,0,1-.5.521.535.535,0,0,1-.6-.521v-4.781a.532.532,0,0,1,.6-.522h2.955a.525.525,0,0,1,.59.522.582.582,0,0,1-.59.573h-2.451Z"
-                            transform="translate(-274.938 -295.381)"
-                            fill="#fff"
-                          />
-                        </g>
-                        <path
-                          id="Path_2765"
-                          data-name="Path 2765"
-                          d="M116,417.053H96v1.053h20a1.056,1.056,0,0,0,1.053-1.053V416A1.056,1.056,0,0,1,116,417.053Z"
-                          transform="translate(-59.789 -388.63)"
-                          fill="#cad1d8"
-                        />
-                      </g>
-                    </svg>
-                    <span class="mx-2 cairo">اسم الملف</span>
-                  </span>
-                  <span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 28.452 29.041"
-                    >
-                      <g id="picture" transform="translate(0 0)">
-                        <path
-                          id="Path_2766"
-                          data-name="Path 2766"
-                          d="M6.632,0H27.02a4.041,4.041,0,0,1,4.032,4.032V25.009a4.041,4.041,0,0,1-4.032,4.032H6.632A4.041,4.041,0,0,1,2.6,25.009V3.987A4.032,4.032,0,0,1,6.632,0Z"
-                          transform="translate(-2.6 0)"
-                          fill="#4a566e"
-                        />
-                        <path
-                          id="Path_2767"
-                          data-name="Path 2767"
-                          d="M15.739,100.917,9.8,94.937l-7.2,7.2v4.8a4.041,4.041,0,0,0,4.032,4.032H27.02a4.041,4.041,0,0,0,4.032-4.032V99.2L24.3,92.4Z"
-                          transform="translate(-2.6 -81.934)"
-                          fill="#00b594"
-                        />
-                        <circle
-                          id="Ellipse_178"
-                          data-name="Ellipse 178"
-                          cx="2.537"
-                          cy="2.537"
-                          r="2.537"
-                          transform="translate(10.466 7.068)"
-                          fill="#ffcc03"
-                        />
-                      </g>
-                    </svg>
-                    <span class="mx-2 cairo">صورة الموقع </span></span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+         
         </div>
-        <div class="text-center p-2 cairo bg-white" style="color: #18af9a">
+        <div hidden class="text-center p-2 cairo bg-white" style="color: #18af9a">
           رؤيه مسار العمل علي المشروع
         </div>
       </div>

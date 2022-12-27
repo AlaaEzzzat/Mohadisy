@@ -1,3 +1,4 @@
+import { FunctionsService } from './../../../@core/services/functions/functions.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/@core/api.service';
 import { HttpClient } from '@angular/common/http';
@@ -64,26 +65,12 @@ export class ProjectLayoutComponent implements OnInit {
           console.log(data);
         },
       });
-  }
-  /* timeOut: any;
-  position: any = [];
-  getCursorPosition(ev: any) {
-  clearTimeout(this.timer);
-  this.time();
-  }
-  timer:any;
-   time() {
-    this.timer = setTimeout(() => {
-         console.log('mooove')
-    }, 1000) 
-    } */
-    
-
-    
+  }  
   constructor(
     private _HttpClient: HttpClient,
     private toester: ToastrService,
     private api: ApiService,
+    private FunctionsService:FunctionsService
   ) {
     
   }
@@ -94,13 +81,6 @@ export class ProjectLayoutComponent implements OnInit {
     console.log(this.projectReqWorks);
     console.log(this.numOfCompltedMilesones)
   }
-  show(){
-    console.log(this.project);
-    console.log(this.projectMilestnes);
-    console.log(this.projectReqWorks);
-    console.log(this.numOfCompltedMilesones)
-  }
-  
   getReqWorkName(requiredWorkId: any) {
     var requiredWork = this.projectReqWorks.find((rq: any) => {
       rq.id == requiredWorkId;
@@ -109,14 +89,16 @@ export class ProjectLayoutComponent implements OnInit {
   }
 
   getTime(end: any, start: any) {
-    var startDate = new Date(start);
+    this.FunctionsService.getTime(end,start);
+    /* var startDate = new Date(start);
     var endDate = new Date(end);
     var Time = endDate.getTime() - startDate.getTime();
-    var Days = Time / (1000 * 3600 * 24); //Diference in Days
-    return Days;
+    var Days = Time / (1000 * 3600 * 24);
+    return Days; */
   }
   download = (url: string, name: any) => {
-    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
+    this.FunctionsService.download(url,name);
+   /*  return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });
         const fileName = name;
@@ -125,6 +107,6 @@ export class ProjectLayoutComponent implements OnInit {
       (err) => {
         console.log(err);
       }
-    );
+    ); */
   };
 }

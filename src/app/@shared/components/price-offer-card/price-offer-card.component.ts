@@ -7,6 +7,7 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class PriceOfferCardComponent implements OnInit {
 @Input() project: any;
+@Input() category: any;
 @Input() showProject:any= (args: any) => {};
 @Input() showOffers:any= (args: any) => {};
 @Input() deleteProject:any= (args: any) => {};

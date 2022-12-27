@@ -34,6 +34,7 @@ import { PriceOfferProjectLayoutComponent } from './components/price-offer-proje
 import { PriceOfferProjectMainLayoutComponent } from './components/price-offer-project-main-layout/price-offer-project-main-layout.component';
 import { MilestoneCardComponent } from './components/milestone-card/milestone-card.component';
 import { ProjectLayoutComponent } from './components/project-layout/project-layout.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 const routes: Routes = [];
 
 @NgModule({
@@ -66,6 +67,7 @@ const routes: Routes = [];
     ProjectLayoutComponent,
   ],
   imports: [
+   
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
@@ -81,7 +83,16 @@ const routes: Routes = [];
       positionClass: 'toast-bottom-right',
     }),
     FormsModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 8,
+      innerStrokeWidth: 6,
+      outerStrokeColor: '#78C000',
+      innerStrokeColor: '#C7E596',
+      animationDuration: 300,
+    }),
     RouterModule.forChild(routes),
+    
   ],
   providers: [],
   exports: [
@@ -106,7 +117,8 @@ const routes: Routes = [];
     PriceOfferProjectLayoutComponent,
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
-    ProjectLayoutComponent
+    ProjectLayoutComponent,
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

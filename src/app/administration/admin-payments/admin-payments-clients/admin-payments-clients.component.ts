@@ -44,8 +44,6 @@ export class AdminPaymentsClientsComponent implements OnInit {
           this.clientsPayments.push(dddd)
         }
       } this.dataShow =this.clientsPayments
-       
-
       })
     })
   }
@@ -65,7 +63,6 @@ export class AdminPaymentsClientsComponent implements OnInit {
     })
   }
   complete=()=>{
-   
     this.clientsPayments=[]
     this.paymentsService.getClientsPaymentsForAdmin().subscribe({
       next:((data)=>{

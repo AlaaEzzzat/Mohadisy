@@ -19,37 +19,15 @@ isActive ? 'active' : 'bg-white'
     </div>
     <div>
       <i class="icon fa-solid fa-calendar-days ms-2"></i>
-      <span class="textcard"> {{ project.dateCreated }}</span>
+      <span class="textcard"> {{ project.dateCreated | date }}</span>
     </div>
 
     <i class="fa-regular fa-circle-ellipsis-vertical"></i>
   </div>
-  <span *ngIf="userType == 'client'"
+  <span *ngIf="userType == 'client' && category=='priceOffer'"
     class="badge bg-white mt-1 mainColor"
     style="height: fit-content; padding: 10px"
     >{{ project.offers.length }} رد</span
   >
-<!-- 
-  <div *ngIf="userType == 'client'" class="position-absolute dotCon">
-    <button
-      class="dots"
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      aria-label="Example icon-button with a menu"
-    >
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu
-      #menu="matMenu"
-      style="background-color: #18af9a"
-      class="matBtnCon"
-    >
-      <button mat-menu-item>
-        <span (click)="showProject()">عرض المشروع</span>
-      </button>
-      <button hidden mat-menu-item>
-        <span (click)="deleteProject(project)">حذف المشروع</span>
-      </button>
-    </mat-menu>
-  </div> -->
+
 </div>
