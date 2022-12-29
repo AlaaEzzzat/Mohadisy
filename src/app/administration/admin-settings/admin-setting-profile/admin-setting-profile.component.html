@@ -3,7 +3,7 @@
         <div class="row g-0">
           <div class="col-md-2">
             <img
-              src="{{ iProfileAdmin.adminProfile.profilePicturePath }}"
+              src="{{ iProfileAdmin?.adminProfile?.profilePicturePath }}"
               class="img-fluid rounded-1 h-100"
               alt="..."
             />
@@ -12,8 +12,8 @@
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <h5 class="card-title nameProfile cairo h6 fw-normal">
-                  {{ iProfileAdmin.adminProfile.firstName }}
-                  {{ iProfileAdmin.adminProfile.lastName }}
+                  {{ iProfileAdmin?.adminProfile.firstName }}
+                  {{ iProfileAdmin?.adminProfile.lastName }}
                 </h5>
                 <span class="edit cairo  fw-normal" (click)="changeFirstOrLastName()"
                   >تعديل
@@ -22,9 +22,9 @@
               <!-- <h5 class="card-title nameProfile">Admin ADMIN ADMIN admin</h5> -->
 
               <p class="card-text emANumProfile cairo h6 fw-normal">
-                {{ iProfileAdmin.phoneNumber }}
+                {{ iProfileAdmin?.phoneNumber }}
               </p>
-              <p class="card-text emANumProfile cairo h6 fw-normal">{{ iProfileAdmin.email }}</p>
+              <p class="card-text emANumProfile cairo h6 fw-normal">{{ iProfileAdmin?.email }}</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@
               <div class="row g-0">
                 <div class="col-md-2">
                   <img
-                    src="{{ iProfileAdmin.adminProfile.profilePicturePath }}"
+                    src="{{ iProfileAdmin?.adminProfile?.profilePicturePath }}"
                     class="img-fluid rounded-1 h-100"
                     alt="..."
                   />
@@ -93,10 +93,10 @@
                       <!-- <h5 class="card-title nameProfile "> {{iProfileAdmin.adminProfile.firstName}} {{iProfileAdmin.adminProfile.lastName}} </h5> -->
     
                       <p class="card-text emANumProfile">
-                        {{ iProfileAdmin.phoneNumber }}
+                        {{ iProfileAdmin?.phoneNumber }}
                       </p>
                       <p class="card-text emANumProfile">
-                        {{ iProfileAdmin.email }}
+                        {{ iProfileAdmin?.email }}
                       </p>
                     </div>
                   </div>
@@ -110,7 +110,7 @@
       <div class="bg-white py-2 px-4 d-flex justify-content-between align-items-center col-12">
         <p class="stutsProfile cairo h6 fw-normal">تم اضافته <span></span></p>
         <p class="stutsProfile cairo h6 fw-normal">
-          منذ {{ iProfileAdmin.adminProfile.dateCreated | date }}
+          منذ {{ iProfileAdmin?.adminProfile?.dateCreated | date }}
         </p>
       </div>
 

@@ -222,6 +222,8 @@ export class AdminProjectComponent implements OnInit {
   }
 
   objectProduct(object?: any, id?: any) {
+    this.percentage = 0;
+    this.test = '';
     this.idProduct = object;
     let test = JSON.stringify(this.idProduct);
     sessionStorage.setItem('projects', test);

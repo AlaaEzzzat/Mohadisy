@@ -18,6 +18,8 @@ export class WorkScheduleComponent implements OnInit {
   appointment!: appoint;
   newappointment: FormGroup;
   dateOpt: any;
+  dateOptAll: any[]=[]
+
   erDateOp: any;
   message: any;
   showSuc: boolean = false;
@@ -67,11 +69,13 @@ export class WorkScheduleComponent implements OnInit {
     };
     this.http.appointmentsEndAndStartDte(dateSelected).subscribe({
       next: (date) => {
+        console.log(date.data);
+        this.dateOptAll = date.data        ;
         for (let dates of date.data) {
           this.dateOpt = dates;
         }
 
-        this.appointmentFiles = this.dateOpt.appointmentFiles;
+        // this.appointmentFiles = this.dateOpt.appointmentFiles;
       },
       error: (er) => {
         console.log(er);
@@ -139,6 +143,19 @@ export class WorkScheduleComponent implements OnInit {
     });
   }
   download(url: string, name: any) {
+    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe({next:
+      (png) => {
+        const blob = new Blob([png], { type: 'application/pdf' });
+        const fileName = name;
+        saveAs(blob, fileName);
+      },
+      error:(err) => {
+        console.log(err);
+      }}
+     
+    );
+  }
+  download2(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });
@@ -151,6 +168,7 @@ export class WorkScheduleComponent implements OnInit {
     );
   }
 }
+
 interface appoint {
   applicationUserId: string;
   name: string;

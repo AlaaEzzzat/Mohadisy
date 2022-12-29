@@ -11,72 +11,91 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
 </div>
 <div class="col-12  mb-2" (click)="getappointDate()" >
   <!-- <mat-card class="demo-inline-calendar-card"> -->
-  <mat-calendar [(selected)]="selected" class="col-12" ></mat-calendar>
+  <mat-calendar [(selected)]="selected" class="col-12" [min]="selected"></mat-calendar>
   <!-- </mat-card> -->
 </div>
 <div class="col-12 bg-white px-4 py-1 mb-2">
   <p class="fw-semibold pt-3">{{ selected | date: "d/M/yyyy" }}</p>
 </div>
-<div class="col-12 bg-white px-4 py-1 mb-2" *ngIf="dateOpt!=null;else notfound">
-  <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
-    {{ dateOpt?.name }}
+<div class="col-12  scrollsAdmins" *ngIf="dateOpt!=null;else notfound">
+  <ng-container *ngFor="let itemAll of dateOptAll">
+    <div
+    class="bg-white rounded-0  mb-2 col-12 px-3"
+  >
+  <p class="fw-semibold pt-3 main-color d-flex justify-content-between text-break">
+    {{ itemAll?.name }}
     <small class="fw-normal">{{
-      dateOpt?.dateCreated | date: "d/M/yyyy"
+      itemAll?.dateCreated | date: "d/M/yyyy"
     }}</small>
   </p>
-  <p class="fw-normal">{{ dateOpt?.description }}</p>
+  <p class="fw-normal text-break">{{ itemAll?.description }}</p>
 
-  <div *ngFor="let item of appointmentFiles" class="d-flex justify-content-between align-content-center">
-    <a
-    target="_blank"
-    class="informationDownload  d-flex  justify-content-between mb-2"
-    (click)="
-      download(
-        item.filePath,
-        item.fileName
-      )
-    "
-  >
-  <span
-  ><img
-    src="assets/dashboard/picture.png"
-    alt=""
-    *ngIf="
-      item.fileType == '.png' ||
-      item.fileType == '.jpg' ||
-      item.fileType == '.PNG'
-    "
-  />
-  <img
-    src="assets/dashboard/pdf.png"
-    *ngIf="item.fileType === '.pdf'"
-  />
+<div *ngFor="let itemP of itemAll?.appointmentFiles" class="d-flex justify-content-between align-content-center">
+  <a
+  target="_blank"
+  class="informationDownload  d-flex  justify-content-between mb-2"
+  (click)="
+    download2(
+      itemP.filePath,
+      itemP.fileName
+    )
+  "
+>
+<span
+><img
+  src="assets/dashboard/picture.png"
+  alt=""
+  *ngIf="
+  itemP?.fileType == '.png' ||
+  itemP?.fileType == '.jpg' ||
+  itemP?.fileType == '.PNG'
+  "
+/>
+<img
+  src="assets/dashboard/pdf.png"
+  *ngIf="itemP?.fileType === '.pdf'"
+/>
 </span>
-    <p class=" nameDownload">
-      {{ item.fileName }}
-    </p>
-    <i class="fa fa-download typeCom ms-3"></i>
+  <p class=" nameDownload text-break">
+    {{ itemP?.fileName }}
+  </p>
+  <i class="fa fa-download typeCom ms-3"></i>
 
-  </a>
-  </div>
+</a>
+</div> 
+</div>
+ 
+
+  </ng-container>
+
 </div>
 <ng-template #notfound>
   <div class="col-12 bg-white px-4 py-1 mb-2" >
     <p class="fw-semibold pt-3 main-color d-flex justify-content-between">
       {{ erDateOp}}
-      <small class="fw-normal">{{
-        dateOpt?.dateCreated | date: "d/M/yyyy"
-      }}</small>
+      <!-- <small class="fw-normal">{{
+        dateOptAll?.dateCreated | date: "d/M/yyyy"
+      }}</small> -->
     </p>
 
   
   </div>
 </ng-template>
-  <div class=" col-12 bg-white  px-4 py-1 mb-2 " data-bs-toggle="modal" data-bs-target="#addAppointment">
+  <div class=" col-12 bg-white px-4 py-1 mb-2  mt-3 hovColor " data-bs-toggle="modal" data-bs-target="#addAppointment">
 
   <p class="pt-3">
-    <img src="assets/dashboard/add.png" class="ms-2" />
-    <span style="color: #c7c7c7"> اضافه حدث الى هذا اليوم</span>
+    <!-- <img src="assets/dashboard/add.png" class="ms-2 text-dark color" /> -->
+    <svg  class="ms-2  color"  id="add" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_2849" data-name="Path 2849" d="M9.02,21H2.5A2.5,2.5,0,0,1,0,18.5V2.5A2.5,2.5,0,0,1,2.5,0h12A2.5,2.5,0,0,1,17,2.5V8.56a.5.5,0,0,1-1,0V2.5A1.5,1.5,0,0,0,14.5,1H2.5A1.5,1.5,0,0,0,1,2.5v16A1.5,1.5,0,0,0,2.5,20H9.02a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2850" data-name="Path 2850" d="M13.5,9H3.5a.5.5,0,0,1,0-1h10a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2851" data-name="Path 2851" d="M9.5,13h-6a.5.5,0,0,1,0-1h6a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2852" data-name="Path 2852" d="M8.5,5h-5a.5.5,0,0,1,0-1h5a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2853" data-name="Path 2853" d="M17.5,24A6.5,6.5,0,1,1,24,17.5,6.508,6.508,0,0,1,17.5,24Zm0-12A5.5,5.5,0,1,0,23,17.5,5.506,5.506,0,0,0,17.5,12Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2854" data-name="Path 2854" d="M17.5,21a.5.5,0,0,1-.5-.5v-6a.5.5,0,0,1,1,0v6A.5.5,0,0,1,17.5,21Z" transform="translate(0)" fill="#030303"/>
+  <path id="Path_2855" data-name="Path 2855" d="M20.5,18h-6a.5.5,0,0,1,0-1h6a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
+</svg>
+
+    <span style="color: #c7c7c7" class=" text-dark "> اضافه حدث الى هذا اليوم</span>
   </p>
 </div>
 </div>

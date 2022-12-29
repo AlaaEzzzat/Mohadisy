@@ -5,7 +5,7 @@
           'background-color': newApi === 3 ? '#004057' : '#ffffff',
           color: newApi === 3 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getCurrentProjects()"
       >
@@ -16,7 +16,7 @@
           'background-color': newApi === 4 ? '#004057' : '#ffffff',
           color: newApi === 4 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getPendingProject()"
       >
@@ -27,7 +27,7 @@
           'background-color': newApi === 5 ? '#004057' : '#ffffff',
           color: newApi === 5 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getFinishedProjects()"
       >
@@ -39,7 +39,7 @@
           'background-color': newApi === 6 ? '#004057' : '#ffffff',
           color: newApi === 6 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getLateProjects()"
       >
@@ -50,7 +50,7 @@
           'background-color': newApi === 7 ? '#004057' : '#ffffff',
           color: newApi === 7 ? '#ffffff' : '#004057'
         }"
-        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 h4"
+        class="btn rounded-0 col-xl-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
         role="button"
         (click)="getStoppedProjects()"
       >
@@ -576,7 +576,8 @@
 
           <!--  -->
           <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 "  *ngIf="productCurrent?.projectRequestStatus.projectStatus.id != 3 && productCurrent?.projectRequestStatus.projectStatus.id != 4">
-            <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center justify-content-center  px-3 pt-4 pb-3">
+            <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center
+             justify-content-center  px-3 pt-4 pb-3">
 
               
         
@@ -586,11 +587,11 @@
                 class="example-margin"
                 [color]="color"
                 [mode]="mode"
-                [value]="percentage"
+                [value]="100"
               >
               
             </mat-progress-spinner>
-            <h4  id="progress">{{percentage}}%</h4>
+            <h4  id="progress">100%</h4>
               </div>
               <p class="cairo" >   {{test}}</p>
               <!-- <p class="cairo">  تم الانتهاء من المرحله الاولي</p> -->

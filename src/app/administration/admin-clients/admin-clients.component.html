@@ -91,25 +91,25 @@
         ">
             <div
               class="card-body"
-              (click)="objectProduct(pro, pro.id)"
+              (click)="objectProduct(pro, pro?.id)"
               [ngStyle]="{
                 'background-color':
-                  productCurrent.id === pro.id ? '#004057' : '#ffffff',
-                color: productCurrent.id === pro.id ? '#ffffff' : '#004057'
+                  productCurrent?.id === pro?.id ? '#004057' : '#ffffff',
+                color: productCurrent?.id === pro?.id ? '#ffffff' : '#004057'
               }"
             >
               <div class="d-flex align-items-start mb-2">
                 <img
                 class=""
                 src="assets/icons/user.svg"
-                *ngIf="productCurrent.id != pro.id; else whiteIconw"
+                *ngIf="productCurrent?.id != pro?.id; else whiteIconw"
               />
               <ng-template #whiteIconw
                 ><img src="assets/icons/userWh.svg" class=""
               /></ng-template>
                   <div class="card-title me-3 ">
                   <span *ngIf="pro.firstName; else templateName" class="cairo h6 fw-normal" >
-                    {{ pro.firstName }} {{ pro.lastName }}
+                    {{ pro?.firstName }} {{ pro?.lastName }}
                   </span>
                   <ng-template #templateName> Null firstName </ng-template>
                 </div>
@@ -118,23 +118,23 @@
                 <img
                 src="assets/icons/Group 801.svg"
                 class=""
-                [hidden]="productCurrent.id === pro.id"
+                [hidden]="productCurrent?.id === pro?.id"
               />
               <img
                 src="assets/icons/Group 801White.svg"
                 class=""
-                [hidden]="productCurrent.id != pro.id"
+                [hidden]="productCurrent?.id != pro?.id"
               />
               <div class="me-3 cairo h6 fw-normal" *ngIf=" pro.district.city.region.code && pro.district.city.region.nameAr;  else region" >
                 <span
                   class="cairo h6 fw-normal"
-                  *ngIf="pro.district.nameAr; else regioncode"
-                  >{{ pro.district.nameAr }} ,
+                  *ngIf="pro?.district?.nameAr; else regioncode"
+                  >{{ pro?.district?.nameAr }} ,
                 </span>
                 <ng-template #regioncode> </ng-template>
                 <span
                   class=" cairo h6 fw-normal"
-                  *ngIf="pro.district.city.nameAr; else regioncode"
+                  *ngIf="pro?.district?.city?.nameAr; else regioncode"
                 >
                   {{ pro.district.city.nameAr }} ,
                 </span>
@@ -153,12 +153,12 @@
                 <img
                   src="assets/icons/calendar.svg"
                   class=""
-                  [hidden]="productCurrent.id === pro.id"
+                  [hidden]="productCurrent?.id === pro.id"
                 />
                 <img
                   src="assets/icons/calendarWh.svg"
                   class=""
-                  [hidden]="productCurrent.id != pro.id"
+                  [hidden]="productCurrent?.id != pro.id"
                 />
                 <div class="card-title me-3 ">
                   <span *ngIf="pro.firstName; else templateName" class="cairo h6 fw-normal" >
@@ -184,8 +184,8 @@
         <div class="row g-0 justify-content-evenly align-items-center">
           <div class="col-lg-2 col-sm-3">
             <img
-              *ngIf="productCurrent.profilePicturePath; else profilePicturePath"
-              src="{{ productCurrent.profilePicturePath }}"
+              *ngIf="productCurrent?.profilePicturePath; else profilePicturePath"
+              src="{{ productCurrent?.profilePicturePath }}"
               class="img-fluid rounded-0 w-75 ms-5 me-2 p-1"
               alt="null"
             />
@@ -194,12 +194,12 @@
           <div class="col-md-3 col-sm-4">
             <div class="card-body">
               <span  class="me-2 cairo h6 fw-normal textInformation">
-                {{ productCurrent.firstName }} {{ productCurrent.lastName }}
+                {{ productCurrent?.firstName }} {{ productCurrent?.lastName }}
               </span>
             </div>
           </div>
           <div class="col-md-7 col-sm-5">
-            <div class="d-flex " *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 4">
+            <div class="d-flex " *ngIf="productCurrent?.joinRequestStatus?.accountStatus?.id === 4">
 
               <a
               type="button"
@@ -229,7 +229,7 @@
               <p class="cairo h6 fw-normal">رفض</p></a
             >
             </div>
-            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent.joinRequestStatus.accountStatus.id === 1">
+            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent?.joinRequestStatus.accountStatus.id === 1">
 
               <a
               type="button"
@@ -242,7 +242,7 @@
             >
             
             </div>
-            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent.joinRequestStatus.accountStatus.id != 1 && productCurrent.joinRequestStatus.accountStatus.id != 4">
+            <div class="d-flex justify-content-end align-content-start" *ngIf="productCurrent?.joinRequestStatus.accountStatus.id != 1 && productCurrent?.joinRequestStatus.accountStatus.id != 4">
 
               <a
               type="button"
@@ -267,18 +267,18 @@
             <div class="d-flex flex-row justify-content-between ">
               <h6 class="card-subtitle text-muted ms-2 cairo  fw-normal">رقم الهوية</h6>
 
-              <p class="cairo h6 fw-normal textInformation">{{ productCurrent.idNumber }}</p>
+              <p class="cairo h6 fw-normal textInformation">{{ productCurrent?.idNumber }}</p>
 
-              <!-- <div   [hidden]="!productCurrent.idFile"> -->
+              <!-- <div   [hidden]="!productCurrent?.idFile"> -->
               <a
                 class="informationDownload bg-light d-flex px-2 align-items-center"
                 target="_blank"
-                (click)="download(productCurrent.idPath,productCurrent.idFile)"
-                *ngIf="productCurrent.idFile && productCurrent.idPath; else idFile"
+                (click)="download(productCurrent?.idPath,productCurrent?.idFile)"
+                *ngIf="productCurrent?.idFile && productCurrent?.idPath; else idFile"
               >
 
                 <i class="fa fa-download typeCom ms-3 cairo h6 fw-normal"></i>
-                <p class="pt-3">{{ productCurrent.idFile }}</p>
+                <p class="pt-3">{{ productCurrent?.idFile }}</p>
               </a>
               <ng-template #idFile>___</ng-template>
               <!-- </div> -->
@@ -292,8 +292,8 @@
             <h6 class="card-subtitle text-muted cairo  fw-normal mb-2">الدوله</h6>
             <samp
               class="cairo h6 fw-normal"
-              *ngIf="productCurrent.district.city.region.code; else cityName"
-              >{{ productCurrent.district.city.region.code
+              *ngIf="productCurrent?.district.city.region.code; else cityName"
+              >{{ productCurrent?.district.city.region.code
                }}</samp
             >
             <ng-template #cityName> _ </ng-template>
@@ -302,18 +302,18 @@
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المدينه</p>
             <samp
             class="cairo h6 fw-normal textInformation"
-              *ngIf="productCurrent.district.city.nameAr; else city"
-              >{{ productCurrent.district.city.nameAr }}</samp
+              *ngIf="productCurrent?.district.city.nameAr; else city"
+              >{{ productCurrent?.district.city.nameAr }}</samp
             >
             <ng-template #city> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">المنطقه</p>
             <samp
-            class="cairo h6 fw-normal textInformation" *ngIf=" productCurrent.district.city.region.nameAr;
+            class="cairo h6 fw-normal textInformation" *ngIf=" productCurrent?.district.city.region.nameAr;
                 else regionName
               "
-              >{{ productCurrent.district.city.region.nameAr }}</samp
+              >{{ productCurrent?.district.city.region.nameAr }}</samp
             >
             <ng-template #regionName> _ </ng-template>
           </div>
@@ -321,10 +321,10 @@
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">العنوان</p>
             <samp
             class="cairo h6 fw-normal textInformation"
-              *ngIf="productCurrent.streetName; else shortAddress"
-              >{{ productCurrent.buildingNumber }},
-              {{ productCurrent.streetName }} -
-              {{ productCurrent.neighborhood }}</samp
+              *ngIf="productCurrent?.streetName; else shortAddress"
+              >{{ productCurrent?.buildingNumber }},
+              {{ productCurrent?.streetName }} -
+              {{ productCurrent?.neighborhood }}</samp
             >
             <ng-template #shortAddress> _ </ng-template>
           </div>
@@ -336,10 +336,10 @@
             <samp
             class="cairo h6 fw-normal textInformation"
               *ngIf="
-                productCurrent.district.officePhoneNumber;
+                productCurrent?.district.officePhoneNumber;
                 else officePhoneNumber
               "
-              >{{ productCurrent.district.officePhoneNumber }}</samp
+              >{{ productCurrent?.district.officePhoneNumber }}</samp
             >
             <ng-template #officePhoneNumber> _ </ng-template>
           </div>
@@ -347,8 +347,8 @@
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">
               عنوان البريد الالكتروني
             </p>
-            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.email; else emailName">{{
-              productCurrent.email
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent?.email; else emailName">{{
+              productCurrent?.email
             }}</samp>
             <ng-template #emailName> _ </ng-template>
           </div>
@@ -356,22 +356,22 @@
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رابط الموقع</p>
             <samp
             class="cairo h6 fw-normal textInformation"
-              *ngIf="productCurrent.websiteLink; else websiteLink"
-              >{{ productCurrent.websiteLink }}</samp
+              *ngIf="productCurrent?.websiteLink; else websiteLink"
+              >{{ productCurrent?.websiteLink }}</samp
             >
             <ng-template #websiteLink> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">صندوق البريد</p>
-            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.postalBox; else box">{{
-              productCurrent.postalBox
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent?.postalBox; else box">{{
+              productCurrent?.postalBox
             }}</samp>
             <ng-template #box> _ </ng-template>
           </div>
           <div class="col-lg-4 col-6 mb-4">
             <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">رمز البريد</p>
-            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent.postalCode; else postcode"
-              >{{ productCurrent.postalCode }}
+            <samp class="cairo h6 fw-normal textInformation" *ngIf="productCurrent?.postalCode; else postcode"
+              >{{ productCurrent?.postalCode }}
             </samp>
             <ng-template #postcode> _ </ng-template>
           </div>
