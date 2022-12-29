@@ -4,7 +4,7 @@ import moment from 'moment';
 import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-work-schedule',
   templateUrl: './work-schedule.component.html',
@@ -19,6 +19,7 @@ export class WorkScheduleComponent implements OnInit {
   newappointment: FormGroup;
   dateOpt: any;
   dateOptAll: any[]=[]
+  modalContent = false;
 
   erDateOp: any;
   message: any;
@@ -28,6 +29,7 @@ export class WorkScheduleComponent implements OnInit {
   appointmentFiles: any[] = [];
 
   constructor(
+    private _toastr: ToastrService,
     private http: AdminDashService,
     private formbuilder: FormBuilder,
     private _HttpClient: HttpClient
@@ -101,34 +103,20 @@ export class WorkScheduleComponent implements OnInit {
     if( this.selected < today){
      
       this.message = "من فضلك اختار تاريخ بعد او نفس تاريخ اليوم"
-      this.showErr = true;
+      this._toastr.error(this.message);
+      this.modalContent = false;
 
-      setInterval(() => {
-        this.showErr = false;
-      }, 4000);
-      return true;
+     
 
     }else{
-      return false;
+      this.modalContent = true;
+
 
     }
 }
 
   creatMeeting() {
-    const today = new Date();
 
-    today.setHours(0, 0, 0, 0);
-
-    
-    if( this.selected < today){
-     
-      this.message = "من فضلك اختار تاريخ بعد او نفس تاريخ اليوم"
-      this.showErr = true;
-
-      setInterval(() => {
-        this.showErr = false;
-      }, 4000);
-    }else{
 
       this.iProfileAdmin = localStorage.getItem('id');
       let date = moment(this.selected).format('YYYY-MM-DD');
@@ -141,61 +129,37 @@ export class WorkScheduleComponent implements OnInit {
       this.http.storeAppointment(this.appointment).subscribe({
         next: (data) => {
           this.message = data.message;
-          this.showSuc = true;
-          setInterval(() => {
-            this.showSuc = false;
-          }, 3000);
+          this._toastr.success(data.message);
+       
           this.getappointDate();
           this.http
             .storeAppointmentFiles(data.data.id, this.FileformData)
             .subscribe({
               next: (req) => {
                 this.message = req.message;
-                this.showSuc = true;
-  
-                setInterval(() => {
-                  this.showSuc = false;
-                }, 4000);
+                this._toastr.info(data.message);
+
                 this.getappointDate();
+                this.closeModal()
               },
               error: (er) => {
-                console.log(er);
-                this.message = er.message;
-                this.showErr = true;
-  
-                setInterval(() => {
-                  this.showErr = false;
-                }, 4000);
+                this._toastr.error(er.message);
+                this.closeModal()
+
               },
             });
         },
         error: (er) => {
-          console.log(er);
-          this.message = er.message;
-          this.showErr = true;
-  
-          setInterval(() => {
-            this.showErr = false;
-          }, 4000);
+          this._toastr.error(er.message);
+
+       
         },
       });
       
-    }
+    
     
   }
-  download(url: string, name: any) {
-    return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe({next:
-      (png) => {
-        const blob = new Blob([png], { type: 'application/pdf' });
-        const fileName = name;
-        saveAs(blob, fileName);
-      },
-      error:(err) => {
-        console.log(err);
-      }}
-     
-    );
-  }
+
   download2(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
@@ -208,6 +172,16 @@ export class WorkScheduleComponent implements OnInit {
       }
     );
   }
+
+
+  openSortingModal(){
+    this.modalContent = true;
+    console.log('clicked')
+   
+  }
+  closeModal=()=>{
+    this.modalContent = false;
+   }
 }
 
 interface appoint {

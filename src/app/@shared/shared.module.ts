@@ -35,6 +35,7 @@ import { PriceOfferProjectMainLayoutComponent } from './components/price-offer-p
 import { MilestoneCardComponent } from './components/milestone-card/milestone-card.component';
 import { ProjectLayoutComponent } from './components/project-layout/project-layout.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { PolicyComponent } from './components/policy/policy.component';
 const routes: Routes = [];
 
 @NgModule({
@@ -65,6 +66,7 @@ const routes: Routes = [];
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
     ProjectLayoutComponent,
+    PolicyComponent,
   ],
   imports: [
    

@@ -113,8 +113,56 @@ width: 270px;
 .hovColor:hover{
   background-color: $textColor !important;
   cursor: pointer !important;
+   
+transition:all 0.5s ease-in-out;
  &>p>span,&>p>.color path{
   color: white !important;
   fill: white !important;
+  transition:all 0.5s ease-in-out;
+
  }
+}
+
+.form{
+  width: 70%;
+  position: fixed;
+  top:200px;
+  left: 50%;
+  transform: translate(-50%, -20%) !important;
+  background-color: #fff;
+  box-shadow: 2px 2px 20px rgba(43, 43, 43, 0.1);
+  border-radius: 10px;
+  .title-form{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: #303030;
+    text-align: center;
+  }
+  .Submit{
+    width: 250px;
+    background: #004796;
+    border-radius: 5px;
+    a{
+      color: #fff !important;
+    }
+  }
+}
+
+// @media (max-width: 768px) {
+// .form{
+//   width: 280px;
+// }
+// }
+.modal-container{
+  position:fixed;
+  width:100%;
+  height:100%;
+  left:0;
+  top:0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.5);
+  .close{
+    text-align: end;
+  }
 }

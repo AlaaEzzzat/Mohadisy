@@ -81,10 +81,10 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
   
   </div>
 </ng-template>
-  <div class=" col-12 bg-white px-4 py-1 mb-2  mt-3 hovColor " (click)="isDateBeforeToday()" data-bs-toggle="modal" data-bs-target="#addAppointment">
+  <div class=" col-12 bg-white px-4 py-1 mb-2  mt-3 hovColor " (click)="isDateBeforeToday()" >
 
   <p class="pt-3">
-    <!-- <img src="assets/dashboard/add.png" class="ms-2 text-dark color" /> -->
+    <!-- <img src="assets/dashboard/add.png" class="ms-2 text-dark color" /> data-bs-toggle="modal" data-bs-target="#addAppointment"-->
     <svg  class="ms-2  color"  id="add" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
   <path id="Path_2849" data-name="Path 2849" d="M9.02,21H2.5A2.5,2.5,0,0,1,0,18.5V2.5A2.5,2.5,0,0,1,2.5,0h12A2.5,2.5,0,0,1,17,2.5V8.56a.5.5,0,0,1-1,0V2.5A1.5,1.5,0,0,0,14.5,1H2.5A1.5,1.5,0,0,0,1,2.5v16A1.5,1.5,0,0,0,2.5,20H9.02a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
   <path id="Path_2850" data-name="Path 2850" d="M13.5,9H3.5a.5.5,0,0,1,0-1h10a.5.5,0,0,1,0,1Z" transform="translate(0)" fill="#030303"/>
@@ -101,13 +101,13 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
 </div>
 
 <div
-  class="modal fade"
+  class="modal fade form"
   id="addAppointment"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg" >
     <div class="modal-content">
       <div
         class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
@@ -217,4 +217,96 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
 
 <div class="alert   position-fixed bottom-0 end10 border-0 text-white toastErr rounded-0" role="alert" *ngIf="showErr">
   {{message}}
+</div>
+
+
+<div class="modal-container border border-3" *ngIf="modalContent">
+  <div class="form">
+    <div class="text-end modaltitle p-3 d-flex ">
+      <mat-icon class="close text-white" (click)="closeModal()"  alt="" width="20px">close</mat-icon>
+      <h5 class="modal-title col-11 text-white" id="exampleModalLabel">
+        اضافة مهمه  
+      </h5>
+    </div>
+
+  <div class="modal-body my-3 modalbody p-3">
+    <form  [formGroup]="newappointment"
+    (ngSubmit)="creatMeeting()" novalidate>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <label class="form-label" for="name"
+            >اسم </label
+          >
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+              appoins['name'].errors && appoins['name'].touched
+            }"
+          />
+          <div
+            *ngIf="appoins['name'].errors && appoins['name'].touched"
+            class="alert alert-warning mt-2"
+          >
+            <div *ngIf="appoins['name'].errors['required']">
+              من فضلك ادخل اسم للموعد                </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="description"
+            >وصف </label
+          >
+
+          <textarea  id="" cols="30" rows="1" type="text"
+          id="description"
+          name="description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': appoins['description'].errors && appoins['description'].touched
+          }"></textarea>
+          <div
+            *ngIf="appoins['description'].errors && appoins['description'].touched"
+            class="alert alert-warning mt-2"
+          >
+            <div *ngIf="appoins['description'].errors['required']">
+              من فضلك ادخل   وصف للموعد
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">اضافه ملف</label>
+        <input class="form-control" 
+        type="file"
+        id="imageFile"
+        (change)="uplaodFile($event)"
+        name="imageFile"
+        formControlName="imageFile"
+       >
+      </div>
+     
+      <!-- <input (change)="uplaodFile($event)"  type="file" name="imageFile"> -->
+      <button
+      type="submit"
+      [disabled]="!newappointment.valid"
+      class="btn btn-lg ms-2 text-white form-control  mb-3"
+      style="background: #18AF9A"
+    >
+      انشاء  مهمه
+    </button>
+    <button type="button"  (click)="closeModal()" 
+    class="btn btn-lg ms-2 text-white form-control btn-secondary"
+
+    >
+      الغاء
+    </button>
+    </form>
+  </div>
+  </div>
 </div>
