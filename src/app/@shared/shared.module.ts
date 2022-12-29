@@ -36,6 +36,8 @@ import { MilestoneCardComponent } from './components/milestone-card/milestone-ca
 import { ProjectLayoutComponent } from './components/project-layout/project-layout.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { PolicyComponent } from './components/policy/policy.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 const routes: Routes = [];
 
 @NgModule({
@@ -69,7 +71,7 @@ const routes: Routes = [];
     PolicyComponent,
   ],
   imports: [
-   
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,

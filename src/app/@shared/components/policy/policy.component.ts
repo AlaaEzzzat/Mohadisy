@@ -1,17 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, Inject, OnInit} from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({
   selector: 'app-policy',
   templateUrl: './policy.component.html',
   styleUrls: ['./policy.component.scss']
 })
 export class PolicyComponent implements OnInit {
-  cuttintID:number=1;
-  constructor() { }
+ policyID:any
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
   }
-  currID(ID:number){
-    this.cuttintID=ID;
-  }
+change(id:any){
+  // this.policyID=id
+  this.data.policyID = id
+  console.log("id",this.data.policyID )
+
+}
+}
+export interface DialogData {
+  policyID: 2|3|4;
 }

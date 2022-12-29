@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { PolicyComponent } from '../policy/policy.component';
 
 @Component({
   selector: 'app-landing',
@@ -12,7 +14,9 @@ export class LandingComponent implements OnInit {
   minutes: number = 0;
   secends: number = 0;
   x: any = '';
-  constructor() {}
+  policyID:number=1;
+
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.x = setInterval(() => {
@@ -31,4 +35,17 @@ export class LandingComponent implements OnInit {
   one: boolean = true;
   two: boolean = false;
   three: boolean = false;
+
+  openDialog(policy:any) {
+    const dialogRef = this.dialog.open(PolicyComponent,{
+      data: {
+        policyID: policy,
+      },
+    });
+    this.policyID=policy
+    console.log(this.policyID)
+    dialogRef.afterClosed().subscribe(result => {
+    
+    });
+  }
 }

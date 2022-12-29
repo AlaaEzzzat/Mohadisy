@@ -22,17 +22,45 @@
     
       /* Handle */
       ::-webkit-scrollbar-thumb {
-        background: #064C9A;
+        background: #18af9a;
         border-radius: 10px;
       }
     
       /* Handle on hover */
       ::-webkit-scrollbar-thumb:hover {
-        background: #0f5db6;
+        background: #18af9a;
       }
     
     
       .mat-button-toggle-checked,.cdk-focused{
-        background: #0f5db6 !important;
+        background: #18af9a !important;
         color:#fff !important;
+      }
+      .buttons {
+      
+      
+        .btn {
+        background-color:  #b1b4b3;
+        color: #fff;
+        box-shadow: none !important;
+        &:focus{
+          box-shadow: none !important;
+
+        }
+        }
+      }
+      .active{
+        background-color:  #18af9a !important;
+        color: #fff; 
+        &:focus{
+          box-shadow: none !important;
+          color: #fff; 
+
+        }
+      }
+      .gray {
+        background-color: #b1b4b3;
+        color: #fff;
+        box-shadow: none !important;
+
       }

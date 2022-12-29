@@ -1,17 +1,74 @@
-<section>
-      <div class="container">
-        <div class=" d-flex flex-wrap  justify-content-center ">
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="row rounded-3 col-8 btns lightGray d-flex flex-wrap  justify-content-center">
-              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==1}" class=" col-md-4 lightGray" (click)="currID(1)">Terms of Services</mat-button-toggle>
-              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==2}"  class=" col-md-4 lightGray" (click)="currID(2)">االلتزمات والحقوق</mat-button-toggle>
-              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==3}"  class=" col-md-4 lightGray" (click)="currID(3)"> اإللغاء واالسترجاع</mat-button-toggle>
-          </mat-button-toggle-group>
-          
-        </div>
-        <div class=" overflow-auto description mb-4 p-3" >
-          <div *ngIf="cuttintID==1 "></div>
-          <div *ngIf="cuttintID==2 "></div>
-          <div *ngIf="cuttintID==3 "></div>
-        </div>
-      </div>
-    </section>
+<!-- <h2 mat-dialog-title>Install Angular</h2> -->
+<div class="buttons d-flex flex-wrap justify-content-evenly align-items-center flex-lg-row row">
+  <button    (click)="change(2)"    class="btn col-lg-3 col-sm-5 col-12 mb-2 py-3"
+  [ngClass]="data.policyID === 2? 'active' : 'gray'"
+   
+  >
+    <span class="cairo ms-3 fs-4"> الرسوم والالتزامات الماديه
+    </span>
+   
+  </button>
+  <button  (click)="change(3)" [ngClass]="data.policyID === 3? 'active' : 'gray'"  class="btn col-lg-3 col-sm-5 col-12 mb-2 py-3"
+ 
+>
+  <span class="cairo ms-3 fs-4">          الشروط والالتزامات
+  </span>
+  
+</button>
+<button (click)="change(4)" [ngClass]="data.policyID === 4? 'active' : 'gray'" class="btn col-lg-3 col-sm-6 col-12 mb-2 py-3"
+
+>
+<span class="cairo ms-3 fs-4">          الالغاء و الاسترجاع
+</span>
+
+</button>
+</div>
+
+<mat-dialog-content class="mat-typography" *ngIf="data.policyID === 2 ">
+<ul>
+  <li class="cairo fs-5 mt-3 lh-base"> تستحق إدارة المنصة رسوم تسجيل )شهرية / سنوية( بمبلغ وقدره .... لاير تدفع فور وصول إشعار 
+    بذلك أو صدور فاتورة.</li>
+    <li class="cairo fs-5 mt-3 lh-base">
+      تستحق المنصة نسبة وقدرها )(، وذلك عن كل عملية تعاقدية تقوم من خالل المنصة أن ناتجة وناشئة 
+      عن المنصة، ويتم دفعها للمنصة عبر الوسائل المتاحة للدفع فور إتمام التعاقد.
+    </li >
+    <li class="cairo fs-5 mt-3 lh-base">ل تتحمل المنصة أي رسوم حكومية أو غيرها عن الغير من مقدمي الخدمات أو المشتركين عموما 
+      تكون ناشئة وناتجة عن عالقة الطرفين التعاقدية.</li>
+</ul>
+</mat-dialog-content>
+<mat-dialog-content class="mat-typography" *ngIf="data.policyID === 3 ">
+<p class="cairo fs-4">االلتزمات والحقوق: </p>
+<ol>
+  <li class="cairo fs-5 mt-3 lh-base">يحق إلدارة المنصة تعديل سياسة المستخدم هذه وأي معلومات مرتبطة من وقت آلخر عن طريق 
+    نشر الشروط المعدلة على الموقع دون إخطارك.</li>
+  <li class="cairo fs-5 mt-3 lh-base"> في المنصة اإللكترونية يتم تبادل الخدمات الهندسية، لذلك يجب على المشترين والبائعين التسجيل 
+    للحصول على حساب من أجل شراء أو بيع خدمات. </li>
+  <li class="cairo fs-5 mt-3 lh-base">يمنح الموقع اإللكتروني الفرصة للمستخدمين للعمل معًا عبر اإلنترنت إلكمال المشاريع ودفع ثمنها، 
+    وشراء العناصر وبيعها، واستخدام الخدمات التي نقدمها. </li>
+  <li class="cairo fs-5 mt-3 lh-base">نحن لسنا طرفًا  في أي اتفاقيات تعاقدية بين المشتري والبائع في الموقع عبر اإلنترنت ، نحن فقط وسيط و وسيلة ربط بين الطرفين. 
+  </li>
+  <li class="cairo fs-5 mt-3 lh-base">لدارة المنصة الحق في تغيير أو إضافة إلى الموقع اإللكتروني أو المعلومات أو الخدمات الموضحة 
+    فيه من وقت آلخر ودون سابق إنذار. </li>
+  <li class="cairo fs-5 mt-3 lh-base">إن كامل المسؤولية عن المعلومات الموجودة على المنصة الموقع االلكتروني هي على من قام بكتابتها 
+    وإدخالها، وليس على إدارة المنصة والمالك أي مسؤولية تجاهك أو تجاه أي شخص آخر في حالة 
+    حدوث أي خطأ في المعلومات الموجودة على الموقع اإللكتروني أو إذا كانت هذه المعلومات غير 
+    محدثة. </li>
+  <li class="cairo fs-5 mt-3 lh-base">تلتزم إدارة المنصة بالدعم الفني الالزم عن طريق وسائل التواصل المتاحة عبر المنصة في األوقات 
+    التي تحددها لذلك.</li>
+   <li class="cairo fs-5 mt-3 lh-base">دارة المنصة باحترافية ومهنية وتعاون مع المشتركين ، مع الوعد بتطوير دائم ومواكب لسوق العمل 
+    والعمالء. </li>
+</ol>
+</mat-dialog-content>
+<mat-dialog-content class="mat-typography" *ngIf="data.policyID === 4 ">
+<ul>
+  <li class="cairo fs-5 mt-3 lh-base">يحق لمقدم الخدمة والمشترك إلغاء حسابه في أي وقت ما لم يكن عليه رسوم والتزامات نحو المنصة 
+    ومالكها، وفي حال تم إلغاء اشتراكه دون أداء ما عليه فإنه ذلك يبقى حقا عليه في ذمته، وليس له 
+    المطالبة بأي مبالغ تم دفعها للمنصة . </li>
+    <li class="cairo fs-5 mt-3 lh-base"> يمنح المشترك فترة تجربة مدتها )( يوما ، يحق له خاللها إلغاء االشتراك دون تحمل أي رسوم، غير 
+      نسبة المنصة في أي تعاقد ينشأ مع عميل من خاللها في تلك الفترة.</li>
+</ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <!-- <button mat-button mat-dialog-close></button> -->
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="active border-0 btn">اغلاق</button>
+</mat-dialog-actions>

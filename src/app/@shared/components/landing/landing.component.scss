@@ -196,3 +196,26 @@
     }
   }
 }
+ul{
+  list-style: none;
+    color: #fff !important;
+      list-style: none;
+      cursor: pointer;
+
+   li::before {
+      content: "\2022";
+      color: #18af9a;
+      font-weight: bold;
+      display: inline-block; 
+      width: 1em;
+      margin-left: 0px;
+      margin-right: 15px;
+      border-radius: 50%;
+      font-size: 30px;
+        }
+   
+    
+}
+.fs-5.cairo.text-white>span{
+  color:#18af9a !important;
+}
