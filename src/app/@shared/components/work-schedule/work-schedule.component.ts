@@ -47,6 +47,10 @@ export class WorkScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
+    // yesterday
+    // this.isDateBeforeToday(new Date()); // => true
+
+// today
     this.getappointDate();
   }
   get name() {
@@ -90,57 +94,87 @@ export class WorkScheduleComponent implements OnInit {
       this.FileformData.append('file', file);
     }
   }
+   isDateBeforeToday() {
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    if( this.selected < today){
+     
+      this.message = "من فضلك اختار تاريخ بعد او نفس تاريخ اليوم"
+      this.showErr = true;
+
+      setInterval(() => {
+        this.showErr = false;
+      }, 4000);
+    }
+}
 
   creatMeeting() {
-    this.iProfileAdmin = localStorage.getItem('id');
-    let date = moment(this.selected).format('YYYY-MM-DD');
-    this.appointment = {
-      applicationUserId: this.iProfileAdmin,
-      name: this.name?.value,
-      description: this.description?.value,
-      dateCreated: date,
-    };
-    this.http.storeAppointment(this.appointment).subscribe({
-      next: (data) => {
-        this.message = data.message;
-        this.showSuc = true;
-        setInterval(() => {
-          this.showSuc = false;
-        }, 3000);
-        this.getappointDate();
-        this.http
-          .storeAppointmentFiles(data.data.id, this.FileformData)
-          .subscribe({
-            next: (req) => {
-              this.message = req.message;
-              this.showSuc = true;
+    const today = new Date();
 
-              setInterval(() => {
-                this.showSuc = false;
-              }, 4000);
-              this.getappointDate();
-            },
-            error: (er) => {
-              console.log(er);
-              this.message = er.message;
-              this.showErr = true;
+    today.setHours(0, 0, 0, 0);
 
-              setInterval(() => {
-                this.showErr = false;
-              }, 4000);
-            },
-          });
-      },
-      error: (er) => {
-        console.log(er);
-        this.message = er.message;
-        this.showErr = true;
+    
+    if( this.selected < today){
+     
+      this.message = "من فضلك اختار تاريخ بعد او نفس تاريخ اليوم"
+      this.showErr = true;
 
-        setInterval(() => {
-          this.showErr = false;
-        }, 4000);
-      },
-    });
+      setInterval(() => {
+        this.showErr = false;
+      }, 4000);
+    }else{
+      this.iProfileAdmin = localStorage.getItem('id');
+      let date = moment(this.selected).format('YYYY-MM-DD');
+      this.appointment = {
+        applicationUserId: this.iProfileAdmin,
+        name: this.name?.value,
+        description: this.description?.value,
+        dateCreated: date,
+      };
+      this.http.storeAppointment(this.appointment).subscribe({
+        next: (data) => {
+          this.message = data.message;
+          this.showSuc = true;
+          setInterval(() => {
+            this.showSuc = false;
+          }, 3000);
+          this.getappointDate();
+          this.http
+            .storeAppointmentFiles(data.data.id, this.FileformData)
+            .subscribe({
+              next: (req) => {
+                this.message = req.message;
+                this.showSuc = true;
+  
+                setInterval(() => {
+                  this.showSuc = false;
+                }, 4000);
+                this.getappointDate();
+              },
+              error: (er) => {
+                console.log(er);
+                this.message = er.message;
+                this.showErr = true;
+  
+                setInterval(() => {
+                  this.showErr = false;
+                }, 4000);
+              },
+            });
+        },
+        error: (er) => {
+          console.log(er);
+          this.message = er.message;
+          this.showErr = true;
+  
+          setInterval(() => {
+            this.showErr = false;
+          }, 4000);
+        },
+      });
+    }
+    
   }
   download(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe({next:

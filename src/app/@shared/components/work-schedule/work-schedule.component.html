@@ -81,7 +81,7 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
   
   </div>
 </ng-template>
-  <div class=" col-12 bg-white px-4 py-1 mb-2  mt-3 hovColor " data-bs-toggle="modal" data-bs-target="#addAppointment">
+  <div class=" col-12 bg-white px-4 py-1 mb-2  mt-3 hovColor " (click)="isDateBeforeToday()" data-bs-toggle="modal" data-bs-target="#addAppointment">
 
   <p class="pt-3">
     <!-- <img src="assets/dashboard/add.png" class="ms-2 text-dark color" /> -->
