@@ -94,7 +94,7 @@ export class WorkScheduleComponent implements OnInit {
       this.FileformData.append('file', file);
     }
   }
-   isDateBeforeToday() {
+   isDateBeforeToday=()=> {
     const today = new Date();
 
     today.setHours(0, 0, 0, 0);
@@ -106,6 +106,11 @@ export class WorkScheduleComponent implements OnInit {
       setInterval(() => {
         this.showErr = false;
       }, 4000);
+      return true;
+
+    }else{
+      return false;
+
     }
 }
 
@@ -124,6 +129,7 @@ export class WorkScheduleComponent implements OnInit {
         this.showErr = false;
       }, 4000);
     }else{
+
       this.iProfileAdmin = localStorage.getItem('id');
       let date = moment(this.selected).format('YYYY-MM-DD');
       this.appointment = {
@@ -173,6 +179,7 @@ export class WorkScheduleComponent implements OnInit {
           }, 4000);
         },
       });
+      
     }
     
   }
