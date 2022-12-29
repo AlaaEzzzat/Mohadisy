@@ -129,7 +129,7 @@ export class WorkScheduleComponent implements OnInit {
       this.http.storeAppointment(this.appointment).subscribe({
         next: (data) => {
           this.message = data.message;
-          this._toastr.success(data.message);
+          this._toastr.info(data.message);
        
           this.getappointDate();
           this.http
@@ -168,17 +168,18 @@ export class WorkScheduleComponent implements OnInit {
         saveAs(blob, fileName);
       },
       (err) => {
-        console.log(err);
+        this._toastr.error(err.message);
+
       }
     );
   }
 
 
-  openSortingModal(){
-    this.modalContent = true;
-    console.log('clicked')
+  // openSortingModal(){
+  //   this.modalContent = true;
+  //   console.log('clicked')
    
-  }
+  // }
   closeModal=()=>{
     this.modalContent = false;
    }
