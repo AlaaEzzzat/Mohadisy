@@ -1,1 +1,17 @@
-<p>policy works!</p>
+<section>
+      <div class="container">
+        <div class=" d-flex flex-wrap  justify-content-center ">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="row rounded-3 col-8 btns lightGray d-flex flex-wrap  justify-content-center">
+              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==1}" class=" col-md-4 lightGray" (click)="currID(1)">Terms of Services</mat-button-toggle>
+              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==2}"  class=" col-md-4 lightGray" (click)="currID(2)">االلتزمات والحقوق</mat-button-toggle>
+              <mat-button-toggle [ngClass]="{'mat-button-toggle-checked cdk-focused cdk-mouse-focused':cuttintID==3}"  class=" col-md-4 lightGray" (click)="currID(3)"> اإللغاء واالسترجاع</mat-button-toggle>
+          </mat-button-toggle-group>
+          
+        </div>
+        <div class=" overflow-auto description mb-4 p-3" >
+          <div *ngIf="cuttintID==1 "></div>
+          <div *ngIf="cuttintID==2 "></div>
+          <div *ngIf="cuttintID==3 "></div>
+        </div>
+      </div>
+    </section>

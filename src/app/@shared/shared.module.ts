@@ -120,6 +120,7 @@ const routes: Routes = [];
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
     ProjectLayoutComponent,
+    PolicyComponent
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

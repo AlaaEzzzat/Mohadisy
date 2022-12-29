@@ -1,0 +1,38 @@
+.title-Terms{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 36px;
+      color: #064C9A;
+    }
+    .Terms{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 36px;
+      color: rgba(0, 0, 0, 0.671);
+    }
+    
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+    
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+    
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #064C9A;
+        border-radius: 10px;
+      }
+    
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #0f5db6;
+      }
+    
+    
+      .mat-button-toggle-checked,.cdk-focused{
+        background: #0f5db6 !important;
+        color:#fff !important;
+      }
