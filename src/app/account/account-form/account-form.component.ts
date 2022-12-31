@@ -13,12 +13,14 @@ export class AccountFormComponent implements OnInit {
 @Input()   newselect: string = '';
 @Input()     userdata: any;
 @Input()  categoriySelector: string = '';
-
-
+public captchaResolved : boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
+  checkCaptcha=(captchaResponse : any)=> {
+    this.captchaResolved = (captchaResponse && captchaResponse.length > 0) ? true : false
+}
 
 }

@@ -64,452 +64,397 @@
                 </ng-container>
 
               </div>
-              <ng-container [ngSwitch]="type">
-                    
-            
-                  <ng-container *ngSwitchCase="'login'">
-                        <form 
-                        novalidate
-                        class="mt-5"
-                        [formGroup]="Forms"
-                        (ngSubmit)="onSubmit()">  
-                        <div class="row">
-                        <div class="col-md-12 mb-4">
-                        <p class="form-label cairo" for="email">البريد الالكترونى</p>
-                        <input
-                              type="text"
-                              class="form-control"
-                              id="email"
-                              name="email"
-                              formControlName="email"
-                              placeholder="example@gmail.com"
-                              placeholder="البريد الالكترونى"
-                              [class.is-valid]="f['email'].valid"
-                              [class.is-invalid]="f['email'].invalid && f['email'].touched"
-                        />
-                        <div
-                              *ngIf="f['email'].errors && f['email'].touched"
-                              class="alert alert-warning mt-2"
-                        >
-                        <div class="cairo" *ngIf="f['email'].errors['required']">
-                              من فضلك ادخل البريد الألكتروني 
-                        </div>
-                        <div class="cairo" *ngIf="f['email'].errors['email']">
-                        من فضلك ادخل بريد ألكتروني صحيح
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-            
-                        <div class="row">
-                        <div class="col-md-12 mb-4">
-                        <label class="form-label cairo" for="password"
-                              >كلمة المرور</label
-                        >
-                        <input
-                              type="password"
-                              id="password"
-                              name="password"
-                              formControlName="password"
-                              class="form-control"
-                              placeholder="كلمه المرور"
-                              [class.is-valid]="f['password'].valid"
-                              [class.is-invalid]="f['password'].invalid && f['password'].touched"
-                        />
-                        <div
-                              *ngIf="f['password'].errors && f['password'].touched"
-                              class="alert alert-warning mt-2"
-                        >
-                        <div class="cairo" *ngIf="f['password'].errors['required']">
-                              من فضلك ادخل كلمة المرور
-                        </div>
-                        </div>
-                        </div>
-                        </div>
-                        <div>
-                  
-         
-                        </div>
-          
-                        <button
-                        type="submit"
-                        class="btn submitBtn cairo btn-lg ms-2 text-white form-control"
-                        [disabled]="!Forms"
-                        >
-                        تسجيل الدخول
-                        </button></form>
-                        <div class="d-flex justify-content-between flex-wrap mt-2" style="font-size: 12px">
-                        <div >
-                        <a
-                              routerLink="/account/forgetpassword"
-                              class="cairo fs-6 link-primary text-decoration-none"
-                        >
-                              هل نسيت كلمه السر ؟
-                        </a>
-                        </div>
-                  
-                        <div >
-                        <a
-                              routerLink="/account/signup"
-                              class="cairo fs-6 link-primary text-decoration-none"
-                        >
-                              إنشاء حساب جديد
-                        </a>
-                        </div>
-                        </div>
-                 
-                  </ng-container>
-                  <ng-container *ngSwitchCase="'forgetpassword'">
-                        <form 
-                        novalidate
-                        class="mt-5"
-                        [formGroup]="Forms"
-                        (ngSubmit)="onSubmit()">  
-                        <div class="row">
-                        <div class="col-md-12 mb-4">
-                        <p class="form-label" for="email">
-                              رقم الهاتف/ البريد الالكترونى
-                        </p>
-                        <input
-                              type="text"
-                              class="form-control"
-                              id="email"
-                              name="email"
-                              formControlName="email"
-                                          placeholder="رقم الهاتف/ البريد الالكترونى"
-                        />
-                        </div>
-                        </div>
-                  
-                        <!-- routerLink="/account/confirmation" -->
-                        <button
-                        type="submit"
-                        class="btn submitBtn btn-lg mt-2 text-white form-control"
-                        [disabled]="!Forms.valid"
-                        
-                        >
-                        ارسال
-                        </button></form>
-                        <div class=" mt-2" style="font-size: 12px">
-                              <div >
-                              <a
-                              routerLink="/account/login"
-                              class="cairo fs-6 link-primary text-decoration-none"
-                              >
-                              الذهاب لتسجيل الدخول
-                              </a>
-                              </div>
-                              
-                        </div>
-                  </ng-container>
-                  <ng-container *ngSwitchCase="'signup'">
-                        
-                        <form 
-                        novalidate
-                        class="mt-5"
-                        [formGroup]="Forms"
-                        (ngSubmit)="onSubmit()">  
-                  <div class="row">
-                        <div
-                        class=""
-                        [ngClass]="{
-                        'col-6':
-                              newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb',
-                        'col-12':
-                              newselect !== 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'
-                        }"
-                        >
-                        <label class="form-label">نوع الحساب</label>
-                        <select
-                        [(ngModel)]="categoriySelector"
-                        class="form-control"
-                        formControlName="roleId"
-                        >
-                        <option *ngFor="let user of userdata" [value]="user.id">
-                              {{ user.arabicName }}
-                        </option>
-                        </select>
-                        </div>
-                        <div
-                        class="col-md-6"
-                        *ngIf="
-                        newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'
-                        "
-                        >
-                        <label class="form-label">تسجيل ك</label>
-                        <select
-                        class="form-control"
-                        id="accountId"
-                        name="accountId"
-                        formControlName="accountId"
-                        >
-                        <option
-                              *ngFor="let account of userdata[1].accountTypes"
-                              [value]="account.id"
-                        >
-                              {{ account.typeName }}
-                        </option>
-                        </select>
-                        </div>
-                  </div>
-                  <div class="row">
-                        <div class="col-lg-6">
-                        <label class="form-label" for="username"
-                        >اسم المستخدم</label
-                        >
-                        <input
-                        type="text"
-                        id="username"
-                        class="form-control"
-                        name="username"
-                        formControlName="username"
-                        
-                        [class.is-valid]="f['username'].valid"
-                        [class.is-invalid]="f['username'].invalid && f['username'].touched"
-                        />
-                        <div
-                        *ngIf="f['username'].errors && f['username'].touched"
-                        class="alert alert-warning mt-2"
-                        >
-                        <div *ngIf="f['username'].errors['required']">
-                              من فضلك ادخل اسم المستخدم
-                        </div>
-                        <div *ngIf="f['username'].errors['pattern']">
-                              يجب أن لا يحتوي إسم المستخدم علي مسافات و يجب أن يتكون من حروف و ارقام وأحد الرموز التالية _ .
-                        </div>
-                        </div>
-                        </div>
-                        <div class="col-lg-6">
-                        <label class="form-label" for="email"
-                        >البريد الالكتروني</label
-                        >
-                        <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        formControlName="email"
-                        class="form-control"
-                        placeholder="example@gmail.com"
-                        
-                        [class.is-valid]="f['email'].valid"
-                        [class.is-invalid]="f['email'].invalid && f['email'].touched"
-                        />
-                        <div
-                        *ngIf="f['email'].errors && f['email'].touched"
-                        class="alert alert-warning mt-2"
-                        >
-                        <div *ngIf="f['email'].errors['required']">
-                              من فضلك ادخل البريد الالكتروني
-                        </div>
-                        </div>
-                        </div>
-                  </div>
-            
-                  <div class="row mt-3">
-                        <div class="col-md-12 mb-4">
-                        <label class="form-label" for="phoneNumber"
-                        >رقم الهاتف
-                        </label>
-                        <input
-                        type="phoneNumber"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        formControlName="phoneNumber"
-                        placeholder="9665xxxxxxxx"
-                        class="form-control"
-                        
-                        [class.is-valid]="f['phoneNumber'].valid"
-                        [class.is-invalid]="f['phoneNumber'].invalid && f['phoneNumber'].touched"
-                        />
-                        <div
-                        *ngIf="
-                              f['phoneNumber'].errors && f['phoneNumber'].touched
-                        "
-                        class="alert alert-warning mt-2"
-                        >
-                        <div *ngIf="f['phoneNumber'].errors['required']">
-                        من فضلك ادخل رقم الهاتف
-                        </div>
-                        <div *ngIf="f['phoneNumber'].errors['pattern']">
-                        من فضلك ادخل رقم هاتف سعودي
-                        </div>
-                        
-                        </div>
-                        </div>
-                        <div class="col-md-12 mb-4">
-                        <label class="form-label" for="password"
-                        >كلمة المرور</label
-                        >
-                        <input
-                        type="password"
-                        id="password"
-                        #password
-                        name="password"
-                        formControlName="password"
-                        class="form-control"
-                        
-                        [class.is-valid]="f['password'].valid"
-                        [class.is-invalid]="f['password'].invalid && f['password'].touched"
-                        />
-                        <div
-                        *ngIf="f['password'].errors && f['password'].touched"
-                        class="alert alert-warning mt-2"
-                        >
-                        <div *ngIf="f['password'].errors['required']">
-                              من فضلك ادخل كلمة المرور
-                        </div>
-                        <div *ngIf="f['password'].errors['pattern']">
-                        يجب أن تحتوي كلمة المرور علي حروف وأرقام و أحد الرموز و أن يكون من 7 إلي 15 
-                        </div>
-                        </div>
-                        </div>
-                        <div class="col-md-12 mb-4">
-                        <label class="form-label" for="password"
-                        >إعاده كتابة كلمة المرور  </label
-                        >
-                        <input
-                        type="password"
-                        id="rePassword"
-                        name="rePassword"
-                        #rePassword
-                        formControlName="rePassword"
-                        class="form-control"
-                        
-                        [class.is-valid]="f['rePassword'].valid"
-                        [class.is-invalid]="f['rePassword'].invalid && f['rePassword'].touched"
-                        />
-                        <div
-                        *ngIf="f['rePassword'].errors && f['rePassword'].touched"
-                        class="alert alert-warning mt-2"
-                        >
-                        <div *ngIf="f['rePassword'].errors['required']">
-                              من فضلك أعد كتابة كلمة المرور
-                        </div>
-                        <div *ngIf="f['rePassword'].errors['confirmPasswordValidator']">
-                              يجب أن تكون كلمة السر مطابقة 
-                        </div>
-                        
+              <form 
+              novalidate
+              class="mt-5"
+              [formGroup]="Forms"
+              (ngSubmit)="onSubmit()">  
+              <!-- login -->
+              <div class="row" *ngIf="type==='login'">
+              <div class="col-md-12 mb-4">
+              <p class="form-label cairo" for="email">البريد الالكترونى</p>
+              <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    formControlName="email"
+                    placeholder="example@gmail.com"
+                    placeholder="البريد الالكترونى"
+                    [class.is-valid]="f['email'].valid"
+                    [class.is-invalid]="f['email'].invalid && f['email'].touched"
+              />
+              <div
+                    *ngIf="f['email'].errors && f['email'].touched"
+                    class="alert alert-warning mt-2"
+              >
+              <div class="cairo" *ngIf="f['email'].errors['required']">
+                    من فضلك ادخل البريد الألكتروني 
+              </div>
+              <div class="cairo" *ngIf="f['email'].errors['email']">
+              من فضلك ادخل بريد ألكتروني صحيح
+              </div>
+              </div>
+              </div>
+              </div>
+  
+              <div class="row" *ngIf="type==='login'">
+              <div class="col-md-12 mb-4">
+              <label class="form-label cairo" for="password"
+                    >كلمة المرور</label
+              >
+              <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    formControlName="password"
+                    class="form-control"
+                    placeholder="كلمه المرور"
+                    [class.is-valid]="f['password'].valid"
+                    [class.is-invalid]="f['password'].invalid && f['password'].touched"
+              />
+              <div
+                    *ngIf="f['password'].errors && f['password'].touched"
+                    class="alert alert-warning mt-2"
+              >
+              <div class="cairo" *ngIf="f['password'].errors['required']">
+                    من فضلك ادخل كلمة المرور
+              </div>
+              </div>
+              </div>
+              </div>
+              <!-- end login -->
+              <!-- forgetpassword -->
+              <div class="row" *ngIf="type==='forgetpassword'">
+                <div class="col-md-12 mb-4">
+                <p class="form-label" for="email">
+                      رقم الهاتف/ البريد الالكترونى
+                </p>
+                <input
+                      type="text"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      formControlName="email"
+                      placeholder="رقم الهاتف/ البريد الالكترونى"
+                />
+                </div>
+              </div>
+              <!--end forgetpassword -->
 
-                        </div>
-                        </div>
-                  </div>
-                  <div class="d-flex mb-2">
-                        <input type="checkbox" id="conditions"
-                        name="conditions"
-                  
-                        formControlName="conditions"
-                        class="ms-2" >
-                        <a
-                        routerLink="/account/login"
-                        class="text-decoration-none"
-                        >
-                        أوافق علي الشروط و الأحكام
-                        </a>
-                  </div>
-                  <button
-                        type="submit"
-                        [disabled]="!Forms.valid"
-                        class="btn submitBtn btn-lg ms-2 text-white form-control"
-            
-                  >
-                        انشاء حساب
-                  </button></form>
-                  <div class="text-center mt-1">
-                        <a
-                        routerLink="/account/login"
-                        class="myLink text-decoration-none"
-                        >
-                        هل لديك حساب بالفعل , سجل الآن!
-                        </a>
-                  </div>
-            
-                  </ng-container>
-                  <ng-container *ngSwitchCase="'confirmcode'">
-                        <form 
-                        novalidate
-                        class="mt-5"
-                        [formGroup]="Forms"
-                        (ngSubmit)="onSubmit()">  
-                        <div class="row">
-                          <div class="col-md-12 mb-4">
-                            <p class="form-label" for="token">رقم التاكيد</p>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="token"
-                              name="token"
-                              formControlName="token"
-                              placeholder="رقم التاكيد"
-                            />
-                          </div>
-                        </div>
-                        <button
-                          type="submit"
-                          class="btn btn-lg mt-2 text-white form-control"
-                          style="background: #18af9a"
-                          [disabled]="!Forms.valid"
-            
-                        >
-                          تأكيد الكود
-                        </button></form>
-                        <p class="text-center mt-2">
-                          أنتظر خمس دقائق قبل
-                          <a
-                            href="#"
-                            class="text-decoration-none"
-                            style="color: #18af9a"
-                          >
-                            إعاده الارسال !
-                          </a>
-                        </p>
-                  </ng-container>
-                  <ng-container *ngSwitchCase="'restPassword'">
-                        <form 
-                        novalidate
-                        class="mt-5"
-                        [formGroup]="Forms"
-                        (ngSubmit)="onSubmit()">  
-                        <div class="row">
-                          <div class="col-md-12 mb-4">
-                            <p class="form-label" for="newPassword">
-                              كلمه المرور الجديده
-                            </p>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="newPassword"
-                              name="newPassword"
-                              formControlName="newPassword"
-                              placeholder="كلمه المرور الجديده"
-                            />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12 mb-4">
-                            <p class="form-label" for="newPasswordVerified">
-                              تأكيد كلمه المرور الجديده
-                            </p>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="newPasswordVerified"
-                              name="newPasswordVerified"
-                              formControlName="newPasswordVerified"
-                              placeholder="تأكيد كلمه المرور الجديده"
-                            />
-                          </div>
-                        </div>
+              <!-- signup -->
+              <div class="row" *ngIf="type==='signup'">
+                <div
+                class=""
+                [ngClass]="{
+                'col-6':
+                      newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb',
+                'col-12':
+                      newselect !== 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'
+                }"
+                >
+                <label class="form-label">نوع الحساب</label>
+                <select
+                [(ngModel)]="categoriySelector"
+                class="form-control"
+                formControlName="roleId"
+                >
+                <option *ngFor="let user of userdata" [value]="user.id">
+                      {{ user.arabicName }}
+                </option>
+                </select>
+                </div>
+                <div
+                class="col-md-6"
+                *ngIf="
+                newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'
+                "
+                >
+                <label class="form-label">تسجيل ك</label>
+                <select
+                class="form-control"
+                id="accountId"
+                name="accountId"
+                formControlName="accountId"
+                >
+                <option
+                      *ngFor="let account of userdata[1].accountTypes"
+                      [value]="account.id"
+                >
+                      {{ account.typeName }}
+                </option>
+                </select>
+                </div>
+              </div>
+              <div class="row"  *ngIf="type==='signup'">
+                    <div class="col-lg-6">
+                    <label class="form-label" for="username"
+                    >اسم المستخدم</label
+                    >
+                    <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    name="username"
+                    formControlName="username"
                     
-                        <button
-                          type="submit"
-                          class="btn btn-lg mt-5 text-white form-control"
-                          style="background: #18af9a"
-                        >
-                          تم
-                        </button></form>
-                  </ng-container>
-            
-              </ng-container>
+                    [class.is-valid]="f['username'].valid"
+                    [class.is-invalid]="f['username'].invalid && f['username'].touched"
+                    />
+                    <div
+                    *ngIf="f['username'].errors && f['username'].touched"
+                    class="alert alert-warning mt-2"
+                    >
+                    <div *ngIf="f['username'].errors['required']">
+                          من فضلك ادخل اسم المستخدم
+                    </div>
+                    <div *ngIf="f['username'].errors['pattern']">
+                          يجب أن لا يحتوي إسم المستخدم علي مسافات و يجب أن يتكون من حروف و ارقام وأحد الرموز التالية _ .
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                    <label class="form-label" for="email"
+                    >البريد الالكتروني</label
+                    >
+                    <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    formControlName="email"
+                    class="form-control"
+                    placeholder="example@gmail.com"
+                    
+                    [class.is-valid]="f['email'].valid"
+                    [class.is-invalid]="f['email'].invalid && f['email'].touched"
+                    />
+                    <div
+                    *ngIf="f['email'].errors && f['email'].touched"
+                    class="alert alert-warning mt-2"
+                    >
+                    <div *ngIf="f['email'].errors['required']">
+                          من فضلك ادخل البريد الالكتروني
+                    </div>
+                    </div>
+                    </div>
+              </div>
+    
+              <div class="row mt-3"  *ngIf="type==='signup'">
+                    <div class="col-md-12 mb-4">
+                    <label class="form-label" for="phoneNumber"
+                    >رقم الهاتف
+                    </label>
+                    <input
+                    type="phoneNumber"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    formControlName="phoneNumber"
+                    placeholder="9665xxxxxxxx"
+                    class="form-control"
+                    
+                    [class.is-valid]="f['phoneNumber'].valid"
+                    [class.is-invalid]="f['phoneNumber'].invalid && f['phoneNumber'].touched"
+                    />
+                    <div
+                    *ngIf="
+                          f['phoneNumber'].errors && f['phoneNumber'].touched
+                    "
+                    class="alert alert-warning mt-2"
+                    >
+                    <div *ngIf="f['phoneNumber'].errors['required']">
+                    من فضلك ادخل رقم الهاتف
+                    </div>
+                    <div *ngIf="f['phoneNumber'].errors['pattern']">
+                    من فضلك ادخل رقم هاتف سعودي
+                    </div>
+                    
+                    </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                    <label class="form-label" for="password"
+                    >كلمة المرور</label
+                    >
+                    <input
+                    type="password"
+                    id="password"
+                    #password
+                    name="password"
+                    formControlName="password"
+                    class="form-control"
+                    
+                    [class.is-valid]="f['password'].valid"
+                    [class.is-invalid]="f['password'].invalid && f['password'].touched"
+                    />
+                    <div
+                    *ngIf="f['password'].errors && f['password'].touched"
+                    class="alert alert-warning mt-2"
+                    >
+                    <div *ngIf="f['password'].errors['required']">
+                          من فضلك ادخل كلمة المرور
+                    </div>
+                    <div *ngIf="f['password'].errors['pattern']">
+                    يجب أن تحتوي كلمة المرور علي حروف وأرقام و أحد الرموز و أن يكون من 7 إلي 15 
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-md-12 mb-4">
+                    <label class="form-label" for="password"
+                    >إعاده كتابة كلمة المرور  </label
+                    >
+                    <input
+                    type="password"
+                    id="rePassword"
+                    name="rePassword"
+                    #rePassword
+                    formControlName="rePassword"
+                    class="form-control"
+                    
+                    [class.is-valid]="f['rePassword'].valid"
+                    [class.is-invalid]="f['rePassword'].invalid && f['rePassword'].touched"
+                    />
+                    <div
+                    *ngIf="f['rePassword'].errors && f['rePassword'].touched"
+                    class="alert alert-warning mt-2"
+                    >
+                    <div *ngIf="f['rePassword'].errors['required']">
+                          من فضلك أعد كتابة كلمة المرور
+                    </div>
+                    <div *ngIf="f['rePassword'].errors['confirmPasswordValidator']">
+                          يجب أن تكون كلمة السر مطابقة 
+                    </div>
+                    
+        
+                    </div>
+                    </div>
+              </div>
+              <div class="d-flex mb-2"  *ngIf="type==='signup'">
+                    <input type="checkbox" id="conditions"
+                    name="conditions"
+              
+                    formControlName="conditions"
+                    class="ms-2" />
+                    <a
+                    routerLink="/account/login"
+                    class="text-decoration-none"
+                    >
+                    أوافق علي الشروط و الأحكام
+                    </a>
+              </div> 
+              <!-- end signup -->
+          <!-- restPassword -->
+              <div class="row"  *ngIf="type==='restPassword'">
+                <div class="col-md-12 mb-4">
+                  <p class="form-label" for="newPassword">
+                    كلمه المرور الجديده
+                  </p>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPassword"
+                    name="newPassword"
+                    formControlName="newPassword"
+                    placeholder="كلمه المرور الجديده"
+                  />
+                </div>
+              </div>
+              <div class="row" *ngIf="type==='restPassword'">
+                <div class="col-md-12 mb-4">
+                  <p class="form-label" for="newPasswordVerified">
+                    تأكيد كلمه المرور الجديده
+                  </p>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="newPasswordVerified"
+                    name="newPasswordVerified"
+                    formControlName="newPasswordVerified"
+                    placeholder="تأكيد كلمه المرور الجديده"
+                  />
+                </div>
+              </div>
+              <!-- end restPassword -->
+              <!-- confirmcode -->
+              <div class="row" *ngIf="type==='confirmcode'">
+                <div class="col-md-12 mb-4">
+                  <p class="form-label" for="token">رقم التاكيد</p>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="token"
+                    name="token"
+                    formControlName="token"
+                    placeholder="رقم التاكيد"
+                  />
+                </div>
+              </div>
+              <!-- end confirmcode -->
+              <!-- captcha Resolved -->
+              <div class="col-md-12 mb-4">
+                <re-captcha (resolved)="checkCaptcha($event)"
+                name="recaptchaReactive"  siteKey="6LeuM78jAAAAAJ7e9U4XnO8uLl-NSlxwxblmvuyp">
+              </re-captcha>
+              </div>
+             <!--end captcha Resolved -->
+
+              <button
+              type="submit"
+              class="btn submitBtn cairo btn-lg ms-2 text-white form-control"
+              [disabled]="!Forms.valid || !captchaResolved"
+              >
+              <span  *ngIf="type==='login'">
+                تسجيل الدخول
+              </span>
+              <span  *ngIf="type==='forgetpassword'">
+                ارسال
+              </span>
+              <span   *ngIf="type==='signup'">
+                ارسال
+              </span>
+              <span *ngIf="type==='restPassword'">تم</span>  
+              <span *ngIf="type==='confirmcode'">              تأكيد الكود
+              </span>  
+
+              </button>
+              <p class="text-center mt-2" *ngIf="type==='confirmcode'">
+                أنتظر خمس دقائق قبل
+                <a
+                  href="#"
+                  class="text-decoration-none"
+                  style="color: #18af9a"
+                >
+                  إعاده الارسال !
+                </a>
+              </p>
+            </form>
+              <div class="d-flex justify-content-between flex-wrap mt-2" style="font-size: 12px" >
+              <div *ngIf="type==='login'">
+              <a
+                    routerLink="/account/forgetpassword"
+                    class="cairo fs-6 link-primary text-decoration-none"
+              >
+                    هل نسيت كلمه السر ؟
+              </a>
+              </div>
+        
+              <div *ngIf="type==='login'">
+              <a
+                    routerLink="/account/signup"
+                    class="cairo fs-6 link-primary text-decoration-none"
+              >
+                    إنشاء حساب جديد
+              </a>
+              </div>
+              <div *ngIf="type==='forgetpassword'">
+                <a
+                routerLink="/account/login"
+                class="cairo fs-6 link-primary text-decoration-none"
+                >
+                الذهاب لتسجيل الدخول
+                </a>
+                </div>
+              </div>
+       
+         
                
 
                
@@ -535,3 +480,5 @@
     <!-- <h3>Form Value</h3>
     {{ SignupForm.value | json }} -->
     
+
+ 
