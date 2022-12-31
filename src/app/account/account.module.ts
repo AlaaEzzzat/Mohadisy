@@ -10,6 +10,7 @@ import { ConfirmcodeComponent } from './confirmcode/confirmcode.component';
 import { RestPasswordComponent } from './rest-password/rest-password.component';
 import { SilderaccountComponent } from './silderaccount/silderaccount.component';
 import { environment } from 'src/environments/environment';
+import { AccountFormComponent } from './account-form/account-form.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'forgetpassword', component: ForgetPasswordComponent },
   { path: 'confirmation', component: ConfirmcodeComponent },
   { path: 'resetpassword', component: RestPasswordComponent },
+
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const routes: Routes = [
     ConfirmcodeComponent,
     RestPasswordComponent,
     SilderaccountComponent,
+    AccountFormComponent,
   ],
   imports: [
     CommonModule,

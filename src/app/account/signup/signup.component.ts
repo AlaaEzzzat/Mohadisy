@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
   apiLinkuser = 'https://app.mohandisy.com/api/Role/getRoles';
   SignupForm: FormGroup;
   userdata: any;
+  type:string="signup";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -79,7 +80,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   apiLink = 'https://app.mohandisy.com/api/Authenticate/userRegister';
-  onSubmit() {
+  onSubmit=()=>{
     console.log(this.SignupForm.value);
     var user = this.SignupForm.value;
     delete user.rePassword;

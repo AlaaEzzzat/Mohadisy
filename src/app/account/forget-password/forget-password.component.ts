@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/@core/auth/auth.service';
   styleUrls: ['./forget-password.component.scss'],
 })
 export class ForgetPasswordComponent implements OnInit {
+  type:string="forgetpassword";
+
   restForm;
   constructor(
     private formBuilder: FormBuilder,
@@ -21,7 +23,7 @@ export class ForgetPasswordComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
     });
   }
-  onSubmit() {
+  onSubmit=()=>{
     this.auth
       .restpassword(
         `https://app.mohandisy.com/api/Authenticate/getResetPasswordToken?email=${this.restForm.value.email}`
