@@ -52,7 +52,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
   workImages: any = [];
   AllProjectCategory: any = [];
   allServiceProviderWorks: any = [];
-
+  today:Date = new Date();
   constructor(
     private fb: FormBuilder,
     private serviceProviderService: ServiceProviderService,
@@ -68,7 +68,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
       websiteLink: ['', [Validators.required]],
       projectServiceId: ['', [Validators.required]],
 
-      email: ['', [Validators.required]],
+      email: ['',[Validators.required]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
@@ -104,6 +104,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.today = new Date();
     this.comUsername = localStorage.getItem('name')?.replace(/"/g, '') || '';
     this.comEmail = localStorage.getItem('email')?.replace(/"/g, '') || '';
     this.comPhoneNumber =
@@ -396,31 +397,35 @@ export class CompanyCompleteProfileComponent implements OnInit {
       );
   }
   addAdress(district: any) {
-    let region = this.regionsList.find((region: any) => {
-      if (region.id == this.completeCampanyProfileForm?.get('region')?.value) {
-        return region;
-      }
-    });
-    let city = this.citiesList.find((city: any) => {
-      if (city.id == this.completeCampanyProfileForm?.get('city')?.value) {
-        return city;
-      }
-    });
-    let newAddress = {
-      region: region.nameAr,
-      city: city.nameAr,
-      district: district,
-    };
-    this.provider.postAdress(newAddress).subscribe({
-      next: (response: any) => {
-        console.log('address Posted');
-        this.addingDistrict = false;
-        this._getDistricts();
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+    if(district){
+      let region = this.regionsList.find((region: any) => {
+        if (region.id == this.completeCampanyProfileForm?.get('region')?.value) {
+          return region;
+        }
+      });
+      let city = this.citiesList.find((city: any) => {
+        if (city.id == this.completeCampanyProfileForm?.get('city')?.value) {
+          return city;
+        }
+      });
+      let newAddress = {
+        region: region.nameAr,
+        city: city.nameAr,
+        district: district,
+      };
+      this.provider.postAdress(newAddress).subscribe({
+        next: (response: any) => {
+          console.log('address Posted');
+          this.addingDistrict = false;
+          this._getDistricts();
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+    } else{
+      this._toastr.error("يجب إدخال إسم الحي")
+    }
   }
   prevWorksFormSubmit() {
     let filesFormDta = new FormData();

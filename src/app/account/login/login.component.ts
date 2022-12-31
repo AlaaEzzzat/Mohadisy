@@ -44,6 +44,7 @@ resolved(repsonse:any){
         this.LoginForm.value
       )
       .subscribe((data) => {
+        console.log(data)
         if (data.data.emailConfirmed) {
           this._toastr.info(data.message);
           this.serviceProviderService.personalData = data.data;

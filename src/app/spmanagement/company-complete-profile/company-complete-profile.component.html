@@ -94,7 +94,7 @@
               id="officePhoneNumber"
               formControlName="officePhoneNumber"
               class="form-control form-control-lg signup"
-              placeholder="   رقم الهوية  "
+              placeholder="   رقم الهاتف  "
               [class.is-valid]="officePhoneNumber?.valid"
               [class.is-invalid]="
                 officePhoneNumber?.invalid && officePhoneNumber?.touched
@@ -168,7 +168,7 @@
               [hidden]="projectServiceId?.valid || projectServiceId?.untouched"
             >
               <span *ngIf="projectServiceId?.errors?.['required']">
-                الخدمات مطللوب</span
+                الخدمات مطلوبة</span
               >
             </div>
           </div>
@@ -291,6 +291,7 @@
                   name="district"
                   id="district"
                   #district
+                  required
                   class="form-control m-0 form-control-lg"
                 />
                 <i
@@ -693,6 +694,7 @@
                     class="form-control form-control-lg signup"
                     placeholder="   تاريخ الإنتهاء   "
                     required
+                    [min]='today'
                     [class.is-valid]="companyRegisterationEndDate?.valid"
                     [class.is-invalid]="
                       companyRegisterationEndDate?.invalid &&

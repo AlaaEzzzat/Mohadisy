@@ -1,16 +1,4 @@
-body {
-  overflow-x: hidden;
-}
 
-
-.has-search {
-  .form-control {
-    padding-left: 2.375rem;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-}
 
 .overlay {
   *{
@@ -71,4 +59,82 @@ label{
 }
 
 
+
+body {
+  overflow-x: hidden;
+  
+}
+span{
+  font-family: 'cairo';
+}
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+  .show {
+    margin-left: 0 !important;
+  }
+  .hide {
+    margin-left: -15rem !important;
+  }
+}
+@media (max-width: 767px) {
+  .show {
+    margin-left: -15rem !important;
+  }
+  .hide {
+    margin-left: -0 !important;
+  }
+}
+.has-search .form-control {
+  padding-left: 2.375rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #18af9a;
+}
+.form-control-feedback {
+  margin-right: 13em;
+}
+@media (max-width: 767px) {
+  .list-group .title{
+    display: none;
+    }
+    .list-group .items{
+      text-align: center;
+    }
+}
+
+.list-group div
+{
+  cursor: pointer;
+}
+.active
+{
+  background-color: #2eb6a42b;
+  width: fit-content;
+
+}
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+  }
 

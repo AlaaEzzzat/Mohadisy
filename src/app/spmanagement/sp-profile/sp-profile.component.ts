@@ -1,3 +1,5 @@
+
+import { FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserserviceService } from 'src/app/@core/http/userservice.service';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
@@ -17,6 +19,18 @@ import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.servic
   styleUrls: ['./sp-profile.component.scss'],
 })
 export class SpProfileComponent implements OnInit {
+  subServices = new FormControl();
+  selectedsubServices: any = [];
+  selectedServices: any;
+  allProjectSubService: any = [];
+  _getSubServices(id:any) {
+    this.provider
+      .getProjectSubServicesByServiceId(id)
+      .subscribe((data: any) => {
+        this.allProjectSubService = data.data;
+        console.log(data);
+      });
+  }
   papers: any = [
     { id: 1, name: 'IBan', title: '   خطاب بنكى برقم الايبان', value: '' },
     {
@@ -25,18 +39,17 @@ export class SpProfileComponent implements OnInit {
       title: ' شهاده الزكاه والدخل',
       value: '',
     },
-    { id: 3, name: 'companyRegisterationNumberPath', title: '  السجل التجارى', value: '' },
+    {
+      id: 3,
+      name: 'companyRegisterationNumberPath',
+      title: '  السجل التجارى',
+      value: '',
+    },
     { id: 4, name: 'ProfessionLicense', title: ' الرخصه', value: '' },
     {
       id: 5,
       name: 'SocialInsuranceCertificate',
       title: 'شهاده التأمينات الاجتماعيه',
-      value: '',
-    },
-    {
-      id: 6,
-      name: 'SaudizationCertificate',
-      title: 'المؤهل السعودي',
       value: '',
     },
   ];
@@ -55,9 +68,9 @@ export class SpProfileComponent implements OnInit {
   ProfessionLicenseName: any = '';
   SocialInsuranceCertificateName: any = '';
   SaudizationCertificateName: any = '';
-  companyRegisterationNumberPath:any='';
-  companyRegisterationNumberName:any=''
-  FileformData = new FormData()
+  companyRegisterationNumberPath: any = '';
+  companyRegisterationNumberName: any = '';
+  FileformData = new FormData();
   file: any;
   iProfileAdmin: any | undefined = undefined;
   dateOpt: any;
@@ -88,7 +101,17 @@ export class SpProfileComponent implements OnInit {
   projectService: any = null;
   projectSubServiceEdit: boolean = false;
   projectSubService: any = null;
-  userType:any='';
+  userType: any = '';
+  organizationalRepresentativeName: any = '';
+  organizationalRepresentativePhoneNumber: any = '';
+  organizationalRepresentativeEmail: any = '';
+  oldOrganizationalRepresentativeName: any = '';
+  oldOrganizationalRepresentativePhoneNumber: any = '';
+  oldOrganizationalRepresentativeEmail: any = '';
+  selectedProjectServiceId:any = '';
+  serviceEdit:boolean = false;
+  oldProjectService:any = '';
+  oldProjectSubService:any = '';
   constructor(
     private renderer: Renderer2,
     private api: ApiService,
@@ -97,37 +120,49 @@ export class SpProfileComponent implements OnInit {
     private clientService: ClientService,
     private provider: ServiceProviderService,
     private UserserviceService: UserserviceService,
-    private toester :ToastrService
+    private toester: ToastrService,
+    private client: ClientService
   ) {}
-
+  allProjectService: any = [];
   ngOnInit(): void {
+    this.client.getProjectServicesAndSubService().subscribe((data: any) => {
+      this.allProjectService = data.data.projectServices;
+      console.log(this.allProjectService)
+    });
     this.getappointDate();
     if (localStorage.getItem('type') == '"IND"') {
-      this.userType='IND'
+      this.userType = 'IND';
       this.UserserviceService.getIndividualServiceProviderProfile().subscribe(
         (data: any) => {
-          console.log(this.profile)
           this.profile = data.data;
-          console.log(this.profile);
-          this.name = this.profile.individualServiceProviderProfile?.firstName + ' ' + this.profile.individualServiceProviderProfile?.lastName;
+          console.log("hdasbchjc",this.profile);
+          this.name =
+            this.profile.individualServiceProviderProfile?.firstName +
+            ' ' +
+            this.profile.individualServiceProviderProfile?.lastName;
           this.email = this.profile.email;
-          this.phoneNumber = this.profile.individualServiceProviderProfile?.phoneNumber;
+          this.phoneNumber =
+            this.profile.individualServiceProviderProfile?.phoneNumber;
           this.location =
             this.profile?.individualServiceProviderProfile?.district?.nameAr +
             '+' +
-            this.profile?.individualServiceProviderProfile?.district?.city?.region?.nameAr;
-            this.projectService =  this.profile?.individualServiceProviderProfile?.projectService?.name;
-            this.projectSubService = ''; 
+            this.profile?.individualServiceProviderProfile?.district?.city
+              ?.region?.nameAr;
+          this.projectService =
+            this.profile?.individualServiceProviderProfile?.projectService;
+          this.oldProjectService =
+            this.profile?.individualServiceProviderProfile?.projectService.name;
+          this.oldProjectSubService = '';
         }
       );
     } else if (localStorage.getItem('type') == '"CO"') {
-      this.userType='CO'
+      this.userType = 'CO';
       this.api
         .get(
           'https://app.mohandisy.com/api/OrganizationalServiceProvider/getProfile'
         )
         .subscribe((data) => {
-          console.log(data.data)
+          console.log(data.data);
           this.profile = data.data;
           this.name =
             this.profile?.organizationalServiceProviderProfile?.companyName;
@@ -140,11 +175,13 @@ export class SpProfileComponent implements OnInit {
             this.profile.organizationalServiceProviderProfile?.district?.city
               ?.region?.nameAr;
           this.projectService =
-            this.profile?.organizationalServiceProviderProfile?.projectService?.name;
-          this.projectSubService =
-            this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
-
-          this.IBan =
+            this.profile?.organizationalServiceProviderProfile?.projectService;
+        
+           
+            this.oldProjectService = this.profile?.organizationalServiceProviderProfile?.projectService.name;
+            this.oldProjectSubService = this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
+          
+            this.IBan =
             this.profile.organizationalServiceProviderProfile?.iBanPath;
           this.IBanName =
             this.profile.organizationalServiceProviderProfile?.iBanFile;
@@ -164,9 +201,30 @@ export class SpProfileComponent implements OnInit {
             this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificatePath;
           this.SocialInsuranceCertificateName =
             this.profile.organizationalServiceProviderProfile?.socialInsuranceCertificateFile;
-            this.companyRegisterationNumberPath = this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberPath;
-            this.companyRegisterationNumberName = this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberFile;
+          this.companyRegisterationNumberPath =
+            this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberPath;
+          this.companyRegisterationNumberName =
+            this.profile.organizationalServiceProviderProfile?.companyRegisterationNumberFile;
 
+          this.organizationalRepresentativeName =
+            this.profile?.organizationalServiceProviderProfile?.representative
+              ?.firstName +
+            ' ' +
+            this.profile?.organizationalServiceProviderProfile?.representative
+              ?.lastName;
+          this.oldOrganizationalRepresentativeName =
+            this.organizationalRepresentativeName;
+          this.organizationalRepresentativePhoneNumber =
+            this.profile?.organizationalServiceProviderProfile?.representative?.phoneNumber;
+          this.oldOrganizationalRepresentativePhoneNumber =
+            this.organizationalRepresentativePhoneNumber;
+          this.organizationalRepresentativeEmail =
+            this.profile?.organizationalServiceProviderProfile?.representative?.email;
+          this.oldOrganizationalRepresentativeEmail =
+            this.organizationalRepresentativeEmail;
+            this.selectedProjectServiceId= this.projectService?.id;
+            this.oldProjectService = this.profile?.organizationalServiceProviderProfile?.projectService.name;
+            this.oldProjectSubService = "";
           if (
             this.profile?.organizationalServiceProviderProfile?.licenseFile !=
             null
@@ -221,16 +279,18 @@ export class SpProfileComponent implements OnInit {
       .get('https://app.mohandisy.com/api/Dashboard/getServiceProviderStatus')
       .subscribe((data) => {
         var rate = data.data.testimonials;
-        console.log(rate)
-        if(rate != null){
+        console.log(rate);
+        if (rate != null) {
           for (let i = 0; i < rate?.length; i++) {
             this.avgRate += Number(rate[i].stars);
           }
           this.avgRate /= rate?.length;
-        }else{
+        } else {
           this.avgRate = 0;
         }
       });
+      this._getSubServices(this.selectedProjectServiceId);
+    
   }
 
   projectImage(workId: any) {
@@ -351,6 +411,7 @@ export class SpProfileComponent implements OnInit {
           console.log(err);
         },
       });
+      
     }
 
     let imageprofileformData = new FormData();
@@ -395,7 +456,32 @@ export class SpProfileComponent implements OnInit {
       .subscribe({
         next: (response: any) => {
           console.log('profile edited');
-          this.toester.info('تم تعديل البيانات ')
+          if (
+            this.oldOrganizationalRepresentativeEmail !=
+              this.organizationalRepresentativeEmail ||
+            this.oldOrganizationalRepresentativeName !=
+              this.organizationalRepresentativeName ||
+            this.oldOrganizationalRepresentativePhoneNumber !=
+              this.organizationalRepresentativePhoneNumber
+          ){
+           
+            var  newProfile = this.profile.organizationalServiceProviderProfile;
+            newProfile.representative.firstName = this.organizationalRepresentativeName.split(" ")[0];
+            newProfile.representative.lastName = this.organizationalRepresentativeName.split(" ")[1];
+            newProfile.representative.email = this.organizationalRepresentativeEmail;
+            newProfile.representative.phoneNumber = this.organizationalRepresentativePhoneNumber;
+    
+            this.provider.updateRepresentative(newProfile.representative).subscribe({
+              next: (response: any) => {
+                console.log(response);
+                console.log("representative updated");
+              },
+              error: (err: any) => {
+                console.log(err);
+              },
+            });
+          }
+          this.toester.info('تم تعديل البيانات ');
         },
         error: (err: any) => {
           console.log(err);

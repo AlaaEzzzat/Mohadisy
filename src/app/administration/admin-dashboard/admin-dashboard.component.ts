@@ -254,10 +254,10 @@ export class AdminDashboardComponent implements OnInit {
           {
             label: `# مشروع`,
             data: [
-              this.chart.totalProjectsNumber,
-              this.chart.pendingProjectsNumber,
-              this.chart.finishedProjectsNumber,
-              this.chart.currentProjectsNumber,
+              this.chart?.totalProjectsNumber,
+              this.chart?.pendingProjectsNumber,
+              this.chart?.finishedProjectsNumber,
+              this.chart?.currentProjectsNumber,
             ],
             backgroundColor: ['#FF6384', '#4BC0C0', '#FFCE56', '#2696C8'],
             borderColor: ['none'],

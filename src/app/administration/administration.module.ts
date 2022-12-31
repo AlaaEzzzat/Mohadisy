@@ -22,7 +22,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminSpUpdataComponent } from './admin-sp-updata/admin-sp-updata.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { MatMenuModule } from '@angular/material/menu';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
@@ -41,7 +41,7 @@ import {MatSelectModule} from '@angular/material/select';
     AdminSPComponent,
     
     AdminSpUpdataComponent,
-    FooterComponent,
+
   ],
   imports: [
     SharedModule,

@@ -129,21 +129,7 @@
                     <div class="col-lg-5">
                       <div class="cairo mb-3">
                         <p
-                          class="card-title bold d-flex justify-content-between"
-                          (click)="editOverview = true"
-                        >
-                          <input
-                            id="name"
-                            type="text"
-                            [autofocus]="editName"
-                            [(ngModel)]="name"
-                            class="bold editable"
-                          />
-                          <i
-                            (click)="focusMyInput('#name')"
-                            class="fa fa-pencil"
-                          ></i>
-                        </p>
+                          class="card-title bold d-flex justify-content-between"> {{name}} </p>
                         <p class="card-title bold"> {{phoneNumber}}</p>
                         <p
                           class="card-text bold"
@@ -175,7 +161,7 @@
                           }}
                         </p>
                       </div>
-                      <div class="d-flex flex-row-reverse ms-4">
+                      <!-- <div class="d-flex flex-row-reverse ms-4">
                         <div>
                           <a class="me-2">
                             <img
@@ -213,7 +199,7 @@
                             />
                           </a>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -334,7 +320,7 @@
               <ng-container *ngFor="let item of overview">
                 <div class="card border-0 acc-card my-1">
                   <div class="d-flex justify-content-between">
-                    <div>
+        
                       <p
                         *ngIf="item.id == 1"
                         class="card-title bold d-flex justify-content-around align-items-center"
@@ -346,17 +332,11 @@
                         class="card-title bold d-flex justify-content-around align-items-center"
                         (click)="editOverview = true"
                       >
-                        <span>{{ item.title + " : " }}</span>
-                        <input
-                          id="projectService"
-                          type="text"
-                          [autofocus]="projectServiceEdit"
-                          [(ngModel)]="projectService"
-                          class="bold editable"
-                        />
+                        <span>{{ item.title + " : " + oldProjectService }}</span>
+                      
                         <i
-                          (click)="focusMyInput('#projectService')"
-                          class="fa fa-pencil"
+                          (click)="serviceEdit = true"
+                          class="fa me-3 fa-pencil"
                         ></i>
                       </p>
                       <p
@@ -364,23 +344,63 @@
                         (click)="editOverview = true"
                         class="card-title bold d-flex justify-content-around align-items-center"
                       >
-                        <span>{{ item.title + " : " }}</span>
-                        <input
-                          id="projectSubService"
-                          type="text"
-                          [autofocus]="projectSubServiceEdit"
-                          [(ngModel)]="projectSubService"
-                          class="bold editable"
-                        />
-                        <i
-                          (click)="focusMyInput('#projectSubService')"
-                          class="fa fa-pencil"
-                        ></i>
+                        <span>{{ item.title + " : " + oldProjectSubService}}</span>   
                       </p>
-                    </div>
                   </div>
                 </div>
               </ng-container>
+            </div>
+          </div>
+          <div>
+            
+            <div class="mt-2">
+              
+                <div class=" card border-0 p-3 card-1" *ngIf="serviceEdit">
+                  <div class="col-12 mt-3">
+                   <div class="form-group ">
+                     <label class="form-label cairo" for="projectServiceId"> الخدمات الرئيسية </label>
+                     <select
+                       name="projectServiceId"
+                       #projectServiceId
+                       id="projectServiceId"
+                       class="mt-2 form-control"
+                       [(ngModel)]="projectService"
+                       (change)="_getSubServices(projectServiceId.value)"
+                     >
+                       <ng-container *ngFor="let projectService of allProjectService">
+                         <option [value]="projectService.id">
+                           {{ projectService.name }}
+                         </option>
+                       </ng-container>
+                     </select>
+                   </div>
+         
+                  
+                 </div>
+                  <div class="col-12 mt-3">
+                   <div class="form-group">
+                     <label class="form-label ms-3" for="projectServiceId">
+                       الخدمات الفرعيه
+                     </label>
+                     <mat-form-field>
+                       <mat-select
+                         [formControl]="subServices"
+                         [(value)]="selectedsubServices"
+                         [(ngModel)]="projectSubService"
+                         multiple
+                       >
+                         <mat-option
+                           *ngFor="let subService of allProjectSubService"
+                           [value]="subService['id']"
+                           >{{ subService["name"] }}</mat-option
+                         >
+                       </mat-select>
+                     </mat-form-field>
+                   </div>
+                 </div>
+             
+               </div>
+          
             </div>
           </div>
         </div>
@@ -412,17 +432,17 @@
                       
                         <small class="mt-2">{{
                           paper.name == "IBan"
-                            ? IBanName
+                            ? IBanName.slice(0,30)+"..."
                             : paper.name == "ZakatCertificate"
-                            ? ZakatCertificateName
+                            ? ZakatCertificateName.slice(0,30)+"..."
                             : paper.name == "ProfessionLicense"
-                            ? ProfessionLicenseName
+                            ? ProfessionLicenseName.slice(0,30)+"..."
                             : paper.name == "SocialInsuranceCertificate"
-                            ? SocialInsuranceCertificateName
+                            ? SocialInsuranceCertificateName.slice(0,30)+"..."
                             : paper.name == "SaudizationCertificate"
-                            ? SaudizationCertificateName
+                            ? SaudizationCertificateName.slice(0,30)+"..."
                             :paper.name == "companyRegisterationNumberPath"
-                            ? companyRegisterationNumberName
+                            ? companyRegisterationNumberName.slice(0,30)+"..."
                             : ""
                         }}</small>
                      
@@ -503,32 +523,53 @@
         <div class="card border-0 p-2 bg-white mb-2">
               <div class="p-2">
                 <p class="">ممثل الشركه على المنصه</p>
-                <p>
-                  <i class="fas fa-user ms-2"></i>
-
-                  {{
-                    profile?.organizationalServiceProviderProfile
-                      ?.representative?.firstName
-                  }}
-                  {{
-                    profile?.organizationalServiceProviderProfile
-                      ?.representative?.lastName
-                  }}
-                </p>
-                <p class="">
-                  <i class="fas fa-phone ms-2"></i>
-                  {{
-                    profile?.organizationalServiceProviderProfile
-                      ?.representative?.phoneNumber
-                  }}
-                </p>
-                <p class="">
-                  <i class="fa fa-envelope-open-o ms-2"></i>
-                  {{
-                    profile?.organizationalServiceProviderProfile
-                      ?.representative?.email
-                  }}
-                </p>
+                <p class="card-title d-flex justify-content-around"
+                      (click)="editOverview = true"
+                    >
+                      <input
+                        id="name"
+                        type="text"
+                        [autofocus]="editOverview"
+                        [(ngModel)]="organizationalRepresentativeName"
+                        class="bold editable"
+                      />
+                      <i
+                        (click)="focusMyInput('#name')"
+                        class="fa fa-pencil"
+                      ></i>
+                    </p>
+               
+                <p class="card-title d-flex justify-content-around"
+                      (click)="editOverview = true"
+                    >
+                      <input
+                        id="phoneNumber"
+                        type="text"
+                        [autofocus]="editOverview"
+                        [(ngModel)]="organizationalRepresentativePhoneNumber"
+                        class="bold editable"
+                      />
+                      <i
+                        (click)="focusMyInput('#phoneNumber')"
+                        class="fa fa-pencil"
+                      ></i>
+                    </p>
+             
+                <p class="card-title d-flex justify-content-around"
+                      (click)="editOverview = true"
+                    >
+                      <input
+                        id="email"
+                        type="text"
+                        [autofocus]="editOverview"
+                        [(ngModel)]="organizationalRepresentativeEmail"
+                        class="bold editable"
+                      />
+                      <i
+                        (click)="focusMyInput('#email')"
+                        class="fa fa-pencil"
+                      ></i>
+                    </p>
               </div>
         </div>
       </div>

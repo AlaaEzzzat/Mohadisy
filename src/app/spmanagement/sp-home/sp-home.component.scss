@@ -75,4 +75,12 @@ span{
   outline: none;
   box-shadow: none;
   }
-
+  .content{
+    padding-top: 78px
+  }
+@media (max-width:570px) {
+  .content{
+    padding-top: 107px
+  }
+  
+}

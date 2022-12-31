@@ -83,3 +83,38 @@ background-color: #18af9a;
   }
 
 }
+.rounded-circle{
+  right: 0;
+}
+
+.userName{
+  display: block;
+}
+.nameCon{
+  .nav-link{
+    padding-right: 40px;
+  }
+}
+@media (max-width:570px) {
+  .dots{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+  }
+  #navbarSupportedContent{
+    margin-top: 20px;
+  }
+  .nameCon{
+    width: 40px;
+  }
+  .nameCon .nav-link{
+    z-index: 10;
+    width: 40px;
+    opacity: 0;
+  }
+  .userName{
+    display: none;
+  }
+}

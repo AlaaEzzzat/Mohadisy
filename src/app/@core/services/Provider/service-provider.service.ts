@@ -198,4 +198,11 @@ export class ServiceProviderService {
       `${environment.baseUrl}/api/Project/getIndividualSPLateProjects//Page/${page}`
     );
   }
+  
+  updateRepresentative(profile: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Representative/updateRepresentative`,
+      profile
+    );
+  }
 }

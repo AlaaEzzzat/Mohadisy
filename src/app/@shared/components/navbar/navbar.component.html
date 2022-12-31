@@ -1,94 +1,16 @@
 <nav class="navbar navbar-expand-lg shadow-sm" style="padding: 15px">
   <div class="container-fluid">
-    <div class="d-flex align-items-center">
+    <div class="d-flex  align-items-center">
       <img src="assets/logo.png" alt="" height="40px" />
       <div class="mx-3 texticon" (click)="clickEvent()">
-        <img
-          src="assets/next.png"
-          alt=""
-          srcset=""
-          width="28px"
-          height="28px"
-          class="img-fluid"
-        />
       </div>
     </div>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+   
+    <div id="navbarSupportedContent">
       <ul
-        class="navbar-nav mx-3 me-auto d-flex align-items-center mb-2 mb-lg-0"
-        style="min-width: 80%"
+        class="navbar-nav d-flex align-items-center mb-2 mb-lg-0 p-0"
       >
-        <li class="ms-3">
-          <div class="form-group has-search position-relative">
-            <span
-              (click)="search()"
-              class="h-100 px-4 rounded-5 position-absolute top-0"
-              style="left: 38px; z-index: 2; background-color: #004057"
-            >
-              <i
-                class="fa fa-search text-white"
-                style="font-size: 16px; margin-top: 10px"
-              ></i>
-            </span>
-            <input
-              type="text"
-              class="form-control searchBox bg-light border-0 rounded-5"
-              placeholder="إبحث عن"
-            />
-            <span
-              style="left: 0; z-index: 1; background-color: #18af9a"
-              class="p-2 h-100 pe-5 ps-3 rounded-5 position-absolute top-0 left-0"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="22"
-                viewBox="0 0 22.902 26"
-              >
-                <g id="filter" transform="translate(-30.5)">
-                  <path
-                    id="Path_2845"
-                    data-name="Path 2845"
-                    d="M33.547,0H32.023V18.383H30.5v4.57h1.523V26h1.523V22.953H35.07v-4.57H33.547Zm0,21.43H32.023V19.906h1.523Z"
-                    fill="#fff"
-                  />
-                  <path
-                    id="Path_2846"
-                    data-name="Path 2846"
-                    d="M396.07,18.383h-1.523V0h-1.523V18.383H391.5v4.57h1.523V26h1.523V22.953h1.523Zm-1.523,3.047h-1.523V19.906h1.523Z"
-                    transform="translate(-342.668)"
-                    fill="#fff"
-                  />
-                  <path
-                    id="Path_2847"
-                    data-name="Path 2847"
-                    d="M274.547,0h-1.523V11.273H271.5v4.57h1.523V26h1.523V15.844h1.523v-4.57h-1.523Zm0,14.32h-1.523V12.8h1.523Z"
-                    transform="translate(-228.762)"
-                    fill="#fff"
-                  />
-                  <path
-                    id="Path_2848"
-                    data-name="Path 2848"
-                    d="M153.547,0h-1.523V2.725H150.5v4.57h1.523V26h1.523V7.295h1.523V2.725h-1.523Zm0,5.771h-1.523V4.248h1.523Z"
-                    transform="translate(-113.906)"
-                    fill="#fff"
-                  />
-                </g>
-              </svg>
-            </span>
-          </div>
-        </li>
+      
         <li class="d-flex nav-item me-auto p-1">
           <div class="position-relative bg-light" style="border-radius: 50%">
             <button
@@ -192,7 +114,7 @@
               </svg>
             </span>
           </div>
-          <div class="me-4 pt-1 d-flex position-relative">
+          <div class="me-4 nameCon pt-1 d-flex position-relative flex-row-reverse">
             <img
               [src]="
                 userType == 'Client'
@@ -204,16 +126,16 @@
                   : userprofile?.individualServiceProviderProfile?.profilePicturePath
               "
               alt=""
-              class="rounded-circle position-absolute top-0"
+              class="rounded-circle  position-absolute top-0"
               width="40px"
               height="40px"
             />
             <a
-              class="nav-link ps-4 pe-5 bg-light active rounded-5 py-1"
+              class="nav-link d-flex bg-light active rounded-5 py-1"
               aria-current="page"
               (click)="showSubMenu()"
             >
-              <span class="fontStyle cairo"> مرحباً {{ username }} </span>
+              <span class="fontStyle userName cairo"> مرحباً {{ username }} </span>
               <span class="dotCon">
                 <button
                   class="dots"
