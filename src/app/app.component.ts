@@ -19,6 +19,6 @@ export class AppComponent implements OnInit {
       )
       .subscribe((e: any) => {
         console.log(e[0].urlAfterRedirects); 
-      });
+        localStorage.setItem('router', e[0].urlAfterRedirects);      });
   }
 }
