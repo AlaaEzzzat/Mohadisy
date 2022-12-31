@@ -31,20 +31,27 @@ form-group {
 .form-group input:focus {
   box-shadow: none;
 }
-.carousel-indicators button {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin: 10px;
-  text-indent: 0;
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  background-color: #004057;
+.cairo{
+  font-family: 'cairo';
 }
-.carousel-indicators .active {
-  width: 20px;
-  height: 20px;
-  margin: 10px;
-  background-color: #18af9a;
+
+.slider{
+left: 0;
+position: absolute;
+top: 0;
+}
+.submitBtn{
+  transition: all 0.5s ease-in-out;
+  background: #18af9a
+}
+.submitBtn:hover{
+  background-color: #007666;
+}
+.myLink{
+  transition: all 0.5s ease-in-out;
+}
+.myLink:hover{
+color: #2b7c71;
+
+transform: scale(1.5);
 }

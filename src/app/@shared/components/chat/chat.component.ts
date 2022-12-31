@@ -5,7 +5,7 @@ import { ProviderServiceService } from './../../../@core/services/Provider/provi
 import { IMessage } from '../../../@models/message';
 import { ChatService } from '../../../@core/services/chat/chat.service';
 import { ClientService } from '../../../@core/services/client/client.service';
-import { Component, OnInit, ViewChild, ElementRef,ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,ChangeDetectorRef, AfterContentChecked, Input } from '@angular/core';
 import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-chat',
@@ -14,6 +14,7 @@ import { saveAs } from 'file-saver';
 })
 export class ChatComponent implements OnInit,AfterContentChecked {
   activeChat: boolean = false;
+  
   message: IMessage = {} as IMessage;
   @ViewChild('textInput') textInput!: ElementRef;
   @ViewChild('fileImage') fileImage!: ElementRef;

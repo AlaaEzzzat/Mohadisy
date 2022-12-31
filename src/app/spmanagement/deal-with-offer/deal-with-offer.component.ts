@@ -129,7 +129,6 @@ export class DealWithOfferComponent implements OnInit {
       )
       .subscribe((data) => {
         var stages = data.data;
-
         for (let i = 0; i < stages.length; i++) {
           this.Precentage[i] = stages[i].percentage;
           this.totalcostMilestone[i] = stages[i].cost;
@@ -185,8 +184,6 @@ export class DealWithOfferComponent implements OnInit {
   }
 
   MilestoneCost(stage: any, precentage: any) {
-    console.log(this.Precentage)
-    console.log(stage)
     this.totalcostMilestone[stage] = 0;
     this.Precentage[stage] = precentage;
     if (stage == '1' && precentage) {

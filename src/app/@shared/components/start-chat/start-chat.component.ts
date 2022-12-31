@@ -54,7 +54,7 @@ export class StartChatComponent implements OnInit {
       this.complaintService.storeComplaint(this.message).subscribe({
         next: (data: any) => {
           this._toastr.info(data.message);
-          this.startingChat = false;
+          this.toggleStatus();
         },
         error: (error: any) => {
           console.log(error);
@@ -65,7 +65,7 @@ export class StartChatComponent implements OnInit {
   sendMessageToEndPoint(message: any, receiverId: any) {
     this.chatService.sendMessage(message).subscribe({
       next: (data: any) => {
-        this.startingChat = false;
+        this.toggleStatus();
         if (this.userType == 'sp') {
           this.router.navigate(['/Spmanagement/chat']);
         } else if (this.userType == 'client') {

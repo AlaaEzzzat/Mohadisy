@@ -18,7 +18,7 @@ export class ConfirmcodeComponent implements OnInit {
     private _toastr: ToastrService
   ) {
     this.restForm = this.formBuilder.group({
-      token: ['', [Validators.required, Validators.email]],
+      token: ['', [Validators.required]],
     });
   }
   onSubmit() {
@@ -27,7 +27,7 @@ export class ConfirmcodeComponent implements OnInit {
         `https://app.mohandisy.com/api/Account/checkResetPasswordToken`,
         this.restForm.value
       )
-      .subscribe((data) => {
+      .subscribe((data:any) => {
         this._toastr.success(data.message);
         this.router.navigate(['/account/resetpassword']);
         localStorage.setItem(

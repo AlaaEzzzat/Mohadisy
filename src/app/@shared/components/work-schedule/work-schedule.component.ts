@@ -67,6 +67,7 @@ export class WorkScheduleComponent implements OnInit {
     };
     this.http.appointmentsEndAndStartDte(dateSelected).subscribe({
       next: (date) => {
+        console.log(date)
         for (let dates of date.data) {
           this.dateOpt = dates;
         }

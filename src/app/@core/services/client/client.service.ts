@@ -212,4 +212,24 @@ export class ClientService {
       ''
     );
   }
+  /* ************************** */
+  
+  changeMilestoneStatusToCurrentWork(milestoneId:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Milestone/changeMilestoneStatusToCurrentWork/${milestoneId}`
+    );
+  }
+  startMilestone(milestoneId:any): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Milestone/startMilestone/${milestoneId}`
+    );
+  }
+  
+
+storeMilestoneFiles( milestoneId: any, files:any): Observable<any> {
+  return this._HttpClient.post<any>(
+    `${environment.baseUrl}/api/Milestone/storeMilestoneFiles/${milestoneId}`,
+    files
+  );
+}
 }

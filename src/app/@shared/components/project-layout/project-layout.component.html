@@ -529,56 +529,92 @@
                       </ng-container>
                       <div
                         *ngIf="userType == 'sp'"
-                        class="d-flex justify-content-around align-items-center"
+                        class="flex-wrap d-flex justify-content-around align-items-center"
                       >
-                        <div
-                          *ngIf="
-                            activeCategory == 1 && item.milestoneStatusId == 2
-                          "
-                          class="d-flex justify-content-around align-items-center flex-column"
-                        >
-                          <div class="position-relative files">
-                            <input
-                              class="input"
-                              multiple
-                              type="file"
-                              #pdfFiles
-                              formControlName="pdfFiles"
-                              id="pdfFiles"
-                              required
-                            />
-                            <img src="assets/dashboard/pdf.png" />
-                          </div>
-                          <span class="me-2 cairo">تحميل ملفات</span>
-                        </div>
+                      <div
+                      *ngIf="
+                        (activeCategory == 1 && item.milestoneStatusId == 2 )
+                      "
+                      class="d-flex justify-content-around align-items-center flex-column"
+                    >
+                      <div class="position-relative files">
+                        <input
+                          class="input"
+                          multiple
+                          type="file"
+                          #pdfFiles
+                          formControlName="pdfFiles"
+                          id="pdfFiles"
+                          required
+                          (change)="onFileUpload($event, 'file')"
+                        />
+                        <img src="assets/dashboard/pdf.png" />
+                      </div>
+                      <span class="me-2 cairo">{{fileName || " رفع ملف"}}</span>
+                    </div>
+                    <div
+                    *ngIf="
+                      (activeCategory == 1 && item.milestoneStatusId == 2 ) 
+                    "
+                    class="d-flex justify-content-around align-items-center flex-column"
+                  >
+                    <div class="position-relative files">
+                      <input
+                        class="input"
+                        multiple
+                        type="file"
+                        #pdfFiles
+                        formControlName="pdfFiles"
+                        id="pdfFiles"
+                        required
+                        (change)="onFileUpload($event, 'image')"
+                      />
+                      <img src="assets/dashboard/picture.png" />
+                    </div>
+                    <span class="me-2 cairo">{{imageName || " رفع صورة"}} </span>
+                  </div>
                         <button
                           *ngIf="
-                            activeCategory == 1 && item.milestoneStatusId == 2
+                           ( activeCategory == 1 && item.milestoneStatusId != 2)
+                          "
+                          type="button"
+                         (click)="startMilestone(item.id)"
+                          class="cairo bg-white border-0 m-0 p-2 d-flex flex-column justify-content-center align-items-center"
+                        >
+                          <i
+                            style="font-size: 18px"
+                            class="fa-regular fs-3 fa-circle-play ms-2"
+                          ></i>
+                          <span>بدأ</span>
+                        </button>
+                        <button
+                          *ngIf="
+                           ( activeCategory == 1 && item.milestoneStatusId == 2) 
                           "
                           type="button"
                           data-bs-toggle="modal"
                           data-bs-target="#open"
-                          class="cairo border-0 m-0 p-0 d-flex align-items-center"
+                          class="cairo bg-white border-0 m-0 p-2 d-flex flex-column justify-content-center align-items-center"
                         >
                           <i
                             style="font-size: 18px"
-                            class="fa-regular fa-circle-stop ms-2"
+                            class="fa-regular fs-3 fa-circle-stop ms-2"
                           ></i>
                           <span>تعليق</span>
                         </button>
-                        <p
+                        <button
                           *ngIf="
-                            activeCategory == 1 && item.milestoneStatusId == 2
+                            (activeCategory == 1 && item.milestoneStatusId == 2)
                           "
                           (click)="finished(item.id)"
-                          class="cairo m-0 p-0 d-flex align-items-center"
+                          class="cairo bg-white border-0 m-0 p-2 d-flex flex-column justify-content-center align-items-center"
                         >
                           <i
                             style="font-size: 18px"
-                            class="fa-solid fa-circle-check ms-2"
+                            class="fa-solid fs-3 fa-circle-check ms-2"
                           ></i>
                           <span>إنهاء</span>
-                        </p>
+                        </button>
                         <div
                           class="fade modal mt-5"
                           aria-hidden="false"

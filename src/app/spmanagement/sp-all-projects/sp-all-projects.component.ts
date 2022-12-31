@@ -255,6 +255,7 @@ export class SpAllProjectsComponent implements OnInit {
         `https://app.mohandisy.com/api/Milestone/getMilestonesByOfferId/${this.project.offers[0].id}`
       )
       .subscribe((data:any) => {
+        console.log(data)
         var stones = data.data;
         for (let i = 0; i < stones.length; i++) {
           if (Number(stones[i].milestoneStatusId) == 4) {

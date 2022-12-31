@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from './../../@core/api.service';
 import { AuthService } from './../../@core/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ConfirmPasswordValidator } from './../../@core/utils/confirmPassword';
 import { UserserviceService } from 'src/app/@core/http/userservice.service';
 
 @Component({
@@ -18,7 +19,7 @@ import { UserserviceService } from 'src/app/@core/http/userservice.service';
 })
 export class SignupComponent implements OnInit {
   apiLinkuser = 'https://app.mohandisy.com/api/Role/getRoles';
-  SignupForm;
+  SignupForm: FormGroup;
   userdata: any;
 
   constructor(
@@ -28,24 +29,37 @@ export class SignupComponent implements OnInit {
     private _user: UserserviceService,
     private _toastr: ToastrService
   ) {
-    this._user.getusers(this.apiLinkuser).subscribe((res:any) => {
+    this._user.getusers(this.apiLinkuser).subscribe((res: any) => {
       this.userdata = res.data;
     });
-    this.SignupForm = this.formBuilder.group({
-      username: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(20),
+    this.SignupForm = this.formBuilder.group(
+      {
+        username: [
+          '',
+          [Validators.required, Validators.pattern('^[a-z][a-z0-9._]{3,}$')],
         ],
-      ],
-      email: ['', [Validators.required, Validators.email]],
-       password: ['', [Validators.required,Validators.pattern("^(?=.{10,}$)(?![_.!@#$%&])(?!.*[_.!@#$%&]{2})[A-Za-z0-9._!@#$%&]+(?<![_.])$")]],
-   /*    password: ['', [Validators.required,Validators.pattern("^(?!=.[a-z])(?!=.[0-9])(?!=.[A-Z])(?!=.[@$!%?&])[A-Za-z0-9@$!%?&]{10,}")]], */
-      phoneNumber: ['', [Validators.required,Validators.pattern('^(966)(5)[0-9]{8}$'),]],
-      roleId: ['', [Validators.required]],
-    });
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$'
+            ),
+          ],
+        ],
+        rePassword: ['', [Validators.required]],
+        phoneNumber: [
+          '',
+          [Validators.required, Validators.pattern('^(966)(5)[0-9]{8}$')],
+        ],
+        roleId: ['', [Validators.required]],
+        conditions: ['', [Validators.required]],
+      },
+      {
+        validator: ConfirmPasswordValidator('password', 'rePassword'),
+      }
+    );
   }
 
   newselect: string = '';
@@ -66,8 +80,11 @@ export class SignupComponent implements OnInit {
 
   apiLink = 'https://app.mohandisy.com/api/Authenticate/userRegister';
   onSubmit() {
-    console.log(this.SignupForm.value)
-    this.auth.signup(this.apiLink, this.SignupForm.value).subscribe((data) => {
+    console.log(this.SignupForm.value);
+    var user = this.SignupForm.value;
+    delete user.rePassword;
+    delete user.conditions;
+    this.auth.signup(this.apiLink, user).subscribe((data: any) => {
       this._toastr.success(data.message);
       this.router.navigate(['/account/login']);
     });

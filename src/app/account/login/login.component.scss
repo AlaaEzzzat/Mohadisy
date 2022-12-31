@@ -11,3 +11,10 @@ left: 0;
 position: absolute;
 top: 0;
     }
+    .submitBtn{
+      transition: all 0.5s ease-in-out;
+      background: #18af9a
+    }
+    .submitBtn:hover{
+      background-color: #007666;
+    }

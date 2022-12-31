@@ -14,7 +14,8 @@ import { ApiService } from 'src/app/@core/api.service';
 })
 export class LoginComponent implements OnInit {
   accountStatus: any = {};
-  LoginForm;
+  LoginForm:FormGroup;
+  captcha:string="";
   constructor(
     private formBuilder: FormBuilder,
     private serviceProviderService: ServiceProviderService,
@@ -32,7 +33,9 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.LoginForm.controls;
   }
-
+resolved(repsonse:any){
+  this.captcha = repsonse;
+}
   onSubmit() {
     console.log(this.LoginForm.value)
     this.auth

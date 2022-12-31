@@ -1,3 +1,4 @@
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +7,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  countDownDate = new Date('dec 30, 2022 15:37:25').getTime();
+  countDownDate = new Date('jan 1, 2023 00:00:00').getTime();
   days: number = 0;
   hours: number = 0;
   minutes: number = 0;
   secends: number = 0;
   x: any = '';
-  constructor() {}
+  slidesStore:any;
+  constructor() {
+    this.slidesStore = ["assets/images/c11.jpg","assets/images/c22.jpg","assets/images/c33.jpg"]
+  }
 
+  customOptions: OwlOptions = {
+      loop: true,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      margin:40,
+      nav:false,
+      dots: false,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:2
+          },
+          1000:{
+              items:2
+          }
+      }
+  }
   ngOnInit(): void {
     this.x = setInterval(() => {
       let now = new Date().getTime();

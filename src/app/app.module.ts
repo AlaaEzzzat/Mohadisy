@@ -4,7 +4,7 @@ import { HomeModule } from './Layout_HomePage/home.module';
 import { AccountModule } from './account/account.module';
 import { SharedModule } from './@shared/shared.module';
 import { NgModule } from '@angular/core';
-
+/* import { RecaptchaModule } from "ng-recaptcha"; */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './@core/@core.module';
@@ -29,6 +29,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     HttpClientModule,
     NgxSpinnerModule,
     HomeModule,
+/*     RecaptchaModule, */
     FormsModule,
     NgbModule,
    

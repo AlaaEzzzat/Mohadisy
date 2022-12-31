@@ -6,14 +6,13 @@
           type == 'client'
             ? project.project?.offers[0]?.organizationalServiceProviderProfile
                 ?.companyLogoPath ||
-              project.project?.offers[0]?.individualServiceProviderProfile
-                .profilePicturePath
+              project?.project?.offers[0]?.individualServiceProviderProfile?.profilePicturePath
             : type == 'sp'
-            ? project.project?.clientProfile?.profilePicturePath
+            ? project?.project?.clientProfile?.profilePicturePath
             : type == 'clientForAdmin'
-            ? project.profile?.profilePicturePath
+            ? project?.profile?.profilePicturePath
             : type == 'spForAdmin'
-            ? (project.profile?.companyLogoFile?project.profile?.companyLogoPath: project.profile?.profilePicturePath)
+            ? (project.profile?.companyLogoFile? project.profile?.companyLogoPath: project?.profile?.profilePicturePath)
             : ''
         "
         class="img-fluid rounded-start"
@@ -199,8 +198,7 @@
             type == "client"
               ? project.project?.offers[0]?.organizationalServiceProviderProfile
                   ?.companyName ||
-                project.project?.offers[0]?.individualServiceProviderProfile
-                  .name
+                project.project?.offers[0]?.individualServiceProviderProfile?.name
               : type == "sp"
               ? project.project?.clientProfile?.firstName +
                 " " +

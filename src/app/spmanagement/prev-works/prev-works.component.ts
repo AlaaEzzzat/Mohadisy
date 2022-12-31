@@ -54,7 +54,7 @@ export class PrevWorksComponent implements OnInit {
     this.work = this.prevWorksForm.value;
     this.work.identifier = '1';
     delete this.work.images;
-    if(this.method=='store'){
+
       if (localStorage.getItem('type') == '"CO"') {
         this.serviceProviderService
           .storeOrganizationalServiceProviderWork(this.work)
@@ -111,9 +111,6 @@ export class PrevWorksComponent implements OnInit {
             },
           });
       }
-    }else{
-
-    }
   }
   ngOnInit(): void {
     this.serviceProviderService
