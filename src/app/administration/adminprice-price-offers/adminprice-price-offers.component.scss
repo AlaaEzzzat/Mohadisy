@@ -2,8 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 $fontCairoFamily: 'Cairo', sans-serif;
-$fontTajawalFamily: 'Cairo', sans-serif;
-$textColor:#18AF9A;
+$textColor:#18af9a;
 $Alltext:#004057;
 $bgGrayD:#C7C7C7;
 $bgButton:#F3FBFA;
@@ -19,11 +18,11 @@ button>i ,.typeCom
 {
   color: #18AF9A !important;
   // font-family:$fontCairoFamily;
-  font-family:$fontTajawalFamily;
+  font-family:$fontCairoFamily;
 
 }
 .cairo{
-  font-family: 'cairo';
+  font-family: $fontCairoFamily;
 }
 .textInformation,a{
   color: $Alltext !important;
@@ -86,7 +85,7 @@ color: #000 !important;
   background-color: $textColor !important;
   >h2,>button{
     color: white !important;
-    font-family: $fontTajawalFamily;
+    font-family: $fontCairoFamily;
   }
   >button:focus,>button:active{
 box-shadow: none !important;

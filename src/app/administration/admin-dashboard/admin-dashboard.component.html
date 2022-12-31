@@ -103,14 +103,14 @@
           <div class="w-100 d-flex justify-content-between">
             <p class="h6 text-gary col-10">
               <img class="h6" src="assets/user/user (2).png" /> اسم المرسل /
-              {{ item.applicationUser.userName }}
+              {{ item?.applicationUser?.userName }}
             </p>
             <p class="h6 text-gary col-2 text-start">
               <img class="h6" src="assets/user/calendar.png" />
-              {{ item.dateCreated | date: "d/M/yyyy" }}
+              {{ item?.dateCreated | date: "d/M/yyyy" }}
             </p>
           </div>
-          <p class="text-gary text-end">{{ item.content }}</p>
+          <p class="text-gary text-end">{{ item?.content }}</p>
         </div>
       </div>
       <div

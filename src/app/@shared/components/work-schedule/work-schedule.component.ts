@@ -4,7 +4,7 @@ import moment from 'moment';
 import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
 import { HttpClient } from '@angular/common/http';
 import { saveAs } from 'file-saver';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-work-schedule',
   templateUrl: './work-schedule.component.html',
@@ -18,6 +18,9 @@ export class WorkScheduleComponent implements OnInit {
   appointment!: appoint;
   newappointment: FormGroup;
   dateOpt: any;
+  dateOptAll: any[]=[]
+  modalContent = false;
+
   erDateOp: any;
   message: any;
   showSuc: boolean = false;
@@ -26,6 +29,7 @@ export class WorkScheduleComponent implements OnInit {
   appointmentFiles: any[] = [];
 
   constructor(
+    private _toastr: ToastrService,
     private http: AdminDashService,
     private formbuilder: FormBuilder,
     private _HttpClient: HttpClient
@@ -45,6 +49,10 @@ export class WorkScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
+    // yesterday
+    // this.isDateBeforeToday(new Date()); // => true
+
+// today
     this.getappointDate();
   }
   get name() {
@@ -67,12 +75,13 @@ export class WorkScheduleComponent implements OnInit {
     };
     this.http.appointmentsEndAndStartDte(dateSelected).subscribe({
       next: (date) => {
-        console.log(date)
+        console.log(date.data);
+        this.dateOptAll = date.data        ;
         for (let dates of date.data) {
           this.dateOpt = dates;
         }
 
-        this.appointmentFiles = this.dateOpt.appointmentFiles;
+        // this.appointmentFiles = this.dateOpt.appointmentFiles;
       },
       error: (er) => {
         console.log(er);
@@ -87,59 +96,71 @@ export class WorkScheduleComponent implements OnInit {
       this.FileformData.append('file', file);
     }
   }
+   isDateBeforeToday=()=> {
+    const today = new Date();
+
+    today.setHours(0, 0, 0, 0);
+    if( this.selected < today){
+     
+      this.message = "من فضلك اختار تاريخ بعد او نفس تاريخ اليوم"
+      this._toastr.error(this.message);
+      this.modalContent = false;
+
+     
+
+    }else{
+      this.modalContent = true;
+
+
+    }
+}
 
   creatMeeting() {
-    this.iProfileAdmin = localStorage.getItem('id');
-    let date = moment(this.selected).format('YYYY-MM-DD');
-    this.appointment = {
-      applicationUserId: this.iProfileAdmin,
-      name: this.name?.value,
-      description: this.description?.value,
-      dateCreated: date,
-    };
-    this.http.storeAppointment(this.appointment).subscribe({
-      next: (data) => {
-        this.message = data.message;
-        this.showSuc = true;
-        setInterval(() => {
-          this.showSuc = false;
-        }, 3000);
-        this.getappointDate();
-        this.http
-          .storeAppointmentFiles(data.data.id, this.FileformData)
-          .subscribe({
-            next: (req) => {
-              this.message = req.message;
-              this.showSuc = true;
 
-              setInterval(() => {
-                this.showSuc = false;
-              }, 4000);
-              this.getappointDate();
-            },
-            error: (er) => {
-              console.log(er);
-              this.message = er.message;
-              this.showErr = true;
 
-              setInterval(() => {
-                this.showErr = false;
-              }, 4000);
-            },
-          });
-      },
-      error: (er) => {
-        console.log(er);
-        this.message = er.message;
-        this.showErr = true;
+      this.iProfileAdmin = localStorage.getItem('id');
+      let date = moment(this.selected).format('YYYY-MM-DD');
+      this.appointment = {
+        applicationUserId: this.iProfileAdmin,
+        name: this.name?.value,
+        description: this.description?.value,
+        dateCreated: date,
+      };
+      this.http.storeAppointment(this.appointment).subscribe({
+        next: (data) => {
+          this.message = data.message;
+          this._toastr.info(data.message);
+       
+          this.getappointDate();
+          this.http
+            .storeAppointmentFiles(data.data.id, this.FileformData)
+            .subscribe({
+              next: (req) => {
+                this.message = req.message;
+                this._toastr.info(data.message);
 
-        setInterval(() => {
-          this.showErr = false;
-        }, 4000);
-      },
-    });
+                this.getappointDate();
+                this.closeModal()
+              },
+              error: (er) => {
+                this._toastr.error(er.message);
+                this.closeModal()
+
+              },
+            });
+        },
+        error: (er) => {
+          this._toastr.error(er.message);
+
+       
+        },
+      });
+      
+    
+    
   }
-  download(url: string, name: any) {
+
+  download2(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {
         const blob = new Blob([png], { type: 'application/pdf' });
@@ -147,11 +168,23 @@ export class WorkScheduleComponent implements OnInit {
         saveAs(blob, fileName);
       },
       (err) => {
-        console.log(err);
+        this._toastr.error(err.message);
+
       }
     );
   }
+
+
+  // openSortingModal(){
+  //   this.modalContent = true;
+  //   console.log('clicked')
+   
+  // }
+  closeModal=()=>{
+    this.modalContent = false;
+   }
 }
+
 interface appoint {
   applicationUserId: string;
   name: string;

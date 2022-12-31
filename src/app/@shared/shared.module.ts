@@ -35,6 +35,10 @@ import { PriceOfferProjectMainLayoutComponent } from './components/price-offer-p
 import { MilestoneCardComponent } from './components/milestone-card/milestone-card.component';
 import { ProjectLayoutComponent } from './components/project-layout/project-layout.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { PolicyComponent } from './components/policy/policy.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { FooterComponent } from './components/footer/footer.component';
+
 const routes: Routes = [];
 
 @NgModule({
@@ -65,9 +69,11 @@ const routes: Routes = [];
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
     ProjectLayoutComponent,
+    PolicyComponent,
+    FooterComponent,
   ],
   imports: [
-   
+    MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
@@ -118,6 +124,8 @@ const routes: Routes = [];
     PriceOfferProjectMainLayoutComponent,
     MilestoneCardComponent,
     ProjectLayoutComponent,
+    PolicyComponent,
+    FooterComponent
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

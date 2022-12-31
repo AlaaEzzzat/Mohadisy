@@ -1,0 +1,72 @@
+.title-Terms{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 36px;
+      color: #064C9A;
+    }
+    .Terms{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 36px;
+      color: rgba(0, 0, 0, 0.671);
+    }
+    
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+    
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+    
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #18af9a;
+        border-radius: 10px;
+      }
+    
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #18af9a;
+      }
+    
+    
+      .mat-button-toggle-checked,.cdk-focused{
+        background: #18af9a !important;
+        color:#fff !important;
+      }
+      .buttons {
+      
+      
+        .btn {
+        background-color:  #b1b4b3;
+        color: #fff;
+        box-shadow: none !important;
+        &:focus{
+          box-shadow: none !important;
+
+        }
+        }
+      }
+      .active{
+        background-color:  #18af9a !important;
+        color: #fff; 
+        &:focus{
+          box-shadow: none !important;
+          color: #fff; 
+
+        }
+      }
+      .gray {
+        background-color: #b1b4b3;
+        color: #fff;
+        box-shadow: none !important;
+
+      }
+      .content{
+        min-height: 450px;
+      }
+      .cairo{
+        font-family: 'cairo';
+      }

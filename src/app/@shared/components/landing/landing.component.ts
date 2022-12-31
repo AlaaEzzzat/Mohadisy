@@ -1,5 +1,7 @@
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import { PolicyComponent } from '../policy/policy.component';
 
 @Component({
   selector: 'app-landing',
@@ -13,10 +15,13 @@ export class LandingComponent implements OnInit {
   minutes: number = 0;
   secends: number = 0;
   x: any = '';
-  slidesStore:any;
-  constructor() {
-    this.slidesStore = ["assets/images/c11.jpg","assets/images/c22.jpg","assets/images/c33.jpg"]
-  }
+
+
+
+  policyID:number=1;
+
+  constructor(public dialog: MatDialog) {}
+
 
   customOptions: OwlOptions = {
       loop: true,
@@ -55,4 +60,17 @@ export class LandingComponent implements OnInit {
   one: boolean = true;
   two: boolean = false;
   three: boolean = false;
+
+  openDialog(policy:any) {
+    const dialogRef = this.dialog.open(PolicyComponent,{
+      data: {
+        policyID: policy,
+      },
+    });
+    this.policyID=policy
+    console.log(this.policyID)
+    dialogRef.afterClosed().subscribe(result => {
+    
+    });
+  }
 }

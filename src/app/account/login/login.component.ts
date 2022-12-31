@@ -57,6 +57,7 @@ resolved(repsonse:any){
           );
           localStorage.setItem(
             'type',
+
             JSON.stringify(data.data?.accountType?.key)
           );
           localStorage.setItem('id', JSON.stringify(data.data.id));

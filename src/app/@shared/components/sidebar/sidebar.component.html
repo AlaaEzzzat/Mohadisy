@@ -5,10 +5,10 @@
         id="sidebar-wrapper"
       >
         <div class="list-group list-group-flush d-flex align-items-center justify-content-center flex-column">
-          <div class="text-white">
+          <div class="text-white col-12 " >
             <ng-container *ngFor="let item of data; let i=index">
               <div
-                class="p-2 my-4 pe-3 sidebar-item"
+                class="p-2 my-4 pe-3 sidebar-item col-12"
                 [routerLink]="item.routing"
                 [routerLinkActive]="['active']">
                 <img

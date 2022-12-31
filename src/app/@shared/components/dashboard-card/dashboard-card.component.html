@@ -185,21 +185,6 @@
         <p class="text-center  m-0 ">
           {{
             type == "projects"
-              ? data?.stoppedProjectsNumber
-              : type == "pricequotes"
-              ? data?.rejectedPricequotesCost
-              : type =="indSp"
-              ? "مرفوضة"
-              : type =="comSp"
-              ? "مرفوضة"
-              : type =="client"
-              ? "مرفوضة" : ""
-          }}
-        </p>
-        <hr class="my-2 w-100" />
-        <p class="text-center  m-0 ">
-          {{
-            type == "projects"
               ? data?.stoppedProjectsCost
               : type == "pricequotes"
               ? data?.rejectedPricequotesNumber
@@ -209,6 +194,22 @@
               ? data?.rejectedOrganizationalSPNumber
               : type =="client"
               ? data?.rejectedClientsNumber : ""
+          }}
+        </p>
+        
+        <hr class="my-2 w-100" />
+        <p class="text-center  m-0 ">
+          {{
+            type == "projects"
+              ? data?.stoppedProjectsNumber
+              : type == "pricequotes"
+              ? data?.rejectedPricequotesCost
+              : type =="indSp"
+              ? "مرفوضة"
+              : type =="comSp"
+              ? "مرفوضة"
+              : type =="client"
+              ? "مرفوضة" : ""
           }}
         </p>
         </div>

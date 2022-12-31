@@ -1,17 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+$fontCairoFamily: 'Cairo', sans-serif;
+$textColor:#18af9a;
+$Alltext:#004057;
+$bgGrayD:#C7C7C7;
+$bgButton:#F3FBFA;
+$colorbg:#030303;
+
 .premary-color {
-  color: #004057 !important;
+  color: $Alltext !important;
 }
 .bg-green {
-  background-color: #004057 !important;
+  background-color: $Alltext !important;
 }
 .main-color {
-  color: #18af9a !important;
+  color: $textColor !important;
 }
 // i {
 //   color: #f3d720;
 // }
 text-gary{
-  color: #1D1C1C !important;
+  color: $colorbg !important;
 }
 .cairo{
   font-family: "cairo";
@@ -49,26 +57,26 @@ text-gary{
 }
 .E9CCF2{
  background-color: #C4E8C9;
- color: rgb(22, 22, 22) !important;
+ color: $colorbg !important;
 }
 .D9CCF2{
   background-color: #C9EDE8;
-  color: rgb(22, 22, 22) !important;
+  color: $colorbg !important;
 
 }
 .C4D3D8{
   background-color: #C4D3D8;
-  color: rgb(22, 22, 22) !important;
+  color:$colorbg !important;
 
 }
 .D1F2FE{
   background-color: #D1F2FE;
-  color: rgb(22, 22, 22) !important;
+  color:$colorbg !important;
 
 }
 .E2FD{
   background-color: #97E2FD;
-  color: rgb(22, 22, 22) !important;
+  color:$colorbg !important;
 
 }
 @media (min-width: 1400px){
@@ -140,7 +148,7 @@ border: none!important;
 
 ::ng-deep .mat-calendar-body-cell-content {
   background-color: white ;
-  color: black;
+  color: $colorbg;
   width: 100%;
   border-radius: 25% !important;
   -webkit-border-radius: 25% !important;
@@ -157,7 +165,7 @@ background-color:white;
 
 ::ng-deep .mat-calendar-table-header , ::ng-deep .mat-calendar-body-label
 {
-  color: black;
+  color: $colorbg;
 }
 
 ::ng-deep .mat-focus-indicator

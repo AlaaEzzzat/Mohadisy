@@ -143,6 +143,7 @@ export class AdminClientsComponent implements OnInit {
 
     this.ServicesProvidor.getNonActiveClientProfiles(this.page).subscribe({
       next: (value) => {
+        console.log(value)
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
@@ -165,6 +166,8 @@ export class AdminClientsComponent implements OnInit {
 
     this.ServicesProvidor.getBlockedClientsProfiles(this.page).subscribe({
       next: (value) => {
+        console.log(value)
+
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;
