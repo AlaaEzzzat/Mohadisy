@@ -14,6 +14,8 @@ import { ApiService } from 'src/app/@core/api.service';
 })
 export class LoginComponent implements OnInit {
   accountStatus: any = {};
+  public captchaResolved : boolean = false;
+
   LoginForm:FormGroup;
   captcha:string="";
   constructor(
@@ -148,4 +150,7 @@ resolved(repsonse:any){
       });
   }
   ngOnInit(): void {}
+  checkCaptcha(captchaResponse : any) {
+    this.captchaResolved = (captchaResponse && captchaResponse.length > 0) ? true : false
+}
 }

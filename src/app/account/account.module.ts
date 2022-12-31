@@ -9,7 +9,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { ConfirmcodeComponent } from './confirmcode/confirmcode.component';
 import { RestPasswordComponent } from './rest-password/rest-password.component';
 import { SilderaccountComponent } from './silderaccount/silderaccount.component';
-
+import { environment } from 'src/environments/environment';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
@@ -35,6 +35,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxSpinnerModule,
     FormsModule, 
-  ],
+ 
+
+  ]
 })
 export class AccountModule {}

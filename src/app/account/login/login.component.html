@@ -85,13 +85,19 @@
               </div>
               </div>
             </div>
+            <div>
+        
+<!-- <re-captcha (resolved)="checkCaptcha($event)" formControlName="recaptchaReactive" siteKey="6LeuM78jAAAAAJ7e9U4XnO8uLl-NSlxwxblmvuyp"
+  name="recaptchaReactive"ngModel siteKey="YOUR-SITE-KEY">
+</re-captcha> -->
+            </div>
 <div [hidden]="captcha">
   <!-- <re-captch (resolved)="resolved($event)" siteKey="6LdvArcjAAAAADSle4ifwVGyUwnAoSXIq1Ueh4tV"></re-captch> -->
 </div>
             <button
               type="submit"
               class="btn submitBtn cairo btn-lg ms-2 text-white form-control"
-              [disabled]="!LoginForm.valid"
+              [disabled]="!LoginForm"
             >
               تسجيل الدخول
             </button>
