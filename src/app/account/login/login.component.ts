@@ -14,6 +14,7 @@ import { ApiService } from 'src/app/@core/api.service';
 })
 export class LoginComponent implements OnInit {
   accountStatus: any = {};
+  type:string="login";
   LoginForm:FormGroup;
   captcha:string="";
   constructor(
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
 resolved(repsonse:any){
   this.captcha = repsonse;
 }
-  onSubmit() {
+  onSubmit=()=>{
     console.log(this.LoginForm.value)
     this.auth
       .login(
@@ -149,4 +150,6 @@ resolved(repsonse:any){
       });
   }
   ngOnInit(): void {}
+
+
 }

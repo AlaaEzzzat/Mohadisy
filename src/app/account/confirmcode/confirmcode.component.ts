@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/@core/auth/auth.service';
 })
 export class ConfirmcodeComponent implements OnInit {
   restForm;
+  type:string="confirmcode"
+
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
@@ -21,7 +23,7 @@ export class ConfirmcodeComponent implements OnInit {
       token: ['', [Validators.required]],
     });
   }
-  onSubmit() {
+  onSubmit=()=> {
     this.auth
       .confirmEmial(
         `https://app.mohandisy.com/api/Account/checkResetPasswordToken`,

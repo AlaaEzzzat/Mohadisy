@@ -188,12 +188,13 @@
               ? data?.stoppedProjectsCost
               : type == "pricequotes"
               ? data?.rejectedPricequotesNumber
+           
               : type =="indSp"
-              ? data?.rejectedIndividualSPNumber
+              ? "مرفوضة"
               : type =="comSp"
-              ? data?.rejectedOrganizationalSPNumber
+              ? "مرفوضة"
               : type =="client"
-              ? data?.rejectedClientsNumber : ""
+              ? "مرفوضة" : ""
           }}
         </p>
         
@@ -205,11 +206,11 @@
               : type == "pricequotes"
               ? data?.rejectedPricequotesCost
               : type =="indSp"
-              ? "مرفوضة"
+              ? data?.rejectedIndividualSPNumber
               : type =="comSp"
-              ? "مرفوضة"
+              ? data?.rejectedOrganizationalSPNumber
               : type =="client"
-              ? "مرفوضة" : ""
+              ? data?.rejectedClientsNumber : ""
           }}
         </p>
         </div>

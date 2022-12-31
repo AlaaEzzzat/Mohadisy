@@ -5,6 +5,9 @@
 export const environment = {
   production: false,
   baseUrl: 'https://app.mohandisy.com',
+  recaptcha: {
+    siteKey: '6LeuM78jAAAAAJ7e9U4XnO8uLl-NSlxwxblmvuyp',
+  },
 };
 
 /*

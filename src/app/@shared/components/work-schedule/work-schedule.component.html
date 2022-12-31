@@ -22,12 +22,14 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
     <div
     class="bg-white rounded-0  mb-2 col-12 px-3"
   >
-  <p class="fw-semibold pt-3 main-color d-flex justify-content-between text-break">
+  <div class="fw-semibold pt-3 main-color d-flex justify-content-between text-break">
     {{ itemAll?.name }}
-    <small class="fw-normal">{{
+    <!-- <small class="fw-normal">{{
       itemAll?.dateCreated | date: "d/M/yyyy"
-    }}</small>
-  </p>
+    }}</small> -->
+    <div (click)="deleteDate(itemAll?.id)" class="cursor"> <small class="typeCom fw-normal cairo">حذف</small> </div>
+
+  </div>
   <p class="fw-normal text-break">{{ itemAll?.description }}</p>
 
 <div *ngFor="let itemP of itemAll?.appointmentFiles" class="d-flex justify-content-between align-content-center">
@@ -62,6 +64,7 @@ class="rounded-0 d-flex flex-column justify-content-around align-items-center mb
   <i class="fa fa-download typeCom ms-3"></i>
 
 </a>
+
 </div> 
 </div>
  

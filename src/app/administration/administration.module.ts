@@ -41,7 +41,6 @@ import {MatSelectModule} from '@angular/material/select';
     AdminSPComponent,
     
     AdminSpUpdataComponent,
-
   ],
   imports: [
     SharedModule,

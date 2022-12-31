@@ -38,7 +38,7 @@ const routes: Routes = [
       import('./usermanagement/usermanagement.module').then(
         (m) => m.UsermanagementModule
       ),
-      canActivate:[RouterGuard,UserAuthGuard]
+      canActivate:[UserAuthGuard]
 
   },
   { path: '**', component: NotFoundComponent },

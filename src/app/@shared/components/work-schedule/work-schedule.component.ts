@@ -160,6 +160,17 @@ export class WorkScheduleComponent implements OnInit {
     
   }
 
+  deleteDate(id:any){
+    this.http.deleteAppointment(id).subscribe({
+      next:(data)=>{
+        this._toastr.info(data.message);
+        this.getappointDate()
+      },error:(er)=>{
+        this._toastr.info(er.message)
+
+      }
+    })
+  }
   download2(url: string, name: any) {
     return this._HttpClient.get(url, { responseType: 'arraybuffer' }).subscribe(
       (png) => {

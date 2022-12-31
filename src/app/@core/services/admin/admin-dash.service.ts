@@ -89,4 +89,8 @@ export class AdminDashService {
       this.httpoptions
     );
   }
+ deleteAppointment(object: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Appointment/deleteAppointment/${object}`,{},this.httpoptions);
+  }
 }

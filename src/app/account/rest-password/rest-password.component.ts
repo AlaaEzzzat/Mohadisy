@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/@core/auth/auth.service';
 })
 export class RestPasswordComponent implements OnInit {
   restForm;
+  type:string="restPassword"
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
