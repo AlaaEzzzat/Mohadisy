@@ -148,6 +148,7 @@
             <select
               name="projectServiceId"
               id="projectServiceId"
+              #projectService
               class="mt-2 form-control form-control-lg"
               formControlName="projectServiceId"
               [class.is-valid]="projectServiceId?.valid"
@@ -787,8 +788,11 @@
             <div class="row">
               <div class="col-md-3 col-sm-6 col-xs-12 mt-3">
                 <div class="form-group">
-                  <label class="form-label mb-2" for="licenseNumber">
+                  <label *ngIf="projectServiceId?.value == 1" class="form-label mb-2" for="licenseNumber">
                     رقم رخصة هيئه المهندسين
+                  </label>
+                  <label *ngIf="projectServiceId?.value == 2" class="form-label mb-2" for="licenseNumber">
+                    رقم رخصة هيئه المقاولين
                   </label>
                   <input
                     type="text"
@@ -796,7 +800,7 @@
                     name="licenseNumber"
                     id="licenseNumber"
                     class="form-control form-control-lg signup"
-                    placeholder="   رقم رخصة هيئه المهندسين "
+                    placeholder="   رقم رخصة الهيئه  "
                     required
                     [class.is-valid]="licenseNumber?.valid"
                     [class.is-invalid]="
@@ -808,7 +812,7 @@
                     [hidden]="licenseNumber?.valid || licenseNumber?.untouched"
                   >
                     <span *ngIf="licenseNumber?.errors?.['required']"
-                      >رقم رخصة هيئه المهندسين مطلوب
+                      >رقم رخصة الهيئه مطلوبة
                     </span>
                   </div>
                 </div>

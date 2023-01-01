@@ -9,7 +9,7 @@ import { PolicyComponent } from '../policy/policy.component';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  countDownDate = new Date('jan 1, 2023 00:00:00').getTime();
+  countDownDate = new Date('Feb 1, 2023 00:00:00').getTime();
   days: number = 0;
   hours: number = 0;
   minutes: number = 0;
