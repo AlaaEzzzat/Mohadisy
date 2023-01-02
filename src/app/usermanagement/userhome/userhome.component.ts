@@ -57,8 +57,14 @@ export class UserhomeComponent implements OnInit {
   clickEvent() {
     this.status = !this.status;
   }
-  ngOnInit(): void {}
 
+  /* ************************* */
+  profileAccepted:any='';
+  ngOnInit(): void {
+    this.profileAccepted = localStorage.getItem('profileAccepted')
+    console.log(this.profileAccepted)
+  }
+  /* *************** */
   signOut() {
     localStorage.clear();
     this.router.navigate(['/account/login']);

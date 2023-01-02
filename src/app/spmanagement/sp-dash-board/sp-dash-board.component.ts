@@ -36,7 +36,7 @@ export class SpDashBoardComponent implements OnInit {
       this.currentProjects = this.data.spProjects.currentProjects;
       this.currentProjects.length > 0
         ? this.currentProjects.map((project: any) => {
-            this.currentProjectsCost += project.offers[0].totalCost;
+            this.currentProjectsCost += project?.offers[0]?.totalCost;
             if (project.offers.length > 0) {
               this.getOfferSender(project);
             }

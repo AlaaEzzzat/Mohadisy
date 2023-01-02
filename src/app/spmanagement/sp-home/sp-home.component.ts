@@ -61,6 +61,9 @@ export class SpHomeComponent implements OnInit {
     this.status = !this.status;
   }
   constructor() {}
-
-  ngOnInit(): void {}
+  profileAccepted:boolean=false;
+  ngOnInit(): void {
+    this.profileAccepted = Boolean(localStorage.getItem('profileAccepted'));
+    console.log(this.profileAccepted)
+  }
 }

@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class AccountFormComponent implements OnInit {
 @Input() type=''
 @Input() f:any= (args: any) => {}
+@Input() checkrole:any= (args: any) => {}
 @Input() onSubmit:any= (args: any) => {}
 @Input() Forms:any= (args: any) => {}
 @Input()   newselect: string = '';

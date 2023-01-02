@@ -4,14 +4,12 @@ body {
 span{
   font-family: 'cairo';
 }
+
 #page-content-wrapper {
-  min-width: 100vw;
+ 
+  width: 100%;
 }
 @media (min-width: 768px) {
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
   .show {
     margin-left: 0 !important;
   }

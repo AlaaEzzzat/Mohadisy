@@ -150,9 +150,7 @@
                   style="background-color: #18af9a"
                   class="matBtnCon"
                 >
-                  <button (click)="signOut()" mat-menu-item>
-                    <span class="cairo"> تسجيل خروج</span>
-                  </button>
+                  
                   <button [hidden]=" userType == 'Admin'" mat-menu-item (click)="profile()">
                     <a
                       routerLink="/usermanagement/profile"
@@ -160,6 +158,9 @@
                     >
                       المعلومات</a
                     >
+                  </button>
+                  <button (click)="signOut()" mat-menu-item>
+                    <span class="cairo"> تسجيل خروج</span>
                   </button>
                 </mat-menu>
               </span>

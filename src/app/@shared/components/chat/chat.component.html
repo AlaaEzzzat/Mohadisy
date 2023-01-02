@@ -1,180 +1,187 @@
 <section class="chat">
   <div id="frame" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-    <div class="container h-100">
-      <div class="row h-100">
-        <div class="col-md-4 col-2 h-100">
-          <div id="sidepanel">
-            <div id="profile">
-              <div class="wrap d-flex align-items-center">
-                <img
-                  id="profile-img"
-                  [src]="
-                    userType == 'Client'
-                      ? senderProfile.profilePicturePath
-                      : userType == 'Admin'
-                      ? senderProfile.adminProfile.profilePicturePath
-                      : userType == 'CO'
-                      ? senderProfile.organizationalServiceProviderProfile
-                          ?.companyLogoPath
-                      : senderProfile.organizationalServiceProviderProfile
-                          ?.companyLogoPath
-                  "
-                  class="online" 
-                  alt=""
-                /> 
+    <div class="row h-100">
+      <div class="col-md-4 col-2 p-0 h-100">
+        <div id="sidepanel">
+          <div id="profile">
+            <div class="wrap d-flex align-items-center">
+              <img
+                id="profile-img"
+                [src]="
+                  userType == 'Client'
+                    ? senderProfile.profilePicturePath
+                    : userType == 'Admin'
+                    ? senderProfile.adminProfile.profilePicturePath
+                    : userType == 'CO'
+                    ? senderProfile.organizationalServiceProviderProfile
+                        ?.companyLogoPath
+                    : senderProfile.organizationalServiceProviderProfile
+                        ?.companyLogoPath
+                "
+                class="online"
+                alt=""
+              />
 
-                <p class="m-0 me-4 cairo">
-                  {{
-                    userType == "Client"
-                      ? senderProfile.firstName + " " + senderProfile.lastName
-                      : userType == "Admin"
-                      ? senderProfile.adminProfile.firstName +
-                        " " +
-                        senderProfile.adminProfile.lastName
-                      : userType == "CO"
-                      ? senderProfile.organizationalServiceProviderProfile
-                          ?.companyName
-                      : senderProfile.organizationalServiceProviderProfile
-                          ?.companyLogoPath
-                  }}
-                </p>
+              <p class="m-0 me-4 cairo">
+                {{
+                  userType == "Client"
+                    ? senderProfile.firstName + " " + senderProfile.lastName
+                    : userType == "Admin"
+                    ? senderProfile.adminProfile.firstName +
+                      " " +
+                      senderProfile.adminProfile.lastName
+                    : userType == "CO"
+                    ? senderProfile.organizationalServiceProviderProfile
+                        ?.companyName
+                    : senderProfile.organizationalServiceProviderProfile
+                        ?.companyLogoPath
+                }}
+              </p>
 
-                <div id="status-options">
-                  <ul>
-                    <li id="status-online" class="active">
-                      <span class="status-circle"></span>
-                      <p>Online</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div id="search" class="d-flex">
-              <label for=""
-                ><i
-                  (click)="search(text.value)"
-                  class="fa fa-search"
-                  aria-hidden="true"
-                ></i
-              ></label>
-              <input type="text" #text placeholder="بحث ..." />
-            </div>
-            <div id="contacts">
-              <ul class="p-0 m-0">
-                <ng-container *ngFor="let user of dataShow">
-                  <li class="contact" (click)="showMessage(user)">
-                    <div
-                      class="wrap d-flex align-items-center"
-                      [ngClass]="activeUser.id == user.id ? 'activebg' : ''"
-                    >
-                      <div>
-                        <img
-                          [src]="user.profilePicture ? user.profilePicture : ''"
-                          alt=""
-                        />
-                      </div>
-                      <div class="meta me-3">
-                        <p class="name m-0">{{ user.fullName }}</p>
-                        <p class="preview">
-                          {{
-                            user.lastMessage.length > 15
-                              ? user.lastMessage.substr(0, 15) + "..."
-                              : user.lastMessage
-                          }}
-                        </p>
-                      </div>
-                    </div>
+              <div id="status-options">
+                <ul>
+                  <li id="status-online" class="active">
+                    <span class="status-circle"></span>
+                    <p>Online</p>
                   </li>
-                </ng-container>
-              </ul>
-            </div>
-            <div id="bottom-bar">
-              <button id="settings">
-                <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
-                <span>Settings</span>
-              </button>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col-md-8 col-10 h-100">
-          <div *ngIf="activeUser" class="content">
-            <div class="contact-profile">
-              <img [src]="activeUser.profilePicture" alt="" />
-              <p>{{ activeUser.fullName }}</p>
-            </div>
-
-            <div class="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
-              <ul>
-                <ng-container *ngFor="let msg of activeChatUserChat">
-                  <li
-                    class=""
-                    [ngClass]="
-                      msg.senderId == senderProfile.applicationUserId ||
-                      msg.senderId == senderProfile.id
-                        ? 'sent'
-                        : 'replies'
-                    "
+          <div id="search">
+            <label for="searchInput"
+              ><i
+                (click)="search(text.value)"
+                class="fa fa-search"
+                aria-hidden="true"
+              ></i
+            ></label>
+            <input id="searchInput" type="text" #text placeholder="بحث ..." />
+          </div>
+          <div id="contacts">
+            <ul class="p-0 m-0">
+              <ng-container *ngFor="let user of dataShow">
+                <li class="contact" (click)="showMessage(user)">
+                  <div
+                    class="wrap d-flex align-items-center"
+                    [ngClass]="activeUser.id == user.id ? 'activebg' : ''"
                   >
-                    <img
-                      [src]="
-                        msg.senderId == senderProfile.applicationUserId
-                          ? senderProfile.profilePicturePath
-                          : activeUser.profilePicture
-                      "
-                      alt=""
-                    />
-                    <p *ngIf="msg.messageType.type == 'Text'" class="cairo">
-                      {{ msg.content }}
-                    </p>
-                    <img
-                      class="imgMsg mb-2"
-                      [src]="msg.content"
-                      *ngIf="msg.messageType.type == 'Image'"
-                    />
-                    <p *ngIf="msg.messageType.type == 'File'" class="cairo">
-                      {{ msg.content.split("/").slice(-1)[0] }}
-                      <i
-                        class="fa fa-download me-3"
-                        (click)="
-                          download(
-                            msg.content,
-                            msg.content.split('/').slice(-1)[0]
-                          )
-                        "
-                      ></i>
-                    </p>
-                  </li>
-                </ng-container>
-              </ul>
-            </div>
-            <div class="message-input">
-              <div class="wrap">
-                <input
-                  #textInput
-                  type="text"
-                  placeholder="اكتب رسالتك ..."
-                  class="cairo"
-                />
-                <i class="fa fa-paperclip attachment" aria-hidden="true">
-                  <input
-                    (change)="onFileUpload($event)"
-                    #fileImage
-                    type="file"
-                    alt=""
-                    name="attatch"
-                    id="attatch"
-                    class="attatch"
-                  />
-                  <small *ngIf="fileMessage">{{ fileMessage.name }}</small>
-                </i>
-                <button
-                  (click)="sendMessage(textInput.value, activeUser.id)"
-                  class="submit"
+                    <div>
+                      <img
+                        [src]="user.profilePicture ? user.profilePicture : ''"
+                        alt=""
+                      />
+                    </div>
+                    <div class="meta me-3">
+                      <p class="name m-0">{{ user.fullName }}</p>
+                      <p class="preview">
+                        {{
+                          user.lastMessage.length > 15
+                            ? user.lastMessage.substr(0, 15) + "..."
+                            : user.lastMessage
+                        }}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 col-10 h-100 pe-0">
+        <div *ngIf="activeUser" class="content">
+          <div class="contact-profile">
+            <img [src]="activeUser.profilePicture" alt="" />
+            <p>{{ activeUser.fullName }}</p>
+          </div>
+
+          <div class="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <ul>
+              <ng-container *ngFor="let msg of activeChatUserChat">
+                <li
+                  class=""
+                  [ngClass]="
+                    msg.senderId == senderProfile.applicationUserId ||
+                    msg.senderId == senderProfile.id
+                      ? 'sent'
+                      : 'replies'
+                  "
                 >
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                </button>
-              </div>
+                  <img
+                    [src]="
+                      msg.senderId == senderProfile.applicationUserId
+                        ? senderProfile.profilePicturePath
+                        : activeUser.profilePicture
+                    "
+                    alt=""
+                  />
+                  <p *ngIf="msg.messageType.type == 'Text'" class="cairo">
+                    {{ msg.content }}
+                  </p>
+                  <div class="" *ngIf="msg.messageType.type == 'Image'">
+                    <i
+                    [ngClass]="
+                    msg.senderId == senderProfile.applicationUserId ||
+                    msg.senderId == senderProfile.id
+                      ? 'sentImgDownload'
+                      : 'repliesImgDownload'
+                  "
+                      class="fa fa-download mx-3 mt-5"
+                      (click)="
+                        download(
+                          msg.content,
+                          msg.content.split('/').slice(-1)[0]
+                        )
+                      "
+                    ></i>
+                    <img class="imgMsg mb-2" [src]="msg.content" />
+                  </div>
+
+                  <p *ngIf="msg.messageType.type == 'File'" class="cairo">
+                    {{ msg.content.split("/").slice(-1)[0] }}
+                    <i
+                      class="fa fa-download me-3"
+                      (click)="
+                        download(
+                          msg.content,
+                          msg.content.split('/').slice(-1)[0]
+                        )
+                      "
+                    ></i>
+                  </p>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          <div class="message-input">
+            <div class="wrap">
+              <input
+                #textInput
+                type="text"
+                placeholder="اكتب رسالتك ..."
+                class="cairo"
+                (keyup.enter)="sendMessage(textInput.value, activeUser.id)"
+              />
+              <i class="fa fa-paperclip attachment" aria-hidden="true">
+                <input
+                  (change)="onFileUpload($event)"
+                  #fileImage
+                  type="file"
+                  alt=""
+                  name="attatch"
+                  id="attatch"
+                  class="attatch"
+                />
+                <small *ngIf="fileMessage">{{ fileMessage.name }}</small>
+              </i>
+              <button
+                (click)="sendMessage(textInput.value, activeUser.id)"
+                class="submit"
+              >
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </button>
             </div>
           </div>
         </div>

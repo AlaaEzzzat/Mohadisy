@@ -1,7 +1,5 @@
 
-.row{
-  width: 100% !important;
-}
+
 .overlay {
   *{
 font-family: 'cairo';
@@ -69,19 +67,16 @@ body {
 span{
   font-family: 'cairo';
 }
-#page-content-wrapper {
-  min-width: 100vw;
-}
 
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
 }
 
+#page-content-wrapper {
+
+  width: 100%;
+}
 @media (min-width: 768px) {
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
   .show {
     margin-left: 0 !important;
   }
@@ -139,4 +134,26 @@ span{
   outline: none;
   box-shadow: none;
   }
+.contentDiv{
+  background-color: #f8fafc; padding-top: 78px
+}
+@media (max-width:570px) {
+  .contentDiv{
+   padding-top: 107px
+  }
+}
+.askBtn{
+  background-color: #004057;
+    position: fixed;
+    bottom: 30px;
+    left: 20px;
+    z-index: 999;
+    font-size: 15px;
+    transition: all 0.5s ease-in-out;
+}
 
+.askBtn:hover{
+  background-color: #18AF9A;
+  transform: scale(1.1);
+
+}

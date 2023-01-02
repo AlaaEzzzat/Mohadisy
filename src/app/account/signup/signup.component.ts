@@ -65,8 +65,9 @@ export class SignupComponent implements OnInit {
 
   newselect: string = '';
 
-  ngDoCheck(): void {
-    this.newselect = this.categoriySelector;
+   checkrole=(id:any)=>  {
+    console.log(id)
+    this.newselect = id
     if (this.newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb') {
       this.SignupForm.addControl(
         'accountId',
@@ -76,7 +77,7 @@ export class SignupComponent implements OnInit {
     } else {
       this.SignupForm.removeControl('accountId');
     }
-  }
+  } 
   ngOnInit(): void {}
 
   apiLink = 'https://app.mohandisy.com/api/Authenticate/userRegister';
@@ -85,10 +86,10 @@ export class SignupComponent implements OnInit {
     var user = this.SignupForm.value;
     delete user.rePassword;
     delete user.conditions;
-    this.auth.signup(this.apiLink, user).subscribe((data: any) => {
+     this.auth.signup(this.apiLink, user).subscribe((data: any) => {
       this._toastr.success(data.message);
       this.router.navigate(['/account/login']);
-    });
+    }); 
   }
   categoriySelector: string = '';
 

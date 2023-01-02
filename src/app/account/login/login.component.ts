@@ -53,6 +53,7 @@ resolved(repsonse:any){
           localStorage.setItem('role', JSON.stringify(data.data.roles[0]));
           localStorage.setItem('name', JSON.stringify(data.data.username));
           localStorage.setItem('email', JSON.stringify(data.data.email));
+          localStorage.setItem('profileAccepted', JSON.stringify(data.data.profileAccepted));
           localStorage.setItem(
             'phoneNumber',
             JSON.stringify(data.data.phoneNumber)

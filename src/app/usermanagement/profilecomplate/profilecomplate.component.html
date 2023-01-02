@@ -1,9 +1,9 @@
 <section
   *ngIf="(userSuccess && imageSuccess) == false"
-  style="min-height: 100vh"
+  class="container-fluid"
 >
   <header class="form-control p-3 signFormIn border-end">
-    <h5 class="bd-title m-0 p-0" dir="rtl">إستكمال البيانات الخاصه بكـ</h5>
+    <h5 class="bd-title cairo m-0 p-0" dir="rtl">إستكمال البيانات الخاصه بكـ</h5>
   </header>
   <div class="container form-control py-5 px-4 border-0 signFormIn">
     <form [formGroup]="registerForm" (ngSubmit)="registerFormSubmit()">
@@ -45,24 +45,15 @@
             >
             <input
               type="text"
-              formControlName="email"
               id="email"
               class="form-control form-control-lg signup"
               placeholder="البريد الإلكتروني"
-              (keypress)="englishOnly($event)"
-              required
+              [value]="loginEmail"
+              disabled
               [class.is-valid]="email?.valid"
               [class.is-invalid]="email?.invalid && email?.touched"
             />
-            <div
-              class="alert alert-warning"
-              [hidden]="email?.valid || email?.untouched"
-            >
-              <span *ngIf="email?.errors?.['required']"
-                >البريد الإلكتروني مطللوب</span
-              >
-              <span *ngIf="email?.errors?.['email']">تأكد من بنية البريد</span>
-            </div>
+    
           </div>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -75,6 +66,7 @@
               class="form-control form-control-lg signup"
               placeholder="9665XXXXXXXX"
               (keypress)="numberOnly($event)"
+              [value]="loginPhoneNumber"
               [class.is-valid]="phoneNumber?.valid"
               [class.is-invalid]="phoneNumber?.invalid && phoneNumber?.touched"
             />
@@ -103,6 +95,7 @@
               id="userName"
               class="form-control form-control-lg signup"
               placeholder="   إسم المستخدم "
+              [value]="loginUsername"
               (keypress)="englishOnly($event)"
               [class.is-valid]="userName?.valid"
               [class.is-invalid]="userName?.invalid && userName?.touched"
@@ -115,7 +108,7 @@
                 إسم المستخدم مطللوب</span
               >
               <span *ngIf="userName?.errors?.['pattern']">
-                تأكد من بنيةإسم المستخدم
+                يجب أن لا يحتوي إسم المستخدم علي مسافات و يجب أن يتكون من حروف و ارقام وأحد الرموز التالية _ .
               </span>
             </div>
           </div>
@@ -425,7 +418,7 @@
             <button
               [disabled]="!registerForm.valid"
               type="submit"
-              class="btn btn-success py-2 form-control text-white"
+              class="btn saveBtn py-2 form-control "
             >
               <i class="fa fa-floppy-disk mx-2" aria-hidden="true"></i>
               حفظ

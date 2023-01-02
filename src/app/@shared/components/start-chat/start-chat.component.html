@@ -4,18 +4,19 @@
       >&times;</a
     >
     <div class="content">
-      <label class="form-label fw-bold cairo">
-        {{ process == "chat" ? "الرسالة" : "تقديم شكوي" }}
+      <label  class="form-label fw-bold cairo">
+        {{ process == "chat" ?
+        receiverId ==''? "مراسلة مسؤلي المنصة":'إرسال رسالة' : "تقديم شكوي" }}
       </label>
       <div class="message-input d-flex flex-column justify-content-center">
         <div class="wrap">
-          <input
-            class="form-control"
+          <textarea
+            class="form-control "
             #textInput
             type="text"
             placeholder="اكتب شيئاً ..."
             class="cairo"
-          />
+          ></textarea>
           <i
             *ngIf="process == 'chat'"
             class="fa-solid fa-paperclip attachment"
@@ -33,7 +34,7 @@
             <small *ngIf="fileMessage">{{ fileMessage.name }}</small>
           </i>
         </div>
-        <button (click)="sendMessage(textInput.value)" class="btn submit">
+        <button  (click)="sendMessage(textInput.value)" class="btn submit">
           <span class="mx-2">{{ process == "chat" ? "إرسال" : "تقديم" }}</span>
           <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </button>

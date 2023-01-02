@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AdminSettingsService } from './../../../@core/services/admin/admin-settings.service';
 import { ScrollToBottomDirective } from './../../directives/scroll-to-bottom';
 import { HttpClient } from '@angular/common/http';
@@ -25,7 +26,8 @@ export class ChatComponent implements OnInit,AfterContentChecked {
     private chatService: ChatService,
     private _HttpClient: HttpClient,
     private adminSettingsService: AdminSettingsService,
-    private cd:ChangeDetectorRef
+    private cd:ChangeDetectorRef,
+    private toaster : ToastrService
   ) {}
   senderProfile: any = {};
   userCahts: any = [];
@@ -118,44 +120,50 @@ export class ChatComponent implements OnInit,AfterContentChecked {
   sendMessage(message: string, receiverId: string) {
    
     var type: number = 1;
-    if (message) {
+    if (message ) {
       this.message.content = message;
       this.message.messageTypeId = type;
       this.message.receiverId = receiverId;
       this.sendMessageToEndPoint(this.message, receiverId);
+      this.sendFile(type,receiverId)
+    }else if(this.fileMessage){
+      this.sendFile(type,receiverId)
+    }else{
+      this.toaster.error("نأمل إدخال محتوي للرسالة")
     }
-    if (this.fileMessage) {
-      this.isFileImage(this.fileMessage) ? (type = 2) : (type = 3);
-      this.message.content = '';
-      this.message.messageTypeId = type;
-      this.message.receiverId = receiverId;
-      this.chatService.sendMessage(this.message).subscribe({
-        next: (data: any) => {
-     
-          var msgID = data.data.id;
-          var fileFormData = new FormData();
-        
-          fileFormData.append('file', this.fileMessage);
-          fileFormData.append('msgId', msgID);
-          this.chatService.sendMessageFile(msgID, fileFormData).subscribe({
-            next: (data: any) => {
-           
-              this.fileMessage = {};
-              this.getUserChatsF();
-              this.getChatWithUser(receiverId);
-            },
-            error: (error: any) => {
-              console.log(error);
-            },
-          });
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
-    }
+  } 
+sendFile(type:any,receiverId:any){
+  if (this.fileMessage) {
+    this.isFileImage(this.fileMessage) ? (type = 2) : (type = 3);
+    this.message.content = '';
+    this.message.messageTypeId = type;
+    this.message.receiverId = receiverId;
+    this.chatService.sendMessage(this.message).subscribe({
+      next: (data: any) => {
+   
+        var msgID = data.data.id;
+        var fileFormData = new FormData();
+      
+        fileFormData.append('file', this.fileMessage);
+        fileFormData.append('msgId', msgID);
+        this.chatService.sendMessageFile(msgID, fileFormData).subscribe({
+          next: (data: any) => {
+         
+            this.fileMessage = {};
+            this.getUserChatsF();
+            this.getChatWithUser(receiverId);
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
   }
-
+}
   fileMessage: any = '';
   onFileUpload(event: any) {
     if (event.target.files.length > 0) {

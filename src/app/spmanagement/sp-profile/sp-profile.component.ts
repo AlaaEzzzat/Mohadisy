@@ -180,7 +180,7 @@ export class SpProfileComponent implements OnInit {
            
             this.oldProjectService = this.profile?.organizationalServiceProviderProfile?.projectService.name;
             this.oldProjectSubService = this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
-          
+          console.log(this.oldProjectSubService)
             this.IBan =
             this.profile.organizationalServiceProviderProfile?.iBanPath;
           this.IBanName =
@@ -482,6 +482,7 @@ export class SpProfileComponent implements OnInit {
             });
           }
           this.toester.info('تم تعديل البيانات ');
+          window.location.reload();
         },
         error: (err: any) => {
           console.log(err);

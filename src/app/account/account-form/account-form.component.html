@@ -1,6 +1,6 @@
-<section >
+<section class="myform" >
       <div class="container-fluid">
-        <div class="row">
+        <div class="row vh-100 ">
           <div class="col-xl-6 d-flex justify-content-center align-items-center p-3">
             <div class="card-body text-black">
               <div class="text-center">
@@ -146,17 +146,13 @@
               <div class="row" *ngIf="type==='signup'">
                 <div
                 class=""
-                [ngClass]="{
-                'col-6':
-                      newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb',
-                'col-12':
-                      newselect !== 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'
-                }"
+                [ngClass]=" newselect == 'e33f6a34-9655-4d3a-8bcd-dc9be0bb84fb'?'col-6' :  'col-12'"
                 >
                 <label class="form-label">نوع الحساب</label>
                 <select
                 [(ngModel)]="categoriySelector"
                 class="form-control"
+                (change)="checkrole(categoriySelector)"
                 formControlName="roleId"
                 >
                 <option *ngFor="let user of userdata" [value]="user.id">
@@ -453,6 +449,14 @@
                 الذهاب لتسجيل الدخول
                 </a>
                 </div>
+              <div *ngIf="type==='signup'">
+                <a
+                routerLink="/account/login"
+                class="cairo fs-6 link-primary text-decoration-none"
+                >
+                هل لديك حساب بالفعل , سجل الآن!
+                </a>
+                </div>
               </div>
        
          
@@ -462,9 +466,8 @@
 
             </div>
           </div>
-          <div class="col-xl-6 d-none d-xl-block vh-100">
-          </div>
-          <div class="col-xl-6 d-none  p-0 m-0 d-xl-block vh-100 slider">
+        
+          <div class="col-xl-6 d-none  p-0 m-0 d-xl-block h-100 slider">
             <app-silderaccount></app-silderaccount>
           </div>
         </div>

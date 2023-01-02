@@ -3,22 +3,27 @@
     <app-navbar></app-navbar>
 
     <div
-      class="container-fluid"
-      style="background-color: #f8fafc; padding-top: 78px"
+      class="container-fluid contentDiv"
     >
-      <div class="row" id="aside">
-        <app-sidebar [data]="data"></app-sidebar>
+      <div class="row" >
+        <app-sidebar [data]="data" [profileAccepted]="profileAccepted"></app-sidebar>
         <div class="col-2 col-md-3 col-lg-2" [hidden]="status"></div>
-        <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10 m-0 p-0' : 'col-12 m-0 p-0'">
-          <div class="pt-3" style="min-height: 90vh">
+        <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10 ' : 'col-12'">
+          <div class="pt-3" >
             <router-outlet></router-outlet>
           </div>
-          <app-footer></app-footer>
         </div>
       </div>
     </div>
+    <div class="row p-0 m-0">
+      <div class="col-2 col-md-3 col-lg-2"></div>
+      <div [ngClass]="!status ? 'col-10 col-md-9 col-lg-10 p-0 m-0 ' : 'col-12 p-0 m-0'">
+
+        <app-footer></app-footer>
+      </div>
+    </div>
   </div>
-  <div class="overlay p-5" *ngIf="showpopup">
+  <div  class="overlay p-5" *ngIf="showpopup && profileAccepted">
     <div class="popup p-5">
       <h5 class="text-center mb-4">نوع طلب السعر</h5>
       <a class="close" style="cursor: pointer" (click)="showpopup = false"
@@ -48,20 +53,12 @@
   </div>
 </div>
 <span
-  (click)="openPriceRequest()"
+*ngIf="profileAccepted == true"
   class="btn cairo p-3 px-4 text-white askBtn"
-  style="
-    background-color: #004057;
-    position: fixed;
-    bottom: 30px;
-    left: 20px;
-    z-index: 999;
-    font-size: 15px;
-  "
 >
   طلب عرض السعر
 </span>
-<div (click)="startChatwithAdmin = true">
+<div *ngIf="profileAccepted == true" (click)="startChatwithAdmin = true">
   <app-msg-to-admin ></app-msg-to-admin>
 </div>
 <div *ngIf="startChatwithAdmin">

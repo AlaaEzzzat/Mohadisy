@@ -32,34 +32,38 @@ export class StartChatComponent implements OnInit {
     }
   }
   sendMessage(message: string) {
-    if (this.process == 'chat') {
-      if (this.receiverId == '') {
-        this.receiverId = '1b146acc-ebff-4c65-9edf-64d5f046d8a3';
-      }
-      var type: number = 1;
-      this.message.content = message;
-      this.message.messageTypeId = type;
-      this.message.receiverId = this.receiverId;
-      this.sendMessageToEndPoint(this.message, this.receiverId);
-      if (this.fileMessage) {
-        type = 2;
-        this.message.content = this.fileMessage;
+    if(message ==''){
+      this._toastr.error('نأمل إدخال محتوي للرسالة');
+    }else{
+      if (this.process == 'chat') {
+        if (this.receiverId == '') {
+          this.receiverId = '1b146acc-ebff-4c65-9edf-64d5f046d8a3';
+        }
+        var type: number = 1;
+        this.message.content = message;
         this.message.messageTypeId = type;
         this.message.receiverId = this.receiverId;
-        this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
+        this.sendMessageToEndPoint(this.message, this.receiverId);
+        if (this.fileMessage) {
+          type = 2;
+          this.message.content = this.fileMessage;
+          this.message.messageTypeId = type;
+          this.message.receiverId = this.receiverId;
+          this.sendMessageToEndPoint(this.fileMessage, this.receiverId);
+        }
+      } else if (this.process == 'complaint') {
+        this.message.content = message;
+        this.message.applicationUserId = this.receiverId;
+        this.complaintService.storeComplaint(this.message).subscribe({
+          next: (data: any) => {
+            this._toastr.info(data.message);
+            this.toggleStatus();
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
       }
-    } else if (this.process == 'complaint') {
-      this.message.content = message;
-      this.message.applicationUserId = this.receiverId;
-      this.complaintService.storeComplaint(this.message).subscribe({
-        next: (data: any) => {
-          this._toastr.info(data.message);
-          this.toggleStatus();
-        },
-        error: (error: any) => {
-          console.log(error);
-        },
-      });
     }
   }
   sendMessageToEndPoint(message: any, receiverId: any) {

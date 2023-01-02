@@ -27,6 +27,9 @@ export class ProfilecomplateComponent implements OnInit {
   userSuccess: boolean = false;
   addingDistrict: boolean = false;
   isComplete: boolean = false;
+  loginUsername:any= '';
+  loginEmail:any= '';
+  loginPhoneNumber:any= '';
   isCreated: boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -41,15 +44,10 @@ export class ProfilecomplateComponent implements OnInit {
       applicationUser: this.fb.group({
         userName: [
           '',
-          [
-            Validators.required,
-            Validators.pattern(
-              '^(?=.{4,}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$'
-            ),
-          ],
+         [Validators.required, Validators.pattern('^[a-z][a-z0-9._]{3,}$')],
         ],
         phoneNumber: [
-          '',
+          "",
           [
             Validators.required,
             Validators.pattern('^(966)(5)[0-9]{8}$'),
@@ -57,7 +55,7 @@ export class ProfilecomplateComponent implements OnInit {
             Validators.minLength(12),
           ],
         ],
-        email: ['', [Validators.required, Validators.email]],
+       
       }),
       idNumber: [
         '',
@@ -88,6 +86,12 @@ export class ProfilecomplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginPhoneNumber=localStorage.getItem('phoneNumber')?.replace(/"/g, '') || '';
+    this.phoneNumber?.setValue(this.loginPhoneNumber);
+    this.loginEmail=localStorage.getItem('email')?.replace(/"/g, '') || '';
+    this.loginUsername=localStorage.getItem('name')?.replace(/"/g, '') || '';
+    this.userName?.setValue(this.loginUsername)    
+    console.log(this.loginEmail, this.loginUsername, this.loginPhoneNumber)
     this.provider.getRegions().subscribe((data: any) => {
       this.regionsList = data.data;
     });
@@ -100,11 +104,6 @@ export class ProfilecomplateComponent implements OnInit {
 
   numberOnly(event: any): boolean {
    return this.functionsService.numberOnly(event);
-   /*  const charCode = event.which ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true; */
   }
 
   englishOnly(event: any): boolean {
@@ -166,12 +165,14 @@ export class ProfilecomplateComponent implements OnInit {
   onImageUpload(event: any) {
     if (event.target.files.length > 0) {
       const myImage = event.target.files[0];
+      console.log(myImage)
       this.registerForm.get('imageFile')?.setValue(myImage);
     }
   }
 
   registerFormSubmit() {
     this.user = this.registerForm.value;
+    this.user.email = this.loginEmail;
     let fullNameArr = this.registerForm.get('firstName')?.value.split(' ');
     this.user.firstName = fullNameArr.splice(0, 1)[0];
     this.user.lastName = fullNameArr.join(' ');

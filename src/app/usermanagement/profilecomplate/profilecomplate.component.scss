@@ -103,3 +103,16 @@ display: flex;
 
   }
 }
+p,div,label{
+  font-family: 'cairo';
+  
+}
+.saveBtn{
+  background-color: #0b7e74;
+  transition: all 0.5s ease-in-out;
+  color: #FFF
+}
+.saveBtn:hover{
+  background-color: #004057;
+
+}

@@ -9,7 +9,7 @@
             <ng-container *ngFor="let item of data; let i=index">
               <div
                 class="p-2 my-4 pe-3 sidebar-item col-12"
-                [routerLink]="item.routing"
+                (click)="routing(item.routing)"
                 [routerLinkActive]="['active']">
                 <img
                   [src]="item.image"
