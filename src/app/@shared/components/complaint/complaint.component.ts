@@ -8,23 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComplaintComponent implements OnInit {
   userRole: any = '';
-  constructor(
-    private complaintService: ComplaintService,
-  ) {}
+  constructor(private complaintService: ComplaintService) {}
   complaints: any = [];
   ngOnInit(): void {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = localStorage.getItem('role')?.replace(/"/g, '');
     this.complaintService.getComplaints().subscribe((data: any) => {
       this.complaints = data.data;
-      if (data.data.length > 0) {
-        if (localStorage.getItem('role') == '"Service provider"') {
-          this.complaintService
-            .getAllClientProfiles()
-            .subscribe((data: any) => {
-              console.log(data);
-            });
-        }
-      }
+      console.log(data.data);
     });
   }
   startChat: boolean = false;

@@ -16,14 +16,14 @@ export class SidebarComponent implements OnInit {
       image: 'assets/images/Group.png',
     },
   ];
-  @Input() profileAccepted: any;
+  @Input() profileAccepted: any="true";
   constructor(private router: Router, private toaster: ToastrService) {}
 
   ngOnInit(): void {
     console.log(this.profileAccepted)
   }
   routing(link: any) {
-    if (this.profileAccepted=="true" ) {
+    if (true ) {
       console.log(this.profileAccepted)
       this.router.navigate([link]);
     } else {

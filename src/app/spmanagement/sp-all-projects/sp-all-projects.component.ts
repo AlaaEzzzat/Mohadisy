@@ -286,6 +286,7 @@ export class SpAllProjectsComponent implements OnInit {
         .getMilestonesByOfferId(project.offers[0]?.id)
         .subscribe((milestones: any) => {
           this.projectMilestnes = milestones.data;
+          console.log(this.projectMilestnes)
           this.projectMilestnes.map((mile: any) => {
             if (mile.isPaid) {
               this.numOfCompltedMilesones++;

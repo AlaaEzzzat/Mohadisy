@@ -2,195 +2,136 @@
   <div class="row">
     <div class="col-md-9">
       <div class="card mb-3 border-0 rounded-0">
-        <div class="row position-relative">
-          <div
-            (click)="editOverview = true"
-            class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
-          >
-            <img
-              *ngIf="!userImgChanged"
-              [src]="user.profilePicturePath"
-              class="img-fluid rounded-start"
-              alt="..."
-              style="width: 150px"
-            />
-            <img
-              *ngIf="userImgChanged"
-              [src]="userImg"
-              class="img-fluid rounded-start"
-              alt="..."
-            />
-            <div class="p-2 position-absolute bottom-0 changePic">
-              <input
-                type="file"
-                (change)="uplaodImg($event, proImg.name)"
-                #proImg
-                name="profileImage"
-                id="image"
-                style="width: 20px"
-                class="image"
-              />
-              <svg
-                id="photo-camera"
-                xmlns="http://www.w3.org/2000/svg"
-                width="21.368"
-                height="17.658"
-                viewBox="0 0 21.368 17.658"
-              >
-                <g id="Group_374" data-name="Group 374">
-                  <g id="Group_330" data-name="Group 330">
-                    <g id="Group_329" data-name="Group 329">
-                      <path
-                        id="Path_77"
-                        data-name="Path 77"
-                        d="M18.252,56.121H15.581a.446.446,0,0,1-.422-.318l-.281-.881a2.234,2.234,0,0,0-2.112-1.589H8.6a2.232,2.232,0,0,0-2.111,1.588L6.21,55.8a.448.448,0,0,1-.423.318H3.116A3.19,3.19,0,0,0,0,59.374v8.364a3.19,3.19,0,0,0,3.116,3.253H18.252a3.19,3.19,0,0,0,3.116-3.253V59.374A3.19,3.19,0,0,0,18.252,56.121Zm2.226,11.617a2.279,2.279,0,0,1-2.226,2.323H3.116A2.279,2.279,0,0,1,.89,67.738V59.374a2.279,2.279,0,0,1,2.226-2.323H5.787A1.341,1.341,0,0,0,7.054,56.1l.282-.883A1.339,1.339,0,0,1,8.6,54.262h4.163a1.341,1.341,0,0,1,1.267.954l.281.882a1.341,1.341,0,0,0,1.267.953h2.671a2.279,2.279,0,0,1,2.226,2.323v8.364Z"
-                        transform="translate(0 -53.333)"
-                        fill="#fff"
-                      />
-                    </g>
-                  </g>
-                  <g
-                    id="Group_373"
-                    data-name="Group 373"
-                    transform="translate(6 4.647)"
-                  >
-                    <g id="Group_332" data-name="Group 332">
-                      <g id="Group_331" data-name="Group 331">
-                        <path
-                          id="Path_78"
-                          data-name="Path 78"
-                          d="M132.222,160c-2.329,0-4.222,2.5-4.222,5.576s1.894,5.576,4.222,5.576,4.222-2.5,4.222-5.576S134.551,160,132.222,160Zm0,10.223c-1.94,0-3.519-2.085-3.519-4.647s1.578-4.647,3.519-4.647,3.518,2.085,3.518,4.647S134.162,170.223,132.222,170.223Z"
-                          transform="translate(-128 -160)"
-                          fill="#fff"
-                        />
+        <div class="row bg-white">
+          <div class="col-lg-12">
+            <div class="card mb-3 border-0 rounded-0">
+              <div class="row position-relative">
+                <div
+                  (click)="editOverview = true"
+                  class="col-lg-2 bg-light position-relative d-flex align-items-center justify-content-center"
+                >
+                  <img
+                    *ngIf="!userImgChanged"
+                    [src]="user.profilePicturePath
+                    "
+                    class="img-fluid rounded-start"
+                    alt="..."
+                    style="width: 100px"
+                  />
+                  <img
+                    *ngIf="userImgChanged"
+                    [src]="userImg"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                  <div class="p-2 position-absolute bottom-0 changePic">
+                    <input
+                      type="file"
+                      (change)="uplaodImg($event, proImg.name)"
+                      #proImg
+                      name="profileImage"
+                      id="image"
+                 
+                      class="image"
+                    />
+                    <svg
+                      id="photo-camera"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="21.368"
+                      height="17.658"
+                      viewBox="0 0 21.368 17.658"
+                    >
+                      <g id="Group_374" data-name="Group 374">
+                        <g id="Group_330" data-name="Group 330">
+                          <g id="Group_329" data-name="Group 329">
+                            <path
+                              id="Path_77"
+                              data-name="Path 77"
+                              d="M18.252,56.121H15.581a.446.446,0,0,1-.422-.318l-.281-.881a2.234,2.234,0,0,0-2.112-1.589H8.6a2.232,2.232,0,0,0-2.111,1.588L6.21,55.8a.448.448,0,0,1-.423.318H3.116A3.19,3.19,0,0,0,0,59.374v8.364a3.19,3.19,0,0,0,3.116,3.253H18.252a3.19,3.19,0,0,0,3.116-3.253V59.374A3.19,3.19,0,0,0,18.252,56.121Zm2.226,11.617a2.279,2.279,0,0,1-2.226,2.323H3.116A2.279,2.279,0,0,1,.89,67.738V59.374a2.279,2.279,0,0,1,2.226-2.323H5.787A1.341,1.341,0,0,0,7.054,56.1l.282-.883A1.339,1.339,0,0,1,8.6,54.262h4.163a1.341,1.341,0,0,1,1.267.954l.281.882a1.341,1.341,0,0,0,1.267.953h2.671a2.279,2.279,0,0,1,2.226,2.323v8.364Z"
+                              transform="translate(0 -53.333)"
+                              fill="#fff"
+                            />
+                          </g>
+                        </g>
+                        <g
+                          id="Group_373"
+                          data-name="Group 373"
+                          transform="translate(6 4.647)"
+                        >
+                          <g id="Group_332" data-name="Group 332">
+                            <g id="Group_331" data-name="Group 331">
+                              <path
+                                id="Path_78"
+                                data-name="Path 78"
+                                d="M132.222,160c-2.329,0-4.222,2.5-4.222,5.576s1.894,5.576,4.222,5.576,4.222-2.5,4.222-5.576S134.551,160,132.222,160Zm0,10.223c-1.94,0-3.519-2.085-3.519-4.647s1.578-4.647,3.519-4.647,3.518,2.085,3.518,4.647S134.162,170.223,132.222,170.223Z"
+                                transform="translate(-128 -160)"
+                                fill="#fff"
+                              />
+                            </g>
+                          </g>
+                          <g
+                            id="Group_334"
+                            data-name="Group 334"
+                            transform="translate(1.407 1.859)"
+                          >
+                            <g id="Group_333" data-name="Group 333">
+                              <path
+                                id="Path_79"
+                                data-name="Path 79"
+                                d="M173.482,202.667c-1.552,0-2.815,1.667-2.815,3.718a.366.366,0,1,0,.7,0c0-1.537.947-2.788,2.111-2.788a.483.483,0,0,0,0-.929Z"
+                                transform="translate(-170.667 -202.667)"
+                                fill="#fff"
+                              />
+                            </g>
+                          </g>
+                        </g>
                       </g>
-                    </g>
-                    <g
-                      id="Group_334"
-                      data-name="Group 334"
-                      transform="translate(1.407 1.859)"
-                    >
-                      <g id="Group_333" data-name="Group 333">
-                        <path
-                          id="Path_79"
-                          data-name="Path 79"
-                          d="M173.482,202.667c-1.552,0-2.815,1.667-2.815,3.718a.366.366,0,1,0,.7,0c0-1.537.947-2.788,2.111-2.788a.483.483,0,0,0,0-.929Z"
-                          transform="translate(-170.667 -202.667)"
-                          fill="#fff"
-                        />
-                      </g>
-                    </g>
-                  </g>
-                </g>
-              </svg>
-
-              <span class="me-2 text-white">تغيير الصوره</span>
-            </div>
-          </div>
-          <div class="col-lg-10 d-flex align-items-center">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-5">
-                  <div class="cairo mb-3">
-                    <p
-                      class="card-title bold d-flex justify-content-around"
-                      (click)="editName = true"
-                    >
-                      <input
-                        id="name"
-                        type="text"
-                        [autofocus]="editName"
-                        [(ngModel)]="name"
-                        class="bold editable"
-                      />
-                      <i
-                        (click)="focusMyInput('#name')"
-                        class="fa fa-pencil"
-                      ></i>
-                    </p>
-                    <p
-                      class="card-text secondColor d-flex justify-content-around"
-                      (click)="editOverview = true"
-                    >
-                      <input
-                        id="phone"
-                        type="text"
-                        [(ngModel)]="phoneNumber"
-                        class="bold editable"
-                      />
-                      <i
-                        (click)="focusMyInput('#phone')"
-                        class="fa fa-pencil"
-                      ></i>
-                    </p>
-                    <p
-                      class="card-text secondColor"
-                      (click)="editOverview = true"
-                    >
-                      <span class="bold pe-4">{{ email }}</span>
-                    </p>
+                    </svg>
+  
+                    <span class="me-2 text-white">تغيير الصوره</span>
                   </div>
                 </div>
-                <div
-                  class="col-lg-7 d-flex flex-column justify-content-between"
-                >
-                  <div
-                    class="d-flex align-items-baseline justify-content-around"
-                  >
-                    <h3
-                      [ngClass]="
+                <div class="col-lg-10 d-flex align-items-center">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-5">
+                        <div class="cairo mb-3">
+                          <p
+                            class="card-title bold d-flex justify-content-between"> {{name}} </p>
+                          <p class="card-title bold"> {{phoneNumber}}</p>
+                          <p
+                            class="card-text bold"
+                          >
+                            {{ email }}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        class="col-lg-7 d-flex flex-column justify-content-between"
+                      >
+                        <div
+                        
+                        >
+                          <p
+                            [ngClass]="
                         user.applicationUser?.isActive
                           ? 'secondColor'
                           : 'text-danger'
-                      "
-                      class="card-title"
-                    >
-                      {{
-                        user.applicationUser?.isActive
+                            "
+                            class="card-title"
+                          >
+                            {{  user.applicationUser?.isActive
                           ? "  حساب نشط"
-                          : "  حساب معطل"
-                      }}
-                    </h3>
-                    <span class="mx-1 gray"> | </span>
-                    <p class="card-text">رقم التعريف : {{ user.idNumber }}</p>
-                  </div>
-                  <div class="d-flex flex-row-reverse ms-4">
-                    <div>
-                      <a class="me-2">
-                        <img
-                          src="/assets/icons/global.png"
-                          alt=""
-                          class="img-fluid imgIcon"
-                        />
-                      </a>
-                      <a class="me-2">
-                        <img
-                          src="/assets/icons/in.png"
-                          alt=""
-                          class="img-fluid imgIcon"
-                        />
-                      </a>
-                      <a class="me-2">
-                        <img
-                          src="/assets/icons/fac.png"
-                          alt=""
-                          class="img-fluid imgIcon"
-                        />
-                      </a>
-                      <a class="me-2">
-                        <img
-                          src="/assets/icons/be.png"
-                          alt=""
-                          class="img-fluid imgIcon"
-                        />
-                      </a>
-                      <a class="me-2">
-                        <img
-                          src="/assets/icons/twitter.png"
-                          alt=""
-                          class="img-fluid imgIcon"
-                        />
-                      </a>
+                          : "  حساب معطل" }}
+                          </p>
+                  
+                          <p class="card-text" >
+                            رقم التعريف :
+                            {{user.idNumber  }}
+                          </p>
+                        </div>
+                     
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -199,9 +140,28 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-md-6">
-          <div class="map h-100">
+          <div>
+            <h5 class="cairo mt-2">
+              <i class="fa fa-map-marker"></i>
+              العنوان
+            </h5>
+            <p class="mx-2 mt-2">
+              {{
+               user?.district?.city
+                  ?.region?.nameAr
+              }},
+              {{
+               user?.district?.city
+                  ?.nameAr
+              }},
+              {{
+               user?.district?.nameAr
+              }}
+            </p>
+          </div>
+          <div class="map">
             <a
               class="direction p-3 cairo"
               [href]="map + location"
@@ -214,11 +174,18 @@
             ></iframe>
           </div>
         </div>
-        <div class="col-md-6 mt-3">
+        <div class="col-md-6">
+          <div style="margin-bottom: 40px;">
+            <h5 class="cairo mt-2">
+              <i class="fa fa-id-card"></i>
+              إثبات الهويه
+            </h5>
+            
+          </div>
           <div class="nationalId">
             <img *ngIf="!idPicChanged" [src]="user.idPath" />
             <img *ngIf="idPicChanged" [src]="idImgeUrl" />
-            <div class="over">
+           <!--  <div class="over">
               <div class="d-flex p-3 justify-content-between">
                 <span class="bold text-white">إثبات الهويه</span>
                 <div class="d-flex">
@@ -256,9 +223,9 @@
                       />
                     </g>
                   </svg>
-                </div>
+                </div> 
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
         <div class="col-12 mt-5 d-flex justify-content-center">

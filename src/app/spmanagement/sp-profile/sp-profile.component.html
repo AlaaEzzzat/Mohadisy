@@ -1,4 +1,4 @@
-<div class="row container-fluid">
+<div class="row container-fluid pt-3">
   <div class="col-xl-9 col-lg-12 mb-3">
     <div *ngIf=" userType=='CO'" class="row">
       <div class="col-lg-12">
@@ -48,7 +48,7 @@
                   "
                   class="img-fluid rounded-start"
                   alt="..."
-                  style="width: 150px"
+                  style="width: 100px"
                 />
                 <img
                   *ngIf="userImgChanged"
@@ -63,7 +63,7 @@
                     #proImg
                     name="profileImage"
                     id="image"
-                    style="width: 20px"
+               
                     class="image"
                   />
                   <svg
@@ -142,7 +142,7 @@
                       class="col-lg-7 d-flex flex-column justify-content-between"
                     >
                       <div
-                        class="d-flex align-items-baseline justify-content-around"
+                      
                       >
                         <p
                           [ngClass]="
@@ -152,7 +152,7 @@
                         >
                           {{ profile?.isActive ? "  حساب نشط" : "  حساب معطل" }}
                         </p>
-                        <span class="mx-1 gray"> | </span>
+                
                         <p class="card-text" >
                           رقم التعريف :
                           {{userType=='CO'?
@@ -334,17 +334,19 @@
                       >
                         <span>{{ item.title + " : " + oldProjectService }}</span>
                       
-                        <i
+                      <!--   <i
                           (click)="serviceEdit = true"
                           class="fa me-3 fa-pencil"
-                        ></i>
+                        ></i> -->
                       </p>
-                      <p
+                      <div
                         *ngIf="item.id == 3"
                         class="card-title bold d-flex justify-content-around align-items-center"
                       >
+                      <div>
                         <span>{{ item.title + " : " + oldProjectSubService}}</span>   
-                      </p>
+                      </div>
+                      </div>
                   </div>
                 </div>
               </ng-container>

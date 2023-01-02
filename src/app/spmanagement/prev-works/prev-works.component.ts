@@ -163,6 +163,7 @@ export class PrevWorksComponent implements OnInit {
     this.api.get(`https://app.mohandisy.com/api/ServiceProviderWork/getServiceProviderWorkFilesByWorkId/${workId}`).subscribe(data=>
     {
       this.workFile=data.data;
+      console.log(this.workFile);
     });
   }
   get f() {

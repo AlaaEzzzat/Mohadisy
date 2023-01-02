@@ -424,7 +424,7 @@ export class CompanyCompleteProfileComponent implements OnInit {
         },
       });
     } else{
-      this._toastr.error("يجب إدخال إسم الحي")
+      this._toastr.error("نأمل إدخال إسم الحي")
     }
   }
   prevWorksFormSubmit() {

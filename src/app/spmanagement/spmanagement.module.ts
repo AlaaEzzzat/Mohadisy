@@ -24,7 +24,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
 import { SpPriceOffersComponent } from './sp-price-offers/sp-price-offers.component';
 import { DealWithOfferComponent } from './deal-with-offer/deal-with-offer.component';
 import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     SpDashBoardComponent,
@@ -50,7 +50,7 @@ import { SpAllProjectsComponent } from './sp-all-projects/sp-all-projects.compon
     MatSelectModule,
     MatFormFieldModule,
     SharedModule,
-    MatIconModule,
+    MatIconModule,NgbModule,
     CommonModule,
     SPmanagementRoutingModule,
     FormsModule,

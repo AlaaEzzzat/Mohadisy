@@ -261,42 +261,26 @@
                       <!-------------Carousel------------------>
                       <div class="modal fade "  [id]="'work'+work.id" >
                         <div class="modal-dialog  modal-xl " >
-                          <button type="button" class="close btn " data-bs-dismiss="modal"
-                          >
+                          <button type="button" class="close btn " data-bs-dismiss="modal">
                             <i>&times;</i>
                           </button>
                           <div class="modal-content w-100 border-0" style="background-color:transparent;">
-                            <div class="modal-body ">
-                              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                
-                                  <ng-container *ngFor="let img of workFile; let i=index;">
-                                    <div *ngIf="i==0" class="carousel-item active">
+                            <div class="modal-body "> 
+                              <ngb-carousel *ngIf="workFile">
+                                <ng-container *ngFor="let img of workFile; let i=index;">
+                                  <ng-template ngbSlide>
+                                    <div class="carousel-item active">
                                       <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
                                     </div>
-                                    <div *ngIf="i!=0" class="carousel-item">
-                                      <img src="{{img?.filePath}}" class="d-block w-100" alt="img" >
-                                    </div>
-                                  </ng-container>
-                                </div>
-                
-                              </div>
-                
+                                   
+                                  </ng-template>
+                                </ng-container>
+                              </ngb-carousel>
                             </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-                
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
                           </div>
                         </div>
                       </div>
-  
                       <!----------------------------->
-
-
                 </ul>
               </td>
               <td>

@@ -346,7 +346,7 @@ export class AdminDashboardComponent implements OnInit {
         this.admins = data.data.activatedUsers;
       },
       error: (er) => {
-        alert(er.message);
+        console.log(er);
       },
     });
   }

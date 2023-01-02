@@ -180,7 +180,7 @@ export class SpProfileComponent implements OnInit {
            
             this.oldProjectService = this.profile?.organizationalServiceProviderProfile?.projectService.name;
             this.oldProjectSubService = this.profile?.organizationalServiceProviderProfile?.ospprofileSubServices[0]?.projectSubService.name;
-          console.log(this.oldProjectSubService)
+          console.log("old",this.oldProjectSubService)
             this.IBan =
             this.profile.organizationalServiceProviderProfile?.iBanPath;
           this.IBanName =
@@ -223,8 +223,7 @@ export class SpProfileComponent implements OnInit {
           this.oldOrganizationalRepresentativeEmail =
             this.organizationalRepresentativeEmail;
             this.selectedProjectServiceId= this.projectService?.id;
-            this.oldProjectService = this.profile?.organizationalServiceProviderProfile?.projectService.name;
-            this.oldProjectSubService = "";
+          
           if (
             this.profile?.organizationalServiceProviderProfile?.licenseFile !=
             null

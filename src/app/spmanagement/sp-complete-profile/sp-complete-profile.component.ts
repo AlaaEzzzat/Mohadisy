@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ServiceProviderService } from './../../@core/services/Provider/service-provider.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ApiService } from 'src/app/@core/api.service';
@@ -36,7 +37,8 @@ export class SpCompleteProfileComponent implements OnInit {
     private provider: ProviderServiceService,
     private apiService: ApiService,
     private clientService: ClientService,
-    private serviceProviderService: ServiceProviderService
+    private serviceProviderService: ServiceProviderService,
+    private toaster:ToastrService
   ) {
     this.completeProfileForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/\s/g)]],
@@ -282,30 +284,34 @@ export class SpCompleteProfileComponent implements OnInit {
       );
   }
   addAdress(district: any) {
-    let region = this.regionsList.find((region: any) => {
-      if (region.id == this.completeProfileForm?.get('region')?.value) {
-        return region;
-      }
-    });
-    let city = this.citiesList.find((city: any) => {
-      if (city.id == this.completeProfileForm?.get('city')?.value) {
-        return city;
-      }
-    });
-    let newAddress = {
-      region: region.nameAr,
-      city: city.nameAr,
-      district: district,
-    };
-    this.provider.postAdress(newAddress).subscribe({
-      next: (response: any) => {
-        console.log('address Posted');
-        this.addingDistrict = false;
-        this._getDistricts();
-      },
-      error: (err: any) => {
-        console.log(err);
-      },
-    });
+    if(district){
+      let region = this.regionsList.find((region: any) => {
+        if (region.id == this.completeProfileForm?.get('region')?.value) {
+          return region;
+        }
+      });
+      let city = this.citiesList.find((city: any) => {
+        if (city.id == this.completeProfileForm?.get('city')?.value) {
+          return city;
+        }
+      });
+      let newAddress = {
+        region: region.nameAr,
+        city: city.nameAr,
+        district: district,
+      };
+      this.provider.postAdress(newAddress).subscribe({
+        next: (response: any) => {
+          console.log('address Posted');
+          this.addingDistrict = false;
+          this._getDistricts();
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
+          }else{
+            this.toaster.error("نأمل إدخال إسم الحي ")
+          }
   }
 }
