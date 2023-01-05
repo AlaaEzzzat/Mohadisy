@@ -31,6 +31,11 @@ export class AdminDashService {
       `${environment.baseUrl}/api/Dashboard/getAdminStatus`
     );
   }
+  getProfile(): Observable<any> {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/OrganizationalServiceProvider/getProfile`
+    );
+  }
   getServiceProviderStatus() {
     return this._HttpClient.get<any>(
       `${environment.baseUrl}/api/Dashboard/getServiceProviderStatus`
@@ -56,6 +61,8 @@ export class AdminDashService {
       `${environment.baseUrl}/api/Role/getOfficialRoles`
     );
   }
+
+ 
   officialUserRegister(objectStatus: any): Observable<any> {
     return this._HttpClient.post<any>(
       `${environment.baseUrl}/api/Authenticate/officialUserRegister`,
@@ -92,5 +99,29 @@ export class AdminDashService {
  deleteAppointment(object: any): Observable<any> {
     return this._HttpClient.post<any>(
       `${environment.baseUrl}/api/Appointment/deleteAppointment/${object}`,{},this.httpoptions);
+  }
+
+  /* *********************************************** */
+  storeEmployees(employee: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Employee/storeEmployees`,[employee]);
+  }
+  updateEmployee(employee:any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Employee/updateEmployee`,employee);
+  }
+  deleteEmployee(employeeId: any): Observable<any> {
+    return this._HttpClient.post<any>(
+      `${environment.baseUrl}/api/Employee/deleteEmployee/${employeeId}`,{});
+  }
+  getEmployees() {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Employee/getEmployees`
+    );
+  }
+  getEmployeeLevels() {
+    return this._HttpClient.get<any>(
+      `${environment.baseUrl}/api/Employee/getEmployeeLevels`
+    );
   }
 }

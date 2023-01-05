@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div  class="overlay p-5" *ngIf="showpopup && profileAccepted">
+  <div  class="overlay p-5" *ngIf="showpopup">
     <div class="popup p-5">
       <h5 class="text-center mb-4">نوع طلب السعر</h5>
       <a class="close" style="cursor: pointer" (click)="showpopup = false"
@@ -53,12 +53,12 @@
   </div>
 </div>
 <span
-*ngIf="profileAccepted == true"
+(click)="openPriceRequest()"
   class="btn cairo p-3 px-4 text-white askBtn"
 >
   طلب عرض السعر
 </span>
-<div *ngIf="profileAccepted == true" (click)="startChatwithAdmin = true">
+<div (click)="startChatwithAdmin = true">
   <app-msg-to-admin ></app-msg-to-admin>
 </div>
 <div *ngIf="startChatwithAdmin">

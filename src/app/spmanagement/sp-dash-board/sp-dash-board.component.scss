@@ -104,3 +104,31 @@ text-gary {
   background: #d3d3d3;
   border-radius: 10px;
 }
+.btn-add{
+ 
+  width: 150px;
+  color: #FFF;
+  background-color: #004057;
+  padding: 10px;
+}
+.main-bk{
+  background-color: #004057;
+}
+.modaltitle{
+  background-color: #18AF9A !important;
+  >h2,>button{
+    color: white !important;
+  }
+  >button:focus,>button:active{
+box-shadow: none !important;
+border: none!important;
+  }
+  >button:hover{
+    background-color:transparent !important;
+    color: white !important;
+  }
+
+}
+.addAccount{
+  cursor: pointer;
+}

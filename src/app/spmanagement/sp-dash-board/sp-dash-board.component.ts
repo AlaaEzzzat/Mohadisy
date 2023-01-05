@@ -1,3 +1,5 @@
+import { IEmployee } from './../../@core/utils/iemployee';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AdminDashService } from 'src/app/@core/services/admin/admin-dash.service';
 import { ClientService } from './../../@core/services/client/client.service';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 
 import { Chart, registerables } from 'node_modules/chart.js';
+import { ToastrService } from 'ngx-toastr';
 Chart.register(...registerables);
 @Component({
   selector: 'app-sp-dash-board',
@@ -15,6 +18,8 @@ Chart.register(...registerables);
 })
 export class SpDashBoardComponent implements OnInit {
   data: any = {};
+  ospProfile: any = {};
+  employee: IEmployee = {} as IEmployee;
   completedProjects: any = [];
   selected: Date = new Date();
   color: ThemePalette = 'primary';
@@ -24,13 +29,32 @@ export class SpDashBoardComponent implements OnInit {
   completedProjectsCost: any = 0;
   currentProjectsCost: any = 0;
   testimonials: any = [];
+  addEmployeeForm!: FormGroup;
   constructor(
     private _api: ApiService,
     private adminDashService: AdminDashService,
-    private clientService: ClientService
-  ) {}
-
+    private clientService: ClientService,
+    private fb: FormBuilder,
+    private toaser: ToastrService
+  ) {
+    this.addEmployeeForm = this.fb.group({
+      name: ['', [Validators.required]],
+      employeeLevelId: ['', [Validators.required]],
+    });
+  }
+  isCoProvider:boolean=false
   ngOnInit(): void {
+    if(localStorage.getItem('type')=='"CO"'){
+      this.isCoProvider=true;
+      this.getEmployeeLevelsFun();
+      this.getEmployeesFun();
+    }else{
+      this.isCoProvider=false;
+    }
+    this.adminDashService.getProfile().subscribe((profile: any) => {
+      console.log(profile.data);
+      this.ospProfile = profile.data.organizationalServiceProviderProfile;
+    });
     this.adminDashService.getServiceProviderStatus().subscribe((data) => {
       this.data = data.data;
       this.currentProjects = this.data.spProjects.currentProjects;
@@ -53,6 +77,20 @@ export class SpDashBoardComponent implements OnInit {
         : '';
       this.testimonials = this.data.testimonials;
       this.renderDouChart();
+    });
+  }
+  employeeLevels: any = [];
+  employees: any = [];
+  getEmployeeLevelsFun() {
+    this.adminDashService.getEmployeeLevels().subscribe((data: any) => {
+      this.employeeLevels = data.data;
+      console.log(this.employeeLevels);
+    });
+  }
+  getEmployeesFun() {
+    this.adminDashService.getEmployees().subscribe((data: any) => {
+      this.employees = data.data;
+      console.log(this.employees);
     });
   }
   getOfferSender(project: any) {
@@ -148,4 +186,65 @@ export class SpDashBoardComponent implements OnInit {
     },
     nav: true,
   };
+  get f() {
+    return this.addEmployeeForm.controls;
+  }
+  get employeeName() {
+    return this.addEmployeeForm.get('name');
+  }
+  addEmployeeFormSubmit() {
+    if(this.method=="إضافة"){
+      this.employee = this.addEmployeeForm.value;
+      this.employee.employeeLevelId = Number(this.employee.employeeLevelId);
+      console.log(this.employee);
+      this.adminDashService.storeEmployees(this.employee).subscribe({
+        next: (res: any) => {
+          this.toaser.info(res.message);
+          this.getEmployeesFun();
+        },
+        error: (err: any) => {
+          this.toaser.info(err.message);
+        },
+      });
+    }else{
+
+      this.employee = this.addEmployeeForm.value;
+      this.updatedEmployee.employeeLevelId = Number(this.employee.employeeLevelId);
+      this.updatedEmployee.name = this.employee.name;
+      delete this.updatedEmployee?.employeeLevel
+      delete this.updatedEmployee?.organizationalServiceProviderProfile
+      console.log(this.updatedEmployee);
+      this.adminDashService.updateEmployee(this.updatedEmployee).subscribe({
+        next: (res: any) => {
+          this.toaser.info(res.message);
+          console.log(res)
+          this.getEmployeesFun();
+        },
+        error: (err: any) => {
+          this.toaser.info(err.message);
+        },
+      });
+    }
+  }
+  method:any="إضافة"
+  updatedEmployee:any={};
+  editEmployee(employee:any) {
+    this.updatedEmployee = employee;
+    this.method = "تعديل";
+    this.addEmployeeForm.setValue({
+      name: employee.name,
+      employeeLevelId: employee.employeeLevelId
+    });
+  }
+  deleteEmployee(id: any) {
+    this.adminDashService.deleteEmployee(id).subscribe({
+      next: (res: any) => {
+        this.toaser.info(res.message);
+        this.getEmployeesFun();
+      },
+      error: (err: any) => {
+        this.toaser.info(err.message);
+      },
+    });
+  }
 }

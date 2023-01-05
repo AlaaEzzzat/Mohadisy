@@ -32,7 +32,44 @@
             </div>
           </div>
         </div>
-
+        <div *ngIf="isCoProvider">
+          <div
+            class="cairo bg-white rounded-0 d-flex justify-content-between align-items-start mb-2 col-12 py-3 px-4"
+          >
+            <h5 class="premary-color">موظفين الشركة</h5>
+            <p
+              class="main-color addAccount"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModalReject"
+            >
+              اضافة موظف
+            </p>
+          </div>
+          <div class="col-12 d-flex flex-column mb-3 scrollsAdmins">
+            <div
+              *ngFor="let employee of employees"
+              class="bg-white rounded-0 d-flex flex-lg-row flex-column justify-content-between align-items-start mb-2 col-12 px-4 py-3"
+            >
+              
+                <div
+                  class="w-100 d-flex flex-row justify-content-between align-items-center flex-wrap"
+                >
+                 
+                    <p class="h6 text-gary ">{{ employee?.name }}</p>
+                    <p class="h6 main-color text-start">
+                      {{ employee?.employeeLevel?.name }}
+                    </p>
+                
+                  <p class="mt-2">
+                    <span class="ms-4 p-2  main-bk rounded-1"   data-bs-toggle="modal"
+                    data-bs-target="#exampleModalReject" (click)="editEmployee(employee)"><i class="fa fa-edit text-white"></i></span>
+                    <span class="p-2 main-bk rounded-1" (click)="deleteEmployee(employee.id)"> <i class="fa fa-trash text-white"></i></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+       
+        </div>
         <div class="d-flex flex-column mb-2 col-12">
           <div
             class="row m-0 p-0 gx-4 justify-content-between align-items-start"
@@ -93,15 +130,78 @@
       <div class="row">
         <!-- دا هيتحذف -->
         <!-- part 1 -->
-          <div class="col-12 slideshow">
-            <div class="bg-white text-center py-3 mb-2">
-              <h5 class="fw-bold text-center m-0 p-0 cairo">تقيمات العملاء</h5>
-            </div>
-            <app-carousel-rate
-              [testimonials]="testimonials"
-            ></app-carousel-rate>
+        <div class="col-12 slideshow">
+          <div class="bg-white text-center py-3 mb-2">
+            <h5 class="fw-bold text-center m-0 p-0 cairo">تقيمات العملاء</h5>
           </div>
+          <app-carousel-rate [testimonials]="testimonials"></app-carousel-rate>
         </div>
       </div>
+    </div>
   </div>
 </section>
+<div
+  class="modal fade"
+  id="exampleModalReject"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div
+        class="modal-header d-flex justify-content-between align-items-center modaltitle px-3 pt-3 pb-2 border-0"
+      >
+        <h5 class="cairo modal-title col-11 text-white" id="exampleModalLabel">
+          اضافة موظف جديد
+        </h5>
+
+        <button
+          type="button"
+          class="btn text-white col-1"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="modal-body my-3 modalbody">
+        <form
+        class="py-4 px-2 bg-white rounded-0 py-3 px-4"
+        [formGroup]="addEmployeeForm"
+        (ngSubmit)="addEmployeeFormSubmit()"
+      >
+        <div class="form-row d-flex justify-content-between">
+          <div class="form-group col-6">
+            <label for="name" class="mb-2 cairo">الأسم</label>
+            <input
+              type="text"
+              formControlName="name"
+              name="name"
+              class="form-control"
+              id="name"
+            />
+          </div>
+          <div class="form-group col-5">
+            <label for="EmployeeLevelId" class="mb-2 cairo">مستوي الموظف </label>
+            <select
+              formControlName="employeeLevelId"
+              name="employeeLevelId"
+              id="employeeLevelId"
+              class="form-control"
+            >
+              <option selected disabled class="cairo">إختر...</option>
+              <ng-container *ngFor="let empLevel of employeeLevels">
+                <option class="cairo" [value]="empLevel.id">{{ empLevel.name }}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <button   data-bs-dismiss="modal" type="submit" class="btn cairo btn-add text-white mt-3 mx-auto">
+          {{method}}
+        </button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
