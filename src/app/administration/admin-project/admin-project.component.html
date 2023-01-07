@@ -58,8 +58,16 @@
       </button>
     </div>
 
-    <div class="col-12 d-flex flex-row flex-wrap justify-content-between"
-      *ngIf="isProcessing; else undefind">
+    <ng-container *ngIf="messagesError!=null; else undefind">
+      <h5 class="card-title me-3  cairo  titleInformation">{{messagesError}}</h5>
+    
+    
+      
+    </ng-container>
+   
+
+  <ng-template #undefind>
+    <div class="col-12 d-flex flex-row flex-wrap justify-content-between">
       <!-- <div class="col-12 d-flex flex-row flex-wrap justify-content-between" > -->
         <div class="col-md-4 col-12 position-relative">
           <form class="d-flex flex-column me-3">
@@ -576,7 +584,7 @@
 
           <!--  -->
           <div class="col-12 mb-3 d-flex flex-lg-row flex-column rounded-0 "  *ngIf="productCurrent?.projectRequestStatus.projectStatus.id != 3 && productCurrent?.projectRequestStatus.projectStatus.id != 4">
-            <div class="text-center col-lg-2 col-12 bg-white d-flex flex-column align-content-center
+            <div class="text-center col-lg-3 col-12 bg-white d-flex flex-column align-content-center
              justify-content-center  px-3 pt-4 pb-3">
 
               
@@ -587,17 +595,17 @@
                 class="example-margin"
                 [color]="color"
                 [mode]="mode"
-                [value]="100"
+                [value]="percentage"
               >
               
             </mat-progress-spinner>
-            <h4  id="progress">100%</h4>
+            <h4  id="progress">{{percentage}}%</h4>
               </div>
               <p class="cairo" >   {{test}}</p>
               <!-- <p class="cairo">  تم الانتهاء من المرحله الاولي</p> -->
 
               </div>
-            <div class="col-lg-10 col-12 bg-white me-1 p-3">
+            <div class="col-lg-9 col-12 bg-white me-1 p-3">
               <div class="d-flex flex-row col-12 mb-5">
                 <div class="col-4">
                   <p class="card-subtitle text-muted cairo h6 fw-normal mb-2">اسم المشروع</p>
@@ -896,15 +904,6 @@
         
         </div>
     </div>
-
-  <ng-template #undefind>
-    <!-- <div
-      class="alert alert-danger d-flex align-items-center"
-      role="alert"
-      *ngIf="!isProcessing"
-    >
-      <div>حاليا لايوجد مشاريع</div>
-    </div> -->
   </ng-template>
 </div>
 

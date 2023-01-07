@@ -221,6 +221,7 @@ export class AdminSPComponent implements OnInit {
 
     this.ServicesProvidor.getNewProfiles(page).subscribe({
       next: (value) => {
+        console.log(value.data.profiles)
         if (value != null && value != undefined && value.data.totalPages != 0) {
           this.datas = value.data.profiles;
           this.iProfileData = this.datas;

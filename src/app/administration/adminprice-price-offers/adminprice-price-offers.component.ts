@@ -51,6 +51,7 @@ export class AdminpricePriceOffersComponent implements OnInit {
   resOffer: any[] = [];
   selectedOfferId: boolean = true;
   productCurrentOffers: any[] = [];
+  messagesError:string|any=null
 
   constructor(
     private ServicesProvidor: AdminProjectsService,
@@ -155,6 +156,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -174,11 +177,13 @@ export class AdminpricePriceOffersComponent implements OnInit {
           this.total = value.data.totalPages;
           this.counter(this.total);
           this.firstObject = this.dataPriceQuotes[0];
-          this.objectProduct(this.firstObject, this.firstObject.id);
+          this.objectProduct(this.firstObject, this.firstObject?.id);
         }
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -200,6 +205,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -222,6 +229,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -243,6 +252,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -265,6 +276,8 @@ export class AdminpricePriceOffersComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }

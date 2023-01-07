@@ -69,7 +69,14 @@
   >
     <div>العميل موجود بالفعل</div>
   </div>
-<ng-container *ngIf="isProcessing; else undefind">
+<ng-container *ngIf="messagesError!=null; else undefind">
+  <h5 class="card-title me-3  cairo  titleInformation">{{messagesError}}</h5>
+
+
+  
+</ng-container>
+<ng-template #undefind>
+
   <div  class="col-12 d-flex flex-row flex-wrap justify-content-between" >
     <div class="col-md-4 col-12  position-relative">
       <form class="d-flex flex-column me-3">
@@ -734,12 +741,7 @@
 
   
   </div>
-
-  
-</ng-container>
-  <ng-template #undefind>
-  
-  </ng-template>
+</ng-template>
 </div>
 
 

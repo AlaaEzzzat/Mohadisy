@@ -63,6 +63,7 @@ export class AdminProjectComponent implements OnInit {
   organizationalServiceProviderProfileId: any;
   individualServiceProviderProfileId: any;
   projectResponsible: any;
+  messagesError:any;
   constructor(
     private ServicesProvidor: AdminProjectsService,
     private _HttpClient: HttpClient,
@@ -129,6 +130,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+        console.log(error)
       },
     });
   }
@@ -151,6 +154,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -173,6 +178,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }
@@ -194,6 +201,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (err) => {
         this.isProcessing = false;
+        this.messagesError=err;
+
       },
     });
   }
@@ -217,6 +226,8 @@ export class AdminProjectComponent implements OnInit {
       },
       error: (error) => {
         this.isProcessing = false;
+        this.messagesError=error;
+
       },
     });
   }

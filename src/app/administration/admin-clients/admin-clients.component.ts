@@ -58,6 +58,7 @@ export class AdminClientsComponent implements OnInit {
   }
   counter(x: number) {
     this.pagenation = [...Array(x).keys()];
+    
   }
   next = () => {
     if (this.page < this.total) {
@@ -235,6 +236,7 @@ export class AdminClientsComponent implements OnInit {
       setTimeout(() => {
         this.show = false;
       }, 1000);
+      this.choise();
     });
   }
 
@@ -253,6 +255,7 @@ export class AdminClientsComponent implements OnInit {
       setTimeout(() => {
         this.show = false;
       }, 1000);
+      this.choise();
     });
   }
 
@@ -271,6 +274,7 @@ export class AdminClientsComponent implements OnInit {
       setTimeout(() => {
         this.show = false;
       }, 3000);
+      this.choise();
     });
   }
   changeToNew() {
@@ -288,6 +292,7 @@ export class AdminClientsComponent implements OnInit {
       setTimeout(() => {
         this.show = false;
       }, 3000);
+      this.choise();
     });
   }
 

@@ -3,7 +3,7 @@
     class=" cairo d-flex flex-row mb-3 col-12 justify-content-around flex-wrap flex-lg-nowrap"
   >
     <button
-      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 fs-5"
+      class="btn rounded-0 cairo col-lg-2 col-sm-4 col-12 ms-2 text-nowrap p-2 mb-3 me-lg-2 fs-5 "
       role="button"
       (click)="getNewProfiles(page)"
       [ngStyle]="{
@@ -344,7 +344,7 @@
           <div class="col-md-5">
             <div
               class="d-flex"
-              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 4"
+              *ngIf="newApi ===1"
             >
               <a
                 type="button"
@@ -377,7 +377,7 @@
 
             <div
               class="d-flex justify-content-end align-content-start ms-3 rounded-0"
-              *ngIf="productCurrent?.joinRequestStatus?.accountStatusId === 1"
+              *ngIf="newApi == 5"
             >
               <a
                 type="button"
@@ -397,8 +397,8 @@
             <div
               class="d-flex justify-content-end align-content-start ms-3 rounded-0"
               *ngIf="
-                productCurrent?.joinRequestStatus?.accountStatusId != 1 &&
-                productCurrent?.joinRequestStatus?.accountStatusId != 4
+              newApi != 1 &&
+                newApi != 5
               "
             >
               <a
@@ -1059,13 +1059,9 @@
   </div>
 
   <ng-template #undefind>
-    <div
-      class=" textInformation d-flex align-items-center "
-     
-      *ngIf="!isProcessing"
-    >
-      <div class=""> <h5 class="textInformation">        حاليا لايوجد طلبات      </h5>      </div>
-    </div>
+    <h5 class="card-title me-3  cairo  titleInformation">لا يوجد طلبات</h5>
+
+   
   </ng-template>
 </div>
 <!-- غير مكتمل -->
