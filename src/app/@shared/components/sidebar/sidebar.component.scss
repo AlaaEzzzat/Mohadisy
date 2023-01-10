@@ -54,10 +54,10 @@ body {
       cursor: pointer;
       transition: all 0.5 ease-in-out;
     }
-    .sidebar-item:hover{
+    .sidebar-item:hover,.sidebaritem .active{
       background-color: #1a5f78;
     }
-    .actives.active{
-      background-color: #1a5f78 !important;
+    // .active.active{
+    //   background-color: #1a5f78 !important;
 
-    }
+    // }
