@@ -15,7 +15,7 @@ export class ComplaintComponent implements OnInit {
   ) {}
   complaints: any = [];
   ngOnInit(): void {
-    this.userRole = localStorage.getItem('role');
+    this.userRole = localStorage.getItem('role')?.replace(/"/g, '');
     this.complaintService.getComplaints().subscribe((data: any) => {
       this.complaints = data.data;
       console.log(this.complaints);
